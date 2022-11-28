@@ -7,6 +7,10 @@ public class RefreshToken
 
     public int UserId { get; init; }
 
+    public string Username { get; init; } = string.Empty;
+
+    public byte RoleId { get; init; }
+
     public int SubAccId { get; init; }
 
     public bool IsUsed { get; set; } = false;

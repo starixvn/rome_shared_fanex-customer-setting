@@ -11,57 +11,70 @@ namespace Fanex.Auth.API.Services;
 
 public interface ITokenService
 {
-    Token GenerateToken(AuthRequest request);
-}
+    Token GenerateToken(int userId, string username, byte roleId, int subAccId);
 
+    RefreshToken? GetRefreshToken(string? refreshToken);
+}
 
 public class TokenService : ITokenService
 {
     private readonly JwtOptions _options;
+    private RefreshToken? _refreshToken = null;
 
     public TokenService(IOptions<JwtOptions> options)
+        => _options = options.Value;
+
+    public Token GenerateToken(int userId, string username, byte roleId, int subAccId)
     {
-        _options = options.Value;
+        var accessToken = GenerateAccessToken(userId, username, roleId, subAccId);
+        var refreshToken = CreateRefreshToken(userId, username, roleId, subAccId);
+
+        return new Token(accessToken, refreshToken);
     }
 
-
-    public Token GenerateToken(AuthRequest request)
+    public RefreshToken? GetRefreshToken(string? refreshToken)
     {
-        var accessToken = GenerateAccessToken(request);
-        var requestToken = CreateRefreshToken(request);
+        if (_refreshToken != null && _refreshToken.Token.Equals(refreshToken))
+        {
+            return _refreshToken;
+        }
 
-        return new Token(accessToken, requestToken);
+        return null;
     }
 
-    private string GenerateAccessToken(AuthRequest request)
+    private string GenerateAccessToken(int userId, string username, byte roleId, int subAccId)
     {
         var claims = new List<Claim>
         {
-            new Claim("UserId", request.UserId.ToString()),
-            new Claim(ClaimTypes.Name, request.Username.ToString()),
-            new Claim(ClaimTypes.Role, request.RoleId.ToString()),
-            new Claim("SubAccId",request.SubAccId.ToString()),
+            new Claim("UserId", userId.ToString()),
+            new Claim(ClaimTypes.Name, username.ToString()),
+            new Claim(ClaimTypes.Role, roleId.ToString()),
+            new Claim("SubAccId",subAccId.ToString()),
         };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
         var token = new JwtSecurityToken(
+            issuer: _options.Issuer,
+            audience: _options.Audience,
             claims: claims,
-            expires: DateTime.Now.AddMinutes(5),
+            expires: DateTime.Now.AddHours(1),
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    private static string CreateRefreshToken(AuthRequest request)
+    private RefreshToken CreateRefreshToken(int userId, string username, byte roleId, int subAccId)
     {
-        var refreshToken = new RefreshToken
+        _refreshToken = new RefreshToken
         {
             Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-            UserId = request.UserId,
-            SubAccId = request.SubAccId,
-            Expires = DateTime.Now.AddHours(1)
+            UserId = userId,
+            Username = username,
+            RoleId = roleId,
+            SubAccId = subAccId,
+            Expires = DateTime.Now.AddHours(2)
         };
 
-        return refreshToken.Token;
+        return _refreshToken;
     }
 }

@@ -1,3 +1,3 @@
 namespace Fanex.Auth.API.Models;
 
-public record Token(string AccessToken, string RefreshToken);
+public record Token(string AccessToken, RefreshToken RefreshToken);
