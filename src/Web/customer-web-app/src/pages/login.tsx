@@ -1,20 +1,27 @@
 import { useRouter } from "next/router";
-import { ssoAsync } from "../features/auth/authSlide";
-import { useAppDispatch } from "../hook";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../features/auth/authApi";
+import { setCredentials } from "../features/auth/authSlide";
 
 export default function Login() {
-  var router = useRouter();
-  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [login] = useLoginMutation();
   return (
-    <section>
+    <div>
       <button
         onClick={async () => {
-          await dispatch(ssoAsync());
+          var response = await login({
+            userId: 12345,
+            username: "alvin",
+            roleId: 4,
+            subAccId: 0,
+          }).unwrap();
+
+          dispatch(setCredentials(response));
           router.push("/");
         }}
-      >
-        Login
-      </button>
-    </section>
+      ></button>
+    </div>
   );
 }

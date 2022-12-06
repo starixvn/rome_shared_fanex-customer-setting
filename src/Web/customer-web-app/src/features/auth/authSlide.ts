@@ -1,52 +1,31 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  SerializedError,
-} from "@reduxjs/toolkit";
-import { sso } from "./authApi";
-
-export enum AuthStatus {
-  IDLE = "idle",
-  LOADING = "loading",
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 export interface AuthState {
-  accessToken: string;
-  status: AuthStatus;
-  error?: SerializedError;
+  accessToken: string | null;
 }
 
 const initialState: AuthState = {
-  accessToken: "",
-  status: AuthStatus.IDLE,
-  error: undefined,
+  accessToken: null,
 };
-
-export const ssoAsync = createAsyncThunk("auth/sso", async () => {
-  const response = await sso();
-
-  return response;
-});
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
     setCredentials: (state, action) => {
-      state.accessToken = action.payload;
+      state.accessToken = action.payload.accessToken;
     },
-    logout: () => initialState,
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(ssoAsync.pending, (state) => {
-        state.status = AuthStatus.LOADING;
-      })
-      .addCase(ssoAsync.fulfilled, (state, action) => {
-        state.status = AuthStatus.IDLE;
-        state.accessToken = action.payload;
-      });
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      console.log("HYDRATE", state, action.payload);
+      return {
+        ...state,
+        ...action.payload.accessToken,
+      };
+    },
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials } = authSlice.actions;

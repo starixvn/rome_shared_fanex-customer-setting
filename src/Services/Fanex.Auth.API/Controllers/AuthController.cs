@@ -21,7 +21,7 @@ public class AuthController : ControllerBase
         var token = _tokenService.GenerateToken(request.UserId, request.Username, request.RoleId, request.SubAccId);
         SetResponseRefreshToken(token.RefreshToken);
 
-        return Ok(token.AccessToken);
+        return Ok(new { token.AccessToken });
     }
 
     [HttpPost("refresh-token")]
@@ -42,7 +42,7 @@ public class AuthController : ControllerBase
         var token = _tokenService.GenerateToken(refreshToken.UserId, refreshToken.Username, refreshToken.RoleId, refreshToken.SubAccId);
         SetResponseRefreshToken(token.RefreshToken);
 
-        return Ok(token.AccessToken);
+        return Ok(new { token.AccessToken });
     }
 
     private void SetResponseRefreshToken(RefreshToken refreshToken)
