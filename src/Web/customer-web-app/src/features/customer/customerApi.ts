@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
 import { AppState } from "../../store";
-import { setCredentials } from "../auth/authSlide";
+import { setAccessToken, reset } from "../auth/authSlide";
 
 const CUSTOMER_URL = "http://localhost:5270";
 
@@ -43,9 +43,11 @@ const baseQueryWithReAuth = async (
     console.log(refreshResult);
     if (refreshResult?.data) {
       // store the new token
-      api.dispatch(setCredentials(refreshResult.data));
+      api.dispatch(setAccessToken(refreshResult.data));
       // retry the original query with new access token
       result = await baseQuery(args, api, extraOptions);
+    } else {
+      api.dispatch(reset());
     }
   }
 

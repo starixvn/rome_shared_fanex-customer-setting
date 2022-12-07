@@ -1,31 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { AppState } from "../../store";
 
-export interface AuthState {
-  accessToken: string | null;
-}
-
-const initialState: AuthState = {
-  accessToken: null,
-};
-
-export const authSlice = createSlice({
+export const AuthSlide = createSlice({
   name: "auth",
-  initialState: initialState,
+  initialState: { accessToken: null },
   reducers: {
-    setCredentials: (state, action) => {
-      state.accessToken = action.payload.accessToken;
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
+    },
+    reset: (state) => {
+      state.accessToken = null;
     },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log("HYDRATE", state, action.payload);
-      return {
-        ...state,
-        ...action.payload.accessToken,
-      };
+      console.log("HYDRATE", action.payload);
+
+      if (!action.payload.auth.accessToken) {
+        return state;
+      }
+
+      state.accessToken = action.payload.auth.accessToken;
     },
   },
 });
 
-export const { setCredentials } = authSlice.actions;
+export const { setAccessToken, reset } = AuthSlide.actions;
+
+export const selectAuth = (state: AppState) => state.auth;

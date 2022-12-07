@@ -1,29 +1,20 @@
 import React from "react";
-import { setCredentials } from "../features/auth/authSlide";
 
-import {
-  getWeatherForecast,
-  WeatherForeCast,
-} from "../features/customer/customerApi";
-import { wrapper } from "../store";
-import Unauthorized from "../features/auth/Unauthorize";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { NextPage } from "next";
+import { selectAuth, setAccessToken } from "../features/auth/authSlide";
+import Unauthorized from "../features/auth/Unauthorize";
+import { wrapper } from "../store";
+import { getWeatherForecast } from "../features/customer/customerApi";
 
-type Props = {
-  isLoading: boolean;
-  isAuthenticated: boolean;
-  data: WeatherForeCast[];
-};
-
-export default function Home({ isAuthenticated, isLoading, data }: Props) {
-  if (!isAuthenticated) {
+const Home: NextPage = ({ data }: any) => {
+  const auth = useSelector(selectAuth);
+  console.log(auth);
+  if (!auth.accessToken) {
     return <Unauthorized />;
-  }
-
-  if (isLoading) {
-    return <>Loading...</>;
   }
 
   return (
@@ -35,7 +26,7 @@ export default function Home({ isAuthenticated, isLoading, data }: Props) {
       </Head>
 
       <main className={styles.main}>
-        {data?.map((item, index) => (
+        {data?.map((item: any, index: number) => (
           <div key={index}>{item.summary}</div>
         ))}
       </main>
@@ -54,27 +45,27 @@ export default function Home({ isAuthenticated, isLoading, data }: Props) {
       </footer>
     </div>
   );
-}
+};
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
-    var accessToken = context.req.cookies["accessToken"];
-    let isAuthenticated = false;
+    var accessToken = context.req.cookies["accessToken"] ?? null;
     if (accessToken) {
-      isAuthenticated = true;
-      store.dispatch(setCredentials({ accessToken }));
+      store.dispatch(setAccessToken(accessToken));
+      const { data } = await store.dispatch(getWeatherForecast.initiate());
+      return {
+        props: {
+          data,
+        },
+      };
     }
-
-    const { isLoading, data } = await store.dispatch(
-      getWeatherForecast.initiate()
-    );
 
     return {
       props: {
-        isAuthenticated,
-        isLoading,
-        data,
+        data: [],
       },
     };
   }
 );
+
+export default Home;

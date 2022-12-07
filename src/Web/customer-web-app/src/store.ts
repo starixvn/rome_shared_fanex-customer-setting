@@ -1,33 +1,28 @@
-import { configureStore, ConfigureStoreOptions } from "@reduxjs/toolkit";
+import { configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { authApi } from "./features/auth/authApi";
-import { authSlice } from "./features/auth/authSlide";
+import { Action } from "redux";
+import { AuthSlide } from "./features/auth/authSlide";
 import { customerApi } from "./features/customer/customerApi";
 
-//import counterReducer from "./features/counter/counterSlice";
-
-// create your reducer
-
-export const makeStore = (
-  options?: ConfigureStoreOptions["preloadedState"] | undefined
-) =>
+const makeStore = () =>
   configureStore({
     reducer: {
-      [authApi.reducerPath]: authApi.reducer,
+      auth: AuthSlide.reducer,
       [customerApi.reducerPath]: customerApi.reducer,
-      auth: authSlice.reducer,
     },
-    devTools: true,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat([
-        authApi.middleware,
-        customerApi.middleware,
-      ]),
-    ...options,
+      getDefaultMiddleware().concat(customerApi.middleware),
+    devTools: true,
   });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  AppState,
+  unknown,
+  Action
+>;
 
-export const wrapper = createWrapper(makeStore);
+export const wrapper = createWrapper<AppStore>(makeStore);

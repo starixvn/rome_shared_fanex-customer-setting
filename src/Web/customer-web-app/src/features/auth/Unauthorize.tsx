@@ -1,32 +1,31 @@
-import React from "react";
-import { useLoginMutation } from "./authApi";
 import { useRouter } from "next/router";
-import { useCookies } from "react-cookie";
+import React from "react";
 
 const Unauthorized = () => {
   const router = useRouter();
-  const [login] = useLoginMutation();
-  const [cookies, setCookie] = useCookies(["accessToken"]);
+
+  async function handleLogin() {
+    const resp = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: 12345,
+        username: "alvin",
+        roleId: 4,
+        subAccId: 0,
+      }),
+    });
+    router.push("/");
+  }
+
   return (
     <section>
       <h1>Unauthorized</h1>
       <br />
       <p>You do not have access to the requested page.</p>
-      <button
-        onClick={async () => {
-          var response = await login({
-            userId: 12345,
-            username: "alvin",
-            roleId: 4,
-            subAccId: 0,
-          }).unwrap();
-
-          setCookie("accessToken", response.accessToken, { path: "/" });
-          router.push("/");
-        }}
-      >
-        Login
-      </button>
+      <button onClick={handleLogin}>Login</button>
     </section>
   );
 };
