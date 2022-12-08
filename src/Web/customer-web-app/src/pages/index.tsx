@@ -44,8 +44,8 @@ const Home: NextPage = ({ data }: any) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     var accessToken = context.req.cookies["accessToken"] ?? null;
+    store.dispatch(setAccessToken(accessToken));
     if (accessToken) {
-      store.dispatch(setAccessToken(accessToken));
       const { data } = await store.dispatch(getWeatherForecast.initiate());
       return {
         props: {

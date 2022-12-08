@@ -42,7 +42,7 @@ public class TokenService : ITokenService
         return null;
     }
 
-    private string GenerateAccessToken(int userId, string username, byte roleId, int subAccId)
+    private JwtSecurityToken GenerateAccessToken(int userId, string username, byte roleId, int subAccId)
     {
         var claims = new List<Claim>
         {
@@ -53,14 +53,12 @@ public class TokenService : ITokenService
         };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
-        var token = new JwtSecurityToken(
+        return new JwtSecurityToken(
             issuer: _options.Issuer,
             audience: _options.Audience,
             claims: claims,
             expires: DateTime.Now.AddHours(1),
             signingCredentials: creds);
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
     private RefreshToken CreateRefreshToken(int userId, string username, byte roleId, int subAccId)

@@ -9,6 +9,7 @@ import { AppState } from "../../store";
 import { setAccessToken, reset } from "../auth/authSlide";
 
 const CUSTOMER_URL = "http://localhost:5270";
+const AUTH_URL = "http://localhost:5139/api/Auth";
 
 export interface WeatherForeCast {
   date: Date;
@@ -16,6 +17,10 @@ export interface WeatherForeCast {
   temperatureF: number;
   summary: string;
 }
+
+const refreshTokenQuery = fetchBaseQuery({
+  baseUrl: AUTH_URL,
+});
 
 const baseQuery = fetchBaseQuery({
   baseUrl: CUSTOMER_URL,
@@ -39,7 +44,11 @@ const baseQueryWithReAuth = async (
   if (result?.error?.status === 403) {
     console.log("sending refresh token");
     // send refresh token to get new access token
-    const refreshResult = await baseQuery("/refresh-token", api, extraOptions);
+    const refreshResult = await refreshTokenQuery(
+      "/refresh-token",
+      api,
+      extraOptions
+    );
     console.log(refreshResult);
     if (refreshResult?.data) {
       // store the new token

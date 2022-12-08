@@ -14,16 +14,5 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader(keyArr[0], keyArr[1] as string)
   );
 
-  res.setHeader(
-    "Set-Cookie",
-    cookie.serialize("accessToken", data.accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
-      maxAge: 3600,
-      path: "/",
-    })
-  );
-
   res.send(data);
 }

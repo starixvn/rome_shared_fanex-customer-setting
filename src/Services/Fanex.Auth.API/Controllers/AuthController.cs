@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using Fanex.Auth.API.Models;
 using Fanex.Auth.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,9 @@ public class AuthController : ControllerBase
     public ActionResult<string> SSO([FromBody] AuthRequest request)
     {
         var token = _tokenService.GenerateToken(request.UserId, request.Username, request.RoleId, request.SubAccId);
-        SetResponseRefreshToken(token.RefreshToken);
+        SetResponseCookies(token);
 
-        return Ok(new { token.AccessToken });
+        return Ok(token.AccessToken);
     }
 
     [HttpPost("refresh-token")]
@@ -40,18 +41,22 @@ public class AuthController : ControllerBase
         }
 
         var token = _tokenService.GenerateToken(refreshToken.UserId, refreshToken.Username, refreshToken.RoleId, refreshToken.SubAccId);
-        SetResponseRefreshToken(token.RefreshToken);
+        SetResponseCookies(token);
 
-        return Ok(new { token.AccessToken });
+        return Ok(token.AccessToken);
     }
 
-    private void SetResponseRefreshToken(RefreshToken refreshToken)
+    private void SetResponseCookies(Token token)
     {
-        var cookieOptions = new CookieOptions
+        Response.Cookies.Append("accessToken", token.AccessToken, new CookieOptions
         {
             HttpOnly = true,
-            Expires = refreshToken.Expires
-        };
-        Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
+            Expires = token.JwtToken.ValidTo
+        });
+        Response.Cookies.Append("refreshToken", token.RefreshToken.Token, new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = token.RefreshToken.Expires,
+        });
     }
 }

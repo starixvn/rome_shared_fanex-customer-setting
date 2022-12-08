@@ -15,7 +15,7 @@ export const AuthSlide = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log("HYDRATE", action.payload);
+      console.log("HYDRATE", state, action.payload);
 
       if (!action.payload.auth.accessToken) {
         return state;

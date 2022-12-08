@@ -17,7 +17,6 @@ const Unauthorized = () => {
         subAccId: 0,
       }),
     });
-    console.log(await resp.json());
     router.push("/");
   }
 
