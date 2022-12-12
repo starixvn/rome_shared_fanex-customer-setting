@@ -1,0 +1,17 @@
+# directories
+**/bin/
+**/obj/
+**/out/
+**/node_modules/
+packages/
+
+# files
+Dockerfile*
+**/*.md
+.dockerignore
+.env
+.git
+.gitignore
+.vs
+.vscode
+.next

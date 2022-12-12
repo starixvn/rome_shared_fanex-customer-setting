@@ -49,7 +49,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const { data } = await store.dispatch(getWeatherForecast.initiate());
       return {
         props: {
-          data,
+          data: data ?? [],
         },
       };
     }

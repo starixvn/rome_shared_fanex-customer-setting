@@ -1,0 +1,4 @@
+include:
+  - project: "ci/repos-ci/rome_fanex_auth_api"
+    ref: master
+    file: "gitlab-ci.yml"

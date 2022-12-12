@@ -1,23 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8FAA606E-FD83-44F7-B439-4725F5019829}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{93325F17-8673-4F0A-913F-BE9635FBC724}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Auth.API", "src\Services\Fanex.Auth.API\Fanex.Auth.API.csproj", "{F243AA29-D097-41AD-8DDA-6AA632982CC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Auth.API", "src\Services\Fanex.Auth.API\Fanex.Auth.API.csproj", "{F243AA29-D097-41AD-8DDA-6AA632982CC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Customer.API", "src\Services\Fanex.Customer.API\Fanex.Customer.API.csproj", "{71512244-8367-4F2E-AAC5-C2E62D23B3FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Customer.API", "src\Services\Fanex.Customer.API\Fanex.Customer.API.csproj", "{71512244-8367-4F2E-AAC5-C2E62D23B3FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F158E9F-C296-4E9B-9DC5-36C5FF6673A9}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.config = NuGet.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F243AA29-D097-41AD-8DDA-6AA632982CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -29,9 +31,15 @@ Global
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{93325F17-8673-4F0A-913F-BE9635FBC724} = {8FAA606E-FD83-44F7-B439-4725F5019829}
 		{F243AA29-D097-41AD-8DDA-6AA632982CC7} = {93325F17-8673-4F0A-913F-BE9635FBC724}
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC} = {93325F17-8673-4F0A-913F-BE9635FBC724}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8DAF03FB-26A5-4D6E-A7A9-53485196FB35}
 	EndGlobalSection
 EndGlobal
