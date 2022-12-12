@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/microsoft-dotnet
-FROM hub.nexdev.net/base/dotnet/core/sdk:7.0 AS build
+FROM hub.nexdev.net/base/dotnet/core/sdk:7.0 AS builder
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
@@ -26,7 +26,7 @@ USER dotnetuser
 # final stage/image
 FROM hub.nexdev.net/base/dotnet/core/aspnet:7.0
 WORKDIR /app
-COPY --from=build /app ./
+COPY --from=builder /app ./
 ENV TZ="America/La_Paz"
 
 ENTRYPOINT ["dotnet", "Fanex.Auth.API.dll"]
