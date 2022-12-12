@@ -5,7 +5,7 @@ WORKDIR /source
 # copy csproj and restore as distinct layers
 COPY src/Services/Fanex.Auth.API/*.csproj ./Fanex.Auth.API/
 COPY NuGet.config ./Fanex.Auth.API/
-RUN dotnet restore -v n Fanex.Auth.API/Fanex.Auth.API.csproj
+RUN dotnet restore -r linux-x64 Fanex.Auth.API/Fanex.Auth.API.csproj
 
 # copy and build app and libraries
 COPY src/Services/Fanex.Auth.API ./Fanex.Auth.API/
