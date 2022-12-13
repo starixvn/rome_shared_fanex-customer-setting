@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
-const crypto = require("crypto");
+const execSync = require("child_process").execSync;
+
+const lastCommitCommand = "git rev-parse HEAD";
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: "standalone",
-  assetPrefix: "/site-customers",
   generateBuildId: async () => {
-    return crypto.randomBytes(20).toString("hex");
+    return execSync(lastCommitCommand).toString().trim();
   },
 };
 

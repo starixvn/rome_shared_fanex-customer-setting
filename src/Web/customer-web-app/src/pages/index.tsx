@@ -8,7 +8,7 @@ import { setAccessToken } from "../features/auth/authSlide";
 import { wrapper } from "../store";
 import { getWeatherForecast } from "../features/customer/customerApi";
 import { AuthGuard } from "../features/auth/AuthGuard";
-const PROXY_PATH = "/site-customers";
+const PROXY_PATH = "";
 
 const Home: NextPage = ({ data }: any) => {
   return (
