@@ -4,15 +4,6 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: "standalone",
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.node = {
-        fs: "empty",
-      };
-    }
-
-    return config;
-  },
   assetPrefix: "./",
   exportPathMap: async function (
     defaultPathMap,
