@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: "standalone",
-  assetPrefix: "/site-customers",
+  basePath: "/site-customers",
 };
 
 module.exports = nextConfig;
