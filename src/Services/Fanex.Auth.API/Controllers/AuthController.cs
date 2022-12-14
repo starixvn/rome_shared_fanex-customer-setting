@@ -1,4 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
 using Fanex.Auth.API.Models;
 using Fanex.Auth.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +19,8 @@ public class AuthController : ControllerBase
     public ActionResult<string> SSO([FromBody] AuthRequest request)
     {
         var token = _tokenService.GenerateToken(request.UserId, request.Username, request.RoleId, request.SubAccId);
-        SetResponseCookies(token);
 
-        return Ok(token.AccessToken);
+        return Ok(new { token.AccessToken, RefreshToken = token.RefreshToken.Token });
     }
 
     [HttpPost("refresh-token")]
