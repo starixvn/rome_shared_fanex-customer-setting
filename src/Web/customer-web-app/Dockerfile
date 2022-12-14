@@ -17,7 +17,7 @@ COPY src/Web/customer-web-app .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
-
+COPY src/Web/customer-web-app/.env.LOCAL.sample .env.production
 RUN yarn build
 
 # If using npm comment out above and use below instead

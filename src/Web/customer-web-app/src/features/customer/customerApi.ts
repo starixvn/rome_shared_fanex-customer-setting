@@ -8,9 +8,6 @@ import { HYDRATE } from "next-redux-wrapper";
 import { AppState } from "../../store";
 import { setAccessToken, reset } from "../auth/authSlide";
 
-const CUSTOMER_URL = "http://localhost:5270";
-const AUTH_URL = "http://localhost:5139/api/Auth";
-
 export interface WeatherForeCast {
   date: Date;
   temperatureC: number;
@@ -19,11 +16,11 @@ export interface WeatherForeCast {
 }
 
 const refreshTokenQuery = fetchBaseQuery({
-  baseUrl: AUTH_URL,
+  baseUrl: process.env.AUTH_URL,
 });
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: CUSTOMER_URL,
+  baseUrl: process.env.CUSTOMER_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const accessToken = (getState() as AppState).auth.accessToken;
