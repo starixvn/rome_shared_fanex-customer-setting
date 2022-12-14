@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+import styles from "./Unauthorized.module.scss";
 
 const Unauthorized = () => {
   const router = useRouter();
@@ -17,11 +18,12 @@ const Unauthorized = () => {
         subAccId: 0,
       }),
     });
+
     router.push("/");
   }
 
   return (
-    <section>
+    <section className={styles.container}>
       <h1>Unauthorized</h1>
       <br />
       <p>You do not have access to the requested page.</p>
