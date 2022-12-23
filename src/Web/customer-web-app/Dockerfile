@@ -1,3 +1,6 @@
+# Register TRANSFORM_CONFIG argument for transforming by environment
+ARG TRANSFORM_CONFIG
+
 FROM hub.nexdev.net/base/node:17.9-alpine3.14 AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -17,7 +20,7 @@ COPY src/Web/customer-web-app .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
-COPY src/Web/customer-web-app/.env.LOCAL.sample .env.production
+COPY "src/Web/customer-web-app/.env.$TRANSFORM_CONFIG" .env.production
 RUN yarn build
 
 # If using npm comment out above and use below instead
