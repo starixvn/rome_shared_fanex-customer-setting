@@ -1,6 +1,3 @@
-# Register TRANSFORM_CONFIG argument for transforming by environment
-ARG TRANSFORM_CONFIG
-
 FROM hub.nexdev.net/base/node:17.9-alpine3.14 AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -15,6 +12,10 @@ FROM hub.nexdev.net/base/node:17.9-alpine3.14 AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY src/Web/customer-web-app .
+
+# Register TRANSFORM_CONFIG argument for transforming by environment
+ARG TRANSFORM_CONFIG
+RUN echo $TRANSFORM_CONFIG
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
