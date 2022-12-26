@@ -1,0 +1,19 @@
+@import "@Styles/Compass/_compass";
+@import "@Styles/_variables";
+@import "@Styles/_other";
+
+.block {
+  @include border();
+  @include clearfix();
+  background-color: $default-bg;
+  margin-bottom: 10px;
+
+  .header {
+    @include border(bottom);
+    background-color: $block-header-bg;
+    font-weight: bold;
+    line-height: 2.7rem;
+    text-align: center;
+    word-wrap: break-word;
+  }
+}

@@ -1,0 +1,129 @@
+﻿@import "./Compass/_compass";
+@import "_variables";
+
+@mixin border($side: "", $color: $border-color) {
+  @if ($side != "") {
+    border-#{$side}: $border-size $border-style $color;
+  } @else {
+    border: $border-size $border-style $color;
+  }
+}
+
+@mixin col($width: 20%, $important: false) {
+  @extend %col;
+
+  @if ($important) {
+    width: $width !important;
+  } @else {
+    width: $width;
+  }
+}
+
+%col {
+  //display: inline-block;
+  float: left;
+}
+
+.w3-percent {
+  @include col(3%, true);
+}
+
+.w4-percent {
+  @include col(4%, true);
+}
+
+.w15-percent {
+  @include col(15%, true);
+}
+
+.w13-percent {
+  @include col(13%, true);
+}
+
+.w16-percent {
+  @include col(16%, true);
+}
+
+.w18-percent {
+  @include col(18%, true);
+}
+
+.w20-percent {
+  @include col(20%, true);
+}
+
+.w21-percent {
+  @include col(21%, true);
+}
+
+.w25-percent {
+  @include col(25%, true);
+}
+
+.w28-percent {
+  @include col(28%, true);
+}
+
+.w30-percent {
+  @include col(30%, true);
+
+  &--last {
+    width: 31% !important;
+  }
+}
+
+.w33-percent {
+  @include col(33%, true);
+
+  &--last {
+    width: 34% !important;
+  }
+}
+
+.w40-percent {
+  @include col(40%, true);
+}
+
+.w42-percent {
+  @include col(42%, true);
+}
+
+.w50-percent {
+  @include col(50%, true);
+}
+
+.w60-percent {
+  @include col(60%, true);
+}
+
+.w70-percent {
+  @include col(70%, true);
+}
+
+.w80-percent {
+  @include col(80%, true);
+}
+
+.w100-percent {
+  @include col(100%, true);
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.red-text {
+  color: $error-color;
+}
+
+.tab {
+  margin-left: 10px;
+}
+
+.indent-30 {
+  text-indent: 30px;
+}
