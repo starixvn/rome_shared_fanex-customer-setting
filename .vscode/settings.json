@@ -1,0 +1,4 @@
+{
+  "omnisharp.enableRoslynAnalyzers": true,
+  "dotnet-test-explorer.testProjectPath": "**/*.Tests.csproj"
+}
