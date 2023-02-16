@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{866C7E06
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.CloneAccount.Tests", "tests\Alpha.CloneAccount.Tests\Alpha.CloneAccount.Tests.csproj", "{D98FB144-B84D-454F-B66D-AF9F905E3DCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.CloneAccount.Api.Tests", "tests\Alpha.CloneAccount.Api.Tests\Alpha.CloneAccount.Api.Tests.csproj", "{BA637430-EE53-4601-8A03-80EFB068FD04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{D98FB144-B84D-454F-B66D-AF9F905E3DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D98FB144-B84D-454F-B66D-AF9F905E3DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D98FB144-B84D-454F-B66D-AF9F905E3DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA637430-EE53-4601-8A03-80EFB068FD04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA637430-EE53-4601-8A03-80EFB068FD04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA637430-EE53-4601-8A03-80EFB068FD04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA637430-EE53-4601-8A03-80EFB068FD04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{679A878D-C983-4BF3-8205-F75526F8E74E} = {9352A02A-6E76-422A-87F8-6A08BCBA33E1}
 		{D451FC80-C7F1-40E9-8BB9-1E2420F0425B} = {9352A02A-6E76-422A-87F8-6A08BCBA33E1}
 		{D98FB144-B84D-454F-B66D-AF9F905E3DCA} = {866C7E06-63AA-412A-A7E5-281C7C1C0522}
+		{BA637430-EE53-4601-8A03-80EFB068FD04} = {866C7E06-63AA-412A-A7E5-281C7C1C0522}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DAF03FB-26A5-4D6E-A7A9-53485196FB35}

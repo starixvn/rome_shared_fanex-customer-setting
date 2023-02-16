@@ -1,66 +1,67 @@
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
+﻿// This application entry point is based on ASP.NET Core new project templates and is included
+// as a starting point for app host configuration.
+// This file may need updated according to the specific scenario of the application being upgraded.
+// For more information on ASP.NET Core hosting, see https://docs.microsoft.com/aspnet/core/fundamentals/host/web-host
 
-var builder = WebApplication.CreateBuilder(args);
+using System.Diagnostics.CodeAnalysis;
+using Fanex.Logging;
+using Fanex.Logging.Extensions;
+using Fanex.Logging.Extensions.AspNetCore;
+using Fanex.Logging.Extensions.Database;
+using Fanex.Logging.RabbitMQ;
 
-// Add services to the container.
+namespace Alpha.CloneAccount.Api;
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddHealthChecks();
-builder.Services.AddSwaggerGen(options =>
+[ExcludeFromCodeCoverage]
+public class Program
 {
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    public static void Main(string[] args)
     {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        In = ParameterLocation.Header,
-        Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")"
-    });
+        var configuration = GetConfiguration();
+        InitFanexLogger(configuration);
+        var appName = typeof(Program).Assembly.GetName().Name;
 
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
-});
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
+        try
         {
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"])),
-            ValidateIssuerSigningKey = true,
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
-builder.Services.AddCors(options => options.AddPolicy(name: "NgOrigins",
-policy =>
-{
-    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-}));
+            var host = CreateHostBuilder(configuration, args).Build();
+            Logger.Log.Info($"Starting {appName}");
+            host.Run();
+        }
+        catch (Exception ex)
+        {
+            Logger.Log.Error($"Program terminated unexpectedly {appName}!", ex);
+        }
+    }
 
-var app = builder.Build();
+    static IConfiguration GetConfiguration()
+    {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        return builder.Build();
+    }
+
+    static void InitFanexLogger(IConfiguration configuration)
+    {
+        LogManager
+            .SetDefaultLogCategory(configuration["Fanex.Logging:DefaultCategory"])
+            .Use(new RabbitMQLogging(configuration["Fanex.Logging:RabbitMQConnectionStrings"]));
+
+        ExceptionHandler
+            .UseConfig(new LoggingConfiguration()
+                .GetHttpHeaderInfo()
+                .UseGetDbExceptionInfo(DatabaseInfoGetters.GetDbExceptionInfo));
+    }
+
+    public static IHostBuilder CreateHostBuilder(IConfiguration configuration, string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration(x => x.AddConfiguration(configuration))
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+                webBuilder.UseUrls("http://0.0.0.0:5000");
+            });
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-
-app.UseCors("NgOrigins");
-
-app.UseAuthorization();
-
-app.MapControllers();
-app.MapHealthChecks("/health").AllowAnonymous();
-
-app.Run();
