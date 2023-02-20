@@ -1,13 +1,12 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import Router from "next/router";
 import styles from "@/styles/Home.module.css";
 import { CustomWindow } from "@/types/custom.window";
 
 declare let window: CustomWindow;
 
 export default function Home() {
-  const [isAuth, setAuth] = useState<boolean>(false);
-
   useEffect(() => {
     const authenticateTelegramUser = async () => {
       const telegramInitData = window.Telegram.WebApp.initData;
@@ -18,7 +17,7 @@ export default function Home() {
       const result = await res.json();
 
       if (result) {
-        setAuth(true);
+        Router.push(`/securitycode`);
       }
     };
 
@@ -34,7 +33,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <p className={styles.text}>Auth: {isAuth}</p>
+        <p className={styles.text}>loading...</p>
       </main>
     </>
   );

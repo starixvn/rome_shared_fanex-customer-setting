@@ -1,0 +1,12 @@
+.header {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: rgb(131, 206, 239);
+}
+
+.t {
+  color: black;
+}
