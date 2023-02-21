@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
+    <Function Name="Security Code">
+        <Setting Key="Age_UpdateMainAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_UpdateSubAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus_Sub" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_GetMainAccountSecurityCode" SpName="Age_CustomerSelSecurityCode" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_GetSubAccountSecurityCode" SpName="Age_CustomerSelSecurityCode_Sub" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
+    </Function>
+
     <Function Name="Copy Account">
         <Setting Key="Acc_CustomerSelSAgentInfo" SpName="Acc_CustomerSelSAgentInfo" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="NewUserName" ObjectProperty="Suffix" />
