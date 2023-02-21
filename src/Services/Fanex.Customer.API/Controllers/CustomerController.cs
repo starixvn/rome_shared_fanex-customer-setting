@@ -1,7 +1,4 @@
-﻿using Alpha.CloneAccount.Api.Requests;
-using Alpha.CloneAccount.Models;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Alpha.CloneAccount.Api.Controllers;
 

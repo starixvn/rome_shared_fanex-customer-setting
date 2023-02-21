@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Share\Alpha.CloneAccount\Alpha.CloneAccount.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.2" />
+    <PackageReference Include="Fanex.Data.Repository" Version="4.2.2" />
     <PackageReference Include="Fanex.Data.SqlServer" Version="4.2.2" />
     <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.0.8" />
+    <PackageReference Include="Fanex.RemotingRef" Version="1.5.0.1" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="MinimalApi.Endpoint" Version="1.3.0" />

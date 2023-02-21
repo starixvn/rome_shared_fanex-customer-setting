@@ -3,11 +3,11 @@ FROM hub.nexdev.net/base/dotnet/core/sdk:7.0 AS builder
 WORKDIR /src
 
 COPY ./src/Services/Fanex.Customer.API/Fanex.Customer.API.csproj ./Fanex.Customer.API/Fanex.Customer.API.csproj
-RUN dotnet nuget add source http://nuget.nexdev.net/api/v2
+RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
 RUN dotnet restore Fanex.Customer.API/Fanex.Customer.API.csproj -v n
 
-COPY ./src/Services/Share/ONEbook.NG2.API.Client ./ONEbook.NG2.API.Client
-COPY ./src/Services/Share/Alpha.CloneAccount ./Alpha.CloneAccount
+# COPY ./src/Services/Share/ONEbook.NG2.API.Client ./ONEbook.NG2.API.Client
+# COPY ./src/Services/Share/Alpha.CloneAccount ./Alpha.CloneAccount
 COPY ./src/Services/Fanex.Customer.API ./Fanex.Customer.API
 
 WORKDIR /src/Fanex.Customer.API
