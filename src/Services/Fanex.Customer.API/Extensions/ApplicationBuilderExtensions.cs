@@ -2,7 +2,7 @@ using Fanex.Data;
 using Fanex.Data.SqlServer;
 using Fanex.RemotingRef;
 
-namespace Alpha.CloneAccount.Api.Extensions;
+namespace Fanex.Customer.API.Extensions;
 
 public static class ApplicationBuilderExtensions
 {

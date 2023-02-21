@@ -1,6 +1,6 @@
 namespace Fanex.Customer.API.Modules.SecurityCode;
 
-public class VerifySecurityCodeParam
+public class VerifySecurityCodeRequest
 {
     public int CustId { get; set; }
 

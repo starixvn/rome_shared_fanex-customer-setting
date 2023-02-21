@@ -1,12 +1,4 @@
 include:
-  - project: "ci/repos-ci/rome_fanex_auth_api"
-    ref: master
-    file: "gitlab-ci.yml"
-
-  - project: "ci/repos-ci/rome_fanex_customer_api"
-    ref: master
-    file: "gitlab-ci-mixing.yml"
-
-  - project: "ci/repos-ci/rome_alpha_customer_web_app"
-    ref: master
-    file: "gitlab-ci-mixing.yml"
+  - project: ci/core-cicd
+    ref: main
+    file: nexcel.gitlab-ci.yml

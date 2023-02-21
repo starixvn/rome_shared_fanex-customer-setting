@@ -12,7 +12,7 @@ public interface ISecurityCodeService
 
     string GenerateSalt(int custId);
 
-    Task<Result> VerifySecurityCode(VerifySecurityCodeParam param);
+    Task<Result> VerifySecurityCode(VerifySecurityCodeRequest param);
 }
 
 public class SecurityCodeService : ISecurityCodeService
@@ -35,7 +35,7 @@ public class SecurityCodeService : ISecurityCodeService
     public string GenerateSecurityToken()
         => Encryption.RandomString(Length);
 
-    public async Task<Result> VerifySecurityCode(VerifySecurityCodeParam param)
+    public async Task<Result> VerifySecurityCode(VerifySecurityCodeRequest param)
     {
         var actualSecurityCode = await GetSecurityCode(param.CustId, param.SubAccId).ConfigureAwait(false);
         var salt = GenerateSalt(param.IsSubAccount() ? param.SubAccId : param.CustId);
@@ -51,7 +51,7 @@ public class SecurityCodeService : ISecurityCodeService
             ? new GetMainAccountSecurityCodeCriteria(custId)
             : new GetSubAccountSecurityCodeCriteria(custId, subAccountId));
 
-    private async Task<Result> UpdateSecurityCodeCounter(VerifySecurityCodeParam param, bool isCorrectSecurityCode)
+    private async Task<Result> UpdateSecurityCodeCounter(VerifySecurityCodeRequest param, bool isCorrectSecurityCode)
     {
         if (param.IsSubAccount())
         {
