@@ -7,22 +7,22 @@ import { CustomWindow } from "@/types/custom.window";
 declare let window: CustomWindow;
 
 export default function Home() {
-  useEffect(() => {
-    const authenticateTelegramUser = async () => {
-      const telegramInitData = window.Telegram.WebApp.initData;
-      const url = `http://localhost:5208/api/auth?telegraminitdata=${encodeURIComponent(
-        telegramInitData
-      )}`;
-      const res = await fetch(url);
-      const result = await res.json();
+  // useEffect(() => {
+  //   const authenticateTelegramUser = async () => {
+  //     const telegramInitData = window.Telegram.WebApp.initData;
+  //     const url = `http://localhost:5208/api/auth?telegraminitdata=${encodeURIComponent(
+  //       telegramInitData
+  //     )}`;
+  //     const res = await fetch(url);
+  //     const result = await res.json();
 
-      if (result) {
-        Router.push(`/securitycode`);
-      }
-    };
+  //     if (result) {
+  //       Router.push(`/securitycode`);
+  //     }
+  //   };
 
-    authenticateTelegramUser();
-  }, []);
+  //   authenticateTelegramUser();
+  // }, []);
 
   return (
     <>
@@ -33,6 +33,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <h1>Hello!!!</h1>
         <p className={styles.text}>loading...</p>
       </main>
     </>
