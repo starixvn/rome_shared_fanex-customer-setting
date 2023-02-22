@@ -1,11 +1,5 @@
 ﻿namespace Alpha.CloneAccount.Api.Tests.Controllers
 {
-    using System.Threading.Tasks;
-    using Alpha.CloneAccount.Constants;
-    using Api.Controllers;
-    using Api.Requests;
-    using MediatR;
-    using NSubstitute;
     using Xunit;
 
     [Trait("Category", "Controllers")]
