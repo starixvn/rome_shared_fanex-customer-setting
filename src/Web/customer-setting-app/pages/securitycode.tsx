@@ -27,7 +27,7 @@ export default function SecurityCode() {
       <div className={styles.main}>
         <form onSubmit={onSubmit}>
           <label className={styles.text}>Security Code</label>
-          <input {...register("securityCode")} />
+          <input {...register("securityCode")} placeholder="123457" />
           <input type="submit" />
         </form>
       </div>

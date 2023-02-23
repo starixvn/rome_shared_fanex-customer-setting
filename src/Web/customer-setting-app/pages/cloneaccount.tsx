@@ -73,13 +73,13 @@ export default function SecurityCode() {
 
           <input className={styles.button} type="submit" />
         </form>
-        <button
+        {/* <button
           onClick={() => {
             Router.push("/securitycode");
           }}
         >
           Back
-        </button>
+        </button> */}
       </div>
     </div>
   );
