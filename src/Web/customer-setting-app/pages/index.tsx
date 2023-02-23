@@ -21,7 +21,7 @@ export default function Home() {
       const result = await res.json();
 
       if (result.token) {
-        Router.push(`/securitycode`);
+        Router.push(`/customer/securitycode`);
       }
     };
 

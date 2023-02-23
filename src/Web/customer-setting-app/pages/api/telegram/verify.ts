@@ -8,7 +8,7 @@ type AuthData = {
 
 type TelegramBot = {
   botId: number;
-  AccessToken: string;
+  accessToken: string;
 };
 
 export default async function handler(
@@ -34,14 +34,14 @@ const getBotToken = async (botId: number) => {
   const res = await fetch(url);
   const bots = await res.json();
   const bot: TelegramBot = bots.find((b: TelegramBot) => b.botId == botId);
-  return bot.AccessToken;
+  return bot.accessToken;
 };
 
 const verifyWebAppOpenByTelegram = async (
   botToken: string,
   telegramInitData: string
 ) => {
-  const initData = new URLSearchParams(decodeURIComponent(telegramInitData));
+  const initData = new URLSearchParams(telegramInitData);
   let dataCheckString: string[] = [];
   initData.sort();
 

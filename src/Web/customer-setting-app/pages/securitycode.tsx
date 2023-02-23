@@ -17,7 +17,7 @@ export default function SecurityCode() {
   const onSubmit = handleSubmit((data) => {
     console.log(data.securityCode);
     if (data.securityCode == 123457) {
-      Router.push(`/cloneaccount`);
+      Router.push(`/customer/cloneaccount`);
     }
   });
 
