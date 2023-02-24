@@ -16,10 +16,10 @@ public class VerifySecurityCodeEndPoint : IEndpoint<IResult, VerifySecurityCodeR
     {
         if (request.IsValid())
         {
-            return Results.BadRequest();
+            var response = await securityCodeService.VerifySecurityCode(request);
+            return Results.Ok(response);
         }
 
-        var response = await securityCodeService.VerifySecurityCode(request);
-        return Results.Ok(response);
+        return Results.BadRequest();
     }
 }
