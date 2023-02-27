@@ -7,7 +7,7 @@ namespace Fanex.Customer.API.Modules.Customer;
 
 public interface ICustomerService
 {
-    Task<CustomerPT> GetCustomerPT(GetCustomerPTRequest request);
+    Task<CustomerPT> GetCustomerPT(int custId, byte custLevel);
 }
 
 public class CustomerService : ICustomerService
@@ -19,6 +19,6 @@ public class CustomerService : ICustomerService
         this.dynamicRepository = dynamicRepository;
     }
 
-    public Task<CustomerPT> GetCustomerPT(GetCustomerPTRequest request)
-        => dynamicRepository.GetAsync<CustomerPT>(new GetCustomerPTInfoCriteria(Enumeration.FromValue<UserLevel>(request.CustLevel), request.CustId));
+    public async Task<CustomerPT> GetCustomerPT(int custId, byte custLevel)
+        => await dynamicRepository.GetAsync<CustomerPT>(new GetCustomerPTInfoCriteria(Enumeration.FromValue<UserLevel>(custLevel), custId));
 }

@@ -1,4 +1,5 @@
 using Fanex.Customer.API.Extensions;
+using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.SecurityCode;
 using Fanex.Data.Repository;
 using MinimalApi.Endpoint.Extensions;
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.RegisterSecurityCodeModule();
+builder.Services.RegisterCustomerModule();
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();

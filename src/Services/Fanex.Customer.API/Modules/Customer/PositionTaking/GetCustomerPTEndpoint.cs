@@ -2,22 +2,16 @@ using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.Customer.PositionTaking;
 
-public class GetCustomerPTEndpoint : IEndpoint<IResult, GetCustomerPTRequest, CustomerService>
+public class GetCustomerPTEndpoint : IEndpoint<IResult, int, byte, ICustomerService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/{custId}/pt", (GetCustomerPTRequest request, CustomerService customerService)
-            => HandleAsync(request, customerService))
-            .Produces<IResult>();
+        app.MapGet("/api/customer/{custId}/{custLevel}/pt", (int custId, byte custLevel, ICustomerService customerService)
+            => HandleAsync(custId, custLevel, customerService));
     }
 
-    public async Task<IResult> HandleAsync(GetCustomerPTRequest request, CustomerService customerService)
+    public async Task<IResult> HandleAsync(int custId, byte custLevel, ICustomerService customerService)
     {
-        if (request.IsValid())
-        {
-            return Results.Ok(await customerService.GetCustomerPT(request));
-        }
-
-        return Results.BadRequest();
+        return Results.Ok(await customerService.GetCustomerPT(custId, custLevel));
     }
 }

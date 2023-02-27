@@ -6,7 +6,7 @@ public class CopyCustomerEndPoint : IEndpoint<IResult, CopyCustomerRequest>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/customer/copy", (CopyCustomerRequest request)
+        app.MapPost("/api/copy", (CopyCustomerRequest request)
             => HandleAsync(request))
             .Produces<IResult>();
     }
