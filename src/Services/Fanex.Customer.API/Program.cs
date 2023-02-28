@@ -1,6 +1,7 @@
 using Fanex.Caching;
 using Fanex.Customer.API;
 using Fanex.Customer.API.Extensions;
+using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.SecurityCode;
 using Fanex.Data.Repository;
@@ -15,7 +16,8 @@ builder.Services.AddSingleton<ICacheService, CacheService>();
 builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.RegisterSecurityCodeModule();
-builder.Services.RegisterCustomerModule(builder.Configuration);
+builder.Services.RegisterCustomerModule();
+builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();
