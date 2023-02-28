@@ -35,6 +35,10 @@
         <Setting Key="Age_CustomerCheckReachDownline" SpName="Age_CustomerCheckReachDownline" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
     </Function>
 
+    <Function Name="Customer Information">
+        <Setting Key="Age_CustomerSelUserSearch" SpName="Age_CustomerSelUserSearch" DbName="DBAGE.bodb02.BODBDownlineNet" Plain="0" />
+    </Function>
+
     <Function Name="Keno">
         <Setting Key="Acc_CustomerSelEditMemberKeno" SpName="Acc_CustomerSelEditMemberKeno" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_CustomerUpdMemberKeno_BetSetting" SpName="Acc_CustomerUpdMemberKeno_BetSetting" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
