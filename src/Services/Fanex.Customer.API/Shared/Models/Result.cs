@@ -12,7 +12,7 @@ public class Result
 
     public int Code { get; }
 
-    public string Message { get; }
+    public string Message { get; set; }
 
     public bool IsSuccessful => Code == 0;
 

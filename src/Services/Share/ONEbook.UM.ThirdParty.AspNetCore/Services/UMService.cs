@@ -1,9 +1,8 @@
 using Fanex.Caching;
 using Fanex.Logging;
-using Newtonsoft.Json;
 using ONEbook.UM.ThirdParty.AspNetCore.Configurations;
 using ONEbook.UM.ThirdParty.AspNetCore.Models;
-
+using System.Text.Json;
 namespace ONEbook.UM.ThirdParty.AspNetCore.Services;
 
 public interface IUMService
@@ -59,7 +58,7 @@ public class UMService : IUMService
         {
             var response = await httpClient.GetAsync($"/api/UnderMaintenance/get?siteId={configuration.SiteId}&productId={productId}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<UnderMaintenanceTime>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<UnderMaintenanceTime>(await response.Content.ReadAsStringAsync());
         }
         catch (Exception ex)
         {

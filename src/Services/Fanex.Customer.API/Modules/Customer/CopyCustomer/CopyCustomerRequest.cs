@@ -1,3 +1,7 @@
+using Fanex.Customer.API.Shared.Enumerations;
+using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Utils;
+
 namespace Fanex.Customer.API.Modules.Customer.CopyCustomer;
 
 public class CopyCustomerRequest
@@ -9,6 +13,8 @@ public class CopyCustomerRequest
     public string ActorSubAccName { get; set; }
 
     public byte ActorUserLevel { get; set; }
+
+    public UserLevel ActorLevel => Enumeration.FromValue<UserLevel>(ActorUserLevel);
 
     public string UserName { get; set; }
 
@@ -26,11 +32,11 @@ public class CopyCustomerRequest
 
     public string Language { get; set; }
 
+    public string LanguageKey => LanguageUtils.ToLanguageKey(Language);
+
     public string IP { get; set; }
 
     public byte SystemId { get; set; }
-
-    public bool IsQrCode { get; set; }
 
     public bool IsValid()
         => ActorId > 0
