@@ -54,6 +54,9 @@
   background: #18965B;
   margin: 0;
   padding: 2px 28px;
+  color: #EDEDED;
+  outline: none;
+  border: 0;
 }
 .main .button.submit {
   padding: 9px 15px;
