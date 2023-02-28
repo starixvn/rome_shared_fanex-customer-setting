@@ -27,7 +27,7 @@ export default function SecurityCode() {
       <div className={styles.main}>
         <form onSubmit={onSubmit}>
           <label className={styles.text}>Security Code</label>
-          <p>To sure your valuable data, please input your Security Code used on the agency site before proceeding!</p>
+          <p className={styles.note}>To ensure your valuable data, please input your Security Code used on the agency site before proceeding!</p>
           <div className={styles.controlsecuritycode}>
             <input className={styles.control} {...register("securityCode")} placeholder="123457" />
             <input type="submit" value="Verify" />

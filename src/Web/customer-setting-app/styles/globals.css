@@ -109,7 +109,6 @@ body {
     rgb(var(--background-start-rgb));
   font-family: var(--font-roboto);
   font-size: 14px;
-  line-height: 22/14;
   font-weight: 400;
 }
 
@@ -118,11 +117,11 @@ a {
   text-decoration: none;
 }
 p{
-  color: var(--secondary-color);
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 3px;
 }
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

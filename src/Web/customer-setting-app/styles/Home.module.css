@@ -7,18 +7,30 @@
 .main {
   padding: 17px 16px;
 }
-
+.main .note{
+  color: var(--secondary-color);
+}
+.main .notetop{
+  color: var(--secondary-color);
+  margin-bottom: 16px;
+  font-style: italic;
+}
 .main label {
   display: block;  
   font-size: 16px;
   line-height: 24px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .main .sublabel {
-  color: rgb(47, 47, 47);
-  margin-bottom: 5px;
-  margin-top: 5px;
+  font-size: 14px;
+  line-height: 22px;  
+   
+}
+.main .sublabel svg{
+  position: relative;
+  top: 4px;
+  left: 6px;
 }
 .main .controlsecuritycode{
   display: flex;
@@ -34,7 +46,7 @@
   height: 26px;
   outline: none;
   width: 100%;
-  max-width: 258px;
+  max-width: 336px;
 }
 .main .controlsecuritycode input[type="submit"]{
   font-weight: 500;
@@ -43,13 +55,17 @@
   margin: 0;
   padding: 2px 28px;
 }
-.main input[type="submit"] {
-  padding: 2px 15px;
-  margin-left: 5px;
-  background-color: rgb(62, 141, 210);
-  color: white;
+.main .button.submit {
+  padding: 9px 15px;
+  margin: 16px 0 0 5px;
+  background: #0B589C;
+  color: #EDEDED;
   outline: none;
   border: 0;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  text-transform: uppercase;
 }
 .main .showcode{
   display: flex;  
@@ -72,14 +88,68 @@
   margin-left: 0px !important;
   width: 100%;
   margin-top: 25px;
+  font-family: var(--font-roboto);
 }
 
 .main button {
   width: 100%;
   height: 30px;
 }
-
-.main select {
-  color: rgb(34, 34, 34);
-  background-color: white;
+.formcontrol{
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+input.full{
+  max-width: 360px!important;
+}
+.formcontrol svg{
+  margin-left: 8px;
+  fill: #18965B;
+}
+.require{
+  color: #A11515;
+  margin-left: 3px;
+}
+.relative{
+  position: relative;
+}
+.showpassword{
+  position: absolute;
+  top: 5px;
+  left: 336px;
+  cursor: pointer;
+}
+.agent{
+  display: flex;
+  align-items:center;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  outline: none;
+  margin-bottom: 18px;
+}
+.agent > *{
+  margin-right: 16px;
+}
+.agent select{
+  width: 52px;
+  height: 36px;
+  border: 1px solid #D1D1D1;
+}
+.agent select:focus{
+  outline: none;
+}
+.agent svg{
+  margin-left: -7px;
+}
+.credit{
+  color: var(--secondary-color);
+  font-size: 13px;
+  line-height: 20px;
+  margin-bottom: 6px;
+}
+.credit span{
+  color: var(--primari-color);
+  font-weight: 700;
 }
