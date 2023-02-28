@@ -5,19 +5,14 @@
 }
 
 .main {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.text {
-  color: rgb(31, 30, 30);
-  margin-bottom: 5px;
-  margin-top: 10px;
+  padding: 17px 16px;
 }
 
 .main label {
-  color: rgb(25, 100, 140);
-  display: block;
+  display: block;  
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 2px;
 }
 
 .main .sublabel {
@@ -25,24 +20,53 @@
   margin-bottom: 5px;
   margin-top: 5px;
 }
-
-.main input {
-  color: black;
-  padding-left: 5px;
-  background-color: white;
-  border: 1px solid rgb(135, 135, 135);
-  border-radius: 4px;
-  height: 30px;
-  outline: none;
+.main .controlsecuritycode{
+  display: flex;
+  margin-bottom: 5px;
 }
-
+.main .controlsecuritycode .control{
+  margin-right: 16px;
+}
+.main .control {
+  appearance: none;
+  padding-left: 5px;
+  border: 1px solid #D1D1D1;
+  height: 26px;
+  outline: none;
+  width: 100%;
+  max-width: 258px;
+}
+.main .controlsecuritycode input[type="submit"]{
+  font-weight: 500;
+  font-size: 12px;
+  background: #18965B;
+  margin: 0;
+  padding: 2px 28px;
+}
 .main input[type="submit"] {
   padding: 2px 15px;
   margin-left: 5px;
   background-color: rgb(62, 141, 210);
   color: white;
+  outline: none;
+  border: 0;
 }
-
+.main .showcode{
+  display: flex;  
+}
+.main .showcode input{
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.main .showcode span{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  cursor: pointer;
+  color: var(--secondary-color)
+}
 .main .button {
   display: block;
   margin-left: 0px !important;

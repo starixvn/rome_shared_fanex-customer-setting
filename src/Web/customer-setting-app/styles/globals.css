@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -5,7 +6,7 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: #333333;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
@@ -38,6 +39,19 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --primari-color: #333333;
+  --secondary-color: #727272;
+  --font-roboto: 'Roboto', sans-serif;
+
+  /** super **/
+  --background-super: #795547;
+  /** master **/
+  --background-master: #363B59;
+  /** agent **/
+  --background-agent: #4C6375;
+  
+  
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,20 +100,29 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: var(--primari-color);
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: var(--font-roboto);
+  font-size: 14px;
+  line-height: 22/14;
+  font-weight: 400;
 }
 
 a {
   color: inherit;
   text-decoration: none;
 }
-
+p{
+  color: var(--secondary-color);
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 3px;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

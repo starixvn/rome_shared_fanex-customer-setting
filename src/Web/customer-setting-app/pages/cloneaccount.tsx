@@ -26,7 +26,7 @@ export default function SecurityCode() {
 
   return (
     <div className={styles.container}>
-      <Header headerContent="Create new Customer"></Header>
+      <Header headerContent="Create New Customer"></Header>
       <div className={styles.main}>
         <p className={styles.text}>
           *Note: Settings will remain the same as the Source account setting for

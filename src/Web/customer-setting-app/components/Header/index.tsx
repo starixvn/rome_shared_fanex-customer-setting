@@ -7,7 +7,7 @@ interface HeaderPros {
 const Header = ({ headerContent }: HeaderPros) => {
   return (
     <div className={styles.header}>
-      <p className={styles.t}>{headerContent}</p>
+      {headerContent}
     </div>
   );
 };
