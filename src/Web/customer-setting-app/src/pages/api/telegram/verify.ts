@@ -1,11 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import CryptoJS from "crypto-js";
 
-type AuthData = {
-  token: string;
-  refreshToken: string;
-};
-
 type TelegramBot = {
   botId: number;
   accessToken: string;

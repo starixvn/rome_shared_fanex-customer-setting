@@ -1,11 +1,14 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
+const nextTranslate = require("next-translate-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 
-const nextConfig = {
+module.exports = nextTranslate({
   reactStrictMode: true,
   output: "standalone",
   assetPrefix: isProd ? "/customer" : "",
-};
-
-module.exports = nextConfig;
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+});

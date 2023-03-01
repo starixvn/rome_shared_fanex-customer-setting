@@ -1,13 +1,15 @@
 import Router from "next/router";
 import { useForm } from "react-hook-form";
-import Header from "@/components/Header";
-import styles from "@/styles/Home.module.css";
+import useTranslation from "next-translate/useTranslation";
+import styles from "@styles/Home.module.scss";
+import Header from "@components/Header";
 
 type FormValues = {
   securityCode: number;
 };
 
 export default function SecurityCode() {
+  const { t } = useTranslation("common");
   const {
     register,
     handleSubmit,
@@ -20,16 +22,23 @@ export default function SecurityCode() {
       Router.push(`/customer/cloneaccount`);
     }
   });
- 
+
   return (
     <div className={styles.container}>
-      <Header headerContent="Create New Customer"></Header>
+      <Header headerContent={t("header")}></Header>
       <div className={styles.main}>
         <form onSubmit={onSubmit}>
           <label className={styles.text}>Security Code</label>
-          <p className={styles.note}>To ensure your valuable data, please input your Security Code used on the agency site before proceeding!</p>
+          <p className={styles.note}>
+            To ensure your valuable data, please input your Security Code used
+            on the agency site before proceeding!
+          </p>
           <div className={styles.controlsecuritycode}>
-            <input className={styles.control} {...register("securityCode")} placeholder="123457" />
+            <input
+              className={styles.control}
+              {...register("securityCode")}
+              placeholder="123457"
+            />
             <input type="submit" value="Verify" />
           </div>
           <label className={styles.showcode}>

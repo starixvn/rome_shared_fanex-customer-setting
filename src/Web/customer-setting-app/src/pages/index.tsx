@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useEffect } from "react";
 import Router, { useRouter } from "next/router";
-import { CustomWindow } from "@/types/custom.window";
+import { CustomWindow } from "src/types/custom.window";
 
 declare let window: CustomWindow;
 
