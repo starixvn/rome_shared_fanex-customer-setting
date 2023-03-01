@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
@@ -8,7 +9,7 @@ public class CopyCustomerEndPoint : IEndpoint<IResult, CopyCustomerRequest, ICop
     {
         app.MapPost("/api/customer/copy", (CopyCustomerRequest request, ICopyCustomerService copyCustomerService)
             => HandleAsync(request, copyCustomerService))
-            .Produces<IResult>();
+            .Produces<CopyMultipleCustomerResult>();
     }
 
     public async Task<IResult> HandleAsync(CopyCustomerRequest request, ICopyCustomerService copyCustomerService)

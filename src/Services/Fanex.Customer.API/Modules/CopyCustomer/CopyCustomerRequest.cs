@@ -1,11 +1,19 @@
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Utils;
+using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
 
 public class CopyCustomerRequest
 {
+    private readonly AppSettings appSettings;
+
+    public CopyCustomerRequest(IOptions<AppSettings> appSettings)
+    {
+        this.appSettings = appSettings.Value;
+    }
+
     public int ActorId { get; set; }
 
     public int ActorSubAccId { get; set; }
@@ -44,7 +52,7 @@ public class CopyCustomerRequest
         && 1 < ActorUserLevel && ActorUserLevel < 5
         && !string.IsNullOrWhiteSpace(UserName)
         && !string.IsNullOrWhiteSpace(Password)
-        && 0 < NumberOfAccounts && NumberOfAccounts <= 10
+        && 0 < NumberOfAccounts && NumberOfAccounts <= appSettings.MaximumAccountsCreatePerRequest
         && Credit >= 0
         && MaxCredit >= 0
         && SourceCustId > 0

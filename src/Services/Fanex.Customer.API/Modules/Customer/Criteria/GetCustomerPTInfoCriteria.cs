@@ -18,11 +18,19 @@ public class GetCustomerPTInfoCriteria : CriteriaBase
     public int CustId { get; }
 
     public override string GetSettingKey()
-        => CustLevel.IsAgentLevel()
-        ? "Acc_CustomerSelAgentInfo"
-        : CustLevel.IsMasterLevel()
-        ? "Acc_CustomerSelMAgentInfo"
-        : "Acc_CustomerSelSAgentInfo";
+    {
+        if (CustLevel.IsAgentLevel())
+        {
+            return "Acc_CustomerSelAgentInfo";
+        }
+
+        if (CustLevel.IsMasterLevel())
+        {
+            return "Acc_CustomerSelMAgentInfo";
+        }
+
+        return "Acc_CustomerSelSAgentInfo";
+    }
 
     public override bool IsValid()
         => CustId > 0;

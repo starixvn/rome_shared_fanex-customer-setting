@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Modules.Customer.Models;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using MinimalApi.Endpoint;
 
@@ -9,7 +10,7 @@ public class SearchCustomerEndpoint : IEndpoint<IResult, SearchCustomerRequest, 
     {
         app.MapGet("/api/customer/search", (SearchCustomerRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
-            .Produces<IResult>();
+            .Produces<SuggestCustomer>();
     }
 
     public async Task<IResult> HandleAsync(SearchCustomerRequest request, ICustomerService customerService)
