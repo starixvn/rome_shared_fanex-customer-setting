@@ -29,6 +29,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseFanexData(builder.Configuration, app.Environment);
 app.UseRemotingRef(builder.Configuration);
+app.ConfigureExceptionHandler(Fanex.Logging.Logger.Log);
 
 app.MapEndpoints();
 app.MapHealthChecks("/healthz");

@@ -4,7 +4,7 @@ using System.Text;
 using Fanex.Data;
 using Microsoft.AspNetCore.Diagnostics;
 
-namespace Alpha.CloneAccount.Api.Extensions;
+namespace Fanex.Customer.API.Extensions;
 
 public static class ExceptionMiddlewareExtensions
 {
