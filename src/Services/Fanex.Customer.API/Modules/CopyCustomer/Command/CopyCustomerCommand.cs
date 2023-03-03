@@ -32,6 +32,17 @@ public abstract class CopyCustomerCommand : NonQueryCommand
 
     public string UserPwd { get; }
 
+    public string FirstName { get; set; } = string.Empty;
+
+
+    public string LastName { get; set; } = string.Empty;
+
+    public string Phone { get; set; } = string.Empty;
+
+    public string Fax { get; set; } = string.Empty;
+
+    public string MobilePhone { get; set; } = string.Empty;
+
     public decimal Credit { get; }
 
     public int Creator { get; }

@@ -7,13 +7,6 @@ namespace Fanex.Customer.API.Modules.CopyCustomer;
 
 public class CopyCustomerRequest
 {
-    private readonly AppSettings appSettings;
-
-    public CopyCustomerRequest(IOptions<AppSettings> appSettings)
-    {
-        this.appSettings = appSettings.Value;
-    }
-
     public int ActorId { get; set; }
 
     public int ActorSubAccId { get; set; }
@@ -46,13 +39,13 @@ public class CopyCustomerRequest
 
     public byte SystemId { get; set; }
 
+
     public bool IsValid()
         => ActorId > 0
         && ActorSubAccId >= 0
         && 1 < ActorUserLevel && ActorUserLevel < 5
         && !string.IsNullOrWhiteSpace(UserName)
         && !string.IsNullOrWhiteSpace(Password)
-        && 0 < NumberOfAccounts && NumberOfAccounts <= appSettings.MaximumAccountsCreatePerRequest
         && Credit >= 0
         && MaxCredit >= 0
         && SourceCustId > 0

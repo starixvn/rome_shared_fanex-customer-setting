@@ -34,6 +34,11 @@ public class CopyMemberSpParamsBuilder : ICopyMemberSpParamsBuilder
         spParams.Add("custid", 0);
         spParams.Add("username", param.UserName);
         spParams.Add("userpwd", hashPassword);
+        spParams.Add("firstname", string.Empty);
+        spParams.Add("lastname", string.Empty);
+        spParams.Add("phone", string.Empty);
+        spParams.Add("mobilephone", string.Empty);
+        spParams.Add("fax", string.Empty);
         spParams.Add("credit", param.Credit);
         spParams.Add("copyfromcustid", param.SourceCustId);
         spParams.Add("systemid", param.SystemId);
