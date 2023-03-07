@@ -14,7 +14,7 @@ export default function Home() {
       const params = new URLSearchParams(queryString);
       const url = `${
         process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP
-      }/telegram/verify?botId=${params.get(
+      }/auth/telegram?botId=${params.get(
         "botId"
       )}&telegramInitData=${encodeURIComponent(telegramInitData)}`;
       const res = await fetch(url);

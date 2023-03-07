@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap");
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: #333333;
   --background-start-rgb: 214, 219, 220;
@@ -42,16 +42,14 @@
 
   --primari-color: #333333;
   --secondary-color: #727272;
-  --font-roboto: 'Roboto', sans-serif;
+  --font-roboto: "Roboto", sans-serif;
 
   /** super **/
   --background-super: #795547;
   /** master **/
-  --background-master: #363B59;
+  --background-master: #363b59;
   /** agent **/
-  --background-agent: #4C6375;
-  
-  
+  --background-agent: #4c6375;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -116,7 +114,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
-p{
+p {
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 3px;

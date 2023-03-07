@@ -7,7 +7,7 @@ const isProd = process.env.NODE_ENV === "production";
 module.exports = nextTranslate({
   reactStrictMode: true,
   output: "standalone",
-  assetPrefix: isProd ? "/customer" : "",
+  assetPrefix: isProd ? "/customer" : undefined,
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },

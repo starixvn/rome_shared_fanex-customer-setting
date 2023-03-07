@@ -15,7 +15,7 @@ export const CheckMarkIcon = ({ width, height }: IconProps) => {
     >
       <path
         fillRule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="M1.33398 8.00016C1.33398 4.32016 4.32065 1.3335 8.00065 1.3335C11.6807 1.3335 14.6673 4.32016 14.6673 8.00016C14.6673 11.6802 11.6807 14.6668 8.00065 14.6668C4.32065 14.6668 1.33398 11.6802 1.33398 8.00016ZM3.33398 8.00016L6.66732 11.3335L12.6673 5.3335L11.7273 4.38683L6.66732 9.44683L4.27398 7.06016L3.33398 8.00016Z"
         fill="#18965B"
       />
@@ -27,8 +27,8 @@ export const InformationIcon = ({ width, height }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
+      width={width}
+      height={height}
       fill="currentColor"
       viewBox="0 0 16 16"
     >
@@ -43,8 +43,8 @@ export const InformationIcon = ({ width, height }: IconProps) => {
 export const EyeIcon = ({ width, height }: IconProps) => {
   return (
     <svg
-      width="16"
-      height="16"
+      width={width}
+      height={height}
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

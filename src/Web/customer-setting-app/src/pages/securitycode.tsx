@@ -2,7 +2,7 @@ import Router from "next/router";
 import { useForm } from "react-hook-form";
 import useTranslation from "next-translate/useTranslation";
 import styles from "@styles/Home.module.scss";
-import Header from "@components/Header";
+import Header from "@components/header";
 
 type FormValues = {
   securityCode: number;
@@ -19,7 +19,7 @@ export default function SecurityCode() {
   const onSubmit = handleSubmit((data) => {
     console.log(data.securityCode);
     if (data.securityCode == 123457) {
-      Router.push(`/customer/cloneaccount`);
+      Router.push(`/customer/newcustomer`);
     }
   });
 
