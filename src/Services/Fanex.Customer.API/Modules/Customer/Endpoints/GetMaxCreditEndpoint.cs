@@ -8,7 +8,7 @@ public class GetMaxCreditEndpoint : IEndpoint<IResult, int, ICustomerService>
     {
         app.MapGet("/api/customer/{custId}/max-credit", (int custId, ICustomerService customerService)
             => HandleAsync(custId, customerService))
-            .Produces<string>();
+            .Produces<decimal>();
     }
 
     public async Task<IResult> HandleAsync(int custId, ICustomerService customerService)
