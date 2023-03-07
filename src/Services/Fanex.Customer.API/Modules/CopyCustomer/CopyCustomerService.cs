@@ -75,9 +75,9 @@ public class CopyCustomerService : ICopyCustomerService
 
     private async Task Sync3rdProductSettings(CopyCustomerRequest param, int createdCustId)
     {
-        var createdCustomer = await GetCustomerInfo(createdCustId);
-        var sourceCustomer = await GetCustomerInfo(param.SourceCustId);
-        var actor = await GetCustomerInfo(param.ActorId);
+        var createdCustomer = await customerService.GetCustomerInfo(createdCustId);
+        var sourceCustomer = await customerService.GetCustomerInfo(param.SourceCustId);
+        var actor = await customerService.GetCustomerInfo(param.ActorId);
 
         if (createdCustomer != null && sourceCustomer != null && actor != null)
         {
@@ -99,9 +99,6 @@ public class CopyCustomerService : ICopyCustomerService
             }
         }
     }
-
-    private async Task<CustomerInfo> GetCustomerInfo(int custId)
-        => await dynamicRepository.GetAsync<CustomerInfo>(new GetCustomerInfoCriteria(custId, appSettings.SettingStatus));
 
     private async Task<CopyCustomerResult> CopyMember(CopyCustomerRequest param)
     {

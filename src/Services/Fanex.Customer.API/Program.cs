@@ -26,7 +26,10 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("./swagger/v1/swagger.json", "v1");
+});
 app.UseFanexData(builder.Configuration, app.Environment);
 app.UseRemotingRef(builder.Configuration);
 app.ConfigureExceptionHandler(Fanex.Logging.Logger.Log);

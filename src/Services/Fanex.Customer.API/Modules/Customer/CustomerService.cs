@@ -15,6 +15,10 @@ public interface ICustomerService
     Task<IEnumerable<SuggestCustomer>> SearchCustomer(SearchCustomerRequest param);
 
     Task<CustomerInfo> GetCustomerInfo(int custId);
+
+    Task<string> GetMaxCredit(int custId);
+
+    Task<string> GetSuggestUsername(GetSuggestUsernameRequest request);
 }
 
 public class CustomerService : ICustomerService
@@ -39,4 +43,14 @@ public class CustomerService : ICustomerService
 
     public async Task<CustomerInfo> GetCustomerInfo(int custId)
         => await dynamicRepository.GetAsync<CustomerInfo>(new GetCustomerInfoCriteria(custId, appSettings.SettingStatus));
+
+    public Task<string> GetMaxCredit(int custId)
+        => dynamicRepository.GetAsync<string>(new GetCustomerMaxCreditCriteria(custId));
+
+    public async Task<string> GetSuggestUsername(GetSuggestUsernameRequest request)
+    {
+        var command = new GetSuggestUsernameCommand(request.ActorName, request.CustId, request.RoleId);
+        await dynamicRepository.ExecuteAsync(command);
+        return command.SeqName;
+    }
 }
