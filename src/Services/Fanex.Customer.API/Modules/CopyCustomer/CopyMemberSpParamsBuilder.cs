@@ -42,6 +42,7 @@ public class CopyMemberSpParamsBuilder : ICopyMemberSpParamsBuilder
         spParams.Add("credit", param.Credit);
         spParams.Add("copyfromcustid", param.SourceCustId);
         spParams.Add("systemid", param.SystemId);
+        spParams.Add("CreatedMode", 1);
         spParams.Add("playerdiscount", sportbooksSetting["playerdiscount"]);
         spParams.Add("playerdiscountcs", sportbooksSetting["playerdiscountcs"]);
         spParams.Add("playerdiscount1x2", sportbooksSetting["playerdiscount1x2"]);

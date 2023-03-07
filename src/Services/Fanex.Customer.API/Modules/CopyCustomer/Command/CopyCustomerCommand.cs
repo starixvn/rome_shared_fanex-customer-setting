@@ -59,6 +59,8 @@ public abstract class CopyCustomerCommand : NonQueryCommand
 
     public int CustId { get; set; }
 
+    public byte CreatedMode { get; } = 1;
+
     public byte SettingStatus { get; }
 
     public int ErrCode { get; set; }
