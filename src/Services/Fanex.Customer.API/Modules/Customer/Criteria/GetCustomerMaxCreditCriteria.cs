@@ -1,17 +1,19 @@
+using Fanex.Data;
 using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.Customer.Criteria;
 
 public class GetCustomerMaxCreditCriteria : CriteriaBase
 {
-    public GetCustomerMaxCreditCriteria(int custId)
+    public GetCustomerMaxCreditCriteria(string username)
     {
-        CustId = custId;
+        Username = username;
     }
 
-    public int CustId { get; }
+    [SpParam(SqlParamName = "RefCust")]
+    public string Username { get; }
 
     public override string GetSettingKey() => "Acc_CustomerCreditInfoSel";
 
-    public override bool IsValid() => CustId > 0;
+    public override bool IsValid() => !string.IsNullOrWhiteSpace(Username);
 }
