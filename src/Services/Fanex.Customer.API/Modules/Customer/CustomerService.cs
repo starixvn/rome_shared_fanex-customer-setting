@@ -16,7 +16,7 @@ public interface ICustomerService
 
     Task<CustomerInfo> GetCustomerInfo(int custId);
 
-    Task<decimal> GetMaxCredit(int custId);
+    Task<CreditInfo> GetCreditInfo(int custId);
 
     Task<string> GetSuggestUsername(GetSuggestUsernameRequest request);
 }
@@ -44,8 +44,8 @@ public class CustomerService : ICustomerService
     public async Task<CustomerInfo> GetCustomerInfo(int custId)
         => await dynamicRepository.GetAsync<CustomerInfo>(new GetCustomerInfoCriteria(custId, appSettings.SettingStatus));
 
-    public Task<decimal> GetMaxCredit(int custId)
-        => dynamicRepository.GetAsync<decimal>(new GetCustomerMaxCreditCriteria(custId));
+    public Task<CreditInfo> GetCreditInfo(int custId)
+        => dynamicRepository.GetAsync<CreditInfo>(new GetCustomerMaxCreditCriteria(custId));
 
     public async Task<string> GetSuggestUsername(GetSuggestUsernameRequest request)
     {
