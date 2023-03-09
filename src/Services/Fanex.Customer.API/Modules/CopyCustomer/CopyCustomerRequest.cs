@@ -1,7 +1,6 @@
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Utils;
-using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
 

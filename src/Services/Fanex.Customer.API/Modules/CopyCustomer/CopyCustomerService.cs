@@ -49,6 +49,7 @@ public class CopyCustomerService : ICopyCustomerService
             if (result.IsSuccessful)
             {
                 index++;
+                usernames.Add(request.UserName);
                 request.UserName = await GetAvailableDownlineUserName(request);
 
                 Task.Run(async () =>

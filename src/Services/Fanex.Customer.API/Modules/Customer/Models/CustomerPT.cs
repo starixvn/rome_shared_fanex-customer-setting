@@ -2,6 +2,11 @@ namespace Fanex.Customer.API.Modules.Customer.Models;
 
 public class CustomerPT
 {
+    public CustomerPT()
+    {
+
+    }
+
     public CustomerPT(string suffix, decimal maxCredit)
     {
         Suffix = suffix;
