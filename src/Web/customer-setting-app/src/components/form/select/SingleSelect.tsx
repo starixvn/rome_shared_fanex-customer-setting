@@ -7,13 +7,14 @@ export type SelectData = {
 
 type Props = SelectHTMLAttributes<HTMLSelectElement> & {
   options: SelectData[];
+  selectedValue: string;
 };
 
 export const SingleSelect = forwardRef<HTMLSelectElement, Props>(
-  ({ options, ...rest }: Props, ref) => {
+  ({ options, selectedValue, ...rest }: Props, ref) => {
     return (
       <>
-        <select {...rest} ref={ref}>
+        <select {...rest} ref={ref} defaultValue={selectedValue}>
           {options.map((item) => (
             <option key={item.value} value={item.value}>
               {item.displayName}

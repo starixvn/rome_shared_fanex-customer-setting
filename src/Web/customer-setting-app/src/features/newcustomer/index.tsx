@@ -1,14 +1,27 @@
-import React from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Header from "@components/header";
 import { CheckMarkIcon, EyeIcon, InformationIcon } from "@components/icons";
 import styles from "./NewCustomer.module.scss";
-import {
-  CheckUsernameExists,
-  SearchCustomerExists,
-} from "@components/customer";
+
+import dynamic from "next/dynamic";
+
+const CheckUsernameExists = dynamic(
+  () => import("@components/customer").then((mod) => mod.CheckUsernameExists),
+  {
+    ssr: false,
+  }
+);
+
+const SearchCustomerExists = dynamic(
+  () => import("@components/customer").then((mod) => mod.SearchCustomerExists),
+  {
+    ssr: false,
+  }
+);
 
 export const CreateNewCustomer = ({ props }: any) => {
+  const existAccountName = useRef("");
   const methods = useForm();
   const {
     register,
@@ -20,6 +33,14 @@ export const CreateNewCustomer = ({ props }: any) => {
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
+
+  const handleCorrectAccount = (value: string) => {
+    existAccountName.current = value;
+  };
+
+  {
+    console.log("create new customer");
+  }
 
   return (
     <div className={styles.container}>
@@ -39,8 +60,12 @@ export const CreateNewCustomer = ({ props }: any) => {
               name="existAccount"
               control={control}
               render={({ field: { onChange } }) => (
-                <SearchCustomerExists handleChange={onChange} />
+                <SearchCustomerExists
+                  handleChange={onChange}
+                  handleCorrectAccount={handleCorrectAccount}
+                />
               )}
+              rules={{ required: true }}
             />
           </div>
 
@@ -50,7 +75,12 @@ export const CreateNewCustomer = ({ props }: any) => {
             {props.maxAccounts})
           </p>
           <div className={styles.formcontrol}>
-            <input className={styles.control} {...register("noOfAccounts")} />
+            <input
+              className={styles.control}
+              {...register("noOfAccounts", {
+                required: true,
+              })}
+            />
             {/* <CheckMarkIcon height={16} width={16} /> */}
           </div>
           <label className={styles.text}>Account Details</label>
@@ -68,6 +98,7 @@ export const CreateNewCustomer = ({ props }: any) => {
               render={({ field: { onChange } }) => (
                 <CheckUsernameExists onChange={onChange} />
               )}
+              rules={{ required: true }}
             />
           </div>
           <label className={styles.sublabel}>
@@ -76,7 +107,9 @@ export const CreateNewCustomer = ({ props }: any) => {
           <div className={styles.formcontrol}>
             <input
               className={styles.control + " " + styles.full}
-              {...register("credit")}
+              {...register("credit", {
+                required: true,
+              })}
             />
           </div>
           <div className={styles.credit}>
@@ -91,7 +124,9 @@ export const CreateNewCustomer = ({ props }: any) => {
           <div className={styles.relative}>
             <input
               className={styles.control + " " + styles.full}
-              {...register("password")}
+              {...register("password", {
+                required: true,
+              })}
               type="password"
             />
             <span className={styles.showpassword}>

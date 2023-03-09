@@ -1,10 +1,11 @@
 import { CheckMarkIcon } from "@components/icons";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { components, OptionProps } from "react-select";
 import AsyncCreatableSelect from "react-select/async-creatable";
+import { AppContext } from "src/pages/newcustomer";
 
 const getCustomers = async (query: string) => {
-  const url = `http://localhost:3000/api/customer/search?query=${query}`;
+  const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/search?query=${query}`;
   const res = await fetch(url);
   const result = await res.json();
   return result;
@@ -68,11 +69,18 @@ const Option = (props: OptionProps<any>) => {
   );
 };
 
-export const SearchCustomerExists = ({ handleChange }: any) => {
+export const SearchCustomerExists = ({
+  handleChange,
+  handleCorrectAccount,
+}: any) => {
+  const { setExistAccountName } = useContext(AppContext);
   const onChange = (option: any, actionMeta: any) => {
     handleChange(option.value);
+    handleCorrectAccount(option.value);
+    setExistAccountName(option.value);
   };
 
+  console.log("render search");
   return (
     <div>
       <AsyncCreatableSelect

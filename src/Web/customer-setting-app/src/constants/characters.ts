@@ -1,6 +1,7 @@
 import { SelectData } from "@components/form/select/SingleSelect";
 
 const charactersList = [
+  0,
   1,
   2,
   3,
@@ -39,6 +40,6 @@ const charactersList = [
 ];
 
 export const characters: SelectData[] = charactersList.map((character) => ({
-  value: character,
+  value: character.toString(),
   displayName: character.toString(),
 }));

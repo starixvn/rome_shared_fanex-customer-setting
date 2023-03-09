@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { CreateNewCustomer } from "@features/newcustomer";
 
@@ -9,8 +9,25 @@ interface Props {
   maxAccounts: number;
 }
 
+export const AppContext = createContext({
+  existAccountName: "",
+  setExistAccountName: (name: any) => {},
+});
+const AppProvider = ({ children }: any) => {
+  const [existAccountName, setExistAccountName] = useState("");
+  return (
+    <AppContext.Provider value={{ existAccountName, setExistAccountName }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
 const NewCustomer = (props: Props) => {
-  return <CreateNewCustomer props={props} />;
+  return (
+    <AppProvider>
+      <CreateNewCustomer props={props} />;
+    </AppProvider>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -20,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       isAgent: true,
       minCredit: 0,
-      maxCredit: await res.json(),
+      maxCredit: 100,
       maxAccounts: process.env.MAX_ACCOUNTS,
     },
   };
