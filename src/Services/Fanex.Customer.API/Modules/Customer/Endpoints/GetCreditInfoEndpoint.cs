@@ -14,7 +14,7 @@ public class GetCreditInfoEndpoint : IEndpoint<IResult, string, ICustomerService
 
     public async Task<IResult> HandleAsync(string username, ICustomerService customerService)
     {
-        if (!string.IsNullOrWhiteSpace(username))
+        if (string.IsNullOrWhiteSpace(username))
         {
             return Results.BadRequest();
         }
