@@ -25,3 +25,5 @@ export const SingleSelect = forwardRef<HTMLSelectElement, Props>(
     );
   }
 );
+
+SingleSelect.displayName = "SingleSelect";

@@ -4,7 +4,7 @@ interface Props {
   statusCode?: number;
 }
 
-function Error({ statusCode }: Props) {
+function Error({ statusCode = 404 }: Props) {
   return (
     <p>
       {statusCode
@@ -14,9 +14,9 @@ function Error({ statusCode }: Props) {
   );
 }
 
-Error.getInitialProps = ({ res, err }: NextPageContext) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  return { statusCode };
-};
+// Error.getInitialProps = ({ res, err }: NextPageContext) => {
+//   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+//   return { statusCode };
+// };
 
 export default Error;

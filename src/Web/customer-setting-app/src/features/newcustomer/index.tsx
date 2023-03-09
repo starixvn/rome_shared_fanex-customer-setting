@@ -1,10 +1,9 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import Header from "@components/header";
-import { CheckMarkIcon, EyeIcon, InformationIcon } from "@components/icons";
-import styles from "./NewCustomer.module.scss";
-
 import dynamic from "next/dynamic";
+import styles from "./NewCustomer.module.scss";
+import Header from "@components/header/Header";
+import { EyeIcon, InformationIcon } from "@components/icons/Icons";
 
 const CheckUsernameExists = dynamic(
   () => import("@components/customer").then((mod) => mod.CheckUsernameExists),

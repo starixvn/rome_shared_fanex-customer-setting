@@ -1,4 +1,3 @@
-import { CheckMarkIcon } from "@components/icons";
 import React, { useContext, useState } from "react";
 import { components, OptionProps } from "react-select";
 import AsyncCreatableSelect from "react-select/async-creatable";
