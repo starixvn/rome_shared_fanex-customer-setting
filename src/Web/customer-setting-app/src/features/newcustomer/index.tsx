@@ -1,9 +1,11 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import styles from "./NewCustomer.module.scss";
 import Header from "@components/header/Header";
 import { EyeIcon, InformationIcon } from "@components/icons/Icons";
+
+import { useRouter } from "next/router";
 
 const CheckUsernameExists = dynamic(
   () => import("@components/customer").then((mod) => mod.CheckUsernameExists),
@@ -19,28 +21,34 @@ const SearchCustomerExists = dynamic(
   }
 );
 
+interface IFormInputs {
+  existAccount: string;
+  noOfAccounts: string;
+  username: string;
+  credit: string;
+  password: string;
+}
+
 export const CreateNewCustomer = ({ props }: any) => {
-  const existAccountName = useRef("");
-  const methods = useForm();
+  const router = useRouter();
+  const methods = useForm<IFormInputs>();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
     control,
+    getValues,
   } = methods;
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    router.reload();
   });
-
-  const handleCorrectAccount = (value: string) => {
-    existAccountName.current = value;
-  };
 
   {
     console.log("create new customer");
   }
-
   return (
     <div className={styles.container}>
       <Header headerContent="Create New Customer"></Header>
@@ -61,7 +69,7 @@ export const CreateNewCustomer = ({ props }: any) => {
               render={({ field: { onChange } }) => (
                 <SearchCustomerExists
                   handleChange={onChange}
-                  handleCorrectAccount={handleCorrectAccount}
+                  test={getValues("existAccount")}
                 />
               )}
               rules={{ required: true }}
@@ -80,7 +88,7 @@ export const CreateNewCustomer = ({ props }: any) => {
                 required: true,
               })}
             />
-            {/* <CheckMarkIcon height={16} width={16} /> */}
+            {/* {errors.noOfAccounts && <CheckMarkIcon height={16} width={16} />} */}
           </div>
           <label className={styles.text}>Account Details</label>
           <p className={styles.text}>

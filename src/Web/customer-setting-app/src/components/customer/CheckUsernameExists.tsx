@@ -1,12 +1,12 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SingleSelect } from "@components/form";
 import { characters } from "src/constants/characters";
 import { AppContext } from "src/pages/newcustomer";
 
 export const CheckUsernameExists = ({ onChange, ...props }: any) => {
   const { existAccountName } = useContext(AppContext);
-  const [suggestName, setSuggestName] = useState("");
-  const newName = useRef("");
+  const [suggestName, setSuggestName] = useState("000");
+  const [isCorrect, setIsCorrect] = useState(0);
 
   const getSuggestName = async (actorName: string) => {
     const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/suggest/${actorName}`;
@@ -16,7 +16,8 @@ export const CheckUsernameExists = ({ onChange, ...props }: any) => {
     const nameSuggest = existAccountName
       .substring(0, existAccountName.length - 3)
       .concat(data.suggestName);
-    newName.current = nameSuggest;
+    setSuggestName(nameSuggest);
+    setIsCorrect(1);
     onChange(nameSuggest);
   };
 
@@ -29,22 +30,25 @@ export const CheckUsernameExists = ({ onChange, ...props }: any) => {
   }, [existAccountName]);
 
   const handleSelectChange = (e: any, index: number) => {
-    const length = newName.current.length;
-    const result = newName.current.split("");
+    const length = suggestName.length;
+    const result = suggestName.split("");
     result[length - (3 - index)] = e.target.value;
     const t = result.join("");
-    newName.current = t;
+    setSuggestName(t);
+    setIsCorrect(isCorrect + 1);
     onChange(t);
   };
 
   const renderSelect = (suggestName: string) => {
-    return Array.from(suggestName).map((item, index) => {
+    const newArr = suggestName.slice(suggestName.length - 3);
+    return Array.from(newArr).map((item, index) => {
+      // console.log(item, index);
       return (
         <SingleSelect
-          key={index}
+          key={`${item}${index}`}
           onChange={(e) => handleSelectChange(e, index)}
           options={characters}
-          selectedValue={item}
+          selectedValue={item.toString()}
         />
       );
     });
@@ -60,7 +64,8 @@ export const CheckUsernameExists = ({ onChange, ...props }: any) => {
           ? existAccountName.substring(0, existAccountName.length - 3)
           : "_____________"}
       </span>
-      {suggestName !== "" ? renderSelect(suggestName) : ""}
+      {suggestName ? renderSelect(suggestName) : ""}
+      {/* {isCorrect === 0 ? "" : <CheckMarkIcon height={16} width={16} />} */}
     </>
   );
 };

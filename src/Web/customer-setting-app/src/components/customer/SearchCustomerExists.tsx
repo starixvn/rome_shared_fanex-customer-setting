@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { components, OptionProps } from "react-select";
 import AsyncCreatableSelect from "react-select/async-creatable";
 import { AppContext } from "src/pages/newcustomer";
@@ -68,15 +68,13 @@ const Option = (props: OptionProps<any>) => {
   );
 };
 
-export const SearchCustomerExists = ({
-  handleChange,
-  handleCorrectAccount,
-}: any) => {
+export const SearchCustomerExists = ({ handleChange }: any) => {
   const { setExistAccountName } = useContext(AppContext);
   const onChange = (option: any, actionMeta: any) => {
     handleChange(option.value);
-    handleCorrectAccount(option.value);
-    setExistAccountName(option.value);
+    !option.__isNew__
+      ? setExistAccountName(option.value)
+      : setExistAccountName("");
   };
 
   console.log("render search");
