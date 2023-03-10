@@ -37,6 +37,7 @@
 
     <Function Name="Customer Information">
         <Setting Key="Age_CustomerSelUserSearch" SpName="Age_CustomerSelUserSearch" DbName="DBAGE.bodb02.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustomerCheckExists" SpName="Age_CustomerCheckExists" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_CustomerCreditInfoSel" SpName="Acc_CustomerCreditInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
         </Setting>
