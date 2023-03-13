@@ -2,8 +2,9 @@ using System.Data;
 using Fanex.Customer.API.Modules.CopyCustomer.Command;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Customer;
-using Fanex.Customer.API.Modules.Customer.Criteria;
-using Fanex.Customer.API.Modules.Customer.Models;
+using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Enumerations;
+using Fanex.Customer.API.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -14,6 +15,8 @@ namespace Fanex.Customer.API.Modules.CopyCustomer;
 public interface ICopyCustomerService
 {
     Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request);
+
+    Task<Result> CheckLimitNewDownline(CheckLimitNewDownlineRequest request);
 }
 
 public class CopyCustomerService : ICopyCustomerService
@@ -40,6 +43,17 @@ public class CopyCustomerService : ICopyCustomerService
 
     public async Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request)
     {
+        var checkLimitNewDownlineResult = await CheckLimitNewDownline(new CheckLimitNewDownlineRequest
+        {
+            CustId = request.ActorId,
+            CustLevel = request.ActorUserLevel,
+            Language = request.Language
+        });
+        if (!checkLimitNewDownlineResult.IsSuccessful)
+        {
+            return new CopyMultipleCustomerResult(Enumerable.Empty<string>(), checkLimitNewDownlineResult.Code, checkLimitNewDownlineResult.Message);
+        }
+
         var index = 0;
         var usernames = new List<string>();
 
@@ -247,5 +261,39 @@ public class CopyCustomerService : ICopyCustomerService
         }
 
         return string.Empty;
+    }
+
+    public async Task<Result> CheckLimitNewDownline(CheckLimitNewDownlineRequest request)
+    {
+        var command = new CheckLimitNewDownlineCommand(request.CustId);
+        await dynamicRepository.ExecuteAsync(command);
+
+        return command.IsAllowed
+            ? Result.CreateSuccessfulResult()
+            : GetLimitNewDownlineErrorResult(Enumeration.FromValue<UserLevel>(request.CustLevel), request.Language);
+    }
+
+    private static Result GetLimitNewDownlineErrorResult(UserLevel custLevel, string language)
+    {
+        const int LimitNewDownlineErrorCode = 1001;
+
+        return new Result(
+            LimitNewDownlineErrorCode,
+            StaticResources.Get(GetLimitNewDownlineResourceKey(custLevel), language));
+    }
+
+    private static string GetLimitNewDownlineResourceKey(UserLevel custLevel)
+    {
+        if (custLevel.IsSuperLevel())
+        {
+            return "LimitSuperNewDownlineError";
+        }
+
+        if (custLevel.IsMasterLevel())
+        {
+            return "LimitMasterNewDownlineError";
+        }
+
+        return "LimitAgentNewDownlineError";
     }
 }
