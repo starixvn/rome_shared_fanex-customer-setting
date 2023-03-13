@@ -1,9 +1,9 @@
 import useTranslation from "next-translate/useTranslation";
 import styles from "@components/Header/Header.module.scss";
 
-interface HeaderPros {
+type HeaderPros = {
   headerContent: string;
-}
+};
 
 const Header = ({ headerContent }: HeaderPros) => {
   const { t } = useTranslation("common");

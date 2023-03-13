@@ -1,14 +1,12 @@
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import { Controller, useForm } from "react-hook-form";
 import styles from "./NewCustomer.module.scss";
-import Header from "@components/header/Header";
 import { EyeIcon, InformationIcon } from "@components/icons/Icons";
+import { BasicModal } from "@components/modal/BasicModal";
 
-import { useRouter } from "next/router";
-
-const CheckUsernameExists = dynamic(
-  () => import("@components/customer").then((mod) => mod.CheckUsernameExists),
+const NewAccountName = dynamic(
+  () => import("@components/customer").then((mod) => mod.NewAccountName),
   {
     ssr: false,
   }
@@ -20,7 +18,6 @@ const SearchCustomerExists = dynamic(
     ssr: false,
   }
 );
-
 interface IFormInputs {
   existAccount: string;
   noOfAccounts: string;
@@ -30,28 +27,33 @@ interface IFormInputs {
 }
 
 export const CreateNewCustomer = ({ props }: any) => {
-  const router = useRouter();
   const methods = useForm<IFormInputs>();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-    control,
-    getValues,
-  } = methods;
+  const { register, handleSubmit, control, reset } = methods;
+
+  const [openModal, setOpenModal] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
-    router.reload();
+    setOpenModal(true);
   });
 
-  {
-    console.log("create new customer");
-  }
+  const handleRequestClose = () => {
+    reset();
+    setOpenModal(false);
+  };
+
+  console.log("create new customer");
   return (
-    <div className={styles.container}>
-      <Header headerContent="Create New Customer"></Header>
+    <>
+      {openModal ? (
+        <BasicModal
+          isOpen={openModal}
+          handleRequestClose={handleRequestClose}
+          data={[1, 2, 3, 4, 5]}
+        />
+      ) : (
+        ""
+      )}
       <div className={styles.main}>
         <p className={styles.note + " " + styles.notetop}>
           *Note: Settings will remain the same as the Source account setting for
@@ -67,10 +69,7 @@ export const CreateNewCustomer = ({ props }: any) => {
               name="existAccount"
               control={control}
               render={({ field: { onChange } }) => (
-                <SearchCustomerExists
-                  handleChange={onChange}
-                  test={getValues("existAccount")}
-                />
+                <SearchCustomerExists handleChange={onChange} />
               )}
               rules={{ required: true }}
             />
@@ -103,7 +102,7 @@ export const CreateNewCustomer = ({ props }: any) => {
               name="username"
               control={control}
               render={({ field: { onChange } }) => (
-                <CheckUsernameExists onChange={onChange} />
+                <NewAccountName onChange={onChange} />
               )}
               rules={{ required: true }}
             />
@@ -146,6 +145,6 @@ export const CreateNewCustomer = ({ props }: any) => {
           />
         </form>
       </div>
-    </div>
+    </>
   );
 };

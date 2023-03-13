@@ -1,8 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
-const themeInitializerScript = `(function () {
-  document.body.dataset.theme = "light";
-})();`;
+// const themeInitializerScript = `(function () {
+//   document.body.dataset.theme = "light";
+// })();`;
 
 export default function Document() {
   return (
@@ -11,9 +11,10 @@ export default function Document() {
         <script src="https://telegram.org/js/telegram-web-app.js" defer />
       </Head>
       <body>
+        <div id="main" />
         <Main />
         <NextScript />
-        <script dangerouslySetInnerHTML={{ __html: themeInitializerScript }} />
+        {/* <script dangerouslySetInnerHTML={{ __html: themeInitializerScript }} /> */}
       </body>
     </Html>
   );

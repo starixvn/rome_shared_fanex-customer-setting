@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { SingleSelect } from "@components/form";
 import { characters } from "src/constants/characters";
-import { AppContext } from "src/pages/newcustomer";
+import { NewCustomerContext } from "@features/new-customer";
 
-export const CheckUsernameExists = ({ onChange, ...props }: any) => {
-  const { existAccountName } = useContext(AppContext);
+export const NewAccountName = ({ onChange, ...props }: any) => {
+  const { existAccountName } = useContext(NewCustomerContext);
   const [suggestName, setSuggestName] = useState("000");
   const [isCorrect, setIsCorrect] = useState(0);
 
@@ -54,9 +54,7 @@ export const CheckUsernameExists = ({ onChange, ...props }: any) => {
     });
   };
 
-  {
-    console.log("render check username exist");
-  }
+  console.log("render check username exist");
   return (
     <>
       <span>

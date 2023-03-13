@@ -1,6 +1,8 @@
-import React, { createContext, useState } from "react";
+import React from "react";
 import { GetServerSideProps } from "next";
-import { CreateNewCustomer } from "@features/newcustomer";
+import Header from "@components/header/Header";
+import styles from "@styles/Home.module.scss";
+import { CreateNewCustomer, NewCustomerProvider } from "@features/new-customer";
 
 interface Props {
   isAgent: boolean;
@@ -9,24 +11,14 @@ interface Props {
   maxAccounts: number;
 }
 
-export const AppContext = createContext({
-  existAccountName: "",
-  setExistAccountName: (name: any) => {},
-});
-const AppProvider = ({ children }: any) => {
-  const [existAccountName, setExistAccountName] = useState("");
-  return (
-    <AppContext.Provider value={{ existAccountName, setExistAccountName }}>
-      {children}
-    </AppContext.Provider>
-  );
-};
-
 const NewCustomer = (props: Props) => {
   return (
-    <AppProvider>
-      <CreateNewCustomer props={props} />;
-    </AppProvider>
+    <NewCustomerProvider>
+      <div className={styles.container}>
+        <Header headerContent="Create New Customer"></Header>
+        <CreateNewCustomer props={props} />
+      </div>
+    </NewCustomerProvider>
   );
 };
 

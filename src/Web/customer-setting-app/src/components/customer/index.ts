@@ -1,2 +1,2 @@
-export { CheckUsernameExists } from "./CheckUsernameExists";
-export { SearchCustomerExists } from "./SearchCustomerExists";
+export { SearchCustomerExists } from "./search-customer/SearchCustomerExists";
+export { NewAccountName } from "./new-account/NewAccountName";
