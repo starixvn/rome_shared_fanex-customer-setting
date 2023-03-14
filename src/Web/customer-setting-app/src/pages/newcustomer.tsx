@@ -1,8 +1,10 @@
 import React from "react";
-import { GetServerSideProps } from "next";
-import Header from "@components/header/Header";
+import Header from "@components/Header/Header";
 import styles from "@styles/Home.module.scss";
 import { CreateNewCustomer, NewCustomerProvider } from "@features/new-customer";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "src/lib/session";
+import { GetServerSideProps } from "next";
 
 interface Props {
   isAgent: boolean;

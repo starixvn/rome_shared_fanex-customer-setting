@@ -1,33 +1,6 @@
 import Head from "next/head";
-import { useEffect } from "react";
-import Router, { useRouter } from "next/router";
-import { CustomWindow } from "src/types/custom.window";
-
-declare let window: CustomWindow;
 
 export default function Home() {
-  const { asPath } = useRouter();
-  useEffect(() => {
-    const authenticateTelegramUser = async () => {
-      const telegramInitData = window.Telegram.WebApp.initData;
-      const queryString = asPath.split("?")[1].replace("#", "&");
-      const params = new URLSearchParams(queryString);
-      const url = `${
-        process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP
-      }/auth/telegram?botId=${params.get(
-        "botId"
-      )}&telegramInitData=${encodeURIComponent(telegramInitData)}`;
-      const res = await fetch(url);
-      const result = await res.json();
-
-      if (result.token) {
-        Router.push(`/customer/securitycode`);
-      }
-    };
-
-    authenticateTelegramUser();
-  }, []);
-
   return (
     <>
       <Head>
@@ -37,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1 style={{ textAlign: "center" }}>Loading...</h1>
+        <h1 style={{ textAlign: "center" }}>Telegram Web App</h1>
       </main>
     </>
   );

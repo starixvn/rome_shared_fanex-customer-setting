@@ -2,7 +2,7 @@ import Router from "next/router";
 import { useForm } from "react-hook-form";
 import useTranslation from "next-translate/useTranslation";
 import styles from "@styles/Home.module.scss";
-import Header from "@components/header/Header";
+import Header from "@components/Header/Header";
 
 type FormValues = {
   securityCode: number;
