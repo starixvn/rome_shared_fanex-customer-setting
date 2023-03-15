@@ -4,49 +4,46 @@ import { characters } from "src/constants/characters";
 import { NewCustomerContext } from "@features/new-customer";
 
 export const NewAccountName = ({ onChange, ...props }: any) => {
-  const { existAccountName } = useContext(NewCustomerContext);
+  const { copyCustomerName } = useContext(NewCustomerContext);
   const [suggestName, setSuggestName] = useState("000");
-  const [isCorrect, setIsCorrect] = useState(0);
 
   const getSuggestName = async (actorName: string) => {
     const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/suggest/${actorName}`;
     const res = await fetch(url);
     const data = await res.json();
     setSuggestName(data.suggestName);
-    const nameSuggest = existAccountName
-      .substring(0, existAccountName.length - 3)
-      .concat(data.suggestName);
-    setSuggestName(nameSuggest);
-    setIsCorrect(1);
-    onChange(nameSuggest);
+    handleOnChange(data.suggestName);
   };
 
   useEffect(() => {
-    if (existAccountName !== "") {
+    if (copyCustomerName !== "") {
       getSuggestName(
-        existAccountName.substring(0, existAccountName.length - 3)
+        copyCustomerName.substring(0, copyCustomerName.length - 3)
       );
     }
-  }, [existAccountName]);
+  }, [copyCustomerName]);
 
   const handleSelectChange = (e: any, index: number) => {
-    const length = suggestName.length;
     const result = suggestName.split("");
-    result[length - (3 - index)] = e.target.value;
-    const t = result.join("");
-    setSuggestName(t);
-    setIsCorrect(isCorrect + 1);
-    onChange(t);
+    result[index] = e.target.value;
+    setSuggestName(result.join(""));
+    handleOnChange(result.join(""));
+  };
+
+  const handleOnChange = (newSuggestName: string) => {
+    onChange(
+      copyCustomerName
+        .substring(0, copyCustomerName.length - newSuggestName.length)
+        .concat(newSuggestName)
+    );
   };
 
   const renderSelect = (suggestName: string) => {
-    const newArr = suggestName.slice(suggestName.length - 3);
-    return Array.from(newArr).map((item, index) => {
-      // console.log(item, index);
+    return Array.from(suggestName).map((item, index) => {
       return (
         <SingleSelect
           key={`${item}${index}`}
-          onChange={(e) => handleSelectChange(e, index)}
+          handleChange={(e) => handleSelectChange(e, index)}
           options={characters}
           selectedValue={item.toString()}
         />
@@ -58,12 +55,11 @@ export const NewAccountName = ({ onChange, ...props }: any) => {
   return (
     <>
       <span>
-        {existAccountName
-          ? existAccountName.substring(0, existAccountName.length - 3)
+        {copyCustomerName
+          ? copyCustomerName.substring(0, copyCustomerName.length - 3)
           : "_____________"}
       </span>
       {suggestName ? renderSelect(suggestName) : ""}
-      {/* {isCorrect === 0 ? "" : <CheckMarkIcon height={16} width={16} />} */}
     </>
   );
 };

@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import styles from "./NewCustomer.module.scss";
-import { EyeIcon, InformationIcon } from "@components/icons/Icons";
+import {
+  CheckMarkIcon,
+  EyeIcon,
+  InformationIcon,
+} from "@components/icons/Icons";
 import { BasicModal } from "@components/modal/BasicModal";
 
 const NewAccountName = dynamic(
@@ -28,9 +32,16 @@ interface IFormInputs {
 
 export const CreateNewCustomer = ({ props }: any) => {
   const methods = useForm<IFormInputs>();
-  const { register, handleSubmit, control, reset } = methods;
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = methods;
 
   const [openModal, setOpenModal] = useState(false);
+  const submitSuccessCount = useRef(0);
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
@@ -39,21 +50,19 @@ export const CreateNewCustomer = ({ props }: any) => {
 
   const handleRequestClose = () => {
     reset();
+    submitSuccessCount.current++;
+    console.log(submitSuccessCount);
     setOpenModal(false);
   };
 
   console.log("create new customer");
   return (
     <>
-      {openModal ? (
-        <BasicModal
-          isOpen={openModal}
-          handleRequestClose={handleRequestClose}
-          data={[1, 2, 3, 4, 5]}
-        />
-      ) : (
-        ""
-      )}
+      <BasicModal
+        isOpen={openModal}
+        handleRequestClose={handleRequestClose}
+        data={[1, 2, 3, 4, 5]}
+      />
       <div className={styles.main}>
         <p className={styles.note + " " + styles.notetop}>
           *Note: Settings will remain the same as the Source account setting for
@@ -69,9 +78,12 @@ export const CreateNewCustomer = ({ props }: any) => {
               name="existAccount"
               control={control}
               render={({ field: { onChange } }) => (
-                <SearchCustomerExists handleChange={onChange} />
+                <SearchCustomerExists
+                  onChange={onChange}
+                  submitSuccessCount={submitSuccessCount.current}
+                />
               )}
-              rules={{ required: true }}
+              // rules={{ required: true }}
             />
           </div>
 
@@ -106,6 +118,7 @@ export const CreateNewCustomer = ({ props }: any) => {
               )}
               rules={{ required: true }}
             />
+            {errors.username && <CheckMarkIcon height={16} width={16} />}
           </div>
           <label className={styles.sublabel}>
             Credit<span className={styles.require}>*</span>

@@ -1,5 +1,5 @@
 import { NewCustomerContext } from "@features/new-customer";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { components, GroupBase, OptionProps } from "react-select";
 import AsyncCreatableSelect from "react-select/async-creatable";
 import Select from "react-select/dist/declarations/src/Select";
@@ -19,25 +19,31 @@ const CustomOption = (props: OptionProps<any>) => {
   );
 };
 
-export const SearchCustomerExists = ({ handleChange }: any) => {
+export const SearchCustomerExists = ({ onChange, submitSuccessCount }: any) => {
   let selectInputRef: Select<any, boolean, GroupBase<any>> | null = null;
+  const { setCopyCustomerName } = useContext(NewCustomerContext);
 
-  const { setExistAccountName } = useContext(NewCustomerContext);
-
-  const onChange = (option: any) => {
+  const onHandleChange = (option: any) => {
     if (option) {
-      handleChange(option.value);
+      onChange(option.value);
       !option.__isNew__
-        ? setExistAccountName(option.value)
-        : setExistAccountName("");
+        ? setCopyCustomerName(option.value)
+        : setCopyCustomerName("");
     } else {
-      setExistAccountName("");
+      setCopyCustomerName("");
     }
   };
 
-  // const clearSingleValue = () => {
-  //   selectInputRef?.clearValue();
-  // };
+  useEffect(() => {
+    if (submitSuccessCount > 0) {
+      clearSingleValue();
+      setCopyCustomerName("");
+    }
+  }, [submitSuccessCount]);
+
+  const clearSingleValue = () => {
+    selectInputRef?.clearValue();
+  };
 
   console.log("render search");
   return (
@@ -50,7 +56,7 @@ export const SearchCustomerExists = ({ handleChange }: any) => {
         placeholder=""
         styles={customerStyles}
         loadOptions={customPromiseOptions}
-        onChange={onChange}
+        onChange={onHandleChange}
         formatOptionLabel={(option: any) => {
           return option.userName ? option.userName : option["value"];
         }}
