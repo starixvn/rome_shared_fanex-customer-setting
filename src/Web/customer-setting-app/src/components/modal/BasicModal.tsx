@@ -21,7 +21,6 @@ export const BasicModal = ({ isOpen, handleRequestClose, data }: any) => {
         isOpen={isOpen}
         style={customStyles}
         onRequestClose={handleRequestClose}
-        
       >
         <div>{data}</div>
       </Modal>

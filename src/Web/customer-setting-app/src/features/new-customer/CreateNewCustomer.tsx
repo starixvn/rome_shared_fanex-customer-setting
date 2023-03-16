@@ -4,6 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import styles from "./NewCustomer.module.scss";
 import {
   CheckMarkIcon,
+  ErrorIcon,
   EyeIcon,
   InformationIcon,
 } from "@components/icons/Icons";
@@ -24,23 +25,21 @@ const SearchCustomerExists = dynamic(
 );
 interface IFormInputs {
   existAccount: string;
-  noOfAccounts: string;
+  noOfAccounts: number;
   username: string;
-  credit: string;
+  memberMaxCredit?: string;
+  credit: number;
   password: string;
 }
 
 export const CreateNewCustomer = ({ props }: any) => {
   const methods = useForm<IFormInputs>();
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = methods;
+  const { register, handleSubmit, control, reset, formState, resetField } =
+    methods;
 
   const [openModal, setOpenModal] = useState(false);
+  const [maxCredit, setMaxCredit] = useState(0);
+  const [maxMemberCredit, setMaxMemberCredit] = useState(0);
   const submitSuccessCount = useRef(0);
 
   const onSubmit = handleSubmit((data) => {
@@ -49,10 +48,25 @@ export const CreateNewCustomer = ({ props }: any) => {
   });
 
   const handleRequestClose = () => {
-    reset();
     submitSuccessCount.current++;
-    console.log(submitSuccessCount);
     setOpenModal(false);
+  };
+
+  React.useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      resetField("credit");
+      reset();
+    }
+  }, [formState, reset]);
+
+  const handleChangeMaxCredit = (value: number) => {
+    setMaxCredit(value);
+  };
+
+  const handleOnBlur = (e: any) => {
+    if (Number(e.target.value) !== maxMemberCredit) {
+      setMaxMemberCredit(Number(e.target.value));
+    }
   };
 
   console.log("create new customer");
@@ -80,10 +94,11 @@ export const CreateNewCustomer = ({ props }: any) => {
               render={({ field: { onChange } }) => (
                 <SearchCustomerExists
                   onChange={onChange}
+                  changeMaxCredit={handleChangeMaxCredit}
                   submitSuccessCount={submitSuccessCount.current}
                 />
               )}
-              // rules={{ required: true }}
+              rules={{ required: true }}
             />
           </div>
 
@@ -94,12 +109,14 @@ export const CreateNewCustomer = ({ props }: any) => {
           </p>
           <div className={styles.formcontrol}>
             <input
+              type="number"
               className={styles.control}
               {...register("noOfAccounts", {
                 required: true,
+                min: 1,
+                max: props.maxAccounts,
               })}
             />
-            {/* {errors.noOfAccounts && <CheckMarkIcon height={16} width={16} />} */}
           </div>
           <label className={styles.text}>Account Details</label>
           <p className={styles.text}>
@@ -114,27 +131,51 @@ export const CreateNewCustomer = ({ props }: any) => {
               name="username"
               control={control}
               render={({ field: { onChange } }) => (
-                <NewAccountName onChange={onChange} />
+                <NewAccountName
+                  actorName={props.actorName}
+                  submitSuccessCount={submitSuccessCount.current}
+                  onChange={onChange}
+                />
               )}
               rules={{ required: true }}
             />
-            {errors.username && <CheckMarkIcon height={16} width={16} />}
           </div>
           <label className={styles.sublabel}>
             Credit<span className={styles.require}>*</span>
           </label>
           <div className={styles.formcontrol}>
             <input
+              type="number"
               className={styles.control + " " + styles.full}
               {...register("credit", {
+                min: 0,
+                max: 100,
                 required: true,
               })}
+              onBlur={handleOnBlur}
             />
           </div>
           <div className={styles.credit}>
             <span>{props.minCredit.toFixed(2)}</span> =&lt; New Given Credit
-            =&lt; <span>{props.maxCredit.toFixed(2)}</span>
+            =&lt; <span>{maxCredit.toFixed(2)}</span>
           </div>
+          {props.isMasterLevel ? (
+            <div>
+              <label className={styles.sublabel}>
+                Member Max Credit<span className={styles.require}>*</span>
+              </label>
+              <input
+                type="number"
+                {...register("memberMaxCredit", {
+                  required: true,
+                  max: maxMemberCredit,
+                })}
+              />
+              <div className={styles.credit}>
+                <span>=&lt; {maxMemberCredit.toFixed(2)}</span>
+              </div>
+            </div>
+          ) : null}
           <label className={styles.sublabel}>
             Password
             <span className={styles.require}>*</span>
@@ -148,9 +189,7 @@ export const CreateNewCustomer = ({ props }: any) => {
               })}
               type="password"
             />
-            <span className={styles.showpassword}>
-              <EyeIcon height={16} width={16} />
-            </span>
+            <span className={styles.showpassword}></span>
           </div>
           <input
             className={styles.button + " " + styles.submit}

@@ -11,6 +11,7 @@ export default function Login() {
   useEffect(() => {
     const signIn = async () => {
       const telegramInitData = window.Telegram.WebApp.initData || null;
+
       if (!telegramInitData) {
         router.push("/unauthorized");
       }

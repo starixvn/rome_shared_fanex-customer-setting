@@ -1,11 +1,25 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SingleSelect } from "@components/form";
 import { characters } from "src/constants/characters";
-import { NewCustomerContext } from "@features/new-customer";
+import { CheckMarkIcon, ErrorIcon } from "@components/icons/Icons";
 
-export const NewAccountName = ({ onChange, ...props }: any) => {
-  const { copyCustomerName } = useContext(NewCustomerContext);
-  const [suggestName, setSuggestName] = useState("000");
+export const NewAccountName = ({
+  actorName,
+  submitSuccessCount,
+  onChange,
+}: any) => {
+  const [suggestName, setSuggestName] = useState("");
+  const [isCorrectName, setIsCorrectName] = useState(false);
+
+  useEffect(() => {
+    getSuggestName(actorName);
+  }, [submitSuccessCount]);
+
+  useEffect(() => {
+    if (suggestName !== "") {
+      checkExistUserName();
+    }
+  }, [suggestName]);
 
   const getSuggestName = async (actorName: string) => {
     const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/suggest/${actorName}`;
@@ -15,13 +29,17 @@ export const NewAccountName = ({ onChange, ...props }: any) => {
     handleOnChange(data.suggestName);
   };
 
-  useEffect(() => {
-    if (copyCustomerName !== "") {
-      getSuggestName(
-        copyCustomerName.substring(0, copyCustomerName.length - 3)
-      );
+  const checkExistUserName = async () => {
+    const userName = actorName.concat(suggestName);
+    const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/exist/${userName}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data.isExist) {
+      setIsCorrectName(true);
+    } else {
+      setIsCorrectName(false);
     }
-  }, [copyCustomerName]);
+  };
 
   const handleSelectChange = (e: any, index: number) => {
     const result = suggestName.split("");
@@ -31,11 +49,7 @@ export const NewAccountName = ({ onChange, ...props }: any) => {
   };
 
   const handleOnChange = (newSuggestName: string) => {
-    onChange(
-      copyCustomerName
-        .substring(0, copyCustomerName.length - newSuggestName.length)
-        .concat(newSuggestName)
-    );
+    onChange(actorName.concat(newSuggestName));
   };
 
   const renderSelect = (suggestName: string) => {
@@ -54,12 +68,9 @@ export const NewAccountName = ({ onChange, ...props }: any) => {
   console.log("render check username exist");
   return (
     <>
-      <span>
-        {copyCustomerName
-          ? copyCustomerName.substring(0, copyCustomerName.length - 3)
-          : "_____________"}
-      </span>
+      <span>{actorName}</span>
       {suggestName ? renderSelect(suggestName) : ""}
+      {isCorrectName ? <CheckMarkIcon height={16} width={16} /> : null}
     </>
   );
 };

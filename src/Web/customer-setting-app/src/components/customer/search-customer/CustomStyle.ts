@@ -1,20 +1,3 @@
-const getCustomers = async (query: string) => {
-  const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/search?query=${query}`;
-  const res = await fetch(url);
-  const result = await res.json();
-  return result;
-};
-
-export const customPromiseOptions = async (inputValue: string) => {
-  const data = await getCustomers(inputValue);
-  return data.map((item: any) => {
-    return {
-      ...item,
-      value: item.userName,
-    };
-  });
-};
-
 export const customerStyles = {
   control: (baseStyles: any, state: any) => ({
     ...baseStyles,
