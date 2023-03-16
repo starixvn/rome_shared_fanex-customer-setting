@@ -21,6 +21,8 @@ public interface ICustomerService
     Task<string> GetSuggestUsername(GetSuggestUsernameRequest request);
 
     Task<bool> CheckExistedCustomer(string username);
+
+    Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
 }
 
 public class CustomerService : ICustomerService
@@ -61,5 +63,12 @@ public class CustomerService : ICustomerService
         var command = new CheckExistedCustomerCommand(username);
         await dynamicRepository.ExecuteAsync(command);
         return command.IsExists;
+    }
+
+    public async Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username)
+    {
+        var command = new CheckBelongingByUsernameCommand(custId, username, subAccountId);
+        await dynamicRepository.ExecuteAsync(command);
+        return new(command.IsActive, command.CustId, command.IsSubAcc, command.RoleId);
     }
 }
