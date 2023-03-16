@@ -21,19 +21,14 @@ export default withIronSessionApiRoute(loginRoute, sessionOptions);
 
 async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
   const { telegramInitData } = req.body;
-  console.log(telegramInitData);
   try {
     const initData = new URLSearchParams(telegramInitData);
     var user = JSON.parse(initData.get("user") || "");
-    console.log(user);
     var account = await getAccount(user.id);
-    console.log(account);
     const botToken = await getBotToken(Number(account.botId));
-    console.log(botToken);
     const isVerified = await verifyWebAppOpenByTelegram(botToken, initData);
 
     if (isVerified) {
-      console.log(isVerified);
       var data = {
         isLoggedIn: true,
         custId: account.custId,
@@ -44,7 +39,6 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
       req.session.user = data;
       await req.session.save();
     }
-    console.log(req.session.user);
     res.json(req.session.user);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
@@ -81,8 +75,6 @@ const verifyWebAppOpenByTelegram = async (
     dataCheckString.join("\n"),
     secret
   ).toString(CryptoJS.enc.Hex);
-  console.log(checkHash);
-  console.log(initData.get("hash"));
 
   return initData.get("hash") === checkHash;
 };

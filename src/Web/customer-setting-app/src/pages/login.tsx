@@ -14,7 +14,6 @@ export default function Login() {
       if (!telegramInitData) {
         router.push("/unauthorized");
       }
-      console.log(telegramInitData);
 
       const { returnUrl } = router.query;
 
