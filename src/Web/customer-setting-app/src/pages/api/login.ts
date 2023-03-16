@@ -8,15 +8,6 @@ type TelegramBot = {
   accessToken: string;
 };
 
-export type Account = {
-  userId: number;
-  custId: number;
-  subAccId: number;
-  customerLevel: number;
-  language: string;
-  botId: number;
-};
-
 export default withIronSessionApiRoute(loginRoute, sessionOptions);
 
 async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
@@ -34,6 +25,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
         custId: account.custId,
         subAccId: account.subAccId,
         customerLevel: account.customerLevel,
+        username: account.username,
         language: account.language,
       };
       req.session.user = data;
@@ -56,7 +48,7 @@ const getBotToken = async (botId: number) => {
 const getAccount = async (chatId: number) => {
   const url = `${process.env.TELEGRAM_API_URL}/Setting/${chatId}`;
   const res = await fetch(url);
-  return (await res.json()) as Account;
+  return await res.json();
 };
 
 const verifyWebAppOpenByTelegram = async (

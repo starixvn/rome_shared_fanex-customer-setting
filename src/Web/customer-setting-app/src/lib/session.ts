@@ -5,6 +5,7 @@ export type User = {
   custId: number;
   subAccId: number;
   customerLevel: number;
+  username: string;
   language: string;
 };
 
