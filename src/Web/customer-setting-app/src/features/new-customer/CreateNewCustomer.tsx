@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import styles from "./NewCustomer.module.scss";
 import {
   CheckMarkIcon,

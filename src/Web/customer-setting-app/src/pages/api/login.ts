@@ -14,13 +14,13 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
   const { telegramInitData } = req.body;
   try {
     const initData = new URLSearchParams(telegramInitData);
-    var user = JSON.parse(initData.get("user") || "");
-    var account = await getAccount(user.id);
+    const user = JSON.parse(initData.get("user") || "");
+    const account = await getAccount(user.id);
     const botToken = await getBotToken(Number(account.botId));
     const isVerified = await verifyWebAppOpenByTelegram(botToken, initData);
 
     if (isVerified) {
-      var data = {
+      const data = {
         isLoggedIn: true,
         custId: account.custId,
         subAccId: account.subAccId,
@@ -55,7 +55,7 @@ const verifyWebAppOpenByTelegram = async (
   botToken: string,
   initData: URLSearchParams
 ) => {
-  let dataCheckString: string[] = [];
+  const dataCheckString: string[] = [];
   initData.sort();
 
   initData.forEach((value, key) => {

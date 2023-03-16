@@ -1,4 +1,4 @@
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CustomWindow } from "src/types/custom.window";
 
@@ -24,7 +24,7 @@ export default function Login() {
         },
         body: JSON.stringify({ telegramInitData }),
       });
-      var authData = await res.json();
+      const authData = await res.json();
       if (authData.isLoggedIn) {
         router.push(returnUrl as string);
       } else {
