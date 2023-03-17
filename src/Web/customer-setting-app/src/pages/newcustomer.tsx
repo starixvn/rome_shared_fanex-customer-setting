@@ -3,6 +3,7 @@ import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions, User } from "src/lib/session";
 import Layout from "@components/Layout";
 import useTranslation from "next-translate/useTranslation";
+import { CreateNewCustomer } from "@features/new-customer/CreateNewCustomer";
 
 interface Props {
   user: User;
@@ -16,9 +17,7 @@ const NewCustomer = (props: Props) => {
   const { t } = useTranslation("newcustomer");
   return (
     <Layout title={t("header")}>
-      <NewCustomerProvider>
       <CreateNewCustomer props={props} />
-      </NewCustomerProvider>
     </Layout>
   );
 };

@@ -1,39 +1,49 @@
 import { useEffect, useState } from "react";
 import { SingleSelect } from "@components/form";
 import { characters } from "src/constants/characters";
-import { CheckMarkIcon, ErrorIcon } from "@components/icons/Icons";
+import { CheckMarkIcon } from "@components/icons/Icons";
 
-export const NewAccountName = ({
-  actorName,
-  submitSuccessCount,
-  onChange,
-}: any) => {
+export const getSuggestAccountName = async (actorName: string) => {
+  const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/suggest/${actorName}`;
+  const res = await fetch(url);
+  return await res.json();
+}
+
+export const checkExistAccountName = async (username: string) => {
+  const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/exist/${username}`;
+  const res = await fetch(url);
+  return await res.json();
+}
+
+type Props = {
+  actorName: string,
+  onChange: (newAccountName: string) => void
+}
+
+export const NewAccountName = ({ actorName, onChange }: Props) =>
+{
   const [suggestName, setSuggestName] = useState("");
   const [isCorrectName, setIsCorrectName] = useState(false);
 
   useEffect(() => {
-    getSuggestName(actorName);
-  }, [submitSuccessCount]);
+    handleGetSuggestName(actorName);
+  }, []);
 
   useEffect(() => {
     if (suggestName !== "") {
-      checkExistUserName();
+      handleCheckExistName();
     }
   }, [suggestName]);
 
-  const getSuggestName = async (actorName: string) => {
-    const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/suggest/${actorName}`;
-    const res = await fetch(url);
-    const data = await res.json();
+  const handleGetSuggestName = async (actorName: string) => {
+    const data = await getSuggestAccountName(actorName);
     setSuggestName(data.suggestName);
     handleOnChange(data.suggestName);
   };
 
-  const checkExistUserName = async () => {
-    const userName = actorName.concat(suggestName);
-    const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/exist/${userName}`;
-    const res = await fetch(url);
-    const data = await res.json();
+  const handleCheckExistName = async () => {
+    const username = actorName.concat(suggestName);
+    const data = await checkExistAccountName(username);
     if (!data.isExist) {
       setIsCorrectName(true);
     } else {

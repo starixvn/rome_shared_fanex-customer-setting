@@ -1,14 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { Controller, useForm } from "react-hook-form";
 import styles from "./NewCustomer.module.scss";
 import {
-  CheckMarkIcon,
-  ErrorIcon,
-  EyeIcon,
   InformationIcon,
 } from "@components/icons/Icons";
-import { BasicModal } from "@components/modal/BasicModal";
 
 const NewAccountName = dynamic(
   () => import("@components/customer").then((mod) => mod.NewAccountName),
@@ -27,37 +23,47 @@ interface IFormInputs {
   existAccount: string;
   noOfAccounts: number;
   username: string;
-  memberMaxCredit?: string;
+  memberMaxCredit?: number;
   credit: number;
   password: string;
 }
 
+type Result = {
+  usernames?: string[],
+  code?: number,
+  message?: string,
+  isSuccessful?: boolean
+  credit?: number,
+  failAccounts?: number
+}
+
 export const CreateNewCustomer = ({ props }: any) => {
   const methods = useForm<IFormInputs>();
-  const { register, handleSubmit, control, reset, formState, resetField } =
-    methods;
+  const { register, handleSubmit, control, reset, formState, resetField } = methods;
 
-  const [openModal, setOpenModal] = useState(false);
+  const [data, setData] = useState<Result>({});
   const [maxCredit, setMaxCredit] = useState(0);
   const [maxMemberCredit, setMaxMemberCredit] = useState(0);
-  const submitSuccessCount = useRef(0);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    setOpenModal(true);
+  const onSubmit = handleSubmit(async (formData) => {
+    const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/copy`;
+    const result = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: formData.username,
+        password: formData.password,
+        credit: Number(formData.credit),
+        maxCredit: Number(formData.memberMaxCredit) || 0,
+        sourceUserName: formData.existAccount,
+        numberOfAccounts: Number(formData.noOfAccounts)
+      }),
+    });
+    const data = await result.json();
+    setData(data);
   });
-
-  const handleRequestClose = () => {
-    submitSuccessCount.current++;
-    setOpenModal(false);
-  };
-
-  React.useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      resetField("credit");
-      reset();
-    }
-  }, [formState, reset]);
 
   const handleChangeMaxCredit = (value: number) => {
     setMaxCredit(value);
@@ -69,15 +75,35 @@ export const CreateNewCustomer = ({ props }: any) => {
     }
   };
 
+  const handleContinue = () => { 
+    setData({});
+    resetField("credit");
+    reset();
+  }
+
+  const renderResult = (data: Result) => {
+    return <>
+      <div>The following accounts have been created successful:</div>
+      <div>
+        <span>Usernames: </span>
+        {data.usernames?.map(item => <span key={item}>{item}, </span>)}
+      </div>
+      <div>
+        <span>Credit: {data.credit} (per account)</span>
+      </div>
+      <div>No accounts have been created failed.</div>
+      <div>
+        <span>Failed reason: { data.message}</span>
+      </div>
+      <button onClick={handleContinue}>Create More</button>
+    </>
+  }
+
   console.log("create new customer");
   return (
     <>
-      <BasicModal
-        isOpen={openModal}
-        handleRequestClose={handleRequestClose}
-        data={[1, 2, 3, 4, 5]}
-      />
-      <div className={styles.main}>
+      {JSON.stringify(data) !== "{}" ? renderResult(data) : (
+        <div className={styles.main}>
         <p className={styles.note + " " + styles.notetop}>
           *Note: Settings will remain the same as the Source account setting for
           all accounts
@@ -95,7 +121,6 @@ export const CreateNewCustomer = ({ props }: any) => {
                 <SearchCustomerExists
                   onChange={onChange}
                   changeMaxCredit={handleChangeMaxCredit}
-                  submitSuccessCount={submitSuccessCount.current}
                 />
               )}
               rules={{ required: true }}
@@ -133,7 +158,6 @@ export const CreateNewCustomer = ({ props }: any) => {
               render={({ field: { onChange } }) => (
                 <NewAccountName
                   actorName={props.actorName}
-                  submitSuccessCount={submitSuccessCount.current}
                   onChange={onChange}
                 />
               )}
@@ -149,11 +173,12 @@ export const CreateNewCustomer = ({ props }: any) => {
               className={styles.control + " " + styles.full}
               {...register("credit", {
                 min: 0,
-                max: 100,
+                max: maxCredit,
                 required: true,
               })}
               onBlur={handleOnBlur}
-            />
+              />
+              <span>(per account)</span>
           </div>
           <div className={styles.credit}>
             <span>{props.minCredit.toFixed(2)}</span> =&lt; New Given Credit
@@ -170,7 +195,8 @@ export const CreateNewCustomer = ({ props }: any) => {
                   required: true,
                   max: maxMemberCredit,
                 })}
-              />
+                />
+                <span>(per account)</span>
               <div className={styles.credit}>
                 <span>=&lt; {maxMemberCredit.toFixed(2)}</span>
               </div>
@@ -197,6 +223,7 @@ export const CreateNewCustomer = ({ props }: any) => {
           />
         </form>
       </div>
+      )}
     </>
   );
 };

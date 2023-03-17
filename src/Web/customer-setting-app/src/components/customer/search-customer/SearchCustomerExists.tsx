@@ -3,17 +3,23 @@ import React, { useEffect, useState } from "react";
 import { components, GroupBase, OptionProps } from "react-select";
 import AsyncCreatableSelect from "react-select/async-creatable";
 import Select from "react-select/dist/declarations/src/Select";
+import { checkExistAccountName } from "../new-account/NewAccountName";
 import { customerStyles } from "./CustomStyle";
 
-const getCustomers = async (query: string) => {
+const getExistCustomers = async (query: string) => {
   const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/search?query=${query}`;
   const res = await fetch(url);
-  const result = await res.json();
-  return result;
+  return await res.json();
+};
+
+const getCustomerMaxCredit = async (username: string) => {
+  const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/credit/${username}`;
+  const result = await fetch(url);
+  return await result.json();
 };
 
 export const customPromiseOptions = async (inputValue: string) => {
-  const data = await getCustomers(inputValue);
+  const data = await getExistCustomers(inputValue);
   return data.map((item: any) => {
     return {
       ...item,
@@ -36,25 +42,22 @@ const CustomOption = (props: OptionProps<any>) => {
   );
 };
 
-export const SearchCustomerExists = ({
-  onChange,
-  changeMaxCredit,
-  submitSuccessCount,
-}: any) => {
-  let selectInputRef: Select<any, boolean, GroupBase<any>> | null = null;
+type Props = {
+  onChange: (existAccountName: string) => void,
+  changeMaxCredit: (maxCredit: number) => void
+}
 
+export const SearchCustomerExists = ({ onChange, changeMaxCredit }: Props) => {
+  let selectInputRef: Select<any, boolean, GroupBase<any>> | null = null;
   const [isCorrectName, setIsCorrectName] = useState(false);
 
-  const getMaxCredit = async (username: string) => {
-    const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/credit/${username}`;
-    const result = await fetch(url);
-    return await result.json();
-  };
+  useEffect(() => {
+    setIsCorrectName(false);
+    clearSingleValue();
+  }, []);
 
   const checkExistUserName = async (username: string) => {
-    const url = `${process.env.NEXT_PUBLIC_CUSTOMER_SETTING_APP}/customer/exist/${username}`;
-    const res = await fetch(url);
-    const data = await res.json();
+    const data = await checkExistAccountName(username);
     if (data.isExist) {
       setIsCorrectName(true);
     } else {
@@ -64,17 +67,12 @@ export const SearchCustomerExists = ({
 
   const onHandleChange = async (option: any) => {
     if (option) {
-      const data = await getMaxCredit(option.value);
+      const data = await getCustomerMaxCredit(option.value);
       await checkExistUserName(option.value)
       changeMaxCredit(data.maxCredit);
       onChange(option.value);
     }
   };
-
-  useEffect(() => {
-    setIsCorrectName(false);
-    clearSingleValue();
-  }, [submitSuccessCount]);
 
   const clearSingleValue = () => {
     selectInputRef?.clearValue();
