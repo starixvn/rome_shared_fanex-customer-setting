@@ -51,10 +51,7 @@ const getAccount = async (chatId: number) => {
   return await res.json();
 };
 
-const verifyWebAppOpenByTelegram = async (
-  botToken: string,
-  initData: URLSearchParams
-) => {
+const verifyWebAppOpenByTelegram = async (botToken: string, initData: URLSearchParams) => {
   const dataCheckString: string[] = [];
   initData.sort();
 
@@ -63,10 +60,7 @@ const verifyWebAppOpenByTelegram = async (
   });
 
   const secret = CryptoJS.HmacSHA256(botToken, "WebAppData");
-  const checkHash = CryptoJS.HmacSHA256(
-    dataCheckString.join("\n"),
-    secret
-  ).toString(CryptoJS.enc.Hex);
+  const checkHash = CryptoJS.HmacSHA256(dataCheckString.join("\n"), secret).toString(CryptoJS.enc.Hex);
 
   return initData.get("hash") === checkHash;
 };

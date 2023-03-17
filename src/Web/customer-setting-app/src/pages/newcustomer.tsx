@@ -1,9 +1,8 @@
 import React from "react";
-import Header from "@components/header/Header";
-import styles from "@styles/Home.module.scss";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions, User } from "src/lib/session";
-import { CreateNewCustomer } from "@features/new-customer/CreateNewCustomer";
+import Layout from "@components/Layout";
+import useTranslation from "next-translate/useTranslation";
 
 interface Props {
   user: User;
@@ -14,11 +13,13 @@ interface Props {
 }
 
 const NewCustomer = (props: Props) => {
+  const { t } = useTranslation("newcustomer");
   return (
-    <div className={styles.container}>
-      <Header headerContent="Create New Customer"></Header>
+    <Layout title={t("header")}>
+      <NewCustomerProvider>
       <CreateNewCustomer props={props} />
-    </div>
+      </NewCustomerProvider>
+    </Layout>
   );
 };
 
@@ -29,7 +30,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   const user = req.session.user;
 
   if (user === undefined) {
-    res.setHeader("location", "//unauthorized");
+    res.setHeader("location", "/unauthorized");
     res.statusCode = 302;
     res.end();
     return {
