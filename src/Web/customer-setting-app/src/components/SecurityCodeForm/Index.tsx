@@ -1,17 +1,50 @@
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import styles from "./SecurityCode.module.scss";
 
-const SecurityCodeForm = ({ username }: { username: string }) => {
+type Props = {
+  username: string;
+  onVerifySuccess: () => void;
+};
+
+const SecurityCodeForm = ({ username, onVerifySuccess }: Props) => {
   const { t } = useTranslation("common");
   const [securityCodeShown, setSecurityCodeShown] = useState(false);
+  const [securityCode, setSecurityCode] = useState("");
+  const [error, setError] = useState("");
 
-  const showSecurityCodeHandler = () => {
+  const handleShowSecurityCode = () => {
     setSecurityCodeShown(!securityCodeShown);
   };
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new URLSearchParams();
+    formData.append("securityCode", securityCode);
+    const response = await fetch("/api/security-code/verify", {
+      method: "POST",
+      body: formData.toString(),
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+    });
+
+    const result = await response.json();
+    if (result.isSuccessful) {
+      onVerifySuccess();
+    } else {
+      setError(result.message);
+    }
+  };
+
   return (
-    <form className={styles["security-code"]}>
+    <form className={styles["security-code"]} onSubmit={handleSubmit}>
+      {error && (
+        <div className="error-message">
+          <div className="msg msg-error">{error}</div>
+        </div>
+      )}
       <label htmlFor="SecurityCode">{t("SecurityCode")}</label>
       <p>
         {t("Hi")} {username},
@@ -26,11 +59,13 @@ const SecurityCodeForm = ({ username }: { username: string }) => {
           pattern="[0-9]*"
           autoComplete="off"
           maxLength={6}
+          value={securityCode}
+          onChange={(e) => setSecurityCode(e.target.value)}
         />
         <input type="submit" value={t("Verify")} />
       </div>
       <div className={styles["form-group"]}>
-        <input type="checkbox" id="checkbox" checked={securityCodeShown} onChange={showSecurityCodeHandler} />
+        <input type="checkbox" id="checkbox" checked={securityCodeShown} onChange={handleShowSecurityCode} />
         <label htmlFor="checkbox">{t("ShowSecurityCode")}</label>
       </div>
     </form>

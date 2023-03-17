@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions, User } from "src/lib/session";
 import Layout from "@components/Layout";
 import useTranslation from "next-translate/useTranslation";
 import { CreateNewCustomer } from "@features/new-customer/CreateNewCustomer";
+import SecurityCodeForm from "@components/SecurityCodeForm/Index";
 
 interface Props {
   user: User;
@@ -15,17 +16,22 @@ interface Props {
 
 const NewCustomer = (props: Props) => {
   const { t } = useTranslation("newcustomer");
+  const [isSecurityCodeVerified, setIsSecurityCodeVerified] = useState(false);
+  const onVerifySecurityCodeSuccess = () => {
+    setIsSecurityCodeVerified(true);
+  };
   return (
     <Layout title={t("header")}>
-      <CreateNewCustomer props={props} />
+      {isSecurityCodeVerified ? (
+        <CreateNewCustomer props={props} />
+      ) : (
+        <SecurityCodeForm username={props.actorName} onVerifySuccess={onVerifySecurityCodeSuccess} />
+      )}
     </Layout>
   );
 };
 
-export const getServerSideProps = withIronSessionSsr(async function ({
-  req,
-  res,
-}) {
+export const getServerSideProps = withIronSessionSsr(async function ({ req, res }) {
   const user = req.session.user;
 
   if (user === undefined) {
@@ -45,7 +51,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
         minCredit: 0,
         maxAccounts: process.env.MAX_ACCOUNTS,
         actorName: "",
-        isMasterLevel: false
+        isMasterLevel: false,
       },
     };
   }
@@ -56,10 +62,9 @@ export const getServerSideProps = withIronSessionSsr(async function ({
       minCredit: 0,
       maxAccounts: process.env.MAX_ACCOUNTS,
       actorName: user.username,
-      isMasterLevel: user.customerLevel === 3
+      isMasterLevel: user.customerLevel === 3,
     },
   };
-},
-sessionOptions);
+}, sessionOptions);
 
 export default NewCustomer;
