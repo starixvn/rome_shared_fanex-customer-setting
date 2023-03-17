@@ -84,17 +84,24 @@ export const CreateNewCustomer = ({ props }: any) => {
   const renderResult = (data: Result) => {
     return <>
       <div>The following accounts have been created successful:</div>
-      <div>
-        <span>Usernames: </span>
-        {data.usernames?.map(item => <span key={item}>{item}, </span>)}
-      </div>
-      <div>
-        <span>Credit: {data.credit} (per account)</span>
-      </div>
-      <div>No accounts have been created failed.</div>
-      <div>
-        <span>Failed reason: { data.message}</span>
-      </div>
+      {data?.usernames && data?.usernames.length > 0 ? (
+        <>
+          <div>
+            <span>Usernames: </span>
+            {data.usernames?.map(item => <span key={item}>{item}, </span>)}
+          </div>
+          <div>
+            <span>Credit: {data.credit} (per account)</span>
+          </div>
+        </>
+      ) : null}
+      {data?.failAccounts && data.failAccounts > 0 ? (<>
+        <div>{data.failAccounts} accounts have been created failed.</div>
+        <div>
+          <span>Failed reason: {data.message}</span>
+        </div>
+      </>
+      ) : null}
       <button onClick={handleContinue}>Create More</button>
     </>
   }

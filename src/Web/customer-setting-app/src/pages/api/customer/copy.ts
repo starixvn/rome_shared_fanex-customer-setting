@@ -25,7 +25,7 @@ const getDownLineInfo = async (user: User, sourceUserName: string) => {
 
 const copyCustomer = async (user: User, data: any) => {
   const url = `${process.env.CUSTOMER_API}/copy`;
-  let reqData = {
+  const reqData = {
     actorId: user.custId,
     actorSubAccId: user.subAccId,
     actorSubAccName: "",
