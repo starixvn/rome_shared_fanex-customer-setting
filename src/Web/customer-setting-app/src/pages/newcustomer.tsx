@@ -21,7 +21,7 @@ const NewCustomer = (props: Props) => {
     setIsSecurityCodeVerified(true);
   };
   return (
-    <Layout title={t("header")}>
+    <Layout title={t("header")} roleId={props.user.customerLevel}>
       {isSecurityCodeVerified ? (
         <CreateNewCustomer props={props} />
       ) : (
