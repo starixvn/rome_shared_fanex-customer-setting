@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { Controller, useForm } from "react-hook-form";
+import useTranslation from "next-translate/useTranslation";
+import { Controller, FieldErrors, useForm } from "react-hook-form";
 import styles from "./NewCustomer.module.scss";
 import {
   InformationIcon,
@@ -23,8 +24,8 @@ interface IFormInputs {
   existAccount: string;
   noOfAccounts: number;
   username: string;
-  memberMaxCredit?: number;
   credit: number;
+  memberMaxCredit?: number;
   password: string;
 }
 
@@ -38,8 +39,9 @@ type Result = {
 }
 
 export const CreateNewCustomer = ({ props }: any) => {
-  const methods = useForm<IFormInputs>();
-  const { register, handleSubmit, control, reset, formState, resetField } = methods;
+  const methods = useForm<IFormInputs>({ shouldFocusError: false });
+  const { t } = useTranslation("newcustomer");
+  const { register, handleSubmit, control, reset, formState: {errors}, resetField } = methods;
 
   const [data, setData] = useState<Result>({});
   const [maxCredit, setMaxCredit] = useState(0);
@@ -83,27 +85,42 @@ export const CreateNewCustomer = ({ props }: any) => {
 
   const renderResult = (data: Result) => {
     return <>
-      <div>The following accounts have been created successful:</div>
       {data?.usernames && data?.usernames.length > 0 ? (
         <>
+          <div>{ t("result.success")}</div>
           <div>
-            <span>Usernames: </span>
+            <span>{ t("result.usernames")}</span>
             {data.usernames?.map(item => <span key={item}>{item}, </span>)}
           </div>
           <div>
-            <span>Credit: {data.credit} (per account)</span>
+            <span>{ t("result.credit", {credit: data.credit})}</span>
           </div>
         </>
       ) : null}
       {data?.failAccounts && data.failAccounts > 0 ? (<>
-        <div>{data.failAccounts} accounts have been created failed.</div>
+        <div>{t("result.fail", {failAccounts: data.failAccounts})}</div>
         <div>
-          <span>Failed reason: {data.message}</span>
+          <span>{ t("result.failReason", {message: data.message})}</span>
         </div>
       </>
       ) : null}
-      <button onClick={handleContinue}>Create More</button>
+      <button onClick={handleContinue}>{ t("result.createMore")}</button>
     </>
+  }
+
+  const renderErrors = (errors: FieldErrors) => {
+    const errorKeys = ["existAccount", "noOfAccounts", "username", "credit", "memberMaxCredit", "password"];
+    let firstErr = "";
+    for (const key of errorKeys) {
+      if (errors[key]) {
+        firstErr = key;
+        break;
+      }
+    }
+    if (firstErr !== "") {
+      const message = t(`formError.${firstErr}`);
+      return <div className="error">{message}</div>
+    }
   }
 
   console.log("create new customer");
@@ -111,15 +128,11 @@ export const CreateNewCustomer = ({ props }: any) => {
     <>
       {JSON.stringify(data) !== "{}" ? renderResult(data) : (
         <div className={styles.main}>
-        <p className={styles.note + " " + styles.notetop}>
-          *Note: Settings will remain the same as the Source account setting for
-          all accounts
-        </p>
-        <form onSubmit={onSubmit}>
-          <label className={styles.text}>Copy Settings</label>
-          <p className={styles.text}>
-            Search existing account to copy the same settings
-          </p>
+          <p className={styles.note + " " + styles.notetop}>{ t("note")}</p>
+          <form onSubmit={onSubmit}>
+          {renderErrors(errors)}
+            <label className={styles.text}>{ t("copySettings")}</label>
+          <p className={styles.text}> {t("searchNote")}</p>
           <div className={styles.formcontrol}>
             <Controller
               name="existAccount"
@@ -130,15 +143,11 @@ export const CreateNewCustomer = ({ props }: any) => {
                   changeMaxCredit={handleChangeMaxCredit}
                 />
               )}
-              rules={{ required: true }}
+              rules={{minLength: 1, required: true }}
             />
           </div>
-
-          <label className={styles.text}>No. Of Accounts</label>
-          <p className={styles.text}>
-            Choose the number of accounts you want to create (Max=
-            {props.maxAccounts})
-          </p>
+          <label className={styles.text}>{ t("noOfAccounts")}</label>
+          <p className={styles.text}>{t("noAccountsNote", {max: props.maxAccounts})}</p>
           <div className={styles.formcontrol}>
             <input
               type="number"
@@ -150,13 +159,9 @@ export const CreateNewCustomer = ({ props }: any) => {
               })}
             />
           </div>
-          <label className={styles.text}>Account Details</label>
-          <p className={styles.text}>
-            Choose an available username as as starter and the remaining
-            accounts will follow
-          </p>
-          <label className={styles.sublabel}>
-            Username<span className={styles.require}>*</span>
+            <label className={styles.text}>{ t("accountDetail")}</label>
+          <p className={styles.text}> {t("accountDetailNote")}</p>
+            <label className={styles.sublabel}>{ t("username")}<span className={styles.require}>*</span>
           </label>
           <div className={styles.agent}>
             <Controller
@@ -168,12 +173,10 @@ export const CreateNewCustomer = ({ props }: any) => {
                   onChange={onChange}
                 />
               )}
-              rules={{ required: true }}
+              rules={{minLength: 1, required: true }}
             />
           </div>
-          <label className={styles.sublabel}>
-            Credit<span className={styles.require}>*</span>
-          </label>
+            <label className={styles.sublabel}>{ t("credit")}<span className={styles.require}>*</span></label>
           <div className={styles.formcontrol}>
             <input
               type="number"
@@ -185,16 +188,15 @@ export const CreateNewCustomer = ({ props }: any) => {
               })}
               onBlur={handleOnBlur}
               />
-              <span>(per account)</span>
+              <span>{ t("perAccount")}</span>
           </div>
           <div className={styles.credit}>
-            <span>{props.minCredit.toFixed(2)}</span> =&lt; New Given Credit
-            =&lt; <span>{maxCredit.toFixed(2)}</span>
+              <span>{props.minCredit.toFixed(2)}</span>{ t("creditNote")}<span>{maxCredit.toFixed(2)}</span>
           </div>
           {props.isMasterLevel ? (
             <div>
               <label className={styles.sublabel}>
-                Member Max Credit<span className={styles.require}>*</span>
+                  { t("memberMaxCredit")}<span className={styles.require}>*</span>
               </label>
               <input
                 type="number"
@@ -203,14 +205,14 @@ export const CreateNewCustomer = ({ props }: any) => {
                   max: maxMemberCredit,
                 })}
                 />
-                <span>(per account)</span>
+                <span>{ t("perAccount")}</span>
               <div className={styles.credit}>
                 <span>=&lt; {maxMemberCredit.toFixed(2)}</span>
               </div>
             </div>
           ) : null}
           <label className={styles.sublabel}>
-            Password
+            {t("password")}
             <span className={styles.require}>*</span>
             <InformationIcon height={16} width={16} />
           </label>

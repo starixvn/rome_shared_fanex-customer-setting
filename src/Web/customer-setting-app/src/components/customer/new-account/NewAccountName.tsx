@@ -47,6 +47,7 @@ export const NewAccountName = ({ actorName, onChange }: Props) =>
     if (!data.isExist) {
       setIsCorrectName(true);
     } else {
+      onChange("");
       setIsCorrectName(false);
     }
   };
@@ -66,7 +67,7 @@ export const NewAccountName = ({ actorName, onChange }: Props) =>
     return Array.from(suggestName).map((item, index) => {
       return (
         <SingleSelect
-          key={`${item}${index}`}
+          key={`${item}`}
           handleChange={(e) => handleSelectChange(e, index)}
           options={characters}
           selectedValue={item.toString()}

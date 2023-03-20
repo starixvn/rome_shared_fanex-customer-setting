@@ -61,6 +61,7 @@ export const SearchCustomerExists = ({ onChange, changeMaxCredit }: Props) => {
     if (data.isExist) {
       setIsCorrectName(true);
     } else {
+      onChange("");
       setIsCorrectName(false);
     }
   };
@@ -68,9 +69,9 @@ export const SearchCustomerExists = ({ onChange, changeMaxCredit }: Props) => {
   const onHandleChange = async (option: any) => {
     if (option) {
       const data = await getCustomerMaxCredit(option.value);
+      onChange(option.value);
       await checkExistUserName(option.value)
       changeMaxCredit(data.maxCredit);
-      onChange(option.value);
     }
   };
 
