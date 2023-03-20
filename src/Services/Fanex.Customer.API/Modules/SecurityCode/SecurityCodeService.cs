@@ -20,6 +20,7 @@ public class SecurityCodeService : ISecurityCodeService
     private const int Length = 6;
     private const string MD5 = "MD5";
     private const string SHA256 = "SHA256";
+    private const string SHA1 = "SHA1";
     private const string SECURITYCODEPADDING = "1qaw3+{:P)";
 
     private readonly IDynamicRepository dynamicRepository;
@@ -39,11 +40,9 @@ public class SecurityCodeService : ISecurityCodeService
     {
         var actualSecurityCode = await GetSecurityCode(param.CustId, param.SubAccId).ConfigureAwait(false);
         var salt = GenerateSalt(param.IsSubAccount() ? param.SubAccId : param.CustId);
-        var hashedSecurityCode = Encryption.ComputeHash(SHA256, param.SecurityCode, salt);
+        var hashedSecurityCode = Encryption.ComputeHash(SHA1, param.SecurityCode, salt);
         var isCorrectSecurityCode = string.Equals(actualSecurityCode, hashedSecurityCode);
-        await UpdateSecurityCodeCounter(param, isCorrectSecurityCode);
-
-        throw new NotImplementedException();
+        return await UpdateSecurityCodeCounter(param, isCorrectSecurityCode);
     }
 
     private Task<string> GetSecurityCode(int custId, int subAccountId)
