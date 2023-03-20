@@ -1,3 +1,4 @@
+import Message from "@components/Message";
 import useTranslation from "next-translate/useTranslation";
 import React, { FormEvent, useState } from "react";
 import styles from "./SecurityCode.module.scss";
@@ -11,7 +12,7 @@ const SecurityCodeForm = ({ username, onVerifySuccess }: Props) => {
   const { t } = useTranslation("common");
   const [securityCodeShown, setSecurityCodeShown] = useState(false);
   const [securityCode, setSecurityCode] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState("Wrong Security Code. Please try again.");
 
   const handleShowSecurityCode = () => {
     setSecurityCodeShown(!securityCodeShown);
@@ -40,12 +41,8 @@ const SecurityCodeForm = ({ username, onVerifySuccess }: Props) => {
 
   return (
     <form className={styles["security-code"]} onSubmit={handleSubmit}>
-      {error && (
-        <div className="error-message">
-          <div className="msg msg-error">{error}</div>
-        </div>
-      )}
       <label htmlFor="SecurityCode">{t("SecurityCode")}</label>
+      {error && <Message message={error} />}
       <p>
         {t("Hi")} {username},
       </p>

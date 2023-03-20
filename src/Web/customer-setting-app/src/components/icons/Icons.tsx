@@ -1,18 +1,12 @@
 type IconProps = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   fill?: number;
 };
 
 export const CheckMarkIcon = ({ width, height }: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
-      fill="currentColor"
-      viewBox="0 0 16 16"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" viewBox="0 0 16 16">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -25,13 +19,7 @@ export const CheckMarkIcon = ({ width, height }: IconProps) => {
 
 export const InformationIcon = ({ width, height }: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
-      fill="currentColor"
-      viewBox="0 0 16 16"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" viewBox="0 0 16 16">
       <path
         d="M6.33398 5H7.66748V3.6665H6.33398V5ZM7.00048 12.3335C4.06048 12.3335 1.66698 9.94 1.66698 7C1.66698 4.06 4.06048 1.6665 7.00048 1.6665C9.94049 1.6665 12.334 4.06 12.334 7C12.334 9.94 9.94049 12.3335 7.00048 12.3335ZM7.00048 0.333496C3.31848 0.333496 0.333984 3.3185 0.333984 7C0.333984 10.6815 3.31898 13.6665 7.00048 13.6665C10.6825 13.6665 13.667 10.6815 13.667 7C13.667 3.3185 10.682 0.333496 7.00048 0.333496ZM6.33398 10.3335H7.66748V6.3335H6.33398V10.3335Z"
         fill="#0B599C"
@@ -42,13 +30,7 @@ export const InformationIcon = ({ width, height }: IconProps) => {
 
 export const EyeIcon = ({ width, height }: IconProps) => {
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_2466_18121)">
         <path
           d="M8.00065 3.3335C4.97035 3.3335 2.38247 5.26861 1.33398 8.00016C2.38247 10.7317 4.97035 12.6668 8.00065 12.6668C11.031 12.6668 13.6188 10.7317 14.6673 8.00016C13.6188 5.26861 11.031 3.3335 8.00065 3.3335ZM8.00065 11.1113C6.32792 11.1113 4.97035 9.7175 4.97035 8.00016C4.97035 6.28283 6.32792 4.88905 8.00065 4.88905C9.67338 4.88905 11.031 6.28283 11.031 8.00016C11.031 9.7175 9.67338 11.1113 8.00065 11.1113ZM8.00065 6.1335C6.99459 6.1335 6.18247 6.96727 6.18247 8.00016C6.18247 9.03305 6.99459 9.86683 8.00065 9.86683C9.00671 9.86683 9.81883 9.03305 9.81883 8.00016C9.81883 6.96727 9.00671 6.1335 8.00065 6.1335Z"
@@ -64,26 +46,11 @@ export const EyeIcon = ({ width, height }: IconProps) => {
   );
 };
 
-export const ErrorIcon = ({ width, height }: IconProps) => {
+export const ErrorIcon = ({ width = 20, height = 20 }: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      x="0px"
-      y="0px"
-      width="16"
-      height="16"
-      viewBox="0 0 48 48"
-    >
-      <path
-        fill="#F44336"
-        d="M21.5 4.5H26.501V43.5H21.5z"
-        transform="rotate(45.001 24 24)"
-      ></path>
-      <path
-        fill="#F44336"
-        d="M21.5 4.5H26.5V43.501H21.5z"
-        transform="rotate(135.008 24 24)"
-      ></path>
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={width} height={height} viewBox="0 0 48 48">
+      <path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z" transform="rotate(45.001 24 24)"></path>
+      <path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)"></path>
     </svg>
   );
 };
