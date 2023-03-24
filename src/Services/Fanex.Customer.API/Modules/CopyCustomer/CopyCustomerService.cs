@@ -216,7 +216,7 @@ public class CopyCustomerService : ICopyCustomerService
             num3 *= num5;
         }
 
-        plainText = num3.ToString();
+        plainText = num3.ToString("G15");
         var str = string.Empty;
 
         for (var j = 1; j <= plainText.Length; j++)
