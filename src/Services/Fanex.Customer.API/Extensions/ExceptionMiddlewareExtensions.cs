@@ -11,7 +11,7 @@ public static class ExceptionMiddlewareExtensions
     private const string BreakLine = "\r\n";
     private const string TwoBreakLine = "\r\n\r\n";
 
-    public static void ConfigureExceptionHandler(this IApplicationBuilder app, Fanex.Logging.ILogger logger)
+    public static void ConfigureExceptionHandler(this IApplicationBuilder app, Logging.ILogger logger)
     {
         app.UseExceptionHandler(appError =>
         {

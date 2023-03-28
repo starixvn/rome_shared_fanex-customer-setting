@@ -29,7 +29,7 @@ public static class ApplicationBuilderExtensions
     {
         RefDataTypeContainer
             .ConnectTo(new Uri(configuration["RemoteRefURL"]))
-            .FromApplication("Alpha.CloneAccount.Api");
+            .FromApplication("Fanex.Customer.Api");
 
         return app;
     }
