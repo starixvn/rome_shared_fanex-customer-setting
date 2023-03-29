@@ -1,6 +1,7 @@
 using Fanex.Caching;
 using Fanex.Customer.API;
 using Fanex.Customer.API.Extensions;
+using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.SecurityCode;
@@ -33,7 +34,8 @@ app.UseSwaggerUI(options =>
 });
 app.UseFanexData(builder.Configuration, app.Environment);
 app.UseRemotingRef(builder.Configuration);
-app.ConfigureExceptionHandler(Fanex.Logging.Logger.Log);
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapEndpoints();
 app.MapHealthChecks("/healthz");

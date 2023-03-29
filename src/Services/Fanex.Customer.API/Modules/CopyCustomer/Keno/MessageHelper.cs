@@ -1,4 +1,4 @@
-using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Modules.CopyCustomer.Keno.Resources;
 using Fanex.Customer.API.Shared.Models;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Keno;

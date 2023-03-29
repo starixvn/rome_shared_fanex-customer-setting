@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.Customer.API.Resources
+namespace Fanex.Customer.API.Modules.CopyCustomer.Keno.Resources
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -42,7 +42,7 @@ namespace Fanex.Customer.API.Resources
             {
                 if (object.ReferenceEquals(resourceMan, null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Customer.API.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Customer.API.Modules.CopyCustomer.Keno.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

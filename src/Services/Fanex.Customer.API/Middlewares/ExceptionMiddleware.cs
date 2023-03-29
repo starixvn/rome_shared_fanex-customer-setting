@@ -2,35 +2,46 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Text;
 using Fanex.Data;
-using Microsoft.AspNetCore.Diagnostics;
 
-namespace Fanex.Customer.API.Extensions;
+namespace Fanex.Customer.API.Middlewares;
 
-public static class ExceptionMiddlewareExtensions
+public class ExceptionMiddleware
 {
     private const string BreakLine = "\r\n";
     private const string TwoBreakLine = "\r\n\r\n";
+    private readonly RequestDelegate _next;
+    private readonly Logging.ILogger _logger;
 
-    public static void ConfigureExceptionHandler(this IApplicationBuilder app, Logging.ILogger logger)
+    public ExceptionMiddleware(RequestDelegate next, Logging.ILogger logger)
     {
-        app.UseExceptionHandler(appError =>
+        _next = next;
+        _logger = logger;
+    }
+
+    public async Task InvokeAsync(HttpContext httpContext)
+    {
+        try
         {
-            appError.Run(async context =>
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "application/json";
-                var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                if (contextFeature != null)
-                {
-                    await logger.ErrorAsync(await BuildError(context.Request, contextFeature.Error));
-                    await context.Response.WriteAsync(new
-                    {
-                        context.Response.StatusCode,
-                        Message = "Internal Server Error."
-                    }.ToString());
-                }
-            });
-        });
+            httpContext.Request.EnableBuffering();
+            await _next(httpContext);
+        }
+        catch (Exception ex)
+        {
+            await HandleExceptionAsync(httpContext, ex);
+        }
+    }
+
+    private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.ContentType = "application/json";
+
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        await _logger.ErrorAsync(await BuildError(context.Request, exception));
+        await context.Response.WriteAsync(new
+        {
+            context.Response.StatusCode,
+            exception.Message
+        }.ToString());
     }
 
     private static async Task<string> BuildError(HttpRequest request, Exception exception)
