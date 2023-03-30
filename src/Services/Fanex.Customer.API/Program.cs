@@ -1,13 +1,18 @@
+using System.Net;
 using Fanex.Caching;
 using Fanex.Customer.API;
 using Fanex.Customer.API.Extensions;
 using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Customer;
+using Fanex.Customer.API.Modules.Otp;
 using Fanex.Customer.API.Modules.SecurityCode;
 using Fanex.Data.Repository;
 using Fanex.RemotingRef;
 using MinimalApi.Endpoint.Extensions;
+using ONEbook.OTP.Services;
+using TelegramBot.Client.Services;
+using SophosOtp = ONEbook.OTP.Services.OtpService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +21,21 @@ builder.Services.AddFanexLogging(builder.Configuration);
 builder.Services.AddSingleton<ICacheService, CacheService>();
 builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
+builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>
+{
+    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+    httpClient.BaseAddress = new Uri(builder.Configuration["TelegramClientUrl"]);
+    httpClient.DefaultRequestHeaders.Add("Accept-Language", Thread.CurrentThread.CurrentCulture.Name);
+});
+builder.Services.AddHttpClient<IOTPService, OTPService>(httpClient =>
+{
+    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+    httpClient.BaseAddress = new Uri(builder.Configuration["TelegramClientUrl"]);
+    httpClient.DefaultRequestHeaders.Add("Accept-Language", Thread.CurrentThread.CurrentCulture.Name);
+});
+builder.Services.AddScoped<SophosOtp, OtpServiceImpl>();
 builder.Services.RegisterSecurityCodeModule();
+builder.Services.RegisterOtpModule();
 builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.AddEndpoints();
