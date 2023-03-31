@@ -23,6 +23,8 @@ public interface ICustomerService
     Task<bool> CheckExistedCustomer(string username);
 
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
+
+    Task<bool> IsEnableCustomer(int custId);
 }
 
 public class CustomerService : ICustomerService
@@ -70,5 +72,12 @@ public class CustomerService : ICustomerService
         var command = new CheckBelongingByUsernameCommand(custId, username, subAccountId);
         await dynamicRepository.ExecuteAsync(command);
         return new(command.IsActive, command.CustId, command.IsSubAcc, command.RoleId);
+    }
+
+    public async Task<bool> IsEnableCustomer(int custId)
+    {
+        var command = new CheckEnableCustomerCommand(custId);
+        await dynamicRepository.ExecuteAsync(command);
+        return command.ErrCode.Equals(0);
     }
 }

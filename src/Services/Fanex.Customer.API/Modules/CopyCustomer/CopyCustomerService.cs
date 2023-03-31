@@ -54,6 +54,13 @@ public class CopyCustomerService : ICopyCustomerService
             return new CopyMultipleCustomerResult(Enumerable.Empty<string>(), checkLimitNewDownlineResult.Code, checkLimitNewDownlineResult.Message);
         }
 
+        var isSourceAccountEnable = request.SourceCustId > 0 && await customerService.IsEnableCustomer(request.SourceCustId);
+
+        if (!isSourceAccountEnable)
+        {
+            return new CopyMultipleCustomerResult(Enumerable.Empty<string>(), 100, StaticResources.Get("ThisSourceAccountWasDisabled", request.Language));
+        }
+
         var index = 0;
         var usernames = new List<string>();
 
