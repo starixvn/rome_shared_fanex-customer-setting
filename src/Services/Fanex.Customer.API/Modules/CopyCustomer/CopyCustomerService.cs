@@ -8,7 +8,6 @@ using Fanex.Customer.API.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
-using Microsoft.VisualBasic;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
 
@@ -132,7 +131,7 @@ public class CopyCustomerService : ICopyCustomerService
             var spParams = copyMemberSpParamsBuilder.BuildSpParams(
                 dataTable.Rows[0],
                 param,
-                CfsEnCode(param.Password));
+                param.Password);
 
             await db.ExecuteNonQueryAsync(spParams);
             var ouputParams = db.GetOutputParams();
@@ -175,7 +174,7 @@ public class CopyCustomerService : ICopyCustomerService
         {
             return new CopyAgentCommand(
                 request.UserName,
-                CfsEnCode(request.Password),
+                request.Password,
                 request.Credit,
                 request.MaxCredit,
                 request.ActorId,
@@ -190,7 +189,7 @@ public class CopyCustomerService : ICopyCustomerService
 
         return new CopyMasterCommand(
             request.UserName,
-            CfsEnCode(request.Password),
+            request.Password,
             request.Credit,
             request.ActorId,
             request.ActorId,
@@ -200,57 +199,6 @@ public class CopyCustomerService : ICopyCustomerService
             request.IP,
             request.SystemId,
             appSettings.SettingStatus);
-    }
-
-    public string CfsEnCode(string plainText)
-    {
-        var num = 30;
-        var num2 = num - plainText.Length;
-
-        if (num2 > 1)
-        {
-            for (var m = 1; m <= num2; m++)
-            {
-                plainText += Strings.Chr(0x15);
-            }
-        }
-
-        var num3 = 1.0;
-
-        for (var i = 1; i <= num; i++)
-        {
-            var num5 = num + Strings.Asc(Strings.Mid(plainText, i, 1)) * i;
-            num3 *= num5;
-        }
-
-        plainText = num3.ToString("G15");
-        var str = string.Empty;
-
-        for (var j = 1; j <= plainText.Length; j++)
-        {
-            str += CfsCode(Strings.Mid(plainText, j, 3));
-        }
-
-        var str2 = string.Empty;
-
-        for (var k = 20; k <= str.Length - 0x12; k += 2)
-        {
-            str2 += Strings.Mid(str, k, 1);
-        }
-
-        return str2;
-    }
-
-    private static string CfsCode(string nWord)
-    {
-        var number = string.Empty;
-
-        for (var i = 1; i <= nWord.Length; i++)
-        {
-            number += Strings.Asc(Strings.Mid(nWord, i, 1));
-        }
-
-        return Conversion.Hex(number);
     }
 
     private async Task<string> GetAvailableDownlineUserName(CopyCustomerRequest request)
