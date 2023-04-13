@@ -78,7 +78,7 @@ public class KenoRepository : IKenoRepository
                 Phone = dataReader.HasColumn("phone") ? dataReader.ToString("phone") : string.Empty,
                 MobilePhone = dataReader.HasColumn("mobilephone") ? dataReader.ToString("mobilephone") : string.Empty,
                 Fax = dataReader.HasColumn("fax") ? dataReader.ToString("fax") : string.Empty,
-                IsDisableAutoMPT = dataReader.ToBool("DisableAutoMPT", false),
+                IsDisableAutoMPT = dataReader.HasColumn("DisableAutoMPT") ? dataReader.ToBool("DisableAutoMPT") : false,
                 RoleId = role,
                 ActionType = (int)actionType
             };
