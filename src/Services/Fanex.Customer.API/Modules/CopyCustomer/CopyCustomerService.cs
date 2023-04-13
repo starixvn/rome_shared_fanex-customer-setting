@@ -25,19 +25,22 @@ public class CopyCustomerService : ICopyCustomerService
     private readonly ICopyMemberSpParamsBuilder copyMemberSpParamsBuilder;
     private readonly IThirdPartyProductService thirdPartyProductService;
     private readonly ICustomerService customerService;
+    private readonly Fanex.Logging.ILogger logger;
 
     public CopyCustomerService(
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
         ICopyMemberSpParamsBuilder copyMemberSpParamsBuilder,
         IThirdPartyProductService thirdPartyProductService,
-        ICustomerService customerService)
+        ICustomerService customerService,
+        Logging.ILogger logger)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
         this.copyMemberSpParamsBuilder = copyMemberSpParamsBuilder;
         this.thirdPartyProductService = thirdPartyProductService;
         this.customerService = customerService;
+        this.logger = logger;
     }
 
     public async Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request)
@@ -162,6 +165,11 @@ public class CopyCustomerService : ICopyCustomerService
 
         await dynamicRepository.ExecuteAsync(criteria);
 
+        if (criteria.CustId > 0)
+        {
+            InsertUnreadMessage(criteria.CustId, request.ActorLevel.GetDirectDownLineLevel().Value);
+        }
+
         return new CopyCustomerResult(
             criteria.CustId,
             criteria.ErrCode,
@@ -250,5 +258,26 @@ public class CopyCustomerService : ICopyCustomerService
         }
 
         return "LimitAgentNewDownlineError";
+    }
+
+    private void InsertUnreadMessage(int custId, byte roleId)
+    {
+        Task.Run(() =>
+        {
+            try
+            {
+                var criteria = new CustomerReadMessageCommand(custId, roleId, 0, 0, string.Empty);
+                this.dynamicRepository.Execute(criteria);
+
+                if (criteria.ErrCode != 0)
+                {
+                    logger.Info($"[Age_MsgCustReadStatus_Ins] CustId: {custId}; SubAccId: 0; RoleId: {roleId} ErrCode: {criteria.ErrCode}; ErrMsg: {criteria.ErrMsg}");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message, ex);
+            }
+        });
     }
 }

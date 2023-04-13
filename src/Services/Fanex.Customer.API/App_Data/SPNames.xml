@@ -7,7 +7,7 @@
         <Setting Key="Age_GetSubAccountSecurityCode" SpName="Age_CustomerSelSecurityCode_Sub" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
     </Function>
 
-     <Function Name="Otp">
+    <Function Name="Otp">
         <Setting Key="Age_OTP_CustomerOTPSel" SpName="Age_OTP_CustomerOTPSel" DbName="DBCUST.CustDB.BODBDownlineNet" />
         <Setting Key="Age_OTP_CustomerCheckEnableOTP" SpName="Age_OTP_CustomerCheckEnableOTP" DbName="DBCUST.CustDB.BODBDownlineNet" />
         <Setting Key="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" SpName="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" DbName="DBCUST.CustDB.BODBDownlineNet" />
@@ -74,5 +74,9 @@
     <Function Name="API Logger">
         <Setting Key="WriteLog_UserLog_ExternalAPI_Ins" SpName="WriteLog_UserLog_ExternalAPI_Ins" DbName="DBLOG.bodb_CustomerLog.BODBDownlineNet" Plain="0" />
         <Setting Key="WriteLog_UserLog_ExternalAPI_UpdResponse" SpName="WriteLog_UserLog_ExternalAPI_UpdResponse" DbName="DBLOG.bodb_CustomerLog.BODBDownlineNet" Plain="0" />
+    </Function>
+
+    <Function Name="Message">
+        <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.BODBDownlineNet" Plain="0" />
     </Function>
 </Functions>
