@@ -18,7 +18,8 @@ public interface ING2Service
         CustomerInfo createdCustomer,
         bool disableNG2,
         CustomerInfo actor,
-        CopyCustomerRequest request);
+        CopyCustomerRequest request,
+        byte settingStatus);
 }
 
 public class NG2Service : ING2Service
@@ -47,7 +48,8 @@ public class NG2Service : ING2Service
         CustomerInfo createdCustomer,
         bool disableNG2,
         CustomerInfo actor,
-        CopyCustomerRequest request)
+        CopyCustomerRequest request,
+        byte settingStatus)
     {
         if (!actor.HideNG2 && actor.SyncedNG2)
         {
@@ -62,6 +64,7 @@ public class NG2Service : ING2Service
                     actor.CustId,
                     request.SystemId,
                     request.IP,
+                    settingStatus,
                     request.Language,
                     request.ActorSubAccId);
             }
@@ -81,6 +84,7 @@ public class NG2Service : ING2Service
         int userId,
         byte systemId,
         string ip,
+        byte settingStatus,
         string language = "en-US",
         int subAccId = 0)
     {
@@ -114,7 +118,7 @@ public class NG2Service : ING2Service
 
         if (response.Result.IsSuccess && (response.Result.AccountArray.Count <= 0 || response.Result.AccountArray[0].IsSuccess))
         {
-            var result = await SyncStatus(custId, userId, ip, subAccId);
+            var result = await SyncStatus(custId, userId, ip, settingStatus, subAccId);
 
             if (result.IsSuccessful)
             {
@@ -138,9 +142,9 @@ public class NG2Service : ING2Service
         return await ng2StatusService.SyncCustomers(request);
     }
 
-    private async Task<Shared.Models.Result> SyncStatus(int custId, int userId, string ip, int subAccId)
+    private async Task<Shared.Models.Result> SyncStatus(int custId, int userId, string ip, byte settingStatus, int subAccId)
     {
-        var command = new SyncStatusCommand(custId, userId, ip, subAccId);
+        var command = new SyncStatusCommand(custId, userId, ip, settingStatus, subAccId);
         await dynamicRepository.ExecuteAsync(command).ConfigureAwait(false);
         return new Shared.Models.Result(command.ErrCode, command.ErrMsg);
     }

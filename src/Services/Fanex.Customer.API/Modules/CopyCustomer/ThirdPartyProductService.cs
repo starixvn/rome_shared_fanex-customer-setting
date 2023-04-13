@@ -11,13 +11,15 @@ public interface IThirdPartyProductService
         CustomerInfo createdCustomer,
         CustomerInfo sourceCustomer,
         CustomerInfo actor,
-        CopyCustomerRequest param);
+        CopyCustomerRequest param,
+        byte settingStatus);
 
     Task SyncMemberSettings(
         CustomerInfo createdCustomer,
         CustomerInfo sourceCustomer,
         CustomerInfo actor,
-        CopyCustomerRequest param);
+        CopyCustomerRequest param,
+        byte settingStatus);
 }
 
 public class ThirdPartyProductService : IThirdPartyProductService
@@ -40,16 +42,18 @@ public class ThirdPartyProductService : IThirdPartyProductService
         CustomerInfo createdCustomer,
         CustomerInfo sourceCustomer,
         CustomerInfo actor,
-        CopyCustomerRequest param)
+        CopyCustomerRequest param,
+        byte settingStatus)
     {
-        await ng2Service.SyncCustomerSettings(createdCustomer, sourceCustomer.DisableNG2, actor, param);
+        await ng2Service.SyncCustomerSettings(createdCustomer, sourceCustomer.DisableNG2, actor, param, settingStatus);
     }
 
     public async Task SyncMemberSettings(
         CustomerInfo createdCustomer,
         CustomerInfo sourceCustomer,
         CustomerInfo actor,
-        CopyCustomerRequest param)
+        CopyCustomerRequest param,
+        byte settingStatus)
     {
         await dcsService.InsertMemberSettings(
             createdCustomer.CustId,
@@ -63,7 +67,7 @@ public class ThirdPartyProductService : IThirdPartyProductService
             sourceCustomer.CustId,
             param);
 
-        await ng2Service.SyncCustomerSettings(createdCustomer, sourceCustomer.DisableNG2, actor, param);
+        await ng2Service.SyncCustomerSettings(createdCustomer, sourceCustomer.DisableNG2, actor, param, settingStatus);
     }
 }
 

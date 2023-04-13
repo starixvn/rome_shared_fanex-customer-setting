@@ -111,7 +111,8 @@ public class CopyCustomerService : ICopyCustomerService
                     createdCustomer,
                     sourceCustomer,
                     actor,
-                    param);
+                    param,
+                    appSettings.SettingStatus);
             }
             else
             {
@@ -119,7 +120,8 @@ public class CopyCustomerService : ICopyCustomerService
                     createdCustomer,
                     sourceCustomer,
                     actor,
-                    param);
+                    param,
+                    appSettings.SettingStatus);
             }
         }
     }

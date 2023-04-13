@@ -4,11 +4,12 @@ namespace Fanex.Customer.API.Modules.CopyCustomer.NG2;
 
 public class SyncStatusCommand : NonQueryCommand
 {
-    public SyncStatusCommand(int custId, int userId, string ip, int subAccId = 0)
+    public SyncStatusCommand(int custId, int userId, string ip, byte settingStatus, int subAccId = 0)
     {
         CustId = custId;
         UserId = userId;
         SubAccId = subAccId;
+        SettingStatus = settingStatus;
         IP = ip;
     }
 
@@ -23,6 +24,8 @@ public class SyncStatusCommand : NonQueryCommand
     public int SubAccId { get; }
 
     public string IP { get; }
+
+    public byte SettingStatus { get; }
 
     public int ErrCode { get; set; }
 
