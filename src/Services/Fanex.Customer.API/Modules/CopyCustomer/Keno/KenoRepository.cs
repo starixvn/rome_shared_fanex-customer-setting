@@ -98,13 +98,13 @@ public class KenoRepository : IKenoRepository
                 MinBet = dataReader.HasColumn("MinBet") ? dataReader.ToDouble("MinBet") : 0,
                 MaxBet = dataReader.HasColumn("MaxBet") ? dataReader.ToDouble("MaxBet") : 0,
                 MaxPerMatch = dataReader.HasColumn("MaxPerGameType") ? dataReader.ToDouble("MaxPerGameType") : 0,
-                IsEnabled = !dataReader.ToBool("IsDisabled", false),
+                IsEnabled = dataReader.HasColumn("IsDisabled") ? !dataReader.ToBool("IsDisabled") : false,
                 Upline = new BetSetting()
                 {
                     MinBet = dataReader.HasColumn("MinBet_Min") ? dataReader.ToDouble("MinBet_Min") : 0,
                     MaxBet = dataReader.HasColumn("MaxBet_Max") ? dataReader.ToDouble("MaxBet_Max") : 0,
                     MaxPerMatch = dataReader.HasColumn("MaxPerMatch_Max") ? dataReader.ToDouble("MaxPerMatch_Max") : 0,
-                    IsEnabled = !dataReader.ToBool("DisableUplinesKeno", false)
+                    IsEnabled = dataReader.HasColumn("DisableUplinesKeno") ? !dataReader.ToBool("DisableUplinesKeno") : true
                 }
             };
 

@@ -1,7 +1,6 @@
 using System.Text;
 using EasyNetQ;
 using Fanex.Logging;
-using Newtonsoft.Json;
 using ONEbook.NG2.API.Client.Configurations;
 using ONEbook.NG2.API.Client.Models;
 
@@ -23,7 +22,6 @@ public class NG2StatusService : ING2StatusService
         this.logger = logger;
         this.configuration = configuration;
         this.httpClient = httpClient;
-        this.httpClient.BaseAddress = new Uri(configuration.Url);
     }
 
     public async Task<Response> SyncCustomers(Request request)
@@ -50,12 +48,14 @@ public class NG2StatusService : ING2StatusService
     {
         try
         {
-            using var stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, "/CreateAccount") { Content = stringContent };
-            var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            var jsonContent = System.Text.Json.JsonSerializer.Serialize(request);
+            using var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var url = $"{configuration.Url}/CreateAccount";
+            using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url) { Content = stringContent };
+            using var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             httpResponseMessage.EnsureSuccessStatusCode();
-
-            return JsonConvert.DeserializeObject<Response>(await httpResponseMessage.Content.ReadAsStringAsync());
+            var jsonResponse = await httpResponseMessage.Content.ReadAsStringAsync();
+            return System.Text.Json.JsonSerializer.Deserialize<Response>(jsonResponse);
         }
         catch (Exception ex)
         {
