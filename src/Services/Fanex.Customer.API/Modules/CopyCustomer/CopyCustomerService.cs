@@ -25,7 +25,7 @@ public class CopyCustomerService : ICopyCustomerService
     private readonly ICopyMemberSpParamsBuilder copyMemberSpParamsBuilder;
     private readonly IThirdPartyProductService thirdPartyProductService;
     private readonly ICustomerService customerService;
-    private readonly Fanex.Logging.ILogger logger;
+    private readonly Logging.ILogger logger;
 
     public CopyCustomerService(
         IDynamicRepository dynamicRepository,
@@ -64,6 +64,7 @@ public class CopyCustomerService : ICopyCustomerService
         }
 
         var index = 0;
+        var retryLoop = 0;
         var usernames = new List<string>();
 
         do
@@ -72,6 +73,7 @@ public class CopyCustomerService : ICopyCustomerService
             if (result.IsSuccessful)
             {
                 index++;
+                retryLoop = 0;
                 usernames.Add(request.UserName);
                 request.UserName = await GetAvailableDownlineUserName(request);
 
@@ -82,8 +84,9 @@ public class CopyCustomerService : ICopyCustomerService
             }
             else
             {
-                if (result.Code == 201)
+                if (result.Code == 201 && retryLoop < 5)
                 {
+                    retryLoop++;
                     request.UserName = await GetAvailableDownlineUserName(request);
                 }
                 else
