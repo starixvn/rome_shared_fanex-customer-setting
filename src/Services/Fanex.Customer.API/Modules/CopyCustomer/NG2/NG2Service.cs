@@ -3,6 +3,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using Fanex.Customer.API.Modules.Customer.Models;
+using Fanex.Customer.API.Resources;
 using Fanex.Data.Repository;
 using Newtonsoft.Json;
 using ONEbook.NG2.API.Client.Configurations;
@@ -135,7 +136,7 @@ public class NG2Service : ING2Service
         if (umInfo != null && umInfo.IsUnderMaintenanceTime)
         {
             response.Result.ErrorCode = 5003;
-            //response.Result.ErrorDescription = string.Format(StaticResources.Get("UM", request.Language), umInfo.From, umInfo.To);
+            response.Result.ErrorDescription = string.Format(StaticResources.Get("UM", request.Language), umInfo.From, umInfo.To);
             return response;
         }
 

@@ -52,7 +52,7 @@ public class AgentUpdateMemberPositionTakingCriteria : CriteriaBase
 
     public bool IsSearchAndCopy { get; }
 
-    public string ErrCode { get; set; }
+    public int ErrCode { get; set; }
 
     public string ErrMsg { get; set; }
 
