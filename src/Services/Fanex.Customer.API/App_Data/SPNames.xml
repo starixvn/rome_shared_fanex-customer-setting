@@ -47,7 +47,7 @@
         <Setting Key="Acc_CustomerCreditInfoSel" SpName="Acc_CustomerCreditInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
         </Setting>
-        <Setting Key="Age_CustomerSelSuggestUsername" SpName="Age_CustomerSelSuggestUsername" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Age_CustomerSelCheckBelonging_ByUsername" SpName="Age_CustomerSelCheckBelonging_ByUsername" DbName="DBAGE.bodb02.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_CustomerSelCheckEnable" SpName="Acc_CustomerSelCheckEnable" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
     </Function>

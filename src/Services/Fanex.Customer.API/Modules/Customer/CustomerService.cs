@@ -55,7 +55,7 @@ public class CustomerService : ICustomerService
 
     public async Task<string> GetSuggestUsername(GetSuggestUsernameRequest request)
     {
-        var command = new GetSuggestUsernameCommand(request.ActorName, request.CustId, request.RoleId);
+        var command = new GetSuggestUsernameCommand(request.ActorName, request.RoleId);
         await dynamicRepository.ExecuteAsync(command);
         return command.SeqName;
     }
