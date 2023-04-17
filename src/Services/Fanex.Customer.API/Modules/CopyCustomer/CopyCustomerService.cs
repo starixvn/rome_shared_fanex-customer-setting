@@ -2,6 +2,7 @@ using System.Data;
 using Fanex.Customer.API.Modules.CopyCustomer.Command;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Customer;
+using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
@@ -216,19 +217,13 @@ public class CopyCustomerService : ICopyCustomerService
 
     private async Task<string> GetAvailableDownlineUserName(CopyCustomerRequest request)
     {
-        var ptInfo = await customerService.GetCustomerPT(request.ActorId, request.ActorUserLevel);
+        var length = request.ActorLevel.IsAgentLevel()
+                ? request.UserName.Length - 3
+                : request.UserName.Length - 2;
+        var userName = request.UserName.Substring(0, length);
+        var suffix = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = userName, RoleId = request.ActorUserLevel });
 
-        if (ptInfo != null)
-        {
-            var userName = request.UserName;
-            var length = request.ActorLevel.IsAgentLevel()
-                ? userName.Length - 3
-                : userName.Length - 2;
-
-            return $"{userName.Substring(0, length)}{ptInfo.Suffix}";
-        }
-
-        return string.Empty;
+        return !string.IsNullOrWhiteSpace(suffix) ? $"{userName}{suffix}" : string.Empty;
     }
 
     public async Task<Result> CheckLimitNewDownline(CheckLimitNewDownlineRequest request)

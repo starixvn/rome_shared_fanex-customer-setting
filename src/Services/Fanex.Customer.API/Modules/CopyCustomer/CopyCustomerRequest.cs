@@ -38,7 +38,6 @@ public class CopyCustomerRequest
 
     public byte SystemId { get; set; }
 
-
     public bool IsValid()
         => ActorId > 0
         && ActorSubAccId >= 0
