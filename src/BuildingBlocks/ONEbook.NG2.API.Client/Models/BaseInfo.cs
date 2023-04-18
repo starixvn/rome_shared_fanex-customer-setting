@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace ONEbook.NG2.API.Client.Models;
+namespace ONEbook.NG2.API.DTO;
 
 public class BaseInfo
 {

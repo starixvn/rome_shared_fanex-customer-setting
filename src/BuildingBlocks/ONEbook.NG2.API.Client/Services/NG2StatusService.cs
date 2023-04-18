@@ -2,7 +2,7 @@ using System.Text;
 using EasyNetQ;
 using Fanex.Logging;
 using ONEbook.NG2.API.Client.Configurations;
-using ONEbook.NG2.API.Client.Models;
+using ONEbook.NG2.API.DTO.CreateAccount;
 
 namespace ONEbook.NG2.API.Client.Services;
 
@@ -36,8 +36,11 @@ public class NG2StatusService : ING2StatusService
             }
         }
 
+        await logger.InfoAsync(System.Text.Json.JsonSerializer.Serialize(response));
+
         if (!response.Result.IsSuccess)
         {
+            await logger.InfoAsync($"NotifyFailedRequest: {System.Text.Json.JsonSerializer.Serialize(request)}");
             await NotifyFailedRequest(request);
         }
 
@@ -73,6 +76,7 @@ public class NG2StatusService : ING2StatusService
         try
         {
             var rabbitConfig = configuration.Rabbit;
+            await logger.InfoAsync(System.Text.Json.JsonSerializer.Serialize(rabbitConfig));
             var rabbitConnectionString = string.Format(
                 "host={0};virtualHost={1};username={2};password={3};requestedHeartbeat={4}",
                 rabbitConfig.Host,

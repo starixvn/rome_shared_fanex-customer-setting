@@ -7,8 +7,9 @@ using Fanex.Customer.API.Resources;
 using Fanex.Data.Repository;
 using Newtonsoft.Json;
 using ONEbook.NG2.API.Client.Configurations;
-using ONEbook.NG2.API.Client.Models;
 using ONEbook.NG2.API.Client.Services;
+using ONEbook.NG2.API.DTO;
+using ONEbook.NG2.API.DTO.CreateAccount;
 using ONEbook.UM.ThirdParty.AspNetCore.Services;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.NG2;
@@ -52,6 +53,7 @@ public class NG2Service : ING2Service
         CopyCustomerRequest request,
         byte settingStatus)
     {
+        await logger.InfoAsync($"SyncCustomerSettings: {System.Text.Json.JsonSerializer.Serialize(actor)}");
         if (!actor.HideNG2 && actor.SyncedNG2)
         {
             try
@@ -104,6 +106,8 @@ public class NG2Service : ING2Service
             Language = language
         };
 
+        await logger.InfoAsync($"AutoInsertAccount: {System.Text.Json.JsonSerializer.Serialize(request)}");
+
         var function = APIFunc.CreateAccount.ToString();
         var logId = await LogRequest(new LogAPIRequest(
             request.Auth.SiteId == SiteId.NAP ? 3 : 2,
@@ -116,10 +120,11 @@ public class NG2Service : ING2Service
         ));
         var response = await SyncCustomers(request);
         await LogResponse(logId, response.Result.ErrorCode, JsonConvert.SerializeObject(response));
-
-        if (response.Result.IsSuccess && (response.Result.AccountArray.Count <= 0 || response.Result.AccountArray[0].IsSuccess))
+        await logger.InfoAsync(JsonConvert.SerializeObject(response));
+        if (response.Result.IsSuccess && (response.Result.AccountArray.Count > 0 ? response.Result.AccountArray[0].IsSuccess : true))
         {
             var result = await SyncStatus(custId, userId, ip, settingStatus, subAccId);
+            await logger.InfoAsync(JsonConvert.SerializeObject(result));
 
             if (result.IsSuccessful)
             {
@@ -140,6 +145,7 @@ public class NG2Service : ING2Service
             return response;
         }
 
+        await logger.InfoAsync("SyncCustomers" + System.Text.Json.JsonSerializer.Serialize(request));
         return await ng2StatusService.SyncCustomers(request);
     }
 

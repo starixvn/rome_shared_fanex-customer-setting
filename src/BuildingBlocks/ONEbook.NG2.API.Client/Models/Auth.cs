@@ -1,4 +1,4 @@
-namespace ONEbook.NG2.API.Client.Models;
+namespace ONEbook.NG2.API.DTO;
 
 public class Auth
 {
