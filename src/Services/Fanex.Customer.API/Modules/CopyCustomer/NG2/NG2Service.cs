@@ -53,7 +53,6 @@ public class NG2Service : ING2Service
         CopyCustomerRequest request,
         byte settingStatus)
     {
-        await logger.InfoAsync($"SyncCustomerSettings: {System.Text.Json.JsonSerializer.Serialize(actor)}");
         if (!actor.HideNG2 && actor.SyncedNG2)
         {
             try
@@ -106,8 +105,6 @@ public class NG2Service : ING2Service
             Language = language
         };
 
-        await logger.InfoAsync($"AutoInsertAccount: {System.Text.Json.JsonSerializer.Serialize(request)}");
-
         var function = APIFunc.CreateAccount.ToString();
         var logId = await LogRequest(new LogAPIRequest(
             request.Auth.SiteId == SiteId.NAP ? 3 : 2,
@@ -120,11 +117,10 @@ public class NG2Service : ING2Service
         ));
         var response = await SyncCustomers(request);
         await LogResponse(logId, response.Result.ErrorCode, JsonConvert.SerializeObject(response));
-        await logger.InfoAsync(JsonConvert.SerializeObject(response));
+
         if (response.Result.IsSuccess && (response.Result.AccountArray.Count > 0 ? response.Result.AccountArray[0].IsSuccess : true))
         {
             var result = await SyncStatus(custId, userId, ip, settingStatus, subAccId);
-            await logger.InfoAsync(JsonConvert.SerializeObject(result));
 
             if (result.IsSuccessful)
             {
@@ -145,7 +141,6 @@ public class NG2Service : ING2Service
             return response;
         }
 
-        await logger.InfoAsync("SyncCustomers" + System.Text.Json.JsonSerializer.Serialize(request));
         return await ng2StatusService.SyncCustomers(request);
     }
 
