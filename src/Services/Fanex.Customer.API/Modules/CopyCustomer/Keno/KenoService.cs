@@ -187,7 +187,7 @@ public class KenoService : IKenoService
             result.Message = ReformatErrorMessageForBetSetting(betSetting.BetTypeId, result.Message);
         }
 
-        return new List<Result>();
+        return results;
     }
 
     internal string ReformatErrorMessageForBetSetting(int betTypeId, string inputMessage)
