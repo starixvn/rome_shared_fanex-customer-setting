@@ -1,6 +1,5 @@
 using Fanex.Data;
 using Fanex.Data.SqlServer;
-using Fanex.RemotingRef;
 
 namespace Fanex.Customer.API.Extensions;
 
@@ -22,15 +21,6 @@ public static class ApplicationBuilderExtensions
             .WithSqlServer(resourcePath)
             .Use(connectionStrings)
             .Run();
-        return app;
-    }
-
-    public static IApplicationBuilder UseRemotingRef(this IApplicationBuilder app, IConfiguration configuration)
-    {
-        RefDataTypeContainer
-            .ConnectTo(new Uri(configuration["RemoteRefURL"]))
-            .FromApplication("Fanex.Customer.Api");
-
         return app;
     }
 }
