@@ -7,6 +7,7 @@ using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Rules;
+using Fanex.Customer.API.Modules.LiteModeCustomer;
 using Fanex.Customer.API.Modules.SecurityCode;
 using Fanex.Data.Repository;
 using MinimalApi.Endpoint.Extensions;
@@ -38,17 +39,20 @@ builder.Services.RegisterSecurityCodeModule();
 builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.RegisterRulesServiceModule();
+builder.Services.RegisterLiteModeModule();
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(type => type.ToString());
+});
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("./swagger/v1/swagger.json", "v1");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
 app.UseFanexData(builder.Configuration, app.Environment, builder.Services);
@@ -60,7 +64,7 @@ app.MapHealthChecks("/healthz");
 
 if (!app.Environment.IsDevelopment())
 {
-    builder.WebHost.UseUrls("http://0.0.0.0:5000");
+    builder.WebHost.UseUrls("http://localhost:5001");
 }
 
 app.Run();
