@@ -8,6 +8,8 @@ public class GroupType
 
     public int GroupTypeLevel { get; set; }
 
+    public short DisplayType { get; set; }
+
     public List<GroupItemDefault> GroupItems { get; set; }
 
     public List<GroupItemDefault> CompactGroupItems { get; set; }
