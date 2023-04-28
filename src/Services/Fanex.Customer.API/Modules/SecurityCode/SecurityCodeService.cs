@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Fanex.Customer.API.Modules.SecurityCode.Commands;
 using Fanex.Customer.API.Modules.SecurityCode.Criteria;
 using Fanex.Customer.API.Shared.Models;
@@ -52,7 +53,7 @@ public class SecurityCodeService : ISecurityCodeService
 
     private async Task<Result> UpdateSecurityCodeCounter(VerifySecurityCodeRequest param, bool isCorrectSecurityCode)
     {
-        if (param.IsSubAccount())
+        if (param.SubAccId.Equals(0))
         {
             var command = new UpdateMainAccountSecurityCodeCounterCommand(param.CustId, isCorrectSecurityCode, param.Language, param.IP);
             await dynamicRepository.ExecuteAsync(command);

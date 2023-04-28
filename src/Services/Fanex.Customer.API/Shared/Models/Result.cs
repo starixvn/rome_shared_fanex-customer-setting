@@ -4,7 +4,7 @@ public class Result
 {
     public const int ErrorCode = 1;
 
-    public Result(int code, string message)
+    public  Result(int code, string message)
     {
         Code = code;
         Message = message;

@@ -50,6 +50,7 @@
         <Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Age_CustomerSelCheckBelonging_ByUsername" SpName="Age_CustomerSelCheckBelonging_ByUsername" DbName="DBAGE.bodb02.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_CustomerSelCheckEnable" SpName="Acc_CustomerSelCheckEnable" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_Chatbot_CustomerStatusSel" SpName="Age_Chatbot_CustomerStatusSel" DbName="DBCust.CustDB.BODBDownlineNet" />
     </Function>
 
     <Function Name="NG2">
