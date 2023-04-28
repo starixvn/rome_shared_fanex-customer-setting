@@ -30,5 +30,5 @@ public class GeneralInformation
 
     public string TransferOption { get; set; }
 
-    public bool IsInTransferList { get; set; }
+    public bool IsAutomateTransfer { get; set; }
 }

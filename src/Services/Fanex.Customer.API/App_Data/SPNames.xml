@@ -71,4 +71,11 @@
     <Function Name="Message">
         <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.BODBDownlineNet" Plain="0" />
     </Function>
+    
+    <Function Name="Lite Mode">
+        <Setting Key="Acc_LiteMode_CustSetting_SuperAllInfoSel" SpName="Acc_LiteMode_CustSetting_SuperAllInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" >
+            <Mapping DataField="NewUserName" ObjectProperty="Suffix" />
+            <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+        </Setting> 
+    </Function>
 </Functions>

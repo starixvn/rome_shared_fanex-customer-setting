@@ -15,7 +15,7 @@ public class GetCustomerInfoEndpoint : IEndpoint<IResult, int, ICreateCustomerSe
 
     public async Task<IResult> HandleAsync(int custId, ICreateCustomerService customerService)
     {
-        return Results.Ok(customerService.Query(custId));
+        return Results.Ok(await customerService.Query(custId));
 
     }
 }
