@@ -2,6 +2,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -14,14 +15,24 @@ public interface ICreateCustomerService
 public class CreateCustomerService : ICreateCustomerService
 {
     private readonly IDynamicRepository dynamicRepository;
-    
-    public CreateCustomerService(IDynamicRepository dynamicRepository)
+
+    private readonly AppSettings appSettings;
+
+    public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings)
     {
         this.dynamicRepository = dynamicRepository;
+        this.appSettings = appSettings.Value;
     }
     public async Task<CustomerSetting> Query(int custId)
     => new CustomerSetting
     {
-        GeneralInfo = await dynamicRepository.GetAsync<GeneralInformation>(new GetCustomerCriteria { CustId = custId, GroupId = 0, GroupType = 0 }),
+        GeneralInfo = await dynamicRepository.GetAsync<GeneralInformation>(
+            new GetCustomerCriteria
+            {
+                CustId = custId,
+                GroupId = 0,
+                GroupType = 0,
+                CreationStatus = appSettings.CreationStatus
+            }),
     };
 }
