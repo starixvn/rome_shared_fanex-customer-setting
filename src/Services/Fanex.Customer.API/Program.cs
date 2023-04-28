@@ -7,7 +7,7 @@ using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Rules;
-using Fanex.Customer.API.Modules.LiteModeCustomer;
+using Fanex.Customer.API.Modules.CreateCustomer;
 using Fanex.Customer.API.Modules.SecurityCode;
 using Fanex.Data.Repository;
 using MinimalApi.Endpoint.Extensions;

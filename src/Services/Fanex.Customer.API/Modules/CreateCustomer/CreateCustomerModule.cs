@@ -1,0 +1,13 @@
+using Fanex.Customer.API.Modules.CreateCustomer.Services;
+
+namespace Fanex.Customer.API.Modules.CreateCustomer;
+
+public static class CreateCustomerModule
+{
+    public static IServiceCollection RegisterLiteModeModule(this IServiceCollection services)
+    {
+        services.AddSingleton<ICreateCustomerService, CreateCustomerService>();
+
+        return services;
+    }
+}
