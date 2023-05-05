@@ -8,13 +8,13 @@ public class GetCustomerInfoEndpoint : IEndpoint<IResult, int, ICreateCustomerSe
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/query", (int custId, ICreateCustomerService customerService)
-            => HandleAsync(custId, customerService))
+        app.MapGet("/api/customer/query", (int uplineCustId, ICreateCustomerService customerService)
+            => HandleAsync(uplineCustId, customerService))
             .Produces<CustomerSetting>();
     }
 
-    public async Task<IResult> HandleAsync(int custId, ICreateCustomerService customerService)
+    public async Task<IResult> HandleAsync(int uplineCustId, ICreateCustomerService customerService)
     {
-        return Results.Ok(await customerService.Query(custId));
+        return Results.Ok(await customerService.Query(uplineCustId));
     }
 }

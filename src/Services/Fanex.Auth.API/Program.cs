@@ -25,7 +25,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(options => { options.RoutePrefix = "local2"; });
+    app.UseSwaggerUI();
 }
 
 app.UseCors("NgOrigins");

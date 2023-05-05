@@ -1,14 +1,17 @@
+using Fanex.Caching;
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
+using System.Linq;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface ICreateCustomerService
 {
-    Task<CustomerSetting> Query(int custId);
+    Task<CustomerSetting> Query(int uplineCustId);
 
 }
 
@@ -18,21 +21,57 @@ public class CreateCustomerService : ICreateCustomerService
 
     private readonly AppSettings appSettings;
 
-    public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings)
+    private readonly ICacheService cacheService;
+
+    public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
+        this.cacheService = cacheService;
     }
-    public async Task<CustomerSetting> Query(int custId)
-    => new CustomerSetting
+    public async Task<CustomerSetting> Query(int uplineCustId)
     {
-        GeneralInfo = await dynamicRepository.GetAsync<GeneralInformation>(
-            new GetCustomerCriteria
+        var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
+          () => GetSettingProfile(),
+           new CacheItemOptions())).ToList();
+
+        var customerSetting = new CustomerSetting
+        {
+            GeneralInfo = await dynamicRepository.GetAsync<GeneralInformation>(
+                    new GetCustomerCriteria
+                    {
+                        CustId = uplineCustId,
+                        CreationStatus = appSettings.CreationStatus
+                    }),
+        };
+
+        customerSetting.ProductGroups = settingProfile.GroupBy(o => o.GroupId).Select(group => new ProductGroup{ProductGroupId = group.Key }).ToList();
+        foreach (var productGroup in customerSetting.ProductGroups)
+        {
+            productGroup.GroupTypes = settingProfile.Where(o=> o.GroupId == productGroup.ProductGroupId).GroupBy(o => o.GroupType)
+                .Select(item => new GroupType
+                {
+                    GroupTypeId = item.Key
+                 }).ToList();
+
+            foreach(var groupType in productGroup.GroupTypes)
             {
-                CustId = custId,
-                GroupId = 0,
-                GroupType = 0,
-                CreationStatus = appSettings.CreationStatus
-            }),
-    };
+                
+            }
+        }
+
+        return customerSetting;
+    }
+
+    private static async Task<ProductGroup> GetProductGroup(int GroupId)
+    {
+        return new ProductGroup();
+    }
+
+    private static async Task<GroupType> GetGroupType()
+    {
+        return new GroupType();
+    }
+
+    private async Task<IEnumerable<SettingProfile>> GetSettingProfile() => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus });
 }

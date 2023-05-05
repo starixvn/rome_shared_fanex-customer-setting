@@ -75,6 +75,8 @@
     <Function Name="Create Customer">
         <Setting Key="Acc_LiteMode_CustSetting_SuperAllInfoSel" SpName="Acc_LiteMode_CustSetting_SuperAllInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" >
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
-        </Setting> 
+        </Setting>
+        <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        
     </Function>
 </Functions>
