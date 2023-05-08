@@ -4,6 +4,6 @@ public class CustomerSetting
 {
     public GeneralInformation GeneralInfo { get; set; }
 
-    public List<ProductGroup> ProductGroups { get; set; }
+    public Dictionary<int, ProductGroup> ProductGroups { get; set; }
 
 }

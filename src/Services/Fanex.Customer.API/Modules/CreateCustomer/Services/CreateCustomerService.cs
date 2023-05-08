@@ -45,19 +45,23 @@ public class CreateCustomerService : ICreateCustomerService
                     }),
         };
 
-        customerSetting.ProductGroups = settingProfile.GroupBy(o => o.GroupId).Select(group => new ProductGroup{ProductGroupId = group.Key }).ToList();
+        customerSetting.ProductGroups = new Dictionary<int, ProductGroup>();
+        var productGroups = settingProfile.GroupBy(o => o.GroupId).Select(group => new ProductGroup { ProductGroupId = group.Key }).ToList();
+        foreach (var productGroup in productGroups)
+        {
+            customerSetting.ProductGroups.Add(productGroup.ProductGroupId, productGroup);
+        }
+
+
+
         foreach (var productGroup in customerSetting.ProductGroups)
         {
-            productGroup.GroupTypes = settingProfile.Where(o=> o.GroupId == productGroup.ProductGroupId).GroupBy(o => o.GroupType)
+            productGroup.Value.GroupTypes = settingProfile.Where(o => o.GroupId == productGroup.Key).GroupBy(o => o.GroupType)
                 .Select(item => new GroupType
                 {
                     GroupTypeId = item.Key
-                 }).ToList();
+                }).ToList();
 
-            foreach(var groupType in productGroup.GroupTypes)
-            {
-                
-            }
         }
 
         return customerSetting;
