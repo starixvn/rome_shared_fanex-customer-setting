@@ -52,19 +52,9 @@
         <Setting Key="Acc_CustomerSelCheckEnable" SpName="Acc_CustomerSelCheckEnable" DbName="DBCUST.CustDB.BODBDownlineNet" Plain="0" />
     </Function>
 
-    <Function Name="Keno">
-        <Setting Key="Acc_CustomerSelEditMemberKeno" SpName="Acc_CustomerSelEditMemberKeno" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_CustomerUpdMemberKeno_BetSetting" SpName="Acc_CustomerUpdMemberKeno_BetSetting" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_CustomerUpdMemberKeno_Positiontaking" SpName="Acc_CustomerUpdMemberKeno_Positiontaking" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-    </Function>
-
     <Function Name="NG2">
         <Setting Key="Acc_CustSetting_SyncGameStatusUpd" SpName="Acc_CustSetting_SyncGameStatusUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_CustSetting_DisableGameStatusUpd" SpName="Acc_CustSetting_DisableGameStatusUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-    </Function>
-
-    <Function Name="UM On product">
-        <Setting Key="Acc_CheckUM" SpName="Acc_CheckUM" DbName="DBCust.CustDB.BODBDownlineNet" />
     </Function>
 
     <Function Name="Problem Account - Limit New Downline">

@@ -8,7 +8,6 @@ using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Otp;
 using Fanex.Customer.API.Modules.SecurityCode;
 using Fanex.Data.Repository;
-using Fanex.RemotingRef;
 using MinimalApi.Endpoint.Extensions;
 using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
@@ -19,7 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddFanexLogging(builder.Configuration);
 builder.Services.AddSingleton<ICacheService, CacheService>();
-builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>
 {
@@ -52,7 +50,6 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 app.UseFanexData(builder.Configuration, app.Environment);
-app.UseRemotingRef(builder.Configuration);
 
 app.UseMiddleware<ExceptionMiddleware>();
 

@@ -1,5 +1,4 @@
 ﻿using Fanex.Customer.API.Modules.CopyCustomer.DCS;
-using Fanex.Customer.API.Modules.CopyCustomer.Keno;
 using Fanex.Customer.API.Modules.CopyCustomer.NG2;
 using Fanex.Customer.API.Modules.Customer.Models;
 
@@ -26,16 +25,13 @@ public class ThirdPartyProductService : IThirdPartyProductService
 {
     private readonly ING2Service ng2Service;
     private readonly IDCSService dcsService;
-    private readonly IKenoService kenoService;
 
     public ThirdPartyProductService(
         ING2Service ng2Service,
-        IDCSService dcsService,
-        IKenoService kenoService)
+        IDCSService dcsService)
     {
         this.ng2Service = ng2Service;
         this.dcsService = dcsService;
-        this.kenoService = kenoService;
     }
 
     public async Task SyncMasterOrAgentSettings(
@@ -61,11 +57,6 @@ public class ThirdPartyProductService : IThirdPartyProductService
             actor.CustId,
             param.ActorSubAccId,
             param.IP);
-
-        kenoService.UpdateMemberSettings(
-            createdCustomer.CustId,
-            sourceCustomer.CustId,
-            param);
 
         await ng2Service.SyncCustomerSettings(createdCustomer, sourceCustomer.DisableNG2, actor, param, settingStatus);
     }

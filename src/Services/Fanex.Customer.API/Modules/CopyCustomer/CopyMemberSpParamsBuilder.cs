@@ -51,7 +51,6 @@ public class CopyMemberSpParamsBuilder : ICopyMemberSpParamsBuilder
         spParams.Add("ugroup", sportbooksSetting["ugroup"]);
         spParams.Add("closed", sportbooksSetting["closed"]);
         spParams.Add("issearchandcopy", 1);
-        spParams.Add("disablenumber", sportbooksSetting["disablenumber"]);
         spParams.Add("language", param.LanguageKey);
         spParams.Add("ip", param.IP);
         spParams.Add("creator", param.ActorId);
@@ -63,7 +62,7 @@ public class CopyMemberSpParamsBuilder : ICopyMemberSpParamsBuilder
 
     private static void AddBettingLimitSpParams(DataRow sportbooksSetting, Hashtable spParams)
     {
-        var sportTypes = new[] { "1", "1mp", "1saba", "2", "2saba", "3", "5", "8", "10", "11", "99", "99mp", "161", "164" };
+        var sportTypes = new[] { "1", "1mp", "1saba", "2", "2saba", "3", "5", "8", "10", "11", "99", "99mp" };
         var parameters = new[] { "minbetv{0}", "maxbetv{0}", "maxpermatchv{0}", "maxpopermatchv{0}" };
 
         foreach (string item in sportTypes)
@@ -77,18 +76,13 @@ public class CopyMemberSpParamsBuilder : ICopyMemberSpParamsBuilder
             }
             else
             {
-                if (item == "161")
-                {
-                    spParams.Add("maxperballv161", sportbooksSetting["maxperballv161"]);
-                }
-
                 foreach (string param in parameters)
                 {
                     var formatParam = string.Format(param, item);
 
                     if (!spParams.ContainsKey(formatParam))
                     {
-                        if (param == "maxpopermatchv{0}" && item != "161" && item != "164")
+                        if (param == "maxpopermatchv{0}")
                         {
                             spParams.Add(formatParam, sportbooksSetting[string.Format("maxpayoutpermatchv{0}", item)]);
                         }
@@ -125,11 +119,6 @@ public class CopyMemberSpParamsBuilder : ICopyMemberSpParamsBuilder
                     parameter_max = "maxlpos_{0}";
                     break;
 
-                case "161_live":
-                    parameter = "v161alivepositiontaking_{0}";
-                    parameter_max = "maxv161lpos_{0}";
-                    break;
-
                 default:
                     parameter = string.Format("v{0}apositiontaking_", key) + "{0}";
                     parameter_max = string.Format("maxv{0}pos_", key) + "{0}";
@@ -161,9 +150,7 @@ public class CopyMemberSpParamsBuilder : ICopyMemberSpParamsBuilder
             { "8", new string[] { "1", "3", "20", "10" } },
             { "10", new string[] { "1", "2", "3", "20", "10" } },
             { "11", new string[] { "1", "20", "10" } },
-            { "99", new string[] { "1", "2", "3", "9", "20", "10", "9999" } },
-            { "161", new string[] { "81", "83", "86", "88" } },
-            { "161_live", new string[] { "85", "86", "87", "89", "90" } }
+            { "99", new string[] { "1", "2", "3", "9", "20", "10", "9999" } }
         };
 
         return sportTypesBetTypes;
