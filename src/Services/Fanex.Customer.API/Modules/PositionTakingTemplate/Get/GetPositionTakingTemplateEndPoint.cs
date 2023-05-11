@@ -1,24 +1,48 @@
+using Fanex.Data.Repository;
 using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
 
-public class GetPositionTakingTemplateEndPoint : IEndpoint<IResult, int, IPositionTakingTemplateService>
+public class GetPositionTakingTemplateEndPoint : IEndpoint<IResult, int, IDynamicRepository>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/{custId}/pt-templates", (int custId, IPositionTakingTemplateService positionTakingTemplateService)
-            => HandleAsync(custId, positionTakingTemplateService))
+        app.MapGet("/api/customer/{custId}/pt-templates", (int custId, IDynamicRepository dynamicRepository)
+            => HandleAsync(custId, dynamicRepository))
             .Produces<IEnumerable<PTTemplate>>()
             .WithTags("PositionTakingTemplate");
     }
 
-    public async Task<IResult> HandleAsync(int custId, IPositionTakingTemplateService positionTakingTemplateService)
+    public async Task<IResult> HandleAsync(int custId, IDynamicRepository dynamicRepository)
     {
         if (custId < 0)
         {
             return Results.BadRequest();
         }
 
-        return Results.Ok(await positionTakingTemplateService.GetByCustId(custId));
+        var items = await dynamicRepository.FetchAsync<PositionTakingTemplateDto>(new GetPositionTakingTemplateCriteria(custId));
+
+        var response = from item in items
+                       group item by new
+                       {
+                           Id = item.TemplateId,
+                           Name = item.TemplateName,
+                           item.IsDefault
+                       } into itemGroup
+                       select new PTTemplate
+                       {
+                           Id = itemGroup.Key.Id,
+                           Name = itemGroup.Key.Name,
+                           IsDefault = itemGroup.Key.IsDefault,
+                           Details = itemGroup.Select(i => new PTTemplateDetail
+                           {
+                               TemplateId = i.TemplateId,
+                               GroupId = i.GroupId,
+                               SubGroupId = i.SubGroupId,
+                               PT = i.PT
+                           })
+                       };
+
+        return Results.Ok(response);
     }
 }

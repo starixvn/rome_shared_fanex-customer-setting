@@ -14,7 +14,6 @@ using MinimalApi.Endpoint.Extensions;
 using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
-using Fanex.Customer.API.Modules.PositionTakingTemplate;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor()
@@ -41,7 +40,6 @@ builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.RegisterRulesServiceModule();
 builder.Services.RegisterLiteModeModule();
-builder.Services.RegisterPositionTemplateModule();
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();
