@@ -1,4 +1,3 @@
-using System.Text;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -25,35 +24,17 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
 
     public async Task<IResult> HandleAsync(CreatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)
     {
-        if (request.IsValid())
-        {
-            var template = request.Template;
-            var command = new CreatePositionTakingTemplateCommand(
-                request.CustId,
-                template.Name,
-                BuildXMLSettings(template.Details),
-                template.IsDefault,
-                appSettings.CreationStatus,
-                request.Language,
-                request.IP);
+        var command = new CreatePositionTakingTemplateCommand(
+            request.CustId,
+            request.TemplateName,
+            request.Settings.BuildXMLSettings(),
+            request.IsDefault,
+            appSettings.CreationStatus,
+            request.Language,
+            request.IP);
 
-            await dynamicRepository.ExecuteAsync(command);
+        await dynamicRepository.ExecuteAsync(command);
 
-            return Results.Ok(new Result(command.ErrorCode, command.ErrMsg));
-        }
-
-        return Results.BadRequest();
-    }
-
-    private static string BuildXMLSettings(IEnumerable<PTTemplateDetail> details)
-    {
-        var builder = new StringBuilder();
-
-        foreach (var item in details)
-        {
-            builder.Append(item.ToXml());
-        }
-
-        return $"<Root>{builder}</Root>";
+        return Results.Ok(new Result(command.ErrorCode, command.ErrMsg));
     }
 }
