@@ -15,7 +15,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 public interface ICreateCustomerService
 {
     Task<CustomerSetting> Query(int uplineCustId, int uplineRoleId);
-    
+
     Task<CustomerSetting> QueryPTTemplate(int custId, int roleId);
 
 }
@@ -67,14 +67,14 @@ public class CreateCustomerService : ICreateCustomerService
 
             productGroup.Value.GroupTypes = settingProfile
                 .Where(o => o.GroupId == productGroup.Key)
-                .GroupBy(o => o.GroupType)
-                .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key).Result);
+                .GroupBy(o => new { o.GroupType, o.SubGroupId })
+                .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key.GroupType, item.Key.SubGroupId).Result);
         }
 
         GetNameFromRemotingRef(customerSetting);
         return customerSetting;
     }
-    
+
     public async Task<CustomerSetting> QueryPTTemplate(int uplineCustId, int uplineRoleId)
     {
         var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
@@ -101,20 +101,24 @@ public class CreateCustomerService : ICreateCustomerService
 
         foreach (var productGroup in customerSetting.ProductGroups)
         {
+            var groupTypes = settingProfile
+                .Where(o => o.GroupId == productGroup.Key && (o.GroupType == 153 || o.GroupType == 160))
+                .GroupBy(o => new { o.GroupType, o.SubGroupId })
+                .Select(async item => await GetGroupType(uplineCustId, productGroup.Key, item.Key.GroupType, item.Key.SubGroupId));
 
             productGroup.Value.GroupTypes = settingProfile
-                .Where(o => o.GroupId == productGroup.Key && (o.GroupType == 153 ||o.GroupType == 160))
-                .GroupBy(o => o.GroupType)
-                .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key).Result);
+                .Where(o => o.GroupId == productGroup.Key && (o.GroupType == 153 || o.GroupType == 160))
+                .GroupBy(o => new { o.GroupType, o.SubGroupId })
+                .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key.GroupType, item.Key.SubGroupId).Result);
         }
 
         GetNameFromRemotingRef(customerSetting);
         return customerSetting;
     }
 
-    private async Task<GroupType> GetGroupType(int uplineCustId, int productGroupId, int groupTypeId)
+    private async Task<GroupType> GetGroupType(int uplineCustId, int productGroupId, int groupTypeId, int? subGroupId)
     {
-        var groupType = new GroupType { Id = groupTypeId };
+        var groupType = new GroupType { Id = groupTypeId, SubGroupId = subGroupId };
         var service = (IGroupTypeBaseService)Activator.CreateInstance(Type.GetType($"Fanex.Customer.API.Modules.CreateCustomer.Services.GroupType{groupTypeId}.GroupType{groupTypeId}Service, Fanex.Customer.API"), dynamicRepository, appSettings);
         groupType.GroupItems = await service.Query(uplineCustId, productGroupId);
 
@@ -129,7 +133,7 @@ public class CreateCustomerService : ICreateCustomerService
             productGroup.Value.Name = this.remotingRef.GetResourceDataByRefIdAndResourceId("ProductGroup", productGroup.Value.Id.ToString(), "en-US", productGroup.Value.Id.ToString());
             foreach (var groupType in productGroup.Value.GroupTypes)
             {
-                groupType.Name = this.remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.Id.ToString(), "en-US", groupType.Id.ToString());
+                groupType.SubGroupName = this.remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.SubGroupId?.ToString(), "en-US", groupType.Id.ToString());
                 if (groupType.GroupItems != null)
                 {
                     var groupItems = new List<GroupItemDefault>();
