@@ -2,7 +2,6 @@ using Fanex.Caching;
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Data.Repository;
 using Fanex.RemotingRef;
 using Microsoft.Extensions.Options;
@@ -15,7 +14,7 @@ public interface ICreateCustomerService
 
     Task<CustomerSetting> QueryPTTemplate(int custId, int roleId);
 
-    Task<IEnumerable<object>> GetPTRange(int custId, string language = "en-US");
+    Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language = "en-US");
 }
 
 public class CreateCustomerService : ICreateCustomerService
@@ -73,30 +72,22 @@ public class CreateCustomerService : ICreateCustomerService
         return customerSetting;
     }
 
-    public async Task<IEnumerable<object>> GetPTRange(int custId, string language)
+    public async Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language)
     {
         var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
          () => GetSettingProfile(),
           new CacheItemOptions())).ToList();
 
         var productGroups = settingProfile.Where(p => p.GroupType == 153 || p.GroupType == 160).GroupBy(p => p.GroupId)
-            .Select((g) => new
+            .Select((g) => new ProductGroup
             {
                 Id = g.Key,
                 Name = remotingRef.GetResourceDataByRefIdAndResourceId("ProductGroup", g.Key.ToString(), language, string.Empty),
-                SubGroups = g.GroupBy(t => new { t.GroupType, t.SubGroupId }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
+                GroupTypes = g.GroupBy(t => new { t.GroupType, t.SubGroupId }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
                     var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.SubGroupId);
-                    var subGroupName = remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.SubGroupId.ToString(), "en-US", string.Empty);
-                    var maxPT = groupType.GroupItems.Select(i => (i as SuperPTSettingItem).S4).Min();
-
-                    return new
-                    {
-                        Id = groupType.SubGroupId,
-                        Name = subGroupName,
-                        Min = 0,
-                        Max = maxPT
-                    };
+                    groupType.SubGroupName = remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.SubGroupId.ToString(), "en-US", string.Empty);
+                    return groupType;
                 }).ToEnumerable()
             });
 
