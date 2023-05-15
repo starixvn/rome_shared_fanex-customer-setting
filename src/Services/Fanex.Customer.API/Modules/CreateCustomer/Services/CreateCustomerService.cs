@@ -1,10 +1,7 @@
 using Fanex.Caching;
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
-using Fanex.Customer.API.Modules.CreateCustomer.Services.GroupType153;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
-using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
 using Fanex.RemotingRef;
 using Microsoft.Extensions.Options;
@@ -18,6 +15,7 @@ public interface ICreateCustomerService
 
     Task<CustomerSetting> QueryPTTemplate(int custId, int roleId);
 
+    Task<IEnumerable<ProductGroup>> GetPTRange(int custId, string language = "en-US");
 }
 
 public class CreateCustomerService : ICreateCustomerService
@@ -73,6 +71,28 @@ public class CreateCustomerService : ICreateCustomerService
 
         GetNameFromRemotingRef(customerSetting);
         return customerSetting;
+    }
+
+    public async Task<IEnumerable<ProductGroup>> GetPTRange(int custId, string language)
+    {
+        var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
+         () => GetSettingProfile(),
+          new CacheItemOptions())).ToList();
+
+        var productGroups = settingProfile.Where(p => p.GroupType == 153 || p.GroupType == 160).GroupBy(p => p.GroupId)
+            .Select((g) => new ProductGroup
+            {
+                Id = g.Key,
+                Name = remotingRef.GetResourceDataByRefIdAndResourceId("ProductGroup", g.Key.ToString(), language, string.Empty),
+                GroupTypes = g.GroupBy(t => t.GroupType).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
+                {
+                    var groupType = await GetGroupType(custId, g.Key, t.Key);
+                    groupType.Name = remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.Id.ToString(), "en-US", string.Empty);
+                    return groupType;
+                }).ToEnumerable()
+            });
+
+        return productGroups;
     }
 
     public async Task<CustomerSetting> QueryPTTemplate(int uplineCustId, int uplineRoleId)

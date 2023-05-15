@@ -4,17 +4,17 @@ using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.EndPoints;
 
-public class GetPTTemplateEndpoint : IEndpoint<IResult, int, int, ICreateCustomerService>
+public class GetPTTemplateEndpoint : IEndpoint<IResult, int, string, ICreateCustomerService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/{custId}/{roleId}/{language}/queryPTTemplate", (int custId, int roleId, string language, ICreateCustomerService customerService)
-            => HandleAsync(custId, roleId, customerService))
+        app.MapGet("/api/customer/{custId}/{language}/queryPTTemplate", (int custId, string language, ICreateCustomerService customerService)
+            => HandleAsync(custId, language, customerService))
             .Produces<CustomerSetting>().WithTags("LiteMode");
     }
 
-    public async Task<IResult> HandleAsync(int custId, int roleId, ICreateCustomerService customerService)
+    public async Task<IResult> HandleAsync(int custId, string language, ICreateCustomerService customerService)
     {
-        return Results.Ok(await customerService.QueryPTTemplate(custId, roleId));
+        return Results.Ok(await customerService.GetPTRange(custId, language));
     }
 }
