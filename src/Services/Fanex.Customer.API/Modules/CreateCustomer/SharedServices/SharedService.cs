@@ -1,9 +1,7 @@
 using Fanex.Caching;
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Data.Repository;
-using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 
@@ -22,9 +20,9 @@ public class SharedService
 
     public SharedService(IDynamicRepository dynamicRepository, AppSettings appSettings, ICacheService cacheService)
     {
-        this.dynamicRepository = dynamicRepository?? new DynamicRepository();
+        this.dynamicRepository = dynamicRepository ?? new DynamicRepository();
         this.appSettings = appSettings;
-        this.cacheService = cacheService?? new CacheService();
+        this.cacheService = cacheService ?? new CacheService();
     }
 
     internal async Task<IEnumerable<SettingProfile>> GetSettingProfile()
