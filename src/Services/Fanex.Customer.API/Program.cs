@@ -14,14 +14,18 @@ using MinimalApi.Endpoint.Extensions;
 using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
+using Newtonsoft.Json;
+using Fanex.RemotingRef;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor()
                 .AddSingleton<IShardInfoAccessor, ShardInfoAccessor>();
 builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddFanexLogging(builder.Configuration);
+builder.Services.AddFanexRemotingRef(builder.Configuration);
 builder.Services.AddSingleton<ICacheService, CacheService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
+builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>
 {
     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

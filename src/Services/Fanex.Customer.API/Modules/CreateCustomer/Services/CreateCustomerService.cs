@@ -1,9 +1,12 @@
 using Fanex.Caching;
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
+using Fanex.Customer.API.Modules.CreateCustomer.Services.GroupType153;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
+using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
+using Fanex.RemotingRef;
 using Microsoft.Extensions.Options;
 using System.Linq;
 
@@ -11,7 +14,9 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface ICreateCustomerService
 {
-    Task<CustomerSetting> Query(int uplineCustId);
+    Task<CustomerSetting> Query(int uplineCustId, int uplineRoleId);
+    
+    Task<CustomerSetting> QueryPTTemplate(int custId, int roleId);
 
 }
 
@@ -23,13 +28,17 @@ public class CreateCustomerService : ICreateCustomerService
 
     private readonly ICacheService cacheService;
 
-    public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService)
+    private readonly IRemotingRefService remotingRef;
+
+    public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService, IRemotingRefService remotingRef)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
         this.cacheService = cacheService;
+        this.remotingRef = remotingRef;
     }
-    public async Task<CustomerSetting> Query(int uplineCustId)
+
+    public async Task<CustomerSetting> Query(int uplineCustId, int uplineRoleId)
     {
         var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
           () => GetSettingProfile(),
@@ -43,38 +52,103 @@ public class CreateCustomerService : ICreateCustomerService
                         CustId = uplineCustId,
                         CreationStatus = appSettings.CreationStatus
                     }),
+            ProductGroups = new Dictionary<int, ProductGroup>()
         };
 
-        customerSetting.ProductGroups = new Dictionary<int, ProductGroup>();
-        var productGroups = settingProfile.GroupBy(o => o.GroupId).Select(group => new ProductGroup { ProductGroupId = group.Key }).ToList();
+        customerSetting.GeneralInfo.UplineRoleId = uplineRoleId;
+        var productGroups = settingProfile.GroupBy(o => o.GroupId).Select(group => new ProductGroup { Id = group.Key }).ToList();
         foreach (var productGroup in productGroups)
         {
-            customerSetting.ProductGroups.Add(productGroup.ProductGroupId, productGroup);
+            customerSetting.ProductGroups.Add(productGroup.Id, productGroup);
         }
-
-
 
         foreach (var productGroup in customerSetting.ProductGroups)
         {
-            productGroup.Value.GroupTypes = settingProfile.Where(o => o.GroupId == productGroup.Key).GroupBy(o => o.GroupType)
-                .Select(item => new GroupType
-                {
-                    GroupTypeId = item.Key
-                }).ToList();
 
+            productGroup.Value.GroupTypes = settingProfile
+                .Where(o => o.GroupId == productGroup.Key)
+                .GroupBy(o => o.GroupType)
+                .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key).Result);
         }
 
+        GetNameFromRemotingRef(customerSetting);
+        return customerSetting;
+    }
+    
+    public async Task<CustomerSetting> QueryPTTemplate(int uplineCustId, int uplineRoleId)
+    {
+        var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
+          () => GetSettingProfile(),
+           new CacheItemOptions())).ToList();
+
+        var customerSetting = new CustomerSetting
+        {
+            GeneralInfo = await dynamicRepository.GetAsync<GeneralInformation>(
+                    new GetCustomerCriteria
+                    {
+                        CustId = uplineCustId,
+                        CreationStatus = appSettings.CreationStatus
+                    }),
+            ProductGroups = new Dictionary<int, ProductGroup>()
+        };
+
+        customerSetting.GeneralInfo.UplineRoleId = uplineRoleId;
+        var productGroups = settingProfile.GroupBy(o => o.GroupId).Select(group => new ProductGroup { Id = group.Key }).ToList();
+        foreach (var productGroup in productGroups)
+        {
+            customerSetting.ProductGroups.Add(productGroup.Id, productGroup);
+        }
+
+        foreach (var productGroup in customerSetting.ProductGroups)
+        {
+
+            productGroup.Value.GroupTypes = settingProfile
+                .Where(o => o.GroupId == productGroup.Key && (o.GroupType == 153 ||o.GroupType == 160))
+                .GroupBy(o => o.GroupType)
+                .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key).Result);
+        }
+
+        GetNameFromRemotingRef(customerSetting);
         return customerSetting;
     }
 
-    private static async Task<ProductGroup> GetProductGroup(int GroupId)
+    private async Task<GroupType> GetGroupType(int uplineCustId, int productGroupId, int groupTypeId)
     {
-        return new ProductGroup();
+        var groupType = new GroupType { Id = groupTypeId };
+        var service = (IGroupTypeBaseService)Activator.CreateInstance(Type.GetType($"Fanex.Customer.API.Modules.CreateCustomer.Services.GroupType{groupTypeId}.GroupType{groupTypeId}Service, Fanex.Customer.API"), dynamicRepository, appSettings);
+        groupType.GroupItems = await service.Query(uplineCustId, productGroupId);
+
+        return groupType;
     }
 
-    private static async Task<GroupType> GetGroupType()
+    private void GetNameFromRemotingRef(CustomerSetting customerSetting)
     {
-        return new GroupType();
+        foreach (var productGroup in customerSetting.ProductGroups)
+        {
+            var groupTypes = new List<GroupType>();
+            productGroup.Value.Name = this.remotingRef.GetResourceDataByRefIdAndResourceId("ProductGroup", productGroup.Value.Id.ToString(), "en-US", productGroup.Value.Id.ToString());
+            foreach (var groupType in productGroup.Value.GroupTypes)
+            {
+                groupType.Name = this.remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.Id.ToString(), "en-US", groupType.Id.ToString());
+                if (groupType.GroupItems != null)
+                {
+                    var groupItems = new List<GroupItemDefault>();
+                    foreach (var groupItem in groupType.GroupItems)
+                    {
+                        string refkey = $"{productGroup.Value.Id}_{groupType.Id}_{groupItem.SporttypeId}_{groupItem.BettypeId}";
+                        groupItem.DisplayName = this.remotingRef.GetResourceDataByRefIdAndResourceId("G_GT_Sport_Bettype", refkey, "en-US", refkey);
+                        groupItem.SporttypeName = this.remotingRef.GetSportName(groupItem.SporttypeId.ToString(), "en-US");
+                        groupItem.BettypeName = this.remotingRef.GetBetTypeName(groupItem.BettypeId.ToString(), "en-US");
+                        groupItems.Add(groupItem);
+                    }
+
+                    groupType.GroupItems = groupItems.ToList();
+                }
+                groupTypes.Add(groupType);
+            }
+
+            productGroup.Value.GroupTypes = groupTypes;
+        }
     }
 
     private async Task<IEnumerable<SettingProfile>> GetSettingProfile() => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus });

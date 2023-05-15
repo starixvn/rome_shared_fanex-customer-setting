@@ -1,6 +1,6 @@
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 
-public class CommissionSettingItem
+public class CommissionSettingItem : GroupItemDefault
 {
     public decimal CommRate { get; set; }
 

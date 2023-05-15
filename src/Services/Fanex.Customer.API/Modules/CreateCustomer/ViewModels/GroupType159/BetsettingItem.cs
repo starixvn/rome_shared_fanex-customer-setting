@@ -1,6 +1,6 @@
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType159;
 
-public class BetsettingItem
+public class BetsettingItem : GroupItemDefault
 {
     public decimal MinBet { get; set; }
 

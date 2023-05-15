@@ -4,7 +4,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface IGroupTypeBaseService
 {
-    GroupItemDefault Query();
+    Task<IEnumerable<GroupItemDefault>> Query(int uplineCustId, int productGroupId);
 
     // Result Update();
 }

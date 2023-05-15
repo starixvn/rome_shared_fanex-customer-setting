@@ -1,6 +1,6 @@
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
 
-public class LossLimitSettingItem
+public class LossLimitSettingItem : GroupItemDefault
 {
     public decimal LossLimit { get; set; }
 

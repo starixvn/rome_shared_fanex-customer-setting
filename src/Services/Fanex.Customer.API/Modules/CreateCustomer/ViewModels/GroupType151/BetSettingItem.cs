@@ -17,7 +17,7 @@ public class BetSettingItem : GroupItemDefault
 
     public decimal MaxPerMatch { get; set; }
 
-    public decimal MaxPayoutPerMatch { get; set; }
+    public decimal? MaxPayoutPerMatch { get; set; }
 
     public BetSettingItem Upline { get; set; }
 }
