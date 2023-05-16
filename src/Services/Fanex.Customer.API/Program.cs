@@ -15,6 +15,7 @@ using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
 using Fanex.RemotingRef;
+using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,8 +25,10 @@ builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddFanexLogging(builder.Configuration);
 builder.Services.AddFanexRemotingRef(builder.Configuration);
 builder.Services.AddSingleton<ICacheService, CacheService>();
-builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
+builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
+builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
+builder.Services.AddSingleton<ISharedService, SharedService>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>
 {
     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -44,7 +47,7 @@ builder.Services.RegisterSecurityCodeModule();
 builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.RegisterRulesServiceModule();
-builder.Services.RegisterLiteModeModule();
+builder.Services.RegisterCreateCustomerModule();
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();

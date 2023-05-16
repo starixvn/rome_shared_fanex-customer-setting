@@ -4,7 +4,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer;
 
 public static class CreateCustomerModule
 {
-    public static IServiceCollection RegisterLiteModeModule(this IServiceCollection services)
+    public static IServiceCollection RegisterCreateCustomerModule(this IServiceCollection services)
     {
         services.AddSingleton<ICreateCustomerService, CreateCustomerService>();
 

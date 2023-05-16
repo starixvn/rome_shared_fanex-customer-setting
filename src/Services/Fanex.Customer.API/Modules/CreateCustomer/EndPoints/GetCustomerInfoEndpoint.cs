@@ -1,20 +1,21 @@
+using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Services;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.EndPoints;
 
-public class GetCustomerInfoEndpoint : IEndpoint<IResult, int, int, ICreateCustomerService>
+public class GetCustomerInfoEndpoint : IEndpoint<IResult, CreateCustomerRequest, ICreateCustomerService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/query", (int uplineCustId, int uplineRoleId, string language, ICreateCustomerService customerService)
-            => HandleAsync(uplineCustId, uplineRoleId, customerService))
-            .Produces<CustomerSetting>().WithTags("LiteMode");
+        app.MapPost("/api/customer/query", (CreateCustomerRequest request, ICreateCustomerService customerService)
+            => HandleAsync(request, customerService))
+            .Produces<CustomerSetting>().WithTags("Create Customer");
     }
 
-    public async Task<IResult> HandleAsync(int uplineCustId, int uplineRoleId, ICreateCustomerService customerService)
+    public async Task<IResult> HandleAsync(CreateCustomerRequest request, ICreateCustomerService customerService)
     {
-        return Results.Ok(await customerService.Query(uplineCustId, uplineRoleId));
+        return Results.Ok(await customerService.Query(request));
     }
 }

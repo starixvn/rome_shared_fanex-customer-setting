@@ -4,36 +4,69 @@ namespace Fanex.Customer.API.Shared.Services;
 
 public interface ICacheRefService
 {
-    string GetProductGroupName(int productGroupId, string language);
+    string GetProductGroupName(int productGroupId, string language = "en-US");
 
-    string GetSubProductName(int subGroupId, string language);
+    string GetSubGroupName(int? subGroupId, string language = "en-US");
 
-    string GetSportName(int sportTypeId, string language);
+    string GetSporttypeName(int sporttypeId, string language = "en-US");
 
-    string GetBetTypeName(int betTypeId, string language);
+    string GetBettypeName(int bettypeId, string language = "en-US");
 
-    string GetGroupTypeName(int groupId, int groupTypeId, int sportTypeId, int betTypeId, string language);
+    string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
+
+    string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
+
+    string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
 }
 
 public class CacheRefService : ICacheRefService
 {
-    private readonly IRemotingRefService remotingRefService;
+    private readonly IRemotingRefService remotingRef;
 
-    public CacheRefService(IRemotingRefService remotingRefService)
-        => this.remotingRefService = remotingRefService;
+    private const string ProductGroupRefId = "ProductGroup";
 
-    public string GetProductGroupName(int productGroupId, string language)
-        => remotingRefService.GetResourceDataByRefIdAndResourceId("ProductGroup", productGroupId.ToString(), language, string.Empty);
+    private const string SubGroupRefId = "SubGroup";
 
-    public string GetSubProductName(int subGroupId, string language)
-        => remotingRefService.GetResourceDataByRefIdAndResourceId("SubGroup", subGroupId.ToString(), language, string.Empty);
+    private const string SB_Comm_SMA_RefId = "SB_Comm_SMA";
 
-    public string GetSportName(int sportTypeId, string language)
-        => remotingRefService.GetSportName(sportTypeId.ToString(), language, string.Empty);
+    private const string SB_Comm_Member_RefId = "SB_Comm_Member";
 
-    public string GetBetTypeName(int betTypeId, string language)
-        => remotingRefService.GetBetTypeName(betTypeId.ToString(), language);
+    private const string G_GT_Sport_Bettype_RefId = "G_GT_Sport_Bettype";
 
-    public string GetGroupTypeName(int groupId, int groupTypeId, int sportTypeId, int betTypeId, string language)
-        => remotingRefService.GetResourceDataByRefIdAndResourceId("G_GT_Sport_Bettype", $"{groupId}_{groupTypeId}_{sportTypeId}_{betTypeId}", language, string.Empty);
+    public CacheRefService(IRemotingRefService remotingRef)
+    {
+        this.remotingRef = remotingRef;
+    }
+
+    public string GetProductGroupName(int productGroupId, string language = "en-US")
+        => this.remotingRef.GetResourceDataByRefIdAndResourceId(ProductGroupRefId, productGroupId.ToString(), language, productGroupId.ToString());
+
+    public string GetSubGroupName(int? subGroupId, string language = "en-US")
+        => this.remotingRef.GetResourceDataByRefIdAndResourceId(SubGroupRefId, subGroupId?.ToString(), language, subGroupId?.ToString());
+
+    public string GetSporttypeName(int sporttypeId, string language = "en-US")
+        => this.remotingRef.GetSportName(sporttypeId.ToString(), language);
+
+    public string GetBettypeName(int bettypeId, string language = "en-US")
+        => this.remotingRef.GetBetTypeName(bettypeId.ToString(), language);
+
+    public string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
+    {
+        var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
+        return this.remotingRef.GetResourceDataByRefIdAndResourceId(SB_Comm_SMA_RefId, refKey, language, refKey);
+    }
+    public string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
+    {
+        var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
+        return this.remotingRef.GetResourceDataByRefIdAndResourceId(SB_Comm_Member_RefId, refKey, language, refKey);
+    }
+
+    public string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
+    {
+        var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
+        return this.remotingRef.GetResourceDataByRefIdAndResourceId(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
+    }
+    
+    private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
+        => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";
 }

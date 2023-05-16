@@ -2,15 +2,16 @@ using Fanex.Caching;
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Data.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 
 public interface ISharedService
 {
-    Task<IEnumerable<SettingProfile>> GetSettingProfile();
+    Task<IEnumerable<SettingProfile>> GetSettingProfiles();
 }
 
-public class SharedService
+public class SharedService :ISharedService
 {
     private readonly IDynamicRepository dynamicRepository;
 
@@ -18,15 +19,17 @@ public class SharedService
 
     private readonly ICacheService cacheService;
 
-    public SharedService(IDynamicRepository dynamicRepository, AppSettings appSettings, ICacheService cacheService)
+    public SharedService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService)
     {
         this.dynamicRepository = dynamicRepository ?? new DynamicRepository();
-        this.appSettings = appSettings;
+        this.appSettings = appSettings.Value;
         this.cacheService = cacheService ?? new CacheService();
     }
 
-    internal async Task<IEnumerable<SettingProfile>> GetSettingProfile()
+    public async Task<IEnumerable<SettingProfile>> GetSettingProfiles()
         => await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
-          () => dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus }));
+          () => this.GetSettingProfile(),
+           new CacheItemOptions());
 
+    private async Task<IEnumerable<SettingProfile>> GetSettingProfile() => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus });
 }
