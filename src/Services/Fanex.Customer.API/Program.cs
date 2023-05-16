@@ -14,8 +14,8 @@ using MinimalApi.Endpoint.Extensions;
 using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
-using Newtonsoft.Json;
 using Fanex.RemotingRef;
+using Fanex.Customer.API.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor()
@@ -39,6 +39,7 @@ builder.Services.AddHttpClient<IOTPService, OTPService>(httpClient =>
     httpClient.DefaultRequestHeaders.Add("Accept-Language", Thread.CurrentThread.CurrentCulture.Name);
 });
 builder.Services.AddScoped<SophosOtp, OtpServiceImpl>();
+builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
 builder.Services.RegisterSecurityCodeModule();
 builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);

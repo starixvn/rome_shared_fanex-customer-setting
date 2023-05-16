@@ -2,8 +2,8 @@ using Fanex.Caching;
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
+using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
-using Fanex.RemotingRef;
 using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
@@ -14,32 +14,31 @@ public interface ICreateCustomerService
 
     Task<CustomerSetting> QueryPTTemplate(int custId, int roleId);
 
-    Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language = "en-US");
+    Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language);
 }
 
 public class CreateCustomerService : ICreateCustomerService
 {
     private readonly IDynamicRepository dynamicRepository;
-
     private readonly AppSettings appSettings;
-
     private readonly ICacheService cacheService;
+    private readonly ICacheRefService cacheRefService;
 
-    private readonly IRemotingRefService remotingRef;
-
-    public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService, IRemotingRefService remotingRef)
+    public CreateCustomerService(
+        IDynamicRepository dynamicRepository,
+        IOptions<AppSettings> appSettings,
+        ICacheService cacheService,
+        ICacheRefService cacheRefService)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
         this.cacheService = cacheService;
-        this.remotingRef = remotingRef;
+        this.cacheRefService = cacheRefService;
     }
 
     public async Task<CustomerSetting> Query(int uplineCustId, int uplineRoleId)
     {
-        var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
-          () => GetSettingProfile(),
-           new CacheItemOptions())).ToList();
+        var settingProfile = await GetSettingProfile();
 
         var customerSetting = new CustomerSetting
         {
@@ -68,25 +67,23 @@ public class CreateCustomerService : ICreateCustomerService
                 .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key.GroupType, item.Key.SubGroupId).Result);
         }
 
-        GetNameFromRemotingRef(customerSetting);
+        GetNameFromRemotingRef(customerSetting, "en-US");
         return customerSetting;
     }
 
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language)
     {
-        var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
-         () => GetSettingProfile(),
-          new CacheItemOptions())).ToList();
+        var settingProfile = await GetSettingProfile();
 
         var productGroups = settingProfile.Where(p => p.GroupType == 153 || p.GroupType == 160).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {
                 Id = g.Key,
-                Name = remotingRef.GetResourceDataByRefIdAndResourceId("ProductGroup", g.Key.ToString(), language, string.Empty),
+                Name = cacheRefService.GetProductGroupName(g.Key, language),
                 GroupTypes = g.GroupBy(t => new { t.GroupType, t.SubGroupId }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
                     var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.SubGroupId);
-                    groupType.SubGroupName = remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.SubGroupId.ToString(), "en-US", string.Empty);
+                    groupType.SubGroupName = t.Key.SubGroupId.HasValue ? cacheRefService.GetSubProductName(t.Key.SubGroupId.Value, language) : string.Empty;
                     return groupType;
                 }).ToEnumerable()
             });
@@ -96,9 +93,7 @@ public class CreateCustomerService : ICreateCustomerService
 
     public async Task<CustomerSetting> QueryPTTemplate(int uplineCustId, int uplineRoleId)
     {
-        var settingProfile = (await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
-          () => GetSettingProfile(),
-           new CacheItemOptions())).ToList();
+        var settingProfile = await GetSettingProfile();
 
         var customerSetting = new CustomerSetting
         {
@@ -131,7 +126,7 @@ public class CreateCustomerService : ICreateCustomerService
                 .Select(item => GetGroupType(uplineCustId, productGroup.Key, item.Key.GroupType, item.Key.SubGroupId).Result);
         }
 
-        GetNameFromRemotingRef(customerSetting);
+        GetNameFromRemotingRef(customerSetting, "en-US");
         return customerSetting;
     }
 
@@ -144,24 +139,23 @@ public class CreateCustomerService : ICreateCustomerService
         return groupType;
     }
 
-    private void GetNameFromRemotingRef(CustomerSetting customerSetting)
+    private void GetNameFromRemotingRef(CustomerSetting customerSetting, string language)
     {
         foreach (var productGroup in customerSetting.ProductGroups)
         {
             var groupTypes = new List<GroupType>();
-            productGroup.Value.Name = this.remotingRef.GetResourceDataByRefIdAndResourceId("ProductGroup", productGroup.Value.Id.ToString(), "en-US", productGroup.Value.Id.ToString());
+            productGroup.Value.Name = cacheRefService.GetProductGroupName(productGroup.Value.Id, language);
             foreach (var groupType in productGroup.Value.GroupTypes)
             {
-                groupType.SubGroupName = this.remotingRef.GetResourceDataByRefIdAndResourceId("SubGroup", groupType.SubGroupId?.ToString(), "en-US", groupType.Id.ToString());
+                groupType.SubGroupName = groupType.SubGroupId.HasValue ? cacheRefService.GetSubProductName(groupType.SubGroupId.Value, language) : string.Empty;
                 if (groupType.GroupItems != null)
                 {
                     var groupItems = new List<GroupItemDefault>();
                     foreach (var groupItem in groupType.GroupItems)
                     {
-                        string refkey = $"{productGroup.Value.Id}_{groupType.Id}_{groupItem.SporttypeId}_{groupItem.BettypeId}";
-                        groupItem.DisplayName = this.remotingRef.GetResourceDataByRefIdAndResourceId("G_GT_Sport_Bettype", refkey, "en-US", refkey);
-                        groupItem.SporttypeName = this.remotingRef.GetSportName(groupItem.SporttypeId.ToString(), "en-US");
-                        groupItem.BettypeName = this.remotingRef.GetBetTypeName(groupItem.BettypeId.ToString(), "en-US");
+                        groupItem.DisplayName = cacheRefService.GetGroupTypeName(productGroup.Value.Id, groupType.Id, groupItem.SporttypeId, groupItem.BettypeId, language);
+                        groupItem.SporttypeName = cacheRefService.GetSportName(groupItem.SporttypeId, language);
+                        groupItem.BettypeName = cacheRefService.GetBetTypeName(groupItem.BettypeId, language);
                         groupItems.Add(groupItem);
                     }
 
@@ -174,5 +168,10 @@ public class CreateCustomerService : ICreateCustomerService
         }
     }
 
-    private async Task<IEnumerable<SettingProfile>> GetSettingProfile() => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus });
+    private Task<IEnumerable<SettingProfile>> GetSettingProfile()
+        => cacheService.GetOrSetAsync(
+            "CreateCustomerSettingProfile",
+            () => dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus }),
+            new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+
 }
