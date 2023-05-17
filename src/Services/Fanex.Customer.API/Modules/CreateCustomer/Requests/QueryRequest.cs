@@ -1,6 +1,6 @@
 namespace Fanex.Customer.API.Modules.CreateCustomer.Requests;
 
-public class CreateCustomerRequest
+public class QueryRequest
 {
     public int UplineCustId { get; set; }
 

@@ -13,7 +13,6 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType159;
 using Fanex.Customer.API.Shared.Constants;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
@@ -22,7 +21,9 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface ICreateCustomerService
 {
-    Task<CustomerSetting> Query(CreateCustomerRequest request);
+    Task<CustomerSetting> Query(QueryRequest request);
+    
+    Task<Result> Create(CreateRequest request);
 
     Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language);
 }
@@ -35,7 +36,7 @@ public class CreateCustomerService : ICreateCustomerService
     private readonly AppSettings appSettings;
     private readonly ISharedService sharedService;
     private readonly ICacheRefService cacheRefService;
-    private readonly Dictionary<int, dynamic> gropItemMapping;
+    private readonly Dictionary<int, dynamic> groupItemMapping;
 
     public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
     {
@@ -44,7 +45,7 @@ public class CreateCustomerService : ICreateCustomerService
         this.sharedService = sharedService;
         this.cacheRefService = cacheRefService;
 
-        this.gropItemMapping = new()
+        this.groupItemMapping = new()
         {
             {150, new GroupTypeBaseService<CommissionGroup>(dynamicRepository, appSettings.Value)},
             {151, new GroupTypeBaseService<BetSettingItem>(dynamicRepository, appSettings.Value)},
@@ -60,7 +61,7 @@ public class CreateCustomerService : ICreateCustomerService
         };
     }
 
-    public async Task<CustomerSetting> Query(CreateCustomerRequest request)
+    public async Task<CustomerSetting> Query(QueryRequest request)
     {
         var settingProfile = await sharedService.GetSettingProfiles();
 
@@ -118,13 +119,18 @@ public class CreateCustomerService : ICreateCustomerService
         return productGroups;
     }
 
+    public async Task<Result> Create(CreateRequest request)
+    {
+        return new Result();
+    }
+
     private async Task<GroupType> GetGroupType(int uplineCustId, int productGroupId, int groupTypeId, short displayType, int? subGroupId)
         => new GroupType
         {
             Id = groupTypeId,
             SubGroupId = subGroupId,
             DisplayType = displayType,
-            GroupItems = await gropItemMapping[groupTypeId].Query(uplineCustId, productGroupId, groupTypeId)
+            GroupItems = await groupItemMapping[groupTypeId].Query(uplineCustId, productGroupId, groupTypeId)
         };
 
     private void GetNameFromRemotingRef(CustomerSetting customerSetting, string language)

@@ -9,13 +9,13 @@ public interface IGroupTypeBaseService<T>
     Task<IEnumerable<T>> Query(int uplineCustId, int productGroupId, int groupType);
 }
 
-public class GroupTypeBaseService<T>
+public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
 {
     private readonly IDynamicRepository dynamicRepository;
 
     private readonly AppSettings appSettings;
-    
-    public GroupTypeBaseService() : this (null, null)
+
+    public GroupTypeBaseService() : this(null, null)
     {
 
     }

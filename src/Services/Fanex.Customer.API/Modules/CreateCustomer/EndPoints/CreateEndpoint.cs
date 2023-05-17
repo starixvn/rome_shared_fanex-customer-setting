@@ -5,17 +5,17 @@ using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.EndPoints;
 
-public class GetCustomerInfoEndpoint : IEndpoint<IResult, CreateCustomerRequest, ICreateCustomerService>
+public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/customer/query", (CreateCustomerRequest request, ICreateCustomerService customerService)
+        app.MapPost("/api/customer/create", (CreateRequest request, ICreateCustomerService customerService)
             => HandleAsync(request, customerService))
             .Produces<CustomerSetting>().WithTags("Create Customer");
     }
 
-    public async Task<IResult> HandleAsync(CreateCustomerRequest request, ICreateCustomerService customerService)
+    public async Task<IResult> HandleAsync(CreateRequest request, ICreateCustomerService customerService)
     {
-        return Results.Ok(await customerService.Query(request));
+        return Results.Ok(await customerService.Create(request));
     }
 }

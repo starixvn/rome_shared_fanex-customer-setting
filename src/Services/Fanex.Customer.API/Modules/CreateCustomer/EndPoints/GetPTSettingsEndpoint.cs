@@ -9,7 +9,7 @@ public class GetPTTemplateEndpoint : IEndpoint<IResult, int, string, ICreateCust
     {
         app.MapGet("/api/customer/{custId}/pt-settings/{language}", (int custId, string language, ICreateCustomerService customerService)
             => HandleAsync(custId, language, customerService))
-            .WithTags("LiteMode");
+            .WithTags("Create Customer");
     }
 
     public async Task<IResult> HandleAsync(int custId, string language, ICreateCustomerService customerService)
