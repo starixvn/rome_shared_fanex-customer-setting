@@ -27,6 +27,8 @@ public interface ICreateCustomerService
     Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language);
 }
 
+
+
 public class CreateCustomerService : ICreateCustomerService
 {
     private readonly IDynamicRepository dynamicRepository;
@@ -108,10 +110,10 @@ public class CreateCustomerService : ICreateCustomerService
                 GroupTypes = g.GroupBy(t => new { t.GroupType, t.SubGroupId, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
                     var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.DisplayType, t.Key.SubGroupId);
-                    var subGroupName = cacheRefService.GetSubGroupName(groupType.SubGroupId, language);
+                    groupType.SubGroupName = cacheRefService.GetSubGroupName(groupType.SubGroupId, language);
                     return groupType;
                 }).ToEnumerable()
-            });
+            }).Where(p => p.GroupTypes.Any(t => t.GroupItems.Any()));
 
         return productGroups;
     }
