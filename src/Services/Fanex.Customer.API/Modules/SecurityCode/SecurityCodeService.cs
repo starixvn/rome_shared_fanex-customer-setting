@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using Fanex.Customer.API.Modules.SecurityCode.Commands;
 using Fanex.Customer.API.Modules.SecurityCode.Criteria;
 using Fanex.Customer.API.Shared.Models;
@@ -9,18 +8,16 @@ namespace Fanex.Customer.API.Modules.SecurityCode;
 
 public interface ISecurityCodeService
 {
-    string GenerateSecurityToken();
-
     string GenerateSalt(int custId);
 
     Task<Result> VerifySecurityCode(VerifySecurityCodeRequest param);
+
+    Task<string> GetSecurityCode(int custId, int subAccountId);
 }
 
 public class SecurityCodeService : ISecurityCodeService
 {
-    private const int Length = 6;
     private const string MD5 = "MD5";
-    private const string SHA256 = "SHA256";
     private const string SHA1 = "SHA1";
     private const string SECURITYCODEPADDING = "1qaw3+{:P)";
 
@@ -34,9 +31,6 @@ public class SecurityCodeService : ISecurityCodeService
     public string GenerateSalt(int custId)
         => Encryption.ComputeHash(MD5, custId.ToString(), SECURITYCODEPADDING);
 
-    public string GenerateSecurityToken()
-        => Encryption.RandomString(Length);
-
     public async Task<Result> VerifySecurityCode(VerifySecurityCodeRequest param)
     {
         var actualSecurityCode = await GetSecurityCode(param.CustId, param.SubAccId).ConfigureAwait(false);
@@ -46,7 +40,7 @@ public class SecurityCodeService : ISecurityCodeService
         return await UpdateSecurityCodeCounter(param, isCorrectSecurityCode);
     }
 
-    private Task<string> GetSecurityCode(int custId, int subAccountId)
+    public Task<string> GetSecurityCode(int custId, int subAccountId)
         => dynamicRepository.GetAsync<string>(subAccountId.Equals(0)
             ? new GetMainAccountSecurityCodeCriteria(custId)
             : new GetSubAccountSecurityCodeCriteria(custId, subAccountId));
