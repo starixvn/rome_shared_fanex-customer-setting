@@ -2,8 +2,6 @@ namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
 
 public class PTTemplateDetail
 {
-    public int TemplateId { get; set; }
-
     public byte GroupId { get; set; }
 
     public byte SubGroupId { get; set; }

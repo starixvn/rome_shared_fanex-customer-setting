@@ -36,7 +36,6 @@ public class GetPositionTakingTemplateEndPoint : IEndpoint<IResult, int, IDynami
                            IsDefault = itemGroup.Key.IsDefault,
                            Settings = itemGroup.Select(i => new PTTemplateDetail
                            {
-                               TemplateId = i.TemplateId,
                                GroupId = i.GroupId,
                                SubGroupId = i.SubGroupId,
                                PT = i.PT
