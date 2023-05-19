@@ -22,7 +22,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 public interface ICreateCustomerService
 {
     Task<CustomerSetting> Query(QueryRequest request);
-    
+
     Task<Result> Create(CreateRequest request);
 
     Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language);
@@ -91,8 +91,8 @@ public class CreateCustomerService : ICreateCustomerService
         {
             productGroup.Value.GroupTypes = settingProfile
                 .Where(o => o.GroupId == productGroup.Key)
-                .GroupBy(o => new { o.GroupType, o.SubGroupId, o.DisplayType })
-                .Select(item => GetGroupType(request.UplineCustId, productGroup.Key, item.Key.GroupType, item.Key.DisplayType, item.Key.SubGroupId).Result);
+                .GroupBy(o => new { o.GroupType, o.DisplayType })
+                .Select(item => GetGroupType(request.UplineCustId, productGroup.Key, item.Key.GroupType, item.Key.DisplayType).Result);
         }
 
         GetNameFromRemotingRef(customerSetting, request.Language);
@@ -108,13 +108,12 @@ public class CreateCustomerService : ICreateCustomerService
             {
                 Id = g.Key,
                 Name = cacheRefService.GetProductGroupName(g.Key, language),
-                GroupTypes = g.GroupBy(t => new { t.GroupType, t.SubGroupId, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
+                GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
-                    var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.DisplayType, t.Key.SubGroupId);
-                    groupType.SubGroupName = cacheRefService.GetSubGroupName(groupType.SubGroupId, language);
+                    var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.DisplayType);
                     return groupType;
                 }).ToEnumerable()
-            }).Where(p => p.GroupTypes.Any(t => t.GroupItems.Any()));
+            }).Where(p => p.GroupTypes.Any(t => t.SubGroups.Any(r => r.GroupItems.Any())));
 
         return productGroups;
     }
@@ -124,14 +123,32 @@ public class CreateCustomerService : ICreateCustomerService
         return new Result();
     }
 
-    private async Task<GroupType> GetGroupType(int uplineCustId, int productGroupId, int groupTypeId, short displayType, int? subGroupId)
-        => new GroupType
+    private async Task<GroupType> GetGroupType(int uplineCustId, int productGroupId, int groupTypeId, short displayType)
+    {
+        var settingProfile = await sharedService.GetSettingProfiles();
+        var groupType = new GroupType
         {
             Id = groupTypeId,
-            SubGroupId = subGroupId,
-            DisplayType = displayType,
-            GroupItems = await groupItemMapping[groupTypeId].Query(uplineCustId, productGroupId, groupTypeId)
+            DisplayType = displayType
         };
+
+        var groupItems = groupItemMapping[groupTypeId].Query(uplineCustId, productGroupId, groupTypeId).Result;
+        groupType.SubGroups = settingProfile
+                .Where(o => o.GroupId == productGroupId && o.GroupType == groupTypeId)
+                .GroupBy(o => new { o.SubGroupId })
+                .Select(o => new SubGroup { Id = o.Key.SubGroupId }).ToList();
+
+        foreach (var subGroup in groupType.SubGroups)
+        {
+            subGroup.GroupItems = ((IEnumerable<GroupItemDefault>)groupItems).Join(
+                settingProfile.Where(o => o.GroupId == productGroupId && o.GroupType == groupTypeId && (o.SubGroupId == subGroup.Id)),
+                groupItems => new { SportType = groupItems.SporttypeId, BetType = groupItems.BettypeId },
+                groupItemsProfile => new { groupItemsProfile.SportType, groupItemsProfile.BetType },
+                (groupItems, groupItemsProfile) => groupItems).ToList();
+        }
+
+        return groupType;
+    }
 
     private void GetNameFromRemotingRef(CustomerSetting customerSetting, string language)
     {
@@ -141,11 +158,11 @@ public class CreateCustomerService : ICreateCustomerService
             productGroup.Value.Name = cacheRefService.GetProductGroupName(productGroup.Value.Id, language);
             foreach (var groupType in productGroup.Value.GroupTypes)
             {
-                groupType.SubGroupName = this.cacheRefService.GetSubGroupName(groupType.SubGroupId, language);
-                if (groupType.GroupItems != null)
+                foreach (var subGroup in groupType.SubGroups)
                 {
                     var groupItems = new List<GroupItemDefault>();
-                    foreach (var groupItem in groupType.GroupItems)
+                    subGroup.Name = this.cacheRefService.GetSubGroupName(subGroup.Id, language);
+                    foreach (var groupItem in subGroup.GroupItems)
                     {
                         GetDisplayNameByDisplayType(customerSetting, language, productGroup, groupType, groupItem);
                         groupItem.SporttypeName = this.cacheRefService.GetSporttypeName(groupItem.SporttypeId, language);
@@ -153,8 +170,9 @@ public class CreateCustomerService : ICreateCustomerService
                         groupItems.Add(groupItem);
                     }
 
-                    groupType.GroupItems = groupItems.ToList();
+                    subGroup.GroupItems = groupItems.ToList();
                 }
+
                 groupTypes.Add(groupType);
             }
 
