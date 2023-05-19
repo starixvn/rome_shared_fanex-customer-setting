@@ -76,8 +76,15 @@
         <Setting Key="Acc_LiteMode_CustSetting_SuperAllInfoSel" SpName="Acc_LiteMode_CustSetting_SuperAllInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
             <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-            <Mapping DataField="bettype" ObjectProperty="BettypeId" />
-            
+            <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+            <Mapping DataField="Upline_SingleMatchParlay" ObjectProperty="MaxSingleMatchParlay" />
+            <Mapping DataField="Upline_Combo2" ObjectProperty="MaxCombo2" />
+            <Mapping DataField="Upline_Combo35" ObjectProperty="MaxCombo35" />
+            <Mapping DataField="Upline_ComboOver6" ObjectProperty="MaxComboOver6" />
+            <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
+            <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
+            <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
+            <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
         </Setting>
         <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
