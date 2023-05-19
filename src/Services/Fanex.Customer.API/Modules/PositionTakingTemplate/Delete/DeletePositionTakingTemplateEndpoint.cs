@@ -18,6 +18,6 @@ public class DeletePositionTakingTemplateEndpoint : IEndpoint<IResult, DeletePos
     {
         var command = new DeletePositionTakingTemplateCommand(request.CustId, request.TemplateId, request.Language, request.IP);
         await dynamicRepository.ExecuteAsync(command);
-        return Results.Ok(new Result(command.ErrorCode, command.ErrMsg));
+        return Results.Ok(new Result(command.ErrCode, command.ErrMsg));
     }
 }
