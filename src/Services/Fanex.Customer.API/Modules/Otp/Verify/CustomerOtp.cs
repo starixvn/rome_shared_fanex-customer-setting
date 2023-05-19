@@ -1,4 +1,4 @@
-namespace Fanex.Customer.API.Modules.Otp.Models;
+namespace Fanex.Customer.API.Modules.Otp;
 
 public class CustomerOtp
 {
