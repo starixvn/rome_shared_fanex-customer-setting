@@ -35,6 +35,6 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
 
         await dynamicRepository.ExecuteAsync(command);
 
-        return Results.Ok(new Result(command.ErrCode, command.ErrMsg));
+        return Results.Ok(new CreatePositionTakingTemplateResult(command.ErrCode, command.ErrMsg, command.TemplateId));
     }
 }

@@ -36,6 +36,8 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
 
     public string IP { get; }
 
+    public int TemplateId { get; set; }
+
     public int ErrCode { get; set; }
 
     public string ErrMsg { get; set; }
