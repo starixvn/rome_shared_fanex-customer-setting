@@ -33,4 +33,8 @@ public class GeneralInformation
     public string TransferOption { get; set; }
 
     public bool IsAutomateTransfer { get; set; }
+
+    public string Site { get; set; }
+
+    public string SiteLabel { get; set; }
 }
