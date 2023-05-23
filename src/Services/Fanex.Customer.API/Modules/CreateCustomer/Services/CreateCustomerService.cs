@@ -16,6 +16,7 @@ using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
+using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -92,7 +93,7 @@ public class CreateCustomerService : ICreateCustomerService
             productGroup.Value.GroupTypes = settingProfile
                 .Where(o => o.GroupId == productGroup.Key)
                 .GroupBy(o => new { o.GroupType, o.DisplayType })
-                .Select(item => GetGroupType(request.UplineCustId, productGroup.Key, item.Key.GroupType, item.Key.DisplayType).Result);
+                .Select(item => GetGroupType(request.UplineCustId, productGroup.Key, item.Key.GroupType, item.Key.DisplayType, request.Language).Result);
         }
 
         GetNameFromRemotingRef(customerSetting, request.Language);
@@ -115,7 +116,7 @@ public class CreateCustomerService : ICreateCustomerService
                 Id = g.Key,
                 GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
-                    var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.DisplayType);
+                    var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.DisplayType, language);
                     return groupType;
                 }).ToEnumerable()
             }).Where(p => p.GroupTypes.Any(t => t.SubGroups.Any(r => r.GroupItems.Any())));
@@ -130,12 +131,18 @@ public class CreateCustomerService : ICreateCustomerService
         return new Result();
     }
 
-    private async Task<GroupType> GetGroupType(int uplineCustId, int productGroupId, int groupTypeId, short displayType)
+    private async Task<GroupType> GetGroupType(
+        int uplineCustId, 
+        int productGroupId, 
+        int groupTypeId, 
+        short displayType,
+        string language)
     {
         var settingProfile = await sharedService.GetSettingProfiles();
         var groupType = new GroupType
         {
             Id = groupTypeId,
+            Name = Labels.ResourceManager.GetString($"GroupType{groupTypeId}",new System.Globalization.CultureInfo(language)),
             DisplayType = displayType
         };
 

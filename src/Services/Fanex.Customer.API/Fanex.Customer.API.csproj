@@ -32,4 +32,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Modules\CreateCustomer\Resources\Labels.Designer.cs">
+      <DependentUpon>Labels.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Modules\CreateCustomer\Resources\Labels.resx">
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
 </Project>
