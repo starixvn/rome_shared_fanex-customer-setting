@@ -1,24 +1,12 @@
-using Fanex.Customer.API.Modules.Otp.Criteria;
-using Fanex.Customer.API.Modules.Otp.Models;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data.Repository;
+using MinimalApi.Endpoint;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
 
 namespace Fanex.Customer.API.Modules.Otp;
 
-public interface IOtpService
-{
-    Task<CustomerOtpSetting> IsEnableOtp(int custId, int subAccId = 0);
-
-    Task GenerateTelegramOtp(int custId, int subAccId);
-
-    Task<CustomerOtp> GetCustomerOtp(int custId, int subAccId = 0);
-
-    Task<Result> VerifyOtp(CustomerOtp customerOtp);
-}
-
-public class OtpService : IOtpService
+public class VerifyOtpEndPoint : IEndpoint<IResult, VerifyOtpRequest, IDynamicRepository>
 {
     private const int TimePeriod = 30;
     private const int OtpSize = 6;
@@ -26,19 +14,30 @@ public class OtpService : IOtpService
     private const string InvalidDataMessage = "Data is not valid";
     private const int DisabledAccountErrorCode = 200;
     private readonly IDynamicRepository dynamicRepository;
-    private readonly ISettingService telegramService;
     private readonly IOTPService telegramOtpService;
     private readonly SophosOtp sophosOtp;
 
-    public OtpService(IDynamicRepository dynamicRepository, ISettingService telegramService, IOTPService telegramOtpService, SophosOtp sophosOtp)
+    public VerifyOtpEndPoint(IDynamicRepository dynamicRepository, IOTPService telegramOtpService, SophosOtp sophosOtp)
     {
         this.dynamicRepository = dynamicRepository;
-        this.telegramService = telegramService;
         this.telegramOtpService = telegramOtpService;
         this.sophosOtp = sophosOtp;
     }
 
-    public async Task<Result> VerifyOtp(CustomerOtp param)
+    public void AddRoute(IEndpointRouteBuilder app)
+    {
+        app.MapPost("/api/customer/otp/verify", (VerifyOtpRequest request, IDynamicRepository dynamicRepository)
+            => HandleAsync(request, dynamicRepository))
+            .Produces<IResult>()
+            .WithTags("OTP");
+    }
+
+    public async Task<IResult> HandleAsync(VerifyOtpRequest request, IDynamicRepository dynamicRepository)
+    {
+        return Results.Ok(await VerifyOtp(request));
+    }
+
+    private async Task<Result> VerifyOtp(VerifyOtpRequest param)
     {
         var isCorrect = false;
 
@@ -51,7 +50,7 @@ public class OtpService : IOtpService
         if (!isCorrect)
         {
             var customerOtp = await GetCustomerOtp(param.CustId, param.SubAccId);
-            if (customerOtp.Enabled)
+            if (customerOtp != null && customerOtp.Enabled)
             {
                 isCorrect = sophosOtp.VerifyOtp(customerOtp.SecretKey, param.Otp, TimePeriod, OtpSize);
             }
@@ -84,21 +83,5 @@ public class OtpService : IOtpService
     {
         var customerOtp = await dynamicRepository.GetAsync<CustomerOtp>(new GetCustomerOtpCriteria { CustId = custId, SubAccId = subAccId });
         return customerOtp;
-    }
-
-    public async Task<CustomerOtpSetting> IsEnableOtp(int custId, int subAccId = 0)
-    {
-        var command = new CheckEnableOtpCommand
-        {
-            CustId = custId,
-            SubAccId = subAccId
-        };
-        await dynamicRepository.ExecuteAsync(command);
-        return new CustomerOtpSetting(command.Enable, await telegramService.IsEnableOTP(custId, subAccId));
-    }
-
-    public async Task GenerateTelegramOtp(int custId, int subAccId)
-    {
-        await telegramOtpService.SendOTP(custId, subAccId);
     }
 }

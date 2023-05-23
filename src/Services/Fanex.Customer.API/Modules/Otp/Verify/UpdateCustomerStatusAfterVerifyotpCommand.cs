@@ -1,6 +1,6 @@
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.Modules.Otp.Criteria;
+namespace Fanex.Customer.API.Modules.Otp;
 
 public class UpdateCustomerStatusAfterVerifyOtpCommand : NonQueryCommand
 {

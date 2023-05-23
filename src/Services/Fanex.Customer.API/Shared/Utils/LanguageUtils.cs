@@ -13,7 +13,9 @@ public static class LanguageUtils
             "en-us" => "E",
             "ja-jp" => "J",
             "zh-tw" => "CT",// Traditional
-            "zh-cn" => "CS",// Simplified
+            "zh-cn" => "CS",// Simplified,
+            "zh-hant" => "CT",// Traditional
+            "zh-hans" => "CS",// Simplified
             "th-th" => "TH",
             "ko-kr" => "KO",
             "vi-vn" => "VI",

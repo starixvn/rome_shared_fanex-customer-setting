@@ -5,7 +5,6 @@ using Fanex.Customer.API.Extensions;
 using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Customer;
-using Fanex.Customer.API.Modules.Otp;
 using Fanex.Customer.API.Modules.SecurityCode;
 using Fanex.Data.Repository;
 using MinimalApi.Endpoint.Extensions;
@@ -33,7 +32,6 @@ builder.Services.AddHttpClient<IOTPService, OTPService>(httpClient =>
 });
 builder.Services.AddScoped<SophosOtp, OtpServiceImpl>();
 builder.Services.RegisterSecurityCodeModule();
-builder.Services.RegisterOtpModule();
 builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.AddEndpoints();

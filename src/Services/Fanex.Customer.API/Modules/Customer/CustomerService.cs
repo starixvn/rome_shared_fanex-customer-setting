@@ -25,6 +25,8 @@ public interface ICustomerService
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
 
     Task<bool> IsEnableCustomer(int custId);
+
+    Task<CustomerStatus> GetCustomerStatus(int custId, int subAccId);
 }
 
 public class CustomerService : ICustomerService
@@ -79,5 +81,12 @@ public class CustomerService : ICustomerService
         var command = new CheckEnableCustomerCommand(custId);
         await dynamicRepository.ExecuteAsync(command);
         return command.ErrCode.Equals(0);
+    }
+
+    public async Task<CustomerStatus> GetCustomerStatus(int custId, int subAccId)
+    {
+        var customerStatusParam = $"<r id=\"{custId}\" sub=\"{subAccId}\"/>";
+        var custList = $"<Root>{customerStatusParam}</Root>";
+        return (await dynamicRepository.FetchAsync<CustomerStatus>(new GetCustomerStatusCriteria(custList))).FirstOrDefault();
     }
 }

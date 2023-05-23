@@ -9,7 +9,8 @@ public class VerifySecurityCodeEndPoint : IEndpoint<IResult, VerifySecurityCodeR
     {
         app.MapPost("api/security-code/verify", (VerifySecurityCodeRequest request, ISecurityCodeService securityCodeService)
             => HandleAsync(request, securityCodeService))
-            .Produces<Result>();
+            .Produces<Result>()
+            .WithTags("SecurityCode");
     }
 
     public async Task<IResult> HandleAsync(VerifySecurityCodeRequest request, ISecurityCodeService securityCodeService)
