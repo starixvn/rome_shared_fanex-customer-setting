@@ -10,6 +10,7 @@ public static class CopyCustomerCodeModule
         services.AddSingleton<ICopyMemberSpParamsBuilder, CopyMemberSpParamsBuilder>();
         services.AddSingleton<IThirdPartyProductService, ThirdPartyProductService>();
         services.AddSingleton<ICopyCustomerService, CopyCustomerService>();
+        services.AddSingleton<IBalanceCustomerService, BalanceCustomerService>();
 
         return services;
     }

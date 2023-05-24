@@ -28,13 +28,16 @@ public class CopyCustomerService : ICopyCustomerService
     private readonly ICustomerService customerService;
     private readonly Logging.ILogger logger;
 
+    private readonly IBalanceCustomerService balanceCustomerService;
+
     public CopyCustomerService(
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
         ICopyMemberSpParamsBuilder copyMemberSpParamsBuilder,
         IThirdPartyProductService thirdPartyProductService,
         ICustomerService customerService,
-        Logging.ILogger logger)
+        Logging.ILogger logger,
+        IBalanceCustomerService balanceCustomerService)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
@@ -42,6 +45,7 @@ public class CopyCustomerService : ICopyCustomerService
         this.thirdPartyProductService = thirdPartyProductService;
         this.customerService = customerService;
         this.logger = logger;
+        this.balanceCustomerService = balanceCustomerService;
     }
 
     public async Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request)
@@ -132,11 +136,15 @@ public class CopyCustomerService : ICopyCustomerService
 
             await db.ExecuteNonQueryAsync(spParams);
             var ouputParams = db.GetOutputParams();
+            var errCode = Convert.ToInt32(ouputParams["errcode"]);
+            var custId = Convert.ToInt32(ouputParams["custid"]);
 
-            return new CopyCustomerResult(
-                Convert.ToInt32(ouputParams["custid"]),
-                Convert.ToInt32(ouputParams["errcode"]),
-                ouputParams["errmsg"].ToString());
+            if (errCode == 0)
+            {
+                await balanceCustomerService.InitBalanceCustomer(custId);
+            }
+
+            return new CopyCustomerResult(custId, errCode, ouputParams["errmsg"].ToString());
         }
 
         return null;

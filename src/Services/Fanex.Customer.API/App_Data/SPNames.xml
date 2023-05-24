@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
+    <Function Name="SiteDB 3">
+        <Setting Key="SiteDB3_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="SiteDB3.bodb02.BODBDownlineNet" />
+        <Setting Key="SiteDB3_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="SiteDB3.bodb02.BODBDownlineNet" />
+        <Setting Key="SiteDB3_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="SiteDB3.bodb02.BODBDownlineNet" />
+        <Setting Key="SiteDB3_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="SiteDB3.bodb02.BODBDownlineNet" />
+    </Function>
+    <Function Name="Add member - DB Central">
+        <Setting Key="Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="DBTXN.bodb02.BODBDownlineNet" />
+        <Setting Key="Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="DBTXN.bodb02.BODBDownlineNet" />
+        <Setting Key="Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="DBTXN.bodb02.BODBDownlineNet" />
+        <Setting Key="Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="DBTXN.bodb02.BODBDownlineNet" />
+    </Function>
     <Function Name="Security Code">
         <Setting Key="Age_UpdateMainAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Age_UpdateSubAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus_Sub" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
@@ -39,6 +51,7 @@
 
         <Setting Key="Age_MaxMemberLimitBySuperCheck" SpName="Age_MaxMemberLimitBySuperCheck" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Age_CustomerCheckReachDownline" SpName="Age_CustomerCheckReachDownline" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_SiteDBConfigSel" SpName="Acc_SiteDBConfigSel" DbName="DBCUST.CustDB.BODBDownlineNet" />        
     </Function>
 
     <Function Name="Customer Information">
