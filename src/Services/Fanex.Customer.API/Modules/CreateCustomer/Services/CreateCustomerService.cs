@@ -103,7 +103,7 @@ public class CreateCustomerService : ICreateCustomerService
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language)
     {
         var settingProfile = await sharedService.GetSettingProfiles();
-        var generalInfo= await dynamicRepository.GetAsync<GeneralInformation>(
+        var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(
                     new GetCustomerCriteria
                     {
                         CustId = custId,
@@ -116,7 +116,30 @@ public class CreateCustomerService : ICreateCustomerService
                 Id = g.Key,
                 GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
-                    var groupType = await GetGroupType(custId, g.Key, t.Key.GroupType, t.Key.DisplayType, language);
+                    var groupItems = await groupItemMapping[t.Key.GroupType].Query(custId, g.Key, t.Key.GroupType);
+                    var groupType = new GroupType
+                    {
+                        Id = t.Key.GroupType,
+                        Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(language)),
+                        DisplayType = t.Key.DisplayType,
+                        SubGroups = t.GroupBy(sb => sb.SubGroupId).Select(sb => new SubGroup
+                        {
+                            Id = sb.Key,
+                            Name = cacheRefService.GetSubGroupName(sb.Key, language),
+                            GroupItems = ((IEnumerable<GroupItemDefault>)groupItems).Join(
+                                t,
+                                groupItems => new { SportType = groupItems.SporttypeId, BetType = groupItems.BettypeId },
+                                groupItemsProfile => new { groupItemsProfile.SportType, groupItemsProfile.BetType },
+                                (groupItems, groupItemsProfile) => groupItems).Select(groupItem =>
+                                {
+                                    groupItem.SporttypeName = cacheRefService.GetSporttypeName(groupItem.SporttypeId, language);
+                                    groupItem.BettypeName = cacheRefService.GetBettypeName(groupItem.BettypeId, language);
+
+                                    return groupItem;
+                                })
+                        })
+                    };
+
                     return groupType;
                 }).ToEnumerable()
             }).Where(p => p.GroupTypes.Any(t => t.SubGroups.Any(r => r.GroupItems.Any())));
@@ -132,9 +155,9 @@ public class CreateCustomerService : ICreateCustomerService
     }
 
     private async Task<GroupType> GetGroupType(
-        int uplineCustId, 
-        int productGroupId, 
-        int groupTypeId, 
+        int uplineCustId,
+        int productGroupId,
+        int groupTypeId,
         short displayType,
         string language)
     {
@@ -142,7 +165,7 @@ public class CreateCustomerService : ICreateCustomerService
         var groupType = new GroupType
         {
             Id = groupTypeId,
-            Name = Labels.ResourceManager.GetString($"GroupType{groupTypeId}",new System.Globalization.CultureInfo(language)),
+            Name = Labels.ResourceManager.GetString($"GroupType{groupTypeId}", new System.Globalization.CultureInfo(language)),
             DisplayType = displayType
         };
 
@@ -196,8 +219,8 @@ public class CreateCustomerService : ICreateCustomerService
 
     private void GetNameFromRemotingRef(CustomerSetting customerSetting, string language)
         => GetNameFromRemotingRef(
-            customerSetting.ProductGroups.Select(productGroup => productGroup.Value).ToList(), 
-            customerSetting.GeneralInfo.UplineRoleId, 
+            customerSetting.ProductGroups.Select(productGroup => productGroup.Value).ToList(),
+            customerSetting.GeneralInfo.UplineRoleId,
             language);
 
     private void GetDisplayNameByDisplayType(int uplineRoleId, string language, ProductGroup productGroup, GroupType groupType, GroupItemDefault groupItem)
