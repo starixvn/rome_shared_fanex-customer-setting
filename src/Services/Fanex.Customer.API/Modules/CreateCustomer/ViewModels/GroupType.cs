@@ -8,5 +8,5 @@ public class GroupType
 
     public short DisplayType { get; set; }
 
-    public IEnumerable<SubGroup> SubGroups { get; set; }
+    public IEnumerable<GroupItemDefault> GroupItems { get; set; }
 }

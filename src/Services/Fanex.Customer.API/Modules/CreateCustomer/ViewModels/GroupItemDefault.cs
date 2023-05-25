@@ -43,6 +43,10 @@ public class GroupItemDefault
 
     public string DisplayName { get; set; }
 
+    public int? SubGroupId { get; set; }
+
+    public string SubGroupName { get; set; }
+
     internal string ToXml()
     {
         throw new NotImplementedException();
