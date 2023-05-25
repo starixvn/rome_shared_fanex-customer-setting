@@ -17,7 +17,7 @@ using SophosOtp = ONEbook.OTP.Services.OtpService;
 using Fanex.RemotingRef;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Shared.Services;
-using Fanex.Customer.API.Modules.CreateCustomer.Services;
+using Fanex.Customer.API.Modules.Message;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor()
@@ -29,6 +29,7 @@ builder.Services.AddSingleton<ICacheService, CacheService>();
 builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
 builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
+builder.Services.AddSingleton<IMessageService, MessageService>();
 builder.Services.AddSingleton<ISharedService, SharedService>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>
 {

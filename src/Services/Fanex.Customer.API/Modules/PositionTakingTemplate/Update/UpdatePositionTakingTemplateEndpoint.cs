@@ -1,3 +1,5 @@
+using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.Message.Models;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using MinimalApi.Endpoint;
@@ -7,10 +9,12 @@ namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
 public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePositionTakingTemplateRequest, IDynamicRepository>
 {
     private readonly AppSettings appSettings;
+    private readonly IMessageService messageService;
 
-    public UpdatePositionTakingTemplateEndpoint(IOptions<AppSettings> appSettings)
+    public UpdatePositionTakingTemplateEndpoint(IOptions<AppSettings> appSettings, IMessageService messageService)
     {
         this.appSettings = appSettings.Value;
+        this.messageService = messageService;
     }
 
     public void AddRoute(IEndpointRouteBuilder app)
@@ -32,6 +36,8 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
             request.Language,
             request.IP);
         await dynamicRepository.ExecuteAsync(command);
-        return Results.Ok(new UpdatePositionTakingTemplateResult(command.ErrCode, command.ErrType, command.ErrMsg));
+        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, SettingLevel.SportTypeBetType, request.Language);
+
+        return Results.Ok(new PTTemplateResult(request.TemplateId, command.ErrCode, message.MainMessage, message.SubMessages));
     }
 }

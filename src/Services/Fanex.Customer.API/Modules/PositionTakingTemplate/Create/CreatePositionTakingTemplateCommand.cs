@@ -40,6 +40,8 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
 
     public int ErrCode { get; set; }
 
+    public int ErrType { get; set; }
+
     public string ErrMsg { get; set; }
 
     public string GetSettingKey() => "Acc_LiteMode_CustSetting_CustPTTemplateIns";

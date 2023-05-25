@@ -1,3 +1,5 @@
+using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.Message.Models;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -8,17 +10,19 @@ namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
 public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePositionTakingTemplateRequest, IDynamicRepository>
 {
     private readonly AppSettings appSettings;
+    private readonly IMessageService messageService;
 
-    public CreatePositionTakingTemplateEndPoint(IOptions<AppSettings> appSettings)
+    public CreatePositionTakingTemplateEndPoint(IOptions<AppSettings> appSettings, IMessageService messageService)
     {
         this.appSettings = appSettings.Value;
+        this.messageService = messageService;
     }
 
     public void AddRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/api/customer/pt-templates", (CreatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)
             => HandleAsync(request, dynamicRepository))
-            .Produces<Result>()
+            .Produces<PTTemplateResult>()
             .WithTags("PositionTakingTemplate");
     }
 
@@ -34,7 +38,8 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
             request.IP);
 
         await dynamicRepository.ExecuteAsync(command);
+        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, SettingLevel.SportTypeBetType, request.Language);
 
-        return Results.Ok(new CreatePositionTakingTemplateResult(command.ErrCode, command.ErrMsg, command.TemplateId));
+        return Results.Ok(new PTTemplateResult(command.TemplateId, command.ErrCode, message.MainMessage, message.SubMessages));
     }
 }

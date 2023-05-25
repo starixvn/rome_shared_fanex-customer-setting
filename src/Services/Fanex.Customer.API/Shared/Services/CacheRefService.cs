@@ -8,9 +8,9 @@ public interface ICacheRefService
 
     string GetSubGroupName(int? subGroupId, string language = "en-US");
 
-    string GetSporttypeName(int sporttypeId, string language = "en-US");
+    string GetSportTypeName(int sporttypeId, string language = "en-US");
 
-    string GetBettypeName(int bettypeId, string language = "en-US");
+    string GetBetTypeName(int bettypeId, string language = "en-US");
 
     string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
 
@@ -44,10 +44,10 @@ public class CacheRefService : ICacheRefService
     public string GetSubGroupName(int? subGroupId, string language = "en-US")
         => this.remotingRef.GetResourceDataByRefIdAndResourceId(SubGroupRefId, subGroupId?.ToString(), language, subGroupId?.ToString());
 
-    public string GetSporttypeName(int sporttypeId, string language = "en-US")
+    public string GetSportTypeName(int sporttypeId, string language = "en-US")
         => this.remotingRef.GetSportName(sporttypeId.ToString(), language);
 
-    public string GetBettypeName(int bettypeId, string language = "en-US")
+    public string GetBetTypeName(int bettypeId, string language = "en-US")
         => this.remotingRef.GetBetTypeName(bettypeId.ToString(), language);
 
     public string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
@@ -66,7 +66,7 @@ public class CacheRefService : ICacheRefService
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
         return this.remotingRef.GetResourceDataByRefIdAndResourceId(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
     }
-    
+
     private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
         => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";
 }

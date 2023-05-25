@@ -132,8 +132,8 @@ public class CreateCustomerService : ICreateCustomerService
                                 groupItemsProfile => new { groupItemsProfile.SportType, groupItemsProfile.BetType },
                                 (groupItems, groupItemsProfile) => groupItems).Select(groupItem =>
                                 {
-                                    groupItem.SporttypeName = cacheRefService.GetSporttypeName(groupItem.SporttypeId, language);
-                                    groupItem.BettypeName = cacheRefService.GetBettypeName(groupItem.BettypeId, language);
+                                    groupItem.SporttypeName = cacheRefService.GetSportTypeName(groupItem.SporttypeId, language);
+                                    groupItem.BettypeName = cacheRefService.GetBetTypeName(groupItem.BettypeId, language);
 
                                     return groupItem;
                                 })
@@ -202,8 +202,8 @@ public class CreateCustomerService : ICreateCustomerService
                     foreach (var groupItem in subGroup.GroupItems)
                     {
                         GetDisplayNameByDisplayType(uplineRoleId, language, productGroup, groupType, groupItem);
-                        groupItem.SporttypeName = this.cacheRefService.GetSporttypeName(groupItem.SporttypeId, language);
-                        groupItem.BettypeName = this.cacheRefService.GetBettypeName(groupItem.BettypeId, language);
+                        groupItem.SporttypeName = this.cacheRefService.GetSportTypeName(groupItem.SporttypeId, language);
+                        groupItem.BettypeName = this.cacheRefService.GetBetTypeName(groupItem.BettypeId, language);
                         groupItems.Add(groupItem);
                     }
 
