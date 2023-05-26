@@ -27,35 +27,11 @@ public interface IQueryCustomerService
     Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language);
 }
 
-public class QueryCustomerService : IQueryCustomerService
+public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
 {
-    private readonly IDynamicRepository dynamicRepository;
-    private readonly AppSettings appSettings;
-    private readonly ISharedService sharedService;
-    private readonly ICacheRefService cacheRefService;
-    private readonly Dictionary<int, dynamic> groupItemMapping;
-
     public QueryCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
+        :base(dynamicRepository, appSettings,sharedService,cacheRefService)
     {
-        this.dynamicRepository = dynamicRepository;
-        this.appSettings = appSettings.Value;
-        this.sharedService = sharedService;
-        this.cacheRefService = cacheRefService;
-
-        this.groupItemMapping = new()
-        {
-            {150, new GroupTypeBaseService<CommissionGroup>(dynamicRepository, appSettings.Value)},
-            {151, new GroupTypeBaseService<BetSettingItem>(dynamicRepository, appSettings.Value)},
-            {152, new GroupTypeBaseService<ParlayMaxPayoutSettingItem>(dynamicRepository, appSettings.Value)},
-            {153, new GroupTypeBaseService<SuperPTSettingItem>(dynamicRepository, appSettings.Value)},
-            {154, new GroupTypeBaseService<ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings.Value)},
-            {155, new GroupTypeBaseService<WinlossLimitSettingItem>(dynamicRepository, appSettings.Value)},
-            {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
-            {157, new GroupTypeBaseService<LossLimitSettingItem>(dynamicRepository, appSettings.Value)},
-            {158, new GroupTypeBaseService<ViewModels.GroupType158.CommissionSettingItem>(dynamicRepository, appSettings.Value)},
-            {159, new GroupTypeBaseService<BetsettingItem>(dynamicRepository, appSettings.Value)},
-            {160, new GroupTypeBaseService<SuperPTSettingItem>(dynamicRepository, appSettings.Value)}
-        };
     }
 
     public async Task<CustomerSetting> Query(QueryRequest request)
@@ -122,14 +98,14 @@ public class QueryCustomerService : IQueryCustomerService
                          GroupItems = 
                         ((IEnumerable<GroupItemDefault>)groupItems).Join(
                             t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType }),
-                            groupItems => new { SportType = groupItems.SporttypeId, BetType = groupItems.BettypeId },
+                            groupItems => new { SportType = groupItems.SportTypeId, BetType = groupItems.BetTypeId },
                             groupItemsProfile => new { groupItemsProfile.Key.SportType, groupItemsProfile.Key.BetType },
                             (groupItem, groupItemsProfile) =>
                             {
                                 groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
                                 groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
-                                groupItem.SporttypeName = cacheRefService.GetSportTypeName(groupItem.SporttypeId, language);
-                                groupItem.BettypeName = cacheRefService.GetBetTypeName(groupItem.BettypeId, language);
+                                groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
+                                groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, language);
 
                                 return groupItem;
                             })
@@ -169,8 +145,8 @@ public class QueryCustomerService : IQueryCustomerService
                 {
                     groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItem.SubGroupId, language);
                     GetDisplayNameByDisplayType(uplineRoleId, language, productGroup, groupType, groupItem);
-                    groupItem.SporttypeName = this.cacheRefService.GetSportTypeName(groupItem.SporttypeId, language);
-                    groupItem.BettypeName = this.cacheRefService.GetBetTypeName(groupItem.BettypeId, language);
+                    groupItem.SportTypeName = this.cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
+                    groupItem.BetTypeName = this.cacheRefService.GetBetTypeName(groupItem.BetTypeId, language);
                     groupItems.Add(groupItem);
                 }
 
@@ -196,8 +172,8 @@ public class QueryCustomerService : IQueryCustomerService
                 groupItem.DisplayName = this.cacheRefService.GetSportsbookCommMemberName(
                     productGroup.Id,
                     groupType.Id,
-                    groupItem.SporttypeId,
-                    groupItem.BettypeId,
+                    groupItem.SportTypeId,
+                    groupItem.BetTypeId,
                     language);
             }
             else
@@ -205,8 +181,8 @@ public class QueryCustomerService : IQueryCustomerService
                 groupItem.DisplayName = this.cacheRefService.GetSportsbookCommSMAName(
                     productGroup.Id,
                     groupType.Id,
-                    groupItem.SporttypeId,
-                    groupItem.BettypeId,
+                    groupItem.SportTypeId,
+                    groupItem.BetTypeId,
                     language);
             }
         }
@@ -215,8 +191,8 @@ public class QueryCustomerService : IQueryCustomerService
             groupItem.DisplayName = this.cacheRefService.GetNameByGroupSubGroup(
                     productGroup.Id,
                     groupType.Id,
-                    groupItem.SporttypeId,
-                    groupItem.BettypeId,
+                    groupItem.SportTypeId,
+                    groupItem.BetTypeId,
                     language);
         }
     }

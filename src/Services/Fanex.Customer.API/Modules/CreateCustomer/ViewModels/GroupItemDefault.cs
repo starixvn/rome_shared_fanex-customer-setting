@@ -28,18 +28,18 @@ public class GroupItemDefault
 
     public GroupItemDefault(int sporttypeid, int bettypeid, string DisplayName)
     {
-        this.SporttypeId = sporttypeid;
-        this.BettypeId = bettypeid;
+        this.SportTypeId = sporttypeid;
+        this.BetTypeId = bettypeid;
         this.DisplayName = DisplayName;
     }
 
-    public int SporttypeId { get; set; }
+    public int SportTypeId { get; set; }
 
-    public string SporttypeName { get; set; }
+    public string SportTypeName { get; set; }
 
-    public int BettypeId { get; set; }
+    public int BetTypeId { get; set; }
 
-    public string BettypeName { get; set; }
+    public string BetTypeName { get; set; }
 
     public string DisplayName { get; set; }
 

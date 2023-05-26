@@ -9,13 +9,13 @@ public class QueryEndpoint : IEndpoint<IResult, QueryRequest, IQueryCustomerServ
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/customer/query", (QueryRequest request, IQueryCustomerService customerService)
-            => HandleAsync(request, customerService))
+        app.MapPost("/api/customer/query", (QueryRequest request, IQueryCustomerService service)
+            => HandleAsync(request, service))
             .Produces<CustomerSetting>().WithTags("Create Customer");
     }
 
-    public async Task<IResult> HandleAsync(QueryRequest request, IQueryCustomerService customerService)
+    public async Task<IResult> HandleAsync(QueryRequest request, IQueryCustomerService service)
     {
-        return Results.Ok(await customerService.Query(request));
+        return Results.Ok(await service.Query(request));
     }
 }

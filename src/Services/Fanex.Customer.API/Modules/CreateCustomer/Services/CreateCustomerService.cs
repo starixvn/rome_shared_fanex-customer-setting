@@ -25,35 +25,11 @@ public interface ICreateCustomerService
     Task<Result> Create(CreateRequest request);
 }
 
-public class CreateCustomerService : ICreateCustomerService
+public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 {
-    private readonly IDynamicRepository dynamicRepository;
-    private readonly AppSettings appSettings;
-    private readonly ISharedService sharedService;
-    private readonly ICacheRefService cacheRefService;
-    private readonly Dictionary<int, dynamic> groupItemMapping;
-
     public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
+        :base(dynamicRepository, appSettings,sharedService,cacheRefService)
     {
-        this.dynamicRepository = dynamicRepository;
-        this.appSettings = appSettings.Value;
-        this.sharedService = sharedService;
-        this.cacheRefService = cacheRefService;
-
-        this.groupItemMapping = new()
-        {
-            {150, new GroupTypeBaseService<CommissionGroup>(dynamicRepository, appSettings.Value)},
-            {151, new GroupTypeBaseService<BetSettingItem>(dynamicRepository, appSettings.Value)},
-            {152, new GroupTypeBaseService<ParlayMaxPayoutSettingItem>(dynamicRepository, appSettings.Value)},
-            {153, new GroupTypeBaseService<SuperPTSettingItem>(dynamicRepository, appSettings.Value)},
-            {154, new GroupTypeBaseService<ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings.Value)},
-            {155, new GroupTypeBaseService<WinlossLimitSettingItem>(dynamicRepository, appSettings.Value)},
-            {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
-            {157, new GroupTypeBaseService<LossLimitSettingItem>(dynamicRepository, appSettings.Value)},
-            {158, new GroupTypeBaseService<ViewModels.GroupType158.CommissionSettingItem>(dynamicRepository, appSettings.Value)},
-            {159, new GroupTypeBaseService<BetsettingItem>(dynamicRepository, appSettings.Value)},
-            {160, new GroupTypeBaseService<SuperPTSettingItem>(dynamicRepository, appSettings.Value)}
-        };
     }
 
     public async Task<Result> Create(CreateRequest request)
