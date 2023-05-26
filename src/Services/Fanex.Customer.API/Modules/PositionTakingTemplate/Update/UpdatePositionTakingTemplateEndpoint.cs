@@ -21,7 +21,7 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
     {
         app.MapPut("/api/customer/pt-templates", (UpdatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)
             => HandleAsync(request, dynamicRepository))
-            .Produces<UpdatePositionTakingTemplateResult>()
+            .Produces<PTTemplateResult>()
             .WithTags("PositionTakingTemplate");
     }
 
@@ -38,6 +38,6 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
         await dynamicRepository.ExecuteAsync(command);
         var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, SettingLevel.SportTypeBetType, request.Language);
 
-        return Results.Ok(new PTTemplateResult(request.TemplateId, command.ErrCode, message.MainMessage, message.SubMessages));
+        return Results.Ok(new PTTemplateResult(command.ErrCode, message.MainMessage, message.SubMessages));
     }
 }

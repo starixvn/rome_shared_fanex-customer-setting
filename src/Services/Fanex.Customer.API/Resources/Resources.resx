@@ -140,4 +140,20 @@
     <value>This Source Account was disabled.</value>
     <comment/>
   </data>
+  <data name="Msg_20046" xml:space="preserve">
+    <value>Invalid Position Taking (max set by upline)</value>
+    <comment/>
+  </data>
+  <data name="Live" xml:space="preserve">
+    <value>Live</value>
+    <comment/>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+    <comment/>
+  </data>
+  <data name="MaxLive" xml:space="preserve">
+    <value>Max Live</value>
+    <comment/>
+  </data>
 </root>
