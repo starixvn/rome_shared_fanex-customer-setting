@@ -3,17 +3,17 @@ using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.EndPoints;
 
-public class GetPTTemplateEndpoint : IEndpoint<IResult, int, string, IQueryCustomerService>
+public class GetPTTemplateEndpoint : IEndpoint<IResult, int, string, IPTSettingService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/{custId}/pt-settings/{language}", (int custId, string language, IQueryCustomerService customerService)
-            => HandleAsync(custId, language, customerService))
+        app.MapGet("/api/customer/{custId}/pt-settings/{language}", (int custId, string language, IPTSettingService service)
+            => HandleAsync(custId, language, service))
             .WithTags("Create Customer");
     }
 
-    public async Task<IResult> HandleAsync(int custId, string language, IQueryCustomerService customerService)
+    public async Task<IResult> HandleAsync(int custId, string language, IPTSettingService service)
     {
-        return Results.Ok(await customerService.GetPTSettings(custId, language));
+        return Results.Ok(await service.GetPTSettings(custId, language));
     }
 }

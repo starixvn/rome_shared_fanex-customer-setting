@@ -8,6 +8,7 @@ public static class CreateCustomerModule
     {
         services.AddSingleton<IQueryCustomerService, QueryCustomerService>();
         services.AddSingleton<ICreateCustomerService, CreateCustomerService>();
+        services.AddSingleton<IPTSettingService, PTSettingService>();
 
         return services;
     }
