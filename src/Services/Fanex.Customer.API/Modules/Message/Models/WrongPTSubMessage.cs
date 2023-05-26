@@ -8,7 +8,7 @@ namespace Fanex.Customer.API.Modules.Message.Models;
 public class WrongPTSubMessage : SubMessage
 {
     [XmlAttribute]
-    public int IsLive { get; set; }
+    public bool IsLive { get; set; }
 
     public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
         => $"{base.ToString(cacheRefService, settingLevel, language)} ({StaticResources.Get("Live", language)})";
@@ -20,5 +20,5 @@ public class MaxPTViolationSubMessage : WrongPTSubMessage
     public decimal MaxPT { get; set; }
 
     public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
-        => $"{base.ToString(cacheRefService, settingLevel, language)} - {StaticResources.Get(IsLive == 1 ? "MaxLive" : "Max", language)}: {PTFormatter.FormatPT(MaxPT)}";
+        => $"{base.ToString(cacheRefService, settingLevel, language)} - {StaticResources.Get(IsLive ? "MaxLive" : "Max", language)}: {PTFormatter.FormatPT(MaxPT)}";
 }

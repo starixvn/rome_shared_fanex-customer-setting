@@ -37,7 +37,7 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
             request.IP);
 
         await dynamicRepository.ExecuteAsync(command);
-        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, SettingLevel.SportTypeBetType, request.Language);
+        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, SettingLevel.SportTypeBetType, "en-US");
 
         return Results.Ok(new CreatePTTemplateResult(command.TemplateId, command.ErrCode, message.MainMessage, message.SubMessages));
     }
