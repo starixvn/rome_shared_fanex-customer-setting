@@ -6,10 +6,10 @@ namespace Fanex.Customer.API.Modules.Message.Models;
 public class SubMessage
 {
     [XmlAttribute]
-    public short SportType { get; set; }
+    public int SportType { get; set; }
 
     [XmlAttribute]
-    public short BetType { get; set; }
+    public int BetType { get; set; }
 
     public virtual string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
         => settingLevel switch
