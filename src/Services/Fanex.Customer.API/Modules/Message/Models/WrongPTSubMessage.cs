@@ -11,7 +11,15 @@ public class WrongPTSubMessage : SubMessage
     public bool IsLive { get; set; }
 
     public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
-        => $"{base.ToString(cacheRefService, settingLevel, language)} ({StaticResources.Get("Live", language)})";
+    {
+        var message = base.ToString(cacheRefService, settingLevel, language);
+        if (IsLive)
+        {
+            message += string.Format(" ({0})", StaticResources.Get("Live", language));
+        }
+
+        return message;
+    }
 }
 
 public class MaxPTViolationSubMessage : WrongPTSubMessage
@@ -20,5 +28,8 @@ public class MaxPTViolationSubMessage : WrongPTSubMessage
     public decimal MaxPT { get; set; }
 
     public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
-        => $"{base.ToString(cacheRefService, settingLevel, language)} - {StaticResources.Get(IsLive ? "MaxLive" : "Max", language)}: {PTFormatter.FormatPT(MaxPT)}";
+        => string.Format("{0} - {1}: {2}",
+            base.ToString(cacheRefService, settingLevel, language),
+            StaticResources.Get(IsLive ? "MaxLive" : "Max", language),
+            PTFormatter.FormatPT(MaxPT));
 }
