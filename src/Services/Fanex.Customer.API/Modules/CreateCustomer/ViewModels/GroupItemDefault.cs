@@ -24,6 +24,8 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 [JsonDerivedType(typeof(GroupType159.BetsettingItem))]
 public class GroupItemDefault
 {
+    private const string SportTypeBetTypeXmlFormat = "SportType=\"{0}\" BetType=\"{1}\"";
+
     public GroupItemDefault() : this(0, 0, null) { }
 
     public GroupItemDefault(int sporttypeid, int bettypeid, string DisplayName)
@@ -47,8 +49,6 @@ public class GroupItemDefault
 
     public string SubGroupName { get; set; }
 
-    internal string ToXml()
-    {
-        throw new NotImplementedException();
-    }
+    public virtual string ToXml()
+        => string.Format(SportTypeBetTypeXmlFormat, SportTypeId, BetTypeId);
 }

@@ -9,13 +9,13 @@ public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerS
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/customer/create", (CreateRequest request, ICreateCustomerService customerService)
-            => HandleAsync(request, customerService))
+        app.MapPost("/api/customer/create", (CreateRequest request, ICreateCustomerService service)
+            => HandleAsync(request, service))
             .Produces<CustomerSetting>().WithTags("Create Customer");
     }
 
-    public async Task<IResult> HandleAsync(CreateRequest request, ICreateCustomerService customerService)
+    public async Task<IResult> HandleAsync(CreateRequest request, ICreateCustomerService service)
     {
-        return Results.Ok(await customerService.Create(request));
+        return Results.Ok(await service.Create(request));
     }
 }

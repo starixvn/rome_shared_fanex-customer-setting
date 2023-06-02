@@ -4,12 +4,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
 
 public class BetSettingItem : GroupItemDefault
 {
-    public BetSettingItem() : this(0, 0, null)
-    { }
-
-    public BetSettingItem(int sporttypeid, int bettypeid, string DisplayName)
-    : base(sporttypeid, bettypeid, DisplayName)
-    { }
+    private const string BetSettingXmlFormat = "<R {0} minbet=\"{1}\" maxbet=\"{2}\" mpm=\"{3}\" {4}/>";
 
     public decimal MinBet { get; set; }
 
@@ -20,4 +15,12 @@ public class BetSettingItem : GroupItemDefault
     public decimal? MaxPayoutPerMatch { get; set; }
 
     public BetSettingItem Upline { get; set; }
+
+    public override string ToXml()
+    => string.Format(BetSettingXmlFormat, 
+        base.ToXml(), 
+        MinBet, 
+        MaxBet, 
+        MaxPerMatch, 
+        MaxPayoutPerMatch.HasValue ? $"maxpayout=\"{MaxPayoutPerMatch.Value}\"" : string.Empty);
 }

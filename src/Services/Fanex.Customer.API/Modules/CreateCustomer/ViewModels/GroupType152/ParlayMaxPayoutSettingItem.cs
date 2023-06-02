@@ -2,6 +2,8 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 
 public class ParlayMaxPayoutSettingItem : GroupItemDefault
 {
+    private const string ParlayMaxPayoutSettingXmlFormat = "<R {0} singlemp=\"{1}\" combo2=\"{2}\" combo35=\"{3}\" combo6=\"{4}\"/>";
+    
     public decimal SingleMatchParlay { get; set; }
 
     public decimal MaxSingleMatchParlay { get; set; }
@@ -25,4 +27,12 @@ public class ParlayMaxPayoutSettingItem : GroupItemDefault
     public decimal MaxComboOver6 { get; set; }
 
     public bool IsAllowUnlimitComboOver6 { get; set; }
+
+    public override string ToXml()
+    => string.Format(ParlayMaxPayoutSettingXmlFormat, 
+        base.ToXml(),
+        SingleMatchParlay,
+        Combo2,
+        Combo35,
+        ComboOver6);
 }

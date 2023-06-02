@@ -9,9 +9,11 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 public interface ISharedService
 {
     Task<IEnumerable<SettingProfile>> GetSettingProfiles();
+
+    Task<IEnumerable<int>> GetAllSettingTypes();
 }
 
-public class SharedService :ISharedService
+public class SharedService : ISharedService
 {
     private readonly IDynamicRepository dynamicRepository;
 
@@ -30,6 +32,9 @@ public class SharedService :ISharedService
         => await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
           () => this.GetSettingProfile(),
            new CacheItemOptions());
+
+    public async Task<IEnumerable<int>> GetAllSettingTypes()
+     => (await this.GetSettingProfile()).Select(i => i.SettingType ).Distinct();
 
     private async Task<IEnumerable<SettingProfile>> GetSettingProfile() => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus });
 }

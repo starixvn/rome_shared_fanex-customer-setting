@@ -49,7 +49,8 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                 {
                     Id = g.Key,
                     Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
-                    GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
+                    GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
+                    .SelectAwait(async t =>
                     {
                         var groupItems = await groupItemMapping[t.Key.GroupType].Query(request.UplineCustId, g.Key, t.Key.GroupType);
                         var groupType = new GroupType

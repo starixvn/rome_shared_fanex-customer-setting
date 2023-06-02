@@ -15,4 +15,6 @@ public class SettingProfile
     public int? SubGroupId { get; set; }
 
     public short DisplayType { get; set; }
+
+    public int SettingType { get; set; }
 }
