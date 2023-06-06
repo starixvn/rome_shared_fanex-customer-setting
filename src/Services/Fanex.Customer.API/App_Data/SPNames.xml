@@ -86,6 +86,7 @@
             <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
             <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
         </Setting>
+        <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />

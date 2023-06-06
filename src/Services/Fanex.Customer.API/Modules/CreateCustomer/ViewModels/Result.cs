@@ -1,6 +1,6 @@
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 
-public class @string
+public class Result
 {
     public int ErrorCode { get; set; }
 

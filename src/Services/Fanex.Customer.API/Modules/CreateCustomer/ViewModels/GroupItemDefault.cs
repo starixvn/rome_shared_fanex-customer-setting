@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType150;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
@@ -12,16 +13,16 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType159;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 
-[JsonDerivedType(typeof(CommissionGroup))]
-[JsonDerivedType(typeof(GroupType151.BetSettingItem))]
-[JsonDerivedType(typeof(ParlayMaxPayoutSettingItem))]
-[JsonDerivedType(typeof(SuperPTSettingItem))]
-[JsonDerivedType(typeof(GroupType154.BetSettingItem))]
-[JsonDerivedType(typeof(WinlossLimitSettingItem))]
-[JsonDerivedType(typeof(GroupType156.CommissionSettingItem))]
-[JsonDerivedType(typeof(LossLimitSettingItem))]
-[JsonDerivedType(typeof(GroupType158.CommissionSettingItem))]
-[JsonDerivedType(typeof(GroupType159.BetsettingItem))]
+[JsonDerivedType(typeof(CommissionGroup), typeDiscriminator: 1)]
+[JsonDerivedType(typeof(GroupType151.BetSettingItem), typeDiscriminator: 2)]
+[JsonDerivedType(typeof(ParlayMaxPayoutSettingItem), typeDiscriminator: 3)]
+[JsonDerivedType(typeof(SuperPTSettingItem), typeDiscriminator: 4)]
+[JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 5)]
+[JsonDerivedType(typeof(WinlossLimitSettingItem), typeDiscriminator: 6)]
+[JsonDerivedType(typeof(GroupType156.CommissionSettingItem), typeDiscriminator: 7)]
+[JsonDerivedType(typeof(LossLimitSettingItem), typeDiscriminator: 8)]
+[JsonDerivedType(typeof(GroupType158.CommissionSettingItem), typeDiscriminator: 9)]
+[JsonDerivedType(typeof(GroupType159.BetsettingItem), typeDiscriminator: 10)]
 public class GroupItemDefault
 {
     private const string SportTypeBetTypeXmlFormat = "SportType=\"{0}\" BetType=\"{1}\"";
@@ -51,4 +52,5 @@ public class GroupItemDefault
 
     public virtual string ToXml()
         => string.Format(SportTypeBetTypeXmlFormat, SportTypeId, BetTypeId);
+
 }

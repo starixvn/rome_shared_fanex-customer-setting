@@ -19,12 +19,13 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using System.Collections;
 using System.Linq;
+using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface ICreateCustomerService
 {
-    Task<Hashtable> Create(CreateRequest request);
+    Task<Result> Create(CreateRequest request);
 }
 
 public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
@@ -36,11 +37,19 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     {
     }
 
-    public async Task<Hashtable> Create(CreateRequest request)
+    public async Task<Result> Create(CreateRequest request)
     {
         var parameters = await this.GetCreateCustomerParams(request, appSettings);
 
-        return parameters;
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_LiteMode_CustomerInsMember_SAg");
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
+
+        return new Result{
+            ErrorCode = Convert.ToInt32(outputParams["errcode"]),
+            ErrorMessage = Convert.ToString(outputParams["errmsg"]),
+            MsgType = Convert.ToInt32(outputParams["msgtype"])
+        };
     }
 
     private async Task<Hashtable> GetCreateCustomerParams(CreateRequest request, AppSettings appSettings)
@@ -85,7 +94,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             .Select(i => {
                 param.Add($"SettingType{i.Key}", i.xlm);
                 return i;
-            });
+            }).ToList();
             
         return param;
     }
