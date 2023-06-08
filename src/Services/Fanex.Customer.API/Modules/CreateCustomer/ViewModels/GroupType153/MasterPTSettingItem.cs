@@ -3,7 +3,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 public class MasterPTSettingItem : GroupItemDefault
 {
     private const string PTXmlFormat
-        = "<PT {0} SuperPT=\"{1}\" IsAutoSuperPT=\"{2}\" AutoSuperPT=\"{3}\" MasterPT=\"{4}\" MinPT=\"{5}\" />";
+        = "<R {0} SuperPT=\"{1}\" IsAutoSuperPT=\"{2}\" AutoSuperPT=\"{3}\" MasterPT=\"{4}\" MinPT=\"{5}\" />";
 
     /// <summary>
     /// Super PT

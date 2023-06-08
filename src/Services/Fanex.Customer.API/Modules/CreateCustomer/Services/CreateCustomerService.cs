@@ -30,8 +30,6 @@ public interface ICreateCustomerService
 
 public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 {
-    private Dictionary<int, string> SettingTypesXml;
-
     public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
         : base(dynamicRepository, appSettings, sharedService, cacheRefService)
     {
@@ -45,7 +43,8 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
 
-        return new Result{
+        return new Result
+        {
             ErrorCode = Convert.ToInt32(outputParams["errcode"]),
             ErrorMessage = Convert.ToString(outputParams["errmsg"]),
             MsgType = Convert.ToInt32(outputParams["msgtype"])
@@ -54,7 +53,23 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private async Task<Hashtable> GetCreateCustomerParams(CreateRequest request, AppSettings appSettings)
     {
-        var param = new Hashtable {
+        var param = CreateGeneralInfoParams(request, appSettings);
+
+        var settingProfiles = await sharedService.GetSettingProfiles();
+
+        var settingTypesXml = CreateSettingTypesXml(request, settingProfiles);
+
+        foreach (var item in settingTypesXml)
+        {
+            param.Add($"SettingType{item.Key}", $"<Root>{item.Value}</Root>");
+        }
+
+        return param;
+    }
+
+    private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)
+    {
+        return new Hashtable {
             { "firstname", request.Settings.GeneralInfo.FirstName },
             { "lastname", request.Settings.GeneralInfo.LastName },
             { "creator", request.Context.CreatorId },
@@ -63,6 +78,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "phone", request.Settings.GeneralInfo.Phone },
             { "mobilephone", request.Settings.GeneralInfo.MobilePhone },
             { "fax", request.Settings.GeneralInfo.Fax },
+            { "transferoption", request.Settings.GeneralInfo.TransferOption },
             { "disableautompt", request.Settings.GeneralInfo.AllowAutoPT },
             { "language", request.Context.Language },
             { "subaccid", request.Context.SubAccId },
@@ -73,31 +89,28 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "site", request.Settings.GeneralInfo.Site },
             { "creationstatus", appSettings.CreationStatus }
         };
-
-        var SettingTypesXml = request.Settings.ProductGroups
-            .SelectMany(p => p.GroupTypes.SelectMany(gi => gi.GroupItems.Select(i => new { GroupId = p.Id, GroupTypeId = gi.Id, GroupItem = i })))
-            .Join(
-               await sharedService.GetSettingProfiles(),
-               groupItems => new { groupItems.GroupId, groupItems.GroupTypeId, groupItems.GroupItem.SportTypeId, groupItems.GroupItem.BetTypeId },
-               settingProfile => new { settingProfile.GroupId, GroupTypeId = settingProfile.GroupType, SportTypeId = settingProfile.SportType, BetTypeId = settingProfile.BetType },
-               (groupItems, settingProfile) =>
-               {
-                   return new
-                   {
-                       settingProfile.SettingType,
-                       groupItems.GroupItem
-                   };
-               }
-            )
-            .GroupBy(g => g.SettingType)
-            .Select(t=>new {t.Key, xlm= string.Join("", t.Select(i => i.GroupItem.ToXml()))})
-            .Select(i => {
-                param.Add($"SettingType{i.Key}", i.xlm);
-                return i;
-            }).ToList();
-            
-        return param;
     }
 
+    private static IEnumerable<KeyValuePair<int, string>> CreateSettingTypesXml(CreateRequest request, IEnumerable<SettingProfile> settingProfiles)
+    {
+        var groupItems = request.Settings.ProductGroups
+        .SelectMany(p => p.GroupTypes.SelectMany(gi => gi.GroupItems.Select(i => new { GroupId = p.Id, GroupTypeId = gi.Id, GroupItem = i })));
 
+        var joinedItems = groupItems.Join(
+            settingProfiles,
+            groupItem => new { groupItem.GroupId, groupItem.GroupTypeId, groupItem.GroupItem.SportTypeId, groupItem.GroupItem.BetTypeId },
+            settingProfile => new { settingProfile.GroupId, GroupTypeId = settingProfile.GroupType, SportTypeId = settingProfile.SportType, BetTypeId = settingProfile.BetType },
+            (groupItem, settingProfile) =>
+            {
+                return new
+                {
+                    settingProfile.SettingType,
+                    groupItem.GroupItem
+                };
+            }
+        );
+
+        return joinedItems.GroupBy(g => g.SettingType)
+        .Select(t => new KeyValuePair<int, string>(t.Key, string.Join("", t.Select(i => i.GroupItem.ToXml()))));
+    }
 }

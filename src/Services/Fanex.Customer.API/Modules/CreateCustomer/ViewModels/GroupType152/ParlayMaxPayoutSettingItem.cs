@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 
 public class ParlayMaxPayoutSettingItem : GroupItemDefault
 {
-    private const string ParlayMaxPayoutSettingXmlFormat = "<R {0} singlemp=\"{1}\" combo2=\"{2}\" combo35=\"{3}\" combo6=\"{4}\"/>";
+    private const string ParlayMaxPayoutSettingXmlFormat = "<R {0} SingleMP=\"{1}\" Combo2=\"{2}\" Combo35=\"{3}\" Combo6=\"{4}\"/>";
     
     public decimal SingleMatchParlay { get; set; }
 

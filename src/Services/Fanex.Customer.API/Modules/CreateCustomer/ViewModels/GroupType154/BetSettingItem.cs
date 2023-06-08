@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType154;
 
 public class BetSettingItem : GroupItemDefault
 {
-    private const string BetSettingXmlFormat = "<R {0} minbet=\"{1}\" maxbet=\"{2}\" mpm=\"{3}\" {4}/>";
+    private const string BetSettingXmlFormat = "<R {0} MinBet=\"{1}\" MaxBet=\"{2}\" MPM=\"{3}\" {4}/>";
 
     public decimal MinBet { get; set; }
 
@@ -22,5 +22,5 @@ public class BetSettingItem : GroupItemDefault
         MinBet,
         MaxBet,
         MaxPerMatch,
-        MaxPerBall.HasValue ? $"maxpernumber=\"{MaxPerBall.Value}\"" : string.Empty);
+        MaxPerBall.HasValue ? $"MaxPerNumber=\"{MaxPerBall.Value}\"" : string.Empty);
 }

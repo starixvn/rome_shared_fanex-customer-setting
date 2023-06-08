@@ -15,11 +15,6 @@ public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
 
     private readonly AppSettings appSettings;
 
-    public GroupTypeBaseService() : this(null, null)
-    {
-
-    }
-
     public GroupTypeBaseService(IDynamicRepository dynamicRepository, AppSettings appSettings)
     {
         this.dynamicRepository = dynamicRepository ?? new DynamicRepository();

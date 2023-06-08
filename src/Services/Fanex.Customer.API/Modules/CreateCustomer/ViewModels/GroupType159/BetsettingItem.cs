@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType159;
 
 public class BetsettingItem : GroupItemDefault
 {
-    private const string BetSettingXmlFormat = "<R {0} minbet=\"{1}\" maxbet=\"{2}\" maxpernumber=\"{3}\" />";
+    private const string BetSettingXmlFormat = "<R {0} MinBet=\"{1}\" MaxBet=\"{2}\" MaxPerNumber=\"{3}\" />";
 
     public decimal MinBet { get; set; }
 

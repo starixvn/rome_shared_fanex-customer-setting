@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 
 public class CommissionSettingItem : GroupItemDefault
 {
-    private const string CommissionXmlFormat = "<R {0} discount=\"{1}\" />";
+    private const string CommissionXmlFormat = "<R {0} Discount=\"{1}\" />";
 
     public decimal Discount { get; set; }
 

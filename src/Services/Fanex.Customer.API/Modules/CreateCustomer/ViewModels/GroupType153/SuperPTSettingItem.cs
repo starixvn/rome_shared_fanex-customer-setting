@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 
 public class SuperPTSettingItem : GroupItemDefault
 {
-    private const string PTXmlFormat = "<r {0} IsLive=\"{1}\" SuperPT=\"{2}\" IsAuto=\"{3}\" MasterPT=\"{4}\" MinPT=\"{5}\"/>";
+    private const string PTXmlFormat = "<R {0} IsLive=\"{1}\" SuperPT=\"{2}\" IsAuto=\"{3}\" MasterPT=\"{4}\" MinPT=\"{5}\"/>";
 
     public bool IsLive { get; set; }
 

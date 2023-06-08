@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 
 public class WinlossLimitSettingItem : GroupItemDefault
 {
-    private const string WinlossLimitXmlFormat = "<R {0} maxwinlimit=\"{1}\" maxlosslimit=\"{2}\" isautoreset=\"{3}\" />";
+    private const string WinlossLimitXmlFormat = "<R {0} MaxWinLimit=\"{1}\" MaxLossLimit=\"{2}\" IsAutoReset=\"{3}\" />";
 
     public decimal WinLimit { get; set; }
 

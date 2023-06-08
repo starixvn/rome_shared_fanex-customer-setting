@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
 
 public class LossLimitSettingItem : GroupItemDefault
 {
-    private const string CommissionXmlFormat = "<R {0} maxlosslimit=\"{1}\" isautoreset=\"{2}\" />";
+    private const string CommissionXmlFormat = "<R {0} MaxLossLimit=\"{1}\" IsAutoReset=\"{2}\" />";
 
     public decimal LossLimit { get; set; }
 
