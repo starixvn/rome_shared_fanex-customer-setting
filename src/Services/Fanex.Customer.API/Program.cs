@@ -2,6 +2,7 @@ using System.Net;
 using Fanex.Caching;
 using Fanex.Customer.API;
 using Fanex.Customer.API.Extensions;
+using Fanex.Customer.API.Helpers;
 using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Customer;
@@ -13,7 +14,8 @@ using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHttpContextAccessor()
+                .AddSingleton<IShardInfoAccessor, ShardInfoAccessor>();
 builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddFanexLogging(builder.Configuration);
 builder.Services.AddSingleton<ICacheService, CacheService>();
@@ -47,7 +49,7 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("./swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
-app.UseFanexData(builder.Configuration, app.Environment);
+app.UseFanexData(builder.Configuration, app.Environment, builder.Services);
 
 app.UseMiddleware<ExceptionMiddleware>();
 
