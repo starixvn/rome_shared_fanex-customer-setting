@@ -98,8 +98,8 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
         var joinedItems = groupItems.Join(
             settingProfiles,
-            groupItem => new { groupItem.GroupId, groupItem.GroupTypeId, groupItem.GroupItem.SportTypeId, groupItem.GroupItem.BetTypeId },
-            settingProfile => new { settingProfile.GroupId, GroupTypeId = settingProfile.GroupType, SportTypeId = settingProfile.SportType, BetTypeId = settingProfile.BetType },
+            groupItem => new { groupItem.GroupId, groupItem.GroupTypeId, groupItem.GroupItem.SportTypeId, groupItem.GroupItem.BetTypeId, groupItem.GroupItem.IsLive },
+            settingProfile => new { settingProfile.GroupId, GroupTypeId = settingProfile.GroupType, SportTypeId = settingProfile.SportType, BetTypeId = settingProfile.BetType, settingProfile.IsLive },
             (groupItem, settingProfile) =>
             {
                 return new
