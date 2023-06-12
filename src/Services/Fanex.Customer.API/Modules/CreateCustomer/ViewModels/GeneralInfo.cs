@@ -37,4 +37,6 @@ public class GeneralInformation
     public string Site { get; set; }
 
     public string SiteLabel { get; set; }
+
+    public string TemplateName { get; set; }
 }

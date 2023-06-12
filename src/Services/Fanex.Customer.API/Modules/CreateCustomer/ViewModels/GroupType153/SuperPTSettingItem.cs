@@ -4,8 +4,6 @@ public class SuperPTSettingItem : GroupItemDefault
 {
     private const string PTXmlFormat = "<R {0} IsLive=\"{1}\" SuperPT=\"{2}\" IsAuto=\"{3}\" MasterPT=\"{4}\" MinPT=\"{5}\"/>";
 
-    public bool IsLive { get; set; }
-
     public bool IsAuto { get; set; }
 
     public decimal S4 { get; set; }

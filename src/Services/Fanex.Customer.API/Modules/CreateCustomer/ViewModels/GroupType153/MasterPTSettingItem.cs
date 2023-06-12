@@ -29,8 +29,6 @@ public class MasterPTSettingItem : GroupItemDefault
     /// Master Min PT
     /// </summary>
     public decimal N3 { get; set; }
-    
-    public bool IsLive { get; set; }
 
     public override string ToXml()
     {

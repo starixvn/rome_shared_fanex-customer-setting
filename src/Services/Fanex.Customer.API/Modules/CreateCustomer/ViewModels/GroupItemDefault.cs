@@ -42,6 +42,8 @@ public class GroupItemDefault
 
     public string SubGroupName { get; set; }
 
+    public bool IsLive { get; set; }
+
     public virtual string ToXml()
         => string.Format(SportTypeBetTypeXmlFormat, SportTypeId, BetTypeId);
 

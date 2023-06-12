@@ -77,10 +77,10 @@
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
             <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
             <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-            <Mapping DataField="Upline_SingleMatchParlay" ObjectProperty="MaxSingleMatchParlay" />
-            <Mapping DataField="Upline_Combo2" ObjectProperty="MaxCombo2" />
-            <Mapping DataField="Upline_Combo35" ObjectProperty="MaxCombo35" />
-            <Mapping DataField="Upline_ComboOver6" ObjectProperty="MaxComboOver6" />
+            <Mapping DataField="SingleMatchParlay" ObjectProperty="MaxSingleMatchParlay" />
+            <Mapping DataField="Combo2" ObjectProperty="MaxCombo2" />
+            <Mapping DataField="Combo35" ObjectProperty="MaxCombo35" />
+            <Mapping DataField="ComboOver6" ObjectProperty="MaxComboOver6" />
             <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
             <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
             <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
