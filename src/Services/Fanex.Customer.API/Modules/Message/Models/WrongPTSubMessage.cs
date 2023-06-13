@@ -21,15 +21,3 @@ public class WrongPTSubMessage : SubMessage
         return message;
     }
 }
-
-public class MaxPTViolationSubMessage : WrongPTSubMessage
-{
-    [XmlAttribute]
-    public decimal MaxPT { get; set; }
-
-    public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
-        => string.Format("{0} - {1}: {2}",
-            base.ToString(cacheRefService, settingLevel, language),
-            StaticResources.Get(IsLive ? "MaxLive" : "Max", language),
-            PTFormatter.FormatPT(MaxPT));
-}

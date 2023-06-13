@@ -1,0 +1,24 @@
+using System.Xml.Serialization;
+using Fanex.Customer.API.Modules.Message.Utils;
+using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Services;
+
+namespace Fanex.Customer.API.Modules.Message.Models;
+
+public class MinMaxPTViolationSubMessage : WrongPTSubMessage
+{
+    [XmlAttribute]
+    public decimal MinPT { get; set; }
+
+    [XmlAttribute]
+    public decimal MaxPT { get; set; }
+
+    public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
+        => string.Format(
+            "{0} - {1}: {2} - {3}: {4}",
+            base.ToString(cacheRefService, settingLevel, language),
+            StaticResources.Get(IsLive ? "MinLive" : "Min", language),
+            PTFormatter.FormatPT(MinPT),
+            StaticResources.Get(IsLive ? "MaxLive" : "Max", language),
+            PTFormatter.FormatPT(MaxPT));
+}

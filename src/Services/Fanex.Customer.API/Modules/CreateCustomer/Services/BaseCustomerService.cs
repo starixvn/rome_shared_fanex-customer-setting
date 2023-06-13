@@ -8,6 +8,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType159;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -20,14 +21,21 @@ public class BaseCustomerService
     protected readonly AppSettings appSettings;
     protected readonly ISharedService sharedService;
     protected readonly ICacheRefService cacheRefService;
+    protected readonly IMessageService messageService;
     protected readonly Dictionary<int, dynamic> groupItemMapping;
 
-    protected BaseCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
+    protected BaseCustomerService(
+        IDynamicRepository dynamicRepository, 
+        IOptions<AppSettings> appSettings, 
+        ISharedService sharedService, 
+        ICacheRefService cacheRefService,
+        IMessageService messageService)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
         this.sharedService = sharedService;
         this.cacheRefService = cacheRefService;
+        this.messageService = messageService;
 
         this.groupItemMapping = new()
         {

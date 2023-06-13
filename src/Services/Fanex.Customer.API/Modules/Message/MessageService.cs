@@ -24,7 +24,13 @@ public class MessageService : IMessageService
         return messageType switch
         {
             MessageTypes.MaxPTViolation => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, settingLevel, language),
+            MessageTypes.MinMaxPTViolation => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, settingLevel, language),
+            MessageTypes.ParlayMaxPayoutViolation 
+                or MessageTypes.BetSettingViolation
+                or MessageTypes.CommissionViolation
+                or MessageTypes.WinLossLimitViolation => TranslateMessage<SubMessage>(rawMessage, settingLevel, language),
             _ => new MessageContent(rawMessage)
+
         };
     }
 

@@ -2,6 +2,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -15,8 +16,8 @@ public interface IPTSettingService
 
 public class PTSettingService: BaseCustomerService, IPTSettingService
 {
-    public PTSettingService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
-        : base(dynamicRepository, appSettings, sharedService, cacheRefService)
+    public PTSettingService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService, IMessageService messageService)
+        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
     {
     }
 

@@ -17,6 +17,7 @@ using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.CreateCustomer.Resources;
+using Fanex.Customer.API.Modules.Message;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -27,8 +28,8 @@ public interface IQueryCustomerService
 
 public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
 {
-    public QueryCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
-        : base(dynamicRepository, appSettings, sharedService, cacheRefService)
+    public QueryCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService, IMessageService messageService)
+        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
     {
     }
 

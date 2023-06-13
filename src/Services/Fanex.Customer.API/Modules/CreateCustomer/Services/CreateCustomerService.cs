@@ -20,35 +20,37 @@ using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using System.Collections;
 using System.Linq;
 using Fanex.Data;
+using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.Message.Models;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface ICreateCustomerService
 {
-    Task<Result> Create(CreateRequest request);
+    Task<CreateCustomerResult> Create(CreateRequest request);
 }
 
 public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 {
-    public CreateCustomerService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService)
-        : base(dynamicRepository, appSettings, sharedService, cacheRefService)
+    public CreateCustomerService(
+        IDynamicRepository dynamicRepository, 
+        IOptions<AppSettings> appSettings, 
+        ISharedService sharedService, 
+        ICacheRefService cacheRefService,
+        IMessageService messageService)
+        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
     {
     }
 
-    public async Task<Result> Create(CreateRequest request)
+    public async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         var parameters = await this.GetCreateCustomerParams(request, appSettings);
 
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_LiteMode_CustomerInsMember_SAg");
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
-
-        return new Result
-        {
-            ErrorCode = Convert.ToInt32(outputParams["errcode"]),
-            ErrorMessage = Convert.ToString(outputParams["errmsg"]),
-            MsgType = Convert.ToInt32(outputParams["msgtype"])
-        };
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), SettingLevel.SportTypeBetType, request.Context.Language);
+        return new CreateCustomerResult(Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<Hashtable> GetCreateCustomerParams(CreateRequest request, AppSettings appSettings)
