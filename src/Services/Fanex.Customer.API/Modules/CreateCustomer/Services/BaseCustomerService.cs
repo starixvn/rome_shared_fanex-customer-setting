@@ -1,4 +1,5 @@
 using Fanex.Customer.API.Modules.CreateCustomer.Services.GroupType152;
+using Fanex.Customer.API.Modules.CreateCustomer.Services.GroupType155;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType150;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
@@ -44,7 +45,7 @@ public class BaseCustomerService
             {152, new GroupType152Service(dynamicRepository, appSettings.Value)},
             {153, new GroupTypeBaseService<SuperPTSettingItem>(dynamicRepository, appSettings.Value)},
             {154, new GroupTypeBaseService<ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings.Value)},
-            {155, new GroupTypeBaseService<WinlossLimitSettingItem>(dynamicRepository, appSettings.Value)},
+            {155, new GroupType155Service(dynamicRepository, appSettings.Value)},
             {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
             {157, new GroupTypeBaseService<LossLimitSettingItem>(dynamicRepository, appSettings.Value)},
             {158, new GroupTypeBaseService<ViewModels.GroupType158.CommissionSettingItem>(dynamicRepository, appSettings.Value)},

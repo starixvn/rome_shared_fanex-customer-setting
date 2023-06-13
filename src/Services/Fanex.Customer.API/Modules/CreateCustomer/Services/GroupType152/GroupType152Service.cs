@@ -4,7 +4,7 @@ using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.GroupType152;
 
-public interface IGroupType152Service<TParlayMaxPayoutSettingItem>
+public interface IGroupType152Service<ParlayMaxPayoutSettingItem>
 {
     Task<IEnumerable<ParlayMaxPayoutSettingItem>> Query(int uplineCustId, int productGroupId, int groupType);
 }
