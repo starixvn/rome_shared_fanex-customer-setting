@@ -31,7 +31,7 @@ public class PTSettingService: BaseCustomerService, IPTSettingService
                         CreationStatus = appSettings.CreationStatus
                     });
 
-        var productGroups = settingProfile.Where(p => p.GroupType == 153 || p.GroupType == 160 && (appSettings.IsY7(generalInfo.SiteLabel) || p.GroupId != 4)).GroupBy(p => p.GroupId)
+        var productGroups = settingProfile.Where(p => p.GroupType == 153 || p.GroupType == 160).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {
                 Id = g.Key,

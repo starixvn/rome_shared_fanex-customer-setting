@@ -11,7 +11,6 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType159;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -45,7 +44,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         var customerSetting = new CustomerSetting
         {
             GeneralInfo = generalInfo,
-            ProductGroups = settingProfile.Where(p => appSettings.IsY7(generalInfo.SiteLabel) || p.GroupId != 4).GroupBy(p => p.GroupId)
+            ProductGroups = settingProfile.GroupBy(p => p.GroupId)
                 .Select((g) => new ProductGroup
                 {
                     Id = g.Key,

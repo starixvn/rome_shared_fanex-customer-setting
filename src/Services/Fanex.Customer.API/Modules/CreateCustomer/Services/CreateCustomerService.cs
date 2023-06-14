@@ -11,7 +11,6 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType159;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
