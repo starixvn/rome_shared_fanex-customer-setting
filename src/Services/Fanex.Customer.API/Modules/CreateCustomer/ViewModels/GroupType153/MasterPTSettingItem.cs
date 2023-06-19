@@ -3,7 +3,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 public class MasterPTSettingItem : GroupItemDefault
 {
     private const string PTXmlFormat
-        = "<R {0} IsLive=\"{1}\" SuperPT=\"{2}\" IsAuto=\"{3}\" MasterPT=\"{4}\" MinPT=\"{5}\"/>";
+        = "<R {0} IsLive=\"{1}\" SuperPT=\"{2}\" IsAuto=\"{3}\" AutoPT=\"{4}\" MasterPT=\"{5}\" MinPT=\"{6}\"/>";
 
     /// <summary>
     /// Super PT
@@ -36,8 +36,9 @@ public class MasterPTSettingItem : GroupItemDefault
             PTXmlFormat,
             base.ToXml(),
             IsLive,
-            IS3 ? US3 : S3,
+            IS3 ? 0 : S3,
             IS3 ? 1 : 0,
+            IS3 ? US3 : 0,
             M3,
             N3);
     }

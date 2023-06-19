@@ -18,7 +18,7 @@ public class SuperPTSettingItem : GroupItemDefault
                 base.ToXml(),
                 IsLive,
                 S4,
-                IsAuto,
+                IsAuto ? 1 : 0,
                 M4,
                 N4);
 }

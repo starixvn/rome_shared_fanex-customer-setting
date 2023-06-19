@@ -23,6 +23,7 @@ public class MessageService : IMessageService
     {
         return messageType switch
         {
+            MessageTypes.WrongPT => TranslateMessage<WrongPTSubMessage>(rawMessage, settingLevel, language),
             MessageTypes.MaxPTViolation => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, settingLevel, language),
             MessageTypes.MinMaxPTViolation => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, settingLevel, language),
             MessageTypes.ParlayMaxPayoutViolation 

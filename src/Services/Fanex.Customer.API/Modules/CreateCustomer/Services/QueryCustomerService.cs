@@ -52,36 +52,42 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
                     .SelectAwait(async t =>
                     {
-                        var groupItems = await groupItemMapping[t.Key.GroupType].Query(request.UplineCustId, g.Key, t.Key.GroupType);
-                        var groupType = new GroupType
+                        if (groupItemMapping.TryGetValue(t.Key.GroupType, out dynamic value))
                         {
-                            Id = t.Key.GroupType,
-                            Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
-                            DisplayType = t.Key.DisplayType,
-                            GroupItems =
-                            ((IEnumerable<GroupItemDefault>)groupItems).Join(
-                                t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType }),
-                                groupItems => new { SportType = groupItems.SportTypeId, BetType = groupItems.BetTypeId },
-                                groupItemsProfile => new { groupItemsProfile.Key.SportType, groupItemsProfile.Key.BetType },
-                                (groupItem, groupItemsProfile) =>
-                                {
-                                    groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
-                                    groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, request.Language);
-                                    groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
-                                    groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, request.Language);
-                                    groupItem.DisplayName = GetDisplayNameByDisplayType(
-                                        groupItem.SportTypeId,
-                                        groupItem.BetTypeId,
-                                        g.Key,
-                                        t.Key.GroupType,
-                                        t.Key.DisplayType,
-                                        request.UplineRoleId,
-                                        request.Language);
+                            var groupItems = await value.Query(request.UplineCustId, g.Key, t.Key.GroupType);
+                            var groupType = new GroupType
+                            {
+                                Id = t.Key.GroupType,
+                                Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
+                                DisplayType = t.Key.DisplayType,
+                                GroupItems =
+                                ((IEnumerable<GroupItemDefault>)groupItems).Join(
+                                    t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType }),
+                                    groupItems => new { SportType = groupItems.SportTypeId, BetType = groupItems.BetTypeId },
+                                    groupItemsProfile => new { groupItemsProfile.Key.SportType, groupItemsProfile.Key.BetType },
+                                    (groupItem, groupItemsProfile) =>
+                                    {
+                                        groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
+                                        groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, request.Language);
+                                        groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
+                                        groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, request.Language);
+                                        groupItem.DisplayName = GetDisplayNameByDisplayType(
+                                            groupItem.SportTypeId,
+                                            groupItem.BetTypeId,
+                                            g.Key,
+                                            t.Key.GroupType,
+                                            t.Key.DisplayType,
+                                            request.UplineRoleId,
+                                            request.Language);
 
-                                    return groupItem;
-                                })
-                        };
-                        return groupType;
+                                        return groupItem;
+                                    })
+                            };
+
+                            return groupType;
+                        }
+
+                        return null;
                     }).ToEnumerable()
                 }).Where(p => p.GroupTypes.Any())
         };
@@ -89,7 +95,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         customerSetting.GeneralInfo.UplineRoleId = request.UplineRoleId;
         return customerSetting;
     }
-    
+
     private string GetDisplayNameByDisplayType(
         int sportTypeId,
         int betTypeId,
