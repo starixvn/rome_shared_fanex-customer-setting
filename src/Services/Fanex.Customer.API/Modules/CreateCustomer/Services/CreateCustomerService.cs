@@ -21,6 +21,8 @@ using System.Linq;
 using Fanex.Data;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.Message.Models;
+using System.Xml;
+using Newtonsoft.Json;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -88,7 +90,8 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
             { "site", request.Settings.GeneralInfo.Site },
-            { "creationstatus", appSettings.CreationStatus }
+            { "creationstatus", appSettings.CreationStatus },
+            { "settingtypeall", ((XmlDocument)JsonConvert.DeserializeXmlNode(request.Context.UIBehavior)).OuterXml },
         };
     }
 
