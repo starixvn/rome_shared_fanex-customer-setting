@@ -13,6 +13,8 @@ public class CreateContext
     public short SystemId { get; set; }
 
     public string Language { get; set; }
+
+    public string UIBehavior { get; set; }
 }
 
 public class CreateRequest

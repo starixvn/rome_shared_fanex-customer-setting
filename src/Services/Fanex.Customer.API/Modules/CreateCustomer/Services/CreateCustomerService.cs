@@ -34,9 +34,9 @@ public interface ICreateCustomerService
 public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 {
     public CreateCustomerService(
-        IDynamicRepository dynamicRepository, 
-        IOptions<AppSettings> appSettings, 
-        ISharedService sharedService, 
+        IDynamicRepository dynamicRepository,
+        IOptions<AppSettings> appSettings,
+        ISharedService sharedService,
         ICacheRefService cacheRefService,
         IMessageService messageService)
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
@@ -91,7 +91,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "ip", request.Context.IP },
             { "site", request.Settings.GeneralInfo.Site },
             { "creationstatus", appSettings.CreationStatus },
-            { "settingtypeall", ((XmlDocument)JsonConvert.DeserializeXmlNode(request.Context.UIBehavior)).OuterXml },
+            { "settingtypeall", !string.IsNullOrWhiteSpace(request.Context.UIBehavior) ? ((XmlDocument)JsonConvert.DeserializeXmlNode(request.Context.UIBehavior))?.OuterXml: string.Empty },
         };
     }
 
