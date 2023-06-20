@@ -132,14 +132,8 @@
     <data name="GroupType154" xml:space="preserve">
         <value>Tiền Cược</value>
     </data>
-    <data name="GroupType155" xml:space="preserve">
-        <value>Giới hạn thắng thua</value>
-    </data>
     <data name="GroupType156" xml:space="preserve">
         <value>Hoa hồng</value>
-    </data>
-    <data name="GroupType157" xml:space="preserve">
-        <value>Giới Hạn Tiền Thua</value>
     </data>
     <data name="GroupType158" xml:space="preserve">
         <value>Hoa hồng</value>

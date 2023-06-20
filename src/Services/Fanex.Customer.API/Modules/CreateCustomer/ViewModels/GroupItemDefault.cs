@@ -5,9 +5,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType154;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 
@@ -17,9 +15,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 [JsonDerivedType(typeof(SuperPTSettingItem), typeDiscriminator: 4)]
 [JsonDerivedType(typeof(MasterPTSettingItem), typeDiscriminator: 5)]
 [JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 6)]
-[JsonDerivedType(typeof(WinlossLimitSettingItem), typeDiscriminator: 7)]
-[JsonDerivedType(typeof(GroupType156.CommissionSettingItem), typeDiscriminator: 8)]
-[JsonDerivedType(typeof(LossLimitSettingItem), typeDiscriminator: 9)]
+[JsonDerivedType(typeof(GroupType156.CommissionSettingItem), typeDiscriminator: 7)]
 public class GroupItemDefault
 {
     private const string SportTypeBetTypeXmlFormat = "SportType=\"{0}\" BetType=\"{1}\"";

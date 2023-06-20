@@ -132,14 +132,8 @@
     <data name="GroupType154" xml:space="preserve">
         <value>การกำหนดการวางเดิมพัน</value>
     </data>
-    <data name="GroupType155" xml:space="preserve">
-        <value>วงเงินแพ้ชนะ</value>
-    </data>
     <data name="GroupType156" xml:space="preserve">
         <value>คอมมิชชั่น</value>
-    </data>
-    <data name="GroupType157" xml:space="preserve">
-        <value>จำกัดยอดเสีย</value>
     </data>
     <data name="GroupType158" xml:space="preserve">
         <value>คอมมิชชั่น</value>

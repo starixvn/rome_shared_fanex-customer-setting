@@ -3,9 +3,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType150;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType157;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
@@ -42,9 +40,7 @@ public class BaseCustomerService
             {152, new GroupTypeBaseService<ParlayMaxPayoutSettingItem>(dynamicRepository, appSettings.Value)},
             {153, new GroupTypeBaseService<SuperPTSettingItem>(dynamicRepository, appSettings.Value)},
             {154, new GroupTypeBaseService<ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings.Value)},
-            {155, new GroupTypeBaseService<WinlossLimitSettingItem>(dynamicRepository, appSettings.Value)},
             {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
-            {157, new GroupTypeBaseService<LossLimitSettingItem>(dynamicRepository, appSettings.Value)}
         };
     }
 }
