@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33027.164
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.2092
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8FAA606E-FD83-44F7-B439-4725F5019829}"
 EndProject
@@ -18,11 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{9A854B66-63AB-44FF-A98E-1F862A5295A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONEbook.NG2.API.Client", "src\BuildingBlocks\ONEbook.NG2.API.Client\ONEbook.NG2.API.Client.csproj", "{E215B32A-1B7D-4CF7-8D68-F9441E8E1A79}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONEbook.UM.ThirdParty.AspNetCore", "src\BuildingBlocks\ONEbook.UM.ThirdParty.AspNetCore\ONEbook.UM.ThirdParty.AspNetCore.csproj", "{72D3D9F7-8515-498A-9311-01FD2ADDD022}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONEbook.NG2.API", "src\BuildingBlocks\ONEbook.NG2.API\ONEbook.NG2.API.csproj", "{AF1482F4-72F6-4011-90EC-4BFCC07E12B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ONEbook.UM.ThirdParty.AspNetCore", "src\BuildingBlocks\ONEbook.UM.ThirdParty.AspNetCore\ONEbook.UM.ThirdParty.AspNetCore.csproj", "{72D3D9F7-8515-498A-9311-01FD2ADDD022}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,18 +34,10 @@ Global
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E215B32A-1B7D-4CF7-8D68-F9441E8E1A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E215B32A-1B7D-4CF7-8D68-F9441E8E1A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E215B32A-1B7D-4CF7-8D68-F9441E8E1A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E215B32A-1B7D-4CF7-8D68-F9441E8E1A79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF1482F4-72F6-4011-90EC-4BFCC07E12B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF1482F4-72F6-4011-90EC-4BFCC07E12B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF1482F4-72F6-4011-90EC-4BFCC07E12B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF1482F4-72F6-4011-90EC-4BFCC07E12B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,9 +47,7 @@ Global
 		{F243AA29-D097-41AD-8DDA-6AA632982CC7} = {93325F17-8673-4F0A-913F-BE9635FBC724}
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC} = {93325F17-8673-4F0A-913F-BE9635FBC724}
 		{9A854B66-63AB-44FF-A98E-1F862A5295A8} = {8FAA606E-FD83-44F7-B439-4725F5019829}
-		{E215B32A-1B7D-4CF7-8D68-F9441E8E1A79} = {9A854B66-63AB-44FF-A98E-1F862A5295A8}
 		{72D3D9F7-8515-498A-9311-01FD2ADDD022} = {9A854B66-63AB-44FF-A98E-1F862A5295A8}
-		{AF1482F4-72F6-4011-90EC-4BFCC07E12B2} = {9A854B66-63AB-44FF-A98E-1F862A5295A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DAF03FB-26A5-4D6E-A7A9-53485196FB35}
