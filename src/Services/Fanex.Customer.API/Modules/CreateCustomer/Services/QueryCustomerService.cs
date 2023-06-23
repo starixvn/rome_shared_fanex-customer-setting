@@ -124,7 +124,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     language);
             }
         }
-        else if (displayType == (int)DisplayType.G_GT_Sport_Bettype)
+        else
         {
             return this.cacheRefService.GetNameByGroupSubGroup(
                     productGroupId,
@@ -133,7 +133,5 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     betTypeId,
                     language);
         }
-
-        return string.Empty;
     }
 }

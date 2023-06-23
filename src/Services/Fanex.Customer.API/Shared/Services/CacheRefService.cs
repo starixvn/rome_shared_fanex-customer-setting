@@ -24,6 +24,8 @@ public class CacheRefService : ICacheRefService
     private readonly IRemotingRefService remotingRef;
 
     private const string ProductGroupRefId = "ProductGroup";
+    
+    private const string SportRefId = "DummySport";
 
     private const string SubGroupRefId = "SubGroup";
 
@@ -44,8 +46,20 @@ public class CacheRefService : ICacheRefService
     public string GetSubGroupName(int? subGroupId, string language = "en-US")
         => this.remotingRef.GetResourceDataByRefIdAndResourceId(SubGroupRefId, subGroupId?.ToString(), language, subGroupId?.ToString());
 
-    public string GetSportTypeName(int sporttypeId, string language = "en-US")
-        => this.remotingRef.GetSportName(sporttypeId.ToString(), language);
+    public string GetSportTypeName(int sportTypeId, string language = "en-US")
+    {
+        var sportTypeName =this.remotingRef.GetSportName(sportTypeId.ToString(), language);
+        if (string.IsNullOrWhiteSpace(sportTypeName))
+        {
+            sportTypeName = this.remotingRef.GetResourceDataByRefIdAndResourceId(
+                SportRefId,
+                sportTypeId.ToString(),
+                language,
+                string.Empty);
+        }
+
+        return sportTypeName;
+    }
 
     public string GetBetTypeName(int bettypeId, string language = "en-US")
         => this.remotingRef.GetBetTypeName(bettypeId.ToString(), language);
