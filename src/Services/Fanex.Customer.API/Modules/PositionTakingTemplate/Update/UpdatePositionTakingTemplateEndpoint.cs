@@ -32,6 +32,7 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
             request.TemplateId,
             request.Settings.BuildXMLSettings(),
             request.IsDefault,
+            request.SubAccId,
             appSettings.CreationStatus,
             request.Language,
             request.IP);

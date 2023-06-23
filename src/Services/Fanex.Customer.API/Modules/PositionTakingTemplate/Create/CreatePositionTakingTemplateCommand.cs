@@ -9,6 +9,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
         string templateName,
         string settings,
         bool isDefault,
+        int subAccId,
         byte creationStatus,
         string language,
         string ip)
@@ -17,6 +18,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
         TemplateName = templateName;
         Settings = settings;
         IsDefault = isDefault;
+        SubAccId = subAccId;
         CreationStatus = creationStatus;
         Language = language;
         IP = ip;
@@ -31,6 +33,8 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
     public bool IsDefault { get; }
 
     public byte CreationStatus { get; }
+
+    public int SubAccId { get; }
 
     public string Language { get; }
 

@@ -15,6 +15,8 @@ public class UpdatePositionTakingTemplateRequest
     [Required]
     public IEnumerable<PTTemplateDetail> Settings { get; set; }
 
+    public int SubAccId { get; set; }
+
     public string Language { get; set; } = "E";
 
     public string IP { get; set; } = "";
