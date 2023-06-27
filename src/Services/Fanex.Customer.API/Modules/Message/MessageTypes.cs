@@ -8,6 +8,8 @@ public static class MessageTypes
 
     public const int CommissionViolation = 51;
 
+    public const int SBCommissionViolation = 52;
+
     public const int WrongPT = 61;
 
     public const int MaxPTViolation = 63;

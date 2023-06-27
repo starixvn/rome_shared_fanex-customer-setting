@@ -23,13 +23,19 @@ public class MessageService : IMessageService
     {
         return messageType switch
         {
-            MessageTypes.WrongPT => TranslateMessage<WrongPTSubMessage>(rawMessage, settingLevel, language),
-            MessageTypes.MaxPTViolation => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, settingLevel, language),
-            MessageTypes.MinMaxPTViolation => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, settingLevel, language),
+            MessageTypes.WrongPT 
+                => TranslateMessage<WrongPTSubMessage>(rawMessage, settingLevel, language),
+            MessageTypes.MaxPTViolation 
+                => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, settingLevel, language),
+            MessageTypes.MinMaxPTViolation 
+                => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, settingLevel, language),
+            MessageTypes.SBCommissionViolation 
+                => TranslateMessage<SBCommissionViolationSubMessage>(rawMessage, settingLevel, language),
             MessageTypes.ParlayMaxPayoutViolation 
                 or MessageTypes.BetSettingViolation
                 or MessageTypes.CommissionViolation
-                or MessageTypes.WinLossLimitViolation => TranslateMessage<SubMessage>(rawMessage, settingLevel, language),
+                or MessageTypes.WinLossLimitViolation 
+                => TranslateMessage<SubMessage>(rawMessage, settingLevel, language),
             _ => new MessageContent(rawMessage)
 
         };
