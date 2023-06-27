@@ -27,7 +27,7 @@ public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
             GroupId = productGroupId,
             GroupType = groupType,
             CustId = uplineCustId,
-            UplineRoleId = uplineRoleId,
+            RoleId = uplineRoleId,
             CreationStatus = appSettings.CreationStatus
         });
 }

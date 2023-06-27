@@ -5,6 +5,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -44,4 +45,51 @@ public class BaseCustomerService
             {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
         };
     }
+
+    protected string GetDisplayNameByDisplayType(
+        int sportTypeId,
+        int betTypeId,
+        int productGroupId,
+        int groupTypeId,
+        int displayType,
+        int uplineRoleId,
+        string language)
+    {
+        if (displayType == (int)DisplayType.CommSB)
+        {
+            if (uplineRoleId == (int)CustomerLevel.Agent)
+            {
+                return this.cacheRefService.GetSportsbookCommMemberName(
+                    productGroupId,
+                    groupTypeId,
+                    sportTypeId,
+                    betTypeId,
+                    language);
+            }
+            else
+            {
+                return this.cacheRefService.GetSportsbookCommSMAName(
+                    productGroupId,
+                    groupTypeId,
+                    sportTypeId,
+                    betTypeId,
+                    language);
+            }
+        }
+        else
+        {
+            return this.cacheRefService.GetNameByGroupSubGroup(
+                    productGroupId,
+                    groupTypeId,
+                    sportTypeId,
+                    betTypeId,
+                    language);
+        }
+    }
+
+    protected static int GetPTGroupTypeByCustomerLevel(int groupType, int roleId)
+    => groupType * 10 + roleId;
+
+    protected static bool IsPTGroupType(int groupType)
+    => groupType == 153;
 }

@@ -17,15 +17,15 @@ public class GetCustomerCriteria : CriteriaBase
     public byte CreationStatus { get; set; }
 
     [SpParam(Ignored = true)]
-    public int UplineRoleId { get; set; }
+    public int RoleId { get; set; }
 
     public override string GetSettingKey() 
-        => UplineRoleId switch
+        => RoleId switch
         {
             ((int)CustomerLevel.Super) =>"Acc_LiteMode_CustSetting_SuperAllInfoSel",
             ((int)CustomerLevel.Master) =>"Acc_LiteMode_CustSetting_MasterAllInfoSel",
             ((int)CustomerLevel.Agent) =>"Acc_LiteMode_CustSetting_MasterAllInfoSel",
-            _ => throw new IndexOutOfRangeException($"RoleId cannot = {UplineRoleId}")
+            _ => throw new IndexOutOfRangeException($"RoleId cannot = {RoleId}")
         };
 
     public override bool IsValid() => CustId > 0 && GroupId >= 0 && GroupType >= 0;

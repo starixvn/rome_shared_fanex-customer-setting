@@ -37,7 +37,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     new GetCustomerCriteria
                     {
                         CustId = request.UplineCustId,
-                        UplineRoleId = request.UplineRoleId,
+                        RoleId = request.UplineRoleId,
                         CreationStatus = appSettings.CreationStatus
                     });
         var customerSetting = new CustomerSetting
@@ -95,51 +95,4 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         customerSetting.GeneralInfo.UplineRoleId = request.UplineRoleId;
         return customerSetting;
     }
-
-    private string GetDisplayNameByDisplayType(
-        int sportTypeId,
-        int betTypeId,
-        int productGroupId,
-        int groupTypeId,
-        int displayType,
-        int uplineRoleId,
-        string language)
-    {
-        if (displayType == (int)DisplayType.CommSB)
-        {
-            if (uplineRoleId == (int)CustomerLevel.Agent)
-            {
-                return this.cacheRefService.GetSportsbookCommMemberName(
-                    productGroupId,
-                    groupTypeId,
-                    sportTypeId,
-                    betTypeId,
-                    language);
-            }
-            else
-            {
-                return this.cacheRefService.GetSportsbookCommSMAName(
-                    productGroupId,
-                    groupTypeId,
-                    sportTypeId,
-                    betTypeId,
-                    language);
-            }
-        }
-        else
-        {
-            return this.cacheRefService.GetNameByGroupSubGroup(
-                    productGroupId,
-                    groupTypeId,
-                    sportTypeId,
-                    betTypeId,
-                    language);
-        }
-    }
-
-    private static int GetPTGroupTypeByCustomerLevel(int groupType, int roleId)
-    => groupType * 10 + roleId;
-
-    private static bool IsPTGroupType(int groupType)
-    => groupType == 153;
 }

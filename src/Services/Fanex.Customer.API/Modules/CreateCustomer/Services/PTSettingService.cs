@@ -1,4 +1,5 @@
 using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
@@ -11,7 +12,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface IPTSettingService
 {
-    Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language);
+    Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request);
 }
 
 public class PTSettingService: BaseCustomerService, IPTSettingService
@@ -21,28 +22,30 @@ public class PTSettingService: BaseCustomerService, IPTSettingService
     {
     }
 
-    public async Task<IEnumerable<ProductGroup>> GetPTSettings(int custId, string language)
+    public async Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request)
     {
         var settingProfile = await sharedService.GetSettingProfiles();
         var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(
                     new GetCustomerCriteria
                     {
-                        CustId = custId,
+                        CustId = request.CustId,
+                        RoleId = request.RoleId,
                         CreationStatus = appSettings.CreationStatus
                     });
 
-        var productGroups = settingProfile.Where(p => p.GroupType == 153 || p.GroupType == 160).GroupBy(p => p.GroupId)
+        var productGroups = settingProfile.Where(p => p.GroupType == 153).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {
                 Id = g.Key,
-                Name = cacheRefService.GetProductGroupName(g.Key, language),
+                Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
                 GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
-                    var groupItems = await groupItemMapping[t.Key.GroupType].Query(custId, g.Key, t.Key.GroupType);
+                    var groupTypeWithRoleId = IsPTGroupType(t.Key.GroupType) ? GetPTGroupTypeByCustomerLevel(t.Key.GroupType, request.RoleId - 1) : t.Key.GroupType;
+                    var groupItems = await groupItemMapping[groupTypeWithRoleId].Query(request.CustId, request.RoleId, g.Key, t.Key.GroupType);
                     var groupType = new GroupType
                     {
                         Id = t.Key.GroupType,
-                        Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(language)),
+                        Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                         DisplayType = t.Key.DisplayType,
                         GroupItems =
                         ((IEnumerable<GroupItemDefault>)groupItems).Join(
@@ -52,9 +55,9 @@ public class PTSettingService: BaseCustomerService, IPTSettingService
                             (groupItem, groupItemsProfile) =>
                             {
                                 groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
-                                groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
-                                groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
-                                groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, language);
+                                groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, request.Language);
+                                groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
+                                groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, request.Language);
 
                                 return groupItem;
                             })
