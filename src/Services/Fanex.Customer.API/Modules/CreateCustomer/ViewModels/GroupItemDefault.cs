@@ -14,8 +14,9 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 [JsonDerivedType(typeof(ParlayMaxPayoutSettingItem), typeDiscriminator: 3)]
 [JsonDerivedType(typeof(SuperPTSettingItem), typeDiscriminator: 4)]
 [JsonDerivedType(typeof(MasterPTSettingItem), typeDiscriminator: 5)]
-[JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 6)]
-[JsonDerivedType(typeof(GroupType156.CommissionSettingItem), typeDiscriminator: 7)]
+[JsonDerivedType(typeof(AgentPTSettingItem), typeDiscriminator: 6)]
+[JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 7)]
+[JsonDerivedType(typeof(GroupType156.CommissionSettingItem), typeDiscriminator: 8)]
 public class GroupItemDefault
 {
     private const string SportTypeBetTypeXmlFormat = "SportType=\"{0}\" BetType=\"{1}\"";

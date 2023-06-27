@@ -37,6 +37,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     new GetCustomerCriteria
                     {
                         CustId = request.UplineCustId,
+                        UplineRoleId = request.UplineRoleId,
                         CreationStatus = appSettings.CreationStatus
                     });
         var customerSetting = new CustomerSetting
@@ -50,9 +51,10 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
                     .SelectAwait(async t =>
                     {
-                        if (groupItemMapping.TryGetValue(t.Key.GroupType, out dynamic value))
+                        var groupTypeWithRoleId = IsPTGroupType(t.Key.GroupType) ? GetPTGroupTypeByCustomerLevel(t.Key.GroupType, request.UplineRoleId - 1) : t.Key.GroupType;
+                        if (groupItemMapping.TryGetValue(groupTypeWithRoleId, out dynamic value))
                         {
-                            var groupItems = await value.Query(request.UplineCustId, g.Key, t.Key.GroupType);
+                            var groupItems = await value.Query(request.UplineCustId, request.UplineRoleId, g.Key, t.Key.GroupType);
                             var groupType = new GroupType
                             {
                                 Id = t.Key.GroupType,
@@ -134,4 +136,10 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     language);
         }
     }
+
+    private static int GetPTGroupTypeByCustomerLevel(int groupType, int roleId)
+    => groupType * 10 + roleId;
+
+    private static bool IsPTGroupType(int groupType)
+    => groupType == 153;
 }

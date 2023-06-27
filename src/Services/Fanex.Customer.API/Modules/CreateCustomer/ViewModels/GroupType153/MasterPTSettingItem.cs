@@ -30,6 +30,21 @@ public class MasterPTSettingItem : GroupItemDefault
     /// </summary>
     public decimal N3 { get; set; }
 
+    /// <summary>
+    /// Super Max PT
+    /// </summary>
+    public decimal S4 { get; set; }
+
+    /// <summary>
+    /// Master Max PT
+    /// </summary>
+    public decimal M4 { get; set; }
+
+    /// <summary>
+    /// Super Min PT
+    /// </summary>
+    public decimal N4 { get; set; }
+
     public override string ToXml()
     {
         return string.Format(

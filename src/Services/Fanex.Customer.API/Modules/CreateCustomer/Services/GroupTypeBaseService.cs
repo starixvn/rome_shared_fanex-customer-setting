@@ -6,7 +6,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface IGroupTypeBaseService<T>
 {
-    Task<IEnumerable<T>> Query(int uplineCustId, int productGroupId, int groupType);
+    Task<IEnumerable<T>> Query(int uplineCustId, int uplineRoleId, int productGroupId, int groupType);
 }
 
 public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
@@ -21,12 +21,13 @@ public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
         this.appSettings = appSettings;
     }
 
-    public async Task<IEnumerable<T>> Query(int uplineCustId, int productGroupId, int groupType)
+    public async Task<IEnumerable<T>> Query(int uplineCustId, int uplineRoleId, int productGroupId, int groupType)
         => await dynamicRepository.FetchAsync<T>(new GetCustomerCriteria
         {
             GroupId = productGroupId,
             GroupType = groupType,
             CustId = uplineCustId,
+            UplineRoleId = uplineRoleId,
             CreationStatus = appSettings.CreationStatus
         });
 }

@@ -20,26 +20,23 @@ public class MessageService : IMessageService
     }
 
     public MessageContent TranslateMessage(int messageType, string rawMessage, byte settingLevel, string language)
-    {
-        return messageType switch
+        => messageType switch
         {
-            MessageTypes.WrongPT 
+            MessageTypes.WrongPT
                 => TranslateMessage<WrongPTSubMessage>(rawMessage, settingLevel, language),
-            MessageTypes.MaxPTViolation 
+            MessageTypes.MaxPTViolation
                 => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, settingLevel, language),
-            MessageTypes.MinMaxPTViolation 
+            MessageTypes.MinMaxPTViolation
                 => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, settingLevel, language),
-            MessageTypes.SBCommissionViolation 
+            MessageTypes.SBCommissionViolation
                 => TranslateMessage<SBCommissionViolationSubMessage>(rawMessage, settingLevel, language),
-            MessageTypes.ParlayMaxPayoutViolation 
+            MessageTypes.ParlayMaxPayoutViolation
                 or MessageTypes.BetSettingViolation
                 or MessageTypes.CommissionViolation
-                or MessageTypes.WinLossLimitViolation 
+                or MessageTypes.WinLossLimitViolation
                 => TranslateMessage<SubMessage>(rawMessage, settingLevel, language),
             _ => new MessageContent(rawMessage)
-
         };
-    }
 
     private MessageContent TranslateMessage<T>(string rawMessage, byte settingLevel, string language) where T : SubMessage
     {

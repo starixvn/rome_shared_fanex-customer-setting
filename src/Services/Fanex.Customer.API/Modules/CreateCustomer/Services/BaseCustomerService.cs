@@ -38,7 +38,8 @@ public class BaseCustomerService
             {150, new GroupTypeBaseService<CommissionGroup>(dynamicRepository, appSettings.Value)},
             {151, new GroupTypeBaseService<BetSettingItem>(dynamicRepository, appSettings.Value)},
             {152, new GroupTypeBaseService<ParlayMaxPayoutSettingItem>(dynamicRepository, appSettings.Value)},
-            {153, new GroupTypeBaseService<SuperPTSettingItem>(dynamicRepository, appSettings.Value)},
+            {153_3, new GroupTypeBaseService<MasterPTSettingItem>(dynamicRepository, appSettings.Value)},
+            {153_2, new GroupTypeBaseService<AgentPTSettingItem>(dynamicRepository, appSettings.Value)},
             {154, new GroupTypeBaseService<ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings.Value)},
             {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
         };
