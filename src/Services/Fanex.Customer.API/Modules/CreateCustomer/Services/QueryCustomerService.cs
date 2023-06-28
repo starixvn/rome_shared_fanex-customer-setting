@@ -34,12 +34,12 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
     {
         var settingProfile = await sharedService.GetSettingProfiles();
         var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(
-                    new GetCustomerCriteria
-                    {
-                        CustId = request.UplineCustId,
-                        RoleId = request.UplineRoleId,
-                        CreationStatus = appSettings.CreationStatus
-                    });
+            new GetCustomerCriteria
+            {
+                CustId = request.UplineCustId,
+                RoleId = request.UplineRoleId,
+                CreationStatus = appSettings.CreationStatus
+            });
         var customerSetting = new CustomerSetting
         {
             GeneralInfo = generalInfo,

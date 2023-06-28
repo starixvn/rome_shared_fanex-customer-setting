@@ -14,7 +14,42 @@ public class CreateContext
 
     public string Language { get; set; }
 
-    public string UIBehavior { get; set; }
+    public UIBehavior UIBehavior { get; set; }
+}
+
+public class UIBehavior
+{
+    public IEnumerable<UIProductGroup> ProductGroups { get; set; }
+}
+
+public class UIProductGroup
+{
+    public string GroupName { get; set; }
+
+    public UIGroupType GroupTypes { get; set; }
+}
+
+public class UIGroupType
+{
+
+    public string GroupTypeName { get; set; }
+
+    public UISubGroup SubGroups { get; set; }
+}
+
+public class UISubGroup
+{
+    public string SubGroupName { get; set; }
+
+    public IEnumerable<UIAttribute> Attributes { get; set; }
+
+}
+
+public class UIAttribute
+{
+    public string Key { get; set; }
+
+    public string Value { get; set; }
 }
 
 public class CreateRequest

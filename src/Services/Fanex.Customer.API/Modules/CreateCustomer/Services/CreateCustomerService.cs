@@ -44,7 +44,6 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     public async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         var parameters = await this.GetCreateCustomerParams(request, appSettings);
-
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_LiteMode_CustomerInsMember_SAg");
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
@@ -89,7 +88,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "ip", request.Context.IP },
             { "site", request.Settings.GeneralInfo.Site },
             { "creationstatus", appSettings.CreationStatus },
-            { "settingtypeall", !string.IsNullOrWhiteSpace(request.Context.UIBehavior) ? ((XmlDocument)JsonConvert.DeserializeXmlNode(request.Context.UIBehavior))?.OuterXml: string.Empty },
+            { "settingtypeall", (request.Context.UIBehavior != null) ? ObjectToXml(request.Context.UIBehavior) : string.Empty },
         };
     }
 
@@ -114,5 +113,11 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
         return joinedItems.GroupBy(g => g.SettingType)
         .Select(t => new KeyValuePair<int, string>(t.Key, string.Join("", t.Select(i => i.GroupItem.ToXml()))));
+    }
+
+    private static string ObjectToXml(object o)
+    {
+        Fanex.Common.Helper.Check.Argument.IsNotNull(o, "o");
+        return  ((XmlDocument)JsonConvert.DeserializeXmlNode(JsonConvert.SerializeObject(o)))?.OuterXml;
     }
 }

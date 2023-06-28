@@ -26,12 +26,12 @@ public class PTSettingService: BaseCustomerService, IPTSettingService
     {
         var settingProfile = await sharedService.GetSettingProfiles();
         var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(
-                    new GetCustomerCriteria
-                    {
-                        CustId = request.CustId,
-                        RoleId = request.RoleId,
-                        CreationStatus = appSettings.CreationStatus
-                    });
+            new GetCustomerCriteria
+            {
+                CustId = request.CustId,
+                RoleId = request.RoleId,
+                CreationStatus = appSettings.CreationStatus
+            });
 
         var productGroups = settingProfile.Where(p => p.GroupType == 153).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
