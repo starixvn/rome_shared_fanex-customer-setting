@@ -23,9 +23,11 @@ public class CacheRefService : ICacheRefService
 {
     private readonly IRemotingRefService remotingRef;
 
+    private const string ProductRefId = "Product";
+
     private const string ProductGroupRefId = "ProductGroup";
     
-    private const string SportRefId = "DummySport";
+    private const string DummySportRefId = "DummySport";
 
     private const string SubGroupRefId = "SubGroup";
 
@@ -40,6 +42,9 @@ public class CacheRefService : ICacheRefService
         this.remotingRef = remotingRef;
     }
 
+    public string GetProductName (int productId, string language = "en-US")
+        => this.remotingRef.GetResourceDataByRefIdAndResourceId(ProductRefId, productId.ToString(), language, productId.ToString());
+
     public string GetProductGroupName(int productGroupId, string language = "en-US")
         => this.remotingRef.GetResourceDataByRefIdAndResourceId(ProductGroupRefId, productGroupId.ToString(), language, productGroupId.ToString());
 
@@ -52,7 +57,7 @@ public class CacheRefService : ICacheRefService
         if (string.IsNullOrWhiteSpace(sportTypeName))
         {
             sportTypeName = this.remotingRef.GetResourceDataByRefIdAndResourceId(
-                SportRefId,
+                DummySportRefId,
                 sportTypeId.ToString(),
                 language,
                 string.Empty);
