@@ -85,6 +85,7 @@
             <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
             <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
             <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+            <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
         </Setting>
         <Setting Key="Acc_LiteMode_CustSetting_MasterAllInfoSel" SpName="Acc_LiteMode_CustSetting_MasterAllInfoSel_xtest" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
@@ -98,6 +99,7 @@
             <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
             <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
             <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+            <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
         </Setting>
         <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg_xtest" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
