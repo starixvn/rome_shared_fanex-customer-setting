@@ -44,7 +44,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     public async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         var parameters = await this.GetCreateCustomerParams(request, appSettings);
-        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_LiteMode_CustomerInsMember_SAg");
+        using IObjectDb db = ObjectDbFactory.CreateInstance(GetCreateNewSPName(request.Settings.GeneralInfo.UplineRoleId));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), SettingLevel.SportTypeBetType, request.Context.Language);
@@ -69,7 +69,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)
     {
-        return new Hashtable {
+        var parameters = new Hashtable {
             { "firstname", request.Settings.GeneralInfo.FirstName },
             { "lastname", request.Settings.GeneralInfo.LastName },
             { "creator", request.Context.CreatorId },
@@ -79,17 +79,29 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "mobilephone", request.Settings.GeneralInfo.MobilePhone },
             { "fax", request.Settings.GeneralInfo.Fax },
             { "transferoption", request.Settings.GeneralInfo.TransferOption },
-            { "disableautompt", request.Settings.GeneralInfo.AllowAutoPT },
+            { "templatename", request.Settings.GeneralInfo.TemplateName },
             { "language", request.Context.Language },
             { "subaccid", request.Context.SubAccId },
             { "credit", request.Settings.GeneralInfo.MaxCredit },
-            { "srecommend", request.Context.CreatorId },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
-            { "site", request.Settings.GeneralInfo.Site },
             { "creationstatus", appSettings.CreationStatus },
             { "settingtypeall", (request.Context.UIBehavior != null) ? ObjectToXml(request.Context.UIBehavior) : string.Empty },
         };
+
+        if (request.Settings.GeneralInfo.UplineRoleId == (int)CustomerLevel.Super)
+        {
+            parameters.Add("disableautompt", request.Settings.GeneralInfo.AllowAutoPT);
+            parameters.Add("site", request.Settings.GeneralInfo.Site);
+            parameters.Add("srecommend", request.Context.CreatorId);
+        }
+        else if (request.Settings.GeneralInfo.UplineRoleId == (int)CustomerLevel.Master)
+        {
+            parameters.Add("maxcredit", request.Settings.GeneralInfo.MemberMaxCredit);
+            parameters.Add("mrecommend", request.Context.CreatorId);
+        }
+
+        return parameters;
     }
 
     private static IEnumerable<KeyValuePair<int, string>> CreateSettingTypesXml(CreateRequest request, IEnumerable<SettingProfile> settingProfiles)
@@ -120,4 +132,13 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         Fanex.Common.Helper.Check.Argument.IsNotNull(o, "o");
         return  ((XmlDocument)JsonConvert.DeserializeXmlNode(JsonConvert.SerializeObject(o)))?.OuterXml;
     }
+
+    private static string GetCreateNewSPName(int roleId)
+        => roleId switch
+        {
+            ((int)CustomerLevel.Super) =>"Acc_LiteMode_CustomerInsMember_SAg",
+            ((int)CustomerLevel.Master) =>"Acc_LiteMode_CustomerInsMember_MAg",
+            ((int)CustomerLevel.Agent) =>"Acc_LiteMode_CustSetting_MasterAllInfoSel",
+            _ => throw new IndexOutOfRangeException($"RoleId cannot = {roleId}")
+        };
 }

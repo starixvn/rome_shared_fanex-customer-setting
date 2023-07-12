@@ -24,22 +24,27 @@ public class UIBehavior
 
 public class UIProductGroup
 {
-    public string GroupName { get; set; }
+    public int Id { get; set; }
+
+    public string Name { get; set; }
 
     public UIGroupType GroupTypes { get; set; }
 }
 
 public class UIGroupType
 {
+    public int Id { get; set; }
 
-    public string GroupTypeName { get; set; }
+    public string Name { get; set; }
 
-    public UISubGroup SubGroups { get; set; }
+    public IEnumerable<UISubGroup> SubGroups { get; set; }
 }
 
 public class UISubGroup
 {
-    public string SubGroupName { get; set; }
+    public int Id { get; set; }
+
+    public string Name { get; set; }
 
     public IEnumerable<UIAttribute> Attributes { get; set; }
 

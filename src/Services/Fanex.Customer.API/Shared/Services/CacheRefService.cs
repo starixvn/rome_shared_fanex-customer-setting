@@ -37,6 +37,8 @@ public class CacheRefService : ICacheRefService
 
     private const string G_GT_Sport_Bettype_RefId = "G_GT_Sport_Bettype";
 
+    private static Dictionary<string, string> cacheData ;
+
     public CacheRefService(IRemotingRefService remotingRef)
     {
         this.remotingRef = remotingRef;
@@ -74,6 +76,7 @@ public class CacheRefService : ICacheRefService
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
         return this.remotingRef.GetResourceDataByRefIdAndResourceId(SB_Comm_SMA_RefId, refKey, language, refKey);
     }
+
     public string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
@@ -86,6 +89,13 @@ public class CacheRefService : ICacheRefService
         return this.remotingRef.GetResourceDataByRefIdAndResourceId(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
     }
 
-    private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
+    private static string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
         => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";
+
+    private static string GetFromCacheData(string refId, string refKey)
+        => cacheData[$"{refId}_{refKey}"];
+
+    private static void SetToCacheData (string refId, string refKey, string value)
+    => cacheData[$"{refId}_{refKey}"] = value;
+
 }

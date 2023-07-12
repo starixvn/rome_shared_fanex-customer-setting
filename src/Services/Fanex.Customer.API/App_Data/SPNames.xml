@@ -102,6 +102,7 @@
             <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
         </Setting>
         <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg_xtest" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg_xtest" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
