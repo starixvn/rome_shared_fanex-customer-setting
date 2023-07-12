@@ -50,17 +50,6 @@ public class CopyCustomerService : ICopyCustomerService
 
     public async Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request)
     {
-        var checkLimitNewDownlineResult = await CheckLimitNewDownline(new CheckLimitNewDownlineRequest
-        {
-            CustId = request.ActorId,
-            CustLevel = request.ActorUserLevel,
-            Language = request.Language
-        });
-        if (!checkLimitNewDownlineResult.IsSuccessful)
-        {
-            return new CopyMultipleCustomerResult(Enumerable.Empty<string>(), checkLimitNewDownlineResult.Code, checkLimitNewDownlineResult.Message);
-        }
-
         var isSourceAccountEnable = request.SourceCustId > 0 && await customerService.IsEnableCustomer(request.SourceCustId);
 
         if (!isSourceAccountEnable)
