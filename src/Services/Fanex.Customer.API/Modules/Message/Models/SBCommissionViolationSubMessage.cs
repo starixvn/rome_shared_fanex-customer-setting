@@ -8,6 +8,6 @@ public class SBCommissionViolationSubMessage : SubMessage
 
     private const int SBCommGroupType = 150;
 
-    public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
+    public override string ToString(ICacheRefService cacheRefService, string language)
         => cacheRefService.GetSportsbookCommSMAName(SBGroupId, SBCommGroupType, SportType, BetType, language);
 }

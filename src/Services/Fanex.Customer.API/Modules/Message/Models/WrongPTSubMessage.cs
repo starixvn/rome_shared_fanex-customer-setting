@@ -10,9 +10,9 @@ public class WrongPTSubMessage : SubMessage
     [XmlAttribute]
     public bool IsLive { get; set; }
 
-    public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
+    public override string ToString(ICacheRefService cacheRefService, string language)
     {
-        var message = base.ToString(cacheRefService, settingLevel, language);
+        var message = base.ToString(cacheRefService, language);
         if (IsLive)
         {
             message += string.Format(" ({0})", StaticResources.Get("Live", language));

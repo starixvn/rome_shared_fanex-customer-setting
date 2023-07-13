@@ -1,26 +1,17 @@
-using Fanex.Caching;
-using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Shared.Services;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType150;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
-using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using System.Collections;
-using System.Linq;
 using Fanex.Data;
 using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Modules.Message.Models;
 using System.Xml;
 using Newtonsoft.Json;
+using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -47,7 +38,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         using IObjectDb db = ObjectDbFactory.CreateInstance(GetCreateNewSPName(request.Settings.GeneralInfo.UplineRoleId));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), SettingLevel.SportTypeBetType, request.Context.Language);
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
         return new CreateCustomerResult(Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
@@ -80,7 +71,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "fax", request.Settings.GeneralInfo.Fax },
             { "transferoption", request.Settings.GeneralInfo.TransferOption },
             { "templatename", request.Settings.GeneralInfo.TemplateName },
-            { "language", request.Context.Language },
+            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "subaccid", request.Context.SubAccId },
             { "credit", request.Settings.GeneralInfo.MaxCredit },
             { "systemid", request.Context.SystemId },

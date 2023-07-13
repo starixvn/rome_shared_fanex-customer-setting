@@ -7,7 +7,7 @@ namespace Fanex.Customer.API.Modules.Message;
 
 public interface IMessageService
 {
-    MessageContent TranslateMessage(int messageType, string rawMessage, byte settingLevel, string language);
+    MessageContent TranslateMessage(int messageType, string rawMessage, string language);
 }
 
 public class MessageService : IMessageService
@@ -19,45 +19,45 @@ public class MessageService : IMessageService
         this.cacheRefService = cacheRefService;
     }
 
-    public MessageContent TranslateMessage(int messageType, string rawMessage, byte settingLevel, string language)
+    public MessageContent TranslateMessage(int messageType, string rawMessage, string language)
         => messageType switch
         {
             MessageTypes.WrongPT
-                => TranslateMessage<WrongPTSubMessage>(rawMessage, settingLevel, language),
+                => TranslateMessage<WrongPTSubMessage>(rawMessage, language),
             MessageTypes.MaxPTViolation
-                => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, settingLevel, language),
+                => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, language),
             MessageTypes.MinMaxPTViolation
-                => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, settingLevel, language),
+                => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, language),
             MessageTypes.SBCommissionViolation
-                => TranslateMessage<SBCommissionViolationSubMessage>(rawMessage, settingLevel, language),
+                => TranslateMessage<SBCommissionViolationSubMessage>(rawMessage, language),
             MessageTypes.ParlayMaxPayoutViolation
                 or MessageTypes.BetSettingViolation
                 or MessageTypes.CommissionViolation
                 or MessageTypes.WinLossLimitViolation
-                => TranslateMessage<SubMessage>(rawMessage, settingLevel, language),
+                => TranslateMessage<SubMessage>(rawMessage, language),
             _ => new MessageContent(rawMessage)
         };
 
-    private MessageContent TranslateMessage<T>(string rawMessage, byte settingLevel, string language) where T : SubMessage
+    private MessageContent TranslateMessage<T>(string rawMessage, string language) where T : SubMessage
     {
         var message = Deserialize<MainMessage<T>>(rawMessage);
         var mainMessage = GetMessage(message.MessageId, language);
 
         if (message.SubMessages.Any())
         {
-            return new MessageContent(mainMessage, TranslateSubMessages(message.SubMessages, settingLevel, language));
+            return new MessageContent(mainMessage, TranslateSubMessages(message.SubMessages, language));
         }
 
         return new MessageContent(mainMessage);
     }
 
-    private IEnumerable<string> TranslateSubMessages<T>(T[] subMessages, byte settingLevel, string language) where T : SubMessage
+    private IEnumerable<string> TranslateSubMessages<T>(T[] subMessages, string language) where T : SubMessage
     {
         var messages = new List<string>();
 
         foreach (var subMessage in subMessages)
         {
-            messages.Add(subMessage.ToString(cacheRefService, settingLevel, language));
+            messages.Add(subMessage.ToString(cacheRefService, language));
         }
 
         return messages;

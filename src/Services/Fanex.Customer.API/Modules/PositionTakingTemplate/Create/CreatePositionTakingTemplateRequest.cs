@@ -17,7 +17,7 @@ public class CreatePositionTakingTemplateRequest
 
     public int SubAccId { get; set; }
     
-    public string Language { get; set; } = "E";
+    public string Language { get; set; } = "en-US";
 
     public string IP { get; set; } = "";
 }

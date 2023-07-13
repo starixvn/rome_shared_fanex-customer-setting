@@ -105,7 +105,7 @@
         <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg_xtest" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns_xtest" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateUpd" SpName="Acc_LiteMode_CustSetting_CustPTTemplateUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
     </Function>

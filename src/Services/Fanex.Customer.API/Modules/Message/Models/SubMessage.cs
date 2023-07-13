@@ -11,13 +11,15 @@ public class SubMessage
     [XmlAttribute]
     public int BetType { get; set; }
 
-    public virtual string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
-        => settingLevel switch
+    [XmlAttribute]
+    public int SettingLevel { get; set; }
+
+    public virtual string ToString(ICacheRefService cacheRefService, string language)
+        => SettingLevel switch
         {
-            SettingLevel.Product => string.Empty,
-            SettingLevel.SportType => cacheRefService.GetSportTypeName(SportType, language),
-            SettingLevel.BetType => cacheRefService.GetBetTypeName(BetType, language),
-            SettingLevel.SportTypeBetType => $"{cacheRefService.GetSportTypeName(SportType, language)} - {cacheRefService.GetBetTypeName(BetType, language)}",
-            _ => throw new InvalidOperationException("Not implement setting level")
+            Models.SettingLevel.Product => string.Empty,
+            Models.SettingLevel.SportType => cacheRefService.GetSportTypeName(SportType, language),
+            Models.SettingLevel.BetType => cacheRefService.GetBetTypeName(BetType, language),
+            _ => $"{cacheRefService.GetSportTypeName(SportType, language)} - {cacheRefService.GetBetTypeName(BetType, language)}"
         };
 }

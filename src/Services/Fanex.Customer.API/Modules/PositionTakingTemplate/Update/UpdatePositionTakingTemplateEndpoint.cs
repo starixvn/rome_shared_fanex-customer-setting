@@ -1,5 +1,6 @@
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.Message.Models;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using MinimalApi.Endpoint;
@@ -34,10 +35,10 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
             request.IsDefault,
             request.SubAccId,
             appSettings.CreationStatus,
-            request.Language,
+            LanguageUtils.ToLanguageKey(request.Language),
             request.IP);
         await dynamicRepository.ExecuteAsync(command);
-        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, SettingLevel.SportTypeBetType, "en-US");
+        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, request.Language);
 
         return Results.Ok(new PTTemplateResult(command.ErrCode, message.MainMessage, message.SubMessages));
     }

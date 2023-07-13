@@ -13,10 +13,10 @@ public class MinMaxPTViolationSubMessage : WrongPTSubMessage
     [XmlAttribute]
     public decimal MaxPT { get; set; }
 
-    public override string ToString(ICacheRefService cacheRefService, byte settingLevel, string language)
+    public override string ToString(ICacheRefService cacheRefService, string language)
         => string.Format(
             "{0} - {1}: {2} - {3}: {4}",
-            base.ToString(cacheRefService, settingLevel, language),
+            base.ToString(cacheRefService, language),
             StaticResources.Get(IsLive ? "MinLive" : "Min", language),
             PTFormatter.FormatPT(MinPT),
             StaticResources.Get(IsLive ? "MaxLive" : "Max", language),
