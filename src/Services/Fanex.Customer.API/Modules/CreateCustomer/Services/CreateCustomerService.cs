@@ -61,14 +61,14 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)
     {
         var parameters = new Hashtable {
-            { "firstname", request.Settings.GeneralInfo.FirstName },
-            { "lastname", request.Settings.GeneralInfo.LastName },
+            { "firstname", request.Settings.GeneralInfo.FirstName ?? string.Empty },
+            { "lastname", request.Settings.GeneralInfo.LastName ?? string.Empty},
             { "creator", request.Context.CreatorId },
             { "username", request.Settings.GeneralInfo.UserName },
             { "userpwd", request.Settings.GeneralInfo.Password },
-            { "phone", request.Settings.GeneralInfo.Phone },
-            { "mobilephone", request.Settings.GeneralInfo.MobilePhone },
-            { "fax", request.Settings.GeneralInfo.Fax },
+            { "phone", request.Settings.GeneralInfo.Phone ?? string.Empty},
+            { "mobilephone", request.Settings.GeneralInfo.MobilePhone ?? string.Empty},
+            { "fax", request.Settings.GeneralInfo.Fax ?? string.Empty},
             { "transferoption", request.Settings.GeneralInfo.TransferOption },
             { "templatename", request.Settings.GeneralInfo.TemplateName },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
@@ -82,7 +82,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
         if (request.Settings.GeneralInfo.UplineRoleId == (int)CustomerLevel.Super)
         {
-            parameters.Add("disableautompt", request.Settings.GeneralInfo.AllowAutoPT);
+            parameters.Add("disableautompt", !request.Settings.GeneralInfo.AllowAutoPT);
             parameters.Add("site", request.Settings.GeneralInfo.Site);
             parameters.Add("srecommend", request.Context.CreatorId);
         }
