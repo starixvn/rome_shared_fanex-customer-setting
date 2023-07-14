@@ -26,7 +26,7 @@ public class GeneralInformation
 
     public string Fax { get; set; }
 
-    public bool AllowAutoPT { get; set; }
+    public bool DisableAutoMPT { get; set; }
 
     public string Group { get; set; }
 

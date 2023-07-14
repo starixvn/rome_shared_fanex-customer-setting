@@ -82,7 +82,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
         if (request.Settings.GeneralInfo.UplineRoleId == (int)CustomerLevel.Super)
         {
-            parameters.Add("disableautompt", !request.Settings.GeneralInfo.AllowAutoPT);
+            parameters.Add("disableautompt", request.Settings.GeneralInfo.DisableAutoMPT);
             parameters.Add("site", request.Settings.GeneralInfo.Site);
             parameters.Add("srecommend", request.Context.CreatorId);
         }
