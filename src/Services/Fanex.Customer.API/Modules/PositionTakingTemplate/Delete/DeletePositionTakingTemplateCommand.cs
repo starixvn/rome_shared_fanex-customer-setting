@@ -20,6 +20,8 @@ public class DeletePositionTakingTemplateCommand : INonQueryCommand
 
     public string IP { get; }
 
+    public int SubAccId { get; }
+
     public int ErrCode { get; set; }
 
     public string ErrMsg { get; set; }
