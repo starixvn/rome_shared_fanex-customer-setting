@@ -16,10 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{9A854B66-63AB-44FF-A98E-1F862A5295A8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ONEbook.UM.ThirdParty.AspNetCore", "src\BuildingBlocks\ONEbook.UM.ThirdParty.AspNetCore\ONEbook.UM.ThirdParty.AspNetCore.csproj", "{72D3D9F7-8515-498A-9311-01FD2ADDD022}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +30,6 @@ Global
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72D3D9F7-8515-498A-9311-01FD2ADDD022}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,8 +38,6 @@ Global
 		{93325F17-8673-4F0A-913F-BE9635FBC724} = {8FAA606E-FD83-44F7-B439-4725F5019829}
 		{F243AA29-D097-41AD-8DDA-6AA632982CC7} = {93325F17-8673-4F0A-913F-BE9635FBC724}
 		{71512244-8367-4F2E-AAC5-C2E62D23B3FC} = {93325F17-8673-4F0A-913F-BE9635FBC724}
-		{9A854B66-63AB-44FF-A98E-1F862A5295A8} = {8FAA606E-FD83-44F7-B439-4725F5019829}
-		{72D3D9F7-8515-498A-9311-01FD2ADDD022} = {9A854B66-63AB-44FF-A98E-1F862A5295A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DAF03FB-26A5-4D6E-A7A9-53485196FB35}

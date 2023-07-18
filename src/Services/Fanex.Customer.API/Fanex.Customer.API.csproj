@@ -34,9 +34,4 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\BuildingBlocks\ONEbook.UM.ThirdParty.AspNetCore\ONEbook.UM.ThirdParty.AspNetCore.csproj" />
-  </ItemGroup>
-
 </Project>
