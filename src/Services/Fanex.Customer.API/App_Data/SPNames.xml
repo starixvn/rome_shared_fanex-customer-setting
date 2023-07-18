@@ -53,11 +53,6 @@
         <Setting Key="Age_Chatbot_CustomerStatusSel" SpName="Age_Chatbot_CustomerStatusSel" DbName="DBCust.CustDB.BODBDownlineNet" />
     </Function>
 
-    <Function Name="NG2">
-        <Setting Key="Acc_CustSetting_SyncGameStatusUpd" SpName="Acc_CustSetting_SyncGameStatusUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_CustSetting_DisableGameStatusUpd" SpName="Acc_CustSetting_DisableGameStatusUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-    </Function>
-
     <Function Name="Problem Account - Limit New Downline">
         <Setting Key="Acc_ProblemAccountLimitDownlineCheck" SpName="Acc_ProblemAccountLimitDownlineCheck" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
     </Function>

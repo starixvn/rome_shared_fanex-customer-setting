@@ -25,10 +25,7 @@ public class CustomerInfo
         int superId,
         int masterId,
         int agentId,
-        byte roleId,
-        bool hideNG2,
-        bool syncedNG2,
-        bool disableNG2)
+        byte roleId)
     {
         CustId = custId;
         UserPwd = userPwd;
@@ -46,9 +43,6 @@ public class CustomerInfo
         MasterId = masterId;
         AgentId = agentId;
         RoleId = roleId;
-        HideNG2 = hideNG2;
-        SyncedNG2 = syncedNG2;
-        DisableNG2 = disableNG2;
     }
 
     public int CustId { get; }
@@ -85,11 +79,5 @@ public class CustomerInfo
 
     public UserLevel CustLevel
         => Enumeration.FromValue<UserLevel>(RoleId);
-
-    public bool HideNG2 { get; }
-
-    public bool SyncedNG2 { get; }
-
-    public bool DisableNG2 { get; }
 }
 

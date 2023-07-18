@@ -12,6 +12,7 @@
     <PackageReference Include="Fanex.Data.SqlServer" Version="4.2.2" />
     <PackageReference Include="Fanex.Logging.Extensions.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.0.8" />
+    <PackageReference Include="Fanex.Logging.RabbitMQ" Version="1.0.1" />
     <PackageReference Include="Fanex.Logging.Sentry" Version="1.0.6" />
     <PackageReference Include="MinimalApi.Endpoint" Version="1.3.0" />
     <PackageReference Include="ONEbook.OTP" Version="2.0.0" />
@@ -33,10 +34,4 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\BuildingBlocks\ONEbook.NG2.API.Client\ONEbook.NG2.API.Client.csproj" />
-    <ProjectReference Include="..\..\BuildingBlocks\ONEbook.UM.ThirdParty.AspNetCore\ONEbook.UM.ThirdParty.AspNetCore.csproj" />
-  </ItemGroup>
-
 </Project>

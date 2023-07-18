@@ -107,26 +107,14 @@ public class CopyCustomerService : ICopyCustomerService
         var sourceCustomer = await customerService.GetCustomerInfo(param.SourceCustId);
         var actor = await customerService.GetCustomerInfo(param.ActorId);
 
-        if (createdCustomer != null && sourceCustomer != null && actor != null)
+        if (createdCustomer != null && sourceCustomer != null && actor != null && param.ActorLevel.IsAgentLevel())
         {
-            if (param.ActorLevel.IsAgentLevel())
-            {
-                await thirdPartyProductService.SyncMemberSettings(
-                    createdCustomer,
-                    sourceCustomer,
-                    actor,
-                    param,
-                    appSettings.SettingStatus);
-            }
-            else
-            {
-                await thirdPartyProductService.SyncMasterOrAgentSettings(
-                    createdCustomer,
-                    sourceCustomer,
-                    actor,
-                    param,
-                    appSettings.SettingStatus);
-            }
+            await thirdPartyProductService.SyncMemberSettings(
+                createdCustomer,
+                sourceCustomer,
+                actor,
+                param,
+                appSettings.SettingStatus);
         }
     }
 
