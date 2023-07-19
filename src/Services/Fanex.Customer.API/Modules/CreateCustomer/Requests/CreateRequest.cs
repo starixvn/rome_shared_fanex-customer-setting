@@ -28,7 +28,7 @@ public class UIProductGroup
 
     public string Name { get; set; }
 
-    public UIGroupType GroupTypes { get; set; }
+    public IEnumerable<UIGroupType> GroupTypes { get; set; }
 }
 
 public class UIGroupType
