@@ -24,7 +24,7 @@ public class GetCustomerCriteria : CriteriaBase
         {
             ((int)CustomerLevel.Super) =>"Acc_LiteMode_CustSetting_SuperAllInfoSel",
             ((int)CustomerLevel.Master) =>"Acc_LiteMode_CustSetting_MasterAllInfoSel",
-            ((int)CustomerLevel.Agent) =>"Acc_LiteMode_CustSetting_MasterAllInfoSel",
+            ((int)CustomerLevel.Agent) =>"Acc_LiteMode_CustSetting_AgentAllInfoSel",
             _ => throw new IndexOutOfRangeException($"RoleId cannot = {RoleId}")
         };
 

@@ -60,7 +60,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                                     (groupItem, groupItemsProfile) =>
                                     {
                                         groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
-                                        groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, request.Language);
+                                        groupItem.SubGroupName = cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, request.Language);
                                         groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
                                         groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, request.Language);
                                         groupItem.DisplayName = GetDisplayNameByDisplayType(
