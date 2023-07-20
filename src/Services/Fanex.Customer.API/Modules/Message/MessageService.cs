@@ -33,7 +33,8 @@ public class MessageService : IMessageService
             MessageTypes.ParlayMaxPayoutViolation
                 => TranslateMessage<ParlayMaxPayoutViolationSubMessage>(rawMessage, language),
             MessageTypes.BetSettingViolation
-                or MessageTypes.CommissionViolation
+                => TranslateMessage<BetSettingViolationSubMessage>(rawMessage, language),
+            MessageTypes.CommissionViolation
                 or MessageTypes.WinLossLimitViolation
                 => TranslateMessage<SubMessage>(rawMessage, language),
             _ => new MessageContent(rawMessage)

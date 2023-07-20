@@ -121,6 +121,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     private static string ObjectToXml(object o)
     {
         Fanex.Common.Helper.Check.Argument.IsNotNull(o, "o");
+        var jsonObj = JsonConvert.SerializeObject(o);
         return  ((XmlDocument)JsonConvert.DeserializeXmlNode(JsonConvert.SerializeObject(o)))?.OuterXml;
     }
 

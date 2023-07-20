@@ -21,7 +21,7 @@ public interface ICacheRefService
 
 public class CacheRefService : ICacheRefService
 {
-    private static readonly IRemotingRefService remotingRef = new RemotingRefService();
+    private readonly IRemotingRefService remotingRef;
 
     private const string ProductRefId = "Product";
 
@@ -37,10 +37,9 @@ public class CacheRefService : ICacheRefService
 
     private const string G_GT_Sport_Bettype_RefId = "G_GT_Sport_Bettype";
 
-    private static Dictionary<string, string> cacheData = new Dictionary<string, string>();
-
     public CacheRefService(IRemotingRefService remotingRef)
     {
+        this.remotingRef = remotingRef;
     }
 
     public string GetProductName(int productId, string language = "en-US")
@@ -73,36 +72,21 @@ public class CacheRefService : ICacheRefService
     public string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return GetOrSetFromCacheData(SB_Comm_SMA_RefId, refKey, language, refKey);
+        return remotingRef.GetResourceDataByRefIdAndResourceId(SB_Comm_SMA_RefId, refKey, language, refKey);
     }
 
     public string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return GetOrSetFromCacheData(SB_Comm_Member_RefId, refKey, language, refKey);
+        return remotingRef.GetResourceDataByRefIdAndResourceId(SB_Comm_Member_RefId, refKey, language, refKey);
     }
 
     public string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
+        return remotingRef.GetResourceDataByRefIdAndResourceId(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
     }
 
     private static string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
         => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";
-
-    private static string GetOrSetFromCacheData(string refId, string refKey, string language, string defaultValue)
-    {
-        // return remotingRef.GetResourceDataByRefIdAndResourceId(refId, refKey, language, refKey);
-        if (cacheData.ContainsKey($"{refId}_{refKey}"))
-        {
-            return cacheData[$"{refId}_{refKey}"];
-        }
-        else
-        {
-            var refVal = remotingRef.GetResourceDataByRefIdAndResourceId(refId, refKey, language, refKey);
-            cacheData.Add($"{refId}_{refKey}", refVal);
-            return refVal;
-        }
-    }
 }
