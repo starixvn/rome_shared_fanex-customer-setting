@@ -91,14 +91,9 @@ public class CacheRefService : ICacheRefService
     private static string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
         => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";
 
-    private static string GetFromCacheData(string refId, string refKey)
-        => cacheData[$"{refId}_{refKey}"];
-
-    private static void SetToCacheData(string refId, string refKey, string value)
-    => cacheData[$"{refId}_{refKey}"] = value;
-
     private static string GetOrSetFromCacheData(string refId, string refKey, string language, string defaultValue)
     {
+        // return remotingRef.GetResourceDataByRefIdAndResourceId(refId, refKey, language, refKey);
         if (cacheData.ContainsKey($"{refId}_{refKey}"))
         {
             return cacheData[$"{refId}_{refKey}"];
