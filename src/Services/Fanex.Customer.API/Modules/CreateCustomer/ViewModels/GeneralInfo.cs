@@ -38,5 +38,7 @@ public class GeneralInformation
 
     public string SiteLabel { get; set; }
 
+    public int Currency { get; set; }
+
     public string TemplateName { get; set; }
 }

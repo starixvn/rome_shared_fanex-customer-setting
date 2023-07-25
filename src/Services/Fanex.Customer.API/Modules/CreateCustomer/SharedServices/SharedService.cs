@@ -8,9 +8,9 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 
 public interface ISharedService
 {
-    Task<IEnumerable<SettingProfile>> GetSettingProfiles();
+    Task<IEnumerable<SettingProfile>> GetSettingProfiles(string site, int currency);
 
-    Task<IEnumerable<int>> GetAllSettingTypes();
+    Task<IEnumerable<int>> GetAllSettingTypes(string site, int currency);
 }
 
 public class SharedService : ISharedService
@@ -28,13 +28,19 @@ public class SharedService : ISharedService
         this.cacheService = cacheService ?? new CacheService();
     }
 
-    public async Task<IEnumerable<SettingProfile>> GetSettingProfiles()
-        => await cacheService.GetOrSetAsync("CreateCustomerSettingProfile",
-          () => this.GetSettingProfile(),
+    public async Task<IEnumerable<SettingProfile>> GetSettingProfiles(string site, int currency)
+        => await cacheService.GetOrSetAsync($"CreateCustomerSettingProfile_{site}_{currency}",
+          () => this.GetSettingProfile(site, currency),
            new CacheItemOptions());
 
-    public async Task<IEnumerable<int>> GetAllSettingTypes()
-     => (await this.GetSettingProfile()).Select(i => i.SettingType ).Distinct();
+    public async Task<IEnumerable<int>> GetAllSettingTypes(string site, int currency)
+        => (await this.GetSettingProfile(site, currency)).Select(i => i.SettingType ).Distinct();
 
-    private async Task<IEnumerable<SettingProfile>> GetSettingProfile() => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria { CreationStatus = appSettings.CreationStatus });
+    private async Task<IEnumerable<SettingProfile>> GetSettingProfile(string site, int currency) 
+        => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria 
+        { 
+            CreationStatus = appSettings.CreationStatus,
+            Site = site,
+            Currency = currency
+        });
 }

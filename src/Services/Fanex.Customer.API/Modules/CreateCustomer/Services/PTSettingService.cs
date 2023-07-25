@@ -24,7 +24,7 @@ public class PTSettingService: BaseCustomerService, IPTSettingService
 
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request)
     {
-        var settingProfile = await sharedService.GetSettingProfiles();
+        var settingProfile = await sharedService.GetSettingProfiles(request.Site, request.Currency);
         var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(
             new GetCustomerCriteria
             {

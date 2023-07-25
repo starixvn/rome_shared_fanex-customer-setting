@@ -46,7 +46,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     {
         var param = CreateGeneralInfoParams(request, appSettings);
 
-        var settingProfiles = await sharedService.GetSettingProfiles();
+        var settingProfiles = await sharedService.GetSettingProfiles(request.Settings.GeneralInfo.Site, request.Settings.GeneralInfo.Currency);
 
         var settingTypesXml = CreateSettingTypesXml(request, settingProfiles);
 
@@ -123,7 +123,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         Fanex.Common.Helper.Check.Argument.IsNotNull(o, "o");
         var jsonObj =JsonConvert.SerializeObject(o);
         var wrappedDocument = string.Format("{{ item: {0} }}", jsonObj);
-        return  ((XmlDocument)JsonConvert.DeserializeXmlNode(wrappedDocument))?.OuterXml;
+        return  ((XmlDocument)JsonConvert.DeserializeXmlNode(wrappedDocument))?.OuterXml.Replace("<item>", string.Empty).Replace("</item>", string.Empty);
     }
 
     private static string GetCreateNewSPName(int roleId)
