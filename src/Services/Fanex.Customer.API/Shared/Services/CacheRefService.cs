@@ -4,6 +4,8 @@ namespace Fanex.Customer.API.Shared.Services;
 
 public interface ICacheRefService
 {
+    string GetProductName(int productId, string language = "en-US");
+
     string GetProductGroupName(int productGroupId, string language = "en-US");
 
     string GetSubGroupName(int? subGroupId, string language = "en-US");
