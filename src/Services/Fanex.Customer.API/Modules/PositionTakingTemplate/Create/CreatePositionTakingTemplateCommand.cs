@@ -44,7 +44,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
 
     public int ErrCode { get; set; }
 
-    public int ErrType { get; set; }
+    public int MsgType { get; set; }
 
     public string ErrMsg { get; set; }
 

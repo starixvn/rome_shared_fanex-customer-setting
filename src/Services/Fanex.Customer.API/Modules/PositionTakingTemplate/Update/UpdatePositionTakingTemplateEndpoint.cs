@@ -38,7 +38,7 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
             LanguageUtils.ToLanguageKey(request.Language),
             request.IP);
         await dynamicRepository.ExecuteAsync(command);
-        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, request.Language);
+        var message = messageService.TranslateMessage(command.MsgType, command.ErrMsg, request.Language);
 
         return Results.Ok(new PTTemplateResult(command.ErrCode, message.MainMessage, message.SubMessages));
     }

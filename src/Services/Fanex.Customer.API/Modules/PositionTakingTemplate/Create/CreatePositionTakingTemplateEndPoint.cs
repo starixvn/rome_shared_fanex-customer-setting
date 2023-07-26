@@ -39,7 +39,7 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
             request.IP);
 
         await dynamicRepository.ExecuteAsync(command);
-        var message = messageService.TranslateMessage(command.ErrType, command.ErrMsg, request.Language);
+        var message = messageService.TranslateMessage(command.MsgType, command.ErrMsg, request.Language);
 
         return Results.Ok(new CreatePTTemplateResult(command.TemplateId, command.ErrCode, message.MainMessage, message.SubMessages));
     }

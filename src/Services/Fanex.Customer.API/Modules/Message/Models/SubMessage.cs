@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Modules.Message.Models;
 
 public class SubMessage
 {
-    [XmlAttribute]
+    [XmlAttribute("ProductID")]
     public int ProductId { get; set; }
 
     [XmlAttribute]
