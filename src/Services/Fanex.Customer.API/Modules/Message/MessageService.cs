@@ -37,8 +37,23 @@ public class MessageService : IMessageService
             MessageTypes.CommissionViolation
                 or MessageTypes.WinLossLimitViolation
                 => TranslateMessage<SubMessage>(rawMessage, language),
+            MessageTypes.WrongAutoPT
+                => TranslateSimpleMessage(rawMessage, language),
             _ => new MessageContent(rawMessage)
         };
+
+    private static MessageContent TranslateSimpleMessage(string rawMessage, string language)
+    {
+        var mainMessage = rawMessage;
+        var simpleMessage = Deserialize<RootMessage>(rawMessage);
+
+        if (simpleMessage != null)
+        {
+            mainMessage = GetMessage(simpleMessage.MessageId, language);
+        }
+
+        return new MessageContent(mainMessage);
+    }
 
     private MessageContent TranslateMessage<T>(string rawMessage, string language) where T : SubMessage
     {

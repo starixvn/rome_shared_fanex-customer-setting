@@ -2,6 +2,8 @@ namespace Fanex.Customer.API.Modules.Message;
 
 public static class MessageTypes
 {
+    public const int SimpleMessage = 0;
+
     public const int ParlayMaxPayoutViolation = 31;
 
     public const int WinLossLimitViolation = 41;
@@ -9,6 +11,8 @@ public static class MessageTypes
     public const int CommissionViolation = 51;
 
     public const int SBCommissionViolation = 52;
+
+    public const int WrongAutoPT = 60;
 
     public const int WrongPT = 61;
 
