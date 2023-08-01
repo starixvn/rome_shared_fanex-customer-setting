@@ -227,13 +227,13 @@
     <data name="Msg_10066" xml:space="preserve">
         <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>
     </data>
-    <data name="Msg_10035" xml:space="preserve">
-        <value>Wrong Min bet/ Max bet/ Max per number.</value>
-    </data>
-    <data name="Msg_10036" xml:space="preserve">
-        <value>Min bet must be less than max bet and max bet must be less than max bet per number.</value>
-    </data>
     <data name="Msg_20044" xml:space="preserve">
         <value>You are not allowed to have Auto PT, please contact your upline.</value>
+    </data>
+    <data name="Msg_10063" xml:space="preserve">
+        <value>Max Bet must be less than or equal to Upline's Max Bet</value>
+    </data>
+    <data name="Msg_20005" xml:space="preserve">
+        <value>Wrong position taking (max set by company).</value>
     </data>
 </root>
