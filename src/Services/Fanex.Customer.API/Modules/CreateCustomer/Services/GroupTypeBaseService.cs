@@ -1,4 +1,4 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;

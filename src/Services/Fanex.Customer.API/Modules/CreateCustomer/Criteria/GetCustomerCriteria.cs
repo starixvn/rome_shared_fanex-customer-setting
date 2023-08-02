@@ -2,7 +2,7 @@ using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 
 public class GetCustomerCriteria : CriteriaBase
 {
@@ -19,12 +19,12 @@ public class GetCustomerCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public int RoleId { get; set; }
 
-    public override string GetSettingKey() 
+    public override string GetSettingKey()
         => RoleId switch
         {
-            ((int)CustomerLevel.Super) =>"Acc_LiteMode_CustSetting_SuperAllInfoSel",
-            ((int)CustomerLevel.Master) =>"Acc_LiteMode_CustSetting_MasterAllInfoSel",
-            ((int)CustomerLevel.Agent) =>"Acc_LiteMode_CustSetting_AgentAllInfoSel",
+            ((int)CustomerLevel.Super) => "Acc_LiteMode_CustSetting_SuperAllInfoSel",
+            ((int)CustomerLevel.Master) => "Acc_LiteMode_CustSetting_MasterAllInfoSel",
+            ((int)CustomerLevel.Agent) => "Acc_LiteMode_CustSetting_AgentAllInfoSel",
             _ => throw new IndexOutOfRangeException($"RoleId cannot = {RoleId}")
         };
 

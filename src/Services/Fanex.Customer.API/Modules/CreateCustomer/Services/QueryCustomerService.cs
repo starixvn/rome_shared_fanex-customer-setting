@@ -1,13 +1,13 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
+using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
+using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
-using Fanex.Customer.API.Modules.CreateCustomer.Resources;
-using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -41,11 +41,12 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
     private async Task<GeneralInformation> GetGeneralInfo(QueryRequest request)
     {
         return await dynamicRepository.GetAsync<GeneralInformation>(
-        new GetCustomerCriteria { 
-            CustId = request.UplineCustId, 
-            RoleId = request.UplineRoleId, 
-            CreationStatus = appSettings.CreationStatus 
-            });
+        new GetCustomerCriteria
+        {
+            CustId = request.UplineCustId,
+            RoleId = request.UplineRoleId,
+            CreationStatus = appSettings.CreationStatus
+        });
     }
 
     private IEnumerable<ProductGroup> GetProductGroups(IEnumerable<SettingProfile> settingProfile, QueryRequest request)
@@ -95,7 +96,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         int displayType,
         int uplineRoleId,
         string language,
-        IEnumerable<GroupItemDefault> groupItems, 
+        IEnumerable<GroupItemDefault> groupItems,
         IGrouping<object, SettingProfile> t)
     {
         return groupItems.Join(

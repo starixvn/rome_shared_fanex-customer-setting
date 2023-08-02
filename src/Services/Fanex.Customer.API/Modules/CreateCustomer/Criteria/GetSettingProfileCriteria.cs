@@ -1,6 +1,6 @@
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 
 public class GetSettingProfileCriteria : CriteriaBase
 {

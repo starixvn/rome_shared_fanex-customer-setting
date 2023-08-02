@@ -1,17 +1,20 @@
+using System.Collections;
+using System.Xml;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
-using Fanex.Customer.API.Shared.Services;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Shared.Enumerations;
+using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Services;
+using Fanex.Customer.API.Shared.Utils;
+using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
-using System.Collections;
-using Fanex.Data;
-using Fanex.Customer.API.Modules.Message;
-using System.Xml;
 using Newtonsoft.Json;
-using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -22,7 +25,10 @@ public interface ICreateCustomerService
 
 public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 {
+    private readonly ISiteDBGroupService siteDBGroupService;
+
     public CreateCustomerService(
+        ISiteDBGroupService siteDBGroupService,
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
         ISharedService sharedService,
@@ -30,16 +36,44 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         IMessageService messageService)
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
     {
+        this.siteDBGroupService = siteDBGroupService;
     }
 
     public async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         var parameters = await this.GetCreateCustomerParams(request, appSettings);
-        using IObjectDb db = ObjectDbFactory.CreateInstance(GetCreateNewSPName(request.Settings.GeneralInfo.UplineRoleId));
+        var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
+        using IObjectDb db = ObjectDbFactory.CreateInstance(GetCreateNewSPName(uplineRoleId));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        var result = new CreateCustomerResult(Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+
+        if (result.IsSuccessful && Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel())
+        {
+            await InitBalance(request.Settings.GeneralInfo.Site, Convert.ToInt32(outputParams["custid"]));
+        }
+
+        return result;
+    }
+
+    private async Task InitBalance(string site, int custId)
+    {
+        var siteDBName = await siteDBGroupService.GetSiteDBName(site);
+
+        var creditBalance = new InitCreditBalanceCommand(custId, siteDBName);
+        var insertCredit = dynamicRepository.ExecuteAsync(creditBalance);
+
+        var depositBalance = new InitDepositBalanceCommand(custId, siteDBName);
+        var insertDeposit = dynamicRepository.ExecuteAsync(depositBalance);
+        await Task.WhenAll(insertCredit, insertDeposit);
+
+        if (creditBalance.ErrCode != 0 || depositBalance.ErrCode != 0)
+        {
+            var removeDeposit = dynamicRepository.ExecuteAsync(new RemoveDepositBalanceCustomer(custId, siteDBName));
+            var removeCredit = dynamicRepository.ExecuteAsync(new RemoveCreditBalanceCustomer(custId, siteDBName));
+            await Task.WhenAll(removeDeposit, removeCredit);
+        }
     }
 
     private async Task<Hashtable> GetCreateCustomerParams(CreateRequest request, AppSettings appSettings)
@@ -120,18 +154,18 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private static string ObjectToXml(object o)
     {
-        Fanex.Common.Helper.Check.Argument.IsNotNull(o, "o");
-        var jsonObj =JsonConvert.SerializeObject(o);
+        Common.Helper.Check.Argument.IsNotNull(o, "o");
+        var jsonObj = JsonConvert.SerializeObject(o);
         var wrappedDocument = string.Format("{{ item: {0} }}", jsonObj);
-        return  ((XmlDocument)JsonConvert.DeserializeXmlNode(wrappedDocument))?.OuterXml.Replace("<item>", string.Empty).Replace("</item>", string.Empty);
+        return JsonConvert.DeserializeXmlNode(wrappedDocument)?.OuterXml.Replace("<item>", string.Empty).Replace("</item>", string.Empty);
     }
 
     private static string GetCreateNewSPName(int roleId)
         => roleId switch
         {
-            ((int)CustomerLevel.Super) =>"Acc_LiteMode_CustomerInsMember_SAg",
-            ((int)CustomerLevel.Master) =>"Acc_LiteMode_CustomerInsMember_MAg",
-            ((int)CustomerLevel.Agent) =>"Acc_LiteMode_CustSetting_MasterAllInfoSel",
+            ((int)CustomerLevel.Super) => "Acc_LiteMode_CustomerInsMember_SAg",
+            ((int)CustomerLevel.Master) => "Acc_LiteMode_CustomerInsMember_MAg",
+            ((int)CustomerLevel.Agent) => "Acc_LiteMode_CustomerInsMember_Ag",
             _ => throw new IndexOutOfRangeException($"RoleId cannot = {roleId}")
         };
 }

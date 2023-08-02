@@ -4,7 +4,7 @@ public class GeneralInformation
 {
     public string UserName { get; set; }
 
-    public int UplineRoleId { get; set; }
+    public byte UplineRoleId { get; set; }
 
     public string UplineUserName { get; set; }
 

@@ -5,19 +5,19 @@ using Fanex.Customer.API.Extensions;
 using Fanex.Customer.API.Helpers;
 using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
-using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Rules;
 using Fanex.Customer.API.Modules.CreateCustomer;
+using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
+using Fanex.Customer.API.Modules.Customer;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.SecurityCode;
+using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
+using Fanex.RemotingRef;
 using MinimalApi.Endpoint.Extensions;
 using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
-using Fanex.RemotingRef;
-using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
-using Fanex.Customer.API.Shared.Services;
-using Fanex.Customer.API.Modules.Message;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor()
@@ -29,6 +29,7 @@ builder.Services.AddSingleton<ICacheService, CacheService>();
 builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
 builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
+builder.Services.AddSingleton<ISiteDBGroupService, SiteDBGroupService>();
 builder.Services.AddSingleton<IMessageService, MessageService>();
 builder.Services.AddSingleton<ISharedService, SharedService>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>

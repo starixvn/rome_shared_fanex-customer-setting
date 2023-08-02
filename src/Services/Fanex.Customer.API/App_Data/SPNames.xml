@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
+    <Function Name="SiteDB">
+        <Setting Key="DBSite03_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="DBSite03.bodb02.BODBDownlineNet" />
+        <Setting Key="DBSite03_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="DBSite03.bodb02.BODBDownlineNet" />
+        <Setting Key="DBSite03_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="DBSite03.bodb02.BODBDownlineNet" />
+        <Setting Key="DBSite03_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="DBSite03.bodb02.BODBDownlineNet" />
+        <Setting Key="DBTXN_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="DBTXN.bodb02.BODBDownlineNet" />
+        <Setting Key="DBTXN_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="DBTXN.bodb02.BODBDownlineNet" />
+        <Setting Key="DBTXN_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="DBTXN.bodb02.BODBDownlineNet" />
+        <Setting Key="DBTXN_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="DBTXN.bodb02.BODBDownlineNet" />
+    </Function>
     <Function Name="SiteDB 3">
         <Setting Key="SiteDB_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="SiteDB.bodb02.BODBDownlineNet" />
         <Setting Key="SiteDB_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="SiteDB.bodb02.BODBDownlineNet" />
         <Setting Key="SiteDB_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="SiteDB.bodb02.BODBDownlineNet" />
         <Setting Key="SiteDB_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="SiteDB.bodb02.BODBDownlineNet" />
-    </Function>   
+    </Function>
     <Function Name="Security Code">
         <Setting Key="Age_UpdateMainAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Age_UpdateSubAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus_Sub" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
@@ -101,8 +111,23 @@
             <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
             <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
         </Setting>
+        <Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
+            <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+            <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+            <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+            <Mapping DataField="SingleMatchParlay" ObjectProperty="MaxSingleMatchParlay" />
+            <Mapping DataField="Combo2" ObjectProperty="MaxCombo2" />
+            <Mapping DataField="Combo35" ObjectProperty="MaxCombo35" />
+            <Mapping DataField="ComboOver6" ObjectProperty="MaxComboOver6" />
+            <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
+            <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
+            <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
+            <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+            <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+        </Setting>
         <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />

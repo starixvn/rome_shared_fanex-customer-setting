@@ -1,5 +1,5 @@
 using Fanex.Caching;
-using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -34,11 +34,11 @@ public class SharedService : ISharedService
            new CacheItemOptions());
 
     public async Task<IEnumerable<int>> GetAllSettingTypes(string site, int currency)
-        => (await this.GetSettingProfile(site, currency)).Select(i => i.SettingType ).Distinct();
+        => (await this.GetSettingProfile(site, currency)).Select(i => i.SettingType).Distinct();
 
-    private async Task<IEnumerable<SettingProfile>> GetSettingProfile(string site, int currency) 
-        => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria 
-        { 
+    private async Task<IEnumerable<SettingProfile>> GetSettingProfile(string site, int currency)
+        => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria
+        {
             CreationStatus = appSettings.CreationStatus,
             Site = site,
             Currency = currency

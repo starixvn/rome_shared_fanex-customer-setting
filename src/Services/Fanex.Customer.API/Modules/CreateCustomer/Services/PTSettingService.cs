@@ -1,4 +1,4 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Criterias;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
@@ -15,7 +15,7 @@ public interface IPTSettingService
     Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request);
 }
 
-public class PTSettingService: BaseCustomerService, IPTSettingService
+public class PTSettingService : BaseCustomerService, IPTSettingService
 {
     public PTSettingService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService, IMessageService messageService)
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
@@ -25,14 +25,6 @@ public class PTSettingService: BaseCustomerService, IPTSettingService
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request)
     {
         var settingProfile = await sharedService.GetSettingProfiles(request.Site, request.Currency);
-        var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(
-            new GetCustomerCriteria
-            {
-                CustId = request.CustId,
-                RoleId = request.RoleId,
-                CreationStatus = appSettings.CreationStatus
-            });
-
         var productGroups = settingProfile.Where(p => p.GroupType == 153).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {
