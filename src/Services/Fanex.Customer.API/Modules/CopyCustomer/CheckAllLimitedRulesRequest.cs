@@ -2,11 +2,13 @@ using Fanex.Customer.API.Shared.Models;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
 
-public class CheckLimitNewDownlineRequest
+public class CheckAllLimitedRulesRequest
 {
     public int CustId { get; set; }
 
     public byte CustLevel { get; set; }
+
+    public string ActorUsername { get; set; }
 
     public string Language { get; set; }
 

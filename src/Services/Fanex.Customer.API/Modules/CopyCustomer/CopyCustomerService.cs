@@ -9,6 +9,7 @@ using Fanex.Customer.API.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
+using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
 
@@ -16,7 +17,13 @@ public interface ICopyCustomerService
 {
     Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request);
 
-    Task<Result> CheckLimitNewDownline(CheckLimitNewDownlineRequest request);
+    Task<Result> CheckLimitNewDownline(CheckAllLimitedRulesRequest request);
+
+    Task<Result> CheckReachLimitDownline(CheckAllLimitedRulesRequest request);
+
+    Task<Result> CheckMaxNewMemberBySuper(CheckAllLimitedRulesRequest request);
+
+    Task<Result> CheckAllLimitedRules(CheckAllLimitedRulesRequest request);
 }
 
 public class CopyCustomerService : ICopyCustomerService
@@ -202,16 +209,12 @@ public class CopyCustomerService : ICopyCustomerService
 
     private async Task<string> GetAvailableDownlineUserName(CopyCustomerRequest request)
     {
-        var length = request.ActorLevel.IsAgentLevel()
-                ? request.UserName.Length - 3
-                : request.UserName.Length - 2;
-        var userName = request.UserName.Substring(0, length);
-        var suffix = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = userName, RoleId = request.ActorUserLevel });
+        var suffix = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = request.ActorUserLevel });
 
-        return !string.IsNullOrWhiteSpace(suffix) ? $"{userName}{suffix}" : string.Empty;
+        return !string.IsNullOrWhiteSpace(suffix) ? $"{request.ActorUsername}{suffix}" : string.Empty;
     }
 
-    public async Task<Result> CheckLimitNewDownline(CheckLimitNewDownlineRequest request)
+    public async Task<Result> CheckLimitNewDownline(CheckAllLimitedRulesRequest request)
     {
         var command = new CheckLimitNewDownlineCommand(request.CustId);
         await dynamicRepository.ExecuteAsync(command);
@@ -219,6 +222,48 @@ public class CopyCustomerService : ICopyCustomerService
         return command.IsAllowed
             ? Result.CreateSuccessfulResult()
             : GetLimitNewDownlineErrorResult(Enumeration.FromValue<UserLevel>(request.CustLevel), request.Language);
+    }
+
+    public async Task<Result> CheckReachLimitDownline(CheckAllLimitedRulesRequest request)
+    {
+        var command = new CheckReachLimitDownlineCommand(request.CustId, request.CustLevel, request.ActorUsername, LanguageUtils.ToLanguageKey(request.Language));
+        await dynamicRepository.ExecuteAsync(command);
+
+        return command.ErrCode == 0
+            ? Result.CreateSuccessfulResult()
+            : Result.CreateErrorResult(command.ErrMsg);
+    }
+
+    public async Task<Result> CheckMaxNewMemberBySuper(CheckAllLimitedRulesRequest request)
+    {
+        var command = new CheckMaxNewMemberBySuperCommand(request.CustId, LanguageUtils.ToLanguageKey(request.Language));
+        await dynamicRepository.ExecuteAsync(command);
+
+        return command.ErrCode == 0
+            ? Result.CreateSuccessfulResult()
+            : Result.CreateErrorResult(command.ErrMsg);
+    }
+
+    public async Task<Result> CheckAllLimitedRules(CheckAllLimitedRulesRequest request)
+    {
+        var result = Result.CreateSuccessfulResult();
+
+        if (request.CustLevel == UserLevel.Agent.Value)
+        {
+            result = await CheckMaxNewMemberBySuper(request).ConfigureAwait(false);
+        }
+
+        if (result.IsSuccessful)
+        {
+            result = await CheckReachLimitDownline(request).ConfigureAwait(false);
+        }
+
+        if (result.IsSuccessful)
+        {
+            result = await CheckLimitNewDownline(request).ConfigureAwait(false);
+        }
+
+        return result;
     }
 
     private static Result GetLimitNewDownlineErrorResult(UserLevel custLevel, string language)

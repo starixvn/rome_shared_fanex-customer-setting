@@ -12,6 +12,8 @@ public class CopyCustomerRequest
 
     public string ActorSubAccName { get; set; }
 
+    public string ActorUsername { get; set; }
+
     public byte ActorUserLevel { get; set; }
 
     public UserLevel ActorLevel => Enumeration.FromValue<UserLevel>(ActorUserLevel);
