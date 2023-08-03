@@ -1,4 +1,4 @@
-﻿namespace Fanex.Customer.API.Modules.CopyCustomer.Command
+﻿namespace Fanex.Customer.API.Modules.Rules
 {
     using Fanex.Data.Repository;
 

@@ -4,26 +4,15 @@ using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Resources;
-using Fanex.Customer.API.Shared.Enumerations;
-using Fanex.Customer.API.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
-using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
 
 public interface ICopyCustomerService
 {
     Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request);
-
-    Task<Result> CheckLimitNewDownline(CheckAllLimitedRulesRequest request);
-
-    Task<Result> CheckReachLimitDownline(CheckAllLimitedRulesRequest request);
-
-    Task<Result> CheckMaxNewMemberBySuper(CheckAllLimitedRulesRequest request);
-
-    Task<Result> CheckAllLimitedRules(CheckAllLimitedRulesRequest request);
 }
 
 public class CopyCustomerService : ICopyCustomerService
@@ -212,82 +201,6 @@ public class CopyCustomerService : ICopyCustomerService
         var suffix = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = request.ActorUserLevel });
 
         return !string.IsNullOrWhiteSpace(suffix) ? $"{request.ActorUsername}{suffix}" : string.Empty;
-    }
-
-    public async Task<Result> CheckLimitNewDownline(CheckAllLimitedRulesRequest request)
-    {
-        var command = new CheckLimitNewDownlineCommand(request.CustId);
-        await dynamicRepository.ExecuteAsync(command);
-
-        return command.IsAllowed
-            ? Result.CreateSuccessfulResult()
-            : GetLimitNewDownlineErrorResult(Enumeration.FromValue<UserLevel>(request.CustLevel), request.Language);
-    }
-
-    public async Task<Result> CheckReachLimitDownline(CheckAllLimitedRulesRequest request)
-    {
-        var command = new CheckReachLimitDownlineCommand(request.CustId, request.CustLevel, request.ActorUsername, LanguageUtils.ToLanguageKey(request.Language));
-        await dynamicRepository.ExecuteAsync(command);
-
-        return command.ErrCode == 0
-            ? Result.CreateSuccessfulResult()
-            : Result.CreateErrorResult(command.ErrMsg);
-    }
-
-    public async Task<Result> CheckMaxNewMemberBySuper(CheckAllLimitedRulesRequest request)
-    {
-        var command = new CheckMaxNewMemberBySuperCommand(request.CustId, LanguageUtils.ToLanguageKey(request.Language));
-        await dynamicRepository.ExecuteAsync(command);
-
-        return command.ErrCode == 0
-            ? Result.CreateSuccessfulResult()
-            : Result.CreateErrorResult(command.ErrMsg);
-    }
-
-    public async Task<Result> CheckAllLimitedRules(CheckAllLimitedRulesRequest request)
-    {
-        var result = Result.CreateSuccessfulResult();
-
-        if (request.CustLevel == UserLevel.Agent.Value)
-        {
-            result = await CheckMaxNewMemberBySuper(request).ConfigureAwait(false);
-        }
-
-        if (result.IsSuccessful)
-        {
-            result = await CheckReachLimitDownline(request).ConfigureAwait(false);
-        }
-
-        if (result.IsSuccessful)
-        {
-            result = await CheckLimitNewDownline(request).ConfigureAwait(false);
-        }
-
-        return result;
-    }
-
-    private static Result GetLimitNewDownlineErrorResult(UserLevel custLevel, string language)
-    {
-        const int LimitNewDownlineErrorCode = 1001;
-
-        return new Result(
-            LimitNewDownlineErrorCode,
-            StaticResources.Get(GetLimitNewDownlineResourceKey(custLevel), language));
-    }
-
-    private static string GetLimitNewDownlineResourceKey(UserLevel custLevel)
-    {
-        if (custLevel.IsSuperLevel())
-        {
-            return "LimitSuperNewDownlineError";
-        }
-
-        if (custLevel.IsMasterLevel())
-        {
-            return "LimitMasterNewDownlineError";
-        }
-
-        return "LimitAgentNewDownlineError";
     }
 
     private void InsertUnreadMessage(int custId, byte roleId)

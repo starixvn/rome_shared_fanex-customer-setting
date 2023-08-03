@@ -1,6 +1,6 @@
 using Fanex.Customer.API.Shared.Models;
 
-namespace Fanex.Customer.API.Modules.CopyCustomer;
+namespace Fanex.Customer.API.Modules.Rules;
 
 public class CheckAllLimitedRulesRequest
 {
