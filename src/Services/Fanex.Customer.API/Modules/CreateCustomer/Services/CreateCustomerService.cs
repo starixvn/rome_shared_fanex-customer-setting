@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Xml;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;

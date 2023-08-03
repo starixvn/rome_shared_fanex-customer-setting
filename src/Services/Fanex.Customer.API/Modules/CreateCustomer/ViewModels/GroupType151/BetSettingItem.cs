@@ -1,5 +1,3 @@
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
-
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
 
 public class BetSettingItem : GroupItemDefault
@@ -17,10 +15,10 @@ public class BetSettingItem : GroupItemDefault
     public BetSettingItem Upline { get; set; }
 
     public override string ToXml()
-    => string.Format(BetSettingXmlFormat, 
-        base.ToXml(), 
-        MinBet, 
-        MaxBet, 
-        MaxPerMatch, 
+    => string.Format(BetSettingXmlFormat,
+        base.ToXml(),
+        MinBet,
+        MaxBet,
+        MaxPerMatch,
         MaxPayoutPerMatch.HasValue ? $"MaxPayout=\"{MaxPayoutPerMatch.Value}\"" : string.Empty);
 }

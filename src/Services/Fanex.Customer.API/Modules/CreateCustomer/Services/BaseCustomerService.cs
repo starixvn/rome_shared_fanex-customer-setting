@@ -22,9 +22,9 @@ public class BaseCustomerService
     protected readonly Dictionary<int, dynamic> groupItemMapping;
 
     protected BaseCustomerService(
-        IDynamicRepository dynamicRepository, 
-        IOptions<AppSettings> appSettings, 
-        ISharedService sharedService, 
+        IDynamicRepository dynamicRepository,
+        IOptions<AppSettings> appSettings,
+        ISharedService sharedService,
         ICacheRefService cacheRefService,
         IMessageService messageService)
     {
@@ -34,13 +34,14 @@ public class BaseCustomerService
         this.cacheRefService = cacheRefService;
         this.messageService = messageService;
 
-        this.groupItemMapping = new()
+        groupItemMapping = new()
         {
             {150, new GroupTypeBaseService<CommissionGroup>(dynamicRepository, appSettings.Value)},
             {151, new GroupTypeBaseService<BetSettingItem>(dynamicRepository, appSettings.Value)},
             {152, new GroupTypeBaseService<ParlayMaxPayoutSettingItem>(dynamicRepository, appSettings.Value)},
             {153_3, new GroupTypeBaseService<MasterPTSettingItem>(dynamicRepository, appSettings.Value)},
             {153_2, new GroupTypeBaseService<AgentPTSettingItem>(dynamicRepository, appSettings.Value)},
+            {153_1, new GroupTypeBaseService<MemberPTItem>(dynamicRepository, appSettings.Value)},
             {154, new GroupTypeBaseService<ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings.Value)},
             {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
         };
@@ -59,7 +60,7 @@ public class BaseCustomerService
         {
             if (uplineRoleId == (int)CustomerLevel.Agent)
             {
-                return this.cacheRefService.GetSportsbookCommMemberName(
+                return cacheRefService.GetSportsbookCommMemberName(
                     productGroupId,
                     groupTypeId,
                     sportTypeId,
@@ -68,7 +69,7 @@ public class BaseCustomerService
             }
             else
             {
-                return this.cacheRefService.GetSportsbookCommSMAName(
+                return cacheRefService.GetSportsbookCommSMAName(
                     productGroupId,
                     groupTypeId,
                     sportTypeId,
@@ -78,7 +79,7 @@ public class BaseCustomerService
         }
         else
         {
-            return this.cacheRefService.GetNameByGroupSubGroup(
+            return cacheRefService.GetNameByGroupSubGroup(
                     productGroupId,
                     groupTypeId,
                     sportTypeId,
