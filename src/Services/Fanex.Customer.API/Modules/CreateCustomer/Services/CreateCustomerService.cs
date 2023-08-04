@@ -40,7 +40,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     public async Task<CreateCustomerResult> Create(CreateRequest request)
     {
-        var parameters = await this.GetCreateCustomerParams(request, appSettings);
+        var parameters = await GetCreateCustomerParams(request, appSettings);
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
         using IObjectDb db = ObjectDbFactory.CreateInstance(GetCreateNewSPName(uplineRoleId));
         await db.ExecuteNonQueryAsync(parameters);

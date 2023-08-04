@@ -5,6 +5,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -23,11 +24,23 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
     {
     }
 
+    private readonly IDictionary<string, string> CommissionNameMappings = new Dictionary<string, string>()
+    {
+        {"1_1","a"},
+        {"1_3","b"},
+        {"1_7","c"},
+        {"1_8","d"}
+    };
+
     public async Task<CustomerSetting> Query(QueryRequest request)
     {
         var settingProfile = await sharedService.GetSettingProfiles(request.UplineSite, request.UplineCurrency);
         var generalInfo = await GetGeneralInfo(request);
         generalInfo.Currency = request.UplineCurrency;
+        if (request.UplineRoleId == (byte)CustomerLevel.Agent)
+        {
+            generalInfo.Commissions = await GetAgentSportsBookCommissions(request.UplineCustId);
+        }
         var customerSetting = new CustomerSetting
         {
             GeneralInfo = generalInfo,
@@ -48,6 +61,19 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
             CreationStatus = appSettings.CreationStatus
         });
     }
+
+    private async Task<IEnumerable<SportsBookCommission>> GetAgentSportsBookCommissions(int agentCustId)
+    {
+        var commissions = await dynamicRepository.FetchAsync<SportsBookCommission>(new GetAgentSportsBookCommissionsCriteria(agentCustId));
+        foreach (var commission in commissions)
+        {
+            commission.Name = CommissionNameMappings[$"{commission.SportType}_{commission.BetType}"];
+        }
+        return commissions;
+    }
+
+
+
 
     private IEnumerable<ProductGroup> GetProductGroups(IEnumerable<SettingProfile> settingProfile, QueryRequest request)
     {

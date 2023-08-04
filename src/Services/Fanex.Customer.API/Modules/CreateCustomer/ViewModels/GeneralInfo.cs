@@ -41,4 +41,6 @@ public class GeneralInformation
     public int Currency { get; set; }
 
     public string TemplateName { get; set; }
+
+    public IEnumerable<SportsBookCommission> Commissions { get; set; }
 }
