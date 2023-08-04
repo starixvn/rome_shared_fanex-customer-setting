@@ -44,6 +44,7 @@ public class BaseCustomerService
             {153_1, new GroupTypeBaseService<MemberPTItem>(dynamicRepository, appSettings.Value)},
             {154, new GroupTypeBaseService<ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings.Value)},
             {156, new GroupTypeBaseService<CommissionSettingItem>(dynamicRepository, appSettings.Value)},
+            {157, new GroupTypeBaseService<ViewModels.GroupType157.BetSettingItem>(dynamicRepository, appSettings.Value)},
         };
     }
 

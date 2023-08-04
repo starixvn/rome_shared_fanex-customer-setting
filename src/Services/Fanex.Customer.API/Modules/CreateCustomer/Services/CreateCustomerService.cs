@@ -93,6 +93,8 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)
     {
+        var actorRoleId = request.Settings.GeneralInfo.UplineRoleId;
+
         var parameters = new Hashtable {
             { "firstname", request.Settings.GeneralInfo.FirstName ?? string.Empty },
             { "lastname", request.Settings.GeneralInfo.LastName ?? string.Empty},
@@ -102,7 +104,6 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "phone", request.Settings.GeneralInfo.Phone ?? string.Empty},
             { "mobilephone", request.Settings.GeneralInfo.MobilePhone ?? string.Empty},
             { "fax", request.Settings.GeneralInfo.Fax ?? string.Empty},
-            { "transferoption", request.Settings.GeneralInfo.TransferOption },
             { "templatename", request.Settings.GeneralInfo.TemplateName },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "subaccid", request.Context.SubAccId },
@@ -113,16 +114,25 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             { "settingtypeall", (request.Context.UIBehavior != null) ? ObjectToXml(request.Context.UIBehavior) : string.Empty },
         };
 
-        if (request.Settings.GeneralInfo.UplineRoleId == (int)CustomerLevel.Super)
+        if (actorRoleId == (byte)CustomerLevel.Super)
         {
             parameters.Add("disableautompt", request.Settings.GeneralInfo.DisableAutoMPT);
             parameters.Add("site", request.Settings.GeneralInfo.Site);
             parameters.Add("srecommend", request.Context.CreatorId);
+            parameters.Add("transferoption", request.Settings.GeneralInfo.TransferOption);
         }
-        else if (request.Settings.GeneralInfo.UplineRoleId == (int)CustomerLevel.Master)
+
+        if (actorRoleId == (byte)CustomerLevel.Master)
         {
             parameters.Add("maxcredit", request.Settings.GeneralInfo.MemberMaxCredit);
             parameters.Add("mrecommend", request.Context.CreatorId);
+            parameters.Add("transferoption", request.Settings.GeneralInfo.TransferOption);
+        }
+
+        if (actorRoleId == (byte)CustomerLevel.Agent)
+        {
+            parameters.Add("recommend", request.Context.CreatorId);
+            parameters.Add("ugroup", request.Settings.GeneralInfo.Group);
         }
 
         return parameters;

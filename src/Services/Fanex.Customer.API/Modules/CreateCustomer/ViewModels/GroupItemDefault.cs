@@ -16,6 +16,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 [JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 7)]
 [JsonDerivedType(typeof(CommissionSettingItem), typeDiscriminator: 8)]
 [JsonDerivedType(typeof(MemberPTItem), typeDiscriminator: 9)]
+[JsonDerivedType(typeof(GroupType157.BetSettingItem), typeDiscriminator: 10)]
 public class GroupItemDefault
 {
     private const string SportTypeBetTypeXmlFormat = "SportType=\"{0}\" BetType=\"{1}\"";
