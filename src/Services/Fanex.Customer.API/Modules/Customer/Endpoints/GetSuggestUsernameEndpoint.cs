@@ -1,4 +1,5 @@
 using Fanex.Customer.API.Modules.Customer.Requests;
+using Fanex.Customer.API.Shared.Models;
 using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.Customer.Endpoints;
@@ -9,7 +10,7 @@ public class GetSuggestUsernameEndpoint : IEndpoint<IResult, GetSuggestUsernameR
     {
         app.MapPost("/api/customer/suggest-username", (GetSuggestUsernameRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
-            .Produces<string>();
+            .Produces<Result>();
     }
 
     public async Task<IResult> HandleAsync(GetSuggestUsernameRequest request, ICustomerService customerService)

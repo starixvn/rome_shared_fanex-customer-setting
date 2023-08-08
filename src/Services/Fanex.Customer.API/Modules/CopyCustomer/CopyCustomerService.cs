@@ -64,13 +64,18 @@ public class CopyCustomerService : ICopyCustomerService
             {
                 index++;
                 retryLoop = 0;
-                usernames.Add(request.UserName);
-                request.UserName = await GetAvailableDownlineUserName(request);
-
-                Task.Run(async () =>
+                
+                if (!string.IsNullOrWhiteSpace(request.UserName))
                 {
-                    await Sync3rdProductSettings(request, result.CustId);
-                });
+                    usernames.Add(request.UserName);
+
+                    await Task.Run(async () =>
+                    {
+                        await Sync3rdProductSettings(request, result.CustId).ConfigureAwait(false);
+                    }).ConfigureAwait(false);
+                }
+                
+                request.UserName = await GetAvailableDownlineUserName(request);
             }
             else
             {
@@ -198,9 +203,9 @@ public class CopyCustomerService : ICopyCustomerService
 
     private async Task<string> GetAvailableDownlineUserName(CopyCustomerRequest request)
     {
-        var suffix = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = request.ActorUserLevel });
+        var result = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = request.ActorUserLevel });
 
-        return !string.IsNullOrWhiteSpace(suffix) ? $"{request.ActorUsername}{suffix}" : string.Empty;
+        return !string.IsNullOrWhiteSpace(result.CustomData) ? $"{request.ActorUsername}{result.CustomData}" : string.Empty;
     }
 
     private void InsertUnreadMessage(int custId, byte roleId)

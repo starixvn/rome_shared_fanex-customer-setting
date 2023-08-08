@@ -18,6 +18,10 @@ public class GetSuggestUsernameCommand : NonQueryCommand
 
     public string SeqName { get; set; }
 
+    public int ErrCode { get; set; }
+
+    public string ErrMsg { get; set; }
+
     public override string GetSettingKey() => "Age_CustomerSelSuggestUsernameNew";
 
     public override bool IsValid() => !string.IsNullOrEmpty(ActorName);
