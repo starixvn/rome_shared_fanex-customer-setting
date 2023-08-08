@@ -34,9 +34,8 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
 
     public async Task<CustomerSetting> Query(QueryRequest request)
     {
-        var settingProfile = await sharedService.GetSettingProfiles(request.UplineSite, request.UplineCurrency);
         var generalInfo = await GetGeneralInfo(request);
-        generalInfo.Currency = request.UplineCurrency;
+        var settingProfile = await sharedService.GetSettingProfiles(generalInfo.Site, generalInfo.Currency);
         if (request.UplineRoleId == (byte)CustomerLevel.Agent)
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.UplineCustId);
