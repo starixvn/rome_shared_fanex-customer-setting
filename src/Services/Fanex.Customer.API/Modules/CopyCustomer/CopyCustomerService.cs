@@ -4,6 +4,7 @@ using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -59,12 +60,13 @@ public class CopyCustomerService : ICopyCustomerService
 
         do
         {
+            var suggestUsernameResult = Result.CreateSuccessfulResult();
             var result = request.ActorLevel.IsAgentLevel() ? await CopyMember(request) : await CopyMasterOrAgent(request);
             if (result.IsSuccessful)
             {
                 index++;
                 retryLoop = 0;
-                
+
                 if (!string.IsNullOrWhiteSpace(request.UserName))
                 {
                     usernames.Add(request.UserName);
@@ -74,15 +76,29 @@ public class CopyCustomerService : ICopyCustomerService
                         await Sync3rdProductSettings(request, result.CustId).ConfigureAwait(false);
                     }).ConfigureAwait(false);
                 }
-                
-                request.UserName = await GetAvailableDownlineUserName(request);
+
+                suggestUsernameResult = await GetAvailableDownlineUserName(request);
+
+                if (!suggestUsernameResult.IsSuccessful)
+                {
+                    return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, suggestUsernameResult.Message);
+                }
+
+                request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
             }
             else
             {
                 if (result.Code == 201 && retryLoop < 5)
                 {
                     retryLoop++;
-                    request.UserName = await GetAvailableDownlineUserName(request);
+                    suggestUsernameResult = await GetAvailableDownlineUserName(request);
+
+                    if (!suggestUsernameResult.IsSuccessful)
+                    {
+                        return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, suggestUsernameResult.Message);
+                    }
+
+                    request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
                 }
                 else
                 {
@@ -201,11 +217,11 @@ public class CopyCustomerService : ICopyCustomerService
             appSettings.SettingStatus);
     }
 
-    private async Task<string> GetAvailableDownlineUserName(CopyCustomerRequest request)
+    private async Task<Result> GetAvailableDownlineUserName(CopyCustomerRequest request)
     {
         var result = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = request.ActorUserLevel });
 
-        return !string.IsNullOrWhiteSpace(result.CustomData) ? $"{request.ActorUsername}{result.CustomData}" : string.Empty;
+        return result;
     }
 
     private void InsertUnreadMessage(int custId, byte roleId)
