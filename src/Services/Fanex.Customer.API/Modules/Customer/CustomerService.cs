@@ -18,7 +18,7 @@ public interface ICustomerService
 
     Task<CreditInfo> GetCreditInfo(string username);
 
-    Task<string> GetSuggestUsername(GetSuggestUsernameRequest request);
+    Task<Result> GetSuggestUsername(GetSuggestUsernameRequest request);
 
     Task<bool> CheckExistedCustomer(string username);
 
@@ -55,11 +55,11 @@ public class CustomerService : ICustomerService
     public Task<CreditInfo> GetCreditInfo(string username)
         => dynamicRepository.GetAsync<CreditInfo>(new GetCustomerMaxCreditCriteria(username));
 
-    public async Task<string> GetSuggestUsername(GetSuggestUsernameRequest request)
+    public async Task<Result> GetSuggestUsername(GetSuggestUsernameRequest request)
     {
         var command = new GetSuggestUsernameCommand(request.ActorName, request.RoleId);
         await dynamicRepository.ExecuteAsync(command);
-        return command.SeqName;
+        return new Result(command.ErrCode, command.ErrMsg, command.SeqName);
     }
 
     public async Task<bool> CheckExistedCustomer(string username)

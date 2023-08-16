@@ -1,6 +1,6 @@
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
+namespace Fanex.Customer.API.Modules.Rules;
 
 public class CheckLimitNewDownlineCommand : NonQueryCommand
 {

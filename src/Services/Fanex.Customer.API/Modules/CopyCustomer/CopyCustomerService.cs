@@ -4,7 +4,6 @@ using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Resources;
-using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.Repository;
@@ -15,8 +14,6 @@ namespace Fanex.Customer.API.Modules.CopyCustomer;
 public interface ICopyCustomerService
 {
     Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request);
-
-    Task<Result> CheckLimitNewDownline(CheckLimitNewDownlineRequest request);
 }
 
 public class CopyCustomerService : ICopyCustomerService
@@ -50,17 +47,6 @@ public class CopyCustomerService : ICopyCustomerService
 
     public async Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request)
     {
-        var checkLimitNewDownlineResult = await CheckLimitNewDownline(new CheckLimitNewDownlineRequest
-        {
-            CustId = request.ActorId,
-            CustLevel = request.ActorUserLevel,
-            Language = request.Language
-        });
-        if (!checkLimitNewDownlineResult.IsSuccessful)
-        {
-            return new CopyMultipleCustomerResult(Enumerable.Empty<string>(), checkLimitNewDownlineResult.Code, checkLimitNewDownlineResult.Message);
-        }
-
         var isSourceAccountEnable = request.SourceCustId > 0 && await customerService.IsEnableCustomer(request.SourceCustId);
 
         if (!isSourceAccountEnable)
@@ -74,25 +60,45 @@ public class CopyCustomerService : ICopyCustomerService
 
         do
         {
+            var suggestUsernameResult = Result.CreateSuccessfulResult();
             var result = request.ActorLevel.IsAgentLevel() ? await CopyMember(request) : await CopyMasterOrAgent(request);
             if (result.IsSuccessful)
             {
                 index++;
                 retryLoop = 0;
-                usernames.Add(request.UserName);
-                request.UserName = await GetAvailableDownlineUserName(request);
 
-                Task.Run(async () =>
+                if (!string.IsNullOrWhiteSpace(request.UserName))
                 {
-                    await Sync3rdProductSettings(request, result.CustId);
-                });
+                    usernames.Add(request.UserName);
+
+                    await Task.Run(async () =>
+                    {
+                        await Sync3rdProductSettings(request, result.CustId).ConfigureAwait(false);
+                    }).ConfigureAwait(false);
+                }
+
+                suggestUsernameResult = await GetAvailableDownlineUserName(request);
+
+                if (!suggestUsernameResult.IsSuccessful)
+                {
+                    return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, suggestUsernameResult.Message);
+                }
+
+                request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
             }
             else
             {
                 if (result.Code == 201 && retryLoop < 5)
                 {
                     retryLoop++;
-                    request.UserName = await GetAvailableDownlineUserName(request);
+                    suggestUsernameResult = await GetAvailableDownlineUserName(request);
+
+                    if (!suggestUsernameResult.IsSuccessful)
+                    {
+                        return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, suggestUsernameResult.Message);
+                    }
+
+                    request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
                 }
                 else
                 {
@@ -211,49 +217,11 @@ public class CopyCustomerService : ICopyCustomerService
             appSettings.SettingStatus);
     }
 
-    private async Task<string> GetAvailableDownlineUserName(CopyCustomerRequest request)
+    private async Task<Result> GetAvailableDownlineUserName(CopyCustomerRequest request)
     {
-        var length = request.ActorLevel.IsAgentLevel()
-                ? request.UserName.Length - 3
-                : request.UserName.Length - 2;
-        var userName = request.UserName.Substring(0, length);
-        var suffix = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = userName, RoleId = request.ActorUserLevel });
+        var result = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = request.ActorUserLevel });
 
-        return !string.IsNullOrWhiteSpace(suffix) ? $"{userName}{suffix}" : string.Empty;
-    }
-
-    public async Task<Result> CheckLimitNewDownline(CheckLimitNewDownlineRequest request)
-    {
-        var command = new CheckLimitNewDownlineCommand(request.CustId);
-        await dynamicRepository.ExecuteAsync(command);
-
-        return command.IsAllowed
-            ? Result.CreateSuccessfulResult()
-            : GetLimitNewDownlineErrorResult(Enumeration.FromValue<UserLevel>(request.CustLevel), request.Language);
-    }
-
-    private static Result GetLimitNewDownlineErrorResult(UserLevel custLevel, string language)
-    {
-        const int LimitNewDownlineErrorCode = 1001;
-
-        return new Result(
-            LimitNewDownlineErrorCode,
-            StaticResources.Get(GetLimitNewDownlineResourceKey(custLevel), language));
-    }
-
-    private static string GetLimitNewDownlineResourceKey(UserLevel custLevel)
-    {
-        if (custLevel.IsSuperLevel())
-        {
-            return "LimitSuperNewDownlineError";
-        }
-
-        if (custLevel.IsMasterLevel())
-        {
-            return "LimitMasterNewDownlineError";
-        }
-
-        return "LimitAgentNewDownlineError";
+        return result;
     }
 
     private void InsertUnreadMessage(int custId, byte roleId)

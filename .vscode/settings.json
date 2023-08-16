@@ -1,4 +1,5 @@
 {
   "omnisharp.enableRoslynAnalyzers": true,
-  "dotnet-test-explorer.testProjectPath": "**/*.Tests.csproj"
+  "dotnet-test-explorer.testProjectPath": "**/*.Tests.csproj",
+  "dotnet.defaultSolution": "Fanex.Customer.sln"
 }

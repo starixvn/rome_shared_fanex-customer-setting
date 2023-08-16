@@ -16,7 +16,8 @@ public class GetSuggestUsernameEndpoint : IEndpoint<IResult, GetSuggestUsernameR
     {
         if (request.IsValid())
         {
-            return Results.Ok(await customerService.GetSuggestUsername(request).ConfigureAwait(false));
+            var result = await customerService.GetSuggestUsername(request).ConfigureAwait(false);
+            return Results.Ok(result.CustomData);
         }
 
         return Results.BadRequest();
