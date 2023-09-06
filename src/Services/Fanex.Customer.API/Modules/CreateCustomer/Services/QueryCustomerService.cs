@@ -70,10 +70,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         }
         return commissions;
     }
-
-
-
-
+    
     private IEnumerable<ProductGroup> GetProductGroups(IEnumerable<SettingProfile> settingProfile, QueryRequest request)
     {
         return settingProfile.GroupBy(p => p.GroupId)
@@ -112,7 +109,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
             }
 
             return null;
-        }).ToEnumerable();
+        }).ToEnumerable().ToList();
     }
 
     private IEnumerable<GroupItemDefault> GetGroupItems(
