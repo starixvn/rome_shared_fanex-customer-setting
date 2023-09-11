@@ -70,7 +70,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         }
         return commissions;
     }
-    
+
     private IEnumerable<ProductGroup> GetProductGroups(IEnumerable<SettingProfile> settingProfile, QueryRequest request)
     {
         return settingProfile.GroupBy(p => p.GroupId)
@@ -79,7 +79,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
             GroupTypes = GetGroupTypes(g, request)
-        }).Where(p => p.GroupTypes.Any());
+        }).Where(p => p.GroupTypes.Any(i => i.GroupItems.Any()));
     }
 
     private IEnumerable<GroupType> GetGroupTypes(IGrouping<int, SettingProfile> g, QueryRequest request)
@@ -109,7 +109,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
             }
 
             return null;
-        }).ToEnumerable().ToList();
+        }).ToEnumerable().ToList(); // Must use ToList to prevent call SP 2 times because of Any method in the next action.
     }
 
     private IEnumerable<GroupItemDefault> GetGroupItems(

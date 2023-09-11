@@ -56,8 +56,8 @@ public class PTSettingService : BaseCustomerService, IPTSettingService
                     };
 
                     return groupType;
-                }).ToEnumerable()
-            }).Where(p => p.GroupTypes.Any());
+                }).ToEnumerable().ToList() // Must use ToList to prevent call SP 2 times because of Any method in the next action.
+            }).Where(p => p.GroupTypes.Any(i => i.GroupItems.Any()));
 
         return productGroups;
     }

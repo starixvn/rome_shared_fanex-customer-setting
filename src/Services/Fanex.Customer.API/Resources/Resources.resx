@@ -197,16 +197,16 @@
         <value>The Parlay Max Payout value must be a positive amount.</value>
     </data>
     <data name="Msg_10071" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of SingleMatchParlay is higher than the upline's.</value>
+        <value>Parlay Max Payout: The setting of Single Match Parlay is higher than the upline's.</value>
     </data>
     <data name="Msg_10072" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of Combo2 is higher than the upline's.</value>
+        <value>Parlay Max Payout: The setting of Combo 2 is higher than the upline's.</value>
     </data>
     <data name="Msg_10073" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of Combo35 is higher than the upline's.</value>
+        <value>Parlay Max Payout: The setting of Combo 3-5 is higher than the upline's.</value>
     </data>
     <data name="Msg_10074" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of ComboOver6 is higher than the upline's.</value>
+        <value>Parlay Max Payout: The setting of Combo 6+ &amp; System Parlayis higher than the upline's.</value>
     </data>
     <data name="Msg_20001" xml:space="preserve">
         <value>Wrong position taking.</value>
