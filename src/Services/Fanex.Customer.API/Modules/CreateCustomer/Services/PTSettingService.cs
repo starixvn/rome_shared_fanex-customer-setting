@@ -48,7 +48,7 @@ public class PTSettingService : BaseCustomerService, IPTSettingService
                             {
                                 groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
                                 groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, request.Language);
-                                groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
+                                groupItem.SportTypeName = IsSabaCasino(groupItem.SportTypeId, groupItem.BetTypeId) ? cacheRefService.GetProductName(SabaCasinoProductId) : cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
                                 groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, request.Language);
 
                                 return groupItem;

@@ -20,6 +20,7 @@ public class BaseCustomerService
     protected readonly ICacheRefService cacheRefService;
     protected readonly IMessageService messageService;
     protected readonly Dictionary<int, dynamic> groupItemMapping;
+    protected const int SabaCasinoProductId = 6;
 
     protected BaseCustomerService(
         IDynamicRepository dynamicRepository,
@@ -94,4 +95,7 @@ public class BaseCustomerService
 
     protected static bool IsPTGroupType(int groupType)
     => groupType == 153;
+
+    protected bool IsSabaCasino(int sportTypeId, int betTypeId)
+    => sportTypeId == 208 && betTypeId == 2101;
 }
