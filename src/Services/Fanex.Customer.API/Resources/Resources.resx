@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
     <!--
     Microsoft ResX Schema
@@ -231,5 +231,17 @@
     </data>
     <data name="Msg_20044" xml:space="preserve">
         <value>You are not allowed to have Auto PT, please contact your upline.</value>
+    </data>
+    <data name="Msg_20045" xml:space="preserve">
+        <value>This Template Name already exists.</value>
+    </data>
+    <data name="Msg_20046" xml:space="preserve">
+        <value>Invalid Position Taking(max set by upline).</value>
+    </data>
+    <data name="Msg_20047" xml:space="preserve">
+        <value>This Template is not exists.</value>
+    </data>
+    <data name="Msg_20048" xml:space="preserve">
+        <value>Invalid Position Taking(min/max set by upline).</value>
     </data>
 </root>
