@@ -77,10 +77,9 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private async Task<Hashtable> GetCreateCustomerParams(CreateRequest request, AppSettings appSettings)
     {
+        HtmlEncodeGeneralInfo(request);
         var param = CreateGeneralInfoParams(request, appSettings);
-
         var settingProfiles = await sharedService.GetSettingProfiles(request.Settings.GeneralInfo.Site, request.Settings.GeneralInfo.Currency);
-
         var settingTypesXml = CreateSettingTypesXml(request, settingProfiles);
 
         foreach (var item in settingTypesXml)
@@ -89,6 +88,15 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         }
 
         return param;
+    }
+
+    private static void HtmlEncodeGeneralInfo(CreateRequest request)
+    {
+        request.Settings.GeneralInfo.FirstName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.FirstName);
+        request.Settings.GeneralInfo.LastName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.LastName);
+        request.Settings.GeneralInfo.Fax = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Fax);
+        request.Settings.GeneralInfo.Phone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Phone);
+        request.Settings.GeneralInfo.MobilePhone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.MobilePhone);
     }
 
     private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)

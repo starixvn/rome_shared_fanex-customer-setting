@@ -15,7 +15,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
         string ip)
     {
         CustId = custId;
-        TemplateName = templateName;
+        TemplateName = System.Web.HttpUtility.HtmlEncode(templateName);
         Settings = settings;
         IsDefault = isDefault;
         SubAccId = subAccId;

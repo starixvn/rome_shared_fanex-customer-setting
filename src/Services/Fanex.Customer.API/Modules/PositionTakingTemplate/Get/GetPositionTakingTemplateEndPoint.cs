@@ -32,7 +32,7 @@ public class GetPositionTakingTemplateEndPoint : IEndpoint<IResult, int, IDynami
                        select new PTTemplate
                        {
                            Id = itemGroup.Key.Id,
-                           Name = itemGroup.Key.Name,
+                           Name = System.Web.HttpUtility.HtmlDecode(itemGroup.Key.Name),
                            IsDefault = itemGroup.Key.IsDefault,
                            Settings = itemGroup.Select(i => new PTTemplateDetail
                            {

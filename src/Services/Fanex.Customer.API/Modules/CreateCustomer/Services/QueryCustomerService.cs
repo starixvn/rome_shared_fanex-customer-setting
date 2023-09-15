@@ -61,6 +61,15 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         });
     }
 
+    private static void HtmlDecodeGeneralInfo(GeneralInformation generalInformation)
+    {
+        generalInformation.FirstName = System.Web.HttpUtility.HtmlDecode(generalInformation.FirstName);
+        generalInformation.LastName = System.Web.HttpUtility.HtmlDecode(generalInformation.LastName);
+        generalInformation.Fax = System.Web.HttpUtility.HtmlDecode(generalInformation.Fax);
+        generalInformation.Phone = System.Web.HttpUtility.HtmlDecode(generalInformation.Phone);
+        generalInformation.MobilePhone = System.Web.HttpUtility.HtmlDecode(generalInformation.MobilePhone);
+    }
+
     private async Task<IEnumerable<SportsBookCommission>> GetAgentSportsBookCommissions(int agentCustId)
     {
         var commissions = await dynamicRepository.FetchAsync<SportsBookCommission>(new GetAgentSportsBookCommissionsCriteria(agentCustId));
