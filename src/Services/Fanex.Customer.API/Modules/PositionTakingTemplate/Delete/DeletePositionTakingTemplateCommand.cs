@@ -4,12 +4,13 @@ namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
 
 public class DeletePositionTakingTemplateCommand : INonQueryCommand
 {
-    public DeletePositionTakingTemplateCommand(int custId, int templateId, string language, string ip)
+    public DeletePositionTakingTemplateCommand(int custId, int templateId, string language, string ip, int subAccId)
     {
         CustId = custId;
         TemplateId = templateId;
         Language = language;
         IP = ip;
+        SubAccId = subAccId;
     }
 
     public int CustId { get; }
