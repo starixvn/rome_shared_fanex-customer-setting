@@ -7,6 +7,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
+using Fanex.Customer.API.Shared.Extensions;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
@@ -92,11 +93,11 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private static void HtmlEncodeGeneralInfo(CreateRequest request)
     {
-        request.Settings.GeneralInfo.FirstName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.FirstName);
-        request.Settings.GeneralInfo.LastName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.LastName);
-        request.Settings.GeneralInfo.Fax = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Fax);
-        request.Settings.GeneralInfo.Phone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Phone);
-        request.Settings.GeneralInfo.MobilePhone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.MobilePhone);
+        request.Settings.GeneralInfo.FirstName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.FirstName.RemoveHTMLTags());
+        request.Settings.GeneralInfo.LastName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.LastName.RemoveHTMLTags());
+        request.Settings.GeneralInfo.Fax = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Fax.RemoveHTMLTags());
+        request.Settings.GeneralInfo.Phone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Phone.RemoveHTMLTags());
+        request.Settings.GeneralInfo.MobilePhone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.MobilePhone.RemoveHTMLTags());
     }
 
     private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)

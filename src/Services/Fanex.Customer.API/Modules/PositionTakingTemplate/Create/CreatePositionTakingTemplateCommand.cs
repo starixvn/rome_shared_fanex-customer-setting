@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Shared.Extensions;
 using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
@@ -15,7 +16,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
         string ip)
     {
         CustId = custId;
-        TemplateName = System.Web.HttpUtility.HtmlEncode(templateName);
+        TemplateName = System.Web.HttpUtility.HtmlEncode(templateName.RemoveHTMLTags());
         Settings = settings;
         IsDefault = isDefault;
         SubAccId = subAccId;
