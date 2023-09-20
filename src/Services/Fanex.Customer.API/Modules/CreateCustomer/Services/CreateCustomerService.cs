@@ -93,11 +93,26 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private static void HtmlEncodeGeneralInfo(CreateRequest request)
     {
-        request.Settings.GeneralInfo.FirstName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.FirstName.RemoveHTMLTags());
-        request.Settings.GeneralInfo.LastName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.LastName.RemoveHTMLTags());
-        request.Settings.GeneralInfo.Fax = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Fax.RemoveHTMLTags());
-        request.Settings.GeneralInfo.Phone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Phone.RemoveHTMLTags());
-        request.Settings.GeneralInfo.MobilePhone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.MobilePhone.RemoveHTMLTags());
+        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.FirstName))
+        {
+            request.Settings.GeneralInfo.FirstName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.FirstName.RemoveHTMLTags());
+        }
+        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.LastName))
+        {
+            request.Settings.GeneralInfo.LastName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.LastName.RemoveHTMLTags());
+        }
+        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Fax))
+        {
+            request.Settings.GeneralInfo.Fax = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Fax.RemoveHTMLTags());
+        }
+        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Phone))
+        {
+            request.Settings.GeneralInfo.Phone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Phone.RemoveHTMLTags());
+        }
+        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.MobilePhone))
+        {
+            request.Settings.GeneralInfo.MobilePhone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.MobilePhone.RemoveHTMLTags());
+        }
     }
 
     private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)
