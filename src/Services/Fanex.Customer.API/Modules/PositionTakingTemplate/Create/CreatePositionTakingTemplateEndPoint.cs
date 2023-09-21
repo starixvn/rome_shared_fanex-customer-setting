@@ -1,5 +1,6 @@
 using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Modules.Message.Models;
+using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Extensions;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -28,6 +29,11 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
 
     public async Task<IResult> HandleAsync(CreatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)
     {
+        if (request.TemplateName.ContainsHTML())
+        {
+            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Language ?? LanguageUtils.DefaultLanguage)));
+        }
+
         var command = new CreatePositionTakingTemplateCommand(
             request.CustId,
             request.TemplateName,

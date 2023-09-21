@@ -78,7 +78,6 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     private async Task<Hashtable> GetCreateCustomerParams(CreateRequest request, AppSettings appSettings)
     {
-        HtmlEncodeGeneralInfo(request);
         var param = CreateGeneralInfoParams(request, appSettings);
         var settingProfiles = await sharedService.GetSettingProfiles(request.Settings.GeneralInfo.Site, request.Settings.GeneralInfo.Currency);
         var settingTypesXml = CreateSettingTypesXml(request, settingProfiles);
@@ -89,30 +88,6 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         }
 
         return param;
-    }
-
-    private static void HtmlEncodeGeneralInfo(CreateRequest request)
-    {
-        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.FirstName))
-        {
-            request.Settings.GeneralInfo.FirstName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.FirstName.RemoveHTMLTags());
-        }
-        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.LastName))
-        {
-            request.Settings.GeneralInfo.LastName = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.LastName.RemoveHTMLTags());
-        }
-        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Fax))
-        {
-            request.Settings.GeneralInfo.Fax = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Fax.RemoveHTMLTags());
-        }
-        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Phone))
-        {
-            request.Settings.GeneralInfo.Phone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.Phone.RemoveHTMLTags());
-        }
-        if (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.MobilePhone))
-        {
-            request.Settings.GeneralInfo.MobilePhone = System.Web.HttpUtility.HtmlEncode(request.Settings.GeneralInfo.MobilePhone.RemoveHTMLTags());
-        }
     }
 
     private static Hashtable CreateGeneralInfoParams(CreateRequest request, AppSettings appSettings)
