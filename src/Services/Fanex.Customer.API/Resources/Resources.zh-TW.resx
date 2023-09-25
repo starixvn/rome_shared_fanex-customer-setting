@@ -136,4 +136,120 @@
     <value>此賬號來源已被禁用。</value>
     <comment/>
   </data>
+    <data name="Msg_1" xml:space="preserve">
+        <value>Invalid commission rate.</value>
+        <comment/>
+    </data>
+    <data name="Msg_10002" xml:space="preserve">
+        <value>Wrong Max Per Ball</value>
+        <comment/>
+    </data>
+    <data name="Msg_10003" xml:space="preserve">
+        <value>Wrong Min bet/ Max bet/ Max per match</value>
+        <comment/>
+    </data>
+    <data name="Msg_10059" xml:space="preserve">
+        <value>Wrong Max Payout Per Match.</value>
+        <comment/>
+    </data>
+    <data name="Msg_10060" xml:space="preserve">
+        <value>Max Per Match must be less than or equal to Max Payout Per Match</value>
+        <comment/>
+    </data>
+    <data name="Msg_10061" xml:space="preserve">
+        <value>Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match</value>
+        <comment/>
+    </data>
+    <data name="Msg_10062" xml:space="preserve">
+        <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
+        <comment/>
+    </data>
+    <data name="Msg_10063" xml:space="preserve">
+        <value>Max Bet must be less than or equal to Upline's Max Bet</value>
+        <comment/>
+    </data>
+    <data name="Msg_10064" xml:space="preserve">
+        <value>Max Per Match must be less than or equal to Upline's Max Per Match</value>
+        <comment/>
+    </data>
+    <data name="Msg_10065" xml:space="preserve">
+        <value>Max Payout Per Match must be less than or equal to Upline's Max Payout Per Match</value>
+        <comment/>
+    </data>
+    <data name="Msg_10066" xml:space="preserve">
+        <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>
+        <comment/>
+    </data>
+    <data name="Msg_10067" xml:space="preserve">
+        <value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
+        <comment/>
+    </data>
+    <data name="Msg_10070" xml:space="preserve">
+        <value>The Parlay Max Payout value must be a positive amount.</value>
+        <comment/>
+    </data>
+    <data name="Msg_10071" xml:space="preserve">
+        <value>Parlay Max Payout: The setting of Single Match Parlay is higher than the upline's.</value>
+        <comment/>
+    </data>
+    <data name="Msg_10072" xml:space="preserve">
+        <value>Parlay Max Payout: The setting of Combo 2 is higher than the upline's.</value>
+        <comment/>
+    </data>
+    <data name="Msg_10073" xml:space="preserve">
+        <value>Parlay Max Payout: The setting of Combo 3-5 is higher than the upline's.</value>
+        <comment/>
+    </data>
+    <data name="Msg_10074" xml:space="preserve">
+        <value>Parlay Max Payout: The setting of Combo 6+ &amp; System Parlayis higher than the upline's.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20001" xml:space="preserve">
+        <value>Wrong position taking.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20002" xml:space="preserve">
+        <value>Wrong position taking (min/max set by company).</value>
+        <comment/>
+    </data>
+    <data name="Msg_20005" xml:space="preserve">
+        <value>Wrong position taking (max set by company).</value>
+        <comment/>
+    </data>
+    <data name="Msg_20008" xml:space="preserve">
+        <value>Wrong agent position taking.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20025" xml:space="preserve">
+        <value>The position taking violates Upline Min/Max PT.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20027" xml:space="preserve">
+        <value>The position taking violates Master Max PT set by company</value>
+        <comment/>
+    </data>
+    <data name="Msg_20028" xml:space="preserve">
+        <value>The position taking violates Super Max PT.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20044" xml:space="preserve">
+        <value>You are not allowed to have Auto PT, please contact your upline.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20045" xml:space="preserve">
+        <value>This Template Name already exists.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20046" xml:space="preserve">
+        <value>Invalid Position Taking(max set by upline).</value>
+        <comment/>
+    </data>
+    <data name="Msg_20047" xml:space="preserve">
+        <value>This Template does not exist.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20048" xml:space="preserve">
+        <value>Invalid Position Taking(min/max set by upline).</value>
+        <comment/>
+    </data>
 </root>
