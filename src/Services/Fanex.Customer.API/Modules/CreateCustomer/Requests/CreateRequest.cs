@@ -26,8 +26,6 @@ public class UIProductGroup
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
-
     public IEnumerable<UIGroupType> GroupTypes { get; set; }
 }
 
@@ -35,16 +33,12 @@ public class UIGroupType
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
-
     public IEnumerable<UISubGroup> SubGroups { get; set; }
 }
 
 public class UISubGroup
 {
     public int Id { get; set; }
-
-    public string Name { get; set; }
 
     public IEnumerable<UIAttribute> Attributes { get; set; }
 
