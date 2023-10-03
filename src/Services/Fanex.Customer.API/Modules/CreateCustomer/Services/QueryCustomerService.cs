@@ -53,12 +53,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
     private async Task<GeneralInformation> GetGeneralInfo(QueryRequest request)
     {
         return await dynamicRepository.GetAsync<GeneralInformation>(
-        new GetCustomerCriteria
-        {
-            CustId = request.UplineCustId,
-            RoleId = request.UplineRoleId,
-            CreationStatus = appSettings.CreationStatus
-        });
+        new GetCustomerCriteria(request.UplineCustId, appSettings.CreationStatus, request.UplineRoleId));
     }
 
     private async Task<IEnumerable<SportsBookCommission>> GetAgentSportsBookCommissions(int agentCustId)

@@ -6,18 +6,25 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 
 public class GetCustomerCriteria : CriteriaBase
 {
-    public int CustId { get; set; }
+    public GetCustomerCriteria(int custId, byte creationStatus, int roleId, int groupId = 0,int groupType = 0)
+    {
+        CustId = custId;
+        GroupId = groupId;
+        GroupType = groupType;
+        CreationStatus = creationStatus;
+        RoleId = roleId;
+    }
 
-    public string Site { get; set; }
+    public int CustId { get; }
 
-    public int GroupId { get; set; }
+    public int GroupId { get; }
 
-    public int GroupType { get; set; }
+    public int GroupType { get; }
 
-    public byte CreationStatus { get; set; }
+    public byte CreationStatus { get; }
 
     [SpParam(Ignored = true)]
-    public int RoleId { get; set; }
+    public int RoleId { get; }
 
     public override string GetSettingKey()
         => RoleId switch

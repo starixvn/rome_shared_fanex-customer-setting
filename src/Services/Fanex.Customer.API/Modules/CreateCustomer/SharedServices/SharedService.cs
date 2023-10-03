@@ -37,10 +37,6 @@ public class SharedService : ISharedService
         => (await this.GetSettingProfile(site, currency)).Select(i => i.SettingType).Distinct();
 
     private async Task<IEnumerable<SettingProfile>> GetSettingProfile(string site, int currency)
-        => await dynamicRepository.FetchAsync<SettingProfile>(new GetSettingProfileCriteria
-        {
-            CreationStatus = appSettings.CreationStatus,
-            Site = site,
-            Currency = currency
-        });
+        => await dynamicRepository.FetchAsync<SettingProfile>(
+            new GetSettingProfileCriteria(appSettings.CreationStatus, site, currency));
 }

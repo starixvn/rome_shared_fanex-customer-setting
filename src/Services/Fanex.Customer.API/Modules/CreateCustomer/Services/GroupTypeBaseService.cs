@@ -21,12 +21,10 @@ public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
     }
 
     public async Task<IEnumerable<T>> Query(int uplineCustId, int uplineRoleId, int productGroupId, int groupType)
-        => await dynamicRepository.FetchAsync<T>(new GetCustomerCriteria
-        {
-            GroupId = productGroupId,
-            GroupType = groupType,
-            CustId = uplineCustId,
-            RoleId = uplineRoleId,
-            CreationStatus = appSettings.CreationStatus
-        });
+        => await dynamicRepository.FetchAsync<T>(new GetCustomerCriteria(
+            uplineCustId, 
+            appSettings.CreationStatus, 
+            uplineRoleId, 
+            productGroupId, 
+            groupType));
 }
