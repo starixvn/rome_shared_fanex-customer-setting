@@ -15,6 +15,8 @@ public interface ISharedService
 
 public class SharedService : ISharedService
 {
+    private const int CacheDurationInHour = 24; 
+
     private readonly IDynamicRepository dynamicRepository;
 
     private readonly AppSettings appSettings;
@@ -31,7 +33,7 @@ public class SharedService : ISharedService
     public async Task<IEnumerable<SettingProfile>> GetSettingProfiles(string site, int currency)
         => await cacheService.GetOrSetAsync($"CreateCustomerSettingProfile_{site}_{currency}",
           () => this.GetSettingProfile(site, currency),
-           new CacheItemOptions());
+           new CacheItemOptions(){ RelativeExpiration = new TimeSpan(CacheDurationInHour, 0, 0) });
 
     public async Task<IEnumerable<int>> GetAllSettingTypes(string site, int currency)
         => (await this.GetSettingProfile(site, currency)).Select(i => i.SettingType).Distinct();
