@@ -136,6 +136,10 @@
     <value>บัญชีต้นทางนี้ถูกปิดการใช้งานอยู่</value>
     <comment/>
   </data>
+    <data name="InvalidParameterValue" xml:space="preserve">
+        <value>ค่าพารามิเตอร์ไม่ถูกต้อง</value>
+        <comment/>
+    </data>
     <data name="Msg_1" xml:space="preserve">
         <value>การให้ส่วนลดไม่ถูกต้อง</value>
         <comment/>
@@ -189,19 +193,19 @@
         <comment/>
     </data>
     <data name="Msg_10071" xml:space="preserve">
-        <value>การจ่ายเงินพาร์เลย์สูงสุด: ค่าของพาร์เลย์แมตช์เดี่ยวที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของพาร์เลย์แมตช์เดี่ยวที่ตั้งไว้ สูงกว่าอัพไลน์</value>
         <comment/>
     </data>
     <data name="Msg_10072" xml:space="preserve">
-        <value>การจ่ายเงินพาร์เลย์สูงสุด: ค่าของคอมโบ 2 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบ 2 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
         <comment/>
     </data>
     <data name="Msg_10073" xml:space="preserve">
-        <value>การจ่ายเงินพาร์เลย์สูงสุด: ค่าของคอมโบ 3 - 5 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบ 3 - 5 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
         <comment/>
     </data>
     <data name="Msg_10074" xml:space="preserve">
-        <value>การจ่ายเงินพาร์เลย์สูงสุด: ค่าของคอมโบมากกว่า 6 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบมากกว่า 6 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
         <comment/>
     </data>
     <data name="Msg_20001" xml:space="preserve">
@@ -241,7 +245,7 @@
         <comment/>
     </data>
     <data name="Msg_20046" xml:space="preserve">
-        <value>Invalid Position Taking(max set by upline).</value>
+        <value>ค่าแบ่งสู้ไม่ถูกต้อง (ค่าแบ่งสู้สูงสุดกำหนดโดยอัพไลน์)</value>
         <comment/>
     </data>
     <data name="Msg_20047" xml:space="preserve">
@@ -249,7 +253,7 @@
         <comment/>
     </data>
     <data name="Msg_20048" xml:space="preserve">
-        <value>Invalid Position Taking(min/max set by upline).</value>
+        <value>ค่าแบ่งสู้ไม่ถูกต้อง (ค่าแบ่งสู้ ต่ำสุด/สูงสุด กำหนดโดยอัพไลน์)</value>
         <comment/>
     </data>
 </root>

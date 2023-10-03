@@ -136,6 +136,10 @@
     <value>Tài khoản sao chép này đã bị vô hiệu hóa.</value>
     <comment/>
   </data>
+    <data name="InvalidParameterValue" xml:space="preserve">
+        <value>Giá trị tham số không hợp lệ.</value>
+        <comment/>
+    </data>
     <data name="Msg_1" xml:space="preserve">
         <value>Tỷ lệ hoa hồng không hợp lệ</value>
         <comment/>
@@ -161,7 +165,7 @@
         <comment/>
     </data>
     <data name="Msg_10062" xml:space="preserve">
-        <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
+        <value>Cược Nhỏ Nhất phải lớn hơn hoặc bằng Cược Nhỏ Nhất của Cấp Trên</value>
         <comment/>
     </data>
     <data name="Msg_10063" xml:space="preserve">
@@ -241,7 +245,7 @@
         <comment/>
     </data>
     <data name="Msg_20046" xml:space="preserve">
-        <value>Invalid Position Taking(max set by upline).</value>
+        <value>Position Taking Không Hợp Lệ (PT lớn nhất do cấp trên đặt)</value>
         <comment/>
     </data>
     <data name="Msg_20047" xml:space="preserve">
@@ -249,7 +253,7 @@
         <comment/>
     </data>
     <data name="Msg_20048" xml:space="preserve">
-        <value>Invalid Position Taking(min/max set by upline).</value>
+        <value>Position Taking Không Hợp Lệ (PT nhỏ/lớn nhất do cấp trên đặt)</value>
         <comment/>
     </data>
 </root>

@@ -241,7 +241,7 @@
         <comment/>
     </data>
     <data name="Msg_20046" xml:space="preserve">
-        <value>Invalid Position Taking(max set by upline).</value>
+        <value>無效占成數（上線設置的最高占成數）。</value>
         <comment/>
     </data>
     <data name="Msg_20047" xml:space="preserve">
@@ -249,7 +249,7 @@
         <comment/>
     </data>
     <data name="Msg_20048" xml:space="preserve">
-        <value>Invalid Position Taking(min/max set by upline).</value>
+        <value>無效占成數（上線設置的最低/最高占成數）</value>
         <comment/>
     </data>
 </root>
