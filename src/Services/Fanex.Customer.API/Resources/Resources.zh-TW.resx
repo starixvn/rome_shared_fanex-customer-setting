@@ -137,51 +137,51 @@
     <comment/>
   </data>
     <data name="Msg_1" xml:space="preserve">
-        <value>Invalid commission rate.</value>
+        <value>折扣不正確</value>
         <comment/>
     </data>
     <data name="Msg_10002" xml:space="preserve">
-        <value>Wrong Max Per Ball</value>
+        <value>單粒球最高投注設置錯誤</value>
         <comment/>
     </data>
     <data name="Msg_10003" xml:space="preserve">
-        <value>Wrong Min bet/ Max bet/ Max per match</value>
+        <value>最低投注/最高投注/單場最高投注不正確</value>
         <comment/>
     </data>
     <data name="Msg_10059" xml:space="preserve">
-        <value>Wrong Max Payout Per Match.</value>
+        <value>單場最高派彩錯誤</value>
         <comment/>
     </data>
     <data name="Msg_10060" xml:space="preserve">
-        <value>Max Per Match must be less than or equal to Max Payout Per Match</value>
+        <value>單場限額必须少於或等於單場最高派彩限額</value>
         <comment/>
     </data>
     <data name="Msg_10061" xml:space="preserve">
-        <value>Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match</value>
+        <value>單粒球最高投注必須大於或等於最高投注且少於或等於單場限額</value>
         <comment/>
     </data>
     <data name="Msg_10062" xml:space="preserve">
-        <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
+        <value>最低投注必須大於或等於上線的最低投注</value>
         <comment/>
     </data>
     <data name="Msg_10063" xml:space="preserve">
-        <value>Max Bet must be less than or equal to Upline's Max Bet</value>
+        <value>最高投注必须少於或等於上線的最高投注</value>
         <comment/>
     </data>
     <data name="Msg_10064" xml:space="preserve">
-        <value>Max Per Match must be less than or equal to Upline's Max Per Match</value>
+        <value>單場限額必须少於或等於上線的單場限額</value>
         <comment/>
     </data>
     <data name="Msg_10065" xml:space="preserve">
-        <value>Max Payout Per Match must be less than or equal to Upline's Max Payout Per Match</value>
+        <value>單場最高派彩 必须少於或等於上線的單場最高派彩</value>
         <comment/>
     </data>
     <data name="Msg_10066" xml:space="preserve">
-        <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>
+        <value>單粒球最高投注必须少於或等於上線的單粒球最高投注</value>
         <comment/>
     </data>
     <data name="Msg_10067" xml:space="preserve">
-        <value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
+        <value>最低投注必须少於或等於 最高投注，最高投注必须少於或等於單場限額</value>
         <comment/>
     </data>
     <data name="Msg_10070" xml:space="preserve">
@@ -189,55 +189,55 @@
         <comment/>
     </data>
     <data name="Msg_10071" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of Single Match Parlay is higher than the upline's.</value>
+        <value>串關最高派彩: 單場串關的設置比上線的要高。</value>
         <comment/>
     </data>
     <data name="Msg_10072" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of Combo 2 is higher than the upline's.</value>
+        <value>串關最高派彩: 複選2的設置比上線的要高。</value>
         <comment/>
     </data>
     <data name="Msg_10073" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of Combo 3-5 is higher than the upline's.</value>
+        <value>串關最高派彩: 複選3-5的設置比上線的要高。</value>
         <comment/>
     </data>
     <data name="Msg_10074" xml:space="preserve">
-        <value>Parlay Max Payout: The setting of Combo 6+ &amp; System Parlayis higher than the upline's.</value>
+        <value>串關最高派彩: 複選6的設置比上線的要高。</value>
         <comment/>
     </data>
     <data name="Msg_20001" xml:space="preserve">
-        <value>Wrong position taking.</value>
+        <value>佔成數不正確</value>
         <comment/>
     </data>
     <data name="Msg_20002" xml:space="preserve">
-        <value>Wrong position taking (min/max set by company).</value>
+        <value>佔成數不正確(公司設給最低/高佔成).</value>
         <comment/>
     </data>
     <data name="Msg_20005" xml:space="preserve">
-        <value>Wrong position taking (max set by company).</value>
+        <value>佔成數不正確(公司設給最高佔成).</value>
         <comment/>
     </data>
     <data name="Msg_20008" xml:space="preserve">
-        <value>Wrong agent position taking.</value>
+        <value>代理佔成數不正確.</value>
         <comment/>
     </data>
     <data name="Msg_20025" xml:space="preserve">
-        <value>The position taking violates Upline Min/Max PT.</value>
+        <value>此占成違反上線的最低/最高占成.</value>
         <comment/>
     </data>
     <data name="Msg_20027" xml:space="preserve">
-        <value>The position taking violates Master Max PT set by company</value>
+        <value>此占成違反公司設置於總代理的最高占成。</value>
         <comment/>
     </data>
     <data name="Msg_20028" xml:space="preserve">
-        <value>The position taking violates Super Max PT.</value>
+        <value>此占成違反超級總代理的最高占成。</value>
         <comment/>
     </data>
     <data name="Msg_20044" xml:space="preserve">
-        <value>You are not allowed to have Auto PT, please contact your upline.</value>
+        <value>您不被允許使用自動占成, 請您聯系您的上線。</value>
         <comment/>
     </data>
     <data name="Msg_20045" xml:space="preserve">
-        <value>This Template Name already exists.</value>
+        <value>模板名称已存在。</value>
         <comment/>
     </data>
     <data name="Msg_20046" xml:space="preserve">
@@ -245,7 +245,7 @@
         <comment/>
     </data>
     <data name="Msg_20047" xml:space="preserve">
-        <value>This Template does not exist.</value>
+        <value>该模板不存在。</value>
         <comment/>
     </data>
     <data name="Msg_20048" xml:space="preserve">

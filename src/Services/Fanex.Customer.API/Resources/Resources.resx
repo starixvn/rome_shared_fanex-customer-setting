@@ -173,7 +173,7 @@
         <comment/>
     </data>
     <data name="Msg_10003" xml:space="preserve">
-        <value>Wrong Min bet/ Max bet/ Max per match</value>
+        <value>Invalid Min bet/ Max bet/ Max per match.</value>
         <comment/>
     </data>
     <data name="Msg_10059" xml:space="preserve">

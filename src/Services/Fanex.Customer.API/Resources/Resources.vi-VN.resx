@@ -137,15 +137,15 @@
     <comment/>
   </data>
     <data name="Msg_1" xml:space="preserve">
-        <value>Invalid commission rate.</value>
+        <value>Tỷ lệ hoa hồng không hợp lệ</value>
         <comment/>
     </data>
     <data name="Msg_10002" xml:space="preserve">
-        <value>Wrong Max Per Ball</value>
+        <value>Sai giá trị : Tiền cược lớn nhất cho mỗi banh</value>
         <comment/>
     </data>
     <data name="Msg_10003" xml:space="preserve">
-        <value>Wrong Min bet/ Max bet/ Max per match</value>
+        <value>Sai giá trị : Tiền cược nhỏ nhất / Tiền cược lớn nhất / Tiền cược lớn nhất cho mỗi trận đấu</value>
         <comment/>
     </data>
     <data name="Msg_10059" xml:space="preserve">
@@ -205,19 +205,19 @@
         <comment/>
     </data>
     <data name="Msg_20001" xml:space="preserve">
-        <value>Wrong position taking.</value>
+        <value>Sai giá trị PT</value>
         <comment/>
     </data>
     <data name="Msg_20002" xml:space="preserve">
-        <value>Wrong position taking (min/max set by company).</value>
+        <value>Sai giá trị PT (nhỏ nhất/lớn nhất được thiết lập bởi công ty).</value>
         <comment/>
     </data>
     <data name="Msg_20005" xml:space="preserve">
-        <value>Wrong position taking (max set by company).</value>
+        <value>Sai giá trị PT (giá trị lớn nhất).</value>
         <comment/>
     </data>
     <data name="Msg_20008" xml:space="preserve">
-        <value>Wrong agent position taking.</value>
+        <value>Sai giá trị PT của Agent.</value>
         <comment/>
     </data>
     <data name="Msg_20025" xml:space="preserve">
@@ -233,11 +233,11 @@
         <comment/>
     </data>
     <data name="Msg_20044" xml:space="preserve">
-        <value>You are not allowed to have Auto PT, please contact your upline.</value>
+        <value>Bạn không được phép dùng Auto PT, vui lòng liên hệ cấp trên để biết thêm chi tiết.</value>
         <comment/>
     </data>
     <data name="Msg_20045" xml:space="preserve">
-        <value>This Template Name already exists.</value>
+        <value>Tên Mẫu đã tồn tại.</value>
         <comment/>
     </data>
     <data name="Msg_20046" xml:space="preserve">
