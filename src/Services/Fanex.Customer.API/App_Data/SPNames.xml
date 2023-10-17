@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
     <Function Name="SiteDB">
-        <Setting Key="Acc_CustSetting_SiteGroupSel" SpName="Acc_CustSetting_SiteGroupSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_CustSetting_SiteGroupSel" SpName="Acc_CustSetting_SiteGroupSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
         <Setting Key="DBSite03_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="DBSite03.bodb02.BODBDownlineNet" />
         <Setting Key="DBSite03_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="DBSite03.bodb02.BODBDownlineNet" />
         <Setting Key="DBSite03_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="DBSite03.bodb02.BODBDownlineNet" />
@@ -84,7 +84,7 @@
     </Function>
 
     <Function Name="Create Customer">
-        <Setting Key="Acc_LiteMode_CustSetting_SuperAllInfoSel" SpName="Acc_LiteMode_CustSetting_SuperAllInfoSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
+        <Setting Key="Acc_LiteMode_CustSetting_SuperAllInfoSel" SpName="Acc_LiteMode_CustSetting_SuperAllInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
             <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
             <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
@@ -98,7 +98,7 @@
             <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
             <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
         </Setting>
-        <Setting Key="Acc_LiteMode_CustSetting_MasterAllInfoSel" SpName="Acc_LiteMode_CustSetting_MasterAllInfoSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
+        <Setting Key="Acc_LiteMode_CustSetting_MasterAllInfoSel" SpName="Acc_LiteMode_CustSetting_MasterAllInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
             <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
             <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
@@ -112,7 +112,7 @@
             <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
             <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
         </Setting>
-        <Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
+        <Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0">
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
             <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
             <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
@@ -126,14 +126,14 @@
             <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
             <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
         </Setting>
-        <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateUpd" SpName="Acc_LiteMode_CustSetting_CustPTTemplateUpd_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
-        <Setting Key="Acc_LiteMode_CustSetting_AgentCommSBSel" SpName="Acc_LiteMode_CustSetting_AgentCommSBSel_xpre" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateUpd" SpName="Acc_LiteMode_CustSetting_CustPTTemplateUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Acc_LiteMode_CustSetting_AgentCommSBSel" SpName="Acc_LiteMode_CustSetting_AgentCommSBSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
     </Function>
 </Functions>
