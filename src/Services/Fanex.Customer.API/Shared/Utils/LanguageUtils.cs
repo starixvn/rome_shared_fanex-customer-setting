@@ -2,6 +2,8 @@
 
 public static class LanguageUtils
 {
+    public const string DefaultLanguage = "en-US";
+
     public static string ToLanguageKey(string language)
     {
         var lowerLanguage = string.IsNullOrWhiteSpace(language)

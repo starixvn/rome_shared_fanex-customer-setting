@@ -5,10 +5,15 @@ using Fanex.Customer.API.Extensions;
 using Fanex.Customer.API.Helpers;
 using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
-using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Rules;
+using Fanex.Customer.API.Modules.CreateCustomer;
+using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
+using Fanex.Customer.API.Modules.Customer;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.SecurityCode;
+using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
+using Fanex.RemotingRef;
 using MinimalApi.Endpoint.Extensions;
 using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
@@ -19,8 +24,14 @@ builder.Services.AddHttpContextAccessor()
                 .AddSingleton<IShardInfoAccessor, ShardInfoAccessor>();
 builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddFanexLogging(builder.Configuration);
+builder.Services.AddFanexRemotingRef(builder.Configuration);
 builder.Services.AddSingleton<ICacheService, CacheService>();
+builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
+builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
+builder.Services.AddSingleton<ISiteDBGroupService, SiteDBGroupService>();
+builder.Services.AddSingleton<IMessageService, MessageService>();
+builder.Services.AddSingleton<ISharedService, SharedService>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>
 {
     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -38,11 +49,14 @@ builder.Services.RegisterSecurityCodeModule();
 builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.RegisterRulesServiceModule();
+builder.Services.RegisterCreateCustomerModule();
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(type => type.ToString());
+});
 var app = builder.Build();
 
 app.UseSwagger();

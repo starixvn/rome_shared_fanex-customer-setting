@@ -136,4 +136,124 @@
     <value>บัญชีต้นทางนี้ถูกปิดการใช้งานอยู่</value>
     <comment/>
   </data>
+    <data name="InvalidParameterValue" xml:space="preserve">
+        <value>ค่าพารามิเตอร์ไม่ถูกต้อง</value>
+        <comment/>
+    </data>
+    <data name="Msg_1" xml:space="preserve">
+        <value>การให้ส่วนลดไม่ถูกต้อง</value>
+        <comment/>
+    </data>
+    <data name="Msg_10002" xml:space="preserve">
+        <value>ค่าการเดิมพันสูงสุดต่อบอลผิดพลาด .</value>
+        <comment/>
+    </data>
+    <data name="Msg_10003" xml:space="preserve">
+        <value>ค่า เดิมพันขั้นต่ำ/ เดิมพันขั้นสูดสุด/ เดิมพันต่อเกมสูงสุด ไม่ถูกต้อง</value>
+        <comment/>
+    </data>
+    <data name="Msg_10059" xml:space="preserve">
+        <value>ข้อผิดพลาดในการจ่ายเงินสูงสุดต่อคู่การแข่งขัน</value>
+        <comment/>
+    </data>
+    <data name="Msg_10060" xml:space="preserve">
+        <value>ค่าเดิมพันสูงสุดต่อคู่การแข่งขันต้องน้อยกว่าหรือเท่ากับการจ่ายสูงสุดต่อคู่คู่การแข่งขัน</value>
+        <comment/>
+    </data>
+    <data name="Msg_10061" xml:space="preserve">
+        <value>ค่าเดิมพันสูงสุดต่อบอลต้องมากกว่าหรือเท่ากับค่าเดิมพันสูงสุดและน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อคู่การแข่งขัน</value>
+        <comment/>
+    </data>
+    <data name="Msg_10062" xml:space="preserve">
+        <value>ค่าเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับค่าเดิมพันขั้นต่ำของอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_10063" xml:space="preserve">
+        <value>ค่าเดิมพันสูงสุดต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดของอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_10064" xml:space="preserve">
+        <value>ค่าเดิมพันสูงสุดต่อคู่การแข่งขันต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อคู่การแข่งขันของอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_10065" xml:space="preserve">
+        <value>การจ่ายเงินสูงสุดต่อคู่การแข่งขันจะต้องน้อยกว่าหรือเท่ากับการจ่ายสูงสุดของอัพไลน์ต่อคู่การแข่งขัน</value>
+        <comment/>
+    </data>
+    <data name="Msg_10066" xml:space="preserve">
+        <value>ค่าเดิมพันสูงสุดต่อบอลต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อบอลของอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_10067" xml:space="preserve">
+        <value>ค่าเดิมพันขั้นต่ำต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดและค่าเดิมพันสูงสุดต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อคู่การแข่งขัน</value>
+        <comment/>
+    </data>
+    <data name="Msg_10070" xml:space="preserve">
+        <value>The Parlay Max Payout value must be a positive amount.</value>
+        <comment/>
+    </data>
+    <data name="Msg_10071" xml:space="preserve">
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของพาร์เลย์แมตช์เดี่ยวที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_10072" xml:space="preserve">
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบ 2 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_10073" xml:space="preserve">
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบ 3 - 5 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_10074" xml:space="preserve">
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบมากกว่า 6 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+        <comment/>
+    </data>
+    <data name="Msg_20001" xml:space="preserve">
+        <value>การกำหนดไม่ถูกต้อง.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20002" xml:space="preserve">
+        <value>การกำหนดไม่ถูกต้อง (สูงสุด หรือ ต่ำสุด อ้างอิงจากข้อมูลบริษัท).</value>
+        <comment/>
+    </data>
+    <data name="Msg_20005" xml:space="preserve">
+        <value>การกำหนดไม่ถูกต้อง (สูงสุด  อ้างอิงจากข้อมูลบริษัท).</value>
+        <comment/>
+    </data>
+    <data name="Msg_20008" xml:space="preserve">
+        <value>การกำหนดตัวแทนไม่ถูกต้อง.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20025" xml:space="preserve">
+        <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นต่ำ/ขั้นสูงสุดของทางต้นสาย</value>
+        <comment/>
+    </data>
+    <data name="Msg_20027" xml:space="preserve">
+        <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นสูงสุดของมาสเตอร์ ที่ทางบริษัทตั้งค่าไว้</value>
+        <comment/>
+    </data>
+    <data name="Msg_20028" xml:space="preserve">
+        <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นสูงสุดของซูเปอร์</value>
+        <comment/>
+    </data>
+    <data name="Msg_20044" xml:space="preserve">
+        <value>คุณไม่ได้รับอนุญาตให้ใช้การตั้งค่าแบ่งสู้อัตโนมัติ โปรดติดต่ออัพไลน์ของคุณ</value>
+        <comment/>
+    </data>
+    <data name="Msg_20045" xml:space="preserve">
+        <value>This Template Name already exists.</value>
+        <comment/>
+    </data>
+    <data name="Msg_20046" xml:space="preserve">
+        <value>ค่าแบ่งสู้ไม่ถูกต้อง (ค่าแบ่งสู้สูงสุดกำหนดโดยอัพไลน์)</value>
+        <comment/>
+    </data>
+    <data name="Msg_20047" xml:space="preserve">
+        <value>ไม่มีเทมเพลตนี้</value>
+        <comment/>
+    </data>
+    <data name="Msg_20048" xml:space="preserve">
+        <value>ค่าแบ่งสู้ไม่ถูกต้อง (ค่าแบ่งสู้ ต่ำสุด/สูงสุด กำหนดโดยอัพไลน์)</value>
+        <comment/>
+    </data>
 </root>
