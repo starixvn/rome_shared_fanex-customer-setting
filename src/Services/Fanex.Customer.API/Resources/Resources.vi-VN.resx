@@ -189,7 +189,7 @@
         <comment/>
     </data>
     <data name="Msg_10070" xml:space="preserve">
-        <value>The Parlay Max Payout value must be a positive amount.</value>
+        <value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên phải là số dương.</value>
         <comment/>
     </data>
     <data name="Msg_10071" xml:space="preserve">

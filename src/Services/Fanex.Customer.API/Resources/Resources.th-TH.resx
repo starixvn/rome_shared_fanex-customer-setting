@@ -189,7 +189,7 @@
         <comment/>
     </data>
     <data name="Msg_10070" xml:space="preserve">
-        <value>The Parlay Max Payout value must be a positive amount.</value>
+        <value>การจ่ายเงินพาร์เลย์สูงสุดต่อเดิมพันต้องเป็นจำนวนบวก</value>
         <comment/>
     </data>
     <data name="Msg_10071" xml:space="preserve">
