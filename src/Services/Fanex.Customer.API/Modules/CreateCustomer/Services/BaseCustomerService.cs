@@ -98,4 +98,6 @@ public class BaseCustomerService
 
     protected bool IsSabaCasino(int sportTypeId, int betTypeId)
     => sportTypeId == 208 && betTypeId == 2101;
+
+    
 }

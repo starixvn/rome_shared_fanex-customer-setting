@@ -40,4 +40,9 @@ public class GroupItemDefault
     public virtual string ToXml()
         => string.Format(SportTypeBetTypeXmlFormat, SportTypeId, BetTypeId);
 
+    public virtual bool Validate()
+        => true;
+
+    public virtual bool Is3DecimalPTValue()
+        => false;
 }

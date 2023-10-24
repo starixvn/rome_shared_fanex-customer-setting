@@ -27,4 +27,7 @@ public class MemberPTItem : GroupItemDefault
             IsLive,
             A1);
     }
+    
+    public override bool Is3DecimalPTValue()
+        => (A1 *10) % 10 != 0;
 }

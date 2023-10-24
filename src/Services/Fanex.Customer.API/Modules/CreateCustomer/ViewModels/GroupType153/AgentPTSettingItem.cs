@@ -57,4 +57,10 @@ public class AgentPTSettingItem : GroupItemDefault
                 A2,
                 N2);
     }
+    
+    public override bool Is3DecimalPTValue()
+        => (M2 *10) % 10 != 0
+            || (UM2 *10) % 10 != 0
+            || (A2 *10) % 10 != 0
+            || (N2 *10) % 10 != 0;
 }

@@ -5,4 +5,11 @@ public class AppSettings
     public byte SettingStatus { get; set; }
 
     public byte CreationStatus { get; set; }
+
+    public string SpecialSites { get; set; }
+
+    public bool IsSpecialSites(string siteLabel)
+        => string.IsNullOrWhiteSpace(SpecialSites) ? 
+        false : 
+        SpecialSites.Split(',').Select(site => site.Trim()).Any(site => site.Equals(siteLabel, System.StringComparison.CurrentCultureIgnoreCase));
 }

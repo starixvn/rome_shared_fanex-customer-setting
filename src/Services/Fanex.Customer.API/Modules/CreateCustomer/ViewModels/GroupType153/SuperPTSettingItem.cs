@@ -11,7 +11,7 @@ public class SuperPTSettingItem : GroupItemDefault
     public decimal M4 { get; set; }
 
     public decimal N4 { get; set; }
-    
+
     public override string ToXml()
      => string.Format(
                 PTXmlFormat,
@@ -21,4 +21,9 @@ public class SuperPTSettingItem : GroupItemDefault
                 IsAuto ? 1 : 0,
                 M4,
                 N4);
+
+    public override bool Is3DecimalPTValue()
+        => (S4 *10) % 10 != 0
+            || (M4 *10) % 10 != 0
+            || (N4 *10) % 10 != 0;
 }

@@ -5,6 +5,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Extensions;
@@ -13,6 +14,7 @@ using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Data.Repository;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
@@ -20,6 +22,8 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface ICreateCustomerService
 {
+    bool ValidateRequest (CreateRequest request);
+
     Task<CreateCustomerResult> Create(CreateRequest request);
 }
 
@@ -37,6 +41,22 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
     {
         this.siteDBGroupService = siteDBGroupService;
+    }
+
+    public bool ValidateRequest (CreateRequest request)
+    {
+        if(!appSettings.IsSpecialSites(request.Settings.GeneralInfo.SiteLabel))
+        {
+            foreach(var productGroup in request.Settings.ProductGroups)
+            {
+                if(productGroup.GroupTypes.Any(gt => gt.Id == 153 && gt.GroupItems.Any(gi => gi.Is3DecimalPTValue())))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public async Task<CreateCustomerResult> Create(CreateRequest request)
@@ -116,7 +136,6 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         if (actorRoleId == (byte)CustomerLevel.Super)
         {
             parameters.Add("disableautompt", request.Settings.GeneralInfo.DisableAutoMPT);
-            parameters.Add("site", request.Settings.GeneralInfo.Site);
             parameters.Add("srecommend", request.Context.CreatorId);
             parameters.Add("transferoption", request.Settings.GeneralInfo.TransferOption);
         }
