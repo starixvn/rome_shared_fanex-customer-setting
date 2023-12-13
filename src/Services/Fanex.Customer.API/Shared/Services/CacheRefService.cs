@@ -23,7 +23,7 @@ public interface ICacheRefService
 
 public class CacheRefService : ICacheRefService
 {
-    private static readonly IRemotingRefService remotingRef = new RemotingRefService();
+    private readonly IRemotingRefService remotingRef;
 
     private const string ProductRefId = "Product";
 
@@ -39,9 +39,11 @@ public class CacheRefService : ICacheRefService
 
     private const string G_GT_Sport_Bettype_RefId = "G_GT_Sport_Bettype";
 
-    private static Dictionary<string, string> cacheData = new Dictionary<string, string>();
+    private Dictionary<string, string> cacheData = new Dictionary<string, string>();
+
     public CacheRefService(IRemotingRefService remotingRef)
     {
+        this.remotingRef = remotingRef;
     }
 
     public string GetProductName(int productId, string language = "en-US")
@@ -89,16 +91,16 @@ public class CacheRefService : ICacheRefService
         return GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
     }
 
-    private static string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
+    private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
         => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";
 
-    private static string GetFromCacheData(string refId, string refKey)
+    private string GetFromCacheData(string refId, string refKey)
         => cacheData[$"{refId}_{refKey}"];
 
-    private static void SetToCacheData(string refId, string refKey, string value)
+    private void SetToCacheData(string refId, string refKey, string value)
     => cacheData[$"{refId}_{refKey}"] = value;
 
-    private static string GetOrSetFromCacheData(string refId, string refKey, string language, string defaultValue)
+    private string GetOrSetFromCacheData(string refId, string refKey, string language, string defaultValue)
     {
         if (cacheData.ContainsKey($"{refId}_{refKey}"))
         {
