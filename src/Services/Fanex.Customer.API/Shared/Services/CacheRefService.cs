@@ -39,6 +39,8 @@ public class CacheRefService : ICacheRefService
 
     private const string G_GT_Sport_Bettype_RefId = "G_GT_Sport_Bettype";
 
+    private Dictionary<string, string> cacheData = new Dictionary<string, string>();
+
     public CacheRefService(IRemotingRefService remotingRef)
     {
         this.remotingRef = remotingRef;
@@ -74,21 +76,41 @@ public class CacheRefService : ICacheRefService
     public string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return remotingRef.GetResourceDataByRefIdAndResourceId(SB_Comm_SMA_RefId, refKey, language, refKey);
+        return GetOrSetFromCacheData(SB_Comm_SMA_RefId, refKey, language, refKey);
     }
 
     public string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return remotingRef.GetResourceDataByRefIdAndResourceId(SB_Comm_Member_RefId, refKey, language, refKey);
+        return GetOrSetFromCacheData(SB_Comm_Member_RefId, refKey, language, refKey);
     }
 
     public string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return remotingRef.GetResourceDataByRefIdAndResourceId(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
+        return GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
     }
 
-    private static string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
+    private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
         => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";
+
+    private string GetFromCacheData(string refId, string refKey)
+        => cacheData[$"{refId}_{refKey}"];
+
+    private void SetToCacheData(string refId, string refKey, string value)
+    => cacheData[$"{refId}_{refKey}"] = value;
+
+    private string GetOrSetFromCacheData(string refId, string refKey, string language, string defaultValue)
+    {
+        if (cacheData.ContainsKey($"{refId}_{refKey}"))
+        {
+            return cacheData[$"{refId}_{refKey}"];
+        }
+        else
+        {
+            var refVal = remotingRef.GetResourceDataByRefIdAndResourceId(refId, refKey, language, refKey);
+            cacheData.Add($"{refId}_{refKey}", refVal);
+            return refVal;
+        }
+    }
 }
