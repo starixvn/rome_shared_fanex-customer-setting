@@ -45,7 +45,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 
     public bool ValidateRequest (CreateRequest request)
     {
-        if(!appSettings.IsSpecialSites(request.Settings.GeneralInfo.SiteLabel))
+        if(!appSettings.IsSupportPT3Decimal(request.Settings.GeneralInfo.SiteLabel))
         {
             foreach(var productGroup in request.Settings.ProductGroups)
             {
