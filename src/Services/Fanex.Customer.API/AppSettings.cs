@@ -6,6 +6,11 @@ public class AppSettings
 
     public byte CreationStatus { get; set; }
 
+    public string SiteLabelBelonging777Group { get; set; }
+
+    public bool Belonging777Group(string siteLabel)
+    => !string.IsNullOrWhiteSpace(SiteLabelBelonging777Group) && SiteLabelBelonging777Group.Split(',').Select(site => site.Trim()).Any(site => site.Equals(siteLabel, System.StringComparison.CurrentCultureIgnoreCase));
+
     public string SpecialSites { get; set; }
 
     public bool IsSpecialSites(string siteLabel)

@@ -1,4 +1,5 @@
 using Fanex.RemotingRef;
+using Microsoft.AspNetCore.Identity;
 
 namespace Fanex.Customer.API.Shared.Services;
 
@@ -19,6 +20,8 @@ public interface ICacheRefService
     string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
 
     string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
+
+    string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US", bool isSiteLabel777 = false);
 }
 
 public class CacheRefService : ICacheRefService
@@ -39,6 +42,7 @@ public class CacheRefService : ICacheRefService
 
     private const string G_GT_Sport_Bettype_RefId = "G_GT_Sport_Bettype";
 
+    private const string G_GT_Sport_Bettype_RefId_Saba = "G_GT_Sport_BT_Saba";
     private Dictionary<string, string> cacheData = new Dictionary<string, string>();
 
     public CacheRefService(IRemotingRefService remotingRef)
@@ -89,6 +93,14 @@ public class CacheRefService : ICacheRefService
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
         return GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
+    }
+
+    public string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US", bool isSiteLabel777 = false)
+    {
+        var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
+        var name = isSiteLabel777 ? GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId_Saba, refKey, language, refKey) : refKey;
+
+        return name.Equals(refKey) ? GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, refKey) : name;
     }
 
     private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)

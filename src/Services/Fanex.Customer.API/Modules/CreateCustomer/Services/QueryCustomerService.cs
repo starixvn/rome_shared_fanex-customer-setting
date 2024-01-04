@@ -43,7 +43,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         var customerSetting = new CustomerSetting
         {
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request)
+            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel))
         };
 
         customerSetting.GeneralInfo.UplineRoleId = request.UplineRoleId;
@@ -66,18 +66,18 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         return commissions;
     }
 
-    private IEnumerable<ProductGroup> GetProductGroups(IEnumerable<SettingProfile> settingProfile, QueryRequest request)
+    private IEnumerable<ProductGroup> GetProductGroups(IEnumerable<SettingProfile> settingProfile, QueryRequest request, bool isSiteLabel777)
     {
         return settingProfile.GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
-            GroupTypes = GetGroupTypes(g, request)
+            GroupTypes = GetGroupTypes(g, request, isSiteLabel777)
         }).Where(p => p.GroupTypes.Any(i => i.GroupItems.Any()));
     }
 
-    private IEnumerable<GroupType> GetGroupTypes(IGrouping<int, SettingProfile> g, QueryRequest request)
+    private IEnumerable<GroupType> GetGroupTypes(IGrouping<int, SettingProfile> g, QueryRequest request, bool isSiteLabel777)
     {
         return g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
         .SelectAwait(async t =>
@@ -97,7 +97,8 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                         t.Key.DisplayType,
                         request.UplineRoleId,
                         request.Language,
-                        groupItems, t)
+                        groupItems, t,
+                        isSiteLabel777)
                 };
 
                 return groupType;
@@ -114,7 +115,8 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         int uplineRoleId,
         string language,
         IEnumerable<GroupItemDefault> groupItems,
-        IGrouping<object, SettingProfile> t)
+        IGrouping<object, SettingProfile> t,
+        bool isSiteLabel777)
     {
         return groupItems.Join(
         t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType }),
@@ -133,7 +135,8 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
             groupTypeId,
             displayType,
             uplineRoleId,
-            language);
+            language,
+            isSiteLabel777);
 
             return groupItem;
         });
