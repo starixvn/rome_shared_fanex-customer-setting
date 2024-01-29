@@ -407,4 +407,15 @@
   <Function Name="Available Domains">
     <Setting Key="Age_DomainListSel" SpName="Age_DomainListSel" DbName="DBACC.bodb02.wsv_alp" Plain="0" />
   </Function>
+    <Function Name="Sub Account">
+        <Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubSelInfo" SpName="Age_CustSubSelInfo" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubPwdUpd" SpName="Age_CustSubPwdUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubPwdUpd2" SpName="Age_CustSubPwdUpd2" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubUpdInfo" SpName="Age_CustSubUpdInfo" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubUpdPageAccess" SpName="Age_CustSubUpdPageAccess" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+        <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+    </Function>
 </Functions>
