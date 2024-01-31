@@ -32,6 +32,8 @@ public class UserLevel : Enumeration
     public bool IsSuperLevel() => this == Super;
 
     public bool IsCompanyLevel() => this == Company;
+    
+    public bool IsMemberLevel() => this == Member;
 
     public UserLevel GetDirectDownLineLevel() => FromValue<UserLevel>((byte)(Value - 1));
 

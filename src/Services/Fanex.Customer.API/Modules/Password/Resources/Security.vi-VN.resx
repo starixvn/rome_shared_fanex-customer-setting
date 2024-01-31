@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="alertErrorSecCodeConfirm" xml:space="preserve">
+    <value>Các Mã Bảo Mật không khớp.</value>
+  </data>
+  <data name="alertForcedChangeSCTitle" xml:space="preserve">
+    <value>Bạn buộc phải thay đổi Mã bảo mật. Mã bảo mật mới phải khác với Mã bảo mật mà bạn đã nhận được từ CSD hoặc cấp trên của bạn.</value>
+  </data>
+  <data name="alertForcedChangeSCWithoutValidationTitle" xml:space="preserve">
+    <value>Bạn cần thiết lập mã bảo vệ để xác thực sau mỗi lần đăng nhập.&lt;br/&gt;
+Vui lòng thiết lập mã bảo vệ theo biểu mẫu sau.</value>
+  </data>
+  <data name="alertInputWrongSecCode" xml:space="preserve">
+    <value>Sai Mã Bảo Mật. Vui lòng thử lại.</value>
+  </data>
+  <data name="alertOldSecCodeEmpty" xml:space="preserve">
+    <value>Vui lòng nhập Mã bảo mật hiện tại</value>
+  </data>
+  <data name="alertSameSecCode" xml:space="preserve">
+    <value>Mã bảo mật mới phải khác với Mã bảo mật hiện tại.</value>
+  </data>
+  <data name="alertSecCodeChangedOK" xml:space="preserve">
+    <value>Mã Bảo Mật của bạn đã được thay đổi.</value>
+  </data>
+  <data name="alertSecCodeEmpty" xml:space="preserve">
+    <value>Thông tin này bắt buộc phải nhập.</value>
+  </data>
+  <data name="ConfirmSecurityCode" xml:space="preserve">
+    <value>Xác nhận mã bảo mật mới</value>
+  </data>
+  <data name="informSecCode" xml:space="preserve">
+    <value>Vui lòng nhập Mã bảo mật trước khi thực hiện các thiết lập.!</value>
+  </data>
+  <data name="lblSecCodeWrongRule" xml:space="preserve">
+    <value>Mã Bảo Mật không đáp ứng đủ các yêu cầu bảo mật.</value>
+  </data>
+  <data name="oldSecCode" xml:space="preserve">
+    <value>Mã bảo mật cũ</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>Mã bảo mật</value>
+  </data>
+  <data name="titleResetSecCode" xml:space="preserve">
+    <value>Thay đổi Mã bảo mật</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Nhập lại</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="titleVerifySecurityCode" xml:space="preserve">
+    <value>Xác nhận Mã Bảo Mật</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Vui lòng tìm hiểu thêm tại đây</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật Khẩu</value>
+  </data>
+  <data name="SecurityCodeValidation" xml:space="preserve">
+    <value>Xác nhận Mã Bảo Mật</value>
+  </data>
+  <data name="NotAuthorized" xml:space="preserve">
+    <value>Bạn không được cho phép sử dụng chức năng này</value>
+  </data>
+  <data name="SecurityCodeRules" xml:space="preserve">
+    <value>Quy tắc mã bảo mật</value>
+  </data>
+  <data name="SecurityCodeShower" xml:space="preserve">
+    <value>Xin chào {0}, Mã Bảo Mật của bạn đã được đặt lại. Vui lòng tạo lại Mã Bảo Mật mới.</value>
+  </data>
+  <data name="errUserName" xml:space="preserve">
+    <value>Vui lòng điền Tên đăng nhập và Mật khẩu</value>
+  </data>
+  <data name="lblConfirmClosed" xml:space="preserve">
+    <value>Tài khoản của bạn đã bị đóng, bạn buộc phải đăng xuất .Vui lòng liên hệ với cấp trên của bạn để được hỗ trợ</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="loginWrong5Times" xml:space="preserve">
+    <value>Bạn đã 6 lần điền sai Tên đăng nhập / Mật khẩu, Vui lòng thử lại sau 5 phút</value>
+  </data>
+  <data name="stringSessionLogged" xml:space="preserve">
+    <value>Phiên đăng nhập này bị đóng vì tài khoản của bạn đã đăng nhập ở phiên khác. Nếu không phải bạn, vui lòng liên hệ cấp trên của bạn để được hỗ trợ.</value>
+  </data>
+  <data name="undermaintenance" xml:space="preserve">
+    <value>Server đang được bảo trì,Webside sẽ không thể truy cập từ {0} cho đến {1} . Xin lỗi vì sự bất tiện này!</value>
+  </data>
+  <data name="alertErrorConfirm" xml:space="preserve">
+    <value>Mật khẩu xác nhận không chính xác</value>
+  </data>
+  <data name="alertInputOldPwd" xml:space="preserve">
+    <value>Vui lòng nhập  Mật Khẩu hiện tại</value>
+  </data>
+  <data name="alertPasswordEmpty" xml:space="preserve">
+    <value>Mật Khẩu không thể để trống!!!</value>
+  </data>
+  <data name="forcechangepwd" xml:space="preserve">
+    <value>Bạn buộc phải thay đổi mật khẩu ở lần đăng nhập đầu tiên</value>
+  </data>
+  <data name="lblPasswordChangedOK" xml:space="preserve">
+    <value>Mật khẩu của bạn đã được thay đổi thành công.</value>
+  </data>
+  <data name="lblPasswordDAccountName" xml:space="preserve">
+    <value>Mật khẩu không được chứa tên đăng nhập hoặc tên riêng.</value>
+  </data>
+  <data name="lblPasswordDOldOne" xml:space="preserve">
+    <value>Mật khẩu mới phải khác với mật khẩu đang sử dụng.</value>
+  </data>
+  <data name="lblPasswordExpired" xml:space="preserve">
+    <value>Tính bảo mật và quyền riêng tư của bạn là điều rất quan trọng đối với chúng tôi. Do vậy, chúng tôi không ngừng nâng cao mức độ bảo mật để  bảo vệ an toàn cho dữ liệu của bạn. Vì thế, yêu cầu bạn thay đổi mật khẩu hiện tại.
+Vui lòng điền vào mẩu bên dưới để thay đổi mật khẩu.</value>
+  </data>
+  <data name="lblPasswordHint" xml:space="preserve">
+    <value>Lưu ý: Bạn nên thay đổi mật khẩu định kỳ để tăng cường tính bảo mật.</value>
+  </data>
+  <data name="lblPasswordWrongRule" xml:space="preserve">
+    <value>Mật khẩu của bạn chưa đạt mức an toàn tối thiểu.</value>
+  </data>
+  <data name="lblConfirmPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu mới</value>
+  </data>
+  <data name="lblOldPassword" xml:space="preserve">
+    <value>Mật khẩu hiện tại</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Mật khẩu mới</value>
+  </data>
+  <data name="PasswordHint01" xml:space="preserve">
+    <value>Mật khẩu phải gồm ít nhất 8 ký tự, không có khoảng trắng và phải có ít nhất 3 ký tự sau đây:</value>
+  </data>
+  <data name="PasswordHint02" xml:space="preserve">
+    <value>&lt;li&gt;Ký tự viết hoa [A-Z]&lt;/li&gt;
+&lt;li&gt;Ký tự viết thường [a-z]]&lt;/li&gt;
+&lt;li&gt;Ký tự số [0-9]&lt;/li&gt;
+&lt;li&gt;Ký tự đặc biệt (!,@,#,...)&lt;/li&gt;</value>
+  </data>
+  <data name="PasswordHint03" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong&gt;Ví dụ &lt;/strong&gt;59D7!4$h, 493abcDE&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lưu ý :&lt;/strong&gt;Mật khẩu có phân biệt chữ hoa và chữ thường.&lt;/p&gt;</value>
+  </data>
+  <data name="PasswordRules" xml:space="preserve">
+    <value>Quy tắc mật khẩu</value>
+  </data>
+  <data name="PasswordShower" xml:space="preserve">
+    <value>Xin chào {0}, vui lòng thay đổi Mật Khẩu của bạn.</value>
+  </data>
+  <data name="lblBack" xml:space="preserve">
+    <value>Trở lại</value>
+  </data>
+  <data name="lblChangePassword" xml:space="preserve">
+    <value>Thay đổi mật khẩu</value>
+  </data>
+  <data name="lblresetpassword" xml:space="preserve">
+    <value>Đổi Mật khẩu</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Xem Mật Khẩu</value>
+  </data>
+  <data name="ShowSecurityCode" xml:space="preserve">
+    <value>Xem Mã Bảo Mật</value>
+  </data>
+  <data name="lblPasswordRequire" xml:space="preserve">
+    <value>Mật khẩu phải gồm ít nhất 8 ký tự, không có khoảng trắng và phải có ít nhất 3 ký tự sau đây:
+
+ - Ký tự viết hoa [A-Z]
+ - Ký tự viết thường [a-z]
+ - Ký tự số [0-9]
+ - Ký tự đặc biệt (!,@,#,...)
+Ví dụ : 59D7!4$h, 493abcDE
+
+Lưu ý : Mật khẩu có phân biệt chữ hoa và chữ thường.</value>
+  </data>
+  <data name="createSecurityCode" xml:space="preserve">
+    <value>Vui lòng tạo Mã Bảo Mật, mã này dùng để xác thực khi bạn thay đổi các thiết lập.</value>
+  </data>
+  <data name="SecurityCodeRules01" xml:space="preserve">
+    <value>Mã Bảo Mật bao gồm 6 ký tự số, phải chứa ít nhất 2 ký tự khác nhau và không phải là các số liên tiếp nhau.</value>
+  </data>
+  <data name="SecurityCodeRules02" xml:space="preserve">
+    <value>Ví dụ: không cho phép 123456, 456789, 765432, v.v.</value>
+  </data>
+  <data name="PasswordHint04" xml:space="preserve">
+    <value>Mật khẩu phải gồm 6-10 ký tự, không có khoảng trắng và phải chứa it nhất 1 ký tự viết hoa, 1 ký tự viết thường, 1 ký tự số (ví dụ: 493abcDE, 59D7!4$h).
+Lưu ý:  Mật khẩu có phân biệt chữ hoa và chữ thường.</value>
+  </data>
+  <data name="InputOtpBeforeProceeding" xml:space="preserve">
+    <value>Xin nhập mã OTP để tiến hành.</value>
+  </data>
+  <data name="OtpNotes" xml:space="preserve">
+    <value>OTP sẽ được yêu cầu khi bạn thực hiện những tác vụ quan trọng hoặc đăng nhập bằng một thiết bị/trình duyệt khác. Trước khi bật thông báo OTP, bạn cần thêm tài khoản của bạn vào Ứng dụng xác thực hoặc liên kết tài khoản với Telegram Chatbot.</value>
+  </data>
+  <data name="DownloadSophos" xml:space="preserve">
+    <value>Tải Sophos Authenticator về thiết bị.</value>
+  </data>
+  <data name="SophosAuthenticator" xml:space="preserve">
+    <value>Sophos Authenticator</value>
+  </data>
+  <data name="OtherAuthenticators" xml:space="preserve">
+    <value>Các ứng dụng bảo mật 2 lớp khác như Google Authenticator, Microsoft Authenticator, v..v... cũng được hỗ trợ.</value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>Tạo tài khoản bằng cách quét mã QR này bằng ứng dụng Sophos</value>
+  </data>
+  <data name="UnableScanQRCode" xml:space="preserve">
+    <value>Không quét được mã QR?</value>
+  </data>
+  <data name="ManualInputOtpKey" xml:space="preserve">
+    <value>Vui lòng điền dãy số dưới đây vào phần "Manual Add" trong ứng dụng Sophos và nhấn Done (iOS) hoặc Add (Android)</value>
+  </data>
+  <data name="Enter6DigitsOtp" xml:space="preserve">
+    <value>Điền mã 6 kí tự được tạo ra bởi Sophos vào ô dưới đây và nhấn Verify để hoàn tất quá trình đăng ký.</value>
+  </data>
+  <data name="ClickToRemoveOtp" xml:space="preserve">
+    <value>Nhấn nút bên dưới để xoá thiết bị của người dùng này và chuyển trạng thái OTP của họ thành Chưa kích hoạt.</value>
+  </data>
+  <data name="RemoveOtp" xml:space="preserve">
+    <value>Xoá</value>
+  </data>
+  <data name="EnableDisableOtp" xml:space="preserve">
+    <value>Kích hoạt/tắt tính năng OTP</value>
+  </data>
+  <data name="EnableOtpViaSophos" xml:space="preserve">
+    <value>Kích hoạt tính năng OTP thông qua ứng dụng Authenticator trên di động</value>
+  </data>
+  <data name="OtpIsInvalidOrExpired" xml:space="preserve">
+    <value>Mã OTP không phù hợp hoặc hết hạn.</value>
+  </data>
+  <data name="AuthenticatorAppVerified" xml:space="preserve">
+    <value>Ứng dụng Authenticator của bạn đã được xác nhận.</value>
+  </data>
+  <data name="RemoveOtpWarning" xml:space="preserve">
+    <value>Hệ thống sẽ không chấp nhận mã OTP được tạo ra bởi thiết bị này nữa. Bạn có muốn tiếp tục?</value>
+  </data>
+  <data name="RemoveOtpSuccessMessage" xml:space="preserve">
+    <value>Đã xóa tài khoản khỏi Ứng dụng xác thực và tắt thông báo OTP qua Telegram.</value>
+  </data>
+  <data name="UpdateOtpStatusSuccess" xml:space="preserve">
+    <value>Cập nhật trạng thái OTP thành công.</value>
+  </data>
+  <data name="RemoveOtpForCust" xml:space="preserve">
+    <value>Xoá OTP - {0}</value>
+  </data>
+  <data name="ResetOtpWarning" xml:space="preserve">
+    <value>Nhấn Xóa để xóa tài khoản của cấp dưới khỏi Ứng dụng xác thực và tắt thông báo OTP qua Telegram cho cấp dưới.</value>
+  </data>
+  <data name="OtpValidation" xml:space="preserve">
+    <value>Xác minh mã OTP</value>
+  </data>
+  <data name="ResetDownlineOtpWarning" xml:space="preserve">
+    <value>Bạn có muốn xoá thiết bị của người dùng này?</value>
+  </data>
+  <data name="RegenerateQR" xml:space="preserve">
+    <value>Tạo mới mã QR</value>
+  </data>
+  <data name="UsernameWarning" xml:space="preserve">
+    <value>Tài khoản mới sẽ được đặt tên theo tên đăng nhập của bạn {0}</value>
+  </data>
+  <data name="ChangeIt" xml:space="preserve">
+    <value>Thay đổi?</value>
+  </data>
+  <data name="OtpDatetimeWarning" xml:space="preserve">
+    <value>Thiết lập Date &amp; Time trong thiết bị phải được chuyển sang chế độ "Tự động".</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Đã lưu!</value>
+  </data>
+  <data name="NoRegisterDeviceError" xml:space="preserve">
+    <value>Người dùng này không có thiết bị nào để xoá.</value>
+  </data>
+  <data name="RemoveRegisteredDeviceSuccess" xml:space="preserve">
+    <value>Xoá thiết bị thành công.</value>
+  </data>
+  <data name="RemoveDisableOtpDownline" xml:space="preserve">
+    <value>Không thể xoá thiết bị của người dùng đang bị vô hiệu hoá.</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>Tên tài khoản</value>
+  </data>
+  <data name="RegisterMobileApplication" xml:space="preserve">
+    <value>Cài đặt thông báo OTP qua Ứng dụng xác thực</value>
+  </data>
+  <data name="OtpHiMessage" xml:space="preserve">
+    <value>Xin chào {0}, quý khách đã đăng nhập với thiết bị/trình duyệt khác với lần sử dụng trước. Xin vui lòng nhập mã OTP để tiếp tục.</value>
+  </data>
+  <data name="LockAccountOtpMessage" xml:space="preserve">
+    <value>Tài khoản của bạn đã bị khóa do nhiều lần xác thực không thành công. Vui lòng liên hệ với cấp trên của bạn để mở khóa.</value>
+  </data>
+  <data name="OtpInvalidOrExpiredAndContactUpline" xml:space="preserve">
+    <value>Mã OTP không hợp lệ hoặc đã hết hạn. Vui lòng thử lại mã OTP khác hoặc liên hệ với cấp trên để đặt lại mã OTP.</value>
+  </data>
+  <data name="KickoutMessageByForceChangePassword" xml:space="preserve">
+    <value>Bạn buộc phải đăng xuất do cấp trên thay đổi mật khẩu tài khoản của bạn. Hãy đăng nhập lại bằng mật khẩu mới. Nếu có bất kỳ thắc mắc, xin hãy liên hệ với cấp trên để được hỗ trợ.</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="VerifySecurityCodeShower" xml:space="preserve">
+    <value>Xin chào {0}</value>
+  </data>
+  <data name="FailedToRemoveOtp" xml:space="preserve">
+    <value>Xóa đăng ký thiết bị thất bại</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Bỏ qua</value>
+  </data>
+  <data name="SkipForceChangePasswordPlaceHolder" xml:space="preserve">
+    <value>Gõ "OK" để bỏ qua bước này và chấp nhận rủi ro.</value>
+  </data>
+  <data name="SkipForceChangePasswordWarning" xml:space="preserve">
+    <value>Bạn có chắc rằng muốn giữ lại mật khẩu hiện tại? Bảo mật của bạn có thể gặp rủi ro nếu không thường xuyên thay đổi mật khẩu.</value>
+  </data>
+  <data name="lblConfirmLocked" xml:space="preserve">
+    <value>Tài khoản của bạn bị khóa và đăng xuất do nhiều lần xác thực không thành công. Vui lòng liên hệ cấp trên của bạn để mở khóa.</value>
+  </data>
+  <data name="KickoutMessageByProtectedMode" xml:space="preserve">
+    <value>Tài khoản của bạn vừa bị buộc đăng xuất. Vui lòng liên hệ với cấp trên để được hỗ trợ.</value>
+  </data>
+  <data name="SwitchLabelOff" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="SwitchLabelOn" xml:space="preserve">
+    <value>Mở</value>
+  </data>
+  <data name="AccessToBetLists" xml:space="preserve">
+    <value>Truy cập vào danh sách cược</value>
+  </data>
+  <data name="AccessToStatementReport" xml:space="preserve">
+    <value>Truy cập vào sao kê</value>
+  </data>
+  <data name="CreateNewDownline" xml:space="preserve">
+    <value>Tạo cấp dưới mới</value>
+  </data>
+  <data name="MandatoryActions" xml:space="preserve">
+    <value>Các hành động bắt buộc</value>
+  </data>
+  <data name="OptionalAction" xml:space="preserve">
+    <value>Hành động tùy chọn</value>
+  </data>
+  <data name="SCAskedOncePerSession" xml:space="preserve">
+    <value>Mã bảo mật sẽ được yêu cầu một lần ở mỗi phiên giao dịch trước khi thực hiện các hành động sau</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Chuyển khoản</value>
+  </data>
+  <data name="UpdateDownlineCreditAndSettings" xml:space="preserve">
+    <value>Cập nhật hạn mức được cấp và thiết lập của cấp dưới</value>
+  </data>
+  <data name="UpdateSecurityInformation" xml:space="preserve">
+    <value>Cập nhật thông tin bảo mật (mật khẩu, mã bảo mật, mã OTP, v.v.)</value>
+  </data>
+  <data name="UpdateSubAccInformation" xml:space="preserve">
+    <value>Cập nhật thông tin tài khoản phụ của bạn</value>
+  </data>
+  <data name="NewSecurityCode" xml:space="preserve">
+    <value>Mã bảo mật mới</value>
+  </data>
+  <data name="OTPViaTelegramDisabled" xml:space="preserve">
+    <value>Đã tắt thông báo OTP qua Telegram</value>
+  </data>
+  <data name="SetupOTPViaTelegramChatbot" xml:space="preserve">
+    <value>Cài đặt thông báo OTP qua Telegram Chatbot</value>
+  </data>
+  <data name="OTPViaChatbotIntroduction" xml:space="preserve">
+    <value>Telegram Chatbot giúp bạn nhận các báo cáo quan trọng một cách thuận tiện và an toàn mà không cần truy cập trang Đại lý. Từ giờ, bạn có thể dễ dàng nhận OTP thông qua Telegram Chatbot bằng cách bật thông báo OTP qua Telegram.</value>
+  </data>
+  <data name="EnableOtpViaTelegramChatbot" xml:space="preserve">
+    <value>Bật thông báo OTP qua Telegram Chatbot</value>
+  </data>
+  <data name="UnlinkTelegramChatbot" xml:space="preserve">
+    <value>Nhấn Hủy liên kết để ngắt kết nối giữa Telegram Chatbot với tài khoản của bạn.</value>
+  </data>
+  <data name="OtpViaTelegramSuggestion" xml:space="preserve">
+    <value>Từ giờ bạn đã có thể nhận OTP qua Telegram. Hãy thử ngay!</value>
+  </data>
+  <data name="OtpViaTelegramChatbot" xml:space="preserve">
+    <value>Thông báo OTP qua Telegram Chatbot</value>
+  </data>
+  <data name="RegisteredMobileApplication" xml:space="preserve">
+    <value>Thông báo OTP qua Ứng dụng xác thực</value>
+  </data>
+  <data name="GenerateOTP" xml:space="preserve">
+    <value>Tạo OTP</value>
+  </data>
+  <data name="ToSetupChatbot" xml:space="preserve">
+    <value>Để cài đặt Chatbot, vui lòng làm theo hướng dẫn sau:</value>
+  </data>
+  <data name="PositionTakingTemplate" xml:space="preserve">
+    <value>Mẫu Position Taking</value>
+  </data>
+</root>

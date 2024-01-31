@@ -21,6 +21,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="TelegramBot.Client" Version="1.0.2" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+    <PackageReference Include="Fanex.Cryptography.Aes" Version="1.0.0.6" />
+    <PackageReference Include="TelegramBot.Client" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Resources.Designer.cs">

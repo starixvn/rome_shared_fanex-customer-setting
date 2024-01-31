@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="alertErrorSecCodeConfirm" xml:space="preserve">
+    <value>Security Codes do not match.</value>
+  </data>
+  <data name="alertForcedChangeSCTitle" xml:space="preserve">
+    <value>You're required to change Security Code. Your new Security Code must be different from the one provided by your upline/CSD.&lt;br/&gt;
+Please use the form below to change your Security Code now.</value>
+  </data>
+  <data name="alertForcedChangeSCWithoutValidationTitle" xml:space="preserve">
+    <value>You're required to set your Security Code to authenticate later each time you log-in.&lt;br/&gt;
+Please use the form below to set your Security Code now.</value>
+  </data>
+  <data name="alertInputWrongSecCode" xml:space="preserve">
+    <value>Wrong Security Code. Please try again.</value>
+  </data>
+  <data name="alertOldSecCodeEmpty" xml:space="preserve">
+    <value>Please enter old Security Code</value>
+  </data>
+  <data name="alertSameSecCode" xml:space="preserve">
+    <value>Your new Security Code must be different from the current one.</value>
+  </data>
+  <data name="alertSecCodeChangedOK" xml:space="preserve">
+    <value>Your Security Code has been changed.</value>
+  </data>
+  <data name="alertSecCodeEmpty" xml:space="preserve">
+    <value>This field is required.</value>
+  </data>
+  <data name="ConfirmSecurityCode" xml:space="preserve">
+    <value>Confirm Security Code</value>
+  </data>
+  <data name="informSecCode" xml:space="preserve">
+    <value>Please input your security code before proceeding!</value>
+  </data>
+  <data name="lblSecCodeWrongRule" xml:space="preserve">
+    <value>The Security Code does not meet the security requirements.</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="NotAuthorized" xml:space="preserve">
+    <value>You are not authorized on this function</value>
+  </data>
+  <data name="oldSecCode" xml:space="preserve">
+    <value>Old Security Code</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>Security Code</value>
+  </data>
+  <data name="SecurityCodeValidation" xml:space="preserve">
+    <value>Security Code Validation</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="titleResetSecCode" xml:space="preserve">
+    <value>Reset Security Code</value>
+  </data>
+  <data name="titleVerifySecurityCode" xml:space="preserve">
+    <value>Security Code Validation</value>
+  </data>
+  <data name="SecurityCodeRules" xml:space="preserve">
+    <value>Security code rules</value>
+  </data>
+  <data name="SecurityCodeRules01" xml:space="preserve">
+    <value>Security Code must be a 6-digit number, contains at least 2 different digits and must not be consecutive numbers.</value>
+  </data>
+  <data name="SecurityCodeRules02" xml:space="preserve">
+    <value>For example: 123456, 765432, 456789, etc. are NOT allowed.</value>
+  </data>
+  <data name="SecurityCodeShower" xml:space="preserve">
+    <value>Hi {0}, your security code has been reset. Please set up a new one.</value>
+  </data>
+  <data name="errUserName" xml:space="preserve">
+    <value>Please input username and password</value>
+  </data>
+  <data name="lblConfirmClosed" xml:space="preserve">
+    <value>Your account was closed so you're forced to logout. Please contact your upline for the assistance.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="loginWrong5Times" xml:space="preserve">
+    <value>You have entered wrong user name / password 6 times, please try again after 5 minutes.</value>
+  </data>
+  <data name="stringSessionLogged" xml:space="preserve">
+    <value>You have been logged out because your account has logged into another session. Don't recognize this activity? Please contact your upline for assistance.</value>
+  </data>
+  <data name="undermaintenance" xml:space="preserve">
+    <value>We are having server maintenance, website will be unavailable from {0} until {1}. Sorry for the inconveniences caused!</value>
+  </data>
+  <data name="alertErrorConfirm" xml:space="preserve">
+    <value>The password was not correctly confirmed.</value>
+  </data>
+  <data name="alertInputOldPwd" xml:space="preserve">
+    <value>Please Enter Old Password!!!</value>
+  </data>
+  <data name="alertPasswordEmpty" xml:space="preserve">
+    <value>Sorry, password cannot be empty!!!</value>
+  </data>
+  <data name="forcechangepwd" xml:space="preserve">
+    <value>You have to change your password at the first login.</value>
+  </data>
+  <data name="lblPasswordChangedOK" xml:space="preserve">
+    <value>Your password has been changed successfully.</value>
+  </data>
+  <data name="lblPasswordDAccountName" xml:space="preserve">
+    <value>Your password must not contain your username or nickname.</value>
+  </data>
+  <data name="lblPasswordDOldOne" xml:space="preserve">
+    <value>Your new password must be totally different from your current one.</value>
+  </data>
+  <data name="lblPasswordExpired" xml:space="preserve">
+    <value>Your security and privacy are extremely important to us. Therefore, we continuously strive to improve our security precautions to protect your data. For this reason, we have decided to implement a password reset. 
+Please use the form below to change your password now.</value>
+  </data>
+  <data name="lblPasswordHint" xml:space="preserve">
+    <value>Note: You're strongly recommended to change your password periodically to enhance security.</value>
+  </data>
+  <data name="lblPasswordWrongRule" xml:space="preserve">
+    <value>Your password does not meet the minimum security requirement.</value>
+  </data>
+  <data name="lblConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="lblOldPassword" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="PasswordHint01" xml:space="preserve">
+    <value>Password must be at least 8 characters without white-space and contain at least 3 of the following:</value>
+  </data>
+  <data name="PasswordHint02" xml:space="preserve">
+    <value>&lt;li&gt;Uppercase letter [A-Z]&lt;/li&gt;
+&lt;li&gt;Lowercase letter [a-z]&lt;/li&gt;
+&lt;li&gt;Numeric [0-9]&lt;/li&gt;
+&lt;li&gt;Special character (!,,#,etc..)&lt;/li&gt;</value>
+  </data>
+  <data name="PasswordHint03" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong&gt;For example&lt;/strong&gt;: 59D7!4$h, 493abcDE&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: your password is cAsE sEnSiTiVe&lt;/p&gt;</value>
+  </data>
+  <data name="PasswordRules" xml:space="preserve">
+    <value>Password rules</value>
+  </data>
+  <data name="PasswordShower" xml:space="preserve">
+    <value>Hi {0}, please change your password.</value>
+  </data>
+  <data name="lblBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="lblChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="lblresetpassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="ShowSecurityCode" xml:space="preserve">
+    <value>Show security code</value>
+  </data>
+  <data name="lblPasswordRequire" xml:space="preserve">
+    <value>Password must be at least 8 characters without white-space and contain at least 3 of the following:
+
+  • Uppercase letter [A-Z] 
+  • Lowercase letter [a-z] 
+  • Numeric [0-9] 
+  • Special character (!,@,#,etc..)
+
+For example: 59D7!4$h, 493abcDE
+Notes: your password is cAsE sEnSiTiVe</value>
+  </data>
+  <data name="createSecurityCode" xml:space="preserve">
+    <value>Please create a Security Code which will be asked for any setting updates to make sure it is you.</value>
+  </data>
+  <data name="PasswordHint04" xml:space="preserve">
+    <value>Password must be 6-10 characters without white-space and contain at least 1 uppercase letter, 1 lowercase letter, 1 numeric digit. (e.g. 493abcDE, 59D7!4$h)
+Notes: your password is cAsE sEnSiTiVe.</value>
+  </data>
+  <data name="OtpHiMessage" xml:space="preserve">
+    <value>Hi {0}, you are signed in with a different Device/Browser than the previous use. Please enter an OTP to continue.</value>
+  </data>
+  <data name="InputOtpBeforeProceeding" xml:space="preserve">
+    <value>Please enter your OTP before proceeding!</value>
+  </data>
+  <data name="OtpNotes" xml:space="preserve">
+    <value>The OTP will be required when you perform sensitive actions or log in with a different device/browser. Before enabling OTP notification, you need to add your account to Mobile Authenticator or link your account to Telegram Chatbot.</value>
+  </data>
+  <data name="RegisterMobileApplication" xml:space="preserve">
+    <value>Set up OTP via Mobile Authenticator</value>
+  </data>
+  <data name="DownloadSophos" xml:space="preserve">
+    <value>Download Sophos Authenticator on your device.</value>
+  </data>
+  <data name="SophosAuthenticator" xml:space="preserve">
+    <value>Sophos Authenticator</value>
+  </data>
+  <data name="OtherAuthenticators" xml:space="preserve">
+    <value>Other two-factor authenticator applications such as Google Authenticator, Microsoft Authenticator etc. are also supported</value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>Create an account by scanning this QR code with Sophos</value>
+  </data>
+  <data name="UnableScanQRCode" xml:space="preserve">
+    <value>Unable to scan the QR code?</value>
+  </data>
+  <data name="ManualInputOtpKey" xml:space="preserve">
+    <value>Please input the key below to the Manual Add page in Sophos then click Done (IOS) or Add (Android)</value>
+  </data>
+  <data name="Enter6DigitsOtp" xml:space="preserve">
+    <value>Enter the 6-digits code generated by Sophos into the textbox below and then click Verify to complete the registration.</value>
+  </data>
+  <data name="ClickToRemoveOtp" xml:space="preserve">
+    <value>Click the button below to remove the registered device from your account.</value>
+  </data>
+  <data name="RemoveOtp" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="EnableDisableOtp" xml:space="preserve">
+    <value>Enable/Disable OTP</value>
+  </data>
+  <data name="EnableOtpViaSophos" xml:space="preserve">
+    <value>Enable OTP via Mobile Authenticator App</value>
+  </data>
+  <data name="OtpIsInvalidOrExpired" xml:space="preserve">
+    <value>Your OTP is invalid or expired.</value>
+  </data>
+  <data name="AuthenticatorAppVerified" xml:space="preserve">
+    <value>Your Authenticator App is verified.</value>
+  </data>
+  <data name="RemoveOtpWarning" xml:space="preserve">
+    <value>The system will no longer accept the OTP generated on the registered device. Do you want to proceed?</value>
+  </data>
+  <data name="RemoveOtpSuccessMessage" xml:space="preserve">
+    <value>Removed Mobile Authenticator account and disabled Telegram OTP notification.</value>
+  </data>
+  <data name="UpdateOtpStatusSuccess" xml:space="preserve">
+    <value>Update OTP status successfully</value>
+  </data>
+  <data name="RemoveOtpForCust" xml:space="preserve">
+    <value>Remove OTP - {0}</value>
+  </data>
+  <data name="ResetOtpWarning" xml:space="preserve">
+    <value>Click Remove to remove downline’s Mobile Authenticator account and disable Telegram OTP notification for the downline.</value>
+  </data>
+  <data name="OtpValidation" xml:space="preserve">
+    <value>OTP Validation</value>
+  </data>
+  <data name="ResetDownlineOtpWarning" xml:space="preserve">
+    <value>Do you want to remove this user's registered device?</value>
+  </data>
+  <data name="RegenerateQR" xml:space="preserve">
+    <value>Regenerate QR</value>
+  </data>
+  <data name="UsernameWarning" xml:space="preserve">
+    <value>The new account will be named after your username {0}</value>
+  </data>
+  <data name="ChangeIt" xml:space="preserve">
+    <value>Change it?</value>
+  </data>
+  <data name="OtpDatetimeWarning" xml:space="preserve">
+    <value>The Date &amp; Time settings on your device must be set to Automatic.</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Copied</value>
+  </data>
+  <data name="NoRegisterDeviceError" xml:space="preserve">
+    <value>This user has no registered device to be removed.</value>
+  </data>
+  <data name="RemoveRegisteredDeviceSuccess" xml:space="preserve">
+    <value>Removed the registered device successfully.</value>
+  </data>
+  <data name="RemoveDisableOtpDownline" xml:space="preserve">
+    <value>Failed to remove the registered device from disabled user.</value>
+  </data>
+  <data name="FailedToRemoveOtp" xml:space="preserve">
+    <value>Failed to remove registered device!</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>Account name</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="LockAccountOtpMessage" xml:space="preserve">
+    <value>Your account has been locked due to multiple failed security check. Please contact your upline to unlock.</value>
+  </data>
+  <data name="OtpInvalidOrExpiredAndContactUpline" xml:space="preserve">
+    <value>The OTP is invalid or expired. Please try another OTP or contact your upline to reset your OTP.</value>
+  </data>
+  <data name="KickoutMessageByForceChangePassword" xml:space="preserve">
+    <value>You have been logged out because your account's password has been reset by your upline. Please log in again with the new password. If you have any questions, please contact your upline for assistance.</value>
+  </data>
+  <data name="VerifySecurityCodeShower" xml:space="preserve">
+    <value>Hi {0}</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="SkipForceChangePasswordPlaceHolder" xml:space="preserve">
+    <value>Type "OK" to skip and accept the risk</value>
+  </data>
+  <data name="SkipForceChangePasswordWarning" xml:space="preserve">
+    <value>Are you sure you want to keep your old password? Your security will be at risk if you don't change the password often.</value>
+  </data>
+  <data name="lblConfirmLocked" xml:space="preserve">
+    <value>Your account is locked and forced to log out due to multiple failed security checks. Please contact your upline to unlock.</value>
+  </data>
+  <data name="KickoutMessageByProtectedMode" xml:space="preserve">
+    <value>Your account has just been forced to logout. Please contact your upline for further assistance.</value>
+  </data>
+  <data name="SwitchLabelOff" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="SwitchLabelOn" xml:space="preserve">
+    <value>ON</value>
+  </data>
+  <data name="AccessToBetLists" xml:space="preserve">
+    <value>Access to bet lists</value>
+  </data>
+  <data name="AccessToStatementReport" xml:space="preserve">
+    <value>Access to statement report</value>
+  </data>
+  <data name="CreateNewDownline" xml:space="preserve">
+    <value>Create New Downline</value>
+  </data>
+  <data name="MandatoryActions" xml:space="preserve">
+    <value>Mandatory actions</value>
+  </data>
+  <data name="OptionalAction" xml:space="preserve">
+    <value>Optional action</value>
+  </data>
+  <data name="SCAskedOncePerSession" xml:space="preserve">
+    <value>Security Code will be asked once per session before performing the following actions</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="UpdateDownlineCreditAndSettings" xml:space="preserve">
+    <value>Update downline's given credit and settings</value>
+  </data>
+  <data name="UpdateSecurityInformation" xml:space="preserve">
+    <value>Update security information (password, security code, OTP, etc.)</value>
+  </data>
+  <data name="UpdateSubAccInformation" xml:space="preserve">
+    <value>Update your sub account's information</value>
+  </data>
+  <data name="NewSecurityCode" xml:space="preserve">
+    <value>New Security Code</value>
+  </data>
+  <data name="GenerateOTP" xml:space="preserve">
+    <value>Generate OTP</value>
+  </data>
+  <data name="OTPViaTelegramDisabled" xml:space="preserve">
+    <value>Disabled Telegram OTP notification</value>
+  </data>
+  <data name="SetupOTPViaTelegramChatbot" xml:space="preserve">
+    <value>Set up OTP via Telegram Chatbot</value>
+  </data>
+  <data name="OTPViaChatbotIntroduction" xml:space="preserve">
+    <value>Telegram Chatbot allows you to receive important business reports conveniently and securely without accessing the Agency site. Now you can also get OTP easily via Telegram Chatbot by enabling Telegram OTP notification.</value>
+  </data>
+  <data name="ToSetupChatbot" xml:space="preserve">
+    <value>To setup the chatbot, please follow the instructions below:</value>
+  </data>
+  <data name="EnableOtpViaTelegramChatbot" xml:space="preserve">
+    <value>Enable OTP via Telegram Chatbot</value>
+  </data>
+  <data name="UnlinkTelegramChatbot" xml:space="preserve">
+    <value>Click Unlink to unpair Telegram Chatbot from your account</value>
+  </data>
+  <data name="OtpViaTelegramSuggestion" xml:space="preserve">
+    <value>You can now receive OTP via Telegram. Give it a try!</value>
+  </data>
+  <data name="OtpViaTelegramChatbot" xml:space="preserve">
+    <value>OTP via Telegram Chatbot</value>
+  </data>
+  <data name="RegisteredMobileApplication" xml:space="preserve">
+    <value>OTP via Mobile Authenticator</value>
+  </data>
+  <data name="PositionTakingTemplate" xml:space="preserve">
+    <value>Position Taking Template</value>
+  </data>
+</root>

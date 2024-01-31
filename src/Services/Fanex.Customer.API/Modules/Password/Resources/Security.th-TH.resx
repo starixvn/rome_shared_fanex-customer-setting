@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="alertErrorSecCodeConfirm" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัยไม่ตรงกัน</value>
+  </data>
+  <data name="alertForcedChangeSCTitle" xml:space="preserve">
+    <value>กรุณาเปลี่ยนรหัสความปลอดภัยของคุณ รหัสรักษาความปลอดภัยใหม่จะต้องมีความแตกต่างจากที่ตั้งไว้ให้โดย uplineของท่าน</value>
+  </data>
+  <data name="alertForcedChangeSCWithoutValidationTitle" xml:space="preserve">
+    <value>คุณต้องตั้งรหัสลับของคุณ เพื่อรับรองการเข้าสู่ระบบต่อไปทุกครั้ง&lt;br/&gt;
+กรุณาใช้แบบฟอร์มด้านล่างเพื่อตั้งรหัสลับของคุณตอนนี้</value>
+  </data>
+  <data name="alertInputWrongSecCode" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัยไม่ถูกต้อง โปรดลองใหม่อีกครั้ง</value>
+  </data>
+  <data name="alertOldSecCodeEmpty" xml:space="preserve">
+    <value>โปรดใส่รหัสรักษาความปลอดภัยเก่าของท่าน</value>
+  </data>
+  <data name="alertSameSecCode" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัยใหม่ต้องแตกต่างกับรหัสรักษาความปลอดภัยที่ใช้อยู่ในปัจจุบัน</value>
+  </data>
+  <data name="alertSecCodeChangedOK" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัยทำการเปลี่ยนเรียบร้อยแล้ว</value>
+  </data>
+  <data name="alertSecCodeEmpty" xml:space="preserve">
+    <value>จำเป็นต้องใส่ข้อมูลนี้</value>
+  </data>
+  <data name="ConfirmSecurityCode" xml:space="preserve">
+    <value>ยืนยันรหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="informSecCode" xml:space="preserve">
+    <value>โปรดใส่รหัสรักษาความปลอดภัยของท่านก่อนการดำเนินการต่อไป</value>
+  </data>
+  <data name="lblSecCodeWrongRule" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัยไม่สอดคล้องกับกฎการตั้งค่ารหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="oldSecCode" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัยเก่า</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="titleResetSecCode" xml:space="preserve">
+    <value>ตั้งค่ารหัสรักษาความปลอดภัยใหม่</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>ตั้งค่าใหม่</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>ตกลง</value>
+  </data>
+  <data name="titleVerifySecurityCode" xml:space="preserve">
+    <value>ตรวจสอบรหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>รหัสผ่าน</value>
+  </data>
+  <data name="SecurityCodeValidation" xml:space="preserve">
+    <value>ตรวจสอบรหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="NotAuthorized" xml:space="preserve">
+    <value>คุณไม่มีอำนาจในการเข้าใช้งานฟังก์ชันนี้</value>
+  </data>
+  <data name="SecurityCodeRules" xml:space="preserve">
+    <value>กฎการตั้งค่ารหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="SecurityCodeShower" xml:space="preserve">
+    <value>สวัสดี {0} รหัสรักษาความปลอดภัยของคุณได้รับการตั้งค่า, โปรดตั้งค่าใหม่</value>
+  </data>
+  <data name="errUserName" xml:space="preserve">
+    <value>โปรดใส่ชื่อผู้ใช้และรหัสผ่าน</value>
+  </data>
+  <data name="lblConfirmClosed" xml:space="preserve">
+    <value>บัญชีของคุณได้ถูกปิดการใช้งานดังนั้นคุณถูกบังคับให้ออกจากระบบ กรุณาติดต่ออัพไลน์เพื่อขอความช่วยเหลือ</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>เข้าระบบ</value>
+  </data>
+  <data name="loginWrong5Times" xml:space="preserve">
+    <value>คุณป้อนยูเซอร์เนม/รหัสผ่าน ผิด 6ครั้ง กรุณาลองใหม่อีกครั้งใน 5นาที</value>
+  </data>
+  <data name="stringSessionLogged" xml:space="preserve">
+    <value>มีการเข้าระบบในบัญชีของท่านจากอีกที่หนึ่ง ระบบของท่านไม่สามารถใช้ได้  ถ้าท่านไม่ได้เข้าระบบ กรุณาติดต่อผู้ที่แนะนำท่าน</value>
+  </data>
+  <data name="undermaintenance" xml:space="preserve">
+    <value>ขณะนี้ทางเรามีการบำรุงรักษาเซิร์ฟเวอร์ เว็บไซต์จะไม่สามารถเข้าใช้งานได้ตั้งต่เวลา  {0} until {1}. ขออภัยในความไม่สะดวก</value>
+  </data>
+  <data name="alertErrorConfirm" xml:space="preserve">
+    <value>การยืนยันรหัสผ่านไม่ถูกต้อง</value>
+  </data>
+  <data name="alertInputOldPwd" xml:space="preserve">
+    <value>กรุณาใส่รหัสเดิม</value>
+  </data>
+  <data name="alertPasswordEmpty" xml:space="preserve">
+    <value>ขอโทษค่ะ คุณต้องใส่รหัสผ่านด้วย</value>
+  </data>
+  <data name="forcechangepwd" xml:space="preserve">
+    <value>คุณถูกบังคับเปลี่ยนรหัสผ่านก่อนเข้าสู่ระบบ</value>
+  </data>
+  <data name="lblPasswordChangedOK" xml:space="preserve">
+    <value>รหัสผ่านของคุณเปลี่ยนสำเร็จแล้ว</value>
+  </data>
+  <data name="lblPasswordDAccountName" xml:space="preserve">
+    <value>รหัสผ่านต้องไม่ซ้ำกับชื่อบัญชีผู้ใช้ หรือ ชื่อเล่น</value>
+  </data>
+  <data name="lblPasswordDOldOne" xml:space="preserve">
+    <value>รหัสผ่านใหม่ต้องไม่ซ้ำกับรหัสผ่านปัจจุบัน</value>
+  </data>
+  <data name="lblPasswordExpired" xml:space="preserve">
+    <value>ข้อมูลและความปลอดภัยของคุณเป็นสิ่งสำคัญที่สุดสำหรับเรา ฉะนั้น เราจึงไม่หยุดที่จะปรับปรุงมาตรการระบบรักษาความปลอดภัยของข้อมูลของคุณ  ด้วยเหตุนี้ เราขอให้คุณเปลี่ยนรหัสใหม่ 
+
+    กรุณาใช้แบบฟอร์มด้านล่างเพื่อเปลี่ยนรหัสผ่านของคุณ เดี๋ยวนี้</value>
+  </data>
+  <data name="lblPasswordHint" xml:space="preserve">
+    <value>หมายเหตุ:  เราแนะนำให้คุณเปลี่ยนรหัสเป็นระยะเพื่อความปลอดภัยของคุณเอง</value>
+  </data>
+  <data name="lblPasswordWrongRule" xml:space="preserve">
+    <value>รหัสผ่านของคุณไม่เป็นไปตามข้อแม้ของการรักษาความปลอดภัย</value>
+  </data>
+  <data name="lblConfirmPassword" xml:space="preserve">
+    <value>ยืนยันรหัสผ่าน</value>
+  </data>
+  <data name="lblOldPassword" xml:space="preserve">
+    <value>รหัสผ่านของเดิม</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>รหัสผ่าน</value>
+  </data>
+  <data name="PasswordHint01" xml:space="preserve">
+    <value>รหัสต้องมีอย่างน้อย 8 อักขระต้องไม่มีช่องเว้นวรรค และต้องมีอย่างน้อย 3 ข้อ ยังด้านล่าง</value>
+  </data>
+  <data name="PasswordHint02" xml:space="preserve">
+    <value>&lt;li&gt; ต้องมีภาษาอังกฤษตัวพิมพ์ใหญ่ [A-Z] &lt;/li&gt;
+&lt;li&gt;ต้องมีภาษาอังกฤษตัวพิมพ์เล็ก [a-z]&lt;/li&gt;
+&lt;li&gt; ตัวเลข [0-9] &lt;/li&gt;
+&lt;li&gt; อักขระพิเศษ (!,@,#,etc..)
+&lt;/li&gt;</value>
+  </data>
+  <data name="PasswordHint03" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong&gt;ยกตัวอย่างเช่น: &lt;/strong&gt;59D7!4$h, 493abcDE&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;หมายเหตุ&lt;/strong&gt;รหัสผ่านของคุณเป็นสิ่งที่สำคัญ&lt;/p&gt;</value>
+  </data>
+  <data name="PasswordRules" xml:space="preserve">
+    <value>กฎการตั้งค่ารหัสผ่าน</value>
+  </data>
+  <data name="PasswordShower" xml:space="preserve">
+    <value>สวัสดีคะ {0} โปรดเปลี่ยนรหัสผ่านของคุณ</value>
+  </data>
+  <data name="lblBack" xml:space="preserve">
+    <value>กลับ</value>
+  </data>
+  <data name="lblChangePassword" xml:space="preserve">
+    <value>เปลี่ยนรหัสผ่าน</value>
+  </data>
+  <data name="lblresetpassword" xml:space="preserve">
+    <value>แก้ไขรหัส</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>แสดง</value>
+  </data>
+  <data name="ShowSecurityCode" xml:space="preserve">
+    <value>โชว์รหัสลับ</value>
+  </data>
+  <data name="lblPasswordRequire" xml:space="preserve">
+    <value>รหัสต้องมีอย่างน้อย 8 อักขระต้องไม่มีช่องเว้นวรรค และต้องมีอย่างน้อย 3 ข้อ ยังด้านล่าง
+
+1. ต้องมีภาษาอังกฤษตัวพิมพ์ใหญ่ [A-Z] 
+2. ต้องมีภาษาอังกฤษตัวพิมพ์เล็ก [a-z]
+3. ตัวเลข [0-9] 
+4. อักขระพิเศษ (!,@,#,etc..)
+
+ยกตัวอย่างเช่น: 59D7!4$h, 493abcDE
+หมายเหตุ รหัสผ่านของคุณเป็นสิ่งที่สำคัญ</value>
+  </data>
+  <data name="createSecurityCode" xml:space="preserve">
+    <value>โปรดสร้างรหัสรักษาความปลอดภัยซึ่งระบบจะสอบถามท่านเมื่อทำการตั้งค่าต่าง ๆ เพื่อให้แน่ใจว่าเป็นตัวท่านจริง ๆ</value>
+  </data>
+  <data name="SecurityCodeRules01" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัยจะต้องเป็นตัวเลขอย่างน้อย 6 หลักมี ตัวเลข 2 ตัวที่แตกต่างกันและต้องไม่เป็นหมายเลขี่นับติดต่อกันได้</value>
+  </data>
+  <data name="SecurityCodeRules02" xml:space="preserve">
+    <value>•ตัวอย่างที่ไม่สามารถใช้ได้ 123456, 765432, 456789, ฯลฯ</value>
+  </data>
+  <data name="PasswordHint04" xml:space="preserve">
+    <value>รหัสผ่านต้องมี6-10 อักขระและต้องไม่มีช่องเว้นวรรค ต้องมีภาษาอังกฤษตัวพิมพ์เล็กอย่างน้อย 1ตัว และภาษาอังกฤษตัวพิมพ์ใหญ่อย่างน้อย 1ตัวและตามด้วยตัวเลข
+ยกตัวอย่างเช่น : ( 493abcDE, 59D7!4$h)</value>
+  </data>
+  <data name="InputOtpBeforeProceeding" xml:space="preserve">
+    <value>โปรดใส่ OTP ก่อนดำเนินการ</value>
+  </data>
+  <data name="OtpNotes" xml:space="preserve">
+    <value>จำเป็นต้องใช้รหัส OTP เมื่อคุณต้องการดำเนินการใดๆที่สำคัญกับบัญชีหรือเข้าสู่ระบบด้วยอุปกรณ์หรือเบราว์เซอร์แตกต่างกัน โดยก่อนเปิดใช้งานการแจ้งเตือนรหัส OTP คุณจำเป็นต้องเชื่อมต่อบัญชีของคุณกับ Mobile Authenticator หรือเชื่อมต่อบัญชีของคุณกับเทเลแกรมแชทบอท</value>
+  </data>
+  <data name="DownloadSophos" xml:space="preserve">
+    <value>ดาวน์โหลด Sophos Authenticator Mobile App สู่เครื่องของคุณ</value>
+  </data>
+  <data name="SophosAuthenticator" xml:space="preserve">
+    <value>Sophos Authenticator</value>
+  </data>
+  <data name="OtherAuthenticators" xml:space="preserve">
+    <value>อีก 2 ตัวนอกเหนือจาก authenticator applications คือ Google Authenticator หรือ Microsoft Authenticator ก็รอบรับเช่นเดียวกัน</value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>สร้างบัญชีผู้ใช้โดยการสแกน QR โค้ดนี้กับSophos</value>
+  </data>
+  <data name="UnableScanQRCode" xml:space="preserve">
+    <value>ไม่สามารถแสกน QR code ?</value>
+  </data>
+  <data name="ManualInputOtpKey" xml:space="preserve">
+    <value>โปรดใส่ เงื่อนไขด้านล่างเพื่อเป็นการเพิ่มหน้าใน Sophos และคลิ๊ก Done (iOS) หรือ Add (Android)</value>
+  </data>
+  <data name="Enter6DigitsOtp" xml:space="preserve">
+    <value> ใส่ตัวเลข 6 ตัวที่สร้างโดย Sophos ลงไปในกล่องข้อความด้านล่างแล้วคลิ๊กยืนยันเพื่อเป็นการลงทะเบียน</value>
+  </data>
+  <data name="ClickToRemoveOtp" xml:space="preserve">
+    <value>คลิกที่ปุ่มด้านล่างนี้เพื่อลบผู้ใช้ที่ลงทะเบียนอุปกรณ์และการตั้งค่า/ สถานะของผู้ใช้งาน OTP เพื่อปิดการใช้งาน</value>
+  </data>
+  <data name="RemoveOtp" xml:space="preserve">
+    <value>ลบ</value>
+  </data>
+  <data name="EnableDisableOtp" xml:space="preserve">
+    <value>เปิดการใช้งาน/ปิดการใช้งาน OTP</value>
+  </data>
+  <data name="EnableOtpViaSophos" xml:space="preserve">
+    <value>เปิดการใช้งาน OTP ทาง Authenticator Mobile App</value>
+  </data>
+  <data name="OtpIsInvalidOrExpired" xml:space="preserve">
+    <value>OTP ไม่ถูกต้องหรือหมดอายุแล้ว</value>
+  </data>
+  <data name="AuthenticatorAppVerified" xml:space="preserve">
+    <value>App Authenticator ของคุณได้รับการยืนยัน</value>
+  </data>
+  <data name="RemoveOtpWarning" xml:space="preserve">
+    <value>ระบบจะไม่ยอมรับรหัส OTP ที่สร้างบนอุปกรณ์ที่ลงทะเบียนคุณต้องการที่จะดำเนินการต่อหรือไม่</value>
+  </data>
+  <data name="RemoveOtpSuccessMessage" xml:space="preserve">
+    <value>ลบบัญชี Mobile Authenticator และ ปิดการใช้งานการแจ้งเตือนรหัส OTP ผ่านเทเลแกรม</value>
+  </data>
+  <data name="UpdateOtpStatusSuccess" xml:space="preserve">
+    <value>อัพเดทสถานะ OPT ประสบความสำเร็จ</value>
+  </data>
+  <data name="RemoveOtpForCust" xml:space="preserve">
+    <value>ลบ OTP - {0}</value>
+  </data>
+  <data name="ResetOtpWarning" xml:space="preserve">
+    <value>คลิก ลบ เพื่อลบบัญชีที่เชื่อมโยง Mobile Authenticator ของดาวน์ไลน์ และปิดใช้งานการแจ้งเตือนเทเลแกรม OTP สำหรับดาวน์ไลน์</value>
+  </data>
+  <data name="OtpValidation" xml:space="preserve">
+    <value>การตรวจสอบ OTP</value>
+  </data>
+  <data name="ResetDownlineOtpWarning" xml:space="preserve">
+    <value>คุณต้องการที่จะลบผู้ใช้นี้จากการลงทะเบียนอุปกรณ์หรือไม่?</value>
+  </data>
+  <data name="RegenerateQR" xml:space="preserve">
+    <value>สร้าง QR ใหม่</value>
+  </data>
+  <data name="OtpDatetimeWarning" xml:space="preserve">
+    <value>การตั้งค่าวันที่ และเวลาบนเครื่องของท่านต้องตั้งให้เป็นอัตโนมัติเท่านั้น</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>คัดลอกเรียบร้อยแล้ว</value>
+  </data>
+  <data name="NoRegisterDeviceError" xml:space="preserve">
+    <value>ผู้ใช้นี้ไม่มีอุปกรณ์ที่ลงทะเบียนจะถูกลบออก</value>
+  </data>
+  <data name="UsernameWarning" xml:space="preserve">
+    <value>บัญชีใหม่จะได้รับการตั้งชื่อตามชื่อผู้ใช้ของคุณ  {0}</value>
+  </data>
+  <data name="ChangeIt" xml:space="preserve">
+    <value>ต้องการเปลี่ยนมันหรือไม่</value>
+  </data>
+  <data name="RemoveRegisteredDeviceSuccess" xml:space="preserve">
+    <value>ถอดอุปกรณ์ที่ลงทะเบียนเรียบร้อยแล้ว</value>
+  </data>
+  <data name="RemoveDisableOtpDownline" xml:space="preserve">
+    <value>ไม่สามารถลบผู้ที่ลงทะเบียนอุปกรณ์ไว้แล้วจากการปิดการใช้งานของผู้ใช้</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>ชื่อบัญชี</value>
+  </data>
+  <data name="RegisterMobileApplication" xml:space="preserve">
+    <value>ตั้งค่ารหัส OTP ผ่าน Mobile Authenticator</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>ยืนยัน</value>
+  </data>
+  <data name="OtpHiMessage" xml:space="preserve">
+    <value>สวัสดีค่ะ {0}, คุณเข้าใช้งานในระบบโดยใช้อุปกรณ์หรือ เบราว์เซอร์ ที่แตกต่างจากการใช้ก่อนหน้านี้ กรุณากรอก OTP เพื่อดำเนินการต่อค่ะ</value>
+  </data>
+  <data name="LockAccountOtpMessage" xml:space="preserve">
+    <value>บัญชีนี้ถูกล็อก เนื่องจากการตรวจสอบความปลอดภัยล้มเหลวหลายครั้ง กรุณาติดต่ออัพไลน์ของคุณเพื่อปลดล็อก</value>
+  </data>
+  <data name="OtpInvalidOrExpiredAndContactUpline" xml:space="preserve">
+    <value>รหัสผ่านครั้งเดียวไม่ถูกต้องหรือหมดอายุแล้ว ลองรหัสผ่านครั้งเดียวอีกครั้งหรือติดต่อต้นสายของคุณเพื่อรีเซ็ตรหัสผ่านครั้งเดียวของคุณ</value>
+  </data>
+  <data name="KickoutMessageByForceChangePassword" xml:space="preserve">
+    <value>คุณได้ออกจากระบบเนื่องจากรหัสผ่านได้ถูกเปลี่ยนโดยอัพไลน์ของคุณ
+กรุณาเข้าสู่ระบบอีกครั้งด้วยรหัสผ่านใหม่ หากมีข้อสงสัยหรือต้องการความช่วยเหลือ โปรดสอบถามจากอัพไลน์ของคุณ</value>
+  </data>
+  <data name="VerifySecurityCodeShower" xml:space="preserve">
+    <value>สวัสดี {0}</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>ข้าม</value>
+  </data>
+  <data name="SkipForceChangePasswordPlaceHolder" xml:space="preserve">
+    <value>พิมพ์ "OK" เพื่อข้ามและยอมรับความเสี่ยง</value>
+  </data>
+  <data name="SkipForceChangePasswordWarning" xml:space="preserve">
+    <value>คุณแน่ใจหรือไม่ว่าต้องการเก็บรหัสผ่านปัจจุบันของคุณ? ความปลอดภัยของคุณอาจมีความเสี่ยงหากคุณไม่เปลี่ยนรหัสผ่านบ่อยๆ</value>
+  </data>
+  <data name="lblConfirmLocked" xml:space="preserve">
+    <value>บัญชีของคุณถูกล็อคและจะถูกบังคับให้ออกจากระบบ เนื่องจากการตรวจสอบความปลอดภัยล้มเหลวหลายครั้ง โปรดติดต่ออัพไลน์ของคุณเพื่อปลดล็อค</value>
+  </data>
+  <data name="KickoutMessageByProtectedMode" xml:space="preserve">
+    <value>บัญชีของคุณเพิ่งถูกบังคับให้ออกจากระบบ โปรดติดต่ออัพไลน์ของคุณเพื่อขอความช่วยเหลือเพิ่มเติม</value>
+  </data>
+  <data name="SwitchLabelOff" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
+  <data name="SwitchLabelOn" xml:space="preserve">
+    <value>เปิด</value>
+  </data>
+  <data name="AccessToBetLists" xml:space="preserve">
+    <value>เข้าถึงประวัติรายการเดิมพัน</value>
+  </data>
+  <data name="AccessToStatementReport" xml:space="preserve">
+    <value>เข้าถึงรายงานเดินบัญชี</value>
+  </data>
+  <data name="CreateNewDownline" xml:space="preserve">
+    <value>+ สร้างดาวน์ไลน์ใหม่</value>
+  </data>
+  <data name="MandatoryActions" xml:space="preserve">
+    <value>มาตรการบังคับ</value>
+  </data>
+  <data name="OptionalAction" xml:space="preserve">
+    <value>ตัวเลือกการกระทำ</value>
+  </data>
+  <data name="SCAskedOncePerSession" xml:space="preserve">
+    <value>ระบบจะถามรหัสรักษาความปลอดภัยหนึ่งครั้งก่อนการดำเนินการในแต่ละขั้นตอนต่อไปนี้</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>โอน</value>
+  </data>
+  <data name="UpdateDownlineCreditAndSettings" xml:space="preserve">
+    <value>อัปเดตวงเงินเครดิตดาวน์ไลน์และการตั้งค่า</value>
+  </data>
+  <data name="UpdateSecurityInformation" xml:space="preserve">
+    <value>อัปเดตข้อมูลความปลอดภัย (รหัสผ่าน รหัสความปลอดภัย OTP ฯลฯ)</value>
+  </data>
+  <data name="UpdateSubAccInformation" xml:space="preserve">
+    <value>อัปเดตข้อมูลบัญชีย่อยของคุณ</value>
+  </data>
+  <data name="NewSecurityCode" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="OTPViaTelegramDisabled" xml:space="preserve">
+    <value>ปิดการใช้งานการแจ้งเตือนรหัส OTP ผ่านเทเลแกรม</value>
+  </data>
+  <data name="SetupOTPViaTelegramChatbot" xml:space="preserve">
+    <value>ตั้งค่ารหัส OTP ผ่านเทเลแกรมแชทบอท</value>
+  </data>
+  <data name="OTPViaChatbotIntroduction" xml:space="preserve">
+    <value>เทเลแกรมแชทบอท ช่วยให้คุณรับข้อมูลทางธุรกิจที่สำคัญได้อย่างสะดวกและปลอดภัยโดยไม่ต้องเข้าถึงเว็บไซต์ตัวแทน ซึ่งปัจจุบันคุณสามารถรับรหัส OTP ผ่านเทเลแกรมแชทบอทโดยเปิดใช้งานการแจ้งเตือนผ่าน Telegram OTP</value>
+  </data>
+  <data name="EnableOtpViaTelegramChatbot" xml:space="preserve">
+    <value>เปิดการใช้งานรหัส OTP ผ่านเทเลแกรมแชทบอท</value>
+  </data>
+  <data name="UnlinkTelegramChatbot" xml:space="preserve">
+    <value>คลิกไม่เลือกเพื่อยกเลิกการเชื่อมต่อเทเลแกรมแชทบอทกับบัญชีของคุณ</value>
+  </data>
+  <data name="OtpViaTelegramSuggestion" xml:space="preserve">
+    <value>ขณะนี้คุณสามารถรับหรัส OTP ผ่านเทเลแกรม โปรดลองใช้งาน</value>
+  </data>
+  <data name="OtpViaTelegramChatbot" xml:space="preserve">
+    <value>รหัส OTP ผ่านเทแลแกรมแชทบอท</value>
+  </data>
+  <data name="ToSetupChatbot" xml:space="preserve">
+    <value>สำหรับการตั้งค่าแชทบอท กรุณาดำเนินการตามคำแนะนำด้านล่าง</value>
+  </data>
+  <data name="RegisteredMobileApplication" xml:space="preserve">
+    <value>รหัส OTP ผ่าน Mobile Authenticator</value>
+  </data>
+  <data name="GenerateOTP" xml:space="preserve">
+    <value>สร้างรหัสผ่านครั้งเดียว (OTP)</value>
+  </data>
+  <data name="PositionTakingTemplate" xml:space="preserve">
+    <value>เทมเพลตค่าแบ่งสู้</value>
+  </data>
+</root>

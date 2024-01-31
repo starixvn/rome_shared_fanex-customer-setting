@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="alertErrorSecCodeConfirm" xml:space="preserve">
+    <value>保安码不正确</value>
+  </data>
+  <data name="alertForcedChangeSCTitle" xml:space="preserve">
+    <value>您需要更改机密码。您的新机密码必须要与您上线所提供不相同。&lt;br/&gt;
+请使用下面的表格更改您现在的机密码。</value>
+  </data>
+  <data name="alertForcedChangeSCWithoutValidationTitle" xml:space="preserve">
+    <value>您需要设置您的机密码来验证当日后您从新登入。&lt;br/&gt;
+请使用下面的表格设置您现在的机密码。</value>
+  </data>
+  <data name="alertInputWrongSecCode" xml:space="preserve">
+    <value>保安码不正确。请再重试。</value>
+  </data>
+  <data name="alertOldSecCodeEmpty" xml:space="preserve">
+    <value>请输入您的旧保安码。</value>
+  </data>
+  <data name="alertSameSecCode" xml:space="preserve">
+    <value>您的新保安码必须与当前的不相同。</value>
+  </data>
+  <data name="alertSecCodeChangedOK" xml:space="preserve">
+    <value>保安码已更改。</value>
+  </data>
+  <data name="alertSecCodeEmpty" xml:space="preserve">
+    <value>必填栏</value>
+  </data>
+  <data name="ConfirmSecurityCode" xml:space="preserve">
+    <value>确认保安码</value>
+  </data>
+  <data name="informSecCode" xml:space="preserve">
+    <value>请输入您的保安码以继续执行!</value>
+  </data>
+  <data name="lblSecCodeWrongRule" xml:space="preserve">
+    <value>您所提供的保安码不符合要求。</value>
+  </data>
+  <data name="oldSecCode" xml:space="preserve">
+    <value>旧保安码</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>保安码</value>
+  </data>
+  <data name="titleResetSecCode" xml:space="preserve">
+    <value>重置保安码</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>重填</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="titleVerifySecurityCode" xml:space="preserve">
+    <value>保安码验证</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>了解更多</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="SecurityCodeValidation" xml:space="preserve">
+    <value>保安码验证</value>
+  </data>
+  <data name="NotAuthorized" xml:space="preserve">
+    <value>您没有使用此功能的权限</value>
+  </data>
+  <data name="SecurityCodeRules" xml:space="preserve">
+    <value>保安码条规</value>
+  </data>
+  <data name="SecurityCodeShower" xml:space="preserve">
+    <value>嗨{0}，您的保安码已被重置。请设置一个新的。</value>
+  </data>
+  <data name="errUserName" xml:space="preserve">
+    <value>请输入账号及密码</value>
+  </data>
+  <data name="lblConfirmClosed" xml:space="preserve">
+    <value>您的帐户被关闭，你必须退出。请联系您上线的援助。</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>注册</value>
+  </data>
+  <data name="loginWrong5Times" xml:space="preserve">
+    <value>您已输入6次错误的用户名/密码, 请与5分钟后再尝试。</value>
+  </data>
+  <data name="stringSessionLogged" xml:space="preserve">
+    <value>另一个相同账号已登入界面,强制被登出.如果此登入不是由您所进行,请联络您的上线</value>
+  </data>
+  <data name="undermaintenance" xml:space="preserve">
+    <value>我们正在服务器维护，网站将被从（0）至（1）无法使用。不便之处，敬请原谅！</value>
+  </data>
+  <data name="alertErrorConfirm" xml:space="preserve">
+    <value>您的密码不能被确认</value>
+  </data>
+  <data name="alertInputOldPwd" xml:space="preserve">
+    <value>请输入旧密码</value>
+  </data>
+  <data name="alertPasswordEmpty" xml:space="preserve">
+    <value>密码不能留空</value>
+  </data>
+  <data name="forcechangepwd" xml:space="preserve">
+    <value>您必须更换密码于第一次登入。</value>
+  </data>
+  <data name="lblPasswordChangedOK" xml:space="preserve">
+    <value>您已成功更改您的密码。</value>
+  </data>
+  <data name="lblPasswordDAccountName" xml:space="preserve">
+    <value>您的密码不能包含您的用户名或昵称。</value>
+  </data>
+  <data name="lblPasswordDOldOne" xml:space="preserve">
+    <value>您的新密码不能与旧密码相同。</value>
+  </data>
+  <data name="lblPasswordExpired" xml:space="preserve">
+    <value>您的安全及隐私对我们非常重要。因此, 我们不断努力的提高我们的安全预防措施以保护您的数据。基于此原因, 我们决定实施密码重设。
+
+请使用以下表格立即更换您的密码。</value>
+  </data>
+  <data name="lblPasswordHint" xml:space="preserve">
+    <value>注: 我们强烈建议您定期更换您的密码以提高安全性。</value>
+  </data>
+  <data name="lblPasswordWrongRule" xml:space="preserve">
+    <value>您的密码不符合最低安全要求</value>
+  </data>
+  <data name="lblConfirmPassword" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="lblOldPassword" xml:space="preserve">
+    <value>旧密码</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>新密码</value>
+  </data>
+  <data name="PasswordHint01" xml:space="preserve">
+    <value>密码必须至少 8 个字符没有空格和包含至少 3个 以下：</value>
+  </data>
+  <data name="PasswordHint02" xml:space="preserve">
+    <value>&lt;li&gt;大写字母 [A-Z]&lt;/li&gt;
+&lt;li&gt;小写字母 [a-z]&lt;/li&gt;
+&lt;li&gt; 数字 [0-9]&lt;/li&gt;
+&lt;li&gt; 特殊字符 （!、 @、 # 等。。)&lt;/li&gt;</value>
+  </data>
+  <data name="PasswordHint03" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong&gt;例如  :&lt;/strong&gt; 59D7!4$h, 493abcDE&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意： &lt;/strong&gt;您的密码需有大小写&lt;/p&gt;</value>
+  </data>
+  <data name="PasswordRules" xml:space="preserve">
+    <value>密码条规</value>
+  </data>
+  <data name="PasswordShower" xml:space="preserve">
+    <value>嗨 {0}，请更改您的密码。</value>
+  </data>
+  <data name="lblresetpassword" xml:space="preserve">
+    <value>修改密码</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>顯示密碼</value>
+  </data>
+  <data name="ShowSecurityCode" xml:space="preserve">
+    <value>保安码显示</value>
+  </data>
+  <data name="lblPasswordRequire" xml:space="preserve">
+    <value>密码必须至少 8 个字符没有空格和包含至少 3个 以下：
+
+• 大写字母 [A-Z]
+• 小写字母 [a-z]
+• 数字 [0-9]
+• 特殊字符 （!、 @、 # 等。。)
+
+例如： 59D7!4$h, 493abcDE
+注意： 您的密码需有大小写</value>
+  </data>
+  <data name="createSecurityCode" xml:space="preserve">
+    <value>请创建一个保安码它将需要输入当有任何设置需要更新，以确保您是账号持有人。</value>
+  </data>
+  <data name="SecurityCodeRules01" xml:space="preserve">
+    <value>保安码必须是6位数字，包含至少2个不同的数字，必须是不连续的号码</value>
+  </data>
+  <data name="SecurityCodeRules02" xml:space="preserve">
+    <value>•例如：123456，765432，456789 等都是不被允许的</value>
+  </data>
+  <data name="PasswordHint04" xml:space="preserve">
+    <value>密码必须为 6-10 字符没有空格并包含至少 1  个大写字母、1  个小写字母 、 1  个数字。（例如 493abcDE, 59D7!4$h）
+注意： 您的密码需有大小写</value>
+  </data>
+  <data name="InputOtpBeforeProceeding" xml:space="preserve">
+    <value>请输入您的一次性密码以便继续。</value>
+  </data>
+  <data name="OtpNotes" xml:space="preserve">
+    <value>将需要输入OTP当您执行敏感操作或使用不同设备/浏览器登录。在启用OTP通知之前，您需要将您账号添加到手机验证器或将您账号链接到Telegram Chatbot。</value>
+  </data>
+  <data name="DownloadSophos" xml:space="preserve">
+    <value>在您的设备上下载Sophos Authenticator。</value>
+  </data>
+  <data name="SophosAuthenticator" xml:space="preserve">
+    <value>Sophos 验证器</value>
+  </data>
+  <data name="OtherAuthenticators" xml:space="preserve">
+    <value>还支持其他两个因素身份验证应用程序，如Google Authenticator ，Microsoft Authenticator 等。</value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>通過使用Sophos掃描此QR碼創建帳号</value>
+  </data>
+  <data name="UnableScanQRCode" xml:space="preserve">
+    <value>无法扫描QR码？</value>
+  </data>
+  <data name="ManualInputOtpKey" xml:space="preserve">
+    <value>请在 Sophos 手动添加页面输入以下的键，然后单击完成（iOS）或添加（Android）</value>
+  </data>
+  <data name="Enter6DigitsOtp" xml:space="preserve">
+    <value>在下面的文本框中输入Sophos的6位数代码，然后点击验证以完成注册。</value>
+  </data>
+  <data name="ClickToRemoveOtp" xml:space="preserve">
+    <value>点击下面的按钮删除用户注册的设备，并将其OTP状态设置为已禁用。</value>
+  </data>
+  <data name="RemoveOtp" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="EnableDisableOtp" xml:space="preserve">
+    <value>启用 / 禁用OTP</value>
+  </data>
+  <data name="EnableOtpViaSophos" xml:space="preserve">
+    <value>通过Authenticator Mobile App启用 OTP</value>
+  </data>
+  <data name="OtpIsInvalidOrExpired" xml:space="preserve">
+    <value>您的OTP无效或已过期。</value>
+  </data>
+  <data name="AuthenticatorAppVerified" xml:space="preserve">
+    <value>您的Authenticator App通过验证。</value>
+  </data>
+  <data name="RemoveOtpWarning" xml:space="preserve">
+    <value>OTP在注册设备将不被系统接受。 您要进行吗？</value>
+  </data>
+  <data name="RemoveOtpSuccessMessage" xml:space="preserve">
+    <value>移除手机验证器账号并禁用Telegram OTP 通知。</value>
+  </data>
+  <data name="UpdateOtpStatusSuccess" xml:space="preserve">
+    <value>更新OTP状态成功。</value>
+  </data>
+  <data name="RemoveOtpForCust" xml:space="preserve">
+    <value>刪除OTP - {0}</value>
+  </data>
+  <data name="ResetOtpWarning" xml:space="preserve">
+    <value>点击移除以删除下线用户手机验证器账号并使Telegram OTP的通知无效 于下线。</value>
+  </data>
+  <data name="OtpValidation" xml:space="preserve">
+    <value>OTP验证</value>
+  </data>
+  <data name="ResetDownlineOtpWarning" xml:space="preserve">
+    <value>您是否要删除注册设备予此用户？</value>
+  </data>
+  <data name="RegenerateQR" xml:space="preserve">
+    <value>重建QR</value>
+  </data>
+  <data name="UsernameWarning" xml:space="preserve">
+    <value>新帐户将以您的用户名 {0} 命名。</value>
+  </data>
+  <data name="ChangeIt" xml:space="preserve">
+    <value>需要更改吗</value>
+  </data>
+  <data name="OtpDatetimeWarning" xml:space="preserve">
+    <value>您设备上的日期和时间设置必须设置为自动。</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>复制！</value>
+  </data>
+  <data name="NoRegisterDeviceError" xml:space="preserve">
+    <value>此用户没有已注册的设备要删除。</value>
+  </data>
+  <data name="RemoveRegisteredDeviceSuccess" xml:space="preserve">
+    <value>成功删除注册的设备。</value>
+  </data>
+  <data name="RemoveDisableOtpDownline" xml:space="preserve">
+    <value>无法从禁用的用户删除注册的设备。</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>用戶名</value>
+  </data>
+  <data name="RegisterMobileApplication" xml:space="preserve">
+    <value>通过手机验证器设置OTP</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>验证</value>
+  </data>
+  <data name="OtpHiMessage" xml:space="preserve">
+    <value>您好 {0} ， 您使用的设备 / 浏览器 是与上次使用的不同。 请输入OTP以继续。</value>
+  </data>
+  <data name="LockAccountOtpMessage" xml:space="preserve">
+    <value>由于检测多次失败，导致此账号已被锁定。请联系您的上线以解锁。</value>
+  </data>
+  <data name="OtpInvalidOrExpiredAndContactUpline" xml:space="preserve">
+    <value>OTP无效或过期。请尝试另一个OTP或联系您的上线以重置您的OTP。</value>
+  </data>
+  <data name="lblBack" xml:space="preserve">
+    <value>退回</value>
+  </data>
+  <data name="KickoutMessageByForceChangePassword" xml:space="preserve">
+    <value>您已注销。您的上线变更您的密码。请使用新密码重新登入。若有任何问题，请联系您的上线取得协助。</value>
+  </data>
+  <data name="VerifySecurityCodeShower" xml:space="preserve">
+    <value>嗨{0}</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>略过</value>
+  </data>
+  <data name="SkipForceChangePasswordPlaceHolder" xml:space="preserve">
+    <value>输入“OK" 以略过并且接受风险。</value>
+  </data>
+  <data name="SkipForceChangePasswordWarning" xml:space="preserve">
+    <value>您确定要保留当前密码？如果您选择不更换密码，您的账号防护措施将会有风险。</value>
+  </data>
+  <data name="lblConfirmLocked" xml:space="preserve">
+    <value>由于安全检测多次失败，您的帐户已被锁并强迫登出。请联系您的上线开启账户。</value>
+  </data>
+  <data name="KickoutMessageByProtectedMode" xml:space="preserve">
+    <value>您的账户刚刚被强制注销。 请联系您的上线以获得进一步协助。</value>
+  </data>
+  <data name="SwitchLabelOff" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="SwitchLabelOn" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="AccessToBetLists" xml:space="preserve">
+    <value>访问投注历史</value>
+  </data>
+  <data name="AccessToStatementReport" xml:space="preserve">
+    <value>访问账目报告</value>
+  </data>
+  <data name="CreateNewDownline" xml:space="preserve">
+    <value>创建新下线</value>
+  </data>
+  <data name="MandatoryActions" xml:space="preserve">
+    <value>强制措施</value>
+  </data>
+  <data name="OptionalAction" xml:space="preserve">
+    <value>可选动作</value>
+  </data>
+  <data name="SCAskedOncePerSession" xml:space="preserve">
+    <value>在执行以下操作之前，每个阶段将询问一次保安码</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>转账</value>
+  </data>
+  <data name="UpdateDownlineCreditAndSettings" xml:space="preserve">
+    <value>更新下线的信用额和设置</value>
+  </data>
+  <data name="UpdateSecurityInformation" xml:space="preserve">
+    <value>更新安全信息（密码, 安全码, OTP 等等）</value>
+  </data>
+  <data name="UpdateSubAccInformation" xml:space="preserve">
+    <value>更新您的子账号资料</value>
+  </data>
+  <data name="NewSecurityCode" xml:space="preserve">
+    <value>新保安码</value>
+  </data>
+  <data name="OTPViaTelegramDisabled" xml:space="preserve">
+    <value>禁用Telegram Chatbot通知</value>
+  </data>
+  <data name="SetupOTPViaTelegramChatbot" xml:space="preserve">
+    <value>通过Telegram Chatbot设置OTP</value>
+  </data>
+  <data name="OTPViaChatbotIntroduction" xml:space="preserve">
+    <value>Telegram Chatbot 允许您在不访问代理网的情况下方便和安全的接收重要的业务报告。 现在您也可以通过启用 Telegram OTP通知以便从Telegram Chatbot 轻松获取 OTP。</value>
+  </data>
+  <data name="EnableOtpViaTelegramChatbot" xml:space="preserve">
+    <value>通过Telegram Chatbot启用 OTP</value>
+  </data>
+  <data name="UnlinkTelegramChatbot" xml:space="preserve">
+    <value>点击取消链接以取消您账号的Telegram Chatbot 配对</value>
+  </data>
+  <data name="OtpViaTelegramSuggestion" xml:space="preserve">
+    <value>请试看！您现在可以通过 Telegram 接收 OTP。</value>
+  </data>
+  <data name="OtpViaTelegramChatbot" xml:space="preserve">
+    <value>通过Telegram Chatbot获取的OTP</value>
+  </data>
+  <data name="ToSetupChatbot" xml:space="preserve">
+    <value>请按照以下说明进行设置Chatbot操作：</value>
+  </data>
+  <data name="RegisteredMobileApplication" xml:space="preserve">
+    <value>通过手机验证器获取的OTP</value>
+  </data>
+  <data name="GenerateOTP" xml:space="preserve">
+    <value>产生一次性密码</value>
+  </data>
+  <data name="PositionTakingTemplate" xml:space="preserve">
+    <value>占成数模板</value>
+  </data>
+</root>

@@ -4,6 +4,10 @@ public class Result
 {
     public const int ErrorCode = 1;
 
+    public Result()
+    {
+    }
+
     public Result(int code, string message, string customData = null)
     {
         Code = code;
@@ -11,7 +15,7 @@ public class Result
         CustomData = customData;
     }
 
-    public int Code { get; }
+    public int Code { get; set; }
 
     public string Message { get; set; }
 
