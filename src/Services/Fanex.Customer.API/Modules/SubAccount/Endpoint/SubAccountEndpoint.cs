@@ -14,23 +14,26 @@ namespace Fanex.Customer.API.Modules.SubAccount.Endpoint
     {
         public void AddRoute(IEndpointRouteBuilder app)
         {
-            app.MapGet("api/subaccount/index", (int custId, ISubAccountService service)
+            var subAcc = app.MapGroup("/api/sub-account")
+                .WithTags("Sub-Account");
+
+            subAcc.MapGet("/index", (int custId, ISubAccountService service)
             => HandleAsync(custId, service))
             .Produces<Result>();
 
-            app.MapGet("api/subaccount/get", (int custId, int subAccId, ISubAccountService service)
+            subAcc.MapGet("/get", (int custId, int subAccId, ISubAccountService service)
             => HandleAsync(custId, subAccId, service))
             .Produces<Result>();
 
-            app.MapPost("api/subaccount/add", (int custId, AddSubAccountModel model, ISubAccountService service)
+            subAcc.MapPost("/add", (int custId, AddSubAccountModel model, ISubAccountService service)
             => HandleAsync(custId, model, service))
             .Produces<Result>();
 
-            app.MapPost("api/subaccount/update-info", (int custId, UpdateSubAccountInfoModel model, ISubAccountService service)
+            subAcc.MapPost("/update-info", (int custId, UpdateSubAccountInfoModel model, ISubAccountService service)
             => HandleAsync(custId, model, service))
             .Produces<Result>();
 
-            app.MapPost("api/subaccount/update-pageaccess", (int custId, UpdateSubAccountPageAccessModel model, ISubAccountService service)
+            subAcc.MapPost("/update-pageaccess", (int custId, UpdateSubAccountPageAccessModel model, ISubAccountService service)
             => HandleAsync(custId, model, service))
             .Produces<Result>();
         }

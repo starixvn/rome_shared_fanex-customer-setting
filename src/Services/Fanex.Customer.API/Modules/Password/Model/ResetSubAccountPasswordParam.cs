@@ -1,6 +1,6 @@
 using Fanex.Customer.API.Shared.Models;
 
-namespace Fanex.Customer.API.Modules.Password.Service.Model
+namespace Fanex.Customer.API.Modules.Password.Model
 {
     public class ResetSubAccountPasswordParam
     {

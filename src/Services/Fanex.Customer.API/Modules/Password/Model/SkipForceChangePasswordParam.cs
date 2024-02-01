@@ -1,4 +1,4 @@
-namespace Fanex.Customer.API.Modules.Password.Service.Model
+namespace Fanex.Customer.API.Modules.Password.Model
 {
     public class SkipForceChangePasswordParam
     {

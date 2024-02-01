@@ -2,7 +2,6 @@ using System.Text.RegularExpressions;
 using Fanex.Cryptography.Aes;
 using Fanex.Customer.API.Modules.Password.Criteria;
 using Fanex.Customer.API.Modules.Password.Model;
-using Fanex.Customer.API.Modules.Password.Service.Model;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data.Repository;
 using PasswordSecurity = Fanex.Customer.API.Modules.Password.Resources.Security;
@@ -21,7 +20,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
 
         Task<Result> SkipForceChangePassword(SkipForceChangePasswordParam param);
 
-        Task UpdateLastChangePasswordIndirectAccount(UpdateLastChangePasswordIndirectAccountParam param);
+        Task<int> UpdateLastChangePasswordIndirectAccount(UpdateLastChangePasswordIndirectAccountParam param);
     }
 
     public class PasswordService : BaseService, IPasswordService
@@ -36,16 +35,16 @@ namespace Fanex.Customer.API.Modules.Password.Service
 
         private readonly IEncryption encryption;
         private readonly IAesService aes;
-        private readonly KickoutCustomerService kickoutCustomerService;
+        private readonly IKickoutCustomerService kickoutCustomerService;
         
-        private readonly TelegramBotService telegramBotService;
+        private readonly ITelegramBotService telegramBotService;
 
         public PasswordService(
             IEncryption encryption,
             IAesService aes,
-            KickoutCustomerService kickoutCustomerService,
+            IKickoutCustomerService kickoutCustomerService,
             IDynamicRepository dynamicRepository,
-            TelegramBotService telegramBotService)
+            ITelegramBotService telegramBotService)
             : base(dynamicRepository)
         {
             this.encryption = encryption;
@@ -361,7 +360,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
             return (r1 + r2 + r3 + r4 >= V) && NoWhiteSpace.Match(password).Success;
         }
 
-        public Task UpdateLastChangePasswordIndirectAccount(UpdateLastChangePasswordIndirectAccountParam param)
+        public async Task<int> UpdateLastChangePasswordIndirectAccount(UpdateLastChangePasswordIndirectAccountParam param)
         {
             var criteria = new UpdateLastChangePasswordIndirectAccountCriteria
             {
@@ -375,7 +374,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 UplineUsername = param.UplineUsername
             };
 
-            return dynamicRepository.ExecuteAsync(criteria);
+            return await dynamicRepository.ExecuteAsync(criteria);
         }
     }
 }
