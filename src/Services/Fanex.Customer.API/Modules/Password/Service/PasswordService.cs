@@ -4,7 +4,7 @@ using Fanex.Customer.API.Modules.Password.Criteria;
 using Fanex.Customer.API.Modules.Password.Model;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data.Repository;
-using PasswordSecurity = Fanex.Customer.API.Modules.Password.Resources.Security;
+using PasswordSecurity = Fanex.Customer.API.Modules.AppResources.Security;
 
 namespace Fanex.Customer.API.Modules.Password.Service
 {

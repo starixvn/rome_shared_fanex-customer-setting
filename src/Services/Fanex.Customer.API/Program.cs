@@ -21,7 +21,7 @@ using Fanex.Customer.API.Modules.SubAccount.Service;
 using Fanex.Customer.API.Modules.Balance;
 using Fanex.Customer.API.Modules.Password.Service;
 using Fanex.Customer.API.Modules.EditCustomer;
-using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.Otp;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,6 +61,7 @@ builder.Services.RegisterRulesServiceModule();
 builder.Services.RegisterCreateCustomerModule();
 builder.Services.RegisterSubAccountService();
 builder.Services.RegisterPasswordService();
+builder.Services.RegisterCustomerOtpService();
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();

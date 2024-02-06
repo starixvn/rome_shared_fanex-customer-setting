@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.Customer.API.Modules.Password.Resources {
+namespace Fanex.Customer.API.Modules.AppResources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Fanex.Customer.API.Modules.Password.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Customer.API.Modules.Password.Resources.Security", typeof(Security).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Customer.API.Modules.AppResources.Security", typeof(Security).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
