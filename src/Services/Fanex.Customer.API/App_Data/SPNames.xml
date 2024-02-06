@@ -30,6 +30,13 @@
     <Setting Key="Age_OTP_CustomerOTPSel" SpName="Age_OTP_CustomerOTPSel" DbName="DBCUST.CustDB.wsv_alp" />
     <Setting Key="Age_OTP_CustomerCheckEnableOTP" SpName="Age_OTP_CustomerCheckEnableOTP" DbName="DBCUST.CustDB.wsv_alp" />
     <Setting Key="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" SpName="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" DbName="DBCUST.CustDB.wsv_alp" />
+        <Setting Key="Age_OTP_CustomerOTPIns" SpName="Age_OTP_CustomerOTPIns" DbName="DBCUST.CustDB.wsv_alp" />
+        <Setting Key="Age_OTP_CustomerOTPStatusUpd" SpName="Age_OTP_CustomerOTPStatusUpd" DbName="DBCUST.CustDB.wsv_alp" />
+        <Setting Key="Age_OTP_CustomerOTPDel" SpName="Age_OTP_CustomerOTPDel" DbName="DBCUST.CustDB.wsv_alp" />
+        <Setting Key="Age_OTP_CustomerOTPDeviceInfoIns" SpName="Age_OTP_CustomerOTPDeviceInfoIns" DbName="DBCUST.CustDB.wsv_alp" />
+        <Setting Key="Age_OTP_CustomerOTPDeviceInfoSel" SpName="Age_OTP_CustomerOTPDeviceInfoSel" DbName="DBCUST.CustDB.wsv_alp">
+        <Mapping DataField="DeviceId" ObjectProperty="Id" />
+        </Setting>
   </Function>
   <Function Name="Sub Account">
     <Setting Key="Age_CustSubIns_Register" SpName="Age_CustSubIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" />
