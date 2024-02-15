@@ -1,8 +1,10 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 using Fanex.Cryptography.Aes;
 using Fanex.Customer.API.Modules.Password.Criteria;
 using Fanex.Customer.API.Modules.Password.Model;
 using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using PasswordSecurity = Fanex.Customer.API.Modules.AppResources.Security;
 
@@ -66,7 +68,8 @@ namespace Fanex.Customer.API.Modules.Password.Service
                     param.ActorName,
                     param.NickName
                 },
-                false);
+                false,
+                LanguageUtils.ToLanguage(param.LanguageKey));
 
             if (!validateResult.IsSuccessful)
             {
@@ -126,7 +129,8 @@ namespace Fanex.Customer.API.Modules.Password.Service
                     param.Nickname,
                     param.Username
                 },
-                false);
+                false,
+                LanguageUtils.ToLanguage(param.LanguageKey));
 
             if (!validateResult.IsSuccessful)
             {
@@ -182,7 +186,8 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 {
                     param.ActorName
                 },
-                param.IsResetMemberPassword);
+                param.IsResetMemberPassword,
+                LanguageUtils.ToLanguage(param.LanguageKey));
 
             if (!validateResult.IsSuccessful)
             {
@@ -252,7 +257,8 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 {
                     param.ActorName
                 },
-                false);
+                false,
+                LanguageUtils.ToLanguage(param.LanguageKey));
 
             if (!validateResult.IsSuccessful)
             {
@@ -299,28 +305,29 @@ namespace Fanex.Customer.API.Modules.Password.Service
             string currentPassword,
             string newPassword,
             IEnumerable<string> invalidPasswords,
-            bool isResetMemberPassword)
+            bool isResetMemberPassword,
+            string language)
         {
             if ((!isResetPassword && string.IsNullOrWhiteSpace(currentPassword))
                 || string.IsNullOrWhiteSpace(newPassword))
             {
-                return Result.CreateErrorResult(PasswordSecurity.NotAuthorized);
+                return Result.CreateErrorResult(PasswordSecurity.ResourceManager.GetString("NotAuthorized", new CultureInfo(language)));
             }
 
             if (!IsMatchedRules(newPassword, isResetMemberPassword))
             {
-                return Result.CreateErrorResult(PasswordSecurity.lblPasswordRequire);
+                return Result.CreateErrorResult(PasswordSecurity.ResourceManager.GetString("lblPasswordRequire", new CultureInfo(language)));
             }
 
             if (!isResetPassword && string.Compare(newPassword, currentPassword, StringComparison.OrdinalIgnoreCase) == 0)
             {
-                return Result.CreateErrorResult(PasswordSecurity.lblPasswordDOldOne); //// will update resource later
+                return Result.CreateErrorResult(PasswordSecurity.ResourceManager.GetString("lblPasswordDOldOne", new CultureInfo(language))); //// will update resource later
             }
 
             if (string.Compare(newPassword, "59D7!4$h", StringComparison.OrdinalIgnoreCase) == 0
                 || string.Compare(newPassword, "493abcDE", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                return Result.CreateErrorResult(PasswordSecurity.lblPasswordWrongRule);
+                return Result.CreateErrorResult(PasswordSecurity.ResourceManager.GetString("lblPasswordWrongRule", new CultureInfo(language)));
             }
 
             foreach (var invalidPassword in invalidPasswords)
@@ -328,7 +335,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 if (!string.IsNullOrWhiteSpace(invalidPassword)
                     && newPassword.Contains(invalidPassword, StringComparison.OrdinalIgnoreCase))
                 {
-                    return Result.CreateErrorResult(PasswordSecurity.lblPasswordDAccountName);
+                    return Result.CreateErrorResult(PasswordSecurity.ResourceManager.GetString("lblPasswordDAccountName", new CultureInfo(language)));
                 }
             }
 

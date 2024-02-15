@@ -24,5 +24,24 @@ public static class LanguageUtils
             _ => "E",
         };
     }
+
+    public static string ToLanguage(string languageKey)
+    {
+        var lowerLanguage = string.IsNullOrWhiteSpace(languageKey)
+            ? "e"
+            : languageKey.ToLowerInvariant();
+
+        return lowerLanguage switch
+        {
+            "e" => "en-US",
+            "j" => "ja-JP",
+            "ct" => "zh-TW",// Traditional
+            "cs" => "zh-CN",// Simplified,
+            "th" => "th-TH",
+            "ko" => "ko-KR",
+            "vi" => "vi-VN",
+            _ => "en-US",
+        };
+    }
 }
 

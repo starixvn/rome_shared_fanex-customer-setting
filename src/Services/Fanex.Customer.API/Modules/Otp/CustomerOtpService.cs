@@ -1,9 +1,9 @@
+using System.Globalization;
 using Fanex.Customer.API.Modules.Otp.Commands;
 using Fanex.Customer.API.Modules.Otp.Params;
-using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
-using ONEbook.OTP.Services; 
-using TelegramBot.Client.Services;
+using ONEbook.OTP.Services;
 using CustomResult = Fanex.Customer.API.Shared.Models.Result;
 using OtpSecurity = Fanex.Customer.API.Modules.AppResources.Security;
 
@@ -11,11 +11,11 @@ namespace Fanex.Customer.API.Modules.Otp
 {
     public interface ICustomerOtpService
     {
-        Task<Result> SetUpOtp(CustomerOtp param);
+        Task<CustomResult> SetUpOtp(CustomerOtp param);
 
-        Task<Result> RemoveSecretKey(RemoveSecretKeyParam param);
+        Task<CustomResult> RemoveSecretKey(RemoveSecretKeyParam param);
 
-        Task<Result> ChangeOtpStatus(ChangeOtpStatusParam param);
+        Task<CustomResult> ChangeOtpStatus(ChangeOtpStatusParam param);
 
         CustomerOtp GenerateCustomerOtp(int custId, string username, int subAccId = 0);
 
@@ -52,7 +52,6 @@ namespace Fanex.Customer.API.Modules.Otp
             OtpService otpService,
             IJsonHelper jsonHelper,
             // INetThrottlingService netThrottlingService,
-            IOTPService telegramOTPService,
             Logging.ILogger logger)
         {
             this.dynamicRepository = dynamicRepository;
@@ -96,7 +95,7 @@ namespace Fanex.Customer.API.Modules.Otp
             return new CustomResult
             {
                 Code = command.ErrCode,
-                Message = command.ErrCode == 0 ? OtpSecurity.UpdateOtpStatusSuccess : command.ErrMsg
+                Message = command.ErrCode == 0 ? OtpSecurity.ResourceManager.GetString("UpdateOtpStatusSuccess", new CultureInfo(LanguageUtils.ToLanguage(param.Language))) : command.ErrMsg
             };
         }
 
@@ -135,7 +134,7 @@ namespace Fanex.Customer.API.Modules.Otp
 
             if (!isCorrect)
             {
-                return CustomResult.CreateErrorResult(OtpSecurity.OtpIsInvalidOrExpired);
+                return CustomResult.CreateErrorResult(OtpSecurity.ResourceManager.GetString("OtpIsInvalidOrExpired", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
             }
 
             var deviceInfoSerialized = jsonHelper.Serialize(param.Device.Info);
@@ -157,7 +156,7 @@ namespace Fanex.Customer.API.Modules.Otp
             return new CustomResult
             {
                 Code = command.ErrCode,
-                Message = command.ErrCode == 0 ? OtpSecurity.AuthenticatorAppVerified : command.ErrMsg
+                Message = command.ErrCode == 0 ? OtpSecurity.ResourceManager.GetString("AuthenticatorAppVerified", new CultureInfo(LanguageUtils.ToLanguage(param.Language))) : command.ErrMsg
             };
         }
 
@@ -204,27 +203,27 @@ namespace Fanex.Customer.API.Modules.Otp
             var deleteResult = new CustomResult
             {
                 Code = command.ErrCode,
-                Message = GetRemovedOtpMessage(command.ErrCode, param.IsResetDownlineOrSubAccount, command.ErrMsg)
+                Message = GetRemovedOtpMessage(command.ErrCode, param.IsResetDownlineOrSubAccount, command.ErrMsg, param.Language)
             };
 
             return deleteResult;
         }
 
-        private static string GetRemovedOtpMessage(int code, bool isResetDownlineOrSubAccount, string errorMessage)
+        private static string GetRemovedOtpMessage(int code, bool isResetDownlineOrSubAccount, string errorMessage, string language)
         {
             if (isResetDownlineOrSubAccount)
             {
                 return code switch
                 {
-                    DownlineIsDisabledErrorCode => OtpSecurity.RemoveDisableOtpDownline,
-                    DownlineDoesNotHaveRegisteredDeviceErrorCode => OtpSecurity.NoRegisterDeviceError,
-                    FailedToRemoveDownlineOtpErrorCode => OtpSecurity.FailedToRemoveOtp,
-                    0 => OtpSecurity.RemoveRegisteredDeviceSuccess,
+                    DownlineIsDisabledErrorCode => OtpSecurity.ResourceManager.GetString("RemoveDisableOtpDownline", new CultureInfo(language)),
+                    DownlineDoesNotHaveRegisteredDeviceErrorCode => OtpSecurity.ResourceManager.GetString("NoRegisterDeviceError", new CultureInfo(language)),
+                    FailedToRemoveDownlineOtpErrorCode => OtpSecurity.ResourceManager.GetString("FailedToRemoveOtp", new CultureInfo(language)),
+                    0 => OtpSecurity.ResourceManager.GetString("RemoveRegisteredDeviceSuccess", new CultureInfo(language)),
                     _ => errorMessage,
                 };
             }
 
-            return code == 0 ? OtpSecurity.RemoveOtpSuccessMessage : errorMessage;
+            return code == 0 ? OtpSecurity.ResourceManager.GetString("RemoveOtpSuccessMessage", new CultureInfo(language)) : errorMessage;
         }
 
         public async Task<bool> IsDifferenceDevice(int custId, string deviceId, int subAccId = 0)
