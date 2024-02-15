@@ -8,7 +8,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Command
 
         public int CustId { get; set; }
 
-        public string UpdatePageAccess { get; set; }
+        public string UpdPageAccess { get; set; }
 
         public string Language { get; set; }
 

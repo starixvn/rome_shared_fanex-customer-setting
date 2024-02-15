@@ -50,13 +50,13 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
         public async Task<SubAccountModel> GetSubAccount(int custId, int subAccId)
         {
             var result = await dynamicRepository.GetAsync<SubAccountModel>(new SubAccountCriteria { CustId = custId, SubAccId = subAccId });
-            return result;
+            return result ?? new SubAccountModel();
         }
 
         public async Task<IEnumerable<SubAccountModel>> GetSubAccounts(int custId)
         {
             var result = await dynamicRepository.FetchAsync<SubAccountModel>(new SubAccountListCriteria { CustId = custId });
-            return result;
+            return result ?? Enumerable.Empty<SubAccountModel>();
         }
 
         public async Task<Result> UpdateSubAccountInfo(int custId, UpdateSubAccountInfoModel subAccountModel)
@@ -86,7 +86,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 Language = subAccountModel.Language,
                 LoginIP = subAccountModel.IP,
                 SubAccId = subAccountModel.SubAccId,
-                UpdatePageAccess = subAccountModel.PageAccess,
+                UpdPageAccess = subAccountModel.PageAccess,
                 UserId = custId
             };
 
