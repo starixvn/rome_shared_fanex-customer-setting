@@ -1,4 +1,4 @@
-namespace Fanex.Customer.API.Modules.SecurityCode;
+namespace Fanex.Customer.API.Modules.SecurityCode.Params;
 
 public class VerifySecurityCodeRequest
 {
@@ -11,6 +11,8 @@ public class VerifySecurityCodeRequest
     public string Language { get; set; } = "en-US";
 
     public string IP { get; set; } = string.Empty;
+
+    public string Salt { get; set; }
 
     public bool IsValid() => CustId > 0 && !string.IsNullOrWhiteSpace(SecurityCode);
 

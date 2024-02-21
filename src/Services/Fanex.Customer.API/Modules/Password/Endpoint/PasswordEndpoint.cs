@@ -10,13 +10,12 @@ namespace Fanex.Customer.API.Modules.Password.Endpoint
         IEndpoint<Result, ChangeMainAccountPasswordParam, IPasswordService>,
         IEndpoint<Result, ResetSubAccountPasswordParam, IPasswordService>,
         IEndpoint<Result, ChangeSubAccountPasswordParam, IPasswordService>,
-        IEndpoint<Result, SkipForceChangePasswordParam, IPasswordService>,
-        IEndpoint<int, UpdateLastChangePasswordIndirectAccountParam, IPasswordService>
+        IEndpoint<Result, SkipForceChangePasswordParam, IPasswordService>
     {
         public void AddRoute(IEndpointRouteBuilder app)
         {
             var mainAcc = app.MapGroup("/api/main-account/password")
-                .WithTags("Main-Account");
+                .WithTags("Main-Account-Password");
 
             mainAcc.MapPost("/reset", (ResetMainAccountPasswordParam request1, IPasswordService request2)
             => HandleAsync(request1, request2))
@@ -38,15 +37,11 @@ namespace Fanex.Customer.API.Modules.Password.Endpoint
             .Produces<Result>();
 
             var acc = app.MapGroup("/api/account/password")
-                .WithTags("Sub-Main-Accounts");
+                .WithTags("Sub-Main-Accounts-Password");
 
             acc.MapPost("/skip", (SkipForceChangePasswordParam request1, IPasswordService request2)
             => HandleAsync(request1, request2))
             .Produces<Result>();
-
-            acc.MapPost("/update-last-change-indirect", (UpdateLastChangePasswordIndirectAccountParam request1, IPasswordService request2)
-            => HandleAsync(request1, request2))
-            .Produces<int>();
         }
 
         public async Task<Result> HandleAsync(ResetMainAccountPasswordParam request1, IPasswordService request2)
@@ -72,11 +67,6 @@ namespace Fanex.Customer.API.Modules.Password.Endpoint
         public async Task<Result> HandleAsync(SkipForceChangePasswordParam request1, IPasswordService request2)
         {
             return await request2.SkipForceChangePassword(request1);
-        }
-
-        public async Task<int> HandleAsync(UpdateLastChangePasswordIndirectAccountParam request1, IPasswordService request2)
-        {
-            return await request2.UpdateLastChangePasswordIndirectAccount(request1);
         }
     }
 }
