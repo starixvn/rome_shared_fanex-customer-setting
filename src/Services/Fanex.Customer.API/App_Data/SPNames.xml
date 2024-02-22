@@ -442,4 +442,12 @@
     <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
     <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
   </Function>
+  <Function Name="Protection Code">
+    <Setting Key="Age_CustomerSelProtectionCode" SpName="Age_CustomerSelProtectionCode" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+    <Setting Key="Age_CustomerUpdProtectionCode" SpName="Age_CustomerUpdProtectionCode" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+  </Function>
+  <Function Name="Profile Picture">
+    <Setting Key="Age_CustomerSelProfilePicture" SpName="Age_CustomerSelProfilePicture" DbName="DBAGE.bodb02.BODBDownlineNet" Plain="0" />
+    <Setting Key="Age_CustomerUpdProfilePicture" SpName="Age_CustomerUpdProfilePicture" DbName="DBCust.bodb_Credit.BODBDownlineNet" Plain="0" />
+  </Function>
 </Functions>

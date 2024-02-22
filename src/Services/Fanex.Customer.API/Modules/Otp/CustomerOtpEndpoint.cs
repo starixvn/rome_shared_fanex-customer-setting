@@ -36,7 +36,7 @@ namespace Fanex.Customer.API.Modules.Otp
             otp.MapPost("/remove", (RemoveSecretKeyParam request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
                 .Produces<Result>();
             
-            otp.MapPost("/get", (int custId, int subAccId, ICustomerOtpService request2) => HandleAsync(custId, subAccId, request2))
+            otp.MapGet("/", (int custId, int subAccId, ICustomerOtpService request2) => HandleAsync(custId, subAccId, request2))
                 .Produces<CustomerOtp>();
         }
 
