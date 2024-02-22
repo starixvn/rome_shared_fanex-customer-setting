@@ -10,7 +10,8 @@ namespace Fanex.Customer.API.Modules.Otp
         IEndpoint<bool, CustomerOtpParamBase, ICustomerOtpService>,
         IEndpoint<Result, CustomerOtp, ICustomerOtpService>,
         IEndpoint<bool, CustomerOtpDevice, ICustomerOtpService>,
-        IEndpoint<Result, RemoveSecretKeyParam, ICustomerOtpService>
+        IEndpoint<Result, RemoveSecretKeyParam, ICustomerOtpService>,
+        IEndpoint<CustomerOtp, int, int, ICustomerOtpService>
     {
         public void AddRoute(IEndpointRouteBuilder app)
         {
@@ -21,7 +22,7 @@ namespace Fanex.Customer.API.Modules.Otp
                 .Produces<Result>();
 
             otp.MapPost("/generate", (CustomerOtpParam request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
-                .Produces<Result>();
+                .Produces<CustomerOtp>();
 
             otp.MapPost("/isenabled", (CustomerOtpParamBase request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
                 .Produces<bool>();
@@ -34,6 +35,9 @@ namespace Fanex.Customer.API.Modules.Otp
 
             otp.MapPost("/remove", (RemoveSecretKeyParam request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
                 .Produces<Result>();
+            
+            otp.MapPost("/get", (int custId, int subAccId, ICustomerOtpService request2) => HandleAsync(custId, subAccId, request2))
+                .Produces<CustomerOtp>();
         }
 
         public async Task<Result> HandleAsync(ChangeOtpStatusParam request1, ICustomerOtpService request2)
@@ -64,6 +68,11 @@ namespace Fanex.Customer.API.Modules.Otp
         public async Task<Result> HandleAsync(RemoveSecretKeyParam request1, ICustomerOtpService request2)
         {
             return await request2.RemoveSecretKey(request1);
+        }
+
+        public async Task<CustomerOtp> HandleAsync(int custId, int subAccId, ICustomerOtpService request3)
+        {
+            return await request3.GetCustomerOtp(custId, subAccId);
         }
     }
 }
