@@ -3,6 +3,9 @@ using Fanex.Data.Repository;
 using MinimalApi.Endpoint;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
+using OtpSecurityResource = Fanex.Customer.API.Modules.AppResources.Security;
+using System.Globalization;
+using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.Otp;
 
@@ -69,11 +72,12 @@ public class VerifyOtpEndPoint : IEndpoint<IResult, VerifyOtpRequest, IDynamicRe
 
         await dynamicRepository.ExecuteAsync(changeStatusCommand);
 
-        var result = new Result(changeStatusCommand.ErrCode, isCorrect ? changeStatusCommand.ErrMsg : "OtpInvalidOrExpiredAndContactUpline");
+        var result = new Result(changeStatusCommand.ErrCode, isCorrect ? changeStatusCommand.ErrMsg : 
+            OtpSecurityResource.ResourceManager.GetString("OtpInvalidOrExpiredAndContactUpline", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
 
         if (!isCorrect && result.Code == DisabledAccountErrorCode)
         {
-            result.Message = "LockAccountOtpMessage";
+            result.Message = OtpSecurityResource.ResourceManager.GetString("LockAccountOtpMessage", new CultureInfo(LanguageUtils.ToLanguage(param.Language)));
         }
 
         return result;
