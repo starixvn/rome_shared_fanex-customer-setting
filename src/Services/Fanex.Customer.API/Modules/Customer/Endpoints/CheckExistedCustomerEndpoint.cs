@@ -8,7 +8,8 @@ public class CheckExistedCustomerEndpoint : IEndpoint<IResult, string, ICustomer
     {
         app.MapGet("/api/customer/{username}/exist", (string username, ICustomerService customerService)
             => HandleAsync(username, customerService))
-            .Produces<bool>();
+            .Produces<bool>()
+            .WithTags("Customer Infos");
     }
 
     public async Task<IResult> HandleAsync(string username, ICustomerService customerService)

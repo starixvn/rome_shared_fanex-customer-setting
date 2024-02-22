@@ -1,0 +1,697 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="close" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
+  <data name="ProfileClickTootip" xml:space="preserve">
+    <value>กดที่นี่เพื่อแก้ไขการตั้งค่าโปรไฟล์</value>
+  </data>
+  <data name="subAcc" xml:space="preserve">
+    <value>บัญชีย่อย</value>
+  </data>
+  <data name="admin" xml:space="preserve">
+    <value>แอดมิน</value>
+  </data>
+  <data name="nickname" xml:space="preserve">
+    <value>ชื่อเล่น</value>
+  </data>
+  <data name="configNow" xml:space="preserve">
+    <value>ยืนยันเดี๋ยวนี้</value>
+  </data>
+  <data name="introNickname" xml:space="preserve">
+    <value>&lt;div&gt;เรียนลูกค้าทุกท่าน คุณสามารถเข้าสู่ระะบบโดยชื่อเล่นของคุณเอง&lt;/div&gt;
+&lt;div&gt;...ปลอดภัยและเป็นส่วนตัวมากขึ้น.&lt;/div&gt;</value>
+  </data>
+  <data name="ProfileLoginTip" xml:space="preserve">
+    <value>เรียนเอเย่นท์ของเรา เพื่อให้ท่านเห็นความแตกต่างหากเข้าใช้งานเวปไซต์ปลอม เราได้ทำการเลือกรูปโปรไฟล์ส่วนตัวให้กับท่าน ซึ่งท่านสามารถเข้าทำการเปลี่ยนแปลงได้ โดย&lt;a class="change-picture-link" href="{0}" target="main" id="changePictureLink"&gt;กดที่นี่&lt;/a&gt;.&lt;br/&gt;ทั้งนี้ ท่านสามารถเปลี่ยนภาษาที่ท่านต้องการได้ โดย&lt;a class="change-picture-link" href="{1}" target="main"&gt;กดที่นี่&lt;/a&gt;. ขอบคุณ</value>
+  </data>
+  <data name="clickHere" xml:space="preserve">
+    <value>คลิ๊ก</value>
+  </data>
+  <data name="uploadNow" xml:space="preserve">
+    <value>เพื่ออัพโหลดตอนนี้</value>
+  </data>
+  <data name="strNotAccessPage" xml:space="preserve">
+    <value>ขออภัยคุณไม่ได้รับอนุญาติให้เข้าหน้านี้</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>ตัวช่วย</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>ติดต่อเรา</value>
+  </data>
+  <data name="EditProfilePicture" xml:space="preserve">
+    <value>การตั้งค่าโปรไฟล์</value>
+  </data>
+  <data name="LoginOption" xml:space="preserve">
+    <value>ตัวเลือก การเข้าใช้งาน</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>รหัสผ่าน</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>รหัสรักษาความปลอดภัย</value>
+  </data>
+  <data name="OldView" xml:space="preserve">
+    <value>มุมมองแบบเก่า</value>
+  </data>
+  <data name="accountInfo" xml:space="preserve">
+    <value>ข้อมูลบัญชี</value>
+  </data>
+  <data name="mainMenu" xml:space="preserve">
+    <value>เมนูหลัก</value>
+  </data>
+  <data name="balanceInfo" xml:space="preserve">
+    <value>ข้อมูลยอดเงินคงเหลือ</value>
+  </data>
+  <data name="agent" xml:space="preserve">
+    <value>ตัวแทน</value>
+  </data>
+  <data name="master" xml:space="preserve">
+    <value>ตัวแทนหลัก</value>
+  </data>
+  <data name="super" xml:space="preserve">
+    <value>สูงสุด</value>
+  </data>
+  <data name="agentGivenCredit" xml:space="preserve">
+    <value>เครดิตของเอเย่น</value>
+  </data>
+  <data name="masterGivenCredit" xml:space="preserve">
+    <value>เครดิตของมาสเตอร์</value>
+  </data>
+  <data name="superGivenCredit" xml:space="preserve">
+    <value>เครดิตของซุปเปอร์</value>
+  </data>
+  <data name="totalAgentCredit" xml:space="preserve">
+    <value>ยอดรวมเครดิตของ agent ทั้งหมด</value>
+  </data>
+  <data name="totalMasterCredit" xml:space="preserve">
+    <value>จำนวนรวมในบัญชี ของตัวแทนหลัก</value>
+  </data>
+  <data name="totalMemberCredit" xml:space="preserve">
+    <value>ยอดรวมเครดิตทั้งหมดของสมาชิก</value>
+  </data>
+  <data name="cashBalance" xml:space="preserve">
+    <value>ยอดเงินสด</value>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>สกุลเงิน</value>
+  </data>
+  <data name="todayWinLoss" xml:space="preserve">
+    <value>ยอดได้เสียวันนี้</value>
+  </data>
+  <data name="totalBalance" xml:space="preserve">
+    <value>ยอดเงินรวมทั้งหมด</value>
+  </data>
+  <data name="yesterdayBalance" xml:space="preserve">
+    <value>ยอดคงเหลือเมื่อวาน</value>
+  </data>
+  <data name="yesterdayCashBalance" xml:space="preserve">
+    <value>ยอดเงินสดคงเหลือของเมื่อวาน</value>
+  </data>
+  <data name="yesterdayTotalBalance" xml:space="preserve">
+    <value>ยอดรวมบัญชีของเมื่อวาน</value>
+  </data>
+  <data name="yesterdayWinLoss" xml:space="preserve">
+    <value>ยอดได้เสียเมื่อวาน</value>
+  </data>
+  <data name="announcement" xml:space="preserve">
+    <value>ประกาศ</value>
+  </data>
+  <data name="noInfo" xml:space="preserve">
+    <value>ไม่มีข้อมูล</value>
+  </data>
+  <data name="more" xml:space="preserve">
+    <value>เพิ่ม</value>
+  </data>
+  <data name="totalActiveClosedSuspended" xml:space="preserve">
+    <value>รวมทั้งหมด เปิด/ปิด/ระงับ</value>
+  </data>
+  <data name="totalAgentActiveClosedSuspended" xml:space="preserve">
+    <value>สถานะของAgent ทั้งหมด/ถูกระงับ</value>
+  </data>
+  <data name="totalMasterACS" xml:space="preserve">
+    <value>จำนวนรวมในบัญชีของตัวแทนหลัก ยังคงใช้อยู่ / ปิดแล้ว/ ถูกระงับ</value>
+  </data>
+  <data name="statistics" xml:space="preserve">
+    <value>สถิติของคุณ</value>
+  </data>
+  <data name="highestTurnoverOfTheMonth" xml:space="preserve">
+    <value>ยอดหมุนเวียนมากที่สุดของสมาชิกประจำเดือนนี้</value>
+  </data>
+  <data name="newMemberOfTheMonth" xml:space="preserve">
+    <value>สมาชิกใหม่ประจำเดือนนี้</value>
+  </data>
+  <data name="superOutstanding" xml:space="preserve">
+    <value>ยอดคงค้างของซุปเปอร์</value>
+  </data>
+  <data name="top10WinningMembers" xml:space="preserve">
+    <value>สมาชิก10 อันดับที่เล่นได้สูงสุดของเดือน</value>
+  </data>
+  <data name="totalOutstanding" xml:space="preserve">
+    <value>ยอดคงค้างทังหมด</value>
+  </data>
+  <data name="agentOutstanding" xml:space="preserve">
+    <value>เอเย่นต์ยอดคงค้าง</value>
+  </data>
+  <data name="masterOutstanding" xml:space="preserve">
+    <value>การเดิมพันที่ยังไม่สิ้นสุดของ Master</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>โชว์</value>
+  </data>
+  <data name="member" xml:space="preserve">
+    <value>สมาชิก</value>
+  </data>
+  <data name="turnover" xml:space="preserve">
+    <value>เงินหมุนเวียน</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>ชื่อผู้ใช้ระบบ</value>
+  </data>
+  <data name="winningAmount" xml:space="preserve">
+    <value>ยอดได้ทั้งหมด</value>
+  </data>
+  <data name="createdDate" xml:space="preserve">
+    <value>วันที่สร้าง</value>
+  </data>
+  <data name="givenCredit" xml:space="preserve">
+    <value>เครดิตทั้งหมด</value>
+  </data>
+  <data name="Notice_2" xml:space="preserve">
+    <value>วงเงินเดิมพัน ของท่าน ถูกเปลี่ยนแปลงเป็นที่เรียบร้อยแล้ว โดยทางต้นสาย  กรุณาตรวจสอบรายละเอียดต่าง ๆ ของลูกค้าของท่านอีกครั้ง</value>
+  </data>
+  <data name="Notice_1_2" xml:space="preserve">
+    <value>เอี่ยวขั้นต่ำ และ วงเงินเดิมพัน ของท่าน ถูกเปลี่ยนแปลงเป็นที่เรียบร้อยแล้ว โดยทางต้นสาย  กรุณาตรวจสอบข้อมูลรายละเอียดต่าง ๆ ของลูกค้าของท่านอีกครั้ง</value>
+  </data>
+  <data name="Notice_1" xml:space="preserve">
+    <value>เอี่ยวขั้นต่ำของท่าน ถูกเปลี่ยนโดยทางต้นสายเป็นที่เรียบร้อยแล้ว&lt;br&gt;กรุณาตรวจสอบรายละเอียดต่าง ๆ ของลูกค้าของท่านอีกครั้ง</value>
+  </data>
+  <data name="doNotShowAgain" xml:space="preserve">
+    <value>ไม่ต้องแสดงอีกครั้ง</value>
+  </data>
+  <data name="PrivateMessage" xml:space="preserve">
+    <value>ข้อความส่วนตัว</value>
+  </data>
+  <data name="less" xml:space="preserve">
+    <value>less</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>ออกจากระบบ</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>ต่อไป</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>ผ่าน</value>
+  </data>
+  <data name="BrowserIsOutOfDate" xml:space="preserve">
+    <value>เบราว์เซอร์ของคุณล้าสมัยและอาจจะไม่ได้ทำงานอย่างถูกต้องกับเว็บไซต์ของเรา. สำหรับการสนับสนุนที่ดีเราขอแนะนำให้คุณอัปเกรดเป็นเวอร์ชันใหม่.</value>
+  </data>
+  <data name="ClickToUpdateBrowser" xml:space="preserve">
+    <value>กรุณาคลิกที่นี่เพื่ออัปเดตเบราว์เซอร์</value>
+  </data>
+  <data name="BackOldViewText" xml:space="preserve">
+    <value>ยังไม่คุ้นเคยกับรูปลักษณ์ใหม่?</value>
+  </data>
+  <data name="ClickToBackOldView" xml:space="preserve">
+    <value>คลิกที่นี่เพื่อย้อนกลับ</value>
+  </data>
+  <data name="WarningOldViewDate" xml:space="preserve">
+    <value>รุ่นเก่าจะใช้ได้ถึงวันที่</value>
+  </data>
+  <data name="WarningText" xml:space="preserve">
+    <value>คำเตือน:</value>
+  </data>
+  <data name="HomeIconIntroduction" xml:space="preserve">
+    <value>ไอคอนหน้าแรก - การเข้าถึงหน้าแรก</value>
+  </data>
+  <data name="QuickMenuIntroduction" xml:space="preserve">
+    <value>การเข้าถึงการตั้งค่าบัญชีอย่างรวดเร็ว</value>
+  </data>
+  <data name="QuickMenu" xml:space="preserve">
+    <value>เมนูลัด</value>
+  </data>
+  <data name="SwitchView" xml:space="preserve">
+    <value>สลับมุมมอง</value>
+  </data>
+  <data name="BackOldViewIntroduction" xml:space="preserve">
+    <value>ยังไม่คุ้นเคยกับรูปลักษณ์ใหม่? คลิกที่นี่เพื่อย้อนกลับ</value>
+  </data>
+  <data name="WarningOldVersionDeadline" xml:space="preserve">
+    <value>หมายเหตุ: รุ่นเก่าจะใช้ได้ถึงวันที่ </value>
+  </data>
+  <data name="MainMenuIntroduction" xml:space="preserve">
+    <value>ลำดับตรรกะทั้งหมดในที่เดียว</value>
+  </data>
+  <data name="CollapseExpandIcon" xml:space="preserve">
+    <value>ลด / ขยายไอคอน</value>
+  </data>
+  <data name="CollapseExpandIconIntroduction" xml:space="preserve">
+    <value>คลิกเพื่อเพิ่มพื้นที่ว่าง</value>
+  </data>
+  <data name="MainIntroductionTitle" xml:space="preserve">
+    <value>สัมผัสกับรูปลักษณ์ใหม่และความรู้สึกใหม่</value>
+  </data>
+  <data name="MainIntroductionDescription" xml:space="preserve">
+    <value>สะดวกสบายและครอบคลุมมากขึ้น</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>ไม่ใช่ตอนนี้</value>
+  </data>
+  <data name="QuickTour" xml:space="preserve">
+    <value>คู่มือรวบรัด</value>
+  </data>
+  <data name="TransferMenuIntroduction" xml:space="preserve">
+    <value>โอนจากเมนูหลัก</value>
+  </data>
+  <data name="ViewLogMenuIntroduction" xml:space="preserve">
+    <value>ดูบันทึกจากเมนูหลัก</value>
+  </data>
+  <data name="GotIt" xml:space="preserve">
+    <value>เข้าใจ</value>
+  </data>
+  <data name="Replay" xml:space="preserve">
+    <value>เล่นใหม่</value>
+  </data>
+  <data name="ReplayInstruction" xml:space="preserve">
+    <value>คุณสามารถรีเพลคู่มือโดยการคลิกที่ไอคอนนี้</value>
+  </data>
+  <data name="TakeTourInstruction" xml:space="preserve">
+    <value>คุณสามารถใช้คู่มือโดยการคลิกที่ไอคอนนี้</value>
+  </data>
+  <data name="QuickTourTooltip" xml:space="preserve">
+    <value>คู่มือรวบรัด</value>
+  </data>
+  <data name="stats" xml:space="preserve">
+    <value>สถิติของคุณ</value>
+  </data>
+  <data name="balance" xml:space="preserve">
+    <value>ข้อมูลยอดเงินคงเหลือ</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>เปิดการใช้งาน</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value> ปิดการใช้งาน</value>
+  </data>
+  <data name="normalAnnouncement" xml:space="preserve">
+    <value>ประกาศธรรมดา</value>
+  </data>
+  <data name="specialNotice" xml:space="preserve">
+    <value>ข้อความ เฉพาะ</value>
+  </data>
+  <data name="specialAnnouncement" xml:space="preserve">
+    <value>ข้อความ เฉพาะ</value>
+  </data>
+  <data name="personalMessage" xml:space="preserve">
+    <value>ข้อความส่วนตัว</value>
+  </data>
+  <data name="notice" xml:space="preserve">
+    <value>ประกาศ</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>เปิด</value>
+  </data>
+  <data name="closed" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
+  <data name="suspended" xml:space="preserve">
+    <value>ระงับ</value>
+  </data>
+  <data name="submit" xml:space="preserve">
+    <value>ตกลง</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>ถึง</value>
+  </data>
+  <data name="from" xml:space="preserve">
+    <value>จาก</value>
+  </data>
+  <data name="outstanding" xml:space="preserve">
+    <value>การเดิมพันที่ยังไม่สิ้นสุด</value>
+  </data>
+  <data name="NoPermissionAccessPage" xml:space="preserve">
+    <value>ขออภัยคุณไม่ได้รับอนุญาติให้เข้าหน้านี้</value>
+  </data>
+  <data name="NoInformationIsAvailable" xml:space="preserve">
+    <value>ไม่มีข้อมูล</value>
+  </data>
+  <data name="lblNew" xml:space="preserve">
+    <value>บใหม่</value>
+  </data>
+  <data name="UpdatedSuccessfully" xml:space="preserve">
+    <value>ปรับปรุงเรียบร้อยแล้ว!</value>
+  </data>
+  <data name="Notice_3" xml:space="preserve">
+    <value>อัพไลน์ของคุณได้เปิดใช้งานเกมส์ยิงปลาให้ดาวน์ไลน์ของคุณ. โปรดไปที่หน้าการตั้งค่าเพือกำหนดค่าการตั้งค่าส่วนแบ่งของคุณเอง</value>
+  </data>
+  <data name="highlights" xml:space="preserve">
+    <value>HIGHLIGHTS</value>
+  </data>
+  <data name="systemUpdate" xml:space="preserve">
+    <value>ระบบ</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>ยอดรวม</value>
+  </data>
+  <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
+    <value>ชื่อเล่นของคุณได้กำหนดเรียบร้อยแล้ว</value>
+  </data>
+  <data name="NicknameRule" xml:space="preserve">
+    <value>ชื่อเล่นต้องไม่ซ้ำกัน ตัวอักษรหรือตัวเลขเท่านั้น ควรมีขั้นต่ำ 5 ตัวอักษร และสูงสุด 20 ตัวอักษร</value>
+  </data>
+  <data name="NicknameCompanyPolicy" xml:space="preserve">
+    <value>เพื่อเพิ่มความปลอดภัยและปกป้องบัญชีของคุณคุณจะต้องลงชื่อเข้าใช้ด้วยชื่อเล่นเท่านั้น</value>
+  </data>
+  <data name="NicknameEffectedFrom" xml:space="preserve">
+    <value>นโยบายใหม่จะมีผลตั้งแต่ {0}.</value>
+  </data>
+  <data name="NicknameNote1" xml:space="preserve">
+    <value>คุณจะไม่ได้รับอนุญาติให้เปลี่ยนชื่อเล่นของคุณอีกในภายหลัง.</value>
+  </data>
+  <data name="NicknameNote2" xml:space="preserve">
+    <value>เฉพาะอัพไลน์ของคุณเท่านั้นที่จะเห็นชื่อเล่นของคุณ</value>
+  </data>
+  <data name="SubAccNicknameNote2" xml:space="preserve">
+    <value>เฉพาะอัพไลน์ของคุณเท่านั้นที่จะเห็นชื่อเล่นของคุณ</value>
+  </data>
+  <data name="NicknameOption1" xml:space="preserve">
+    <value>เข้าสู่ระบบด้วยชื่อผู้ใช้หรือชื่อเล่น</value>
+  </data>
+  <data name="NicknameOption2" xml:space="preserve">
+    <value>เข้าสู่ระบบด้วยชื่อเล่นเท่านั้น</value>
+  </data>
+  <data name="NicknameSkipText" xml:space="preserve">
+    <value>ข้ามขั้นตอนนี้และกลับไปหน้าเวป</value>
+  </data>
+  <data name="NicknameRules" xml:space="preserve">
+    <value>กฏการตั้งชื่อเล่น</value>
+  </data>
+  <data name="PleaseChooseNickname" xml:space="preserve">
+    <value>กรุณาเลือกชื่อเล่นที่คุณต้องการ</value>
+  </data>
+  <data name="PleaseSelectLoginByNickname" xml:space="preserve">
+    <value>กรุณาเลือก เข้าสู่ระบบด้วยชื่อเล่นเท่านั้น</value>
+  </data>
+  <data name="DataProcessingIsInProgress" xml:space="preserve">
+    <value>อยู่ในช่วงการการประมวลผลข้อมูล.</value>
+  </data>
+  <data name="DataProcessingNotification" xml:space="preserve">
+    <value>แจ้งเตือนการประมวลผลข้อมูล</value>
+  </data>
+  <data name="invalidCaptcha" xml:space="preserve">
+    <value>คุณใส่รหัสที่หมดอายุแล้วในการเข้าระบบ</value>
+  </data>
+  <data name="IamNotARobot" xml:space="preserve">
+    <value>ฉันไม่ใช่หุ่นยนต์</value>
+  </data>
+  <data name="CreateMemberWithQRCode" xml:space="preserve">
+    <value>สร้างสมาชิกด้วยคิวอาร์โค้ด</value>
+  </data>
+  <data name="PendingTransfer3rd" xml:space="preserve">
+    <value>บุคคลที่สามรอการถ่ายโอน</value>
+  </data>
+  <data name="UMFrom" xml:space="preserve">
+    <value>จาก</value>
+  </data>
+  <data name="UMTo" xml:space="preserve">
+    <value>ถึง</value>
+  </data>
+  <data name="UMAnnouncementTitle" xml:space="preserve">
+    <value>ประกาศการบำรุงรักษา</value>
+  </data>
+  <data name="UMCustomerSettingsPattern" xml:space="preserve">
+    <value>&lt;strong&gt;_SettingType_&lt;/strong&gt; ของ &lt;strong&gt;_Product_&lt;/strong&gt;: ไม่พร้อมใช้งานตั้งแต่ &lt;span class="um-message-time"&gt;{0}&lt;/span&gt; ถึง &lt;span class="um-message-time"&gt;{1}&lt;/span&gt;</value>
+  </data>
+  <data name="UMSorryForInconvenience" xml:space="preserve">
+    <value>ขออภัยในความไม่สะดวก มา ณ ที่นี้ด้วย</value>
+  </data>
+  <data name="AllProducts" xml:space="preserve">
+    <value>โปรดักส์ทั้งหมด</value>
+  </data>
+  <data name="UMSchedule" xml:space="preserve">
+    <value>แผนการบำรุงรักษา (GMT +8) และในช่วงเวลานี้ฟังก์ชันเหล่านี้จะไม่สามารถใช้งานได้:</value>
+  </data>
+  <data name="UMTransferPattern" xml:space="preserve">
+    <value>&lt;strong&gt;การถ่ายโอน&lt;/strong&gt;: ไม่สามารถใช้งานได้ตั้งแต่ &lt;span class="um-message-time"&gt;{0}&lt;/span&gt; ถึง &lt;span class="um-message-time"&gt;{1}&lt;/span&gt;</value>
+  </data>
+  <data name="UMNewAccountPattern" xml:space="preserve">
+    <value>&lt;strong&gt;บัญชีใหม่&lt;/strong&gt;: ไม่สามารถใช้ฟังก์ชันนี้ได้ตั้งแต่ &lt;span class="um-message-time"&gt;{0}&lt;/span&gt; ถึง &lt;span class="um-message-time"&gt;{1}&lt;/span&gt;</value>
+  </data>
+  <data name="UMDearValuedCustomers" xml:space="preserve">
+    <value>เรียน ลูกค้าที่เคารพ</value>
+  </data>
+  <data name="DashboardViewOverallInformation" xml:space="preserve">
+    <value>โปรดคลิก {0} เพื่อดูข้อมูลโดยรวม</value>
+  </data>
+  <data name="PartialUMAnnouncement" xml:space="preserve">
+    <value>เรากำลังอัปเดตฟังก์ชันนี้เพื่อประสบการณ์ที่ดีขึ้น ดังนั้น ฟังก์ชันนี้จึงถูกปิดชั่วคราว ({0} - {1} (GMT+8)) โปรดลองอีกครั้งในภายหลังและขออภัยในความไม่สะดวก</value>
+  </data>
+  <data name="LiveMessage" xml:space="preserve">
+    <value>Live Message</value>
+  </data>
+  <data name="NewProtectionCode" xml:space="preserve">
+    <value>รหัสป้องกันใหม่</value>
+  </data>
+  <data name="ProtectionCode" xml:space="preserve">
+    <value>รหัสป้องกัน</value>
+  </data>
+  <data name="ConfirmProtectionCode" xml:space="preserve">
+    <value>ยืนยันรหัสป้องกัน</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>สร้าง</value>
+  </data>
+  <data name="NotMatchedConfirmProtectionCode" xml:space="preserve">
+    <value>รหัสป้องกันเหล่านี้ไม่ตรงกัน</value>
+  </data>
+  <data name="ProtectionCodeRule" xml:space="preserve">
+    <value>รหัสป้องกันต้องมีอักษรอย่างน้อย 6 ตัว โดยสามารถตรงกับรหัสความปลอดภัยของคุณได้ แต่ไม่สามารถตรงกับรหัสผ่านของคุณ</value>
+  </data>
+  <data name="RequiredNewProtectionCode" xml:space="preserve">
+    <value>จำเป็นต้องมีรหัสป้องกันใหม่</value>
+  </data>
+  <data name="ShowProtectionCode" xml:space="preserve">
+    <value>แสดงรหัสป้องกัน</value>
+  </data>
+  <data name="MinLengthNewProtectionCodeError" xml:space="preserve">
+    <value>รหัสป้องกันต้องมีความยาวอย่างน้อย 6 ตัวอักษร</value>
+  </data>
+  <data name="RequiredConfirmProtectionCode" xml:space="preserve">
+    <value>จำเป็นต้องยืนยันรหัสป้องกัน</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>ล่าสุด</value>
+  </data>
+  <data name="UpdateProtectionCodeSuccessfully" xml:space="preserve">
+    <value>รหัสป้องกันของคุณอัปเดตสำเร็จแล้ว</value>
+  </data>
+  <data name="ContainsSpaceOrUnicodeCharacterError" xml:space="preserve">
+    <value>รหัสป้องกันต้องไม่มีสัญลักษณ์พิเศษหรือช่องว่าง</value>
+  </data>
+  <data name="ContactUs_Content" xml:space="preserve">
+    <value>เรามีเจ้าหน้าที่บริการลูกค้าคอยให้ความช่วยเหลือเกี่ยวกับปัญหาการใช้งานของเว็บเอเย่นต์</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="LetstalkIMID" xml:space="preserve">
+    <value>Letstalk IM ID</value>
+  </data>
+  <data name="SkypeID" xml:space="preserve">
+    <value>ติดต่อ Skype</value>
+  </data>
+  <data name="ContactUsLegend" xml:space="preserve">
+    <value>For Better Security</value>
+  </data>
+  <data name="AdvertisementMyWatchlist" xml:space="preserve">
+    <value>&lt;b&gt;ง่ายดาย&lt;/b&gt; ตรวจสอบการชนะ แพ้ ของคุณ โดยการใช้ &lt;b&gt; ขีดจำกัดของฉัน&lt;/b&gt;</value>
+  </data>
+  <data name="AdvertisementMyWatchlistGlobalThreshold" xml:space="preserve">
+    <value>ขีดจำกัดของฉัน: ตั้งค่าขีดจำกัดการชนะ /แพ้ตามค่าความเสี่ยงของคุณ</value>
+  </data>
+  <data name="AdvertisementMyWatchlistGlobalThresholdDetail" xml:space="preserve">
+    <value>ไปที่ &lt;b&gt; การจัดการความเสี่ยง &lt;/b&gt; --&gt; ขีดจำกัดของฉัน --&gt; ตั้งค่าขีดจำกัดการชนะ/แพ้</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>ศึกษาเพิ่มเติม</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>ไม่มี</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>มี</value>
+  </data>
+  <data name="AdvertisementMyWatchlistGlobalThresholdDetailAgent" xml:space="preserve">
+    <value>ไปที่ &lt;b&gt; การจัดการความเสี่ยง &lt;/b&gt; --&gt; รายการเฝ้าดูของฉัน - ขีดจำกัดของฉัน --&gt; ตั้งค่าขีดจำกัดการชนะ/แพ้</value>
+  </data>
+  <data name="FeedbackTitle" xml:space="preserve">
+    <value>ช่วยเราพัฒนา!</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>ข้อเสนอแนะ</value>
+  </data>
+  <data name="LoveToHear" xml:space="preserve">
+    <value>เรารู้สึกยินดีที่ได้รับคำติชมจากคุณ!</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>ออก</value>
+  </data>
+  <data name="HighlightPopupNewFeatureIntro" xml:space="preserve">
+    <value>&lt;b&gt;โดเมนเวปสมาชิก&lt;/b&gt; ได้เพิ่มเข้ามาแล้ว คุณสามารถ&lt;b&gt;ดึงข้อมูลโดเมนอย่างง่ายดาย&lt;/b&gt; ผ่าน Telegram chatbot</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>เริ่มต้น</value>
+  </data>
+  <data name="SessionExpired" xml:space="preserve">
+    <value>การเข้าสู่ระบบของคุณหมดเวลาแล้ว</value>
+  </data>
+  <data name="HighlightPopupNewFeatureIntro3" xml:space="preserve">
+    <value>คัดลอกข้อมูลรายงานโดยไม่ได้ส่งออก</value>
+  </data>
+  <data name="HighlightPopupNewFeatureIntro4" xml:space="preserve">
+    <value>คัดกรองตั๋วจากรายการเดิมพัน</value>
+  </data>
+  <data name="FeedbackOnFunctionTitle" xml:space="preserve">
+    <value>ช่วยเราปรับปรุง {0} ให้ดียิ่งขึ้น</value>
+  </data>
+  <data name="WinLossDetailReport" xml:space="preserve">
+    <value>รายงานรายละเอียดการแพ้ชนะ</value>
+  </data>
+  <data name="HighlightPopupNewFeatureTitle" xml:space="preserve">
+    <value>โดเมนที่มีอยู่</value>
+  </data>
+  <data name="minAgo" xml:space="preserve">
+    <value>หนึ่งนาทีที่แล้ว</value>
+  </data>
+  <data name="minsAgo" xml:space="preserve">
+    <value>นาทีที่แล้ว</value>
+  </data>
+  <data name="hoursAgo" xml:space="preserve">
+    <value>ชั่วโมงที่แล้ว</value>
+  </data>
+  <data name="daysAgo" xml:space="preserve">
+    <value>วันที่แล้ว</value>
+  </data>
+  <data name="Here" xml:space="preserve">
+    <value>ที่นี่</value>
+  </data>
+</root>

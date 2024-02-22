@@ -1,0 +1,700 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="close" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  <data name="ProfileClickTootip" xml:space="preserve">
+    <value>點擊這裡修改個人設置。</value>
+  </data>
+  <data name="subAcc" xml:space="preserve">
+    <value>子帐号</value>
+  </data>
+  <data name="admin" xml:space="preserve">
+    <value>管理</value>
+  </data>
+  <data name="nickname" xml:space="preserve">
+    <value>暱稱</value>
+  </data>
+  <data name="configNow" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="introNickname" xml:space="preserve">
+    <value>&lt;div&gt;親愛的客戶! 現在您可使用暱稱登錄&lt;/div&gt;
+&lt;div&gt;... 更安全化及個性化.&lt;/div&gt;</value>
+  </data>
+  <data name="ProfileLoginTip" xml:space="preserve">
+    <value>尊敬的代理， 我們選擇了默認的個人資料圖片，以幫助將我們的網站與假網站區分開來。您可以&lt;a class="change-picture-link" href="{0}" target="main" id="changePictureLink"&gt;點擊此處&lt;/a&gt;選擇一個新的。&lt;br/&gt;此外，您可以在&lt;a class="change-picture-link" href="{1}" target="main"&gt;此處&lt;/a&gt;設置您的首選語言。 謝謝。</value>
+  </data>
+  <data name="clickHere" xml:space="preserve">
+    <value>點擊此處</value>
+  </data>
+  <data name="uploadNow" xml:space="preserve">
+    <value>上傳!</value>
+  </data>
+  <data name="strNotAccessPage" xml:space="preserve">
+    <value>對不起, 您不被允許進入此網頁.</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>聯絡我們</value>
+  </data>
+  <data name="EditProfilePicture" xml:space="preserve">
+    <value>個人設置</value>
+  </data>
+  <data name="LoginOption" xml:space="preserve">
+    <value>登錄選項</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>密碼</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>保安碼</value>
+  </data>
+  <data name="OldView" xml:space="preserve">
+    <value>舊視圖</value>
+  </data>
+  <data name="accountInfo" xml:space="preserve">
+    <value>用戶資料</value>
+  </data>
+  <data name="mainMenu" xml:space="preserve">
+    <value>主要目錄</value>
+  </data>
+  <data name="balanceInfo" xml:space="preserve">
+    <value>餘額資料</value>
+  </data>
+  <data name="agent" xml:space="preserve">
+    <value>代理</value>
+  </data>
+  <data name="master" xml:space="preserve">
+    <value>總代理</value>
+  </data>
+  <data name="super" xml:space="preserve">
+    <value>超級</value>
+  </data>
+  <data name="agentGivenCredit" xml:space="preserve">
+    <value>代理信用額度</value>
+  </data>
+  <data name="masterGivenCredit" xml:space="preserve">
+    <value>總代理信用額度</value>
+  </data>
+  <data name="superGivenCredit" xml:space="preserve">
+    <value>超級總代理信用額度</value>
+  </data>
+  <data name="totalAgentCredit" xml:space="preserve">
+    <value>總代理商信用</value>
+  </data>
+  <data name="totalMasterCredit" xml:space="preserve">
+    <value>總代理最高信用額</value>
+  </data>
+  <data name="totalMemberCredit" xml:space="preserve">
+    <value>會員總信用額</value>
+  </data>
+  <data name="cashBalance" xml:space="preserve">
+    <value>現金余額</value>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>貨幣</value>
+  </data>
+  <data name="todayWinLoss" xml:space="preserve">
+    <value>今日輸贏</value>
+  </data>
+  <data name="totalBalance" xml:space="preserve">
+    <value>總平均</value>
+  </data>
+  <data name="yesterdayBalance" xml:space="preserve">
+    <value>昨天餘額</value>
+  </data>
+  <data name="yesterdayCashBalance" xml:space="preserve">
+    <value>昨天現金余額</value>
+  </data>
+  <data name="yesterdayTotalBalance" xml:space="preserve">
+    <value>昨天總平均</value>
+  </data>
+  <data name="yesterdayWinLoss" xml:space="preserve">
+    <value>昨日輸贏</value>
+  </data>
+  <data name="announcement" xml:space="preserve">
+    <value>通告</value>
+  </data>
+  <data name="noInfo" xml:space="preserve">
+    <value>沒資料顯示</value>
+  </data>
+  <data name="more" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="totalActiveClosedSuspended" xml:space="preserve">
+    <value>總數 "活躍/關閉/暫停"</value>
+  </data>
+  <data name="totalAgentActiveClosedSuspended" xml:space="preserve">
+    <value>代理總 '活躍/關閉/暂停'</value>
+  </data>
+  <data name="totalMasterACS" xml:space="preserve">
+    <value>總代理總數 '活躍/關閉/暂停'</value>
+  </data>
+  <data name="statistics" xml:space="preserve">
+    <value>您的統計</value>
+  </data>
+  <data name="highestTurnoverOfTheMonth" xml:space="preserve">
+    <value>本月最高投注額之會員</value>
+  </data>
+  <data name="newMemberOfTheMonth" xml:space="preserve">
+    <value>本月新會員</value>
+  </data>
+  <data name="superOutstanding" xml:space="preserve">
+    <value>超級總代理未完成交易</value>
+  </data>
+  <data name="top10WinningMembers" xml:space="preserve">
+    <value>本月前10名最高赢额会员</value>
+  </data>
+  <data name="totalOutstanding" xml:space="preserve">
+    <value>未完成交易總數</value>
+  </data>
+  <data name="agentOutstanding" xml:space="preserve">
+    <value>代理未結束交易</value>
+  </data>
+  <data name="masterOutstanding" xml:space="preserve">
+    <value>總代理未結束交易</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>顯示</value>
+  </data>
+  <data name="member" xml:space="preserve">
+    <value>會員</value>
+  </data>
+  <data name="turnover" xml:space="preserve">
+    <value>投注額</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>用戶名</value>
+  </data>
+  <data name="winningAmount" xml:space="preserve">
+    <value>贏額</value>
+  </data>
+  <data name="createdDate" xml:space="preserve">
+    <value>新增日期</value>
+  </data>
+  <data name="givenCredit" xml:space="preserve">
+    <value>信用額度</value>
+  </data>
+  <data name="Notice_2" xml:space="preserve">
+    <value>您的上線已修改您的投注金額數值。&lt;br&gt;請務必核對您的下線的細節。</value>
+  </data>
+  <data name="Notice_1_2" xml:space="preserve">
+    <value>您的上線已修改您的最低占成及投注金額數值。&lt;br&gt;請務必核對您的下線的細節。</value>
+  </data>
+  <data name="Notice_1" xml:space="preserve">
+    <value>您的上線已修改您的最低占成。&lt;br&gt;請務必核對您的下線的細節。</value>
+  </data>
+  <data name="doNotShowAgain" xml:space="preserve">
+    <value>不再顯示</value>
+  </data>
+  <data name="PrivateMessage" xml:space="preserve">
+    <value>個人訊息</value>
+  </data>
+  <data name="less" xml:space="preserve">
+    <value>少</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>註銷</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>下一頁</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>略過</value>
+  </data>
+  <data name="BrowserIsOutOfDate" xml:space="preserve">
+    <value>您的瀏覽器已屬逾期版本故未能全面支援我們的網站。 為了得到更全面的支援， 強烈建議您升級瀏覽器至新版本。</value>
+  </data>
+  <data name="ClickToUpdateBrowser" xml:space="preserve">
+    <value>點擊此處升級瀏覽器</value>
+  </data>
+  <data name="BackOldViewText" xml:space="preserve">
+    <value>還沒熟悉新介面？</value>
+  </data>
+  <data name="ClickToBackOldView" xml:space="preserve">
+    <value>點擊此處返回</value>
+  </data>
+  <data name="WarningOldViewDate" xml:space="preserve">
+    <value>舊版本僅適用至</value>
+  </data>
+  <data name="WarningText" xml:space="preserve">
+    <value>警告：</value>
+  </data>
+  <data name="HomeIconIntroduction" xml:space="preserve">
+    <value>主頁圖標 - 連接至首頁</value>
+  </data>
+  <data name="QuickMenuIntroduction" xml:space="preserve">
+    <value>快速連接至賬號設定</value>
+  </data>
+  <data name="QuickMenu" xml:space="preserve">
+    <value>捷徑菜單</value>
+  </data>
+  <data name="SwitchView" xml:space="preserve">
+    <value>轉換遊覽</value>
+  </data>
+  <data name="BackOldViewIntroduction" xml:space="preserve">
+    <value>還沒熟悉新介面？ 點擊此處返回。</value>
+  </data>
+  <data name="WarningOldVersionDeadline" xml:space="preserve">
+    <value>備註： 舊版本僅適用至 </value>
+  </data>
+  <data name="MainMenuIntroduction" xml:space="preserve">
+    <value>邏輯序列， 全在一處</value>
+  </data>
+  <data name="CollapseExpandIcon" xml:space="preserve">
+    <value>縮小/擴展 圖標</value>
+  </data>
+  <data name="CollapseExpandIconIntroduction" xml:space="preserve">
+    <value>點擊以得擴展空</value>
+  </data>
+  <data name="MainIntroductionTitle" xml:space="preserve">
+    <value>體驗與感受全新介面</value>
+  </data>
+  <data name="MainIntroductionDescription" xml:space="preserve">
+    <value>更全面與方便。</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>不是現在</value>
+  </data>
+  <data name="QuickTour" xml:space="preserve">
+    <value>快速遊覽手冊教學</value>
+  </data>
+  <data name="TransferMenuIntroduction" xml:space="preserve">
+    <value>在主菜單轉賬</value>
+  </data>
+  <data name="ViewLogMenuIntroduction" xml:space="preserve">
+    <value>在主菜單查看日誌</value>
+  </data>
+  <data name="GotIt" xml:space="preserve">
+    <value>明白了</value>
+  </data>
+  <data name="Replay" xml:space="preserve">
+    <value>重播</value>
+  </data>
+  <data name="ReplayInstruction" xml:space="preserve">
+    <value>點擊此圖標可重播遊覽手冊教學</value>
+  </data>
+  <data name="TakeTourInstruction" xml:space="preserve">
+    <value>點擊此圖標可遊覽手冊教學</value>
+  </data>
+  <data name="QuickTourTooltip" xml:space="preserve">
+    <value>快速遊覽手冊教學</value>
+  </data>
+  <data name="stats" xml:space="preserve">
+    <value>您的統計</value>
+  </data>
+  <data name="balance" xml:space="preserve">
+    <value>餘額資料</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>啟用</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="normalAnnouncement" xml:space="preserve">
+    <value>一般公告</value>
+  </data>
+  <data name="specialNotice" xml:space="preserve">
+    <value>特殊公告</value>
+  </data>
+  <data name="specialAnnouncement" xml:space="preserve">
+    <value>特殊公告</value>
+  </data>
+  <data name="personalMessage" xml:space="preserve">
+    <value>個人訊息</value>
+  </data>
+  <data name="notice" xml:space="preserve">
+    <value>通告</value>
+  </data>
+  <data name="winloss" xml:space="preserve">
+    <value>输赢</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>活躍</value>
+  </data>
+  <data name="closed" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  <data name="suspended" xml:space="preserve">
+    <value>暫停</value>
+  </data>
+  <data name="submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>到</value>
+  </data>
+  <data name="from" xml:space="preserve">
+    <value>從</value>
+  </data>
+  <data name="outstanding" xml:space="preserve">
+    <value>未完成交易 </value>
+  </data>
+  <data name="NoPermissionAccessPage" xml:space="preserve">
+    <value>對不起, 您不被允許進入此網頁.</value>
+  </data>
+  <data name="NoInformationIsAvailable" xml:space="preserve">
+    <value>沒資料顯示</value>
+  </data>
+  <data name="lblNew" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="UpdatedSuccessfully" xml:space="preserve">
+    <value>更新成功!</value>
+  </data>
+  <data name="Notice_3" xml:space="preserve">
+    <value>您的上線已開啟“捕魚天下”予您的下線。請到您的設定頁面進行配置</value>
+  </data>
+  <data name="highlights" xml:space="preserve">
+    <value>HIGHLIGHTS</value>
+  </data>
+  <data name="systemUpdate" xml:space="preserve">
+    <value>系統</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>總和</value>
+  </data>
+  <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
+    <value>您的暱稱創建成功</value>
+  </data>
+  <data name="NicknameRule" xml:space="preserve">
+    <value>昵稱必須是獨特的，只含有字母或數字，至少五個字符，最多二十個字符</value>
+  </data>
+  <data name="NicknameCompanyPolicy" xml:space="preserve">
+    <value>為了提高安全性並保護您的帳戶，您必須用昵稱登錄。</value>
+  </data>
+  <data name="NicknameEffectedFrom" xml:space="preserve">
+    <value>新政策將生效予 {0}.</value>
+  </data>
+  <data name="NicknameNote1" xml:space="preserve">
+    <value>暱稱之後將不允許更改.</value>
+  </data>
+  <data name="NicknameNote2" xml:space="preserve">
+    <value>只有您的直系上線才能看到您的昵稱。</value>
+  </data>
+  <data name="SubAccNicknameNote2" xml:space="preserve">
+    <value>只有您的直系上線才能看到您的昵稱。</value>
+  </data>
+  <data name="NicknameOption1" xml:space="preserve">
+    <value>用戶名或昵稱登入</value>
+  </data>
+  <data name="NicknameOption2" xml:space="preserve">
+    <value>僅昵稱登入</value>
+  </data>
+  <data name="NicknameSkipText" xml:space="preserve">
+    <value>略過此步驟並前往首頁</value>
+  </data>
+  <data name="NicknameRules" xml:space="preserve">
+    <value>暱稱規則</value>
+  </data>
+  <data name="PleaseChooseNickname" xml:space="preserve">
+    <value>請設定您的暱稱</value>
+  </data>
+  <data name="PleaseSelectLoginByNickname" xml:space="preserve">
+    <value>請選擇"僅限暱稱登錄”</value>
+  </data>
+  <data name="DataProcessingIsInProgress" xml:space="preserve">
+    <value>數據處理正在進行中。</value>
+  </data>
+  <data name="DataProcessingNotification" xml:space="preserve">
+    <value>數據處理通知</value>
+  </data>
+  <data name="invalidCaptcha" xml:space="preserve">
+    <value>識別碼錯誤</value>
+  </data>
+  <data name="IamNotARobot" xml:space="preserve">
+    <value>我不是機器人</value>
+  </data>
+  <data name="CreateMemberWithQRCode" xml:space="preserve">
+    <value>用二維碼創建會員</value>
+  </data>
+  <data name="PendingTransfer3rd" xml:space="preserve">
+    <value>第三方待定轉賬</value>
+  </data>
+  <data name="UMFrom" xml:space="preserve">
+    <value>從</value>
+  </data>
+  <data name="UMTo" xml:space="preserve">
+    <value>到</value>
+  </data>
+  <data name="UMAnnouncementTitle" xml:space="preserve">
+    <value>維護通知</value>
+  </data>
+  <data name="UMCustomerSettingsPattern" xml:space="preserve">
+    <value>&lt;strong&gt;_Product_&lt;/strong&gt;的&lt;strong&gt;_SettingType_&lt;/strong&gt;: 從 &lt;span class="um-message-time"&gt;{0}&lt;/span&gt; 至 &lt;span class="um-message-time"&gt;{1}&lt;/span&gt; 無法使用。</value>
+  </data>
+  <data name="UMSorryForInconvenience" xml:space="preserve">
+    <value>不便之處 敬請見諒!</value>
+  </data>
+  <data name="AllProducts" xml:space="preserve">
+    <value>所有產品</value>
+  </data>
+  <data name="UMSchedule" xml:space="preserve">
+    <value>這是維護的計劃（GMT +8）並且在此期間，這些功能無法使用：</value>
+  </data>
+  <data name="UMTransferPattern" xml:space="preserve">
+    <value>&lt;strong&gt;轉賬&lt;/strong&gt;: 從 &lt;span class="um-message-time"&gt;{0}&lt;/span&gt; 至 &lt;span class="um-message-time"&gt;{1}&lt;/span&gt; 無法使用。</value>
+  </data>
+  <data name="UMNewAccountPattern" xml:space="preserve">
+    <value>&lt;strong&gt;新賬號&lt;/strong&gt;: 此功能從&lt;時間從 &lt;span class="um-message-time"&gt;{0}&lt;/span&gt; 至 &lt;span class="um-message-time"&gt;{1}&lt;/span&gt; 無法使用。</value>
+  </data>
+  <data name="UMDearValuedCustomers" xml:space="preserve">
+    <value>尊敬的客戶，</value>
+  </data>
+  <data name="DashboardViewOverallInformation" xml:space="preserve">
+    <value>請點擊 {0} 以查看整體資料。</value>
+  </data>
+  <data name="PartialUMAnnouncement" xml:space="preserve">
+    <value>我們正在更新此功能以獲得更好的體驗。因此，此功能將暫時關閉（{0} - {1} (GMT+8)）。請稍後再試，給您帶來不便,敬請諒解。</value>
+  </data>
+  <data name="LiveMessage" xml:space="preserve">
+    <value>在線客服</value>
+  </data>
+  <data name="NewProtectionCode" xml:space="preserve">
+    <value>新保護碼</value>
+  </data>
+  <data name="ProtectionCode" xml:space="preserve">
+    <value>保護碼</value>
+  </data>
+  <data name="ConfirmProtectionCode" xml:space="preserve">
+    <value>確認保護碼</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>創建</value>
+  </data>
+  <data name="NotMatchedConfirmProtectionCode" xml:space="preserve">
+    <value>這些保護碼不符合。</value>
+  </data>
+  <data name="ProtectionCodeRule" xml:space="preserve">
+    <value>保護碼必須至少為 6 個字符，可以與您的保安碼相同，但不能與您的密碼相同。</value>
+  </data>
+  <data name="RequiredNewProtectionCode" xml:space="preserve">
+    <value>新保護碼是必需的。</value>
+  </data>
+  <data name="ShowProtectionCode" xml:space="preserve">
+    <value>顯示保護碼</value>
+  </data>
+  <data name="MinLengthNewProtectionCodeError" xml:space="preserve">
+    <value>保護碼必須至少為 6 個字符。</value>
+  </data>
+  <data name="RequiredConfirmProtectionCode" xml:space="preserve">
+    <value>確認保護碼是必需的。</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更改</value>
+  </data>
+  <data name="UpdateProtectionCodeSuccessfully" xml:space="preserve">
+    <value>您的保護碼已成功更新。</value>
+  </data>
+  <data name="ContainsSpaceOrUnicodeCharacterError" xml:space="preserve">
+    <value>保護碼不得包含任何統一碼字符或空格。</value>
+  </data>
+  <data name="ContactUs_Content" xml:space="preserve">
+    <value>我們提供客服專員協助并解答您在代理網遇到的任何問題。</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="LetstalkIMID" xml:space="preserve">
+    <value>Letstalk IM ID</value>
+  </data>
+  <data name="SkypeID" xml:space="preserve">
+    <value>帳號</value>
+  </data>
+  <data name="ContactUsLegend" xml:space="preserve">
+    <value>For Better Security</value>
+  </data>
+  <data name="AdvertisementMyWatchlist" xml:space="preserve">
+    <value>&lt;b&gt;輕鬆&lt;/b&gt;使用&lt;b&gt;我的限額&lt;/b&gt;監控您的輸贏</value>
+  </data>
+  <data name="AdvertisementMyWatchlistGlobalThreshold" xml:space="preserve">
+    <value>我的限額: 根據您的佔成數設置贏/輸限額</value>
+  </data>
+  <data name="AdvertisementMyWatchlistGlobalThresholdDetail" xml:space="preserve">
+    <value>請到 &lt;b&gt;風險管理&lt;/b&gt; --&gt; 我的限額 --&gt; 設置贏/輸限額</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>了解更多</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="AdvertisementMyWatchlistGlobalThresholdDetailAgent" xml:space="preserve">
+    <value>請到 &lt;b&gt;風險管理&lt;/b&gt; --&gt; 我的監控列表 - 我的限額 --&gt; 設置贏/輸限額</value>
+  </data>
+  <data name="FeedbackTitle" xml:space="preserve">
+    <value>協助我們改進！</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>反饋</value>
+  </data>
+  <data name="LoveToHear" xml:space="preserve">
+    <value>我們很樂意聽取您的意見。</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="HighlightPopupNewFeatureIntro" xml:space="preserve">
+    <value>現已包括&lt;b&gt;會員網域名&lt;/b&gt;。 可以使用Telegram聊天機器人&lt;b&gt;輕松進行檢索域名&lt;/b&gt;。</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>開始吧</value>
+  </data>
+  <data name="SessionExpired" xml:space="preserve">
+    <value>您的登錄已超時。</value>
+  </data>
+  <data name="HighlightPopupNewFeatureIntro3" xml:space="preserve">
+    <value>複製報告中的數據而無需導出</value>
+  </data>
+  <data name="HighlightPopupNewFeatureIntro4" xml:space="preserve">
+    <value>在投注歷史中過濾注單</value>
+  </data>
+  <data name="FeedbackOnFunctionTitle" xml:space="preserve">
+    <value>幫助我們改進{0}</value>
+  </data>
+  <data name="WinLossDetailReport" xml:space="preserve">
+    <value>輸贏細節報告</value>
+  </data>
+  <data name="HighlightPopupNewFeatureTitle" xml:space="preserve">
+    <value>可用域名</value>
+  </data>
+  <data name="minAgo" xml:space="preserve">
+    <value>一分鐘前</value>
+  </data>
+  <data name="minsAgo" xml:space="preserve">
+    <value>分鐘之前</value>
+  </data>
+  <data name="hoursAgo" xml:space="preserve">
+    <value>小時之前</value>
+  </data>
+  <data name="daysAgo" xml:space="preserve">
+    <value>天之前</value>
+  </data>
+  <data name="Here" xml:space="preserve">
+    <value>此處</value>
+  </data>
+</root>

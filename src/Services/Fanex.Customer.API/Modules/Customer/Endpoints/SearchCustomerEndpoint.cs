@@ -10,7 +10,8 @@ public class SearchCustomerEndpoint : IEndpoint<IResult, SearchCustomerRequest, 
     {
         app.MapGet("/api/customer/search", (SearchCustomerRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
-            .Produces<SuggestCustomer>();
+            .Produces<SuggestCustomer>()
+            .WithTags("Customer Infos");
     }
 
     public async Task<IResult> HandleAsync(SearchCustomerRequest request, ICustomerService customerService)

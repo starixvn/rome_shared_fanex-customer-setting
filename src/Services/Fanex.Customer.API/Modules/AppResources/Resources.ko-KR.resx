@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="subAcc" xml:space="preserve">
+    <value>보조계정</value>
+  </data>
+  <data name="admin" xml:space="preserve">
+    <value>관리자</value>
+  </data>
+  <data name="nickname" xml:space="preserve">
+    <value>닉네임</value>
+  </data>
+  <data name="configNow" xml:space="preserve">
+    <value>설정하기</value>
+  </data>
+  <data name="introNickname" xml:space="preserve">
+    <value>&lt;div&gt;Dear customers! Now you can login with your own nickname&lt;/div&gt;
+&lt;div&gt;... more secure and personalized.&lt;/div&gt;</value>
+  </data>
+  <data name="clickHere" xml:space="preserve">
+    <value>여기를 클릭</value>
+  </data>
+  <data name="uploadNow" xml:space="preserve">
+    <value>하여 업로드하세요!</value>
+  </data>
+  <data name="strNotAccessPage" xml:space="preserve">
+    <value>죄송합니다. 이페이지를 엑서스 할 수 있는 권한이 없습니다.</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>도움말</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="EditProfilePicture" xml:space="preserve">
+    <value>프로필 사진</value>
+  </data>
+  <data name="LoginOption" xml:space="preserve">
+    <value>로그인 옵션</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>비밀번호</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>Security Code</value>
+  </data>
+  <data name="OldView" xml:space="preserve">
+    <value>Old View</value>
+  </data>
+  <data name="accountInfo" xml:space="preserve">
+    <value>계정정보</value>
+  </data>
+  <data name="mainMenu" xml:space="preserve">
+    <value>메인 메뉴</value>
+  </data>
+  <data name="balanceInfo" xml:space="preserve">
+    <value>잔액정보</value>
+  </data>
+  <data name="agent" xml:space="preserve">
+    <value>에이전트</value>
+  </data>
+  <data name="master" xml:space="preserve">
+    <value>마스터</value>
+  </data>
+  <data name="super" xml:space="preserve">
+    <value>슈퍼</value>
+  </data>
+  <data name="agentGivenCredit" xml:space="preserve">
+    <value>에이전트 충전금액</value>
+  </data>
+  <data name="masterGivenCredit" xml:space="preserve">
+    <value>마스터 충전금액</value>
+  </data>
+  <data name="superGivenCredit" xml:space="preserve">
+    <value>슈퍼 충전 금액</value>
+  </data>
+  <data name="totalAgentCredit" xml:space="preserve">
+    <value>총 에이전트 포인트(크레딧)</value>
+  </data>
+  <data name="totalMasterCredit" xml:space="preserve">
+    <value>총 마스터 크레딧</value>
+  </data>
+  <data name="totalMemberCredit" xml:space="preserve">
+    <value>총 회원 포인트(크레딧)</value>
+  </data>
+  <data name="cashBalance" xml:space="preserve">
+    <value>현금</value>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>화페</value>
+  </data>
+  <data name="todayWinLoss" xml:space="preserve">
+    <value>오늘의 승리/패배</value>
+  </data>
+  <data name="totalBalance" xml:space="preserve">
+    <value>총잔액</value>
+  </data>
+  <data name="yesterdayBalance" xml:space="preserve">
+    <value>어제의 잔액</value>
+  </data>
+  <data name="yesterdayCashBalance" xml:space="preserve">
+    <value>어제의 현금</value>
+  </data>
+  <data name="yesterdayTotalBalance" xml:space="preserve">
+    <value>어제의 토탈 잔액</value>
+  </data>
+  <data name="yesterdayWinLoss" xml:space="preserve">
+    <value>어제의 승리/패배</value>
+  </data>
+  <data name="announcement" xml:space="preserve">
+    <value>공지사항</value>
+  </data>
+  <data name="noInfo" xml:space="preserve">
+    <value>가능한 정보가 없습니다</value>
+  </data>
+  <data name="more" xml:space="preserve">
+    <value>자세히</value>
+  </data>
+  <data name="totalActiveClosedSuspended" xml:space="preserve">
+    <value>총 유효/정지/사용중지</value>
+  </data>
+  <data name="totalAgentActiveClosedSuspended" xml:space="preserve">
+    <value>총 에이전트 접속/중지/보류됨</value>
+  </data>
+  <data name="totalMasterACS" xml:space="preserve">
+    <value>총 마스터 접속/중지/보류됨</value>
+  </data>
+  <data name="statistics" xml:space="preserve">
+    <value>통계</value>
+  </data>
+  <data name="highestTurnoverOfTheMonth" xml:space="preserve">
+    <value>매월 최상위 베팅회원</value>
+  </data>
+  <data name="newMemberOfTheMonth" xml:space="preserve">
+    <value>매월 새로운회원</value>
+  </data>
+  <data name="superOutstanding" xml:space="preserve">
+    <value>슈퍼 베팅중인 금액</value>
+  </data>
+  <data name="top10WinningMembers" xml:space="preserve">
+    <value>최상위 10명의 승리 멤버</value>
+  </data>
+  <data name="totalOutstanding" xml:space="preserve">
+    <value>총 대기 포인트</value>
+  </data>
+  <data name="agentOutstanding" xml:space="preserve">
+    <value>에이전트 아웃스텐딩</value>
+  </data>
+  <data name="masterOutstanding" xml:space="preserve">
+    <value>마스터 대기 포인트</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="member" xml:space="preserve">
+    <value>회원</value>
+  </data>
+  <data name="turnover" xml:space="preserve">
+    <value>총 배팅한 금액</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>사용자 이름</value>
+  </data>
+  <data name="winningAmount" xml:space="preserve">
+    <value>승리한 금액</value>
+  </data>
+  <data name="createdDate" xml:space="preserve">
+    <value>작성일</value>
+  </data>
+  <data name="givenCredit" xml:space="preserve">
+    <value>주어진 크레딧</value>
+  </data>
+  <data name="Notice_2" xml:space="preserve">
+    <value>Your betting limit value has been changed by the upline.&lt;br&gt;Please kindly be informed and have a check the details for your downlines.</value>
+  </data>
+  <data name="Notice_1_2" xml:space="preserve">
+    <value>Your minimum position taking and betting limit value have been changed by the upline.&lt;br&gt;Please kindly be informed and have a check the details for your downlines.</value>
+  </data>
+  <data name="Notice_1" xml:space="preserve">
+    <value>상위 관리자에 의해 최소 거래조건이 변경되었습니다.</value>
+  </data>
+  <data name="doNotShowAgain" xml:space="preserve">
+    <value>이 페이지를 다시 표시하지않습니다.</value>
+  </data>
+  <data name="PrivateMessage" xml:space="preserve">
+    <value>Private Message</value>
+  </data>
+  <data name="less" xml:space="preserve">
+    <value>less</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>로그 아웃</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>다음</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>다음</value>
+  </data>
+  <data name="stats" xml:space="preserve">
+    <value>통계</value>
+  </data>
+  <data name="balance" xml:space="preserve">
+    <value>잔액정보</value>
+  </data>
+  <data name="normalAnnouncement" xml:space="preserve">
+    <value>일반 공지 사항</value>
+  </data>
+  <data name="specialNotice" xml:space="preserve">
+    <value>특별 공지사항</value>
+  </data>
+  <data name="specialAnnouncement" xml:space="preserve">
+    <value>특별 공지사항</value>
+  </data>
+  <data name="personalMessage" xml:space="preserve">
+    <value>개인 메세지</value>
+  </data>
+  <data name="notice" xml:space="preserve">
+    <value>공지사항</value>
+  </data>
+  <data name="winloss" xml:space="preserve">
+    <value>패배</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>유효</value>
+  </data>
+  <data name="closed" xml:space="preserve">
+    <value>정지</value>
+  </data>
+  <data name="suspended" xml:space="preserve">
+    <value>사용중지</value>
+  </data>
+  <data name="submit" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>종료일</value>
+  </data>
+  <data name="from" xml:space="preserve">
+    <value>시작일</value>
+  </data>
+  <data name="outstanding" xml:space="preserve">
+    <value>대기 포인트</value>
+  </data>
+  <data name="NoPermissionAccessPage" xml:space="preserve">
+    <value>죄송합니다. 이페이지를 엑서스 할 수 있는 권한이 없습니다.</value>
+  </data>
+  <data name="NoInformationIsAvailable" xml:space="preserve">
+    <value>가능한 정보가 없습니다</value>
+  </data>
+  <data name="lblNew" xml:space="preserve">
+    <value>새로운</value>
+  </data>
+  <data name="Notice_3" xml:space="preserve">
+    <value>Your upline has enabled Fishing World for your downlines. Please go to setting page to configure your own PT settings.</value>
+  </data>
+  <data name="highlights" xml:space="preserve">
+    <value>HIGHLIGHTS</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>총</value>
+  </data>
+  <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
+    <value>닉네임이 성공적으로 설정되었습니다.</value>
+  </data>
+  <data name="NicknameRule" xml:space="preserve">
+    <value>닉네임은 독특하고 알파벳이나 숫자이여야합니다. 최소5~최대20자리이여야 합니다.</value>
+  </data>
+  <data name="NicknameCompanyPolicy" xml:space="preserve">
+    <value>To increase security and protect your account, you are required to login only by nickname.</value>
+  </data>
+  <data name="NicknameEffectedFrom" xml:space="preserve">
+    <value>New policy will take effect from {0}.</value>
+  </data>
+  <data name="NicknameNote1" xml:space="preserve">
+    <value>You are not allowed to change your nickname afterward.</value>
+  </data>
+  <data name="NicknameNote2" xml:space="preserve">
+    <value>Only your direct upline can see your nickname.</value>
+  </data>
+  <data name="SubAccNicknameNote2" xml:space="preserve">
+    <value>Only the main account user can see your nickname.</value>
+  </data>
+  <data name="NicknameOption1" xml:space="preserve">
+    <value>Login by username or nickname</value>
+  </data>
+  <data name="NicknameOption2" xml:space="preserve">
+    <value>Login by nickname only</value>
+  </data>
+  <data name="NicknameSkipText" xml:space="preserve">
+    <value>Skip this step and go to Home Page</value>
+  </data>
+  <data name="NicknameRules" xml:space="preserve">
+    <value>Nickname rules</value>
+  </data>
+  <data name="PleaseChooseNickname" xml:space="preserve">
+    <value>Please choose your desired nickname</value>
+  </data>
+  <data name="PleaseSelectLoginByNickname" xml:space="preserve">
+    <value>Please select Login by nickname only</value>
+  </data>
+  <data name="invalidCaptcha" xml:space="preserve">
+    <value>잘못된 코드가 입력되었습니다</value>
+  </data>
+  <data name="CreateMemberWithQRCode" xml:space="preserve">
+    <value>Create Member with QR Code</value>
+  </data>
+  <data name="PendingTransfer3rd" xml:space="preserve">
+    <value>3rd Party Pending Transfer</value>
+  </data>
+</root>

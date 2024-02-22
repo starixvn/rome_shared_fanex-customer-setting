@@ -9,7 +9,8 @@ public class CopySingleCustomerEndpoint : IEndpoint<IResult, CopyCustomerRequest
     {
         app.MapPost("/api/customer/copy-single", (CopyCustomerRequest request, ICopyCustomerService copyCustomerService)
            => HandleAsync(request, copyCustomerService))
-           .Produces<CopyCustomerResult>();
+            .Produces<CopyMultipleCustomerResult>()
+            .WithTags("Customer Settings");
     }
 
     public async Task<IResult> HandleAsync(CopyCustomerRequest request, ICopyCustomerService copyCustomerService)

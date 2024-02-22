@@ -8,7 +8,8 @@ public class CheckIsEnabledCustomerEndpoint : IEndpoint<IResult, int, ICustomerS
     {
         app.MapGet("/api/customer/{custId}/IsEnabled", (int custId, ICustomerService customerService)
            => HandleAsync(custId, customerService))
-           .Produces<bool>();
+           .Produces<bool>()
+           .WithTags("Customer Settings");
     }
 
     public async Task<IResult> HandleAsync(int custId, ICustomerService customerService)

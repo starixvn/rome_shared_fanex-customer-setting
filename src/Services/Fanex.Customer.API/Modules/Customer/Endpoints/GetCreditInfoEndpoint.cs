@@ -9,7 +9,8 @@ public class GetCreditInfoEndpoint : IEndpoint<IResult, string, ICustomerService
     {
         app.MapGet("/api/customer/{username}/credit", (string username, ICustomerService customerService)
             => HandleAsync(username, customerService))
-            .Produces<CreditInfo>();
+            .Produces<CreditInfo>()
+            .WithTags("Customer Settings");
     }
 
     public async Task<IResult> HandleAsync(string username, ICustomerService customerService)

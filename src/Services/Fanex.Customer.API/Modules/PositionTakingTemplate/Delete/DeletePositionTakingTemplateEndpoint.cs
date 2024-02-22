@@ -12,7 +12,7 @@ public class DeletePositionTakingTemplateEndpoint : IEndpoint<IResult, DeletePos
         app.MapPut("/api/customer/pt-templates/delete", (DeletePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)
             => HandleAsync(request, dynamicRepository))
             .Produces<Result>()
-            .WithTags("PositionTakingTemplate");
+            .WithTags("Customer Settings");
     }
 
     public async Task<IResult> HandleAsync(DeletePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)

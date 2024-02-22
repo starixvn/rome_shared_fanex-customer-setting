@@ -8,7 +8,8 @@ public class GetCustomerStatusEndpoint : IEndpoint<IResult, int, int, ICustomerS
     {
         app.MapGet("/api/customer/{custId}/{subAccId}/status", (int custId, int subAccId, ICustomerService customerService)
           => HandleAsync(custId, subAccId, customerService))
-          .Produces<IResult>();
+          .Produces<IResult>()
+          .WithTags("Customer Settings");
 
     }
 
