@@ -8,6 +8,7 @@ public static class CustomerCodeModule
         services.AddSingleton<INicknameService, NicknameService>();
         services.AddSingleton<IProtectionCodeService, ProtectionCodeService>();
         services.AddSingleton<IProfilePictureService, ProfilePictureService>();
+        services.AddSingleton<ILanguageService, LanguageService>();
 
         return services;
     }

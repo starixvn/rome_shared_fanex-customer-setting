@@ -450,4 +450,7 @@
     <Setting Key="Age_CustomerSelProfilePicture" SpName="Age_CustomerSelProfilePicture" DbName="DBAGE.bodb02.BODBDownlineNet" Plain="0" />
     <Setting Key="Age_CustomerUpdProfilePicture" SpName="Age_CustomerUpdProfilePicture" DbName="DBCust.bodb_Credit.BODBDownlineNet" Plain="0" />
   </Function>
+  <Function Name="Change Language">
+    <Setting Key="Age_CustLanguageUsageUpd" SpName="Age_CustLanguageUsageUpd" DbName="DBCust.CustDB.BODBDownlineNet" Plain="0" />
+  </Function>
 </Functions>
