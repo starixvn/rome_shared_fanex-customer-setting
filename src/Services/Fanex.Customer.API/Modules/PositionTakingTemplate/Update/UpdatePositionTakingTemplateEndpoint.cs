@@ -22,7 +22,7 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
         app.MapPut("/api/customer/pt-templates", (UpdatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)
             => HandleAsync(request, dynamicRepository))
             .Produces<PTTemplateResult>()
-            .WithTags("Customer Settings");
+            .WithTags(EnpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(UpdatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)

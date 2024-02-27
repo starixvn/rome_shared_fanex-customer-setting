@@ -10,7 +10,7 @@ public class GetPTTemplateEndpoint : IEndpoint<IResult, QueryPTTemplateRequest, 
     {
         app.MapGet("/api/customer/pt-settings", ([AsParameters]QueryPTTemplateRequest request, IPTSettingService service)
             => HandleAsync(request, service))
-            .WithTags("Customer Settings");
+            .WithTags(EnpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(QueryPTTemplateRequest request, IPTSettingService service)

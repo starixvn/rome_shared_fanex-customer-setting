@@ -10,7 +10,7 @@ public class ProtectionCodeEndpoint :
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        var enpoint = app.MapGroup("/api/customer/protection-code").WithTags("Customer Settings");
+        var enpoint = app.MapGroup("/api/customer/protection-code").WithTags(EnpointTags.CustomerSettings);
 
         enpoint.MapGet("/", (int custId, int subAccId, IProtectionCodeService protectionCodeService)
             => HandleAsync(custId, subAccId, protectionCodeService))

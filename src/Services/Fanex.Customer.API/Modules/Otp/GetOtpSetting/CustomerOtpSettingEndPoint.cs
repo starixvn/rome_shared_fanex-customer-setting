@@ -18,7 +18,7 @@ public class CustomerOtpSettingEndPoint : IEndpoint<IResult, int, int, IDynamicR
         app.MapGet("/api/customer/otp/{custId}/{subAccId}", (int custId, int subAccId, IDynamicRepository dynamicRepository)
             => HandleAsync(custId, subAccId, dynamicRepository))
             .Produces<CustomerOtpSetting>()
-            .WithTags("OTP");
+            .WithTags(EnpointTags.OTP);
     }
 
     public async Task<IResult> HandleAsync(int custId, int subAccId, IDynamicRepository dynamicRepository)

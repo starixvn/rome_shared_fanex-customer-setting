@@ -10,7 +10,7 @@ public class GetSuggestUsernameEndpoint : IEndpoint<IResult, GetSuggestUsernameR
         app.MapPost("/api/customer/suggest-username", (GetSuggestUsernameRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
             .Produces<string>()
-            .WithTags("Customer Infos");
+            .WithTags(EnpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(GetSuggestUsernameRequest request, ICustomerService customerService)

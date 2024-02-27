@@ -15,7 +15,7 @@ namespace Fanex.Customer.API.Modules.Password.Endpoint
         public void AddRoute(IEndpointRouteBuilder app)
         {
             var mainAcc = app.MapGroup("/api/main-account/password")
-                .WithTags("Main-Account-Password");
+                .WithTags(EnpointTags.MainAccountPassword);
 
             mainAcc.MapPost("/reset", (ResetMainAccountPasswordParam request1, IPasswordService request2)
             => HandleAsync(request1, request2))
@@ -26,7 +26,7 @@ namespace Fanex.Customer.API.Modules.Password.Endpoint
             .Produces<Result>();
 
             var subAccount = app.MapGroup("/api/sub-account/password")
-                .WithTags("Sub-Account");
+                .WithTags(EnpointTags.SubAccount);
 
             subAccount.MapPost("/reset", (ResetSubAccountPasswordParam request1, IPasswordService request2)
             => HandleAsync(request1, request2))
@@ -37,7 +37,7 @@ namespace Fanex.Customer.API.Modules.Password.Endpoint
             .Produces<Result>();
 
             var acc = app.MapGroup("/api/account/password")
-                .WithTags("Sub-Main-Accounts-Password");
+                .WithTags(EnpointTags.SubMainAccountsPassword);
 
             acc.MapPost("/skip", (SkipForceChangePasswordParam request1, IPasswordService request2)
             => HandleAsync(request1, request2))

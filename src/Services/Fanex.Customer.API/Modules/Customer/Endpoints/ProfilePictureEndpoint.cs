@@ -11,7 +11,7 @@ public class ProfilePictureEndpoint :
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        var enpoint = app.MapGroup("/api/customer/profile-picture").WithTags("Customer Settings");
+        var enpoint = app.MapGroup("/api/customer/profile-picture").WithTags(EnpointTags.CustomerSettings);
 
         enpoint.MapGet("/", (int custId, IProfilePictureService profilePictureService)
             => HandleAsync(custId, profilePictureService))

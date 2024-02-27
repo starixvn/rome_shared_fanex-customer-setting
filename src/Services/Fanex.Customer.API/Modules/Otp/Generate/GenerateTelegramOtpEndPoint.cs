@@ -10,7 +10,7 @@ public class GenerateTelegramOtpEndPoint : IEndpoint<IResult, GenerateTelegramOt
         app.MapPost("/api/customer/otp/telegram/generate", (GenerateTelegramOtpRequest request, IOTPService telegramOtpService)
             => HandleAsync(request, telegramOtpService))
             .Produces<IResult>()
-            .WithTags("OTP");
+            .WithTags(EnpointTags.OTP);
     }
 
     public async Task<IResult> HandleAsync(GenerateTelegramOtpRequest request, IOTPService telegramOtpService)

@@ -2,6 +2,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Services;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Extensions;
 using Fanex.Customer.API.Shared.Utils;
 using MinimalApi.Endpoint;
 
@@ -13,7 +14,7 @@ public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerS
     {
         app.MapPost("/api/customer", (CreateRequest request, ICreateCustomerService service)
             => HandleAsync(request, service))
-            .Produces<CreateCustomerResult>().WithTags("Customer Settings");
+            .Produces<CreateCustomerResult>().WithTags(EnpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(CreateRequest request, ICreateCustomerService service)
