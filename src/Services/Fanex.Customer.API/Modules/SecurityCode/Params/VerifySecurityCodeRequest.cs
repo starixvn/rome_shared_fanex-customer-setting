@@ -12,8 +12,6 @@ public class VerifySecurityCodeRequest
 
     public string IP { get; set; } = string.Empty;
 
-    public string Salt { get; set; }
-
     public bool IsValid() => CustId > 0 && !string.IsNullOrWhiteSpace(SecurityCode);
 
     public bool IsSubAccount() => SubAccId > 0;

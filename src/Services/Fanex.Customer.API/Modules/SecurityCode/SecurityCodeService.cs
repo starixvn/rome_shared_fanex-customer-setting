@@ -17,6 +17,8 @@ public interface ISecurityCodeService
 
     Task<Result> VerifySecurityCode(VerifySecurityCodeRequest param);
 
+    Task<Result> CheckSecurityCode(CheckSecurityCodeRequest param);
+
     Task<string> GetSecurityCode(int custId, int subAccountId);
 
     Task<Result> ChangeMainAccountSecurityCode(ChangeMainAccountSecurityCodeParam param);
@@ -34,6 +36,7 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
 {
     private const string MD5 = "MD5";
     private const string SHA1 = "SHA1";
+    private const string SHA256 = "SHA256";
     private const string SECURITYCODEPADDING = "1qaw3+{:P)";
     private const int AllowSecurityCodeLength = 6;
     private const string SecurityCodeRule = @"^([0-9])(?!\1+$)[0-9]+$";
@@ -227,7 +230,7 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
                 return Result.CreateErrorResult(SecurityCodeResource.ResourceManager.GetString("alertOldSecCodeEmpty", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
             }
 
-            var verifyResult = await VerifySecurityCode(new VerifySecurityCodeRequest
+            var verifyResult = await VerifySecurityCode(new CheckSecurityCodeRequest
             {
                 CustId = param.CustId,
                 SecurityCode = param.CurrentSecurityCode,
@@ -295,5 +298,13 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
         }
 
         return isMatched;
+    }
+
+    public async Task<Result> CheckSecurityCode(CheckSecurityCodeRequest param)
+    {
+        var actualSecurityCode = await GetSecurityCode(param.CustId, param.SubAccId).ConfigureAwait(false);
+        var hashedSecurityCode = Shared.Utils.Encryption.ComputeHash(SHA256, actualSecurityCode, param.Salt);
+        var isCorrectSecurityCode = string.Equals(param.SecurityCode, hashedSecurityCode);
+        return await UpdateSecurityCodeCounter(param, isCorrectSecurityCode);
     }
 }

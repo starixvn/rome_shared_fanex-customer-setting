@@ -6,6 +6,7 @@ namespace Fanex.Customer.API.Modules.SecurityCode.Endpoints;
 
 public class SecurityCodeEndPoint : 
     IEndpoint<IResult, VerifySecurityCodeRequest, ISecurityCodeService>,
+    IEndpoint<IResult, CheckSecurityCodeRequest, ISecurityCodeService>,
     IEndpoint<IResult, int, int, ISecurityCodeService>,
     IEndpoint<IResult, ChangeMainAccountSecurityCodeParam, ISecurityCodeService>,
     IEndpoint<IResult, ChangeSubAccountSecurityCodeParam, ISecurityCodeService>,
@@ -22,6 +23,10 @@ public class SecurityCodeEndPoint :
             .Produces<string>();
 
         securityCode.MapPost("/verify", (VerifySecurityCodeRequest request, ISecurityCodeService securityCodeService)
+            => HandleAsync(request, securityCodeService))
+            .Produces<Result>();
+
+        securityCode.MapPost("/check", (CheckSecurityCodeRequest request, ISecurityCodeService securityCodeService)
             => HandleAsync(request, securityCodeService))
             .Produces<Result>();
 
@@ -101,5 +106,16 @@ public class SecurityCodeEndPoint :
         }
 
         return Results.Ok(await request2.UpdateSecurityCodeFunction(request1));
+    }
+
+    public async Task<IResult> HandleAsync(CheckSecurityCodeRequest request, ISecurityCodeService securityCodeService)
+    {
+        if (request.IsValid())
+        {
+            var response = await securityCodeService.CheckSecurityCode(request);
+            return Results.Ok(response);
+        }
+
+        return Results.BadRequest();
     }
 }
