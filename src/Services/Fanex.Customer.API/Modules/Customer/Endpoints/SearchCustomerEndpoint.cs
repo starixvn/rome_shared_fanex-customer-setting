@@ -8,7 +8,7 @@ public class SearchCustomerEndpoint : IEndpoint<IResult, SearchCustomerRequest, 
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/search", (SearchCustomerRequest request, ICustomerService customerService)
+        app.MapGet("/api/customer/search", ([AsParameters]SearchCustomerRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
             .Produces<SuggestCustomer>()
             .WithTags("Customer Infos");
