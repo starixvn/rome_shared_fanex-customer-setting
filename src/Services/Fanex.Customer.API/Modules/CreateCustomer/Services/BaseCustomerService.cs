@@ -56,7 +56,8 @@ public class BaseCustomerService
         int groupTypeId,
         int displayType,
         int uplineRoleId,
-        string language)
+        string language,
+        bool isSiteLabel777)
     {
         if (displayType == (int)DisplayType.CommSB)
         {
@@ -86,7 +87,8 @@ public class BaseCustomerService
                     groupTypeId,
                     sportTypeId,
                     betTypeId,
-                    language);
+                    language,
+                    isSiteLabel777);
         }
     }
 
