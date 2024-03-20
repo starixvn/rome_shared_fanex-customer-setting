@@ -1,10 +1,8 @@
-using EasyNetQ;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
-using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.EditCustomer;
 

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Fanex.Customer.API.Modules.Message.Models;
 
 public class MessageContent

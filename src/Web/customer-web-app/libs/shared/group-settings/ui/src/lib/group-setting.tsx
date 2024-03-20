@@ -1,42 +1,39 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
-import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
+import { GroupTypeIds } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
-import { Constants, GroupType } from '@customer-web-app/shared-group-settings-types';
-import { IconSaveSingle } from '@customer-web-app/shared/base/common-icon';
+import { GroupType } from '@customer-web-app/shared-group-settings-types';
 
-import BetSettingNote from './bet-setting/bet-setting-note';
+import BetLimit from './bet-limit';
 import SportsBookBetSetting from './bet-setting/sportsbook';
-import SportsBookCommission from './commission/sportsbook';
+import Commission from './commission';
 import ParlayMaxPayout from './parlay-max-payout';
-import AgentPositionTaking from './position-taking/agent-position-taking';
-import MasterEditMemberPositionTaking from './position-taking/master-edit-member-position-taking';
-import MasterPositionTaking from './position-taking/master-position-taking';
-import MemberPositionTaking from './position-taking/member-position-taking';
-import PositionTakingNote from './position-taking/position-taking-note';
-import SuperEditMemberPositionTaking from './position-taking/super-edit-member-position-taking';
-import SuperPositionTaking from './position-taking/super-position-taking';
+import PositionTaking from './position-taking';
+import ProductStatus from './product-status';
+import WinLossLimit from './win-loss-limit';
 
 type Props = {
-  isEditMode?: boolean;
-  updateGroupSetting?: (groupTypeId: number) => void;
+  // isEditMode?: boolean;
+  // updateGroupSetting?: (groupTypeId: number) => void;
 };
 
 export const GroupSetting = forwardRef<ValidationRefType, Props>(function GroupSetting(props, ref) {
-  const { t } = useTranslation();
-  const { productGroups, generalInfo } = useGroupSettingContext();
-  const productGroup = productGroups?.find((x) => x.id === ProductGroupIds.SportsBook);
+  const { productGroups, productGroupId } = useGroupSettingContext();
+  const productGroup = productGroups?.find((x) => x.id === productGroupId);
 
   const betSettingRef = useRef<ValidationRefType>(null);
   const positionTakingRef = useRef<ValidationRefType>(null);
   const parlayMaxPayoutRef = useRef<ValidationRefType>(null);
+  const winLossLimitRef = useRef<ValidationRefType>(null);
+  const betLimitRef = useRef<ValidationRefType>(null);
 
   const refDetails = [
     { ref: betSettingRef, id: GroupTypeIds.SportsBookBetSetting },
     { ref: parlayMaxPayoutRef, id: GroupTypeIds.ParlayMaxPayout },
     { ref: positionTakingRef, id: GroupTypeIds.PositionTaking },
+    { ref: winLossLimitRef, id: GroupTypeIds.WinLossLimit },
+    { ref: betLimitRef, id: GroupTypeIds.BetLimit },
   ];
 
   const scrollToBlock = (id?: number) => {
@@ -88,118 +85,29 @@ export const GroupSetting = forwardRef<ValidationRefType, Props>(function GroupS
     scrollToBlock,
   }));
 
-  const renderBlockTitle = (title: React.ReactNode, groupTypeId: number, isEditMode: boolean) => {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-        <div>{title}</div>
-        {isEditMode && (
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-              props.updateGroupSetting?.(groupTypeId);
-            }}
-            aria-hidden="true"
-          >
-            {IconSaveSingle}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  const renderPTBlockTitle = () => {
-    return renderBlockTitle(
-      <>
-        {t('PositionTaking')}
-        <PositionTakingNote generalInfo={generalInfo} />
-      </>,
-      Constants.GroupTypeIds.PositionTaking,
-      !!props.isEditMode
-    );
-  };
-
-  const renderBetSettingTitle = (isReadOnly: boolean) => {
-    if (isReadOnly) {
-      return (
-        <>
-          {t('BetSetting')}
-          <BetSettingNote generalInfo={generalInfo} />
-        </>
-      );
-    }
-
-    return renderBlockTitle(
-      <>
-        {t('BetSetting')}
-        <BetSettingNote generalInfo={generalInfo} />
-      </>,
-      Constants.GroupTypeIds.SportsBookBetSetting,
-      !!props.isEditMode
-    );
-  };
-
   const renderGroupTypeSetting = (groupType: GroupType) => {
-    const { id, isReadOnly } = groupType;
+    const { id, isReadOnly, isAllowUncheckAll, groupItems } = groupType;
+
     switch (id) {
-      case Constants.GroupTypeIds.SportsBookCommission:
+      case GroupTypeIds.ProductStatus:
+        return <ProductStatus isReadOnly={isReadOnly} />;
+      case GroupTypeIds.SportsBookCommission:
+      case GroupTypeIds.Commission:
+        return <Commission groupTypeId={id} isReadOnly={isReadOnly} />;
+      case GroupTypeIds.SportsBookBetSetting:
+        return <SportsBookBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
+      case GroupTypeIds.ParlayMaxPayout:
+        return <ParlayMaxPayout isReadOnly={isReadOnly} ref={parlayMaxPayoutRef} />;
+      case GroupTypeIds.PositionTaking:
+        return <PositionTaking isReadOnly={isReadOnly} ref={positionTakingRef} />;
+      case GroupTypeIds.BetLimit:
         return (
-          <SportsBookCommission
-            isReadOnly={isReadOnly}
-            title={
-              isReadOnly
-                ? t('Commission')
-                : renderBlockTitle(t('Commission'), Constants.GroupTypeIds.SportsBookCommission, !!props.isEditMode)
-            }
-          />
+          groupItems.length > 0 && (
+            <BetLimit isReadOnly={isReadOnly} ref={betLimitRef} isAllowUncheckAll={isAllowUncheckAll} />
+          )
         );
-      case Constants.GroupTypeIds.SportsBookBetSetting:
-        return (
-          <SportsBookBetSetting isReadOnly={isReadOnly} ref={betSettingRef} title={renderBetSettingTitle(isReadOnly)} />
-        );
-      case Constants.GroupTypeIds.ParlayMaxPayout:
-        return (
-          <ParlayMaxPayout
-            isReadOnly={isReadOnly}
-            ref={parlayMaxPayoutRef}
-            title={
-              isReadOnly
-                ? t('ParlayMaxPayout')
-                : renderBlockTitle(t('ParlayMaxPayout'), Constants.GroupTypeIds.ParlayMaxPayout, !!props.isEditMode)
-            }
-          />
-        );
-      case Constants.GroupTypeIds.PositionTaking:
-        if (params.uplineRoleId === UserLevel.Super && params.roleId === UserLevel.Member)
-          return (
-            <SuperEditMemberPositionTaking
-              ref={positionTakingRef}
-              isReadOnly={isReadOnly}
-              title={renderPTBlockTitle()}
-            />
-          );
-        if (params.uplineRoleId === UserLevel.Master && params.roleId === UserLevel.Member)
-          return (
-            <MasterEditMemberPositionTaking
-              ref={positionTakingRef}
-              isReadOnly={isReadOnly}
-              title={renderPTBlockTitle()}
-              isDisableMasterAutoPT={generalInfo?.disableAutoMPT}
-            />
-          );
-        if (params.uplineRoleId === UserLevel.Agent)
-          return <MemberPositionTaking ref={positionTakingRef} isReadOnly={isReadOnly} title={renderPTBlockTitle()} />;
-        if (params.uplineRoleId === UserLevel.Master)
-          return (
-            <AgentPositionTaking
-              ref={positionTakingRef}
-              isReadOnly={isReadOnly}
-              isDisableMasterAutoPT={generalInfo?.disableAutoMPT}
-              title={renderPTBlockTitle()}
-            />
-          );
-        if (params.uplineRoleId === UserLevel.Super)
-          return <MasterPositionTaking ref={positionTakingRef} isReadOnly={isReadOnly} title={renderPTBlockTitle()} />;
-        return <SuperPositionTaking isReadOnly={isReadOnly} title={renderPTBlockTitle()} />;
+      case GroupTypeIds.WinLossLimit:
+        return <WinLossLimit isReadOnly={isReadOnly} ref={winLossLimitRef} />;
       default:
         return null;
     }

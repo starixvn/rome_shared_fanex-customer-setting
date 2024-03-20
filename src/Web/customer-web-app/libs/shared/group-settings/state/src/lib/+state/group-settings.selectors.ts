@@ -1,8 +1,16 @@
-import { UserLevel } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    AgentPositionTakingGroupItem, CommissionGroupItem, Constants, MasterPositionTakingGroupItem,
-    MemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup,
-    SportsBookBetSettingGroupItem, SuperPositionTakingGroupItem
+  AgentPositionTakingGroupItem,
+  BetLimitGroupItem,
+  CommissionGroupItem,
+  MasterPositionTakingGroupItem,
+  MemberPositionTakingGroupItem,
+  ParlayMaxPayoutGroupItem,
+  ProductGroup,
+  ProductStatusGroupItem,
+  SportsBookBetSettingGroupItem,
+  SuperPositionTakingGroupItem,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export interface GroupSettingsState {
@@ -28,6 +36,16 @@ export function getChanges(roleId: number, productGroups: ProductGroup[], groupT
         const groupItems = type.groupItems.filter(
           (item) => item.isMultipleModeChecked && isChanged(item, type.id, roleId)
         );
+
+        if (type.id === GroupTypeIds.BetLimit) {
+          const newBetLimits = type.groupItems.filter((item) => {
+            if (groupItems.find((i) => i.sportTypeId === item.sportTypeId)) {
+              return item;
+            }
+          });
+          return { ...type, groupItems: newBetLimits };
+        }
+
         return { ...type, groupItems };
       });
     return { ...gr, groupTypes: groupTypes.filter((x) => x.groupItems.length > 0) };
@@ -35,12 +53,17 @@ export function getChanges(roleId: number, productGroups: ProductGroup[], groupT
 }
 
 function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
-  if (groupTypeId === Constants.GroupTypeIds.SportsBookCommission) {
+  if (groupTypeId === GroupTypeIds.ProductStatus) {
+    const groupItem = item as ProductStatusGroupItem;
+    return groupItem.isDisabled !== groupItem.original?.isDisabled;
+  }
+
+  if (groupTypeId === GroupTypeIds.SportsBookCommission) {
     const groupItem = item as CommissionGroupItem;
     return groupItem.discount !== groupItem.original?.discount;
   }
 
-  if (groupTypeId === Constants.GroupTypeIds.SportsBookBetSetting) {
+  if (groupTypeId === GroupTypeIds.SportsBookBetSetting) {
     const groupItem = item as SportsBookBetSettingGroupItem;
     return (
       groupItem.minBet !== groupItem.original?.minBet ||
@@ -50,7 +73,26 @@ function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
     );
   }
 
-  if (groupTypeId === Constants.GroupTypeIds.ParlayMaxPayout) {
+  if (groupTypeId === GroupTypeIds.Commission) {
+    const groupItem = item as CommissionGroupItem;
+    return groupItem?.discount !== groupItem?.original?.discount;
+  }
+
+  if (groupTypeId === GroupTypeIds.WinLossLimit) {
+    const groupItem = item as WinLossLimitGroupItem;
+    return (
+      groupItem.winLimit !== groupItem.original.winLimit ||
+      groupItem.lossLimit !== groupItem.original.lossLimit ||
+      groupItem.isAutoReset !== groupItem.original.isAutoReset
+    );
+  }
+
+  if (groupTypeId === GroupTypeIds.BetLimit) {
+    const groupItem = item as BetLimitGroupItem;
+    return groupItem.isChecked !== groupItem.original?.isChecked;
+  }
+
+  if (groupTypeId === GroupTypeIds.ParlayMaxPayout) {
     const groupItem = item as ParlayMaxPayoutGroupItem;
     return (
       groupItem.singleMatchParlay !== groupItem.original?.singleMatchParlay ||
@@ -60,7 +102,7 @@ function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
     );
   }
 
-  if (groupTypeId === Constants.GroupTypeIds.PositionTaking) {
+  if (groupTypeId === GroupTypeIds.PositionTaking) {
     if (roleId === UserLevel.Super) {
       const groupItem = item as SuperPositionTakingGroupItem;
       return (

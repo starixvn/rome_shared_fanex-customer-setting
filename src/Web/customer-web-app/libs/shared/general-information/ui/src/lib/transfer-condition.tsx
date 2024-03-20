@@ -176,7 +176,7 @@ export const TransferCondition = forwardRef<ValidationRefType, TransferCondition
   };
 
   return (
-    <Block id="transfer-condition" ref={blockRef} title={t('accBalanceTransferCondition')}>
+    <Block id="transfer-condition" ref={blockRef} title={t('accBalanceTransferCondition')} isPartialUpdate={false}>
       <div
         className={classNames(styles.container, { [styles.disabled]: disabled })}
         onMouseEnter={() => disabled && setOpenTooltip(true)}

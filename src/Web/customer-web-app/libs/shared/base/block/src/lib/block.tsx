@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import { forwardRef, ReactNode, useImperativeHandle, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { IconSaveSingle } from '@customer-web-app/shared/base/common-icon';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import styles from './block.module.scss';
@@ -10,6 +11,8 @@ export interface BlockProps {
   title: string | ReactNode;
   children?: ReactNode;
   id?: string;
+  isPartialUpdate: boolean;
+  onSaveClick?: () => void;
 }
 
 export interface LabelProps {
@@ -47,6 +50,11 @@ export const Block = forwardRef<BlockRefType, BlockProps>(function Block(props, 
     setCollapse(!collapse);
   };
 
+  const handleSaveClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    props.onSaveClick?.();
+  };
+
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
   return (
     <div id={props.id} className={styles['container']}>
@@ -56,7 +64,14 @@ export const Block = forwardRef<BlockRefType, BlockProps>(function Block(props, 
           data-tooltip-id={`${props.title}-tooltip`}
           data-tooltip-content={tooltipContent}
         />
-        {props.title}
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+          <div>{props.title}</div>
+          {props.isPartialUpdate && (
+            <div onClick={handleSaveClick} aria-hidden="true">
+              {IconSaveSingle}
+            </div>
+          )}
+        </div>
       </div>
       {!collapse && <div className={styles['content']}>{props.children}</div>}
       <WrapperTooltip id={`${props.title}-tooltip`} className="global-tooltip" />
@@ -99,6 +114,10 @@ export function BlockRow({ children, isHeaderRow = false, label }: Readonly<Bloc
 
 export function BlockColumn({ children }: Readonly<{ children: React.ReactNode | undefined }>) {
   return <div className={styles['block-column']}>{children}</div>;
+}
+
+export function BlockItemGroup({ children }: Readonly<{ children: React.ReactNode | undefined }>) {
+  return <div className={styles['block-item-group']}>{children}</div>;
 }
 
 export default Block;

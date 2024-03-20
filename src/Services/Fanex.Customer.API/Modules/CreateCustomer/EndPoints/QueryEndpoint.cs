@@ -28,14 +28,6 @@ public class QueryCustomerSettingsEndpoint : IEndpoint<IResult, QuerySuperReques
     public async Task<IResult> HandleDownlineAsync(QueryRequest request, IQueryCustomerService service)
     {
         Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
-        // if (request.IsGetUpline && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0))
-        // {
-        //     request.ProductGroupId = 1;
-        // }
-        // else
-        // {
-        //     request.ProductGroupId = 0;
-        // }
         if (string.IsNullOrWhiteSpace(request.Language))
         {
             request.Language = "en-US";

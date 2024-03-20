@@ -30,6 +30,7 @@ builder.Services.AddSingleton<IRemotingRefService, RemotingRefService>();
 builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.AddSingleton<ISiteDBGroupService, SiteDBGroupService>();
+builder.Services.AddSingleton<ISiteDBService, SiteDBService>();
 builder.Services.AddSingleton<IBalanceService, BalanceService>();
 builder.Services.AddSingleton<IMessageService, MessageService>();
 builder.Services.AddSingleton<ISharedService, SharedService>();

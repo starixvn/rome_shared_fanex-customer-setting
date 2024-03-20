@@ -30,7 +30,7 @@ public class PTSettingService : BaseCustomerService, IPTSettingService
 
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request)
     {
-        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency);
+        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency, SharedService.ProfileMode.AddNew);
         var productGroups = settingProfile.Where(p => p.GroupType == 153).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {

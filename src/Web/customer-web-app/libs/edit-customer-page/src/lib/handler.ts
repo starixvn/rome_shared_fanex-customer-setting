@@ -2,13 +2,14 @@ import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import {
   AgentPositionTakingGroupItem,
-  Constants,
   GroupSettingItem,
   MasterEditMemberPositionTakingGroupItem,
   MasterPositionTakingGroupItem,
   ParlayMaxPayoutGroupItem,
   ProductGroup,
+  ProductStatusGroupItem,
   SuperEditMemberPositionTakingGroupItem,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export const handleChangeItemValue = (
@@ -62,43 +63,74 @@ export const handleChangeGroupSettingValue = (
 };
 
 export const handleInitProducts = (productGroups: ProductGroup[]) => {
-  return productGroups.map((group) => {
-    const groupTypes = group.groupTypes.map((type) => {
-      if (type.id === GroupTypeIds.PositionTaking) {
+  return productGroups?.map((group) => {
+    const groupTypes = group.groupTypes
+      .filter((t) => t != null)
+      .map((type) => {
+        if (type.id === GroupTypeIds.PositionTaking) {
+          return {
+            ...type,
+            groupItems: type.groupItems.map((item) => ({
+              ...item,
+              isMultipleModeChecked: true,
+              upline: { ...item },
+              original: { ...item },
+            })),
+          };
+        }
+
+        if (type.id === GroupTypeIds.WinLossLimit) {
+          const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item: WinLossLimitGroupItem) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+            lossLimitValue: item.lossLimit !== 0 ? item.lossLimit : undefined,
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.ParlayMaxPayout) {
+          const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item: ParlayMaxPayoutGroupItem) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+            isAllowUnlimitCombo2: item.combo2 === 0,
+            isAllowUnlimitCombo35: item.combo35 === 0,
+            isAllowUnlimitComboOver6: item.comboOver6 === 0,
+            isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.ProductStatus) {
+          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item: ProductStatusGroupItem) => {
+            if (item.parentSportType && item.parentBetType) {
+              const parentItem = type.groupItems.find(
+                (x) => x.sportTypeId === item.parentSportType && x.betTypeId === item.parentBetType
+              ) as ProductStatusGroupItem;
+
+              if (parentItem.isDisabled) {
+                return { ...item, isMultipleModeChecked: true, original: { ...item }, readonly: true };
+              }
+            }
+
+            return { ...item, isMultipleModeChecked: true, original: { ...item } };
+          });
+
+          return { ...type, groupItems };
+        }
+
         return {
           ...type,
           groupItems: type.groupItems.map((item) => ({
             ...item,
-            isMultipleModeChecked: true,
-            upline: { ...item },
             original: { ...item },
+            isMultipleModeChecked: true,
           })),
         };
-      }
-
-      if (type.id === GroupTypeIds.ParlayMaxPayout) {
-        const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item: ParlayMaxPayoutGroupItem) => ({
-          ...item,
-          isMultipleModeChecked: true,
-          original: { ...item },
-          isAllowUnlimitCombo2: item.combo2 === 0,
-          isAllowUnlimitCombo35: item.combo35 === 0,
-          isAllowUnlimitComboOver6: item.comboOver6 === 0,
-          isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
-        }));
-
-        return { ...type, groupItems };
-      }
-
-      return {
-        ...type,
-        groupItems: type.groupItems.map((item) => ({
-          ...item,
-          original: { ...item },
-          isMultipleModeChecked: true,
-        })),
-      };
-    });
+      });
 
     return { ...group, groupTypes };
   });
@@ -158,7 +190,7 @@ export const getNewIndirectEditCustomerSettings = (
 };
 
 function isIndirectEditSettingChanged<T>(item: T, groupTypeId: number, uplineRoleId: number) {
-  if (groupTypeId === Constants.GroupTypeIds.PositionTaking) {
+  if (groupTypeId === GroupTypeIds.PositionTaking) {
     if (uplineRoleId === UserLevel.Super) {
       const groupItem = item as SuperEditMemberPositionTakingGroupItem;
       return (

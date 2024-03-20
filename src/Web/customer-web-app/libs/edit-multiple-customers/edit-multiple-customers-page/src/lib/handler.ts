@@ -1,8 +1,10 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
   AgentPositionTakingGroupItem,
+  BetLimitGroupItem,
   MasterPositionTakingGroupItem,
   ProductGroup,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export function getNewMultipleEditCustomerSettings(
@@ -42,69 +44,92 @@ export function getNewMultipleEditCustomerSettings(
 
 export const handleInitProducts = (productGroups: ProductGroup[]) => {
   return productGroups.map((group) => {
-    const groupTypes = group.groupTypes.map((type) => {
-      if (type.id === GroupTypeIds.PositionTaking) {
+    const groupTypes = group.groupTypes
+      .filter((t) => t !== null)
+      .map((type) => {
+        if (type.id === GroupTypeIds.PositionTaking) {
+          return {
+            ...type,
+            groupItems: type.groupItems.map((item) => ({
+              ...item,
+              isMultipleModeChecked: false,
+              upline: { ...item },
+              original: { ...item },
+            })),
+          };
+        }
+
+        if (type.id === GroupTypeIds.WinLossLimit) {
+          const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item: WinLossLimitGroupItem) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+            lossLimitValue: item.lossLimit !== 0 ? item.lossLimit : undefined,
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.BetLimit) {
+          const groupItems = (type.groupItems as BetLimitGroupItem[]).map((item: BetLimitGroupItem) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.SportsBookBetSetting) {
+          const groupItems = type.groupItems.map((item: any) => {
+            if (params.isCopyBetSetting !== undefined && !params.isCopyBetSetting) {
+              item.minBet = 0;
+              item.maxBet = 0;
+              item.maxPerMatch = 0;
+              item.maxPayoutPerMatch = 0;
+            }
+
+            return {
+              ...item,
+              original: { ...item },
+              isMultipleModeChecked: false,
+            };
+          });
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.ParlayMaxPayout) {
+          const groupItems = type.groupItems.map((item: any) => {
+            if (params.isCopyBetSetting !== undefined && !params.isCopyBetSetting) {
+              item.combo2 = item.upline.combo2;
+              item.combo35 = item.upline.combo35;
+              item.comboOver6 = item.upline.comboOver6;
+              item.singleMatchParlay = item.upline.singleMatchParlay;
+            }
+            return {
+              ...item,
+              isMultipleModeChecked: false,
+              original: { ...item },
+              isAllowUnlimitCombo2: item.combo2 === 0,
+              isAllowUnlimitCombo35: item.combo35 === 0,
+              isAllowUnlimitComboOver6: item.comboOver6 === 0,
+              isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
+            };
+          });
+
+          return { ...type, groupItems };
+        }
+
         return {
           ...type,
           groupItems: type.groupItems.map((item) => ({
             ...item,
-            isMultipleModeChecked: false,
-            upline: { ...item },
             original: { ...item },
+            isMultipleModeChecked: false,
           })),
         };
-      }
-
-      if (type.id === GroupTypeIds.SportsBookBetSetting) {
-        const groupItems = type.groupItems.map((item: any) => {
-          if (params.isCopyBetSetting !== undefined && !params.isCopyBetSetting) {
-            item.minBet = 0;
-            item.maxBet = 0;
-            item.maxPerMatch = 0;
-            item.maxPayoutPerMatch = 0;
-          }
-
-          return {
-            ...item,
-            original: { ...item },
-            isMultipleModeChecked: false,
-          };
-        });
-
-        return { ...type, groupItems };
-      }
-
-      if (type.id === GroupTypeIds.ParlayMaxPayout) {
-        const groupItems = type.groupItems.map((item: any) => {
-          if (params.isCopyBetSetting !== undefined && !params.isCopyBetSetting) {
-            item.combo2 = item.upline.combo2;
-            item.combo35 = item.upline.combo35;
-            item.comboOver6 = item.upline.comboOver6;
-            item.singleMatchParlay = item.upline.singleMatchParlay;
-          }
-          return {
-            ...item,
-            isMultipleModeChecked: false,
-            original: { ...item },
-            isAllowUnlimitCombo2: item.combo2 === 0,
-            isAllowUnlimitCombo35: item.combo35 === 0,
-            isAllowUnlimitComboOver6: item.comboOver6 === 0,
-            isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
-          };
-        });
-
-        return { ...type, groupItems };
-      }
-
-      return {
-        ...type,
-        groupItems: type.groupItems.map((item) => ({
-          ...item,
-          original: { ...item },
-          isMultipleModeChecked: false,
-        })),
-      };
-    });
+      });
     return { ...group, groupTypes };
   });
 };

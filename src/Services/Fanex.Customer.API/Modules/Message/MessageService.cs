@@ -1,4 +1,5 @@
 using System.Xml.Serialization;
+using EasyNetQ.MessageVersioning;
 using Fanex.Customer.API.Modules.Message.Models;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Services;
@@ -27,6 +28,8 @@ public class MessageService : IMessageService
     public MessageContent TranslateMessage(int messageType, string rawMessage, string language)
         => messageType switch
         {
+            MessageTypes.ProductStatusDependencyViolation
+                => TranslateProductStatusDependencyViolationSubMessages(rawMessage, language),
             MessageTypes.DownlinePTViolation
                 => TranslateDownlinePTViolationSubMessages(rawMessage, language),
             MessageTypes.WrongPT or MessageTypes.WrongPT_Edit
@@ -45,13 +48,19 @@ public class MessageService : IMessageService
                 => TranslateMessage<ParlayMaxPayoutViolationSubMessage>(rawMessage, language),
             MessageTypes.BetSettingViolation
                 => TranslateMessage<BetSettingViolationSubMessage>(rawMessage, language),
-            MessageTypes.CommissionViolation or MessageTypes.WinLossLimitViolation
+            MessageTypes.CommissionViolation
+            or MessageTypes.WinLossLimitViolation
+            or MessageTypes.ProductStatusViolation
+            or MessageTypes.StakeLevelViolation
+            or MessageTypes.WinLimitViolatedWithUpline
+            or MessageTypes.LossLimitViolatedWithUpline
+            or MessageTypes.DailyAutoResetViolatedWithUpline
                 => TranslateMessage<SubMessage>(rawMessage, language),
             MessageTypes.WrongAutoPT
                 => TranslateSimpleMessage(rawMessage, language),
             MessageTypes.UpdateTooOften
             => TranslateUpdateTooOftenMessage(rawMessage, language),
-            _ => new MessageContent(rawMessage)
+            _ => new MessageContent($"MsgType={messageType} MainMsg={rawMessage}")
         };
 
     private static MessageContent TranslateSimpleMessage(string rawMessage, string language)
@@ -116,6 +125,13 @@ public class MessageService : IMessageService
         }
 
         return new MessageContent(mainMessage);
+    }
+
+    private MessageContent TranslateProductStatusDependencyViolationSubMessages(string rawMessage, string language)
+    {
+        var messages = Deserialize<ProductStatusViolationMainMessage>(rawMessage);
+        var subMessages = messages.TranslateSubMessages(cacheRefService, language, GetMessage(messages.MessageId, messages.Message, language));
+        return new MessageContent(string.Empty, subMessages);
     }
 
     private static string GetMessage(int messageId, string defaultMessage, string language)

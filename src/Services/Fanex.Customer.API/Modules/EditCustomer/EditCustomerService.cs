@@ -1,5 +1,3 @@
-using System.Linq;
-using EasyNetQ.FluentConfiguration;
 using Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
 using Fanex.Customer.API.Modules.CreateCustomer.Helpers;
 using Fanex.Customer.API.Modules.CreateCustomer.Services;
@@ -25,7 +23,7 @@ public interface IEditCustomerService
 {
     bool ValidateRequest(CustomerSetting settings);
 
-    Task<UpdateCustomerResult> Update(EditRequest request);
+    Task<UpdateCustomerResult> Update(EditMultipleRequest request);
 
     Task<List<UpdateCustomerResult>> UpdateMultiple(EditMultipleRequest request);
 }
@@ -60,6 +58,10 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {151, new GroupType151Service()},
             {152, new GroupType152Service()},
             {153, new GroupType153Service()},
+            {155, new GroupType155Service()},
+            {156, new GroupType156Service()},
+            {158, new GroupType158Service()},
+            {160, new GroupType160Service()},
         };
     }
 
@@ -91,7 +93,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         return true;
     }
 
-    public async Task<UpdateCustomerResult> Update(EditRequest request)
+    public async Task<UpdateCustomerResult> Update(EditMultipleRequest request)
     {
         var subResults = new List<UpdateGroupTypeResult>();
         CustomerSettingResult uMResult;
@@ -159,7 +161,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         {
             request.Context.CustId = updatedCustomer.CustId;
             request.Context.UserName = updatedCustomer.UserName;
-            result.Add(await Update(new EditRequest()
+            result.Add(await Update(new EditMultipleRequest()
             {
                 Context = request.Context,
                 Settings = request.Settings
@@ -192,7 +194,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         }
     }
 
-    private async Task<UpdateGroupTypeResult> UpdateGeneralInfo(EditRequest request)
+    private async Task<UpdateGroupTypeResult> UpdateGeneralInfo(EditMultipleRequest request)
     {
         GeneralInfoService generalInfoService = new GeneralInfoService(siteDBGroupService);
         using IObjectDb db = ObjectDbFactory.CreateInstance(generalInfoService.GetSPName());

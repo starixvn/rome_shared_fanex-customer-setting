@@ -1,13 +1,11 @@
-import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 
 interface CustomerSettingInformationPageUrlProps {
   tab?: number;
-  generalInfo?: GeneralInfo;
 }
 
-export const CustomerSettingInformationPageUrl = ({ tab, generalInfo }: CustomerSettingInformationPageUrlProps) => {
-  const { mode } = useGroupSettingContext();
+export const CustomerSettingInformationPageUrl = ({ tab }: CustomerSettingInformationPageUrlProps) => {
+  const { mode, generalInfo } = useGroupSettingContext();
   const siteCurrency = `&site=${generalInfo?.site}&siteLabel=${generalInfo?.siteLabel}&currency=${generalInfo?.currency}`;
 
   const getCustomerIdAndRoleId = () => {

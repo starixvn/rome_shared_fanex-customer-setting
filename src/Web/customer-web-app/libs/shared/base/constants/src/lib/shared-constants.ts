@@ -18,6 +18,9 @@ export const ProductGroupIds = {
   SportsBook: 1,
 };
 
+export const isSportsBookProduct = (productGroupId: number | undefined) =>
+  productGroupId === ProductGroupIds.SportsBook;
+
 export const GroupTypeIds = {
   SportsBookCommission: 150,
   SportsBookBetSetting: 151,
@@ -26,6 +29,9 @@ export const GroupTypeIds = {
   RNGGamesBetSetting: 154,
   Commission: 156,
   OtherGamesBetSetting: 157,
+  ProductStatus: 160,
+  BetLimit: 158,
+  WinLossLimit: 155,
 };
 
 export const SportTypeIds = {
@@ -33,6 +39,7 @@ export const SportTypeIds = {
   Basketball: 2,
   ESports: 43,
   MuayThai: 44,
+  LiveCasino: 9911,
 };
 
 export const BetTypeIds = {
@@ -50,16 +57,26 @@ export enum SystemIds {
   ExternalNapSpecialSite = 8,
   ExternalNAPBetSettingSpecialSite = 9,
 }
-export const SpecialSystemIds= [
+export const SpecialSystemIds = [
   SystemIds.y789Alpha,
   SystemIds.y789InternalAlpha,
   SystemIds.ExternalNapSpecialSite,
-  SystemIds.ExternalNAPBetSettingSpecialSite
-]
+  SystemIds.ExternalNAPBetSettingSpecialSite,
+];
 
-export const AlphaSystemIds = [SystemIds.Alpha, SystemIds.y789Alpha, SystemIds.y789InternalAlpha, SystemIds.InternalAlpha]
-export const ExternalNapSystemIds= [SystemIds.ExternalNAP, SystemIds.ExternalNAPBetSetting, SystemIds.ExternalNapSpecialSite,SystemIds.ExternalNAPBetSettingSpecialSite]
+export const AlphaSystemIds = [
+  SystemIds.Alpha,
+  SystemIds.y789Alpha,
+  SystemIds.y789InternalAlpha,
+  SystemIds.InternalAlpha,
+];
+export const ExternalNapSystemIds = [
+  SystemIds.ExternalNAP,
+  SystemIds.ExternalNAPBetSetting,
+  SystemIds.ExternalNapSpecialSite,
+  SystemIds.ExternalNAPBetSettingSpecialSite,
+];
 
 export const MaxNumberInputLength = 18;
 export const i7Markets = ['789y'];
-export const i7Sites = ['yUT','y789','y889','yOther','789y']
+export const i7Sites = ['yUT', 'y789', 'y889', 'yOther', '789y'];

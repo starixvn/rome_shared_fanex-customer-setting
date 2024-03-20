@@ -156,4 +156,20 @@
   "SuperAutoPTCannotBeLessThan": "Super Auto PT must be greater than or equal {{value}}.",
   "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}.",
   "GivenCredit": "信用額度"
+  "ProductStatus": "產品狀態",
+  "BetLimit": "投注限額",
+  "WinLossLimit": "輸贏限額",
+  "DailyAutoResetLimitAt": "每日限額自動重設 (于 中午12 時正 GMT +8)",
+  "MaximumWin": "最高赢額",
+  "MaximumLoss": "最高輸額",
+  "StakeLevelRequired": "每種投注類型至少需要選擇一個投注限額。",
+  "MaximumLossValueShouldBeInRange": "最高輸額需介於 ({{min}} - {{max}}) 的範圍.",
+  "MemberMaxStakeLevelCanBeSelect": "{{name}} - 分配最大{{value}}投註限額給會員。",
+  "ClickToViewCurrentLossAmount": "點擊查看目前輸的數額",
+  "CurrentWinLossAmount": "目前輸贏數額",
+  "Product": "Product",
+  "Winning": "贏",
+  "Losing": "輸",
+  "BBinSettingNote": "注意：BBIN\"贏數額巴仙\"的欄位顯示\"N/A\" 的意思是最高的贏數額不適用於BBIN的產品。",
+  "ViewWinLossLimitInfo": "Click to view Win Loss Limit Info"
 }

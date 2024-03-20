@@ -10,9 +10,10 @@ import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/sh
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CopyIcon from '../../copy-icon';
-import { GroupSettingBlockProps } from '../../position-taking/super-position-taking';
 import scrollToBLock from '../../scroll-helper';
+import { GroupSettingBlockProps } from '../../types';
 import { ValidateBetSetting } from '../bet-setting-base-validator';
+import BetSettingNote from '../bet-setting-note';
 import SportsBookBetSettingMaxPayoutNote from './sportsbook-bet-setting-max-payout-note';
 import SportsBookBetSettingMixSportParlayNote from './sportsbook-bet-setting-mix-sports-parlay-note';
 import { SportsBookBetSettingRow } from './sportsbook-bet-setting-row';
@@ -30,8 +31,15 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
   ref
 ) {
   const { t } = useTranslation();
-  const { productGroups, isMultipleMode, handleUpdateSettingItems, handleSettingItemChange, generalInfo } =
-    useGroupSettingContext();
+  const {
+    productGroups,
+    isMultipleMode,
+    handleUpdateSettingItems,
+    handleSettingItemChange,
+    generalInfo,
+    isEditMode,
+    updateGroupSetting,
+  } = useGroupSettingContext();
   const [validationState, setValidationState] = useState<ValidateBetSetting>();
   const blockRef = useRef<BlockRefType>(null);
 
@@ -177,7 +185,18 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
   };
 
   return (
-    <Block id={BetSettingBlockId} title={props.title} ref={blockRef}>
+    <Block
+      id={BetSettingBlockId}
+      title={
+        <>
+          {t('BetSetting')}
+          <BetSettingNote />
+        </>
+      }
+      isPartialUpdate={isEditMode === true && !isReadOnly}
+      ref={blockRef}
+      onSaveClick={() => updateGroupSetting?.(GroupTypeIds.SportsBookBetSetting)}
+    >
       <BlockRow
         isHeaderRow
         label={
@@ -202,7 +221,7 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
           {
             <>
               {t('maxPayoutPerMatch')}
-              <SportsBookBetSettingMaxPayoutNote generalInfo={generalInfo} />
+              <SportsBookBetSettingMaxPayoutNote />
             </>
           }
         </BlockColumn>

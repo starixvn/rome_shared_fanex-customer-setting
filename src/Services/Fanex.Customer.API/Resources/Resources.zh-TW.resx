@@ -201,6 +201,30 @@
 		<value>最低投注/最高投注/單場最高投注不正確</value>
 		<comment/>
 	</data>
+	<data name="Msg_10022" xml:space="preserve">
+		<value>您不允許修改每日限額自動重設.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10024" xml:space="preserve">
+		<value>最高贏額應低於或相等於直系上線的最高贏額.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10033" xml:space="preserve">
+		<value>最高輸額應低於或相等於直系上線的最高輸額.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10034" xml:space="preserve">
+		<value>這帳號的上線無投註本金級別.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10035" xml:space="preserve">
+		<value>每種投注類型至少需要選擇一個投注限額。</value>
+		<comment/>
+	</data>
+	<data name="Msg_10036" xml:space="preserve">
+		<value>對於{1} 您只能將最大{0} 投註限額分配給會員。</value>
+		<comment/>
+	</data>
 	<data name="Msg_10059" xml:space="preserve">
 		<value>單場最高派彩錯誤</value>
 		<comment/>
@@ -361,6 +385,22 @@
 		<value>無效占成數（上線設置的最低/最高占成數）</value>
 		<comment/>
 	</data>
+	<data name="Msg_60033" xml:space="preserve">
+		<value>由於賬號的此產品已關閉導致無法更改下線產品狀態。</value>
+		<comment/>
+	</data>
+	<data name="Msg_60035" xml:space="preserve">
+		<value>您不能禁用下線的產品。</value>
+		<comment/>
+	</data>
+	<data name="Msg_60037" xml:space="preserve">
+		<value>您必須先啟用 {1}，才能啟用 {0}。</value>
+		<comment/>
+	</data>
+	<data name="Msg_90012" xml:space="preserve">
+		<value>您不能執行此操作。</value>
+		<comment/>
+	</data>
 	<data name="GeneralInfo" xml:space="preserve">
 		<value>基本信息</value>
 		<comment/>
@@ -385,6 +425,22 @@
 		<value>佔成數設定已更新成功.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_155" xml:space="preserve">
+		<value>輸贏限額已成功更新.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_156" xml:space="preserve">
+		<value>佣金已更新成功</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_158" xml:space="preserve">
+		<value>投注限額已成功更新.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_160" xml:space="preserve">
+		<value>產品狀態更新成功</value>
+		<comment/>
+	</data>
 	<data name="GroupType150" xml:space="preserve">
 		<value>佣金</value>
 	</data>
@@ -404,12 +460,12 @@
 		<value>佣金</value>
 	</data>
 	<data name="GroupType158" xml:space="preserve">
-		<value>佣金</value>
+		<value>投注限額</value>
 	</data>
 	<data name="GroupType159" xml:space="preserve">
 		<value>投注設定</value>
 	</data>
 	<data name="GroupType160" xml:space="preserve">
-		<value>佔成數</value>
+		<value>產品狀態</value>
 	</data>
 </root>

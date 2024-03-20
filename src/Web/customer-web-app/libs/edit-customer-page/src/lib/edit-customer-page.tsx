@@ -168,7 +168,7 @@ export function EditCustomerPage() {
       const unCheckAutoPtItems = getUnCheckAutoPtItems(
         newProductGroups,
         params.roleId,
-        ProductGroupIds.SportsBook,
+        params.productGroupId,
         GroupTypeIds.PositionTaking
       );
 
@@ -176,6 +176,7 @@ export function EditCustomerPage() {
 
       const newMemberPts: { isCancel: boolean; groupItems: GroupItem[] } = await NiceModal.show(SetMemberPtPopup, {
         roleId: params.roleId,
+        productGroupId: params.productGroupId,
         groupItems: unCheckAutoPtItems,
       });
 
@@ -200,7 +201,7 @@ export function EditCustomerPage() {
 
       return handleChangeGroupSettingValue(
         newProductGroups,
-        ProductGroupIds.SportsBook,
+        params.productGroupId,
         GroupTypeIds.PositionTaking,
         newPTGroup as []
       );
@@ -317,8 +318,11 @@ export function EditCustomerPage() {
         <EditGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
+          productGroupId={params.productGroupId}
           isReadOnly={
-            (params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) || isIndirectUpdate(params)
+            params.productGroupId !== ProductGroupIds.SportsBook ||
+            (params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
+            isIndirectUpdate(params)
           }
           onGeneralInfoChange={handleGeneralInfoChange}
           onUpdate={handleUpdateGeneralInfo}
@@ -358,16 +362,14 @@ export function EditCustomerPage() {
             mode: 'edit',
             handleSettingItemChange,
             handleUpdateSettingItems,
+            productGroupId: params.productGroupId,
+            updateGroupSetting: handleUpdateGroupType,
+            isEditMode:
+              !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
+              AppConfigHelper.isEditBetSettingOnly(),
           }}
         >
-          <GroupSetting
-            ref={groupSettingRef}
-            updateGroupSetting={(id) => handleUpdateGroupType(id)}
-            isEditMode={
-              !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
-              AppConfigHelper.isEditBetSettingOnly()
-            }
-          />
+          <GroupSetting ref={groupSettingRef} />
         </GroupSettingsContextProvider>
         {generalInfo.displayTransferCondition && (
           <TransferCondition

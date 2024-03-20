@@ -2,7 +2,7 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { GroupItem } from '@customer-web-app/shared-group-settings-types';
 
-import { CopiedPTItem, renderBlockRowTitle, renderPTLabel } from './utils';
+import { CopyStatus, CopyStatusPT, renderBlockRowTitle, renderPTLabel } from './utils';
 
 type GroupPTLabel<T> = {
   isFirstGroup: boolean;
@@ -10,9 +10,11 @@ type GroupPTLabel<T> = {
   ptItems: T[];
   group: T[];
   copyIconId: number | undefined;
-  stateCopiedGroup: CopiedPTItem[];
+  stateCopiedGroup: CopyStatusPT[];
   handleCopyPTs: (itemCopied: T, iconId: number | undefined, isBelongCopiedGroup?: (item: T) => boolean) => void;
 };
+
+export const SportsBookCopyAllId = 0;
 
 export function GroupLabel({
   isFirstGroup,
@@ -31,9 +33,9 @@ export function GroupLabel({
         firstGroupItem.sportTypeName,
         isMultipleEdit,
         group.every((item) => item.isMultipleModeChecked === true),
-        0,
+        SportsBookCopyAllId,
         copyIconId === 0,
-        stateCopiedGroup.length > 0 && !stateCopiedGroup.some((item) => item.isCopied === false),
+        stateCopiedGroup.length > 0 && !stateCopiedGroup.some((item) => item.copyStatus === CopyStatus.Fail),
         (isChecked) => {
           const groupItems = ptItems.map((item) => {
             if (item.sportTypeId === firstGroupItem.sportTypeId) {
@@ -44,7 +46,7 @@ export function GroupLabel({
           });
           handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.PositionTaking, groupItems as []);
         },
-        () => handleCopyPTs(firstGroupItem, 0, () => true)
+        () => handleCopyPTs(firstGroupItem, SportsBookCopyAllId, () => true)
       )
     : renderBlockRowTitle(
         firstGroupItem.sportTypeName,

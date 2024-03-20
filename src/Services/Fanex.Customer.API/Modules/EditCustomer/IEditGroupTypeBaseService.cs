@@ -1,4 +1,3 @@
-using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
 

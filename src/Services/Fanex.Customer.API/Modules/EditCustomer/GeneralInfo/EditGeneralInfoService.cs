@@ -20,7 +20,7 @@ public class GeneralInfoService
 
     public string GetSPName() => "Acc_CustomerUpdGeneralInfo";
 
-    public async Task<Hashtable> GenerateSPParams(EditRequest request, byte SettingStatus = 0)
+    public async Task<Hashtable> GenerateSPParams(EditMultipleRequest request, byte SettingStatus = 0)
     {
         var spParams = new Hashtable {
             { "custid", request.Context.CustId },
@@ -49,7 +49,7 @@ public class GeneralInfoService
         return spParams;
     }
 
-    public CustomerSettingResult Validate(EditRequest request)
+    public CustomerSettingResult Validate(EditMultipleRequest request)
     {
         return (CustomerSettingResult)Result.CreateSuccessfulResult();
     }

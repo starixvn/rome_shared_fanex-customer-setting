@@ -1,6 +1,5 @@
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.RemotingRef;
-using Microsoft.AspNetCore.Identity;
 
 namespace Fanex.Customer.API.Shared.Services;
 
@@ -130,9 +129,9 @@ public class CacheRefService : ICacheRefService
         string language = "en-US",
         bool isSiteLabel777 = false)
     {
-        if (displayType == (int)DisplayType.CommSB)
+        if (displayType == DisplayType.CommSB)
         {
-            if (roleId == (int)CustomerLevel.Member)
+            if (roleId == CustomerLevel.Member)
             {
                 return GetSportsbookCommMemberName(
                     productGroupId,
@@ -153,13 +152,19 @@ public class CacheRefService : ICacheRefService
         }
         else
         {
-            return GetNameByGroupSubGroup(
+            var displayName = GetNameByGroupSubGroup(
                     productGroupId,
                     groupTypeId,
                     sportTypeId,
                     betTypeId,
                     language,
                     isSiteLabel777);
+            if (string.IsNullOrWhiteSpace(displayName))
+            {
+                displayName = GetSportTypeName(sportTypeId, language);
+            }
+            
+            return displayName;
         }
     }
 

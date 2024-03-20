@@ -197,6 +197,30 @@
 		<value>Sai giá trị : Tiền cược nhỏ nhất / Tiền cược lớn nhất / Tiền cược lớn nhất cho mỗi trận đấu</value>
 		<comment/>
 	</data>
+	<data name="Msg_10022" xml:space="preserve">
+		<value>Bạn không được phép thay đổi chức năng Tự động reset giới hạn chuyển khoản mỗi ngày.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10024" xml:space="preserve">
+		<value>Tiền thắng cược lớn nhất phải ít hơn hoặc bằng Tiền thắng cược lớn nhất của cấp trên trực tiếp.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10033" xml:space="preserve">
+		<value>Tiền thua cược lớn nhất phải ít hơn hoặc bằng Tiền thua cược lớn nhất của cấp trên trực tiếp.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10034" xml:space="preserve">
+		<value>Cấp trên của người dùng này chưa cấu hình cấp độ đặt cược.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10035" xml:space="preserve">
+		<value>Mỗi loại cược phải có ít nhất một Giới Hạn Cược.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10036" xml:space="preserve">
+		<value>Bạn chỉ có thể gán tối đa {0} giới hạn cược cho cấp Member của {1}.</value>
+		<comment/>
+	</data>
 	<data name="Msg_10059" xml:space="preserve">
 		<value>Wrong Max Payout Per Match.</value>
 		<comment/>
@@ -357,6 +381,22 @@
 		<value>Position Taking Không Hợp Lệ (PT nhỏ/lớn nhất do cấp trên đặt)</value>
 		<comment/>
 	</data>
+	<data name="Msg_60033" xml:space="preserve">
+		<value>Không thể tùy chỉnh trạng thái trò chơi của thành viên cấp dưới bởi vì tài khoản hiện tại không được phép chơi trò này.</value>
+		<comment/>
+	</data>
+	<data name="Msg_60035" xml:space="preserve">
+		<value>Bạn không được phép vô hiệu hoá sản phẩm cược của cấp dưới.</value>
+		<comment/>
+	</data>
+	<data name="Msg_60037" xml:space="preserve">
+		<value>Bạn không thể kích hoạt {0} khi {1} đang bị vô hiệu hóa.</value>
+		<comment/>
+	</data>
+	<data name="Msg_90012" xml:space="preserve">
+		<value>Bạn không thể thực thi hành động này.</value>
+		<comment/>
+	</data>
 	<data name="GeneralInfo" xml:space="preserve">
 		<value>Thông tin Chung</value>
 		<comment/>
@@ -381,6 +421,22 @@
 		<value>PT được cập nhật thành công.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_155" xml:space="preserve">
+		<value>Cập nhật Giới hạn thắng thua thành công.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_156" xml:space="preserve">
+		<value>Tiền hoa hồng được cập nhật thành công</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_158" xml:space="preserve">
+		<value>Cập nhật Giới hạn cược thành công.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_160" xml:space="preserve">
+		<value>Trạng thái trò chơi được cập nhật thành công.</value>
+		<comment/>
+	</data>
 	<data name="GroupType150" xml:space="preserve">
 		<value>Hoa hồng</value>
 	</data>
@@ -400,12 +456,12 @@
 		<value>Hoa hồng</value>
 	</data>
 	<data name="GroupType158" xml:space="preserve">
-		<value>Hoa hồng</value>
+		<value>Giới hạn cược</value>
 	</data>
 	<data name="GroupType159" xml:space="preserve">
 		<value>Tiền Cược</value>
 	</data>
 	<data name="GroupType160" xml:space="preserve">
-		<value>PT</value>
+		<value>Trạng thái trò chơi</value>
 	</data>
 </root>

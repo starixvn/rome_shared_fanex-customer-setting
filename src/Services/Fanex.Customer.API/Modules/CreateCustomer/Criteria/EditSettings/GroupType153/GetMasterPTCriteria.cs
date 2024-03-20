@@ -2,9 +2,10 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupT
 
 public class GetMasterPTCriteria : GetSuperPTCriteria
 {
-    // public GetMasterPTCriteria(int custId, byte settingStatus) : base(custId, settingStatus)
-    // {
-    // }
+    public GetMasterPTCriteria(int custId, int groupId, byte settingStatus)
+        : base(custId, groupId, settingStatus)
+    {
+    }
 
     public override string GetSettingKey()
         => "Acc_CustSetting_MasterPT_153_Select";

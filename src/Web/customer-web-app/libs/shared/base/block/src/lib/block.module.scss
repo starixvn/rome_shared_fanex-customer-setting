@@ -65,7 +65,7 @@
   }
   input[type='checkbox'] {
     position: relative;
-    top: -1px;
+    top: 0;
   }
 }
 
@@ -108,7 +108,7 @@
       color: var(--color-label);
       input {
         margin-right: 4px;
-        &:not([type='checkbox']) {
+        &:not([type='checkbox']):not([type='radio']) {
           height: var(--height);
           width: 100%;
           max-width: 120px;
@@ -145,4 +145,17 @@
 }
 .text-center {
   text-align: center;
+}
+
+.block-item-group {
+  display: flex;
+  flex-wrap: wrap;
+
+  &:nth-child(even) {
+    background: var(--bg-row-even);
+  }
+  &:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
 }

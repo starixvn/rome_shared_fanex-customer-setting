@@ -28,6 +28,7 @@ export const renderUpdateCustomerResult = (result: UpdateCustomerResult, t: TFun
           {groupType.message && !groupType.isSuccessful && (
             <div className={styles['alert-error']}>{groupType.message}</div>
           )}
+          <div className={ (!groupType.message ? `${styles['alert-error']} ` : ``)}>
           {groupType.subMessages &&
             groupType.subMessages.length > 0 &&
             groupType.subMessages.map((error, index) => (
@@ -42,6 +43,7 @@ export const renderUpdateCustomerResult = (result: UpdateCustomerResult, t: TFun
                 {error.message}
               </div>
             ))}
+          </div>
         </div>
       );
     });

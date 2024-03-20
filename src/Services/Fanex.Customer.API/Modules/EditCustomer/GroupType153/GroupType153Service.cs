@@ -3,7 +3,6 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
-using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Models;
@@ -49,7 +48,7 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         }
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(GetSPName(context.RoleId, context.UplineRoleId));
-        var parameters = GenerateSPParams(groupTypeId, context, groupItems, settingStatus);
+        var parameters = GenerateSPParams(productGroupId, groupTypeId, context, groupItems, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
@@ -132,6 +131,7 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     }
 
     private Hashtable GenerateSPParams(
+        int groupId,
         int groupTypeId,
         EditRequestContext context,
         IEnumerable<GroupItemDefault> groupItems,
@@ -142,7 +142,8 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             { "pt", ComposeJsonSettingParam(groupTypeId, groupItems, false) },
             { "userid", context.ActorId },
             { "ip", context.IP },
-            { "settingstatus", settingStatus}
+            { "settingstatus", settingStatus},
+            { "groupid", groupId}
         };
 
         if (context.RoleId != (byte)CustomerLevel.Member)

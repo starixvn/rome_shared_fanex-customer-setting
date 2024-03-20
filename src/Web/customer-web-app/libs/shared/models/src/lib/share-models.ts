@@ -1,5 +1,3 @@
-import { SystemIds } from '@customer-web-app/shared-constants';
-
 export class Result {
   public code: number;
   public message: string;
@@ -86,6 +84,7 @@ export interface Params {
   roleId: number;
   custId: number;
   noPermissionEditCredit: boolean;
+  productGroupId: number;
 }
 
 export interface Note {

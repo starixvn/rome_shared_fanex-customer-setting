@@ -22,4 +22,11 @@ public class AppSettings
         => string.IsNullOrWhiteSpace(SupportPT3DecimalSites) ?
         false :
         SupportPT3DecimalSites.Split(',').Select(site => site.Trim()).Any(site => site.Equals(siteLabel, System.StringComparison.CurrentCultureIgnoreCase));
+        
+    public string SitesAllowUncheckStakeLevelOnMember { get; set; }
+
+    public bool IsAllowUncheckStakeLevelOnMember(string siteName)
+        => string.IsNullOrWhiteSpace(SitesAllowUncheckStakeLevelOnMember) ?
+        false :
+        SitesAllowUncheckStakeLevelOnMember.Split(',').Select(site => site.Trim()).Any(site => site.Equals(siteName, System.StringComparison.CurrentCultureIgnoreCase));
 }

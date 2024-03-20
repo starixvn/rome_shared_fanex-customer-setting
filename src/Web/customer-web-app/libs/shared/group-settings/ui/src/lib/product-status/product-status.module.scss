@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  width: 50%;
+
+  .status {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    padding: 2px 4px;
+    border-left: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    font-size: var(--font-size);
+    color: var(--color-label);
+    label {
+      cursor: pointer;
+      font-size: var(--font-size);
+      font-weight: normal;
+      color: var(--color-label);
+      margin: 0;
+    }
+  }
+
+  &:last-child {
+    .status {
+      border-right: none;
+    }
+  }
+}
+.blockCenter {
+  margin: 0 auto;
+  padding-top: 1px;
+  display: flex;
+  align-items: center;
+  input{
+    position: relative;
+    top: 0;
+  }
+}

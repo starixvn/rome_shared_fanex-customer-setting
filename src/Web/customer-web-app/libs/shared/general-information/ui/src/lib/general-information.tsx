@@ -102,7 +102,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
   const napCanNotEditCredit = params.noPermissionEditCredit;
 
   return (
-    <Block id="general-information" title={t('general-information')} ref={blockRef}>
+    <Block id="general-information" title={t('general-information')} ref={blockRef} isPartialUpdate={false}>
       <div className={styles['container']}>
         <div className={styles['subheader']}>{t('AccountDetails')}</div>
         {children}

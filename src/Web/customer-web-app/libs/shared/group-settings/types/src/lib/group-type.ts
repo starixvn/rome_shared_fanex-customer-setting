@@ -6,4 +6,15 @@ export interface GroupType {
   displayType?: number;
   groupItems: GroupItem[];
   isReadOnly: boolean;
+  isAllowUncheckAll: boolean;
+}
+
+export interface CurrentWinLossAmount {
+  currentAmount: number;
+  lossPercent: number;
+  maxLossAmount: number;
+  maxMinAmount: number;
+  sportType: number;
+  sportTypeName: number;
+  winPercent: number;
 }

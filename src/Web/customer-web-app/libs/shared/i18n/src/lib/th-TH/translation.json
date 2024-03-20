@@ -156,4 +156,20 @@
   "SuperAutoPTCannotBeLessThan": "Super Auto PT must be greater than or equal {{value}}.",
   "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}.",
   "GivenCredit": "เครดิตทั้งหมด"
+  "ProductStatus": "สถานะผลิตภันฑ์",
+  "BetLimit": "วงเงินเดิมพัน",
+  "WinLossLimit": "วงเงินแพ้ชนะ",
+  "DailyAutoResetLimitAt": "ตั้งวงเงินใหม่อัตโนมัติรายวัน (เวลา 12 น. GMT+8)",
+  "MaximumWin": "ชนะสูงสุด",
+  "MaximumLoss": "แพ้สูงสุด",
+  "StakeLevelRequired": "การเดิมพันแต่ละประเภทจะต้องเลือกอย่างน้อยหนึ่งวงเงินเดิมพัน",
+  "MaximumLossValueShouldBeInRange": "ค่าแพ้สูงสุดควรอยู่ในช่วง ({{min}} - {{max}})",
+  "MemberMaxStakeLevelCanBeSelect": "{{name}} - กำหนดวงเงินเดิมพันสูงสุด {{value}} ในระดับสมาชิก",
+  "ClickToViewCurrentLossAmount": "คลิกเพื่อดูยอดเสียปัจจุบัน",
+  "CurrentWinLossAmount": "จำนวนแพ้/ชนะปัจจุบัน",
+  "Product": "Product",
+  "Winning": "ชนะ",
+  "Losing": "แพ้",
+  "BBinSettingNote": "หมายเหตุ: ค่า % การชนะของ BBIN แสดงผลเป็น \"N/A\" เนื่องจากผลิตภัณฑ์ BBIN ไม่มีการควบคุมขีดจำกัดการชนะสูงสุด",
+  "ViewWinLossLimitInfo": "Click to view Win Loss Limit Info"
 }

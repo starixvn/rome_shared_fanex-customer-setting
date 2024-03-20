@@ -10,5 +10,7 @@ public class GroupType
 
     public bool IsReadOnly { get; set; }
 
+    public bool IsAllowUncheckAll { get; set; }
+
     public IEnumerable<GroupItemDefault> GroupItems { get; set; }
 }

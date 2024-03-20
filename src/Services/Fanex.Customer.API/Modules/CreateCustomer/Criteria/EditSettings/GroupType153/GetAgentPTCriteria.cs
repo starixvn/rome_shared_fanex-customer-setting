@@ -2,9 +2,10 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupT
 
 public class GetAgentPTCriteria : GetSuperPTCriteria
 {
-    // public GetAgentPTCriteria(int custId, byte settingStatus) : base(custId, settingStatus)
-    // {
-    // }
+    public GetAgentPTCriteria(int custId, int groupId, byte settingStatus)
+        : base(custId, groupId, settingStatus)
+    {
+    }
 
     public bool DisableAutoMPT { get; set; }
 

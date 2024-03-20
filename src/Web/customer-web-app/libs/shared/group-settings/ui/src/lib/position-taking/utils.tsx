@@ -7,10 +7,16 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CopyIcon from '../copy-icon';
 
+export enum CopyStatus {
+  Fail = 1,
+  Success = 2,
+  NotCopy = 3,
+}
+
 export type PTRowProps<T> = {
   item: T;
+  copyStatus: CopyStatus;
   label?: string | React.ReactNode;
-  isCopy: boolean | undefined;
   isDisableMasterAutoPT?: boolean;
 };
 
@@ -108,26 +114,53 @@ export const renderBlockRowTitle = (
   );
 };
 
-export type CopiedPTItem = {
+export type CopyStatusPT = {
   betTypeId: number;
   sportTypeId: number;
-  isCopied: boolean | undefined;
+  copyStatus: CopyStatus;
 };
 
 export const usePTCopy = () => {
-  const [stateCopiedGroup, setStateCopiedGroup] = useState<CopiedPTItem[]>([]);
+  const [stateCopiedGroup, setStateCopiedGroup] = useState<CopyStatusPT[]>([]);
   const [copyIconId, setCopyIconId] = useState<number | undefined>();
   const timeId = useRef<NodeJS.Timeout>();
 
+  const handleCopy = (newStateCopiedGroup: CopyStatusPT[], iconCopyId: number | undefined) => {
+    if (JSON.stringify(newStateCopiedGroup) !== JSON.stringify(stateCopiedGroup) || iconCopyId !== copyIconId) {
+      if (timeId) clearTimeout(timeId.current);
+      setStateCopiedGroup(newStateCopiedGroup);
+      setCopyIconId(iconCopyId);
+      timeId.current = setTimeout(() => {
+        setStateCopiedGroup([]);
+        setCopyIconId(undefined);
+      }, 3000);
+    }
+  };
+
   return {
-    stateCopiedGroup,
-    setStateCopiedGroup,
     timeId,
     copyIconId,
+    stateCopiedGroup,
     setCopyIconId,
+    setStateCopiedGroup,
+    handleCopy,
   };
 };
 
-export const isCopyingPTItem = (stateCopiedGroup: CopiedPTItem[], item: GroupItem) => {
-  return stateCopiedGroup.find((i) => i.betTypeId === item.betTypeId && i.sportTypeId === item.sportTypeId)?.isCopied;
+export const isCopyingPTItem = (stateCopiedGroup: CopyStatusPT[], item: GroupItem) => {
+  return (
+    stateCopiedGroup.find((i) => i.betTypeId === item.betTypeId && i.sportTypeId === item.sportTypeId)?.copyStatus ??
+    CopyStatus.NotCopy
+  );
+};
+
+const StringToPreventAutoSortReduce = 'PreventAutoSort';
+
+export const groupSportsBookPTBySportTypeId = (items: GroupItem[]) => {
+  return items.reduce((acc: { [key: string]: GroupItem[] }, cur) => {
+    const key = `${StringToPreventAutoSortReduce}-${cur.sportTypeId}`;
+    acc[key] = acc[key] ?? [];
+    acc[key].push(cur);
+    return acc;
+  }, {});
 };
