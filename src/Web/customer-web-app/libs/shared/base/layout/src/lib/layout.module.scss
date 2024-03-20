@@ -1,0 +1,13 @@
+.container {
+  border: none;
+  background: none;
+  padding: 2px;
+  width: 1228px;
+  position: relative;
+  > div {
+    position: relative;
+    &:hover {
+      z-index: 50;
+    }
+  }
+}

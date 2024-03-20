@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?xvlsl9');
+  src:  url('fonts/icomoon.eot?xvlsl9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?xvlsl9') format('truetype'),
+    url('fonts/icomoon.woff?xvlsl9') format('woff'),
+    url('fonts/icomoon.svg?xvlsl9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ic-"], [class*=" ic-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ic-error:before {
+  content: "\e905";
+  color: #e50000;
+}
+.ic-info-full:before {
+  content: "\e909";
+  color: #2865b5;
+}
+.ic-success:before {
+  content: "\e90c";
+  color: #268026;
+}
+.ic-warning:before {
+  content: "\e90e";
+  color: #a75000;
+}
+.ic-time:before {
+  content: "\e90b";
+}
+.ic-viewlog:before {
+  content: "\e90d";
+}
+.ic-eye-close:before {
+  content: "\e90a";
+  color: #828282;
+}
+.ic-arrow-down:before {
+  content: "\e900";
+}
+.ic-calendar:before {
+  content: "\e901";
+  color: #828282;
+}
+.ic-clock:before {
+  content: "\e902";
+  color: #828282;
+}
+.ic-copied:before {
+  content: "\e903";
+  color: #23a858;
+}
+.ic-copy:before {
+  content: "\e904";
+}
+.ic-eye:before {
+  content: "\e906";
+  color: #828282;
+}
+.ic-guideline:before {
+  content: "\e907";
+  color: #325275;
+}
+.ic-info:before {
+  content: "\e908";
+  color: #537090;
+}

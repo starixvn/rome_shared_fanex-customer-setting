@@ -6,12 +6,12 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 
 public class GetCustomerCriteria : CriteriaBase
 {
-    public GetCustomerCriteria(int custId, byte creationStatus, int roleId, int groupId = 0,int groupType = 0)
+    public GetCustomerCriteria(int custId, byte settingStatus, int roleId, int groupId = 0,int groupType = 0)
     {
         CustId = custId;
         GroupId = groupId;
         GroupType = groupType;
-        CreationStatus = creationStatus;
+        SettingStatus = settingStatus;
         RoleId = roleId;
     }
 
@@ -21,7 +21,7 @@ public class GetCustomerCriteria : CriteriaBase
 
     public int GroupType { get; }
 
-    public byte CreationStatus { get; }
+    public byte SettingStatus { get; }
 
     [SpParam(Ignored = true)]
     public int RoleId { get; }

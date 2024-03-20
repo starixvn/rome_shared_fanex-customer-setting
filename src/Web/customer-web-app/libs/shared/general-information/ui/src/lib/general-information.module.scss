@@ -1,0 +1,133 @@
+.container {
+  padding: 5px 10px 3px;
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
+
+.col-max-credit {
+  min-width: 210px;
+  [class^='_item'],
+  [class*=' _item'] {
+    &:nth-child(2) {
+      margin-top: 20px;
+    }
+  }
+  [class^='_label-text'],
+  [class*=' _label-text'] {
+    margin-right: 20px;
+  }
+}
+label.checkbox {
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  input[type='checkbox'] {
+    top: -3px;
+    position: relative;
+  }
+  span {
+    margin-left: 5px;
+  }
+}
+
+.subheader {
+  color: var(--color-sub-title);
+  font-size: var(--font-size);
+  font-weight: bold;
+  position: relative;
+  margin-bottom: 5px;
+  display: inline-flex;
+
+  > span {
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+    top: 2px;
+    position: relative;
+    display: inline-block;
+    margin: 0 4px 0 0;
+  }
+}
+
+.user-info {
+  border-top: 1px solid var(--border-color);
+  padding-top: 5px;
+  .subheader {
+    cursor: pointer;
+  }
+}
+
+.max-credit {
+  margin-top: 2px;
+  color: var(--color-max-credit);
+  font-size: 11px;
+  white-space: nowrap;
+  b {
+    color: var(--color-max-credit-b);
+    font-weight: bold;
+  }
+}
+
+.col-allowpt {
+  width: 160px;
+}
+.col-group {
+  select {
+    min-width: 95px;
+    width: auto;
+  }
+}
+.checkbox {
+  display: flex;
+  justify-content: center;
+  color: var(--color-label);
+  font-size: 14px;
+  align-items: center;
+  margin: 0 auto;
+  cursor: pointer;
+  padding: 3px 0 0 0;
+
+  input[type='checkbox'] {
+    top: -1px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  span {
+    margin-left: 5px;
+  }
+}
+
+.left {
+  input[type='checkbox'] {
+    margin: 0 !important;
+  }
+}
+
+.icon-left {
+  left: 167px;
+}
+
+.username-edit {
+  background: var(--bg-disabled);
+  border: 1px solid var(--border-disabled);
+  height: var(--height);
+  line-height: var(--height);
+  border-radius: 3px;
+  padding: 0 5px;
+  min-width: 100px;
+  color: var(--color-label);
+}
+
+.readOny-user-info {
+  background: var(--bg-disabled);
+  border: 1px solid var(--border-disabled);
+  height: var(--height);
+  line-height: var(--height);
+  border-radius: 3px;
+  padding: 0 5px;
+  min-width: 165px;
+}

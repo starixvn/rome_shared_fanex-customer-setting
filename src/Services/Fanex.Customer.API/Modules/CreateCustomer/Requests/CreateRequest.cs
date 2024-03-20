@@ -2,7 +2,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Requests;
 
-public class CreateContext
+public class RequestContext
 {
     public int CreatorId { get; set; }
 
@@ -10,11 +10,19 @@ public class CreateContext
 
     public string IP { get; set; }
 
-    public short SystemId { get; set; }
+    public byte SystemId { get; set; }
 
     public string Language { get; set; }
 
+    /// <summary>
+    /// 0: Lite Mode
+    /// 1: Full Mode
+    /// </summary>
+    public int Mode { get; set; }
+
     public UIBehavior UIBehavior { get; set; }
+
+    public bool IsFullMode() => Mode == 1;
 }
 
 public class UIBehavior
@@ -53,7 +61,7 @@ public class UIAttribute
 
 public class CreateRequest
 {
-    public CreateContext Context { get; set; }
+    public RequestContext Context { get; set; }
 
     public CustomerSetting Settings { get; set; }
 }

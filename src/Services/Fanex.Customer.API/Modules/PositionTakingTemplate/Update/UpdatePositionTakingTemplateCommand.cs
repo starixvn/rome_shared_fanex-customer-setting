@@ -10,7 +10,7 @@ public class UpdatePositionTakingTemplateCommand : INonQueryCommand
         string settings,
         bool isDefault,
         int subAccId,
-        byte creationStatus,
+        byte settingStatus,
         string language,
         string ip)
     {
@@ -19,7 +19,7 @@ public class UpdatePositionTakingTemplateCommand : INonQueryCommand
         Settings = settings;
         IsDefault = isDefault;
         SubAccId = subAccId;
-        CreationStatus = creationStatus;
+        SettingStatus = settingStatus;
         Language = language;
         IP = ip;
     }
@@ -32,7 +32,7 @@ public class UpdatePositionTakingTemplateCommand : INonQueryCommand
 
     public bool IsDefault { get; }
 
-    public byte CreationStatus { get; }
+    public byte SettingStatus { get; }
 
     public int SubAccId { get; }
 

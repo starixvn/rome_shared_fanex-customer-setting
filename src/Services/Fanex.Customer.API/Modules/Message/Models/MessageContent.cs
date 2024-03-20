@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Fanex.Customer.API.Modules.Message.Models;
 
 public class MessageContent
@@ -7,7 +9,7 @@ public class MessageContent
         MainMessage = mainMessage;
     }
 
-    public MessageContent(string mainMessage, IEnumerable<string> subMessages)
+    public MessageContent(string mainMessage, IEnumerable<SubMessageContent> subMessages)
     {
         MainMessage = mainMessage;
         SubMessages = subMessages;
@@ -15,5 +17,18 @@ public class MessageContent
 
     public string MainMessage { get; private set; }
 
-    public IEnumerable<string> SubMessages { get; private set; }
+    public IEnumerable<SubMessageContent> SubMessages { get; private set; }
+}
+
+public class SubMessageContent
+{
+    public SubMessageContent(string message, bool isLive = false)
+    {
+        Message = message;
+        IsLive = isLive;
+    }
+
+    public string Message { get; private set; }
+
+    public bool IsLive { get; set; }
 }

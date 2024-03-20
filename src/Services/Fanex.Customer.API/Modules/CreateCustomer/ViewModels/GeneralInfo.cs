@@ -2,9 +2,15 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 
 public class GeneralInformation
 {
+    public int CustId { get; set; }
+
     public string UserName { get; set; }
 
+    public byte RoleId { get; set; }
+
     public byte UplineRoleId { get; set; }
+
+    public int UplineCustId { get; set; }
 
     public string UplineUserName { get; set; }
 
@@ -22,7 +28,13 @@ public class GeneralInformation
 
     public decimal MaxCredit { get; set; }
 
+    public decimal MaxCreditMin { get; set; }
+
+    public decimal MaxCreditMax { get; set; }
+
     public decimal MemberMaxCredit { get; set; }
+
+    public decimal MemberMaxCreditMin { get; set; }
 
     public string Fax { get; set; }
 
@@ -41,6 +53,8 @@ public class GeneralInformation
     public int Currency { get; set; }
 
     public string TemplateName { get; set; }
+
+    public bool IsInternal { get; set; }
 
     public IEnumerable<SportsBookCommission> Commissions { get; set; }
 }

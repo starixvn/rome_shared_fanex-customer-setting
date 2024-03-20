@@ -1,4 +1,6 @@
-﻿namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
+﻿using Fanex.Data;
+
+namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
 
 public class CopyAgentCommand : CopyCustomerCommand
 {
@@ -15,15 +17,21 @@ public class CopyAgentCommand : CopyCustomerCommand
         string ip,
         byte systemId,
         byte settingStatus)
-        : base(userName, userpwd, credit, creator, sourceCustId, subAccountId, language, ip, systemId, settingStatus)
+        : base(userName, userpwd, credit, creator, sourceCustId, language, ip, systemId, settingStatus)
     {
         MRecommend = mrecommend;
         MaxCredit = maxCredit;
+        SubAccId = subAccountId;
     }
 
     public int MRecommend { get; }
 
     public decimal MaxCredit { get; }
+
+    public int SubAccId { get; }
+
+    // [SpParam(Ignored = true)]
+    // public int MsgType { get; set; }
 
     public override string GetSettingKey()
         => "Acc_CustomerInsMember_CloneSetting_MAg";

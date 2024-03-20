@@ -43,23 +43,23 @@ public static class Encryption
         switch (hashAlgorithm)
         {
             case "SHA1":
-                hash = new SHA1Managed();
+                hash = SHA1.Create();
                 break;
 
             case "SHA256":
-                hash = new SHA256Managed();
+                hash = SHA256.Create();
                 break;
 
             case "SHA384":
-                hash = new SHA384Managed();
+                hash = SHA384.Create();
                 break;
 
             case "SHA512":
-                hash = new SHA512Managed();
+                hash = SHA512.Create();
                 break;
 
             default: // MD5
-                hash = new MD5CryptoServiceProvider();
+                hash = MD5.Create();
                 break;
         }
 

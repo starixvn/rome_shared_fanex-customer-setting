@@ -1,4 +1,3 @@
-using Fanex.Customer.API.Shared.Models;
 using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.SecurityCode.Endpoints;

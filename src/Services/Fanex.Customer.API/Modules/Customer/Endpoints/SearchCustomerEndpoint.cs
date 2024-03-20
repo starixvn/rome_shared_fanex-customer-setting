@@ -21,6 +21,5 @@ public class SearchCustomerEndpoint : IEndpoint<IResult, SearchCustomerRequest, 
         }
 
         return Results.BadRequest();
-
     }
 }

@@ -1,66 +1,69 @@
+using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153.Constants;
+using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Models;
+using Newtonsoft.Json;
+
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 
-public class MasterPTSettingItem : GroupItemDefault
+public class MasterPTSettingItem : PTItem
 {
-    private const string PTXmlFormat
-        = "<R {0} IsLive=\"{1}\" SuperPT=\"{2}\" IsAuto=\"{3}\" AutoPT=\"{4}\" MasterPT=\"{5}\" MinPT=\"{6}\"/>";
-
-    /// <summary>
-    /// Super PT
-    /// </summary>
+    [JsonProperty("SuperPT")]
     public decimal S3 { get; set; }
 
-    /// <summary>
-    /// Super Auto PT
-    /// </summary>
+    [JsonProperty("AutoSuperPT")]
     public decimal US3 { get; set; }
 
-    /// <summary>
-    /// Is Auto
-    /// </summary>
+    [JsonProperty("IsAutoSuperPT")]
     public bool IS3 { get; set; }
 
-    /// <summary>
-    /// Master Max PT
-    /// </summary>
+    [JsonProperty("MasterPT")]
     public decimal M3 { get; set; }
 
-    /// <summary>
-    /// Master Min PT
-    /// </summary>
+    [JsonProperty("MinPT")]
     public decimal N3 { get; set; }
 
-    /// <summary>
-    /// Super Max PT
-    /// </summary>
+    [JsonIgnore]
     public decimal S4 { get; set; }
 
-    /// <summary>
-    /// Master Max PT
-    /// </summary>
+    [JsonIgnore]
     public decimal M4 { get; set; }
 
-    /// <summary>
-    /// Super Min PT
-    /// </summary>
+    [JsonIgnore]
     public decimal N4 { get; set; }
 
-    public override string ToXml()
+    [JsonProperty("IsUpdAllMems")]
+    public bool IsUpdateSuperPTOnMembers { get; set; }
+
+    [JsonProperty("UpdAllMems_Value")]
+    public byte SuperPTOnMembers { get; set; }
+
+    public bool ShouldSerializeS3()
     {
-        return string.Format(
-            PTXmlFormat,
-            base.ToXml(),
-            IsLive,
-            IS3 ? 0 : S3,
-            IS3 ? 1 : 0,
-            IS3 ? US3 : 0,
-            M3,
-            N3);
+        if (IS3)
+        {
+            S3 = 0;
+        }
+        else
+        {
+            US3 = 0;
+        }
+
+        return true;
+    }
+
+    public override Result Validate(string language = "en-US")
+    {
+        if (N3 > M3)
+        {
+            return Result.CreateErrorResult(StaticResources.Get("MasterMinPTCannotBeGreaterThanMasterMaxPT", language), ErrorCodes.MasterMinPTIsGreaterThanMasterMaxPT);
+        }
+
+        return Result.CreateSuccessfulResult();
     }
 
     public override bool Is3DecimalPTValue()
-        => (S3 *10) % 10 != 0
-            || (US3 *10) % 10 != 0
-            || (M3 *10) % 10 != 0
-            || (N3 *10) % 10 != 0;
+        => (S3 * 10) % 10 != 0
+            || (US3 * 10) % 10 != 0
+            || (M3 * 10) % 10 != 0
+            || (N3 * 10) % 10 != 0;
 }

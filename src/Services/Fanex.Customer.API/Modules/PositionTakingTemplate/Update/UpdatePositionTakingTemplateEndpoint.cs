@@ -1,5 +1,4 @@
 using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Modules.Message.Models;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
@@ -34,7 +33,7 @@ public class UpdatePositionTakingTemplateEndpoint : IEndpoint<IResult, UpdatePos
             request.Settings.BuildXMLSettings(),
             request.IsDefault,
             request.SubAccId,
-            appSettings.CreationStatus,
+            appSettings.SettingStatus,
             LanguageUtils.ToLanguageKey(request.Language),
             request.IP);
         await dynamicRepository.ExecuteAsync(command);

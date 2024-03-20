@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Shared.Constants;
 using Fanex.RemotingRef;
 using Microsoft.AspNetCore.Identity;
 
@@ -15,13 +16,25 @@ public interface ICacheRefService
 
     string GetBetTypeName(int bettypeId, string language = "en-US");
 
+    string GetDisplayedBetTypeName(int bettypeId, string language = "en-US");
+
     string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
 
     string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
 
-    string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
-
     string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US", bool isSiteLabel777 = false);
+
+    string GetDisplayNameByDisplayType(
+        int sportTypeId,
+        int betTypeId,
+        int productGroupId,
+        int groupTypeId,
+        int displayType,
+        int roleId,
+        string language = "en-US",
+        bool isSiteLabel777 = false);
+
+    string GetParlayMaxPayoutBetSettingInfoSportName(string settingId, bool isSpecialPlatform, string language);
 }
 
 public class CacheRefService : ICacheRefService
@@ -45,9 +58,12 @@ public class CacheRefService : ICacheRefService
     private const string G_GT_Sport_Bettype_RefId_Saba = "G_GT_Sport_BT_Saba";
     private Dictionary<string, string> cacheData = new Dictionary<string, string>();
 
+    public CacheRefService() : this(null)
+    { }
+
     public CacheRefService(IRemotingRefService remotingRef)
     {
-        this.remotingRef = remotingRef;
+        this.remotingRef = remotingRef ?? new RemotingRefService();
     }
 
     public string GetProductName(int productId, string language = "en-US")
@@ -77,6 +93,9 @@ public class CacheRefService : ICacheRefService
     public string GetBetTypeName(int bettypeId, string language = "en-US")
         => remotingRef.GetBetTypeName(bettypeId.ToString(), language);
 
+    public string GetDisplayedBetTypeName(int bettypeId, string language = "en-US")
+        => remotingRef.GetDisplayedBetTypeName(bettypeId.ToString(), language);
+
     public string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
@@ -89,18 +108,68 @@ public class CacheRefService : ICacheRefService
         return GetOrSetFromCacheData(SB_Comm_Member_RefId, refKey, language, refKey);
     }
 
-    public string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
-    {
-        var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, refKey);
-    }
-
     public string GetNameByGroupSubGroup(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US", bool isSiteLabel777 = false)
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        var name = isSiteLabel777 ? GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId_Saba, refKey, language, refKey) : refKey;
+        var value = isSiteLabel777 ? GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId_Saba, refKey, language, string.Empty) : string.Empty;
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            value = GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, string.Empty);
+        }
 
-        return name.Equals(refKey) ? GetOrSetFromCacheData(G_GT_Sport_Bettype_RefId, refKey, language, refKey) : name;
+        return value;
+    }
+
+    public string GetDisplayNameByDisplayType(
+        int sportTypeId,
+        int betTypeId,
+        int productGroupId,
+        int groupTypeId,
+        int displayType,
+        int roleId,
+        string language = "en-US",
+        bool isSiteLabel777 = false)
+    {
+        if (displayType == (int)DisplayType.CommSB)
+        {
+            if (roleId == (int)CustomerLevel.Member)
+            {
+                return GetSportsbookCommMemberName(
+                    productGroupId,
+                    groupTypeId,
+                    sportTypeId,
+                    betTypeId,
+                    language);
+            }
+            else
+            {
+                return GetSportsbookCommSMAName(
+                    productGroupId,
+                    groupTypeId,
+                    sportTypeId,
+                    betTypeId,
+                    language);
+            }
+        }
+        else
+        {
+            return GetNameByGroupSubGroup(
+                    productGroupId,
+                    groupTypeId,
+                    sportTypeId,
+                    betTypeId,
+                    language,
+                    isSiteLabel777);
+        }
+    }
+
+    public string GetParlayMaxPayoutBetSettingInfoSportName(string settingId, bool isSpecialPlatform, string language)
+    {
+        return remotingRef.GetResourceDataByRefIdAndResourceId(
+                    isSpecialPlatform ? "BetSettingRef_Saba" : "BetSettingRef",
+                    settingId,
+                    language,
+                    settingId);
     }
 
     private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
@@ -114,7 +183,7 @@ public class CacheRefService : ICacheRefService
         }
         else
         {
-            var refVal = remotingRef.GetResourceDataByRefIdAndResourceId(refId, refKey, language, refKey);
+            var refVal = remotingRef.GetResourceDataByRefIdAndResourceId(refId, refKey, language, defaultValue);
             cacheData.Add($"{refId}_{refKey}_{language}", refVal);
             return refVal;
         }

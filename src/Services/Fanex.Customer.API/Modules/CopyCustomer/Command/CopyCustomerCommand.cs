@@ -1,4 +1,5 @@
-﻿using Fanex.Data.Repository;
+﻿using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
 
@@ -10,7 +11,6 @@ public abstract class CopyCustomerCommand : NonQueryCommand
         decimal credit,
         int creator,
         int sourceCustId,
-        int subAccountId,
         string language,
         string ip,
         byte systemId,
@@ -21,7 +21,6 @@ public abstract class CopyCustomerCommand : NonQueryCommand
         Credit = credit;
         Creator = creator;
         ExistingCustId = sourceCustId;
-        SubAccountId = subAccountId;
         Language = language;
         IP = ip;
         SystemId = systemId;
@@ -33,7 +32,6 @@ public abstract class CopyCustomerCommand : NonQueryCommand
     public string UserPwd { get; }
 
     public string FirstName { get; set; } = string.Empty;
-
 
     public string LastName { get; set; } = string.Empty;
 
@@ -49,8 +47,6 @@ public abstract class CopyCustomerCommand : NonQueryCommand
 
     public int ExistingCustId { get; }
 
-    public int SubAccountId { get; }
-
     public string Language { get; }
 
     public string IP { get; }
@@ -58,8 +54,6 @@ public abstract class CopyCustomerCommand : NonQueryCommand
     public byte SystemId { get; }
 
     public int CustId { get; set; }
-
-    public byte CreatedMode { get; } = 1;
 
     public byte SettingStatus { get; }
 

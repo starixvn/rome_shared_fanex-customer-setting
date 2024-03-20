@@ -1,0 +1,53 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@customer-web-app/create-customer-page": ["libs/create-customer/create-customer-page/src/index.ts"],
+      "@customer-web-app/create-super-notes": ["libs/create-super/notes/src/index.ts"],
+      "@customer-web-app/create-super-page": ["libs/create-super/create-super-page/src/index.ts"],
+      "@customer-web-app/edit-customer-page": ["libs/edit-customer-page/src/index.ts"],
+      "@customer-web-app/edit-multiple-customer-page": [
+        "libs/edit-multiple-customers/edit-multiple-customers-page/src/index.ts"
+      ],
+      "@customer-web-app/information-page": ["libs/information-page/src/index.ts"],
+      "@customer-web-app/share-models": ["libs/shared/models/src/index.ts"],
+      "@customer-web-app/shared-api-helper": ["libs/shared/base/api-helper/src/index.ts"],
+      "@customer-web-app/shared-block-ui": ["libs/shared/base/block-ui/src/index.ts"],
+      "@customer-web-app/shared-constants": ["libs/shared/base/constants/src/index.ts"],
+      "@customer-web-app/shared-error-block": ["libs/shared/base/error-block/src/index.ts"],
+      "@customer-web-app/shared-general-information-state": ["libs/shared/general-information/state/src/index.ts"],
+      "@customer-web-app/shared-general-information-ui": ["libs/shared/general-information/ui/src/index.ts"],
+      "@customer-web-app/shared-group-settings-context": ["libs/shared/group-settings/context/src/index.ts"],
+      "@customer-web-app/shared-group-settings-data": ["libs/shared/group-settings/data/src/index.ts"],
+      "@customer-web-app/shared-group-settings-services": ["libs/shared/group-settings/services/src/index.ts"],
+      "@customer-web-app/shared-group-settings-state": ["libs/shared/group-settings/state/src/index.ts"],
+      "@customer-web-app/shared-group-settings-types": ["libs/shared/group-settings/types/src/index.ts"],
+      "@customer-web-app/shared-group-settings-ui": ["libs/shared/group-settings/ui/src/index.ts"],
+      "@customer-web-app/shared-helpers": ["libs/shared/base/helpers/src/index.ts"],
+      "@customer-web-app/shared-i18n": ["libs/shared/i18n/src/index.ts"],
+      "@customer-web-app/shared/base/block": ["libs/shared/base/block/src/index.ts"],
+      "@customer-web-app/shared/base/characters-selector": ["libs/shared/base/characters-selector/src/index.ts"],
+      "@customer-web-app/shared/base/common-icon": ["libs/shared/base/common-icon/src/index.ts"],
+      "@customer-web-app/shared/base/layout": ["libs/shared/base/layout/src/index.ts"],
+      "@customer-web-app/shared/base/styles": ["libs/shared/base/styles/src/index.scss"],
+      "@customer-web-app/site-currency-section": ["libs/create-super/site-currency-section/src/index.ts"],
+      "@customer-web-app/sportsbook-information-page": ["libs/sportsbook-information-page/src/index.ts"],
+      "@customer-web-app/wrapper-tooltip": ["libs/shared/base/wrapper-tooltip/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

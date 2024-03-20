@@ -1,0 +1,40 @@
+.pt-select {
+  &.invalid {
+    border: 1px solid var(--border-input-error) !important;
+    background-color: var(--bg-input-error);
+  }
+}
+
+.short-block {
+  width: 480px;
+}
+
+.block-pt {
+  .row-empty {
+    > div {
+      background: var(--bg-row-empty);
+      border-radius: 0 !important;
+    }
+  }
+  [class^='_block-row_'],
+  [class*=' _block-row_'] {
+    background: var(--bg-block-pt);
+  }
+}
+
+.is-multiple-mode {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.checkbox-multiple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  text-align: center;
+  height: 100%;
+  padding-top: 6px;
+  border-right: 1px solid var(--border-color);
+}

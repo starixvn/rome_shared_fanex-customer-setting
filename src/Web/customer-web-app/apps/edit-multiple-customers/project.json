@@ -1,0 +1,78 @@
+{
+  "name": "edit-multiple-customers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/edit-multiple-customers/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/edit-multiple-customers"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "edit-multiple-customers:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "edit-multiple-customers:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "edit-multiple-customers:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "edit-multiple-customers:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "edit-multiple-customers:build:development"
+        },
+        "production": {
+          "buildTarget": "edit-multiple-customers:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/edit-multiple-customers"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/edit-multiple-customers/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "edit-multiple-customers:build"
+      }
+    }
+  },
+  "tags": []
+}

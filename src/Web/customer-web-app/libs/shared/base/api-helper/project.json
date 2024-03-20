@@ -1,0 +1,30 @@
+{
+  "name": "shared-api-helper",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/base/api-helper/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/base/api-helper/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/shared/base/api-helper"
+      }
+    }
+  },
+  "tags": []
+}

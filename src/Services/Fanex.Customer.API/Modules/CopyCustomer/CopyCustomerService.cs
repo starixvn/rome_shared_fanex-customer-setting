@@ -1,9 +1,13 @@
-using System.Data;
+using Fanex.Customer.API.Modules.Balance;
 using Fanex.Customer.API.Modules.CopyCustomer.Command;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Customer.Requests;
+using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.Message.Models;
 using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.Repository;
@@ -13,45 +17,46 @@ namespace Fanex.Customer.API.Modules.CopyCustomer;
 
 public interface ICopyCustomerService
 {
-    Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request);
+    Task<CopyMultipleCustomerResult> CopyCustomers(CopyMultipleCustomersRequest request);
+
+    Task<CopyCustomerResult> CopyCustomer(CopyCustomerRequest request);
 }
 
 public class CopyCustomerService : ICopyCustomerService
 {
     private readonly IDynamicRepository dynamicRepository;
     private readonly AppSettings appSettings;
-    private readonly ICopyMemberSpParamsBuilder copyMemberSpParamsBuilder;
-    private readonly IThirdPartyProductService thirdPartyProductService;
     private readonly ICustomerService customerService;
     private readonly Logging.ILogger logger;
-
-    private readonly IBalanceCustomerService balanceCustomerService;
+    private readonly IBalanceService balanceService;
+    private readonly IMessageService messageService;
 
     public CopyCustomerService(
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
-        ICopyMemberSpParamsBuilder copyMemberSpParamsBuilder,
-        IThirdPartyProductService thirdPartyProductService,
         ICustomerService customerService,
         Logging.ILogger logger,
-        IBalanceCustomerService balanceCustomerService)
+        IBalanceService balanceService,
+        IMessageService messageService)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
-        this.copyMemberSpParamsBuilder = copyMemberSpParamsBuilder;
-        this.thirdPartyProductService = thirdPartyProductService;
         this.customerService = customerService;
         this.logger = logger;
-        this.balanceCustomerService = balanceCustomerService;
+        this.balanceService = balanceService;
+        this.messageService = messageService;
     }
 
-    public async Task<CopyMultipleCustomerResult> CopyCustomer(CopyCustomerRequest request)
+    public async Task<CopyMultipleCustomerResult> CopyCustomers(CopyMultipleCustomersRequest request)
     {
         var isSourceAccountEnable = request.SourceCustId > 0 && await customerService.IsEnableCustomer(request.SourceCustId);
 
         if (!isSourceAccountEnable)
         {
-            return new CopyMultipleCustomerResult(Enumerable.Empty<string>(), 100, StaticResources.Get("ThisSourceAccountWasDisabled", request.Language));
+            return new CopyMultipleCustomerResult(
+                Enumerable.Empty<string>(),
+                100,
+                messageContent: new MessageContent(StaticResources.Get("ThisSourceAccountWasDisabled", request.Language)));
         }
 
         var index = 0;
@@ -61,7 +66,7 @@ public class CopyCustomerService : ICopyCustomerService
         do
         {
             var suggestUsernameResult = Result.CreateSuccessfulResult();
-            var result = request.ActorLevel.IsAgentLevel() ? await CopyMember(request) : await CopyMasterOrAgent(request);
+            var result = await CopyCustomer(request);
             if (result.IsSuccessful)
             {
                 index++;
@@ -70,18 +75,13 @@ public class CopyCustomerService : ICopyCustomerService
                 if (!string.IsNullOrWhiteSpace(request.UserName))
                 {
                     usernames.Add(request.UserName);
-
-                    await Task.Run(async () =>
-                    {
-                        await Sync3rdProductSettings(request, result.CustId).ConfigureAwait(false);
-                    }).ConfigureAwait(false);
                 }
 
                 suggestUsernameResult = await GetAvailableDownlineUserName(request);
 
                 if (!suggestUsernameResult.IsSuccessful)
                 {
-                    return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, suggestUsernameResult.Message);
+                    return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, mainMessage: suggestUsernameResult.Message);
                 }
 
                 request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
@@ -95,153 +95,149 @@ public class CopyCustomerService : ICopyCustomerService
 
                     if (!suggestUsernameResult.IsSuccessful)
                     {
-                        return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, suggestUsernameResult.Message);
+                        var content = new MessageContent(suggestUsernameResult.Message);
+                        return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, messageContent: content);
                     }
 
                     request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
                 }
                 else
                 {
-                    return new CopyMultipleCustomerResult(usernames, result.Code, result.Message);
+                    return new CopyMultipleCustomerResult(usernames, result.Code, result.MsgType, messageContent: result.MessageContent);
                 }
             }
 
         } while (index < request.NumberOfAccounts);
 
-        return new CopyMultipleCustomerResult(usernames);
+        return new CopyMultipleCustomerResult(usernames, 0, 0);
     }
 
-    private async Task Sync3rdProductSettings(CopyCustomerRequest param, int createdCustId)
+    public async Task<CopyCustomerResult> CopyCustomer(CopyCustomerRequest request)
     {
-        var createdCustomer = await customerService.GetCustomerInfo(createdCustId);
-        var sourceCustomer = await customerService.GetCustomerInfo(param.SourceCustId);
-        var actor = await customerService.GetCustomerInfo(param.ActorId);
+        var criteria = BuildCriteria(request);
 
-        if (createdCustomer != null && sourceCustomer != null && actor != null && param.ActorLevel.IsAgentLevel())
-        {
-            await thirdPartyProductService.SyncMemberSettings(
-                createdCustomer,
-                sourceCustomer,
-                actor,
-                param,
-                appSettings.SettingStatus);
-        }
-    }
+        using var objDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey());
 
-    private async Task<CopyCustomerResult> CopyMember(CopyCustomerRequest param)
-    {
-        var dataTable = await GetMemberSetting(param.SourceCustId);
-
-        if (dataTable.Rows.Count > 0)
-        {
-            using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustomerInsMember_Ag");
-            var spParams = copyMemberSpParamsBuilder.BuildSpParams(
-                dataTable.Rows[0],
-                param,
-                param.Password);
-
-            await db.ExecuteNonQueryAsync(spParams);
-            var ouputParams = db.GetOutputParams();
-            var errCode = Convert.ToInt32(ouputParams["errcode"]);
-            var custId = Convert.ToInt32(ouputParams["custid"]);
-
-            if (errCode == 0)
-            {
-                await balanceCustomerService.InitBalanceCustomer(custId);
-            }
-
-            return new CopyCustomerResult(custId, errCode, ouputParams["errmsg"].ToString());
-        }
-
-        return null;
-    }
-
-    private static async Task<DataTable> GetMemberSetting(int custId)
-    {
-        var criteria = new GetMemberSettingCriteria(custId);
-        using IObjectDb db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey());
-        var dataSet = await db.ExecuteDataSetAsync(criteria);
-
-        return dataSet?.Tables?.Count == 1
-            ? dataSet.Tables[0]
-            : new DataTable();
-    }
-
-    private async Task<CopyCustomerResult> CopyMasterOrAgent(CopyCustomerRequest request)
-    {
-        var criteria = BuildCopyMasterOrAgentCriteria(request);
-
+        //await objDb.ExecuteNonQueryAsync(criteria);
         await dynamicRepository.ExecuteAsync(criteria);
 
         if (criteria.CustId > 0)
         {
-            InsertUnreadMessage(criteria.CustId, request.ActorLevel.GetDirectDownLineLevel().Value);
+            if (request.CustLevel == CustomerLevel.Member)
+            {
+                await balanceService.InitBalance(request.Site, criteria.CustId);
+            }
+
+            Task.Run(() => InsertUnreadMessage(criteria.CustId, request.CustLevel));
+        }
+
+        if (criteria.GetType() == typeof(CopyMemberCommand))
+        {
+            var copyMemberCriteria = (CopyMemberCommand)criteria;
+            return new CopyCustomerResult(
+                criteria.CustId,
+                criteria.ErrCode,
+                copyMemberCriteria.MsgType,
+                messageService.TranslateMessage(copyMemberCriteria.MsgType, criteria.ErrMsg, request.Language));
+
         }
 
         return new CopyCustomerResult(
             criteria.CustId,
             criteria.ErrCode,
-            criteria.ErrMsg);
+            mainMessage: criteria.ErrMsg);
     }
 
-    private CopyCustomerCommand BuildCopyMasterOrAgentCriteria(CopyCustomerRequest request)
+    private CopyCustomerCommand BuildCriteria(CopyCustomerRequest request)
     {
-        if (request.ActorLevel.IsMasterLevel())
+        CopyCustomerCommand criteria = request.CustLevel switch
         {
-            return new CopyAgentCommand(
-                request.UserName,
-                request.Password,
-                request.Credit,
-                request.MaxCredit,
-                request.ActorId,
-                request.ActorId,
-                request.SourceCustId,
-                request.ActorSubAccId,
-                request.LanguageKey,
-                request.IP,
-                request.SystemId,
-                appSettings.SettingStatus);
-        }
+            CustomerLevel.Super => new CopySuperCommand(
+                                        request.Site,
+                                        request.IsInternal,
+                                        request.UserName,
+                                        request.Password,
+                                        request.Credit,
+                                        request.ActorId,
+                                        request.SourceCustId,
+                                        request.LanguageKey,
+                                        request.IP,
+                                        request.SystemId,
+                                        appSettings.SettingStatus),
+            CustomerLevel.Master => new CopyMasterCommand(
+                                        request.UserName,
+                                        request.Password,
+                                        request.Credit,
+                                        request.ActorId,
+                                        request.UplineId,
+                                        request.SourceCustId,
+                                        request.ActorSubAccId,
+                                        request.LanguageKey,
+                                        request.IP,
+                                        request.SystemId,
+                                        appSettings.SettingStatus),
+            CustomerLevel.Agent => new CopyAgentCommand(
+                                        request.UserName,
+                                        request.Password,
+                                        request.Credit,
+                                        request.MaxCredit,
+                                        request.ActorId,
+                                        request.UplineId,
+                                        request.SourceCustId,
+                                        request.ActorSubAccId,
+                                        request.LanguageKey,
+                                        request.IP,
+                                        request.SystemId,
+                                        appSettings.SettingStatus),
+            CustomerLevel.Member => new CopyMemberCommand(
+                                        request.UserName,
+                                        request.Password,
+                                        request.Credit,
+                                        request.IsQrCode,
+                                        request.ActorId,
+                                        request.UplineId,
+                                        request.SourceCustId,
+                                        request.ActorSubAccId,
+                                        request.LanguageKey,
+                                        request.IP,
+                                        request.SystemId,
+                                        appSettings.SettingStatus),
+            _ => throw new ArgumentOutOfRangeException("CustLevel", $"Not expected CustLevel value: {request.CustLevel}")
+        };
 
-        return new CopyMasterCommand(
-            request.UserName,
-            request.Password,
-            request.Credit,
-            request.ActorId,
-            request.ActorId,
-            request.SourceCustId,
-            request.ActorSubAccId,
-            request.LanguageKey,
-            request.IP,
-            request.SystemId,
-            appSettings.SettingStatus);
+        criteria.FirstName = request.FirstName ?? string.Empty;
+        criteria.LastName = request.LastName ?? string.Empty;
+        criteria.Phone = request.Phone ?? string.Empty;
+        criteria.MobilePhone = request.MobilePhone ?? string.Empty;
+        criteria.Fax = request.Fax ?? string.Empty;
+
+        return criteria;
     }
+
 
     private async Task<Result> GetAvailableDownlineUserName(CopyCustomerRequest request)
     {
-        var result = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = request.ActorUserLevel });
+        var roleId = Enumeration.FromValue<UserLevel>(request.CustLevel).GetDirectUpLineLevel().Value;
+        var result = await customerService.GetSuggestUsername(new GetSuggestUsernameRequest { ActorName = request.ActorUsername, RoleId = roleId });
 
         return result;
     }
 
-    private void InsertUnreadMessage(int custId, byte roleId)
+    private async Task InsertUnreadMessage(int custId, byte roleId)
     {
-        Task.Run(() =>
+        try
         {
-            try
-            {
-                var criteria = new CustomerReadMessageCommand(custId, roleId, 0, 0, string.Empty);
-                this.dynamicRepository.Execute(criteria);
+            var criteria = new CustomerReadMessageCommand(custId, roleId, 0, 0, string.Empty);
+            await dynamicRepository.ExecuteAsync(criteria);
 
-                if (criteria.ErrCode != 0)
-                {
-                    logger.Info($"[Age_MsgCustReadStatus_Ins] CustId: {custId}; SubAccId: 0; RoleId: {roleId} ErrCode: {criteria.ErrCode}; ErrMsg: {criteria.ErrMsg}");
-                }
-            }
-            catch (Exception ex)
+            if (criteria.ErrCode != 0)
             {
-                logger.Error(ex.Message, ex);
+                await logger.InfoAsync($"[Age_MsgCustReadStatus_Ins] CustId: {custId}; SubAccId: 0; RoleId: {roleId} ErrCode: {criteria.ErrCode}; ErrMsg: {criteria.ErrMsg}");
             }
-        });
+        }
+        catch (Exception ex)
+        {
+            await logger.ErrorAsync(ex.Message, ex);
+        }
     }
 }

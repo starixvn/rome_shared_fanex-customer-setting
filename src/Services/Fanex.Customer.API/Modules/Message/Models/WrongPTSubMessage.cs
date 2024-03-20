@@ -1,5 +1,4 @@
 using System.Xml.Serialization;
-using Fanex.Customer.API.Modules.Message.Utils;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Services;
 
@@ -10,14 +9,9 @@ public class WrongPTSubMessage : SubMessage
     [XmlAttribute]
     public bool IsLive { get; set; }
 
-    public override string ToString(ICacheRefService cacheRefService, string language)
-    {
-        var message = base.ToString(cacheRefService, language);
-        if (IsLive)
-        {
-            message += string.Format(" ({0})", StaticResources.Get("Live", language));
-        }
+    public override SubMessageContent ToContent(ICacheRefService cacheRefService, string language)
+        => new SubMessageContent(ToString(cacheRefService, language), IsLive);
 
-        return message;
-    }
+    public override string ToString(ICacheRefService cacheRefService, string language)
+        => ProductId == 1 ? cacheRefService.GetBetTypeName(BetType, language): base.ToString(cacheRefService,language);
 }

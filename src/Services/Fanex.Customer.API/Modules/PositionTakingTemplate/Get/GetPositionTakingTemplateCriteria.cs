@@ -4,15 +4,15 @@ namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
 
 public class GetPositionTakingTemplateCriteria : CriteriaBase
 {
-    public GetPositionTakingTemplateCriteria(int custId, byte creationStatus)
+    public GetPositionTakingTemplateCriteria(int custId, byte settingStatus)
     {
         CustId = custId;
-        CreationStatus = creationStatus;
+        SettingStatus = settingStatus;
     }
 
     public int CustId { get; }
 
-    public byte CreationStatus { get; }
+    public byte SettingStatus { get; }
 
     public override string GetSettingKey() => "Acc_LiteMode_CustSetting_CustPTTemplateSel";
 

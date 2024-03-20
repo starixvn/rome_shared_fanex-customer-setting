@@ -1,16 +1,37 @@
+using Newtonsoft.Json;
+
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType150;
 
 public class CommissionGroup : GroupItemDefault
 {
-    private const string CommissionGroupXmlFormat = "<R {0} Discount=\"{1}\" />";
-
     public decimal Discount { get; set; }
 
-    public decimal DiscountMember { get; set; }
+    [JsonIgnore]
+    [System.Text.Json.Serialization.JsonIgnore]
+    public decimal UplineDiscount { get; set; }
 
+    [JsonIgnore]
+    [System.Text.Json.Serialization.JsonIgnore]
+    public decimal? UplineOfUplineDiscount { get; set; }
+
+    [JsonIgnore]
     public decimal Step { get; set; }
 
-    public override string ToXml()
-    => string.Format(CommissionGroupXmlFormat, base.ToXml(), Discount);
+    [JsonIgnore]
+    public CommissionGroup Upline { get; set; }
 
+    public override void MapUpline()
+    {
+        Upline = new CommissionGroup();
+        Upline.SportTypeId = SportTypeId;
+        Upline.BetTypeId = BetTypeId;
+        Upline.Discount = UplineDiscount;
+        if(UplineOfUplineDiscount.HasValue)
+        {
+            Upline.Upline = new CommissionGroup();
+            Upline.Upline.SportTypeId = SportTypeId;
+            Upline.Upline.BetTypeId = BetTypeId;
+            Upline.Upline.Discount = UplineOfUplineDiscount.Value;
+        }
+    }
 }

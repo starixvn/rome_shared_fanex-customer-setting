@@ -1,0 +1,43 @@
+.icon {
+  position: absolute;
+  top: 6px;
+  margin: 0;
+  margin-left: 3px;
+  width: 14px;
+  height: 14px;
+}
+.iconLink {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+
+  path {
+    fill: var(--icon-info-link);
+  }
+}
+.iconError {
+  display: block;
+  margin: 0 auto;
+}
+.iconSuccess {
+  display: block;
+  margin: 0 auto;
+}
+.iconSaveSingle {
+  position: relative;
+  top: 3px;
+  width: 30px;
+  height: 24px;
+  padding: 2px;
+  path{
+    fill: var(--icon-info-link);
+  }
+}
+.iconSaveSingle:hover {
+  /* Scale the icon by 1.2 times on hover */
+  transform: scale(1.2);
+  transition: transform 0.2s ease-in-out; /* Optional: Add a smooth transition */
+}
+.iconClose{
+  fill: var(--color-label);
+}

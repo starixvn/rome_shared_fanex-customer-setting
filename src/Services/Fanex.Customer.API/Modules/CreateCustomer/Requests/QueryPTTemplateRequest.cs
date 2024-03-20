@@ -11,4 +11,6 @@ public class QueryPTTemplateRequest
     public int Currency { get; set; }
 
     public string Language { get; set; }
+
+    public byte SystemId { get; set; }
 }

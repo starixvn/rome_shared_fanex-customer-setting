@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/icons/style.css';
+@import './assets/roboto/roboto.css';
+
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: var(--font-size);
+  line-height: 1.42857;
+  color: var(--color-label);
+  background-color: var(--bg-body-tab);
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.block-loading {
+  background: url('./assets/images/loading.gif') no-repeat center center;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 101;
+}
+
+.daily {
+  background-image: url('./assets/images/daily.png');
+}
+.weekly {
+  background-image: url('./assets/images/weekly.png');
+  margin-left: 1%;
+}
