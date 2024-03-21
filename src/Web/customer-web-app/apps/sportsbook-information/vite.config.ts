@@ -4,7 +4,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ command, mode }) => ({
-  base: mode === 'production' ? '/sportsbook-information' : `/${mode}/sportsbook-information`,
+  base: mode === 'PROD' ? '/sportsbook-information' : `/${mode}/sportsbook-information`,
   cacheDir: '../../node_modules/.vite/sportsbook-information',
 
   server: {

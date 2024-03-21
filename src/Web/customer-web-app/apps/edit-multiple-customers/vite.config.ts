@@ -41,7 +41,7 @@ export default defineConfig(({ command, mode }) => {
   };
 
   if (command === 'build') {
-    return { ...config, base: mode === 'production' ? '/edit-multiple-customers' : `/${mode}/edit-multiple-customers` };
+    return { ...config, base: mode === 'PROD' ? '/edit-multiple-customers' : `/${mode}/edit-multiple-customers` };
   }
 
   return config;

@@ -42,7 +42,7 @@ export default defineConfig(({ command, mode }) => {
   };
 
   if (command === 'build') {
-    return { ...config, base: mode === 'production' ? '/create-customer' : `/${mode}/create-customer` };
+    return { ...config, base: mode === 'PROD' ? '/create-customer' : `/${mode}/create-customer` };
   }
 
   return config;

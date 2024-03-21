@@ -42,7 +42,7 @@ export default defineConfig(({ command, mode }) => {
   };
 
   if (command === 'build') {
-    return { ...config, base: mode === 'production' ? '/create-super' : `/${mode}/create-super` };
+    return { ...config, base: mode === 'PROD' ? '/create-super' : `/${mode}/create-super` };
   }
 
   return config;
