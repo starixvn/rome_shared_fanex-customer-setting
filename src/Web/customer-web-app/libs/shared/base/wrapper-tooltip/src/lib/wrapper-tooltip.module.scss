@@ -1,0 +1,35 @@
+.tooltip {
+  z-index: 60;
+  border-radius: 3px;
+  font-size: var(--font-size) !important;
+  line-height: 16px;
+  color: var(--color-tooltip);
+  text-transform: none;
+  font-weight: normal!important;
+  opacity: 1!important;
+  padding: 7px 10px !important;
+  &.error {
+    background: var(--bg-tooltip-error);
+  }
+  &.warning {
+    background: var(--bg-tooltip-warning);
+  }
+  &.success {
+    background: var(--bg-tooltip-success);
+  }
+  &.default {
+    background: var(--bg-tooltip-default);
+  }
+  ul {
+    list-style: disc;
+    padding: 0 0 0 13px;
+    margin: 0;
+    max-width: 290px;
+    li {
+      margin-top: 8px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}

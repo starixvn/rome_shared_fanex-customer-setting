@@ -8,5 +8,7 @@ public class GroupType
 
     public short DisplayType { get; set; }
 
+    public bool IsReadOnly { get; set; }
+
     public IEnumerable<GroupItemDefault> GroupItems { get; set; }
 }

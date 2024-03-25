@@ -1,10 +1,14 @@
 namespace Fanex.Customer.API.Modules.CreateCustomer.Requests;
 
-public class QueryRequest
+public class QueryRequest : BaseQueryRequest
 {
-    public int UplineCustId { get; set; }
+    public int CustId { get; set; }
 
-    public byte UplineRoleId { get; set; }
+    public byte RoleId { get; set; }
 
-    public string Language { get; set; }
+    public bool IsGetUpline { get; set; }
+
+    public byte? UplineRoleId { get; set; }
+
+    public string SiteLabel { get; set; }
 }

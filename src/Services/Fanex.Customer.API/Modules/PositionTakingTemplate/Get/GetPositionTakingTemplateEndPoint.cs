@@ -1,4 +1,3 @@
-using Fanex.Customer.API.Modules.Message;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using MinimalApi.Endpoint;
@@ -8,7 +7,7 @@ namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
 public class GetPositionTakingTemplateEndPoint : IEndpoint<IResult, int, IDynamicRepository>
 {
     private readonly AppSettings appSettings;
-    
+
     public GetPositionTakingTemplateEndPoint(IOptions<AppSettings> appSettings)
     {
         this.appSettings = appSettings.Value;
@@ -29,7 +28,7 @@ public class GetPositionTakingTemplateEndPoint : IEndpoint<IResult, int, IDynami
             return Results.BadRequest();
         }
 
-        var items = await dynamicRepository.FetchAsync<PositionTakingTemplateDto>(new GetPositionTakingTemplateCriteria(custId, appSettings.CreationStatus));
+        var items = await dynamicRepository.FetchAsync<PositionTakingTemplateDto>(new GetPositionTakingTemplateCriteria(custId, appSettings.SettingStatus));
 
         var response = from item in items
                        group item by new

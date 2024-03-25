@@ -1,22 +1,20 @@
-using Fanex.Customer.API.Shared.Enumerations;
-using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer;
 
 public class CopyCustomerRequest
 {
+    public bool IsQrCode { get; set; }
+
+    public int UplineId { get; set; }
+
     public int ActorId { get; set; }
 
     public int ActorSubAccId { get; set; }
 
-    public string ActorSubAccName { get; set; }
-
     public string ActorUsername { get; set; }
 
-    public byte ActorUserLevel { get; set; }
-
-    public UserLevel ActorLevel => Enumeration.FromValue<UserLevel>(ActorUserLevel);
+    public byte CustLevel { get; set; }
 
     public string UserName { get; set; }
 
@@ -28,10 +26,6 @@ public class CopyCustomerRequest
 
     public int SourceCustId { get; set; }
 
-    public string SourceUsername { get; set; }
-
-    public int NumberOfAccounts { get; set; }
-
     public string Language { get; set; }
 
     public string LanguageKey => LanguageUtils.ToLanguageKey(Language);
@@ -40,10 +34,25 @@ public class CopyCustomerRequest
 
     public byte SystemId { get; set; }
 
-    public bool IsValid()
+    public string Site { get; set; }
+
+    public bool IsInternal { get; set; }
+
+    public string FirstName { get; set; } = string.Empty;
+
+    public string LastName { get; set; } = string.Empty;
+
+    public string Phone { get; set; } = string.Empty;
+
+    public string MobilePhone { get; set; } = string.Empty;
+
+    public string Fax { get; set; } = string.Empty;
+
+    public virtual bool IsValid()
         => ActorId > 0
         && ActorSubAccId >= 0
-        && 1 < ActorUserLevel && ActorUserLevel < 5
+        && UplineId >= 0
+        && 1 <= CustLevel && CustLevel < 5
         && !string.IsNullOrWhiteSpace(UserName)
         && !string.IsNullOrWhiteSpace(Password)
         && Credit >= 0

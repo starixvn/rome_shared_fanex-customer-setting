@@ -1,4 +1,3 @@
-using Fanex.Customer.API.Helpers;
 using Fanex.Data;
 using Fanex.Data.SqlServer;
 
@@ -19,13 +18,10 @@ public static class ApplicationBuilderExtensions
         var resourcePath = Path.Combine(env.ContentRootPath, "App_Data", "SPNames.xml");
         DbSettingProviderManager
             .StartNewSession()
-            .WithSqlServer()
+            .WithSqlServer(resourcePath)
             .Use(connectionStrings)
-            .Use(new ShardDbSettingProvider(new ShardInfoAccessor(
-                services.BuildServiceProvider().GetRequiredService<IHttpContextAccessor>()),
-                    resourcePath: resourcePath))
             .Run();
-            
+
         return app;
     }
 }

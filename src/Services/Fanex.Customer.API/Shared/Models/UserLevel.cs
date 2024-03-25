@@ -5,6 +5,9 @@ namespace Fanex.Customer.API.Shared.Models;
 [Serializable]
 public class UserLevel : Enumeration
 {
+
+    public static readonly UserLevel Company = new(5, "Company");
+
     public static readonly UserLevel Super = new(4, "Super");
 
     public static readonly UserLevel Master = new(3, "Master");
@@ -28,5 +31,9 @@ public class UserLevel : Enumeration
 
     public bool IsSuperLevel() => this == Super;
 
+    public bool IsCompanyLevel() => this == Company;
+
     public UserLevel GetDirectDownLineLevel() => FromValue<UserLevel>((byte)(Value - 1));
+
+    public UserLevel GetDirectUpLineLevel() => FromValue<UserLevel>((byte)(Value + 1));
 }

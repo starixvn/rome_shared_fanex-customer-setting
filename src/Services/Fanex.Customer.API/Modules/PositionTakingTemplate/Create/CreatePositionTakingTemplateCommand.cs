@@ -1,4 +1,3 @@
-using Fanex.Customer.API.Shared.Extensions;
 using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.PositionTakingTemplate;
@@ -11,7 +10,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
         string settings,
         bool isDefault,
         int subAccId,
-        byte creationStatus,
+        byte settingStatus,
         string language,
         string ip)
     {
@@ -20,7 +19,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
         Settings = settings;
         IsDefault = isDefault;
         SubAccId = subAccId;
-        CreationStatus = creationStatus;
+        SettingStatus = settingStatus;
         Language = language;
         IP = ip;
     }
@@ -33,7 +32,7 @@ public class CreatePositionTakingTemplateCommand : INonQueryCommand
 
     public bool IsDefault { get; }
 
-    public byte CreationStatus { get; }
+    public byte SettingStatus { get; }
 
     public int SubAccId { get; }
 

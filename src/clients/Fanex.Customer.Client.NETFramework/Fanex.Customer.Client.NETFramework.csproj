@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.Customer.Client\Fanex.Customer.Client.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <Version>1.0.0-beta08</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>@Rome</Authors>
+    <Company>Nexcel</Company>
+    <Product>Fanex</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.6" />
+  </ItemGroup>
+</Project>

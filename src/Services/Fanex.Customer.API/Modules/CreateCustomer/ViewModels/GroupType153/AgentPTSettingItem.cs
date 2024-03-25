@@ -1,66 +1,69 @@
+using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153.Constants;
+using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Models;
+using Newtonsoft.Json;
+
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 
-public class AgentPTSettingItem : GroupItemDefault
+public class AgentPTSettingItem : PTItem
 {
-    private const string PTXmlFormat
-        = "<R {0} IsLive=\"{1}\" MasterPT=\"{2}\" IsAuto=\"{3}\" AutoPT=\"{4}\" AgentPT=\"{5}\" MinPT=\"{6}\" />";
-
-    /// <summary>
-    /// Master PT
-    /// </summary>
+    [JsonProperty("MasterPT")]
     public decimal M2 { get; set; }
 
-    /// <summary>
-    /// Master Auto PT
-    /// </summary>
+    [JsonProperty("AutoMasterPT")]
     public decimal UM2 { get; set; }
 
-    /// <summary>
-    /// Is Auto
-    /// </summary>
+    [JsonProperty("IsAutoMasterPT")]
     public bool IM2 { get; set; }
 
-    /// <summary>
-    /// Agent Max PT
-    /// </summary>
+    [JsonProperty("AgentPT")]
     public decimal A2 { get; set; }
 
-    /// <summary>
-    /// Agent Min PT
-    /// </summary>
+    [JsonProperty("MinPT")]
     public decimal N2 { get; set; }
 
-    /// <summary>
-    /// Master Max PT
-    /// </summary>
+    [JsonIgnore]
     public decimal M3 { get; set; }
 
-    /// <summary>
-    /// Master Min PT
-    /// </summary>
+    [JsonIgnore]
     public decimal N3 { get; set; }
 
-    /// <summary>
-    /// Agent Max PT
-    /// </summary>
+    [JsonIgnore]
     public decimal A4 { get; set; }
 
-    public override string ToXml()
+    [JsonProperty("IsUpdAllMems")]
+    public bool IsUpdateMasterPTOnMembers { get; set; }
+
+    [JsonProperty("UpdAllMems_Value")]
+    public decimal MasterPTOnMembers { get; set; }
+
+    public bool ShouldSerializeM2()
     {
-            return string.Format(
-                PTXmlFormat,
-                base.ToXml(),
-                IsLive,
-                IM2 ? 0 : M2,
-                IM2 ? 1 : 0,
-                IM2 ? UM2 : 0,
-                A2,
-                N2);
+        if (IM2)
+        {
+            M2 = 0;
+        }
+        else
+        {
+            UM2 = 0;
+        }
+
+        return true;
     }
-    
+
+    public override Result Validate(string language = "en-US")
+    {
+        if (N2 > A2)
+        {
+            return Result.CreateErrorResult(StaticResources.Get("AgentMinPTCannotBeGreaterThanAgentMaxPT", language), ErrorCodes.AgentMinPTIsGreaterThanAgentMaxPT);
+        }
+
+        return Result.CreateSuccessfulResult();
+    }
+
     public override bool Is3DecimalPTValue()
-        => (M2 *10) % 10 != 0
-            || (UM2 *10) % 10 != 0
-            || (A2 *10) % 10 != 0
-            || (N2 *10) % 10 != 0;
+        => (M2 * 10) % 10 != 0
+            || (UM2 * 10) % 10 != 0
+            || (A2 * 10) % 10 != 0
+            || (N2 * 10) % 10 != 0;
 }

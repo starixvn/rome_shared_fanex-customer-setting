@@ -4,44 +4,56 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType151;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType152;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType156;
+using Fanex.Customer.API.Shared.Models;
+using Newtonsoft.Json;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 
-[JsonDerivedType(typeof(CommissionGroup), typeDiscriminator: 1)]
-[JsonDerivedType(typeof(BetSettingItem), typeDiscriminator: 2)]
-[JsonDerivedType(typeof(ParlayMaxPayoutSettingItem), typeDiscriminator: 3)]
-[JsonDerivedType(typeof(SuperPTSettingItem), typeDiscriminator: 4)]
-[JsonDerivedType(typeof(MasterPTSettingItem), typeDiscriminator: 5)]
-[JsonDerivedType(typeof(AgentPTSettingItem), typeDiscriminator: 6)]
-[JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 7)]
-[JsonDerivedType(typeof(CommissionSettingItem), typeDiscriminator: 8)]
-[JsonDerivedType(typeof(MemberPTItem), typeDiscriminator: 9)]
-[JsonDerivedType(typeof(GroupType157.BetSettingItem), typeDiscriminator: 10)]
+[JsonDerivedType(typeof(SuperCommissionGroup), typeDiscriminator: 1)]
+[JsonDerivedType(typeof(MasterCommissionGroup), typeDiscriminator: 2)]
+[JsonDerivedType(typeof(AgentCommissionGroup), typeDiscriminator: 3)]
+[JsonDerivedType(typeof(MemberCommissionGroup), typeDiscriminator: 4)]
+//[JsonDerivedType(typeof(CommissionGroup), typeDiscriminator: 5)]
+[JsonDerivedType(typeof(BetSettingItem), typeDiscriminator: 6)]
+[JsonDerivedType(typeof(ParlayMaxPayoutSettingItem), typeDiscriminator: 7)]
+[JsonDerivedType(typeof(SuperPTSettingItem), typeDiscriminator: 8)]
+[JsonDerivedType(typeof(MasterPTSettingItem), typeDiscriminator: 9)]
+[JsonDerivedType(typeof(AgentPTSettingItem), typeDiscriminator: 10)]
+[JsonDerivedType(typeof(AgentPTOnMemberSettingItem), typeDiscriminator: 11)]
+[JsonDerivedType(typeof(MasterPTOnMemberSettingItem), typeDiscriminator: 12)]
+[JsonDerivedType(typeof(SuperPTOnMemberSettingItem), typeDiscriminator: 13)]
+[JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 14)]
+[JsonDerivedType(typeof(CommissionSettingItem), typeDiscriminator: 15)]
+[JsonDerivedType(typeof(GroupType157.BetSettingItem), typeDiscriminator: 16)]
 public class GroupItemDefault
 {
-    private const string SportTypeBetTypeXmlFormat = "SportType=\"{0}\" BetType=\"{1}\"";
-
+    [JsonProperty(PropertyName="SportType")]
     public int SportTypeId { get; set; }
-
+    
+    [Newtonsoft.Json.JsonIgnore]
     public string SportTypeName { get; set; }
 
+    [JsonProperty(PropertyName="BetType")]
     public int BetTypeId { get; set; }
 
+    [Newtonsoft.Json.JsonIgnore]
     public string BetTypeName { get; set; }
 
+    [Newtonsoft.Json.JsonIgnore]
     public string DisplayName { get; set; }
 
+    [Newtonsoft.Json.JsonIgnore]
     public int? SubGroupId { get; set; }
 
+    [Newtonsoft.Json.JsonIgnore]
     public string SubGroupName { get; set; }
 
     public bool IsLive { get; set; }
 
-    public virtual string ToXml()
-        => string.Format(SportTypeBetTypeXmlFormat, SportTypeId, BetTypeId);
+    public virtual void MapUpline() { }
 
-    public virtual bool Validate()
-        => true;
+    public virtual Result Validate(string language = "en-US")
+        => Result.CreateSuccessfulResult();
 
     public virtual bool Is3DecimalPTValue()
         => false;

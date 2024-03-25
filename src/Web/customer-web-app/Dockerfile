@@ -1,54 +1,38 @@
-FROM hub.nexdev.net/base/node:17.9-alpine3.14 AS deps
-RUN apk add --no-cache libc6-compat
+# syntax=docker/dockerfile:1.4
+
+# 1. Build apps
+FROM hub.nexdev.net/base/node:18.16-alpine AS builder
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
 COPY src/Web/customer-web-app/package.json ./
-COPY src/Web/customer-web-app/yarn.lock ./
-RUN yarn --frozen-lockfile
-
-# 2. Rebuild the source code only when needed
-FROM hub.nexdev.net/base/node:17.9-alpine3.14 AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY src/Web/customer-web-app .
+COPY src/Web/customer-web-app/package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm npm install
 
 # Register TRANSFORM_CONFIG argument for transforming by environment
-ARG TRANSFORM_CONFIG
+ARG TRANSFORM_CONFIG=production
 RUN echo $TRANSFORM_CONFIG
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
-COPY "src/Web/customer-web-app/.env.$TRANSFORM_CONFIG" .env.production
-RUN yarn build
+COPY src/Web/customer-web-app .
+RUN npx nx run-many -t build --mode $TRANSFORM_CONFIG
 
-# If using npm comment out above and use below instead
-# RUN npm run build
+# 2. Nginx
+FROM hub.nexdev.net/base/nginxinc/nginx-unprivileged:1.22-alpine-slim
 
-# Production image, copy all the files and run next
-FROM hub.nexdev.net/base/node:17.9-alpine3.14 AS runner
-WORKDIR /app
+# Set root user has full permissions of read/write files/folders to copy needed things
+USER root
 
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+# Copy config nginx
+COPY --from=builder /app/.nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+WORKDIR /usr/share/nginx/html
 
-COPY --from=builder /app/public ./public
+# Remove default nginx static assets
+RUN rm -rf ./*
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Copy static assets from builder stage
+COPY --from=builder /app/dist/apps .
 
-USER nextjs
+WORKDIR /usr/share/nginx/html
 
-EXPOSE 5000
-
-ENV PORT 5000
-
-CMD ["node", "server.js"]
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

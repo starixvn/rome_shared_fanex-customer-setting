@@ -4,13 +4,15 @@ WORKDIR /src
 
 COPY ./src/Services/Fanex.Customer.API/Fanex.Customer.API.csproj ./Services/Fanex.Customer.API/Fanex.Customer.API.csproj
 RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
-RUN dotnet restore Services/Fanex.Customer.API/Fanex.Customer.API.csproj -v n
 
 COPY ./src/Services/Fanex.Customer.API ./Services/Fanex.Customer.API
 
 WORKDIR /src/Services/Fanex.Customer.API
+RUN --mount=type=cache,target=/root/.nuget/packages \
+    dotnet restore -v n
 
-RUN dotnet publish -r linux-x64 --self-contained false -o /app 
+RUN --mount=type=cache,target=/root/.nuget/packages \
+    dotnet publish -r linux-x64 --self-contained false -o /app  
 
 FROM hub.nexdev.net/base/dotnet/core/aspnet:7.0-alpine AS base
 

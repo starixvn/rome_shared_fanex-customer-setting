@@ -1,0 +1,47 @@
+.full-line {
+  width: 50%;
+  input {
+    margin-right: 0 !important;
+  }
+}
+.max-value {
+  display: block;
+  width: 50%;
+  white-space: nowrap;
+  + .inline {
+    width: 100%;
+  }
+}
+
+.inline {
+  padding: 4px 0 0 0;
+  &.full {
+    width: 100%;
+    input[type='text'] {
+      max-width: 100% !important;
+      width: 100%;
+      flex: 1;
+      margin-right: 0 !important;
+    }
+    .inline {
+      display: flex;
+      width: 53%;
+      padding-left: 11px;
+      white-space: nowrap;
+    }
+  }
+  display: flex;
+  align-items: center;
+  input[type='checkbox'] {
+    top: -1px;
+    width: auto !important;
+    margin: 0 4px 0 7px !important;
+  }
+  label {
+    cursor: pointer;
+    font-size: var(--font-size);
+    font-weight: normal;
+    color: var(--color-label);
+    margin: 0;
+  }
+}

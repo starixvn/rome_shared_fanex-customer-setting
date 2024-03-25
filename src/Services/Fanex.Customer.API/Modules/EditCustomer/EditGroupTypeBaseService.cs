@@ -1,0 +1,44 @@
+using EasyNetQ;
+using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
+using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
+using Fanex.Customer.API.Modules.EditCustomer.Requests;
+using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Shared.Services;
+using Fanex.Data;
+
+namespace Fanex.Customer.API.Modules.EditCustomer;
+
+public class EditGroupTypeBaseService: IEditGroupTypeBaseService
+{
+    protected readonly IMessageService messageService;
+
+    protected readonly ICacheRefService cacheRefService;
+
+    public EditGroupTypeBaseService() : this(null, null) { }
+
+    public EditGroupTypeBaseService(IMessageService messageService, ICacheRefService cacheRefService)
+    {
+        this.messageService = messageService ?? new MessageService();
+        this.cacheRefService = cacheRefService ?? new CacheRefService();
+    }
+
+    public virtual UpdateGroupTypeResult Validate(
+        EditRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual Task<UpdateGroupTypeResult> Update(
+        EditRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
+    {
+        throw new NotImplementedException();
+    }
+}

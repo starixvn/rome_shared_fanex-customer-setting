@@ -117,31 +117,5 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="GroupType150" xml:space="preserve">
-        <value>Commission</value>
-    </data>
-    <data name="GroupType151" xml:space="preserve">
-        <value>Bet Setting</value>
-    </data>
-    <data name="GroupType152" xml:space="preserve">
-        <value>Parlay Max Payout</value>
-    </data>
-    <data name="GroupType153" xml:space="preserve">
-        <value>Position Taking</value>
-    </data>
-    <data name="GroupType154" xml:space="preserve">
-        <value>Bet Setting</value>
-    </data>
-    <data name="GroupType156" xml:space="preserve">
-        <value>Commission</value>
-    </data>
-    <data name="GroupType158" xml:space="preserve">
-        <value>Commission</value>
-    </data>
-    <data name="GroupType159" xml:space="preserve">
-        <value>Bet Setting</value>
-    </data>
-    <data name="GroupType160" xml:space="preserve">
-        <value>Position Taking</value>
-    </data>
+    
 </root>

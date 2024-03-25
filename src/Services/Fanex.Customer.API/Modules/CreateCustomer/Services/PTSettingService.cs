@@ -1,4 +1,4 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
+using Fanex.Customer.API.Modules.CreateCustomer.Helpers;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
@@ -17,14 +17,20 @@ public interface IPTSettingService
 
 public class PTSettingService : BaseCustomerService, IPTSettingService
 {
-    public PTSettingService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ISharedService sharedService, ICacheRefService cacheRefService, IMessageService messageService)
-        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService)
+    public PTSettingService(
+        IDynamicRepository dynamicRepository, 
+        IOptions<AppSettings> appSettings, 
+        ISharedService sharedService, 
+        ICacheRefService cacheRefService, 
+        IMessageService messageService,
+        ICustomerSettingHelper helperService)
+        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService)
     {
     }
 
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request)
     {
-        var settingProfile = await sharedService.GetSettingProfiles(request.Site, request.Currency);
+        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency);
         var productGroups = settingProfile.Where(p => p.GroupType == 153).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {
@@ -32,8 +38,8 @@ public class PTSettingService : BaseCustomerService, IPTSettingService
                 Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
                 GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
-                    var groupTypeWithRoleId = IsPTGroupType(t.Key.GroupType) ? GetPTGroupTypeByCustomerLevel(t.Key.GroupType, request.RoleId - 1) : t.Key.GroupType;
-                    var groupItems = await groupItemMapping[groupTypeWithRoleId].Query(request.CustId, request.RoleId, g.Key, t.Key.GroupType);
+                    var groupTypeWithRoleId = IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevel(t.Key.GroupType, (byte)(request.RoleId - 1)) : t.Key.GroupType;
+                    var groupItems = await groupItemMapping[groupTypeWithRoleId].QueryForAddNew(request.CustId, request.RoleId, g.Key, t.Key.GroupType);
                     var groupType = new GroupType
                     {
                         Id = t.Key.GroupType,

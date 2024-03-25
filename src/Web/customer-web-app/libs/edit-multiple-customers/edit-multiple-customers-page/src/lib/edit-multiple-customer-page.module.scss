@@ -1,0 +1,45 @@
+.btn {
+  padding: 5px 0;
+
+  button {
+    color: var(--color-btn);
+    font-weight: bold;
+    padding: 5px 15px;
+    min-width: 100px;
+    background-color: var(--bg-btn-create);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--bg-btn-create-hover);
+    }
+  }
+}
+
+.global-tooltip {
+  max-width: 605px;
+}
+.list-user-update {
+  border: 1px solid var(--border-color);
+  font-weight: bold;
+  color: var(--color-label);
+  padding: 5px 10px 2px;
+  border-radius: 3px;
+  background: var(--bg-list-user);
+  margin-bottom: 10px;
+}
+.list-status-user-update {
+  border: 1px solid var(--border-color);
+  padding: 5px 10px;
+  border-radius: 3px;
+  background: var(--bg-list-user);
+  margin-bottom: 10px;
+  max-height: 200px;
+  overflow: auto;
+}
+.name-user-update {
+  font-weight: 500;
+  font-size: 110%;
+  margin-bottom: 1px;
+  color: var(--color-label);
+}

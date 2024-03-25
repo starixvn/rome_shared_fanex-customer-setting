@@ -117,31 +117,4 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="GroupType150" xml:space="preserve">
-        <value>佣金</value>
-    </data>
-    <data name="GroupType151" xml:space="preserve">
-        <value>投注设定</value>
-    </data>
-    <data name="GroupType152" xml:space="preserve">
-        <value>Parlay Max Payout</value>
-    </data>
-    <data name="GroupType153" xml:space="preserve">
-        <value>占成数</value>
-    </data>
-    <data name="GroupType154" xml:space="preserve">
-        <value>投注设定</value>
-    </data>
-    <data name="GroupType156" xml:space="preserve">
-        <value>佣金</value>
-    </data>
-    <data name="GroupType158" xml:space="preserve">
-        <value>佣金</value>
-    </data>
-    <data name="GroupType159" xml:space="preserve">
-        <value>投注设定</value>
-    </data>
-    <data name="GroupType160" xml:space="preserve">
-        <value>占成数</value>
-    </data>
 </root>

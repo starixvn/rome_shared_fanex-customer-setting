@@ -14,31 +14,43 @@ public class MessageService : IMessageService
 {
     private readonly ICacheRefService cacheRefService;
 
+    private readonly int TimeDiffGMT_4ToGMT8 = 12;
+
+    public MessageService() : this(null)
+    { }
+
     public MessageService(ICacheRefService cacheRefService)
     {
-        this.cacheRefService = cacheRefService;
+        this.cacheRefService = cacheRefService ?? new CacheRefService();
     }
 
     public MessageContent TranslateMessage(int messageType, string rawMessage, string language)
         => messageType switch
         {
-            MessageTypes.WrongPT
+            MessageTypes.DownlinePTViolation
+                => TranslateDownlinePTViolationSubMessages(rawMessage, language),
+            MessageTypes.WrongPT or MessageTypes.WrongPT_Edit
                 => TranslateMessage<WrongPTSubMessage>(rawMessage, language),
-            MessageTypes.MaxPTViolation
+            MessageTypes.MinPTViolation
+                => TranslateMessage<MinPTViolationSubMessage>(rawMessage, language),
+            MessageTypes.MaxPTViolation or MessageTypes.MaxPTViolation_Edit
                 => TranslateMessage<MaxPTViolationSubMessage>(rawMessage, language),
-            MessageTypes.MinMaxPTViolation
+            MessageTypes.MinMaxPTViolation or MessageTypes.MinMaxPTViolation_Edit
                 => TranslateMessage<MinMaxPTViolationSubMessage>(rawMessage, language),
             MessageTypes.SBCommissionViolation
                 => TranslateMessage<SBCommissionViolationSubMessage>(rawMessage, language),
+            MessageTypes.SBMemberCommissionViolation
+                => TranslateMessage<SBMemberCommissionViolationSubMessage>(rawMessage, language),
             MessageTypes.ParlayMaxPayoutViolation
                 => TranslateMessage<ParlayMaxPayoutViolationSubMessage>(rawMessage, language),
             MessageTypes.BetSettingViolation
                 => TranslateMessage<BetSettingViolationSubMessage>(rawMessage, language),
-            MessageTypes.CommissionViolation
-                or MessageTypes.WinLossLimitViolation
+            MessageTypes.CommissionViolation or MessageTypes.WinLossLimitViolation
                 => TranslateMessage<SubMessage>(rawMessage, language),
             MessageTypes.WrongAutoPT
                 => TranslateSimpleMessage(rawMessage, language),
+            MessageTypes.UpdateTooOften
+            => TranslateUpdateTooOftenMessage(rawMessage, language),
             _ => new MessageContent(rawMessage)
         };
 
@@ -49,7 +61,7 @@ public class MessageService : IMessageService
 
         if (simpleMessage != null)
         {
-            mainMessage = GetMessage(simpleMessage.MessageId, language);
+            mainMessage = GetMessage(simpleMessage.MessageId, simpleMessage.Message, language);
         }
 
         return new MessageContent(mainMessage);
@@ -58,9 +70,9 @@ public class MessageService : IMessageService
     private MessageContent TranslateMessage<T>(string rawMessage, string language) where T : SubMessage
     {
         var message = Deserialize<MainMessage<T>>(rawMessage);
-        var mainMessage = GetMessage(message.MessageId, language);
-
-        if (message.SubMessages.Any())
+        var mainMessage = GetMessage(message.MessageId, message.Message, language);
+        mainMessage = string.IsNullOrEmpty(mainMessage) ? message.Message : mainMessage;
+        if (message.SubMessages != null && message.SubMessages.Any())
         {
             return new MessageContent(mainMessage, TranslateSubMessages(message.SubMessages, language));
         }
@@ -68,21 +80,47 @@ public class MessageService : IMessageService
         return new MessageContent(mainMessage);
     }
 
-    private IEnumerable<string> TranslateSubMessages<T>(T[] subMessages, string language) where T : SubMessage
+    private IEnumerable<SubMessageContent> TranslateSubMessages<T>(T[] subMessages, string language) where T : SubMessage
     {
-        var messages = new List<string>();
+        var messages = new List<SubMessageContent>();
 
         foreach (var subMessage in subMessages)
         {
-            messages.Add(subMessage.ToString(cacheRefService, language));
+            messages.Add(subMessage.ToContent(cacheRefService, language));
         }
 
         return messages;
     }
 
-    private static string GetMessage(int messageId, string language)
+    private MessageContent TranslateDownlinePTViolationSubMessages(string rawMessage, string language)
     {
-        return StaticResources.Get($"Msg_{messageId}", language);
+        var messages = Deserialize<DownlinePTViolationMainMessage>(rawMessage);
+        messages.GroupUsernameBySportTypeBetType();
+        var mainMessage = GetMessage(messages.MessageId, messages.Message, language);
+        var subMessages = TranslateSubMessages(messages.SubMessages, language);
+        return new MessageContent(mainMessage, subMessages);
+    }
+
+    private MessageContent TranslateUpdateTooOftenMessage(string rawMessage, string language)
+    {
+        var mainMessage = rawMessage;
+        var updateTooOftenMessage = Deserialize<RootMessage>(rawMessage);
+
+        if (updateTooOftenMessage != null)
+        {
+            DateTime lastUpdatedTime;
+            if (DateTime.TryParse(updateTooOftenMessage.Message, out lastUpdatedTime))
+            {
+                mainMessage = string.Format(GetMessage(updateTooOftenMessage.MessageId, updateTooOftenMessage.Message, language), lastUpdatedTime.AddHours(TimeDiffGMT_4ToGMT8).ToString("dd/MM/yyyy"));
+            }
+        }
+
+        return new MessageContent(mainMessage);
+    }
+
+    private static string GetMessage(int messageId, string defaultMessage, string language)
+    {
+        return StaticResources.Get($"Msg_{messageId}", language) ?? defaultMessage;
     }
 
     private static T Deserialize<T>(string text) where T : RootMessage

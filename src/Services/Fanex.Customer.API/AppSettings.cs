@@ -4,8 +4,6 @@ public class AppSettings
 {
     public byte SettingStatus { get; set; }
 
-    public byte CreationStatus { get; set; }
-
     public string SiteLabelBelonging777Group { get; set; }
 
     public bool Belonging777Group(string siteLabel)

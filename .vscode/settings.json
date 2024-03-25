@@ -1,5 +1,10 @@
 {
-  "omnisharp.enableRoslynAnalyzers": true,
-  "dotnet-test-explorer.testProjectPath": "**/*.Tests.csproj",
-  "dotnet.defaultSolution": "Fanex.Customer.sln"
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 120,
+  "files.autoSave": "off",
+  "prettier.printWidth": 120,
+  "prettier.configPath": "./src/Web/customer-web-app/.prettierrc",
+  "cSpell.words": [
+    "sportsbook",
+    "upline"
+  ]
 }

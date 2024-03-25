@@ -40,7 +40,7 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
             request.Settings.BuildXMLSettings(),
             request.IsDefault,
             request.SubAccId,
-            appSettings.CreationStatus,
+            appSettings.SettingStatus,
             LanguageUtils.ToLanguageKey(request.Language),
             request.IP);
 

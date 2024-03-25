@@ -8,9 +8,9 @@ public class GetPTTemplateEndpoint : IEndpoint<IResult, QueryPTTemplateRequest, 
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/customer/pt-settings", (QueryPTTemplateRequest request, IPTSettingService service)
+        app.MapGet("/api/customer/pt-settings", ([AsParameters]QueryPTTemplateRequest request, IPTSettingService service)
             => HandleAsync(request, service))
-            .WithTags("Create Customer");
+            .WithTags("PositionTakingTemplate");
     }
 
     public async Task<IResult> HandleAsync(QueryPTTemplateRequest request, IPTSettingService service)

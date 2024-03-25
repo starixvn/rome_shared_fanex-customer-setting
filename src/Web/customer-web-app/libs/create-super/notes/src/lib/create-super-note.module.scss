@@ -1,0 +1,48 @@
+.alert-info {
+  color: var(--color-alert-info);
+  font-size: 13px;
+  line-height: 20px;
+  padding: 0 10px 10px 29px;
+  margin-bottom: 0;
+  border: 0;
+  overflow: unset;
+  font-weight: 500;
+  position: relative;
+  &:before {
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: '\e909';
+    position: absolute;
+    font-size: 20px;
+    top: -1px;
+    left: -1px;
+    color: var(--color-icon-alert-info);
+  }
+}
+.block-note {
+  padding: 10px;
+}
+.block-alert{
+  border: 1px solid var(--border-alert);
+  border-radius: 2px;
+  background: var(--bg-alert);
+  padding: 10px 10px 0 10px;
+  [class^="_alert-"] + [class^="_alert-"]{
+    margin-top: 10px; 
+    &:after{
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #CACACA;
+    }
+  }
+}

@@ -17,6 +17,9 @@ public class SubMessage
     [XmlAttribute]
     public int SettingLevel { get; set; }
 
+    public virtual SubMessageContent ToContent(ICacheRefService cacheRefService, string language)
+    => new SubMessageContent(ToString(cacheRefService, language));
+
     public virtual string ToString(ICacheRefService cacheRefService, string language)
         => SettingLevel switch
         {

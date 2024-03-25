@@ -1,0 +1,21 @@
+// note component
+.container {
+  margin-bottom: 12px;
+  .header {
+    display: inline-block;
+    background-color: #90bdea;
+    border-radius: 5px 5px 0 0;
+    font-weight: 700;
+    font-size: 15px;
+    color: #000000;
+    padding: 2px 13px 2px;
+  }
+  .content {
+    border: 1px solid #90bdea;
+    border-radius: 0 5px 5px 5px;
+    color: #333333;
+    background-color: #e7f3ff;
+    padding: 7px 11px;
+  }
+}
+// end note component

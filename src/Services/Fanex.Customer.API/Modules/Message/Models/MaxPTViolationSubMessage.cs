@@ -10,9 +10,9 @@ public class MaxPTViolationSubMessage : WrongPTSubMessage
     [XmlAttribute]
     public decimal MaxPT { get; set; }
 
-    public override string ToString(ICacheRefService cacheRefService, string language)
-        => string.Format("{0} - {1}: {2}",
+    public override SubMessageContent ToContent(ICacheRefService cacheRefService, string language)
+        => new SubMessageContent(string.Format("{0} - {1}: {2}",
             base.ToString(cacheRefService, language),
-            StaticResources.Get(IsLive ? "MaxLive" : "Max", language),
-            PTFormatter.FormatPT(MaxPT));
+            StaticResources.Get("Max", language),
+            PTFormatter.FormatPT(MaxPT)), IsLive);
 }

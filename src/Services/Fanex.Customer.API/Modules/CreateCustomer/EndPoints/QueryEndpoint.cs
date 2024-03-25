@@ -2,20 +2,50 @@ using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Services;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using MinimalApi.Endpoint;
+using Newtonsoft.Json;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.EndPoints;
 
-public class QueryEndpoint : IEndpoint<IResult, QueryRequest, IQueryCustomerService>
+public class QueryCustomerSettingsEndpoint : IEndpoint<IResult, QuerySuperRequest, IQueryCustomerService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/customer/query", (QueryRequest request, IQueryCustomerService service)
+        app.MapGet("/api/customer/globalsetting", ([AsParameters] QuerySuperRequest request, IQueryCustomerService service)
             => HandleAsync(request, service))
-            .Produces<CustomerSetting>().WithTags("Create Customer");
+            .Produces<CustomerSetting>().WithTags("Customer Settings");
+
+        app.MapGet("/api/customer", ([AsParameters] QueryRequest request, IQueryCustomerService service)
+            => HandleDownlineAsync(request, service))
+            .Produces<CustomerSetting>().WithTags("Customer Settings");
     }
 
-    public async Task<IResult> HandleAsync(QueryRequest request, IQueryCustomerService service)
+    public async Task<IResult> HandleAsync(QuerySuperRequest request, IQueryCustomerService service)
     {
-        return Results.Ok(await service.Query(request));
+        Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
+        return Results.Ok(await service.QuerySuper(request, request.ProductGroupId == 1));
+    }
+
+    public async Task<IResult> HandleDownlineAsync(QueryRequest request, IQueryCustomerService service)
+    {
+        Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
+        // if (request.IsGetUpline && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0))
+        // {
+        //     request.ProductGroupId = 1;
+        // }
+        // else
+        // {
+        //     request.ProductGroupId = 0;
+        // }
+        if (string.IsNullOrWhiteSpace(request.Language))
+        {
+            request.Language = "en-US";
+        }
+
+        if (!request.UplineRoleId.HasValue)
+        {
+            request.UplineRoleId = (byte?)(request.RoleId + 1);
+        }
+
+        return Results.Ok(await service.Query(request, request.ProductGroupId == 1));
     }
 }
