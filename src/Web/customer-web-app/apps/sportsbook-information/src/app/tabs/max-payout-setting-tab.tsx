@@ -152,8 +152,8 @@ const FistTable = ({ data, isSpecialPlatform }: { data: SabaSport[], isSpecialPl
     if (e.rowSpan === undefined) {
       e.rowSpan = 1;
     }
-    for (let i = index + 1; i < data.length - 1; i++) {
-      if (e.settingFollowedName !== '' && e.settingFollowedName === data[i].settingFollowedName) {
+    for (let i = index + 1; i < data.length; i++) {
+      if (e.settingFollowedName !== '' && e.settingFollowedName.toLowerCase() === data[i].settingFollowedName.toLowerCase()) {
         e.rowSpan = e.rowSpan + 1;
         data[i].settingFollowedName = '';
       }
@@ -176,9 +176,9 @@ const FistTable = ({ data, isSpecialPlatform }: { data: SabaSport[], isSpecialPl
       <tbody>
         {removeDuplicateSettingFollowedName.map((e, index) => (
           <tr key={`${e.settingName}-${index}`}>
-            <td className="text-center">{e.settingName}</td>
+            <td className="text-left">{e.settingName}</td>
             {e.settingFollowedName && (
-              <td rowSpan={e.rowSpan} className="bgGrey text-center">
+              <td rowSpan={e.rowSpan} className="bgGrey text-left">
                 {e.settingFollowedName}
               </td>
             )}
@@ -206,11 +206,11 @@ const SecondTable = ({ data }: { data: MaxPayoutSport }) => {
           return (
             <tr key={`${betType}-${index}`}>
               {index === 0 && (
-                <td rowSpan={data?.bettypeName.length} className="text-center bgGrey">
+                <td rowSpan={data?.bettypeName.length} className="text-left bgGrey">
                   <Trans i18nKey={`${data?.sportName}`} />
                 </td>
               )}
-              <td className="text-center">{betType}</td>
+              <td className="text-left">{betType}</td>
             </tr>
           );
         })}
