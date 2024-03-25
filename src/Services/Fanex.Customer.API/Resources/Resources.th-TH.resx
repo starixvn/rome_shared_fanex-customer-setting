@@ -366,7 +366,7 @@
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
-		<value>General Info is updated successfully.</value>
+		<value>ข้อมูลทั่วไปอัพเดทเสร็จสมบูรณ์</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_151" xml:space="preserve">
@@ -374,7 +374,7 @@
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_152" xml:space="preserve">
-		<value>Parlay Max Payout is updated successfully.</value>
+		<value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพันอัพเดทเสร็จสมบูรณ์</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_153" xml:space="preserve">
@@ -388,7 +388,7 @@
 		<value>การกำหนดการวางเดิมพัน</value>
 	</data>
 	<data name="GroupType152" xml:space="preserve">
-		<value>Parlay Max Payout</value>
+		<value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน</value>
 	</data>
 	<data name="GroupType153" xml:space="preserve">
 		<value>ค่าความเสี่ยง</value>

@@ -366,7 +366,7 @@
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
-		<value>General Info is updated successfully.</value>
+		<value>基本信息已成功更新。</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_150" xml:space="preserve">
@@ -378,7 +378,7 @@
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_152" xml:space="preserve">
-		<value>Parlay Max Payout is updated successfully.</value>
+		<value>每注串關最高派彩已成功更新。</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_153" xml:space="preserve">
@@ -392,7 +392,7 @@
 		<value>投注設定</value>
 	</data>
 	<data name="GroupType152" xml:space="preserve">
-		<value>Parlay Max Payout</value>
+		<value>每注串關最高派彩</value>
 	</data>
 	<data name="GroupType153" xml:space="preserve">
 		<value>佔成數</value>

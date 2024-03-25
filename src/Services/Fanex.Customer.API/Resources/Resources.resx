@@ -394,7 +394,7 @@
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_152" xml:space="preserve">
-		<value>Parlay Max Payout is updated successfully.</value>
+		<value>Parlay Max Payout Per Bet is updated successfully.</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_153" xml:space="preserve">
@@ -408,7 +408,7 @@
 		<value>Bet Setting</value>
 	</data>
 	<data name="GroupType152" xml:space="preserve">
-		<value>Parlay Max Payout</value>
+		<value>Parlay Max Payout per Bet</value>
 	</data>
 	<data name="GroupType153" xml:space="preserve">
 		<value>Position Taking</value>

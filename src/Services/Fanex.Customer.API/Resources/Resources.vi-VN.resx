@@ -366,7 +366,7 @@
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
-		<value>General Info is updated successfully.</value>
+		<value>Thông Tin Chung đã được cập nhật thành công.</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_151" xml:space="preserve">
@@ -374,7 +374,7 @@
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_152" xml:space="preserve">
-		<value>Parlay Max Payout is updated successfully.</value>
+		<value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên đã được cập nhật thành công.</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_153" xml:space="preserve">
@@ -388,7 +388,7 @@
 		<value>Tiền Cược</value>
 	</data>
 	<data name="GroupType152" xml:space="preserve">
-		<value>Parlay Max Payout</value>
+		<value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên</value>
 	</data>
 	<data name="GroupType153" xml:space="preserve">
 		<value>PT</value>
