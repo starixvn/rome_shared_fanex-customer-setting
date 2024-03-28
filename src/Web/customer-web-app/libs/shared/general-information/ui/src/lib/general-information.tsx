@@ -195,7 +195,14 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
           </BlockItem>
           {/* SMAM max credit*/}
           <div className={styles['col-max-credit']}>
-            <BlockItem label={t(`${UserLevelName[roleId].toLowerCase()}MaxCredit`)} isRequired>
+            <BlockItem
+              label={
+                generalInfo.roleId === UserLevel.Member
+                  ? t('GivenCredit')
+                  : t(`${UserLevelName[roleId].toLowerCase()}MaxCredit`)
+              }
+              isRequired
+            >
               <div>
                 <NumericFormat
                   className={classNames({

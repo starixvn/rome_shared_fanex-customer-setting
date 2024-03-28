@@ -16,6 +16,7 @@
   "masterMaxCreditInvalid": "เครดิตสูงสุดของมาสเตอร์ต้องอยู่ระหว่าง {{min}} และ {{max}}",
   "agentMaxCreditInvalid": "เครดิตสูงสุดของเอเย่นต้องอยู่ระหว่าง {{min}} และ {{max}}",
   "memberMaxCreditInvalid": "เครดิตของสมาชิกต้องอยู่ระหว่าง {{min}} และ {{max}}",
+  "givenCreditInvalid": "เครดิตของสมาชิกต้องอยู่ระหว่าง {{min}} และ {{max}}",
   "accBalanceTransferCondition": "เงื่อนไขในการโอนถ่ายยอดคงเหลือของบัญชี",
   "usernameIsInvalid": "ชื่อที่ใช้ในการเข้าระบบนี้ ไม่สามารถใช้งานได้.",
   "chooseDaily": "กรุณาเลือกแต่ละวันแทนที่จะเลือกทั้ง 7 วัน",
@@ -153,5 +154,6 @@
   "SuperPTOnMemberCannotBeGreaterThan": "ค่าความเสี่ยงของซูเปอร์ต่อเมมเบอร์ต้องน้อยกว่าหรือเท่ากับ {{value}}.",
   "SuperPTOnMemberCannotBeLessThan": "ค่าความเสี่ยงของซูเปอร์ต่อเมมเบอร์ต้องมากกว่ากว่าหรือเท่ากับ {{value}}.",
   "SuperAutoPTCannotBeLessThan": "Super Auto PT must be greater than or equal {{value}}.",
-  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}."
+  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}.",
+  "GivenCredit": "เครดิตทั้งหมด"
 }

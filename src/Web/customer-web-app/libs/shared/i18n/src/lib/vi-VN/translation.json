@@ -16,6 +16,7 @@
   "masterMaxCreditInvalid": "Hạn mức tín dụng lớn nhất của Master phải từ {{min}} đến {{max}}",
   "agentMaxCreditInvalid": "Hạn mức tín dụng lớn nhất của Agent phải từ {{min}} đến {{max}}",
   "memberMaxCreditInvalid": "Hạn mức tín dụng lớn nhất của Member phải từ {{min}} đến {{max}}",
+  "givenCreditInvalid": "Hạn mức tín dụng của Member phải từ {{min}} đến {{max}}",
   "accBalanceTransferCondition": "Điều kiện chuyển khoản",
   "usernameIsInvalid": "Tên tài khoản đã được dùng.",
   "chooseDaily": "Vui lòng chọn Hằng Ngày thay vì toàn bộ 7 ngày.",
@@ -152,5 +153,6 @@
   "SuperPTOnMemberCannotBeGreaterThan": "Super PT on Member must be less than or equal to {{value}}.",
   "SuperPTOnMemberCannotBeLessThan": "Super PT on Member must be greater than or equal to {{value}.",
   "SuperAutoPTCannotBeLessThan": "Super Auto PT must be greater than or equal {{value}}.",
-  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}."
+  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}.",
+  "GivenCredit": "Hạn mức được cấp"
 }

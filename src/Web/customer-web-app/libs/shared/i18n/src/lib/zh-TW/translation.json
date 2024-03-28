@@ -16,6 +16,7 @@
   "masterMaxCreditInvalid": "總代理最高信用額應在{{min}}和{{max}}之間",
   "agentMaxCreditInvalid": "代理最高信用額應在{{min}}和{{max}}之間",
   "memberMaxCreditInvalid": "會員信用額應在{{min}}和{{max}}之間",
+  "givenCreditInvalid": "會員信用額應在{{min}}和{{max}}之間",
   "accBalanceTransferCondition": "轉帳設定",
   "usernameIsInvalid": "此帳號無效.",
   "chooseDaily": "如要選擇七天,請選每天",
@@ -153,5 +154,6 @@
   "SuperPTOnMemberCannotBeGreaterThan": "超級總代理於會員的占成必須少於或相等於 {{value}}。",
   "SuperPTOnMemberCannotBeLessThan": "超級總代理於會員的占成必須大於或相等於 {{value}}。",
   "SuperAutoPTCannotBeLessThan": "Super Auto PT must be greater than or equal {{value}}.",
-  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}."
+  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}.",
+  "GivenCredit": "信用額度"
 }
