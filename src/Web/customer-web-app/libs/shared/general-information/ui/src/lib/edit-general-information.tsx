@@ -120,7 +120,11 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
             </BlockItem>
             <div className={styles['col-max-credit']}>
               <BlockItem
-                label={t(`${UserLevelName[params.roleId]?.toLowerCase()}MaxCredit`)}
+                label={
+                  generalInfo.roleId === UserLevel.Member
+                    ? t('GivenCredit')
+                    : t(`${UserLevelName[params.roleId]?.toLowerCase()}MaxCredit`)
+                }
                 isRequired={!(isReadOnly || napCanNotEditCredit)}
               >
                 <div>

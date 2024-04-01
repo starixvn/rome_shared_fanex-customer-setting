@@ -17,6 +17,7 @@
   "masterMaxCreditInvalid": "Master Max Credit must be between {{min}} and {{max}}",
   "agentMaxCreditInvalid": "Agent Max Credit must be between {{min}} and {{max}}",
   "memberMaxCreditInvalid": "Member Max Credit must be between {{min}} and {{max}}",
+  "givenCreditInvalid": "Member Given Credit must be between {{min}} and {{max}}",
   "accBalanceTransferCondition": "Account Balance Transfer Condition",
   "usernameIsInvalid": "This username is not available.",
   "chooseDaily": "Please choose Daily instead of 7 days.",
@@ -154,5 +155,6 @@
   "SuperPTOnMemberCannotBeGreaterThan": "Super PT on Member must be less than or equal to {{value}}.",
   "SuperPTOnMemberCannotBeLessThan": "Super PT on Member must be greater than or equal to {{value}.",
   "SuperAutoPTCannotBeLessThan": "Super Auto PT must be greater than or equal {{value}}.",
-  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}."
+  "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}.",
+  "GivenCredit": "Given Credit"
 }

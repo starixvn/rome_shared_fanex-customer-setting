@@ -25,7 +25,7 @@ export default class GeneralInformationValidator {
     [UserLevel.Super]: 'superMaxCreditInvalid',
     [UserLevel.Master]: 'masterMaxCreditInvalid',
     [UserLevel.Agent]: 'agentMaxCreditInvalid',
-    [UserLevel.Member]: 'memberMaxCreditInvalid',
+    [UserLevel.Member]: 'givenCreditInvalid',
   };
 
   constructor(generalInfo: GeneralInfo) {
@@ -60,7 +60,7 @@ export default class GeneralInformationValidator {
 
   public async validateAllForEdit() {
     const results = {
-      [`superMaxCredit`]: this.generalInfo.roleId  === UserLevel.Super ? this.validateMaxCredit(true) : true,
+      [`superMaxCredit`]: this.generalInfo.roleId === UserLevel.Super ? this.validateMaxCredit(true) : true,
       [`masterMaxCredit`]: this.generalInfo.roleId === UserLevel.Master ? this.validateMaxCredit(true) : true,
       [`agentMaxCredit`]: this.generalInfo.roleId === UserLevel.Agent ? this.validateMaxCredit(true) : true,
       [`memberMaxCredit`]: (() => {
@@ -164,7 +164,7 @@ export default class GeneralInformationValidator {
     if (uplineMaxCredit !== undefined && !isNaN(uplineMaxCredit) && !isEditMode && maxCredit > uplineMaxCredit) {
       return (this.validationState = new ValidationResult(
         `maxCredit`,
-        this.invalidateMaxCreditMessages[(roleId) as UserLevel],
+        this.invalidateMaxCreditMessages[roleId as UserLevel],
         {
           min: '0',
           max: NumberHelper.formatWithCommas(uplineMaxCredit, 4),
@@ -180,7 +180,7 @@ export default class GeneralInformationValidator {
     if (isEditMasterOrAgent && (maxCredit < maxCreditMin || maxCredit > maxCreditMax)) {
       return (this.validationState = new ValidationResult(
         `maxCredit`,
-        this.invalidateMaxCreditMessages[(roleId) as UserLevel],
+        this.invalidateMaxCreditMessages[roleId as UserLevel],
         {
           min: NumberHelper.formatWithCommas(maxCreditMin, 4),
           max: NumberHelper.formatWithCommas(maxCreditMax, 4),
@@ -192,7 +192,7 @@ export default class GeneralInformationValidator {
     if (isEditSuper && maxCredit < maxCreditMin) {
       return (this.validationState = new ValidationResult(
         `maxCredit`,
-        this.invalidateMaxCreditMessages[(roleId) as UserLevel],
+        this.invalidateMaxCreditMessages[roleId as UserLevel],
         {
           min: NumberHelper.formatWithCommas(maxCreditMin, 4),
         }
@@ -203,7 +203,7 @@ export default class GeneralInformationValidator {
     if (isEditMember && maxCredit > maxCreditMax) {
       return (this.validationState = new ValidationResult(
         `maxCredit`,
-        this.invalidateMaxCreditMessages[(roleId) as UserLevel],
+        this.invalidateMaxCreditMessages[roleId as UserLevel],
         {
           min: '0',
           max: NumberHelper.formatWithCommas(maxCreditMax, 4),
