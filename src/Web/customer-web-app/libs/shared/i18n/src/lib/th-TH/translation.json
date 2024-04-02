@@ -155,7 +155,7 @@
   "SuperPTOnMemberCannotBeLessThan": "ค่าความเสี่ยงของซูเปอร์ต่อเมมเบอร์ต้องมากกว่ากว่าหรือเท่ากับ {{value}}.",
   "SuperAutoPTCannotBeLessThan": "Super Auto PT must be greater than or equal {{value}}.",
   "SuperPTCannotBeLessThan": "Super PT must be greater than or equal {{value}}.",
-  "GivenCredit": "เครดิตทั้งหมด"
+  "GivenCredit": "เครดิตทั้งหมด",
   "ProductStatus": "สถานะผลิตภันฑ์",
   "BetLimit": "วงเงินเดิมพัน",
   "WinLossLimit": "วงเงินแพ้ชนะ",
