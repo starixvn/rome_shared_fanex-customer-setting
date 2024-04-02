@@ -13,7 +13,8 @@ public class EditEndpoint : IEndpoint<IResult, EditRequest, IEditCustomerService
     {
         app.MapPut("/api/customer", (EditRequest request, IEditCustomerService service)
            => HandleAsync(request, service))
-           .Produces<UpdateGroupTypeResult>().WithTags("Customer Settings");
+           .Produces<UpdateGroupTypeResult>().WithTags(EnpointTags.CustomerSettings);
+           .Produces<List<UpdateCustomerResult>>().WithTags(EnpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(EditRequest request, IEditCustomerService service)
