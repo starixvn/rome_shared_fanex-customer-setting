@@ -66,7 +66,8 @@
         <Setting Key="Age_CustomerSelUserSearch" SpName="Age_CustomerSelUserSearch" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
         <Setting Key="Age_CustomerCheckExists" SpName="Age_CustomerCheckExists" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
         <Setting Key="Acc_CustomerCreditInfoSel" SpName="Acc_CustomerCreditInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-            <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+            <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" Class="CreditInfo"/>
+            <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CreditInfo" />
         </Setting>
         <Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
         <Setting Key="Age_CustomerSelCheckBelonging_ByUsername" SpName="Age_CustomerSelCheckBelonging_ByUsername" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
@@ -75,7 +76,7 @@
         <Setting Key="Acc_CustomerPTInfoSel" SpName="Acc_CustomerPTInfoSel" DbName="DBAGE.bodb02.wsv_alp" />
         <Setting Key="Acc_LiteMode_CustSetting_ProductListInfoSel" SpName="Acc_LiteMode_CustSetting_ProductListInfoSel" DbName="DBAGE.bodb02.wsv_alp" />
         <Setting Key="Age_MemCommission_SelBettype" SpName="Age_MemCommission_SelBettype" DbName="DBAGE.bodb02.wsv_alp" />
-        <Setting Key="Acc_SabaVirtualSportsBetSettingRef_Sel" SpName="Acc_SabaVirtualSportsBetSettingRef_Sel" DbName="DBTXN.bodb02.wsv_alp" >
+        <Setting Key="Acc_SabaVirtualSportsBetSettingRef_Sel" SpName="Acc_SabaVirtualSportsBetSettingRef_Sel" DbName="DBTXN.bodb02.wsv_alp">
             <Mapping DataField="SettingID" ObjectProperty="SettingId" />
             <Mapping DataField="SettingID_Followed" ObjectProperty="SettingIdFollowed" />
         </Setting>
