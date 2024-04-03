@@ -29,7 +29,7 @@
   width: 30px;
   height: 24px;
   padding: 2px;
-  path{
+  path {
     fill: var(--icon-info-link);
   }
 }
@@ -38,6 +38,19 @@
   transform: scale(1.2);
   transition: transform 0.2s ease-in-out; /* Optional: Add a smooth transition */
 }
-.iconClose{
+.iconClose {
   fill: var(--color-label);
+}
+.iconCredit {
+  width: 14px;
+  height: 14px;
+  border-radius: 20px;
+  fill: var(--color-icon);
+  background-color: var(--icon-info-link);
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  padding: 1px;
+  margin-left: 3px;
+  cursor: pointer;
 }

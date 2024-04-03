@@ -29,5 +29,7 @@ public class CustomerInfo
     public decimal Credit { get; init; }
 
     public decimal MaxCredit { get; init; }
+
+    public decimal MemberMaxCredit { get; init; }
 }
 

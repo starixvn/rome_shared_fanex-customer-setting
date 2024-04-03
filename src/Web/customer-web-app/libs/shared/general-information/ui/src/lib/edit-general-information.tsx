@@ -17,7 +17,9 @@ import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/bl
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CommissionGroup from './commission-group';
-import { errorTooltip, iconTrueFalse, maxCreditValidateFiled, rangeMinMax } from './common';
+import { errorTooltip, iconTrueFalse, maxCreditValidateFiled } from './common';
+import CreditNote from './credit-note';
+import CreditRange from './credit-range';
 import GeneralInformationValidator, { generalInformationValidatorFields } from './general-information-validator';
 import styles from './general-information.module.scss';
 import UserInfo from './user-info';
@@ -79,18 +81,33 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
       return result;
     };
 
-    const getErrorByField = (fieldName: string) =>
-      validationResults[fieldName] && validationResults[fieldName] !== true;
-
-    const memberCreditGuide = () => {
-      return rangeMinMax(generalInfo.memberMaxCreditMin ?? 0, generalInfo.maxCredit ?? 0);
-    };
-
-    const creditGuide = () => {
-      return rangeMinMax(generalInfo.maxCreditMin ?? 0, generalInfo.maxCreditMax ?? 0, generalInfo.roleId);
+    const getErrorByField = (fieldName: string) => {
+      return validationResults[fieldName] && validationResults[fieldName] !== true;
     };
 
     const napCanNotEditCredit = params.noPermissionEditCredit;
+    let maxCreditMax = generalInfo.maxCreditMax;
+    if (generalInfo.roleId === UserLevel.Super) {
+      maxCreditMax = undefined;
+    }
+
+    const isShowCreditHint = generalInfo.roleId === UserLevel.Member && generalInfo.memberMaxCredit;
+
+    if (isShowCreditHint) {
+      maxCreditMax = Math.min(generalInfo.maxCreditMax || 0, generalInfo.memberMaxCredit || 0);
+    }
+
+    const renderCreditHint = () => {
+      if (isShowCreditHint) {
+        return (
+          <CreditNote
+            availableCredit={generalInfo.maxCreditMax || 0}
+            memberMaxCredit={generalInfo.memberMaxCredit || 0}
+          />
+        );
+      }
+      return null;
+    };
 
     return (
       <Block
@@ -126,7 +143,7 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
                       name="maxCredit"
                       maxLength={MaxNumberInputLength}
                       allowNegative={false}
-                      decimalScale={4}
+                    decimalScale={2}
                       thousandSeparator=","
                       valueIsNumericString
                       value={generalInfo.maxCredit}
@@ -157,7 +174,10 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
                       <span>{iconTrueFalse(getErrorByField(maxCreditValidateFiled(generalInfo)))}</span>
                     )}
                   </div>
-                  {creditGuide()}
+                <div className={styles['max-credit']}>
+                  <CreditRange min={generalInfo.maxCreditMin ?? 0} max={maxCreditMax} />
+                  {renderCreditHint()}
+                </div>
                 </BlockItem>
               </div>
             )}
@@ -177,7 +197,7 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
                       setValidationResults({ ...validationResults, memberMaxCredit: validateMemberMaxCreditResult });
                     }}
                     allowNegative={false}
-                    decimalScale={4}
+                    decimalScale={2}
                     thousandSeparator=","
                     valueIsNumericString
                     id="memberMaxCredit"
@@ -192,7 +212,9 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
                   )}
                   {!napCanNotEditCredit && <span>{iconTrueFalse(getErrorByField('memberMaxCredit'))}</span>}
                 </div>
-                {memberCreditGuide()}
+                <div className={styles['max-credit']}>
+                  <CreditRange min={generalInfo.memberMaxCreditMin ?? 0} max={generalInfo.maxCredit ?? 0} />
+                </div>
               </BlockItem>
             )}
             {/*   CommissionGroup */}

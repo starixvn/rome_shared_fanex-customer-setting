@@ -58,6 +58,8 @@
   --border-icon-collapse: #333333;
   --color-icon-collapse: #333333;
   --border-icon-success: #f4f4f4;
+  --bg-icon: #333;
+  --color-icon: #fff;
   //product setting
   --border-color-product-setting: #5f626b;
   --color-header-table: #ffffff;
@@ -155,6 +157,8 @@
   --border-icon-collapse: #a4a4a4;
   --color-icon-collapse: #a4a4a4;
   --border-icon-success: #2f2f2f;
+  --bg-icon: #fff;
+  --color-icon: #333;
   //product setting
   --border-color-product-setting: #5f626b;
   --color-header-table: #ededed;
@@ -405,6 +409,30 @@ input[type='text'][disabled] {
   font-size: 14px;
   color: var(--color-label);
 }
+
+.icon-credit {
+  font-size: 20px;
+  color: #2267b6;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  z-index: 1;
+}
+
+[data-theme='dark'] .icon-credit {
+  &:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+    left: 2px;
+    background: #fff;
+    z-index: -1;
+    border-radius: 30px;
+  }
+}
+
 .blockLeft {
   margin: 0 auto;
   padding-top: 1px;

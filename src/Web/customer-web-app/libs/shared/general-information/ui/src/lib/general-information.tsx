@@ -14,6 +14,8 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CommissionGroup from './commission-group';
 import { errorTooltip } from './common';
+import CreditNote from './credit-note';
+import CreditRange from './credit-range';
 import GeneralInformationValidator, {
   generalInformationValidatorFields,
   validateMaxCredit,
@@ -50,7 +52,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
   const blockRef = useRef<BlockRefType>(null);
   const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
   const [locationTooltip, setLocationTooltip] = useState<string>('');
-  const { roleId, uplineMaxCredit, maxCredit, disableAutoMPT } = generalInfo;
+  const { roleId, uplineMaxCredit, maxCredit, disableAutoMPT, memberMaxCredit, uplineMemberMaxCredit } = generalInfo;
   const isNotNAP = appConfig.systemId !== SystemIds.NAP;
 
   useImperativeHandle(ref, () => {
@@ -88,6 +90,13 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
     const validator = new GeneralInformationValidator({ ...generalInfo, ...data });
     const result = await validator.validateField(property);
     return result;
+  };
+
+  const renderCreditHint = () => {
+    if (roleId === UserLevel.Member && uplineMemberMaxCredit) {
+      return <CreditNote availableCredit={uplineMaxCredit || 0} memberMaxCredit={uplineMemberMaxCredit || 0} />;
+    }
+    return null;
   };
 
   const getErrorByField = (fieldName: string) => validationResults[fieldName] && validationResults[fieldName] !== true;
@@ -189,9 +198,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
           <div className={styles['col-max-credit']}>
             <BlockItem
               label={
-                generalInfo.roleId === UserLevel.Member
-                  ? t('GivenCredit')
-                  : t(`${UserLevelName[roleId].toLowerCase()}MaxCredit`)
+                roleId === UserLevel.Member ? t('GivenCredit') : t(`${UserLevelName[roleId].toLowerCase()}MaxCredit`)
               }
               isRequired
             >
@@ -204,7 +211,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
                   name="maxCredit"
                   maxLength={MaxNumberInputLength}
                   allowNegative={false}
-                  decimalScale={4}
+                  decimalScale={2}
                   thousandSeparator=","
                   valueIsNumericString
                   value={generalInfo.maxCredit}
@@ -232,24 +239,31 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
                 {napCanNotEditCredit && (
                   <WrapperTooltip type="warning" id="not-edit-max-credit" content={t('CannotUpdateCredit')} />
                 )}
-                {generalInfo.roleId !== UserLevel.Super && !napCanNotEditCredit && (
+                {roleId !== UserLevel.Super && !napCanNotEditCredit && (
                   <span>{getErrorByField(maxCreditValidateFiled(generalInfo)) ? <IconWrong /> : <IconCorrect />}</span>
                 )}
               </div>
-              {generalInfo.roleId < UserLevel.Super && (
+              {roleId < UserLevel.Super && (
                 <div className={styles['max-credit']}>
-                  {`${t(`${UserLevelName[roleId + 1]}_AvailableGivenCredit`)}: `}
-                  <b>{NumberHelper.formatWithCommas(uplineMaxCredit || 0, 4)}</b>
+                  <CreditRange
+                    min={0}
+                    max={
+                      uplineMemberMaxCredit
+                        ? Math.min(uplineMaxCredit || 0, uplineMemberMaxCredit)
+                        : uplineMaxCredit || 0
+                    }
+                  />
+                  {renderCreditHint()}
                 </div>
               )}
             </BlockItem>
           </div>
-          {generalInfo.roleId === UserLevel.Agent && (
+          {roleId === UserLevel.Agent && (
             <BlockItem label={t(`memberMaxCredit`)} isRequired>
               <div>
                 <NumericFormat
                   maxLength={MaxNumberInputLength}
-                  value={generalInfo.memberMaxCredit}
+                  value={memberMaxCredit}
                   className={classNames({
                     error: getErrorByField('memberMaxCredit'),
                   })}
@@ -261,7 +275,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
                     setValidationResults({ ...validationResults, memberMaxCredit: validateMemberMaxCreditResult });
                   }}
                   allowNegative={false}
-                  decimalScale={4}
+                  decimalScale={2}
                   thousandSeparator=","
                   valueIsNumericString
                   id="memberMaxCredit"
@@ -279,10 +293,9 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
                   <span>{getErrorByField('memberMaxCredit') ? <IconWrong /> : <IconCorrect />}</span>
                 )}
               </div>
-              <span className={styles['max-credit']}>
-                {`${t('Member_AvailableGivenCredit')}: `}
-                <b>{isNaN(maxCredit) ? 0 : NumberHelper.formatWithCommas(maxCredit, 4)}</b>
-              </span>
+              <div className={styles['max-credit']}>
+                <CreditRange min={0} max={maxCredit || 0} />
+              </div>
             </BlockItem>
           )}
           {/*   CommissionGroup */}

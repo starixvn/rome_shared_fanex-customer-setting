@@ -68,7 +68,9 @@ export function CreateCustomerPage() {
               ? (generalInfo.uplineUserName + generalInfo.newUserName).toUpperCase()
               : '',
           maxCredit: 0,
+          memberMaxCredit: 0,
           uplineMaxCredit: generalInfo.maxCredit,
+          uplineMemberMaxCredit: generalInfo.memberMaxCredit,
           roleId: params.uplineRoleId - 1,
           uplineCustId: params.uplineId,
           uplineRoleId: params.uplineRoleId,

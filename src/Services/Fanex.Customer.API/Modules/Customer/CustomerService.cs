@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.Net.Http.Headers;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.Customer.Constants;
 using Fanex.Customer.API.Modules.Customer.Criteria;
@@ -9,7 +7,6 @@ using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
-using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
@@ -43,6 +40,8 @@ public interface ICustomerService
     Task<CommissionInfo> GetCommissionInfo(GetCommissionHintRequest request);
 
     Task<MaxPayoutSettingInfo> GetMaxPayoutSettingInfo(GetMaxPayoutSettingInformationRequest request);
+
+    Task<MemberBalance> GetMemberBalance(int custId, string siteDBName);
 }
 
 public class CustomerService : ICustomerService
@@ -190,8 +189,6 @@ public class CustomerService : ICustomerService
         var jsonResponse = new
         {
             ProductSettingInfo = groupedData,
-            // RoleId = request.ActorId,
-            // Is789y = appSettings.IsSpecialSites("789y"),
             ShowBBin = products
                 .Where(gr => gr.GroupId == LiveRNGCasinoGroupdId)
                 .Any(e => e.RealProductId == BBINProductID),
@@ -273,5 +270,24 @@ public class CustomerService : ICustomerService
         }
         maxPayoutSettingInfo.IsSpecialPlatform = isSpecialPlatform;
         return maxPayoutSettingInfo;
+    }
+
+    public async Task<MemberBalance> GetMemberBalance(int custId, string siteDBName)
+    {
+        var memberOutstandingCriteria = new SelectMemberOutstandingCriteria(custId);
+        var memberBalanceCriteria = new SelectMemberBalanceBySiteDBCriteria(custId, siteDBName);
+        var memberBalanceDTO = await dynamicRepository.GetAsync<MemberBalanceDTO>(new SelectMemberBalanceCriteria(custId));
+
+        await Task.WhenAll(dynamicRepository.ExecuteAsync(memberOutstandingCriteria), dynamicRepository.ExecuteAsync(memberBalanceCriteria));
+
+        return new MemberBalance
+        {
+            CustId = memberBalanceDTO.CustId,
+            YesterdayCustomerCash = memberBalanceDTO.YesterdayCustomerCash,
+            Balance = memberBalanceCriteria.Balance,
+            PendingTransfer3rd = memberBalanceCriteria.PendingTransfer3rd,
+            CustomerOutstanding = memberOutstandingCriteria.Outstanding,
+            NetPosition = memberBalanceCriteria.NetPosition
+        };
     }
 }

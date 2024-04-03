@@ -30,5 +30,7 @@ namespace Fanex.Customer.Client.Models
         public decimal Credit { get; set; }
 
         public decimal MaxCredit { get; set; }
+
+        public decimal MemberMaxCredit { get; set; }
     }
 }

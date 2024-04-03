@@ -2,16 +2,26 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-    Params, Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
+  Params,
+  Result,
+  SubMessagesResult,
+  UpdateCustomerResult,
+  ValidateRefResult,
+  ValidationRefType,
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-    GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
+  GeneralInfo,
+  GeneralInfoActionTypes,
+  generalInformationReducer,
+  initialState,
 } from '@customer-web-app/shared-general-information-state';
 import {
-    EditGeneralInformation, TransferCondition, TransferOptions
+  EditGeneralInformation,
+  TransferCondition,
+  TransferOptions,
 } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
@@ -25,8 +35,12 @@ import NiceModal from '@ebay/nice-modal-react';
 
 import styles from './edit-customer-page.module.scss';
 import {
-    getNewIndirectEditCustomerSettings, getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue,
-    handleInitProducts, isGeneralInfoChanged
+  getNewIndirectEditCustomerSettings,
+  getUnCheckAutoPtItems,
+  handleChangeGroupSettingValue,
+  handleChangeItemValue,
+  handleInitProducts,
+  isGeneralInfoChanged,
 } from './handler';
 import { renderUpdateCustomerResult } from './update-customer-result';
 
@@ -68,6 +82,7 @@ export function EditCustomerPage() {
           displayTransferCondition: generalInfo.transferOption === TransferOptions.Daily,
         },
       });
+      validateGeneralInfo();
       setIsLoading(false);
     };
 
