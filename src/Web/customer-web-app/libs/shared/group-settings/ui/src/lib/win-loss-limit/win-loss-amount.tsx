@@ -36,18 +36,18 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
   }, [betType, sportType]);
 
   const showWinningPercentColumn = (wl: CurrentWinLossAmount) => {
-    const { winPercent, currentAmount, maxMinAmount } = wl;
+    const { winPercent, currentAmount, maxWinAmount } = wl;
     if (winPercent === 0) return <div>{winPercent}%</div>;
     if (winPercent > 0 && winPercent <= 100)
       return (
         <div>
-          {winPercent}% ({currentAmount} / {maxMinAmount})
+          {winPercent}% ({currentAmount}/{maxWinAmount})
         </div>
       );
     if (winPercent > 100)
       return (
         <div className={styles.textRed}>
-          {winPercent}% ({currentAmount} / {maxMinAmount})
+          {winPercent}% ({currentAmount}/{maxWinAmount})
         </div>
       );
     if (winPercent === -1) return <div>{t('unlimited')}</div>;
@@ -56,7 +56,7 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
         <div>
           <span className={styles.textRed}>{t('N/A')}</span>
           <span>
-            ( {currentAmount} / <span className={styles.textRed}>{maxMinAmount}</span>)
+            ( {currentAmount} / <span className={styles.textRed}>{maxWinAmount}</span>)
           </span>
         </div>
       );

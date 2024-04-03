@@ -13,7 +13,7 @@ export interface CurrentWinLossAmount {
   currentAmount: number;
   lossPercent: number;
   maxLossAmount: number;
-  maxMinAmount: number;
+  maxWinAmount: number;
   sportType: number;
   sportTypeName: number;
   winPercent: number;
