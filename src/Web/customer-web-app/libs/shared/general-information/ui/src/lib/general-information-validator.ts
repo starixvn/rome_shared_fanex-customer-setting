@@ -135,6 +135,11 @@ export default class GeneralInformationValidator {
     if (memberMaxCredit === undefined) {
       return (this.validationState = new ValidationResult('memberMaxCredit', 'RequiredField'));
     }
+
+    if (memberMaxCredit === 0) {
+      return true;
+    }
+
     const idEditAgent = isEditMode && memberMaxCreditMin !== undefined;
     if (idEditAgent && (memberMaxCredit > maxCredit || memberMaxCredit < memberMaxCreditMin)) {
       return (this.validationState = new ValidationResult('memberMaxCredit', 'memberMaxCreditInvalid', {
