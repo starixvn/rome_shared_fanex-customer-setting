@@ -37,8 +37,15 @@ export const CommissionHintTab = ({ alphaUrl, napUrl, exNapUrl }: { alphaUrl: st
     <div>
       <HighlightFrame header={t('Note')} content={t('NoteContent')} />
       <div className={styles.info}>
+
         <div>
-          <b>{t('CommissionInformation')}</b>
+          <b>{t('OtherProductsCommissionInformation')}</b>
+        </div>
+        <div>{t('BBINBetSetting2')}</div>
+        <div>{t('FGGNote')}</div>
+
+        <div>
+          <b>{t('SportsBookCommissionInformation')}</b>
         </div>
         <div>{t('CommissionMap')}</div>
       </div>
