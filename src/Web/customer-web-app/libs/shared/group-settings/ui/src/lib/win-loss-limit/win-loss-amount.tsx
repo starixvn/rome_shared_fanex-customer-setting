@@ -56,7 +56,7 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
         <div>
           <span className={styles.textRed}>{t('N/A')}</span>
           <span>
-            ( {currentAmount} / <span className={styles.textRed}>{maxWinAmount}</span>)
+            ({currentAmount}/<span className={styles.textRed}>{maxWinAmount}</span>)
           </span>
         </div>
       );
@@ -69,13 +69,13 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
     if (lossPercent > 0 && lossPercent <= 100)
       return (
         <div>
-          {lossPercent}% ({-currentAmount} / {maxLossAmount})
+          {lossPercent}% ({-currentAmount}/{maxLossAmount})
         </div>
       );
     if (lossPercent > 100)
       return (
         <div className={styles.textRed}>
-          {lossPercent}% ({-currentAmount} / {maxLossAmount})
+          {lossPercent}% ({-currentAmount}/{maxLossAmount})
         </div>
       );
   };
