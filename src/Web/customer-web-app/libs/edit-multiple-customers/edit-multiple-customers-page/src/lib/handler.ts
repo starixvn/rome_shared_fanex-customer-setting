@@ -1,10 +1,7 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-  AgentPositionTakingGroupItem,
-  BetLimitGroupItem,
-  MasterPositionTakingGroupItem,
-  ProductGroup,
-  WinLossLimitGroupItem,
+    AgentPositionTakingGroupItem, BetLimitGroupItem, MasterPositionTakingGroupItem, ProductGroup,
+    ProductStatusGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 export function getNewMultipleEditCustomerSettings(
@@ -57,6 +54,16 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
               original: { ...item },
             })),
           };
+        }
+
+        if (type.id === GroupTypeIds.ProductStatus) {
+          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item: ProductStatusGroupItem) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+          }));
+
+          return { ...type, groupItems };
         }
 
         if (type.id === GroupTypeIds.WinLossLimit) {
