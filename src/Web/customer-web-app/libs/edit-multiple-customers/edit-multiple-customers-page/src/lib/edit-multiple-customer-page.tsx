@@ -2,26 +2,16 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-  getUnCheckAutoPtItems,
-  handleChangeGroupSettingValue,
-  handleChangeItemValue,
-  renderUpdateCustomerResult,
-  scrollToTop,
+    getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue, renderUpdateCustomerResult, scrollToTop
 } from '@customer-web-app/edit-customer-page';
 import {
-  Result,
-  SubMessagesResult,
-  UpdateCustomerResult,
-  ValidateRefResult,
-  ValidationRefType,
+    Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-  GeneralInfoActionTypes,
-  generalInformationReducer,
-  initialState,
+    GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
@@ -129,10 +119,9 @@ export function EditMultipleCustomerPage() {
     const unCheckAutoPtItems = getUnCheckAutoPtItems(
       newProductGroups,
       params.roleId,
-      ProductGroupIds.SportsBook,
+      params.productGroupId,
       GroupTypeIds.PositionTaking
     );
-
     if (unCheckAutoPtItems.length === 0) return newProductGroups;
 
     const newMemberPts: { isCancel: boolean; groupItems: GroupItem[] } = await NiceModal.show(SetMemberPtPopup, {
