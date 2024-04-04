@@ -6,42 +6,50 @@ using Fanex.Customer.API.Modules.Message.Models;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.EditCustomer;
 
 public interface IUMService
     {
-        CustomerSettingResult GetUMResult(int custId, byte productId, int? settingTypeId = null, string language = "en-US");
+        CustomerSettingResult GetUMResult(int custId, int groupId, IEnumerable<int> updatedSportTypes, string language = "en-US");
     }
 public class UMService : IUMService
     {
         private readonly IDynamicRepository _dynamicRepository;
         private readonly ICacheRefService _cacheRefService;
+        private readonly AppSettings _appSettings;
         private const string UMDateTimeFormat = "dd/MM/yyyy HH:mm:ss";
         public const int SuccessButDoNothingBecauseUM = 90017;
 
-        public UMService() : this(null, null) { }
+        public UMService() : this(null, null, null) { }
 
-        public UMService(IDynamicRepository dynamicRepository, ICacheRefService cacheRefService)
+        public UMService(IDynamicRepository dynamicRepository, ICacheRefService cacheRefService, IOptions<AppSettings> appSettings)
         {
             _dynamicRepository = dynamicRepository ?? new DynamicRepository();
             _cacheRefService= cacheRefService ?? new CacheRefService();
+            _appSettings = appSettings.Value; 
         }
 
-        public CustomerSettingResult GetUMResult(int custId, byte productId, int? settingTypeId = null, string language = "en-US")
+        public CustomerSettingResult GetUMResult(int custId, int groupId, IEnumerable<int> updatedSportTypes, string language = "en-US")
             => ComposeUMMessage(_dynamicRepository.Fetch<UnderMaintainanceInfo>(new UnderMaintainanceQueryCriteria
             {
                 CustId = custId,
-                ProductId = productId,
-                SettingTypeId = settingTypeId
-            }), language);
+                SettingStatus = _appSettings.SettingStatus,
+                GroupId = groupId
+            }), updatedSportTypes, language);
 
-        private CustomerSettingResult ComposeUMMessage(IEnumerable<UnderMaintainanceInfo> UMInfos, string language)
+        private CustomerSettingResult ComposeUMMessage(IEnumerable<UnderMaintainanceInfo> UMInfos, IEnumerable<int> updatedSportTypes, string language)
         {
             Check.Argument.IsNotNull(UMInfos, "UMInfos");
             var UMSubMessages = new List<SubMessageContent>();
             foreach (var UMInfo in UMInfos)
             {
+                if (!updatedSportTypes.Contains(UMInfo.SportType))
+                { 
+                    continue;
+                }
+
                 if (UMInfo.ProductId == 0)
                 {
                     UMSubMessages.Add(new SubMessageContent(string.Format(

@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Modules.EditCustomer.Criteria;
 
 internal class UnderMaintainanceQueryCriteria : CriteriaBase
 {
-    public byte ProductId { get; set; }
+    public int ProductId { get; set; }
 
     public int CustId { get; set; }
 
@@ -14,6 +14,10 @@ internal class UnderMaintainanceQueryCriteria : CriteriaBase
 
     public byte FunctionType => 1;
 
+    public byte SettingStatus { get; set; }
+
+    public int GroupId { get; set; }
+
     public override string GetSettingKey()
     {
         return "Acc_CheckUM";
@@ -21,6 +25,6 @@ internal class UnderMaintainanceQueryCriteria : CriteriaBase
 
     public override bool IsValid()
     {
-        return ProductId > 0 && CustId > 0;
+        return CustId > 0;
     }
 }

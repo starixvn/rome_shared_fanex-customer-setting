@@ -30,7 +30,7 @@
     <Setting Key="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" SpName="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" DbName="DBCUST.CustDB.wsv_alp" />
   </Function>
   <Function Name="CustomerInfo">
-        <Setting Key="Acc_CustSetting_CustomerInfoSBSelect" SpName="Acc_CustSetting_CustomerInfoSBSelect_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0">
+        <Setting Key="Acc_CustSetting_CustomerInfoSBSelect" SpName="Acc_CustSetting_CustomerInfoSBSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0">
       <Mapping DataField="Username2" ObjectProperty="NickName" Class="CustomerInfo" />
       <Mapping DataField="Currency" ObjectProperty="CurrencyId" Class="CustomerInfo" />
       <Mapping DataField="MaxCredit" ObjectProperty="Credit" Class="CustomerInfo" />
@@ -140,7 +140,7 @@
     <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
@@ -232,28 +232,28 @@
     <Setting Key="Acc_CustSetting_SuperPTOnMember_153_MultiUpd" SpName="Acc_CustSetting_SuperPTOnMember_153_MultiUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_MemberPT_153_Check" SpName="Acc_CustSetting_MemberPT_153_Check" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_GroupedPTMemberLstSelect" SpName="Acc_CustSetting_GroupedPTMemberLstSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_Discount156_Sel_Super" SpName="Acc_CustSetting_Discount_156_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+    <Setting Key="Acc_CustSetting_Discount156_Sel_Super" SpName="Acc_CustSetting_Discount_156_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
             <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" Class="SuperCommissionGroup"/>
             <Mapping DataField="Bettype" ObjectProperty="BettypeId" Class="SuperCommissionGroup" />
             <Mapping DataField="DefaultMaxDiscount" ObjectProperty="UplineDiscount" Class="SuperCommissionGroup" />
             <Mapping DataField="SuperDiscount" ObjectProperty="Discount" Class="SuperCommissionGroup" />
             <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="SuperCommissionGroup" />
     </Setting>
-    <Setting Key="Acc_CustSetting_Discount156_Sel_Master" SpName="Acc_CustSetting_Discount_156_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+    <Setting Key="Acc_CustSetting_Discount156_Sel_Master" SpName="Acc_CustSetting_Discount_156_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
         <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" Class="MasterCommissionGroup" />
         <Mapping DataField="Bettype" ObjectProperty="BettypeId" Class="MasterCommissionGroup" />
         <Mapping DataField="SuperDiscount" ObjectProperty="UplineDiscount" Class="MasterCommissionGroup" />
         <Mapping DataField="MasterDiscount" ObjectProperty="Discount" Class="MasterCommissionGroup" />
         <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="MasterCommissionGroup" />
     </Setting>
-    <Setting Key="Acc_CustSetting_Discount156_Sel_Agent" SpName="Acc_CustSetting_Discount_156_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+    <Setting Key="Acc_CustSetting_Discount156_Sel_Agent" SpName="Acc_CustSetting_Discount_156_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
         <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" Class="AgentCommissionGroup" />
         <Mapping DataField="Bettype" ObjectProperty="BettypeId" Class="AgentCommissionGroup" />
         <Mapping DataField="MasterDiscount" ObjectProperty="UplineDiscount" Class="AgentCommissionGroup" />
         <Mapping DataField="AgentDiscount" ObjectProperty="Discount" Class="AgentCommissionGroup" />
         <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="AgentCommissionGroup" />
     </Setting>
-    <Setting Key="Acc_CustSetting_Discount156_Sel_Member" SpName="Acc_CustSetting_Discount_156_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+    <Setting Key="Acc_CustSetting_Discount156_Sel_Member" SpName="Acc_CustSetting_Discount_156_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
         <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" Class="MemberCommissionGroup" />
         <Mapping DataField="Bettype" ObjectProperty="BettypeId" Class="MemberCommissionGroup" />
         <Mapping DataField="MasterDiscount" ObjectProperty="UplineOfUplineDiscount" Class="MemberCommissionGroup" />
@@ -261,24 +261,24 @@
         <Mapping DataField="PlayerDiscount" ObjectProperty="Discount" Class="MemberCommissionGroup" />
         <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="MemberCommissionGroup" />
     </Setting>
-    <Setting Key="Acc_CustSetting_Discount_156_Upd" SpName="Acc_CustSetting_Discount_156_Upd_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_DisableProductStatus_160_Select" SpName="Acc_CustSetting_DisableProductStatus_160_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
+    <Setting Key="Acc_CustSetting_Discount_156_Upd" SpName="Acc_CustSetting_Discount_156_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_DisableProductStatus_160_Select" SpName="Acc_CustSetting_DisableProductStatus_160_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
     </Setting>
-    <Setting Key="Acc_CustSetting_DisableProductStatus_160_Upd" SpName="Acc_CustSetting_DisableProductStatus_160_Upd_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_StakeLevel_158_Select" SpName="Acc_CustSetting_StakeLevel_158_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
+    <Setting Key="Acc_CustSetting_DisableProductStatus_160_Upd" SpName="Acc_CustSetting_DisableProductStatus_160_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_StakeLevel_158_Select" SpName="Acc_CustSetting_StakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
     </Setting>
-    <Setting Key="Acc_CustSetting_StakeLevel_158_Upd" SpName="Acc_CustSetting_StakeLevel_158_Upd_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_WinLossLimit_155_Select" SpName="Acc_CustSetting_WinLossLimit_155_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
+    <Setting Key="Acc_CustSetting_StakeLevel_158_Upd" SpName="Acc_CustSetting_StakeLevel_158_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_WinLossLimit_155_Select" SpName="Acc_CustSetting_WinLossLimit_155_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
       <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
       <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
     </Setting>
-    <Setting Key="Acc_CustSetting_WinLossLimit_155_Upd" SpName="Acc_CustSetting_WinLossLimit_155_Upd_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect_UAT4" DbName="DBTXN.CUSTDB.wsv_nap" TimeOut="600" />
+    <Setting Key="Acc_CustSetting_WinLossLimit_155_Upd" SpName="Acc_CustSetting_WinLossLimit_155_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CUSTDB.wsv_nap" TimeOut="600" />
   </Function>
 </Functions>

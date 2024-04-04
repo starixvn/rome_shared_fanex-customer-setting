@@ -95,22 +95,9 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
 
     public async Task<UpdateCustomerResult> Update(EditMultipleRequest request)
     {
+        var updatedSportTypes = request.Settings.ProductGroups.SelectMany(g => g.GroupTypes.SelectMany(gt => gt.GroupItems.Select(i => i.SportTypeId)));
         var subResults = new List<UpdateGroupTypeResult>();
-        CustomerSettingResult uMResult;
-        // var isPartialUpdate = request.Settings.ProductGroups.SelectMany(g => g.GroupTypes).Count() == 1;
-        // if (isPartialUpdate)
-        // {
-        //     var groupTypeId = request.Settings.ProductGroups.SelectMany(g => g.GroupTypes).FirstOrDefault()?.Id ?? 0;
-        //     var settingType = isPartialUpdate ? await this.sharedService.GetSettingTypeByGroupType(request.Context.SystemId, request.Settings.GeneralInfo.Site, request.Settings.GeneralInfo.Currency, groupTypeId) : 0;
-        //     Fanex.Common.Helper.Check.Argument.IsNotNull(groupTypeId, "groupTypeId");
-        //     Fanex.Common.Helper.Check.Argument.IsNotNull(settingType, "settingType");
-        //     uMResult = uMService.GetUMResult(request.Context.CustId, 1, settingType, request.Context.Language);
-        // }
-        // else
-        // {
-        uMResult = uMService.GetUMResult(request.Context.CustId, 1, null, request.Context.Language);
-        // }
-
+        CustomerSettingResult uMResult = uMService.GetUMResult(request.Context.CustId, request.Settings.ProductGroups.FirstOrDefault()?.Id ?? 0, updatedSportTypes, request.Context.Language);
 
         if (request.Settings.GeneralInfo != null)
         {
