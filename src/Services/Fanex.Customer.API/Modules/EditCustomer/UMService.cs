@@ -45,7 +45,7 @@ public class UMService : IUMService
             var UMSubMessages = new List<SubMessageContent>();
             foreach (var UMInfo in UMInfos)
             {
-                if (!updatedSportTypes.Contains(UMInfo.SportType))
+                if (UMInfo.SportType != 0 && !updatedSportTypes.Contains(UMInfo.SportType))
                 { 
                     continue;
                 }
