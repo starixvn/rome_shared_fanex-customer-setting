@@ -257,7 +257,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
             groupItem.ProductName = cacheRefService.GetProductName(groupItem.ProductId, language);
             groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
             groupItem.SubGroupName = cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
-            groupItem.SportTypeName = IsSabaCasino(groupItem.SportTypeId, groupItem.BetTypeId) ? cacheRefService.GetProductName(SabaCasinoProductId, language) : cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
+            groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
             groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, language);
             groupItem.DisplayName = cacheRefService.GetDisplayNameByDisplayType(
                 groupItem.SportTypeId,

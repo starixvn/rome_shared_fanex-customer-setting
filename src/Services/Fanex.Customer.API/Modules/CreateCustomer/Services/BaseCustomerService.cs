@@ -26,8 +26,6 @@ public class BaseCustomerService
     protected readonly ICustomerSettingHelper helperService;
     protected readonly Dictionary<int, dynamic> groupItemMapping;
 
-    protected const int SabaCasinoProductId = 6;
-
     protected BaseCustomerService(
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
@@ -74,10 +72,7 @@ public class BaseCustomerService
 
     protected static bool IsGroupTypeByLevel(int groupType)
     => groupType == 153 || groupType == 150 || groupType == 156;
-
-    protected bool IsSabaCasino(int sportTypeId, int betTypeId)
-    => sportTypeId == 208 && betTypeId == 2101;
-
+    
     protected bool IsPTGroupType(int groupType)
     => groupType == 153;
 }
