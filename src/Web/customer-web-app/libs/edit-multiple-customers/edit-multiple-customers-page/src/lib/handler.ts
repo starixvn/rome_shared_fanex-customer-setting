@@ -11,7 +11,7 @@ export function getNewMultipleEditCustomerSettings(
 ) {
   return productGroups.map((gr) => {
     const groupTypes = gr.groupTypes
-      .filter((t) => t.id === groupTypeId || !groupTypeId)
+      .filter((t) => !t.isReadOnly && (t.id === groupTypeId || !groupTypeId))
       .map((type) => {
         if (type.id === GroupTypeIds.PositionTaking) {
           if (roleId === UserLevel.Master) {

@@ -2,7 +2,8 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-    getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue, renderUpdateCustomerResult, scrollToTop
+    getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue,
+    renderUpdateCustomerResult, scrollToTop
 } from '@customer-web-app/edit-customer-page';
 import {
     Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
@@ -15,7 +16,9 @@ import {
 } from '@customer-web-app/shared-general-information-state';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
+import {
+    GroupItem, GroupSettingItem, ProductGroup
+} from '@customer-web-app/shared-group-settings-types';
 import { GroupSetting, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
