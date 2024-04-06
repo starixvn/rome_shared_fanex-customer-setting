@@ -44,7 +44,7 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
       isPartialUpdate={isEditMode === true && !isReadOnly}
       onSaveClick={() => updateGroupSetting?.(groupTypeId)}
     >
-      {params.roleId === UserLevel.Member && productGroupId === ProductGroupIds.SportsBook ? (
+      {params.uplineRoleId === UserLevel.Agent && productGroupId === ProductGroupIds.SportsBook ? (
         <MemberSportsBookCommission {...props} />
       ) : (
         <DefaultCommission {...props} />
