@@ -102,6 +102,7 @@ export const SettingService = {
           upLineRoleId,
           generalInfo,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -134,6 +135,7 @@ export const SettingService = {
           customerIds,
           customerNames,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -157,6 +159,7 @@ export const SettingService = {
           roleId,
           uplineRoleId,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -189,6 +192,7 @@ export const SettingService = {
           customerNames,
           uplineRoleId,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
