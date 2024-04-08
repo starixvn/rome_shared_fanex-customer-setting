@@ -9,7 +9,7 @@ import { Block, BlockItemGroup } from '@customer-web-app/shared/base/block';
 import { GroupSettingBlockProps } from '../types';
 import { ProductStatusItem } from './product-status-item';
 
-export default function ProductStatus({ isReadOnly }: GroupSettingBlockProps) {
+export default function ProductStatus({ isReadOnly }: Readonly<GroupSettingBlockProps>) {
   const { t } = useTranslation();
   const { productGroups, productGroupId, handleUpdateSettingItems, updateGroupSetting, isEditMode } =
     useGroupSettingContext();

@@ -332,7 +332,7 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
                             onClick={() => showCurrentWinLossAmount(winLossLimit.sportTypeId, winLossLimit.betTypeId)}
                             style={{ cursor: 'pointer', color: 'blue' }}
                           >
-                            {t('ClickToViewCurrentLossAmount')}
+                            {t('ClickToViewCurrentWinLossAmount')}
                           </div>
                         )}
                       </div>

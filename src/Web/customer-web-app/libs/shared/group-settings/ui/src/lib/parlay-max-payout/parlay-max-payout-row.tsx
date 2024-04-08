@@ -5,9 +5,7 @@ import { ValidationResult } from '@customer-web-app/share-models';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import {
-  ColumnsParlayMaxPayout,
-  ParlayMaxPayoutGroupItem,
-  ParlayMaxPayoutKey,
+    ColumnsParlayMaxPayout, ParlayMaxPayoutGroupItem, ParlayMaxPayoutKey
 } from '@customer-web-app/shared-group-settings-types';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 

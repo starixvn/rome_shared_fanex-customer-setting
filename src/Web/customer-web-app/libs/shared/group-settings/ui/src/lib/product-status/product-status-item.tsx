@@ -14,7 +14,7 @@ type Props = {
   isReadonly: boolean;
 };
 
-export function ProductStatusItem(props: Props) {
+export function ProductStatusItem(props: Readonly<Props>) {
   const { t } = useTranslation();
   const { generalInfo } = useGroupSettingContext();
   const userLevel = t(UserLevelName[Number(generalInfo?.roleId)]);

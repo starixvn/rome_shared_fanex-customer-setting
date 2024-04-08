@@ -166,7 +166,7 @@
   "StakeLevelRequired": "Each bet type must have at least one Bet Limit value to be selected.",
   "MaximumLossValueShouldBeInRange": "Maximum Loss value should be in the range of ({{min}} - {{max}}).",
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - Assign maximum {{value}} bet limits to member level.",
-  "ClickToViewCurrentLossAmount": "Click to view Current Loss Amount",
+  "ClickToViewCurrentWinLossAmount": "Click to view Current Win Loss Amount",
   "CurrentWinLossAmount": "Current Win/Loss Amount",
   "Product": "Product",
   "Winning": "Winning",

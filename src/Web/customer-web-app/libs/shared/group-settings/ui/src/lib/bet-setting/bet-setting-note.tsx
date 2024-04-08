@@ -1,7 +1,6 @@
 import { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import { IconInfo } from '@customer-web-app/shared/base/common-icon';
 
 import { CustomerSettingInformationPageUrl } from '../customer-setting-information-page-url';

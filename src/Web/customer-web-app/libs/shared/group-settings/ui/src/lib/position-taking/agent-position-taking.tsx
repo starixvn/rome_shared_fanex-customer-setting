@@ -7,9 +7,7 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-  AgentPositionTakingGroupItem,
-  AgentPositionTakingProps,
-  GroupItem,
+    AgentPositionTakingGroupItem, AgentPositionTakingProps, GroupItem
 } from '@customer-web-app/shared-group-settings-types';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -22,13 +20,8 @@ import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
 import { PositionTakingBlockProps } from './types';
 import {
-  CopyStatus,
-  CopyStatusPT,
-  groupSportsBookPTBySportTypeId,
-  isCopyingPTItem,
-  PTRowProps,
-  renderNoneBlockColumn,
-  usePTCopy,
+    CopyStatus, CopyStatusPT, groupSportsBookPTBySportTypeId, isCopyingPTItem, PTRowProps, renderNoneBlockColumn,
+    usePTCopy
 } from './utils';
 
 function minM2(agentPositionTakingGroupItem: AgentPositionTakingProps) {

@@ -7,9 +7,7 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-  GroupItem,
-  SuperEditMemberPositionTakingGroupItem,
-  SuperEditMemberPositionTakingProps,
+    GroupItem, SuperEditMemberPositionTakingGroupItem, SuperEditMemberPositionTakingProps
 } from '@customer-web-app/shared-group-settings-types';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -22,13 +20,8 @@ import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
 import { PositionTakingBlockProps } from './types';
 import {
-  CopyStatus,
-  CopyStatusPT,
-  groupSportsBookPTBySportTypeId,
-  isCopyingPTItem,
-  PTRowProps,
-  renderNoneBlockColumn,
-  usePTCopy,
+    CopyStatus, CopyStatusPT, groupSportsBookPTBySportTypeId, isCopyingPTItem, PTRowProps, renderNoneBlockColumn,
+    usePTCopy
 } from './utils';
 
 function minS1(item: SuperEditMemberPositionTakingProps) {
@@ -362,50 +355,49 @@ const SuperEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTaki
     };
 
     return (
-      <div id={SuperEditMemberPTBlockId}>
-        <Block
-          ref={blockRef}
-          title={title}
-          isPartialUpdate={isEditMode === true && !props.isReadOnly}
-          onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
+      <Block
+        ref={blockRef}
+        title={title}
+        id={SuperEditMemberPTBlockId}
+        isPartialUpdate={isEditMode === true && !props.isReadOnly}
+        onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
+      >
+        <BlockRow
+          isHeaderRow
+          label={
+            isMultipleMode && (
+              <div style={{ display: 'flex', marginLeft: '2px' }}>
+                <input
+                  type="checkbox"
+                  style={{ top: '0' }}
+                  onChange={(e) => handleSelectAll(e.target.checked)}
+                  checked={superPTOnMembers.every((item) => item.isMultipleModeChecked === true)}
+                />
+                <div>{t('SelectAll')}</div>
+              </div>
+            )
+          }
         >
-          <BlockRow
-            isHeaderRow
-            label={
-              isMultipleMode && (
-                <div style={{ display: 'flex', marginLeft: '2px' }}>
-                  <input
-                    type="checkbox"
-                    style={{ top: '0' }}
-                    onChange={(e) => handleSelectAll(e.target.checked)}
-                    checked={superPTOnMembers.every((item) => item.isMultipleModeChecked === true)}
-                  />
-                  <div>{t('SelectAll')}</div>
-                </div>
-              )
-            }
-          >
-            {['SuperPT', 'IsAuto', 'MasterPT', 'agentPT'].map((name) => (
-              <BlockColumn key={name}>{t(name)}</BlockColumn>
-            ))}
-          </BlockRow>
-          <PositionTakingRows
-            productGroupId={groupId}
-            ptItems={superPTOnMembers}
-            copyIconId={copyIconId}
-            stateCopiedGroup={stateCopiedGroup}
-            handleCopyPTs={handleCopyPTs}
+          {['SuperPT', 'IsAuto', 'MasterPT', 'agentPT'].map((name) => (
+            <BlockColumn key={name}>{t(name)}</BlockColumn>
+          ))}
+        </BlockRow>
+        <PositionTakingRows
+          productGroupId={groupId}
+          ptItems={superPTOnMembers}
+          copyIconId={copyIconId}
+          stateCopiedGroup={stateCopiedGroup}
+          handleCopyPTs={handleCopyPTs}
+        />
+        {validateResult && !validateResult.isValid && (
+          <WrapperTooltip
+            type="error"
+            anchorSelect={`#${validateResult.id}`}
+            isOpen={!validateResult.isValid}
+            content={t(validateResult.message, validateResult?.msgParams)}
           />
-          {validateResult && !validateResult.isValid && (
-            <WrapperTooltip
-              type="error"
-              anchorSelect={`#${validateResult.id}`}
-              isOpen={!validateResult.isValid}
-              content={t(validateResult.message, validateResult?.msgParams)}
-            />
-          )}
-        </Block>
-      </div>
+        )}
+      </Block>
     );
   }
 );
