@@ -56,6 +56,8 @@ public class MessageService : IMessageService
             or MessageTypes.LossLimitViolatedWithUpline
             or MessageTypes.DailyAutoResetViolatedWithUpline
                 => TranslateMessage<SubMessage>(rawMessage, language),
+            MessageTypes.StakeLevelMaxChoiceViolation
+                => TranslateStakeLevelMaxChoiceViolationSubMessages(rawMessage, language),
             MessageTypes.WrongAutoPT
                 => TranslateSimpleMessage(rawMessage, language),
             MessageTypes.UpdateTooOften
@@ -99,6 +101,16 @@ public class MessageService : IMessageService
         }
 
         return messages;
+    }
+
+    private MessageContent TranslateStakeLevelMaxChoiceViolationSubMessages(string rawMessage, string language)
+    {
+        var messages = Deserialize<MainMessage<StakeLevelMaxChoiceViolationSubMessage>>(rawMessage);
+        var translatedMainMessage = string.Format(
+                GetMessage(messages.MessageId, messages.Message, language),
+                messages.SubMessages[0].MaxChoice,
+                cacheRefService.GetSportTypeName(messages.SubMessages[0].SportType, language));
+        return new MessageContent(translatedMainMessage);
     }
 
     private MessageContent TranslateDownlinePTViolationSubMessages(string rawMessage, string language)

@@ -42,6 +42,8 @@ public static class MessageTypes
 
     public const int StakeLevelViolation = 131;
 
+    public const int StakeLevelMaxChoiceViolation = 132;
+
     public const int WinLimitViolatedWithUpline = 111;
 
     public const int LossLimitViolatedWithUpline = 112;
