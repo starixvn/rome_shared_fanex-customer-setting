@@ -26,24 +26,22 @@ export const renderNoneBlockColumn = (key: string, numbers: number) => {
   });
 };
 
-function CopyPTICon({
-  id,
-  isCopy,
-  isCopySuccess,
-  content,
-  handleCopyClick,
-}: Readonly<{
+type CopyPtIconProp = {
   id: number;
   isCopy: boolean;
   isCopySuccess: boolean;
-  content: string;
   handleCopyClick?: () => void;
-}>) {
+};
+
+export function CopyPTICon({ id, isCopy, isCopySuccess, handleCopyClick }: Readonly<CopyPtIconProp>) {
   const { t } = useTranslation();
 
   return (
     <span>
-      <span data-tooltip-id={id.toString()} data-tooltip-content={t(content)}>
+      <span
+        data-tooltip-id={id.toString()}
+        data-tooltip-content={isCopySuccess ? t('CopiedSuccessfully') : t('CopyingFailed')}
+      >
         <CopyIcon
           id="copy-position-taking"
           isCopied={isCopy}
@@ -51,7 +49,7 @@ function CopyPTICon({
             handleCopyClick?.();
           }}
         />
-        {content !== '' && (
+        {isCopy && (
           <WrapperTooltip type={isCopySuccess ? 'success' : 'error'} id={id.toString()} isOpen={true} place="bottom" />
         )}
       </span>
@@ -63,18 +61,9 @@ export const renderPTLabel = (
   labelName: string | undefined,
   isMultipleMode: boolean,
   isMultipleModeChecked: boolean,
-  id: number,
-  isCopy: boolean,
-  isCopySuccess: boolean,
-  handleCheckMultiple: (isChecked: boolean) => void,
-  handleCopyClick?: () => void
+  copyIcon: React.ReactNode,
+  handleCheckMultiple: (isChecked: boolean) => void
 ) => {
-  const getContent = () => {
-    if (isCopy === false) return '';
-
-    return isCopySuccess ? 'CopiedSuccessfully' : 'CopyingFailed';
-  };
-
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'normal' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -87,29 +76,7 @@ export const renderPTLabel = (
         )}
         <span>{labelName}</span>
       </div>
-      <CopyPTICon
-        id={id}
-        isCopy={isCopy}
-        isCopySuccess={isCopySuccess}
-        content={getContent()}
-        handleCopyClick={handleCopyClick}
-      />
-    </div>
-  );
-};
-
-export const renderBlockRowTitle = (
-  name: string | undefined,
-  isMultipleMode: boolean,
-  isMultipleModeChecked: boolean,
-  onChange: (isChecked: boolean) => void
-) => {
-  return (
-    <div>
-      {isMultipleMode && (
-        <input type="checkbox" onChange={(e) => onChange(e.target.checked)} checked={isMultipleModeChecked} />
-      )}
-      <span>{name}</span>
+      {copyIcon}
     </div>
   );
 };
@@ -154,8 +121,17 @@ export const isCopyingPTItem = (stateCopiedGroup: CopyStatusPT[], item: GroupIte
   );
 };
 
-const StringToPreventAutoSortReduce = 'PreventAutoSort';
+export function isCopySuccess(stateCopiedGroup: CopyStatusPT[], sportTypeId?: number) {
+  if (stateCopiedGroup.length <= 0) return false;
 
+  if (sportTypeId === undefined) return !stateCopiedGroup.some((i) => i.copyStatus === CopyStatus.Fail);
+
+  return stateCopiedGroup.every((i) =>
+    i.sportTypeId === sportTypeId ? i.copyStatus === CopyStatus.Success || i.copyStatus === CopyStatus.NotCopy : true
+  );
+}
+
+const StringToPreventAutoSortReduce = 'PreventAutoSort';
 export const groupSportsBookPTBySportTypeId = (items: GroupItem[]) => {
   return items.reduce((acc: { [key: string]: GroupItem[] }, cur) => {
     const key = `${StringToPreventAutoSortReduce}-${cur.sportTypeId}`;

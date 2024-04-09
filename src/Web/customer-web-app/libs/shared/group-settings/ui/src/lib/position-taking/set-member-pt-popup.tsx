@@ -15,7 +15,15 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
 import PTSelect from './pt-select';
 import styles from './set-member-pt-popup.module.scss';
-import { CopyStatus, groupSportsBookPTBySportTypeId, renderNoneBlockColumn, renderPTLabel, usePTCopy } from './utils';
+import {
+  CopyPTICon,
+  CopyStatus,
+  groupSportsBookPTBySportTypeId,
+  isCopySuccess,
+  renderNoneBlockColumn,
+  renderPTLabel,
+  usePTCopy,
+} from './utils';
 
 interface SetMemberPtPopupProps<T> {
   roleId: number;
@@ -172,25 +180,20 @@ const MasterNotTakeAutoPT = ({
   const renderGroupLabel = (isFirstGroup: boolean, group: MasterPositionTakingGroupItem[]) => {
     if (!isSportsBookProduct(productGroupId)) return null;
     const { sportTypeId, betTypeId, sportTypeName, betTypeName } = group[0];
-    const groupLabel =
-      isFirstGroup && groupItems?.length > 1
-        ? renderPTLabel(
-            sportTypeName,
-            false,
-            true,
-            SetMemberPopupIconId,
-            copyIconId === SetMemberPopupIconId,
-            stateCopiedGroup.length > 0 && !stateCopiedGroup.some((item) => item.copyStatus === CopyStatus.Fail),
-            () => true,
-            () => {
-              const newSuperPTOnMembers = copySuperPTOnMembers(groupItems, group[0], () => true);
-              handleCopySuperPTOnMembers(newSuperPTOnMembers, SetMemberPopupIconId);
-            }
-          )
-        : sportTypeName;
+    const copyIcon = isFirstGroup && groupItems?.length > 1 && (
+      <CopyPTICon
+        id={SetMemberPopupIconId}
+        isCopy={copyIconId === SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup)}
+        handleCopyClick={() => {
+          const newSuperPTOnMembers = copySuperPTOnMembers(groupItems, group[0], () => true);
+          handleCopySuperPTOnMembers(newSuperPTOnMembers, SetMemberPopupIconId);
+        }}
+      />
+    );
 
     return (
-      <BlockRow key={betTypeName} label={groupLabel}>
+      <BlockRow key={betTypeName} label={renderPTLabel(sportTypeName, false, true, copyIcon, () => true)}>
         {renderNoneBlockColumn(`${sportTypeId}${betTypeId}`, 1)}
       </BlockRow>
     );
@@ -199,33 +202,23 @@ const MasterNotTakeAutoPT = ({
   const renderLabel = (item: MasterPositionTakingGroupItem, hasCopyIcon: boolean) => {
     const { sportTypeId, sportTypeName, betTypeName } = item;
     const labelName = isSportsBookProduct(productGroupId) ? betTypeName : sportTypeName;
-    const isCopySuccess = isSportsBookProduct(productGroupId)
-      ? stateCopiedGroup.length > 0 &&
-        stateCopiedGroup.every((i) =>
-          i.sportTypeId === sportTypeId
-            ? i.copyStatus === CopyStatus.Success || i.copyStatus === CopyStatus.NotCopy
-            : true
-        )
-      : stateCopiedGroup.length > 0 && !stateCopiedGroup.some((i) => i.copyStatus === CopyStatus.Fail);
-    return hasCopyIcon
-      ? renderPTLabel(
-          labelName,
-          false,
-          true,
-          sportTypeId + SetMemberPopupIconId,
-          copyIconId === sportTypeId + SetMemberPopupIconId,
-          isCopySuccess,
-          () => true,
-          () => {
-            const copySuperPTOnMemberValues = copySuperPTOnMembers(
-              groupItems,
-              item,
-              isSportsBookProduct(productGroupId) ? (i) => i.sportTypeId === sportTypeId : () => true
-            );
-            handleCopySuperPTOnMembers(copySuperPTOnMemberValues, sportTypeId + SetMemberPopupIconId);
-          }
-        )
-      : labelName;
+    const copyIcon = hasCopyIcon && (
+      <CopyPTICon
+        id={sportTypeId + SetMemberPopupIconId}
+        isCopy={copyIconId === sportTypeId + SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup, isSportsBookProduct(productGroupId) ? sportTypeId : undefined)}
+        handleCopyClick={() => {
+          const copySuperPTOnMemberValues = copySuperPTOnMembers(
+            groupItems,
+            item,
+            isSportsBookProduct(productGroupId) ? (i) => i.sportTypeId === sportTypeId : () => true
+          );
+          handleCopySuperPTOnMembers(copySuperPTOnMemberValues, sportTypeId + SetMemberPopupIconId);
+        }}
+      />
+    );
+
+    return hasCopyIcon ? renderPTLabel(labelName, false, true, copyIcon, () => true) : labelName;
   };
 
   return (ptGroups as MasterPositionTakingGroupItem[][]).map((group, index) => {
@@ -327,25 +320,20 @@ const AgentNotTakeAutoPT = ({
   const renderGroupLabel = (isFirstGroup: boolean, group: AgentPositionTakingGroupItem[]) => {
     if (!isSportsBookProduct(productGroupId)) return null;
     const { sportTypeId, betTypeId, sportTypeName, betTypeName } = group[0];
-    const groupLabel =
-      isFirstGroup && groupItems?.length > 1
-        ? renderPTLabel(
-            sportTypeName,
-            false,
-            true,
-            SetMemberPopupIconId,
-            copyIconId === SetMemberPopupIconId,
-            stateCopiedGroup.length > 0 && !stateCopiedGroup.some((item) => item.copyStatus === CopyStatus.Fail),
-            () => true,
-            () => {
-              const copyMasterPTOnMemberValues = copyMasterPTOnMembers(groupItems, group[0], () => true);
-              handleCopyValue(copyMasterPTOnMemberValues, SetMemberPopupIconId);
-            }
-          )
-        : sportTypeName;
+    const copyIcon = isFirstGroup && groupItems?.length > 1 && (
+      <CopyPTICon
+        id={SetMemberPopupIconId}
+        isCopy={copyIconId === SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup)}
+        handleCopyClick={() => {
+          const copyMasterPTOnMemberValues = copyMasterPTOnMembers(groupItems, group[0], () => true);
+          handleCopyValue(copyMasterPTOnMemberValues, SetMemberPopupIconId);
+        }}
+      />
+    );
 
     return (
-      <BlockRow key={betTypeName} label={groupLabel}>
+      <BlockRow key={betTypeName} label={renderPTLabel(sportTypeName, false, true, copyIcon, () => true)}>
         {renderNoneBlockColumn(`${sportTypeId}${betTypeId}`, 1)}
       </BlockRow>
     );
@@ -354,33 +342,22 @@ const AgentNotTakeAutoPT = ({
   const renderLabel = (item: AgentPositionTakingGroupItem, hasCopyIcon: boolean) => {
     const { sportTypeId, sportTypeName, betTypeName } = item;
     const labelName = isSportsBookProduct(productGroupId) ? betTypeName : sportTypeName;
-    const isCopySuccess = isSportsBookProduct(productGroupId)
-      ? stateCopiedGroup.length > 0 &&
-        stateCopiedGroup.every((i) =>
-          i.sportTypeId === sportTypeId
-            ? i.copyStatus === CopyStatus.Success || i.copyStatus === CopyStatus.NotCopy
-            : true
-        )
-      : stateCopiedGroup.length > 0 && !stateCopiedGroup.some((i) => i.copyStatus === CopyStatus.Fail);
-    return hasCopyIcon
-      ? renderPTLabel(
-          labelName,
-          false,
-          true,
-          sportTypeId + SetMemberPopupIconId,
-          copyIconId === sportTypeId + SetMemberPopupIconId,
-          isCopySuccess,
-          () => true,
-          () => {
-            const copyMasterPTOnMemberValues = copyMasterPTOnMembers(
-              groupItems,
-              item,
-              isSportsBookProduct(productGroupId) ? (i) => i.sportTypeId === sportTypeId : () => true
-            );
-            handleCopyValue(copyMasterPTOnMemberValues, sportTypeId + SetMemberPopupIconId);
-          }
-        )
-      : labelName;
+    const copyIcon = hasCopyIcon && (
+      <CopyPTICon
+        id={sportTypeId + SetMemberPopupIconId}
+        isCopy={copyIconId === sportTypeId + SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup, isSportsBookProduct(productGroupId) ? sportTypeId : undefined)}
+        handleCopyClick={() => {
+          const copyMasterPTOnMemberValues = copyMasterPTOnMembers(
+            groupItems,
+            item,
+            isSportsBookProduct(productGroupId) ? (i) => i.sportTypeId === sportTypeId : () => true
+          );
+          handleCopyValue(copyMasterPTOnMemberValues, sportTypeId + SetMemberPopupIconId);
+        }}
+      />
+    );
+    return hasCopyIcon ? renderPTLabel(labelName, false, true, copyIcon, () => true) : labelName;
   };
 
   return (ptGroups as AgentPositionTakingGroupItem[][]).map((group, index) => {
