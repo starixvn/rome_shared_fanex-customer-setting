@@ -80,7 +80,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.WinLossLimit) {
-          const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item: WinLossLimitGroupItem) => ({
+          const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item) => ({
             ...item,
             isMultipleModeChecked: true,
             original: { ...item },
@@ -91,7 +91,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.ParlayMaxPayout) {
-          const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item: ParlayMaxPayoutGroupItem) => ({
+          const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => ({
             ...item,
             isMultipleModeChecked: true,
             original: { ...item },
@@ -105,7 +105,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.ProductStatus) {
-          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item: ProductStatusGroupItem) => {
+          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item) => {
             if (item.parentSportType && item.parentBetType) {
               const parentItem = type.groupItems.find(
                 (x) => x.sportTypeId === item.parentSportType && x.betTypeId === item.parentBetType

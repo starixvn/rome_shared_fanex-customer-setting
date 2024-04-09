@@ -93,7 +93,6 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
               onClick={() => {
                 modal.resolve({
                   isCancel: true,
-                  groupItems: [],
                 });
                 modal.remove();
               }}

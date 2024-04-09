@@ -7,7 +7,6 @@ import { ValidationRefType, ValidationResult } from '@customer-web-app/share-mod
 import {
   isSportsBookProduct,
   MaxNumberInputLength,
-  ProductGroupIds,
   UserLevel,
   UserLevelName,
 } from '@customer-web-app/shared-constants';
@@ -119,11 +118,11 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
             {isSportsBookProduct(productGroupId) && (
               <div className={styles['col-max-credit']}>
                 <BlockItem
-                label={
-                  generalInfo.roleId === UserLevel.Member
-                    ? t('GivenCredit')
-                    : t(`${UserLevelName[params.roleId]?.toLowerCase()}MaxCredit`)
-                }
+                  label={
+                    generalInfo.roleId === UserLevel.Member
+                      ? t('GivenCredit')
+                      : t(`${UserLevelName[params.roleId]?.toLowerCase()}MaxCredit`)
+                  }
                   isRequired={!(isReadOnly || napCanNotEditCredit)}
                 >
                   <div>

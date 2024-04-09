@@ -1,7 +1,13 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    AgentPositionTakingGroupItem, BetLimitGroupItem, MasterPositionTakingGroupItem, ProductGroup,
-    ProductStatusGroupItem, WinLossLimitGroupItem
+  AgentPositionTakingGroupItem,
+  BetLimitGroupItem,
+  MasterPositionTakingGroupItem,
+  ParlayMaxPayoutGroupItem,
+  ProductGroup,
+  ProductStatusGroupItem,
+  SportsBookBetSettingGroupItem,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export function getNewMultipleEditCustomerSettings(
@@ -57,7 +63,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.ProductStatus) {
-          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item: ProductStatusGroupItem) => ({
+          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item) => ({
             ...item,
             isMultipleModeChecked: true,
             original: { ...item },
@@ -67,7 +73,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.WinLossLimit) {
-          const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item: WinLossLimitGroupItem) => ({
+          const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item) => ({
             ...item,
             isMultipleModeChecked: true,
             original: { ...item },
@@ -78,7 +84,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.BetLimit) {
-          const groupItems = (type.groupItems as BetLimitGroupItem[]).map((item: BetLimitGroupItem) => ({
+          const groupItems = (type.groupItems as BetLimitGroupItem[]).map((item) => ({
             ...item,
             isMultipleModeChecked: true,
             original: { ...item },
@@ -88,7 +94,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.SportsBookBetSetting) {
-          const groupItems = type.groupItems.map((item: any) => {
+          const groupItems = (type.groupItems as SportsBookBetSettingGroupItem[]).map((item) => {
             if (params.isCopyBetSetting !== undefined && !params.isCopyBetSetting) {
               item.minBet = 0;
               item.maxBet = 0;
@@ -107,7 +113,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.ParlayMaxPayout) {
-          const groupItems = type.groupItems.map((item: any) => {
+          const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => {
             if (params.isCopyBetSetting !== undefined && !params.isCopyBetSetting) {
               item.combo2 = item.upline.combo2;
               item.combo35 = item.upline.combo35;

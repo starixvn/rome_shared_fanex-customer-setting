@@ -3,6 +3,8 @@ import {
   AgentPositionTakingGroupItem,
   BetLimitGroupItem,
   CommissionGroupItem,
+  GroupItem,
+  GroupType,
   MasterPositionTakingGroupItem,
   MemberPositionTakingGroupItem,
   ParlayMaxPayoutGroupItem,
@@ -28,28 +30,69 @@ export function getSettingItems<T>(productGroups: ProductGroup[] | undefined, gr
   return productGroups?.find((g) => g.id === groupId)?.groupTypes?.find((t) => t.id === groupTypeId)?.groupItems as T[];
 }
 
+function getBetLimitGroupItemChange(groupType: GroupType, changeItems: GroupItem[]) {
+  const sportTypeChanges = changeItems.map((i) => i.sportTypeId);
+  const newBetLimits = groupType.groupItems.filter((i) => sportTypeChanges.includes(i.sportTypeId));
+  return { ...groupType, groupItems: newBetLimits };
+}
+
 export function getChanges(roleId: number, productGroups: ProductGroup[], groupTypeId?: number) {
   return productGroups.map((gr) => {
     const groupTypes = gr.groupTypes
       .filter((t) => (t.id === groupTypeId || !groupTypeId) && !t.isReadOnly)
       .map((type) => {
-        const groupItems = type.groupItems.filter(
-          (item) => item.isMultipleModeChecked && isChanged(item, type.id, roleId)
-        );
+        const groupItems = type.groupItems.filter((item) => isChanged(item, type.id, roleId));
 
         if (type.id === GroupTypeIds.BetLimit) {
-          const newBetLimits = type.groupItems.filter((item) => {
-            if (groupItems.find((i) => i.sportTypeId === item.sportTypeId)) {
-              return item;
-            }
-          });
-          return { ...type, groupItems: newBetLimits };
+          return getBetLimitGroupItemChange(type, groupItems);
         }
 
         return { ...type, groupItems };
       });
+
     return { ...gr, groupTypes: groupTypes.filter((x) => x.groupItems.length > 0) };
   });
+}
+
+function isChangePositionTaking(item: GroupItem, roleId: number) {
+  if (roleId === UserLevel.Super) {
+    const groupItem = item as SuperPositionTakingGroupItem;
+    return (
+      groupItem.s4 !== groupItem.original?.s4 ||
+      groupItem.m4 !== groupItem.original.m4 ||
+      groupItem.a4 !== groupItem.original.a4 ||
+      groupItem.n4 !== groupItem.original.n4
+    );
+  }
+
+  if (roleId === UserLevel.Master) {
+    const groupItem = item as MasterPositionTakingGroupItem;
+    return (
+      groupItem.s3 !== groupItem.original?.s3 ||
+      groupItem.iS3 !== groupItem.original.iS3 ||
+      groupItem.uS3 !== groupItem.original.uS3 ||
+      groupItem.m3 !== groupItem.original.m3 ||
+      groupItem.n3 !== groupItem.original.n3
+    );
+  }
+
+  if (roleId === UserLevel.Agent) {
+    const groupItem = item as AgentPositionTakingGroupItem;
+    return (
+      groupItem.iM2 !== groupItem.original?.iM2 ||
+      groupItem.uM2 !== groupItem.original.uM2 ||
+      groupItem.m2 !== groupItem.original.m2 ||
+      groupItem.a2 !== groupItem.original.a2 ||
+      groupItem.n2 !== groupItem.original.n2
+    );
+  }
+
+  if (roleId === UserLevel.Member) {
+    const groupItem = item as MemberPositionTakingGroupItem;
+    return groupItem.a1 !== groupItem.original?.a1;
+  }
+
+  return false;
 }
 
 function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
@@ -103,39 +146,7 @@ function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
   }
 
   if (groupTypeId === GroupTypeIds.PositionTaking) {
-    if (roleId === UserLevel.Super) {
-      const groupItem = item as SuperPositionTakingGroupItem;
-      return (
-        groupItem.s4 !== groupItem.original?.s4 ||
-        groupItem.m4 !== groupItem.original.m4 ||
-        groupItem.a4 !== groupItem.original.a4 ||
-        groupItem.n4 !== groupItem.original.n4
-      );
-    }
-    if (roleId === UserLevel.Master) {
-      const groupItem = item as MasterPositionTakingGroupItem;
-      return (
-        groupItem.s3 !== groupItem.original?.s3 ||
-        groupItem.iS3 !== groupItem.original.iS3 ||
-        groupItem.uS3 !== groupItem.original.uS3 ||
-        groupItem.m3 !== groupItem.original.m3 ||
-        groupItem.n3 !== groupItem.original.n3
-      );
-    }
-    if (roleId === UserLevel.Agent) {
-      const groupItem = item as AgentPositionTakingGroupItem;
-      return (
-        groupItem.iM2 !== groupItem.original?.iM2 ||
-        groupItem.uM2 !== groupItem.original.uM2 ||
-        groupItem.m2 !== groupItem.original.m2 ||
-        groupItem.a2 !== groupItem.original.a2 ||
-        groupItem.n2 !== groupItem.original.n2
-      );
-    }
-    if (roleId === UserLevel.Member) {
-      const groupItem = item as MemberPositionTakingGroupItem;
-      return groupItem.a1 !== groupItem.original?.a1;
-    }
+    return isChangePositionTaking(item as GroupItem, roleId);
   }
 
   return false;

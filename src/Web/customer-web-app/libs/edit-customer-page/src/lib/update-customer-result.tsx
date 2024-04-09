@@ -1,11 +1,9 @@
-import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
+
 import { UpdateCustomerResult } from '@customer-web-app/share-models';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 
-
-
 import styles from './update-customer-result.module.scss';
-import { TFunction } from 'i18next';
 
 export const scrollToTop = () => {
   window &&
@@ -17,7 +15,6 @@ export const scrollToTop = () => {
 };
 
 export const renderUpdateCustomerResult = (result: UpdateCustomerResult, t: TFunction) => {
-  
   if (result.subResults) {
     return result.subResults.map((groupType) => {
       return (
@@ -28,21 +25,21 @@ export const renderUpdateCustomerResult = (result: UpdateCustomerResult, t: TFun
           {groupType.message && !groupType.isSuccessful && (
             <div className={styles['alert-error']}>{groupType.message}</div>
           )}
-          <div className={ (!groupType.message ? `${styles['alert-error']} ` : ``)}>
-          {groupType.subMessages &&
-            groupType.subMessages.length > 0 &&
-            groupType.subMessages.map((error, index) => (
-              <div className={styles['note-error']} key={`${error.message}${index}`}>
-                {error.isLive ? (
-                  <>
-                    <span className="live-badge">{t('Live')}</span>{' '}
-                  </>
-                ) : (
-                  ''
-                )}
-                {error.message}
-              </div>
-            ))}
+          <div className={!groupType.message ? `${styles['alert-error']} ` : ``}>
+            {groupType.subMessages &&
+              groupType.subMessages.length > 0 &&
+              groupType.subMessages.map((error, index) => (
+                <div className={styles['note-error']} key={`${error.message}${index}`}>
+                  {error.isLive ? (
+                    <>
+                      <span className="live-badge">{t('Live')}</span>{' '}
+                    </>
+                  ) : (
+                    ''
+                  )}
+                  {error.message}
+                </div>
+              ))}
           </div>
         </div>
       );
