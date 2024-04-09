@@ -8,5 +8,7 @@ public class GetProductCategoriesRequest
     
     public string Site { get; set; }
     
+    public string SiteLabel { get; set; }
+
     public string Language { get; set; }
 }

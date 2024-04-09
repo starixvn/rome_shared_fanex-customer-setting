@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Shared.Services;
 
 public interface ICacheRefService
 {
-    string GetProductName(int productId, string language = "en-US");
+    string GetProductName(int productId, string language = "en-US", bool isSiteLabel777 = false);
 
     string GetProductGroupName(int productGroupId, string language = "en-US");
 
@@ -65,8 +65,19 @@ public class CacheRefService : ICacheRefService
         this.remotingRef = remotingRef ?? new RemotingRefService();
     }
 
-    public string GetProductName(int productId, string language = "en-US")
-        => remotingRef.GetResourceDataByRefIdAndResourceId(ProductRefId, productId.ToString(), language, productId.ToString());
+    public string GetProductName(int productId, string language = "en-US", bool isSiteLabel777 = false)
+    {
+        if(isSiteLabel777)
+        {
+            var name = remotingRef.GetResourceDataByRefIdAndResourceId($"{ProductRefId}_Saba", productId.ToString(), language, string.Empty);
+            
+            return string.IsNullOrEmpty(name)?
+                remotingRef.GetResourceDataByRefIdAndResourceId(ProductRefId, productId.ToString(), language, productId.ToString()) :
+                name;
+        }
+
+        return remotingRef.GetResourceDataByRefIdAndResourceId(ProductRefId, productId.ToString(), language, productId.ToString());
+    }        
 
     public string GetProductGroupName(int productGroupId, string language = "en-US")
         => remotingRef.GetResourceDataByRefIdAndResourceId(ProductGroupRefId, productGroupId.ToString(), language, productGroupId.ToString());

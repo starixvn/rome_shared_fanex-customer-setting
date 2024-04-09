@@ -56,7 +56,7 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> GetPTSettingInformation(int? custId, bool isTest, string site, string language = "en-US");
 
-        Task<string> GetProductCategories(int? custId, string site, int currency, string language = "en-US");
+        Task<string> GetProductCategories(int? custId, string site, string siteLabel, int currency, string language = "en-US");
 
         Task<string> GetCommissionHint(int custId, string site, string language = "en-US");
 
@@ -207,13 +207,13 @@ namespace Fanex.Customer.Client.Services
             return httpClient.GetStringAsync($"customer/pt-setting-information?site={site}&isTest={isTest}&language={language}");
         }
 
-        public Task<string> GetProductCategories(int? custId, string site, int currencyId, string language = "en-US")
+        public Task<string> GetProductCategories(int? custId, string site, string siteLabel, int currencyId, string language = "en-US")
         {
             if (custId.HasValue)
             {
-                return httpClient.GetStringAsync($"customer/product-categories?custId={custId}&site={site}&currencyId={currencyId}&language={language}");
+                return httpClient.GetStringAsync($"customer/product-categories?custId={custId}&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
             }
-            return httpClient.GetStringAsync($"customer/product-categories?&site={site}&currencyId={currencyId}&language={language}");
+            return httpClient.GetStringAsync($"customer/product-categories?&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
         }
 
         public Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US")

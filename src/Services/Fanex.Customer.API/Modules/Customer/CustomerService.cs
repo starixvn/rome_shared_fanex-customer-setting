@@ -180,7 +180,7 @@ public class CustomerService : ICustomerService
                         Products = (subGroup.Select(d => new
                         {
                             Id = d.RealProductId,
-                            Name = cacheRefService.GetProductName(d.RealProductId, request.Language),
+                            Name = cacheRefService.GetProductName(d.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
                             Products = ""
                         }).ToList())
                     })
