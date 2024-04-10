@@ -27,7 +27,11 @@ public class MessageService : IMessageService
 
     public MessageContent TranslateMessage(int messageType, string rawMessage, string language)
         => messageType switch
-        {
+        { 
+            MessageTypes.PlainMessage
+                => new MessageContent(rawMessage),
+            MessageTypes.WrongAutoPT
+                => TranslateSimpleMessage(rawMessage, language),
             MessageTypes.ProductStatusDependencyViolation
                 => TranslateProductStatusDependencyViolationSubMessages(rawMessage, language),
             MessageTypes.DownlinePTViolation
@@ -58,8 +62,6 @@ public class MessageService : IMessageService
                 => TranslateMessage<SubMessage>(rawMessage, language),
             MessageTypes.StakeLevelMaxChoiceViolation
                 => TranslateStakeLevelMaxChoiceViolationSubMessages(rawMessage, language),
-            MessageTypes.WrongAutoPT
-                => TranslateSimpleMessage(rawMessage, language),
             MessageTypes.UpdateTooOften
             => TranslateUpdateTooOftenMessage(rawMessage, language),
             _ => new MessageContent($"MsgType={messageType} MainMsg={rawMessage}")

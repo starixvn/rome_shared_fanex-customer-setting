@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.Message;
 
 public static class MessageTypes
 {
-    public const int SimpleMessage = 0;
+    public const int PlainMessage = 0;
 
     public const int ParlayMaxPayoutViolation = 31;
 
