@@ -1,4 +1,4 @@
-export default function scrollToBLock(blockId: string) {
+export function scrollToBLock(blockId: string) {
   const block = document.getElementById(blockId);
   window &&
     window.scroll({

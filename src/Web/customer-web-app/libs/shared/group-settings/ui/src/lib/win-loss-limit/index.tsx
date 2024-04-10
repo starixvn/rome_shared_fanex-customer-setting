@@ -8,6 +8,7 @@ import { GroupTypeIds, MaxNumberInputLength, UserLevel } from '@customer-web-app
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { WinLossLimitGroupItem } from '@customer-web-app/shared-group-settings-types';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { IconInfo } from '@customer-web-app/shared/base/common-icon';
@@ -15,7 +16,6 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import NiceModal from '@ebay/nice-modal-react';
 
 import { CustomerSettingInformationPageUrl } from '../customer-setting-information-page-url';
-import scrollToBLock from '../scroll-helper';
 import { GroupSettingBlockProps } from '../types';
 import WinLossAmount from './win-loss-amount';
 
@@ -251,7 +251,8 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
     if (maximumWinOptions.length < 1) return null;
 
     return (
-      <select className='long-select'
+      <select
+        className="long-select"
         key={winLossLimit.sportTypeId}
         value={winLossLimit.winLimit}
         onChange={(e) => handleWinLossLimitChange(winLossLimit, { winLimit: Number(e.target.value) })}

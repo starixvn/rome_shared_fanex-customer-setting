@@ -7,7 +7,7 @@ type Props = {
   handleSelectCommission: (isSelected: boolean) => void;
 };
 
-export default function CommissionLabel({ isSelected, handleSelectCommission, displayName, isReadOnly }: Props) {
+export default function CommissionLabel({ isSelected, handleSelectCommission, displayName, isReadOnly }: Readonly<Props>) {
   const { isMultipleMode } = useGroupSettingContext();
   return (
     <div>

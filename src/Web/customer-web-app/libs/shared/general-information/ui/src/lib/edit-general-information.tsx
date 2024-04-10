@@ -11,6 +11,7 @@ import {
   UserLevelName,
 } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -61,22 +62,13 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
         return validateResult;
       };
 
-      const scrollToBlock = () => {
-        const element = document.getElementById('edit-general-info');
-        window &&
-          window.scroll({
-            top: element?.offsetTop,
-            behavior: 'smooth',
-          });
-      };
-
       const expandBlock = () => {
         blockRef.current?.expand();
       };
 
       return {
         validate,
-        scrollToBlock,
+        scrollToBlock: () => scrollToBLock('edit-general-info'),
         expandBlock,
       };
     });

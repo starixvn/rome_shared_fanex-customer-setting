@@ -6,11 +6,11 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { ParlayMaxPayoutGroupItem } from '@customer-web-app/shared-group-settings-types';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import { ValidationContext } from '../bet-setting/validation-context';
-import scrollToBLock from '../scroll-helper';
 import { GroupSettingBlockProps } from '../types';
 import ParlayMaxPayoutRow from './parlay-max-payout-row';
 import ParlayMaxPayoutValidator from './parlay-max-payout-validator';

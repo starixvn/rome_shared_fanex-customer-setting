@@ -7,12 +7,14 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-    GroupItem, MasterEditMemberPositionTakingGroupItem, MasterEditMemberPositionTakingProps
+  GroupItem,
+  MasterEditMemberPositionTakingGroupItem,
+  MasterEditMemberPositionTakingProps,
 } from '@customer-web-app/shared-group-settings-types';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import scrollToBLock from '../scroll-helper';
 import { ValidatePTResult } from './master-position-taking';
 import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
@@ -20,8 +22,13 @@ import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
 import { PositionTakingBlockProps } from './types';
 import {
-    CopyStatus, CopyStatusPT, groupSportsBookPTBySportTypeId, isCopyingPTItem, PTRowProps, renderNoneBlockColumn,
-    usePTCopy
+  CopyStatus,
+  CopyStatusPT,
+  groupSportsBookPTBySportTypeId,
+  isCopyingPTItem,
+  PTRowProps,
+  renderNoneBlockColumn,
+  usePTCopy,
 } from './utils';
 
 function minM1(item: MasterEditMemberPositionTakingProps) {

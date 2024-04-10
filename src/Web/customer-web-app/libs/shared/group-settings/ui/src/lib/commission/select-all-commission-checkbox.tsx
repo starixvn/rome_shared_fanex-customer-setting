@@ -5,7 +5,7 @@ type Props = {
   handleChange: (isChecked: boolean) => void;
 };
 
-export default function SelectAllCommissionCheckbox({ checked, handleChange }: Props) {
+export default function SelectAllCommissionCheckbox({ checked, handleChange }: Readonly<Props>) {
   const { t } = useTranslation();
   return (
     <>
