@@ -16,6 +16,8 @@ public class SettingProfile
 
     public short DisplayType { get; set; }
 
+    public int SettingLevel { get; set; }
+
     public int SettingType { get; set; }
 
     public short DisplayMode { get; set; }
