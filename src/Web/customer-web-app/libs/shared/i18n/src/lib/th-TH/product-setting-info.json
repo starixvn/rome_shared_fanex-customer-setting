@@ -31,8 +31,8 @@
   "CommissionGroup": "กลุ่มคอมมิสชั่น",
   "BetType": "ชนิดการเดิมพัน",
   "CommissionInformation": "ข้อมูลค่าคอมมิสชั่น",
-  "SportsBookCommissionInformation": "Sportsbook Commission Information",
-  "OtherProductsCommissionInformation": "Other Products Commission Information",
+  "SportsBookCommissionInformation": "ข้อมูลค่าคอมมิสชั่นกีฬา",
+  "OtherProductsCommissionInformation": "ข้อมูลค่าคอมมิสชั่นผลิตภัณฑ์อื่น",
   "CommissionMap": "M = มาสเตอร์, A = เอเย่น, P = สมาชิก",
   "Commission3": "ค่าคอมมิชชั่น3 (คอม3): นำไปใช้กับประเภทการเดิมพันอื่น ๆ",
   "MPSInformation": "ข้อมูลการตั้งค่าการจ่ายเงินสูงสุด",
@@ -83,7 +83,7 @@
   "WinLossLimit": "วงเงินแพ้ชนะ",
   "CustomerSettingInformation": "ข้อมูลการตั้งค่าลูกค้า",
   "BBINBetSetting2": "[BBIN]: ผลิตภัณฑ์ BBIN จะไม่มีการคิดค่าคอมมิชชัน โปรดทราบว่าการปรับเปลี่ยนการตั้งค่าของสมาชิกจะเริ่มมีผลตั้งแต่เวลาที่สมาชิกทำการโอนครั้งถัดไป",
-  "FGGNote": "[FGG] : Commission is not applied to FGG product.",
+  "FGGNote": "[FGG]: ผลิตภัณฑ์ FGG จะไม่มีการคิดค่าคอมมิชชัน",
   "WinLossLimitNote1": "คาสิโนสด: เปรียบเทียบการตั้งค่าขีดจำกัดการชนะ/แพ้กับการชนะ/แพ้ของผลิตภัณฑ์แต่ละรายการ",
   "WinLossLimitNote2": "RNG Casino: เปรียบเทียบการตั้งค่าขีดจำกัดการชนะ/แพ้กับการชนะ/แพ้รวมของผลิตภัณฑ์ทั้งหมด"
 }

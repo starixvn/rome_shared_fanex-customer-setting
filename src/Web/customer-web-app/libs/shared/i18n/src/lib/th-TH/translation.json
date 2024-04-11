@@ -171,5 +171,5 @@
   "Winning": "ชนะ",
   "Losing": "แพ้",
   "BBinSettingNote": "หมายเหตุ: ค่า % การชนะของ BBIN แสดงผลเป็น \"N/A\" เนื่องจากผลิตภัณฑ์ BBIN ไม่มีการควบคุมขีดจำกัดการชนะสูงสุด",
-  "ViewWinLossLimitInfo": "Click to view Win Loss Limit Info"
+  "ViewWinLossLimitInfo": "คลิกเพื่อดูข้อมูลขีดจำกัดการแพ้ชนะ"
 }

@@ -29,8 +29,8 @@
   "PTSettingInformationContent": "PT của những loại cược chính được áp dụng cho các loại cược sau: ",
   "FollowedBy": "Theo thiết lập của",
   "CommissionGroup": "Nhóm hoa hồng",
-  "SportsBookCommissionInformation": "Sportsbook Commission Information",
-  "OtherProductsCommissionInformation": "Other Products Commission Information",
+  "SportsBookCommissionInformation": "Thông Tin Hoa Hồng Sportsbook",
+  "OtherProductsCommissionInformation": "Thông Tin Hoa Hồng Sản Phẩm Khác",
   "BetType": "Loại cược",
   "CommissionInformation": "Thông tin hoa hồng",
   "CommissionMap": "M = Master, A = Agent, P = Member.",
@@ -83,7 +83,7 @@
   "WinLossLimit": "Giới hạn thắng thua",
   "CustomerSettingInformation": "Thông Tin Cài Đặt Tài Khoản",
   "BBINBetSetting2": "[BBIN]: Hoa hồng không được áp dụng cho sản phẩm BBIN, kể từ ngày 11/9/2023 (dd/mm/yyyy). Ngoài ra, khi bạn chỉnh sửa cài đặt của Member, những cài đặt mới này sẽ bắt đầu có hiệu lực kể từ lần chuyển khoản tiếp theo của họ.",
-  "FGGNote": "[FGG] : Commission is not applied to FGG product.",
-  "WinLossLimitNote1": "Live Casino: Compare the Win/Loss Limit settings with the Win/Loss of EACH product.",
-  "WinLossLimitNote2": "RNG Casino: Compare the Win/Loss Limit settings with the total Win/Loss of ALL products."
+  "FGGNote": "[FGG]: Hoa hồng không được áp dụng cho sản phẩm FGG",
+  "WinLossLimitNote1": "Live Casino: So sánh Giới hạn Thắng/Thua với Thắng/Thua của TỪNG sản phẩm.",
+  "WinLossLimitNote2": "RNG Casino: So sánh Giới hạn Thắng/Thua với Tổng Thắng/Thua của TẤT CẢ sản phẩm."
 }
