@@ -6,3 +6,12 @@ export function scrollToBLock(blockId: string) {
       behavior: 'smooth',
     });
 }
+
+export const scrollToTop = () => {
+  window &&
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+};

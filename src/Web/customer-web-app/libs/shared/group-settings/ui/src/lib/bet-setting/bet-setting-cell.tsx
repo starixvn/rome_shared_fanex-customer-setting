@@ -6,6 +6,8 @@ import { NumberHelper } from '@customer-web-app/shared-helpers';
 
 import { Operator } from '../operator';
 
+const BetSettingDecimalScale = 2;
+
 interface BetSettingCellProps {
   id: string;
   value?: number;
@@ -31,7 +33,7 @@ export default function BetSettingCell(props: Readonly<BetSettingCellProps>) {
         value={value}
         disabled={isDisable}
         allowNegative={false}
-        decimalScale={2}
+        decimalScale={BetSettingDecimalScale}
         thousandSeparator=","
         maxLength={maxLength}
         onChange={onChange}

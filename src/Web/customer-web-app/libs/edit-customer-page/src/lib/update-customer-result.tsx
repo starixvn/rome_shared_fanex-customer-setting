@@ -5,15 +5,6 @@ import { ErrorBlock } from '@customer-web-app/shared-error-block';
 
 import styles from './update-customer-result.module.scss';
 
-export const scrollToTop = () => {
-  window &&
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
-};
-
 export const renderUpdateCustomerResult = (result: UpdateCustomerResult, t: TFunction) => {
   if (result.subResults) {
     return result.subResults.map((groupType) => {

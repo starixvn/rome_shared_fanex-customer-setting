@@ -2,31 +2,31 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-    CreateSuperNotes, getHeadlineBelongSite, getNotAllowedSuperPrefixes, HeadlineBelongSite,
-    SuperPrefixes
+  CreateSuperNotes,
+  getHeadlineBelongSite,
+  getNotAllowedSuperPrefixes,
+  HeadlineBelongSite,
+  SuperPrefixes,
 } from '@customer-web-app/create-super-notes';
-import {
-    handleChangeGroupSettingValue, handleChangeItemValue, scrollToTop
-} from '@customer-web-app/edit-customer-page';
-import {
-    CreateCustomerResult, Result, ValidateRefResult, ValidationRefType
-} from '@customer-web-app/share-models';
+import { handleChangeGroupSettingValue, handleChangeItemValue } from '@customer-web-app/edit-customer-page';
+import { CreateCustomerResult, Result, ValidateRefResult, ValidationRefType } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { ProductGroupIds } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-    GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
+  GeneralInfo,
+  GeneralInfoActionTypes,
+  generalInformationReducer,
+  initialState,
 } from '@customer-web-app/shared-general-information-state';
 import { GeneralInformation } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting } from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, scrollToTop } from '@customer-web-app/shared-group-settings-ui';
 import { encrypt } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
-import {
-    Currency, getSitesAndCurrencies, Site, SiteCurrencySection
-} from '@customer-web-app/site-currency-section';
+import { Currency, getSitesAndCurrencies, Site, SiteCurrencySection } from '@customer-web-app/site-currency-section';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import styles from './create-super-page.module.scss';

@@ -17,7 +17,7 @@ import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-set
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { getChanges } from '@customer-web-app/shared-group-settings-state';
 import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, scrollToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -28,7 +28,7 @@ import {
     getNewIndirectEditCustomerSettings, getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue,
     handleInitProducts, isGeneralInfoChanged
 } from './handler';
-import { renderUpdateCustomerResult, scrollToTop } from './update-customer-result';
+import { renderUpdateCustomerResult } from './update-customer-result';
 
 export function EditCustomerPage() {
   const { t } = useTranslation();
