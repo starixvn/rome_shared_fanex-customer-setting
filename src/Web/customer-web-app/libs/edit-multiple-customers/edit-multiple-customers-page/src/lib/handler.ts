@@ -1,13 +1,8 @@
+import { initProductStatusGroup } from '@customer-web-app/edit-customer-page';
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-  AgentPositionTakingGroupItem,
-  BetLimitGroupItem,
-  MasterPositionTakingGroupItem,
-  ParlayMaxPayoutGroupItem,
-  ProductGroup,
-  ProductStatusGroupItem,
-  SportsBookBetSettingGroupItem,
-  WinLossLimitGroupItem,
+    AgentPositionTakingGroupItem, BetLimitGroupItem, MasterPositionTakingGroupItem, ParlayMaxPayoutGroupItem,
+    ProductGroup, SportsBookBetSettingGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 export function getNewMultipleEditCustomerSettings(
@@ -63,13 +58,9 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.ProductStatus) {
-          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item) => ({
-            ...item,
-            isMultipleModeChecked: true,
-            original: { ...item },
-          }));
-
-          return { ...type, groupItems };
+          if (type.id === GroupTypeIds.ProductStatus) {
+            return initProductStatusGroup({ ...type });
+          }
         }
 
         if (type.id === GroupTypeIds.WinLossLimit) {

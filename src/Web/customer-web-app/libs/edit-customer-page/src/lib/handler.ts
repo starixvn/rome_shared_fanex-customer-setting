@@ -1,15 +1,9 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import {
-  AgentPositionTakingGroupItem,
-  GroupSettingItem,
-  MasterEditMemberPositionTakingGroupItem,
-  MasterPositionTakingGroupItem,
-  ParlayMaxPayoutGroupItem,
-  ProductGroup,
-  ProductStatusGroupItem,
-  SuperEditMemberPositionTakingGroupItem,
-  WinLossLimitGroupItem,
+    AgentPositionTakingGroupItem, GroupSettingItem, GroupType, MasterEditMemberPositionTakingGroupItem,
+    MasterPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup, ProductStatusGroupItem,
+    SuperEditMemberPositionTakingGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 export const handleChangeItemValue = (
@@ -62,6 +56,24 @@ export const handleChangeGroupSettingValue = (
   });
 };
 
+export const initProductStatusGroup = (groupType: GroupType) => {
+  const groupItems = (groupType.groupItems as ProductStatusGroupItem[]).map((item) => {
+    if (item.parentSportType && item.parentBetType) {
+      const parentItem = groupType.groupItems.find(
+        (x) => x.sportTypeId === item.parentSportType && x.betTypeId === item.parentBetType
+      ) as ProductStatusGroupItem;
+
+      if (parentItem.isDisabled) {
+        return { ...item, isMultipleModeChecked: true, original: { ...item }, readonly: true };
+      }
+    }
+
+    return { ...item, isMultipleModeChecked: true, original: { ...item } };
+  });
+
+  return { ...groupType, groupItems };
+};
+
 export const handleInitProducts = (productGroups: ProductGroup[]) => {
   return productGroups?.map((group) => {
     const groupTypes = group.groupTypes
@@ -105,21 +117,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
         }
 
         if (type.id === GroupTypeIds.ProductStatus) {
-          const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item) => {
-            if (item.parentSportType && item.parentBetType) {
-              const parentItem = type.groupItems.find(
-                (x) => x.sportTypeId === item.parentSportType && x.betTypeId === item.parentBetType
-              ) as ProductStatusGroupItem;
-
-              if (parentItem.isDisabled) {
-                return { ...item, isMultipleModeChecked: true, original: { ...item }, readonly: true };
-              }
-            }
-
-            return { ...item, isMultipleModeChecked: true, original: { ...item } };
-          });
-
-          return { ...type, groupItems };
+          return initProductStatusGroup({ ...type });
         }
 
         return {
