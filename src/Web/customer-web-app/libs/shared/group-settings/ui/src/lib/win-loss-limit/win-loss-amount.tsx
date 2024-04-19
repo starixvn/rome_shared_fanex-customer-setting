@@ -5,6 +5,7 @@ import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { SportTypeIds } from '@customer-web-app/shared-constants';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { CurrentWinLossAmount } from '@customer-web-app/shared-group-settings-types';
+import { NumberHelper } from '@customer-web-app/shared-helpers';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 import { IconClose } from '@customer-web-app/shared/base/common-icon';
 import { useTheme } from '@customer-web-app/shared/base/layout';
@@ -37,17 +38,19 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
 
   const showWinningPercentColumn = (wl: CurrentWinLossAmount) => {
     const { winPercent, currentAmount, maxWinAmount } = wl;
+    const currentAmountValue = NumberHelper.formatWithCommas(currentAmount);
+    const maxWinAmountValue = NumberHelper.formatWithCommas(maxWinAmount);
     if (winPercent === 0) return <div>{winPercent}%</div>;
     if (winPercent > 0 && winPercent <= 100)
       return (
         <div>
-          {winPercent}% ({currentAmount}/{maxWinAmount})
+          {winPercent}% ({currentAmountValue}/{maxWinAmountValue})
         </div>
       );
     if (winPercent > 100)
       return (
         <div className={styles.textRed}>
-          {winPercent}% ({currentAmount}/{maxWinAmount})
+          {winPercent}% ({currentAmountValue}/{maxWinAmountValue})
         </div>
       );
     if (winPercent === -1) return <div>{t('unlimited')}</div>;
@@ -56,7 +59,7 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
         <div>
           <span className={styles.textRed}>{t('N/A')}</span>
           <span>
-            ({currentAmount}/<span className={styles.textRed}>{maxWinAmount}</span>)
+            ({currentAmountValue}/<span className={styles.textRed}>{maxWinAmountValue}</span>)
           </span>
         </div>
       );
@@ -65,18 +68,20 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
 
   const showLosingPercentColumn = (wl: CurrentWinLossAmount) => {
     const { lossPercent, currentAmount, maxLossAmount } = wl;
+    const currentAmountValue = NumberHelper.formatWithCommas(currentAmount);
+    const maxLossAmountValue = NumberHelper.formatWithCommas(maxLossAmount);
     if (lossPercent === 0) return <div>{lossPercent}%</div>;
     if (lossPercent === -1) return <div>{t('unlimited')}</div>;
     if (lossPercent > 0 && lossPercent <= 100)
       return (
         <div>
-          {lossPercent}% ({-currentAmount}/{maxLossAmount})
+          {lossPercent}% ({-currentAmountValue}/{maxLossAmountValue})
         </div>
       );
     if (lossPercent > 100)
       return (
         <div className={styles.textRed}>
-          {lossPercent}% ({-currentAmount}/{maxLossAmount})
+          {lossPercent}% ({-currentAmountValue}/{maxLossAmountValue})
         </div>
       );
   };
