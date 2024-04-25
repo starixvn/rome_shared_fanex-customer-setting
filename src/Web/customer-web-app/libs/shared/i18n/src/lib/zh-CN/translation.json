@@ -167,7 +167,7 @@
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - 分配最大{{value}}投注限额给会员。",
   "ClickToViewCurrentWinLossAmount": "点击查看目前输的数额",
   "CurrentWinLossAmount": "目前输赢数额",
-  "Product": "Product",
+  "Product": "产品",
   "Winning": "赢",
   "Losing": "输",
   "BBinSettingNote": "注意：BBIN\"赢数额巴仙\"的栏位显示\"N/A\" 的意思是最高的赢数额不适用于BBIN的产品。",

@@ -166,7 +166,7 @@
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - Được gán tối đa {{value}} giới hạn cược cho cấp Member.",
   "ClickToViewCurrentWinLossAmount": "Nhấn để xem Lượng Tiền Đang Thua",
   "CurrentWinLossAmount": "Giá trị thắng thua hiện tại",
-  "Product": "Product",
+  "Product": "Sản phẩm",
   "Winning": "Thắng",
   "Losing": "Thua",
   "BBinSettingNote": "Lưu ý: Phần trăm Thắng (%) của BBIN hiển thị là \"N/A\" nghĩa là không áp dụng Giới Hạn Thắng Tối Đa cho sản phẩm này.",

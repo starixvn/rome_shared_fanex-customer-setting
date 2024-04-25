@@ -167,7 +167,7 @@
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - กำหนดวงเงินเดิมพันสูงสุด {{value}} ในระดับสมาชิก",
   "ClickToViewCurrentWinLossAmount": "คลิกเพื่อดูยอดเสียปัจจุบัน",
   "CurrentWinLossAmount": "จำนวนแพ้/ชนะปัจจุบัน",
-  "Product": "Product",
+  "Product": "ผลิตภัณฑ์",
   "Winning": "ชนะ",
   "Losing": "แพ้",
   "BBinSettingNote": "หมายเหตุ: ค่า % การชนะของ BBIN แสดงผลเป็น \"N/A\" เนื่องจากผลิตภัณฑ์ BBIN ไม่มีการควบคุมขีดจำกัดการชนะสูงสุด",
