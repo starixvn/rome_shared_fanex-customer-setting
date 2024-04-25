@@ -300,7 +300,9 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
         <BlockRow isHeaderRow>
           <BlockColumn>{t('MaximumWin')}</BlockColumn>
           <BlockColumn>{t('MaximumLoss')}</BlockColumn>
-          <BlockColumn>{t('')}</BlockColumn>
+          <div style={{width: "400px", height: "100%"}}>
+            <BlockColumn>{t('')}</BlockColumn>
+          </div>
         </BlockRow>
         {winLossLimitItems
           .filter((item) => item.productId === selectedProductId)
@@ -314,6 +316,7 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
                   handleWinLossLimitChange={handleWinLossLimitChange}
                   setTooltipError={setValidateWinLossLimit}
                 />
+                <div style={{width: "400px", height: "100%"}}>
                 <BlockColumn>
                   <div>
                     <div className="blockLeft" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -324,22 +327,22 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
                           disabled={!winLossLimit.isAutoResetUpline || isReadOnly}
                           onChange={(e) => handleWinLossLimitChange(winLossLimit, { isAutoReset: e.target.checked })}
                         />
-                        <span>{t('DailyAutoResetLimitAt')}</span>
-                      </div>
-                      <div style={{ widows: '100%' }}>
-                        {params.roleId === UserLevel.Member && (
-                          <div
+                        <div>
+                          <span>{t('DailyAutoResetLimitAt')} </span>
+                          {params.roleId === UserLevel.Member && (
+                          <span
                             aria-hidden
                             onClick={() => showCurrentWinLossAmount(winLossLimit.sportTypeId, winLossLimit.betTypeId)}
-                            style={{ cursor: 'pointer', color: 'blue' }}
-                          >
-                            {t('ClickToViewCurrentWinLossAmount')}
-                          </div>
+                            style={{ cursor: 'pointer', color: 'blue', display: "inline-block" }}
+                          >{t('ClickToViewCurrentWinLossAmount')}
+                          </span>
                         )}
-                      </div>
+                        </div>                        
+                      </div>                      
                     </div>
                   </div>
-                </BlockColumn>
+                  </BlockColumn>
+                  </div>
               </BlockRow>
             );
           })}
