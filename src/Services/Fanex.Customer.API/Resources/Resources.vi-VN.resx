@@ -257,10 +257,6 @@
 		<value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
 		<comment/>
 	</data>
-	<data name="Msg_10068" xml:space="preserve">
-		<value>You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8.</value>
-		<comment/>
-	</data>
 	<data name="Msg_10070" xml:space="preserve">
 		<value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên phải là số dương.</value>
 		<comment/>
@@ -279,6 +275,10 @@
 	</data>
 	<data name="Msg_10074" xml:space="preserve">
 		<value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên: Cài đặt cho Combo Over 6 đang cao hơn giới hạn cược của cấp trên.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10078" xml:space="preserve">
+		<value>RNG Casino: Bạn đã đạt đến giới hạn cho số lần cập nhật Position Taking trong tháng (1 lần). Vui lòng thử lại sau {0} 12:00 PM GMT+8.</value>
 		<comment/>
 	</data>
 	<data name="Msg_20001" xml:space="preserve">

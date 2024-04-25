@@ -261,10 +261,6 @@
 		<value>最低投注必须少于或等于 最高投注，最高投注必须少于或等于单场限额</value>
 		<comment/>
 	</data>
-	<data name="Msg_10068" xml:space="preserve">
-		<value>您已达到每月更新占成的最高允许次数（1 次）。请在 {0} 下午 12:00 GMT+8 之后重试。</value>
-		<comment/>
-	</data>
 	<data name="Msg_10070" xml:space="preserve">
 		<value>每注串关最高派彩的设定值必须为正数</value>
 		<comment/>
@@ -283,6 +279,10 @@
 	</data>
 	<data name="Msg_10074" xml:space="preserve">
 		<value>每注串关最高派彩: 复选6的设置比上线的要高。</value>
+		<comment/>
+	</data>
+	<data name="Msg_10078" xml:space="preserve">
+		<value>RNG娱乐城: 您已达到每月更新占成的最高允许次数（1 次）。请在 {0} 下午 12:00 GMT+8 之后重试。</value>
 		<comment/>
 	</data>
 	<data name="Msg_20001" xml:space="preserve">

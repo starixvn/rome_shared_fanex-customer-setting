@@ -277,10 +277,6 @@
 		<value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
 		<comment/>
 	</data>
-	<data name="Msg_10068" xml:space="preserve">
-		<value>You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8.</value>
-		<comment/>
-	</data>
 	<data name="Msg_10070" xml:space="preserve">
 		<value>The Parlay Max Payout value must be a positive amount.</value>
 		<comment/>
@@ -299,6 +295,10 @@
 	</data>
 	<data name="Msg_10074" xml:space="preserve">
 		<value>Parlay Max Payout per Bet: The setting of Combo Over 6 is higher than the upline's.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10078" xml:space="preserve">
+		<value>RNG Casino:  You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8.</value>
 		<comment/>
 	</data>
 	<data name="Msg_20001" xml:space="preserve">
