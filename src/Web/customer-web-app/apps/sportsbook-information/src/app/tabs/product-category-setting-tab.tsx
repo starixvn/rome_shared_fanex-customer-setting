@@ -2,9 +2,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ProductSetting } from './models';
-
 import { BlockV2 } from '@customer-web-app/shared/base/block';
+
+interface ProductSetting {
+  id: number;
+  name: string;
+  products: ProductSetting[];
+}
+
 
 type ProductSettingInfoResponse = {
   productSettingInfo: ProductSetting[];
@@ -14,7 +19,7 @@ type ProductSettingInfoResponse = {
   showRNGKenoNumberGame: boolean;
 };
 
-export function ProductCategorySettingTab({ alphaUrl, napUrl, exNapUrl }: { alphaUrl: string; napUrl: string, exNapUrl: string }) {
+export function ProductCategorySettingTab({ url }: { url: string }) {
   const [data, setData] = useState<ProductSettingInfoResponse>({} as ProductSettingInfoResponse);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
@@ -24,11 +29,11 @@ export function ProductCategorySettingTab({ alphaUrl, napUrl, exNapUrl }: { alph
       const response = await axios.get<ProductSettingInfoResponse>(url);
       return response.data;
     };
-    fetchData(alphaUrl || napUrl || exNapUrl).then((data) => {
+    fetchData(url).then((data) => {
       setData(data);
       setLoading(false);
     });
-  }, [alphaUrl, napUrl]);
+  }, [url]);
 
   if (loading) {
     return <div />;
@@ -61,19 +66,6 @@ export function ProductCategorySettingTab({ alphaUrl, napUrl, exNapUrl }: { alph
 
   return (
     <div>
-      {/*<div>*/}
-      {/*  <div>*/}
-      {/*    <b>{t('SettingRemarks')}</b>*/}
-      {/*  </div>*/}
-      {/*  <SettingRemarksMarketBuilder*/}
-      {/*    userRoleId={informationPageParams?.roleId || 1}*/}
-      {/*    Is789y={specialSystemIds.includes(appConfig.systemId)}*/}
-      {/*    showNoteBBin={data.showBBin}*/}
-      {/*    showNoteRNGKenoNumberGame={data.showRNGKenoNumberGame}*/}
-      {/*  />*/}
-      {/*</div>*/}
-      {/*<br />*/}
-
       <div>
         <b>{t('ProductSettingInformation')}</b>
       </div>
@@ -82,7 +74,7 @@ export function ProductCategorySettingTab({ alphaUrl, napUrl, exNapUrl }: { alph
       {data?.productSettingInfo.map((e, index) => (
         <BlockV2 key={e.name + index.toString()} isCollapse={false} title={e.name} colorPrimary>
           <table>
-            <tbody>             
+            <tbody>
             {e.products?.map((p) => CheckProductsNotNull(p)).includes(true) ? (
               renderMultiple(e.products, e.name, e.products.length)
               ) : (
@@ -94,7 +86,7 @@ export function ProductCategorySettingTab({ alphaUrl, napUrl, exNapUrl }: { alph
                   .join(', ')}
                 </td>
               </tr>
-            )}            
+            )}
             </tbody>
           </table>
         </BlockV2>

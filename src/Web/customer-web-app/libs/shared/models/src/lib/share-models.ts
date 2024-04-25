@@ -95,10 +95,6 @@ export interface TabOptions {
   name: string;
   id: string;
   url: string;
-  alphaUrl: string;
-
-  exNapUrl: string;
-  napUrl: string;
   isActive: boolean;
   contents: string[];
   index: number;

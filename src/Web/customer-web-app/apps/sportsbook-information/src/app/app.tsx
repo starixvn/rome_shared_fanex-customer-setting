@@ -8,10 +8,10 @@ import { Layout } from './layout';
 import { BetSettingTab } from './tabs/bet-setting-tab';
 import { CommissionHintTab } from './tabs/commission-hint-tab';
 import { MaxPayoutSettingTab } from './tabs/max-payout-setting-tab';
-import { ProductCategorySettingTab } from './tabs/product-category-tab/product-category-setting-tab';
+import { ProductCategorySettingTab } from './tabs/product-category-setting-tab';
 import { PtSettingTab } from './tabs/pt-setting-tab';
-import { useTranslation } from "react-i18next";
-import {WinLossLimitTab} from "./tabs/win-loss-limit-tab";
+import { useTranslation } from 'react-i18next';
+import { WinLossLimitTab } from './tabs/win-loss-limit-tab';
 
 export function App() {
   const { t } = useTranslation();
@@ -61,34 +61,19 @@ export function App() {
 }
 
 const RenderTab = ({ tab }: { tab: TabOptions }) => {
-  const prefixPath = appConfig.applicationPath === '/' ? window.location.origin + '/' : appConfig.applicationPath;
-
   switch (tab.id) {
     case 'PTSettingTab':
-      return <PtSettingTab
-        alphaUrl={tab.alphaUrl}
-        napUrl={`${prefixPath}${tab.napUrl}`}
-        exNapUrl={tab.exNapUrl}
-      />;
+      return <PtSettingTab url={tab.url} />;
     case 'BetSettingTab':
       return <BetSettingTab />;
     case 'ProductCategorySettingTab':
-      return <ProductCategorySettingTab
-        alphaUrl={tab.alphaUrl}
-        napUrl={`${prefixPath}${tab.napUrl}`}
-        exNapUrl={tab.exNapUrl} />;
+      return <ProductCategorySettingTab url={tab.url} />;
     case 'CommissionHintTab':
-      return <CommissionHintTab
-        alphaUrl={tab.alphaUrl}
-        napUrl={`${prefixPath}${tab.napUrl}`}
-        exNapUrl={tab.exNapUrl}/>;
+      return <CommissionHintTab url={tab.url} />;
     case 'MaxPayoutSettingTab':
-      return <MaxPayoutSettingTab
-        alphaUrl={tab.alphaUrl}
-        napUrl={`${prefixPath}${tab.napUrl}`}
-        exNapUrl={tab.exNapUrl} />;
+      return <MaxPayoutSettingTab url={tab.url} />;
     case 'WinLossLimitTab':
-      return <WinLossLimitTab/>
+      return <WinLossLimitTab />;
     default:
       return <div />;
   }

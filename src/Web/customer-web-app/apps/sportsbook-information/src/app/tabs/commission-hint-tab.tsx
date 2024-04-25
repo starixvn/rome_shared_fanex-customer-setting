@@ -13,7 +13,7 @@ type CommissionHintData = {
   myanmarOddsBetTypesName: string;
 };
 
-export const CommissionHintTab = ({ alphaUrl, napUrl, exNapUrl }: { alphaUrl: string; napUrl: string, exNapUrl: string }) => {
+export const CommissionHintTab = ({ url }: { url: string }) => {
   const { t } = useTranslation();
   const [data, setData] = useState<CommissionHintData>({} as CommissionHintData);
   const [loading, setLoading] = useState(true);
@@ -23,11 +23,11 @@ export const CommissionHintTab = ({ alphaUrl, napUrl, exNapUrl }: { alphaUrl: st
       const response = await axios.get<CommissionHintData>(url);
       return response.data;
     };
-    fetchData(alphaUrl || napUrl || exNapUrl).then((data) => {
+    fetchData(url).then((data) => {
       setData(data);
       setLoading(false);
     });
-  }, [alphaUrl, napUrl]);
+  }, [url]);
 
   if (loading) {
     return <div />;
