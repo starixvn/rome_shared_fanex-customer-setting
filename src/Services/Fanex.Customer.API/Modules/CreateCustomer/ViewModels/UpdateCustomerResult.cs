@@ -23,17 +23,17 @@ public class UpdateCustomerResult : Result
 public class UpdateGroupTypeResult : CustomerSettingResult
 {
     public UpdateGroupTypeResult(Result result)
-        :base(result.Code, result.Message)
+        : base(result.Code, result.Message)
     {
 
     }
 
     public UpdateGroupTypeResult(CustomerSettingResult customerSettingResult)
-        :base(customerSettingResult.Code, customerSettingResult.Message, customerSettingResult.SubMessages)
+        : base(customerSettingResult.Code, customerSettingResult.Message, customerSettingResult.SubMessages)
     {
 
     }
-    
+
     public UpdateGroupTypeResult(
         int productGroupId,
         string productGroupName,
@@ -58,4 +58,6 @@ public class UpdateGroupTypeResult : CustomerSettingResult
     public int GroupTypeId { get; set; }
 
     public string GroupTypeName { get; set; }
+
+    public UpdateGroupTypeResult ExtraResult { get; set; }
 }

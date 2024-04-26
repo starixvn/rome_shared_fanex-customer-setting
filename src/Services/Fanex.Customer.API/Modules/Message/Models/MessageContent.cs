@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Fanex.Customer.API.Modules.Message.Models;
 
 public class MessageContent
@@ -20,13 +22,21 @@ public class MessageContent
 
 public class SubMessageContent
 {
-    public SubMessageContent(string message, bool isLive = false)
+    public SubMessageContent(string message, bool isLive = false, int sportTypeId = 0, int bettypeId = 0)
     {
         Message = message;
         IsLive = isLive;
+        SportTypeId = sportTypeId;
+        BettypeId = bettypeId;
     }
 
     public string Message { get; private set; }
 
     public bool IsLive { get; set; }
+
+    [JsonIgnore]
+    public int SportTypeId { get; set; }
+
+    [JsonIgnore]
+    public int BettypeId { get; set; }
 }

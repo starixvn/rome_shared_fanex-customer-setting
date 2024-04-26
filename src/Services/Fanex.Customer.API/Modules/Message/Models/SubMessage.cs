@@ -18,7 +18,7 @@ public class SubMessage
     public int SettingLevel { get; set; }
 
     public virtual SubMessageContent ToContent(ICacheRefService cacheRefService, string language)
-    => new SubMessageContent(ToString(cacheRefService, language));
+    => new SubMessageContent(ToString(cacheRefService, language), false, SportType, BetType);
 
     public virtual string ToString(ICacheRefService cacheRefService, string language)
         => SettingLevel switch

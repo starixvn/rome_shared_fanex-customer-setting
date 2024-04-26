@@ -205,6 +205,8 @@
       <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
     </Setting>
     <Setting Key="Acc_CustSetting_MaxPayoutUpd" SpName="Acc_CustSetting_MaxPayoutUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_LimitPTDailyCheck" SpName="Age_LimitPTDailyCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_LimitPTCheck_MultiCust" SpName="Age_LimitPTCheck_MultiCust" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_MemberPT_153_Select" SpName="Acc_CustSetting_MemberPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />

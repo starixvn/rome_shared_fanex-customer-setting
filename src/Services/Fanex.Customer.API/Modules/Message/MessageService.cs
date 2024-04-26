@@ -63,7 +63,7 @@ public class MessageService : IMessageService
             MessageTypes.StakeLevelMaxChoiceViolation
                 => TranslateStakeLevelMaxChoiceViolationSubMessages(rawMessage, language),
             MessageTypes.UpdateTooOften
-            => TranslateUpdateTooOftenMessage(rawMessage, language),
+                => TranslateUpdateTooOftenMessage(rawMessage, language),
             _ => new MessageContent($"MsgType={messageType} MainMsg={rawMessage}")
         };
 
@@ -127,7 +127,7 @@ public class MessageService : IMessageService
     private MessageContent TranslateUpdateTooOftenMessage(string rawMessage, string language)
     {
         var mainMessage = rawMessage;
-        var updateTooOftenMessage = Deserialize<RootMessage>(rawMessage);
+        var updateTooOftenMessage = Deserialize<MainMessage<SubMessage>>(rawMessage);
 
         if (updateTooOftenMessage != null)
         {
@@ -138,7 +138,8 @@ public class MessageService : IMessageService
             }
         }
 
-        return new MessageContent(mainMessage);
+        var subMessages = TranslateSubMessages(updateTooOftenMessage.SubMessages, language);
+        return new MessageContent(mainMessage, subMessages);
     }
 
     private MessageContent TranslateProductStatusDependencyViolationSubMessages(string rawMessage, string language)

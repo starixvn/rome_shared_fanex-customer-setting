@@ -23,7 +23,7 @@ public interface IEditCustomerService
 {
     bool ValidateRequest(CustomerSetting settings);
 
-    Task<UpdateCustomerResult> Update(EditMultipleRequest request);
+    Task<UpdateCustomerResult> Update(EditRequest request);
 
     Task<List<UpdateCustomerResult>> UpdateMultiple(EditMultipleRequest request);
 }
@@ -89,11 +89,11 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                 }
             }
         }
-        
+
         return true;
     }
 
-    public async Task<UpdateCustomerResult> Update(EditMultipleRequest request)
+    public async Task<UpdateCustomerResult> Update(EditRequest request)
     {
         var updatedSportTypes = request.Settings.ProductGroups.SelectMany(g => g.GroupTypes.SelectMany(gt => gt.GroupItems.Select(i => i.SportTypeId)));
         var subResults = new List<UpdateGroupTypeResult>();
@@ -113,8 +113,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                     && groupedPTMemberIds != null
                     && groupedPTMemberIds.Any(id => id == request.Context.CustId))
                 {
-                    var updateResult = updateGroupedPTResults.Where(rs => rs.ProductGroupId == productGroup.Id && rs.GroupTypeId == groupType.Id).FirstOrDefault();
-                    if (updateResult != null)
+                    foreach(var updateResult in updateGroupedPTResults.Where(rs => rs.ProductGroupId == productGroup.Id && rs.GroupTypeId == groupType.Id))
                     {
                         subResults.Add(updateResult);
                     }
@@ -148,11 +147,13 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         {
             request.Context.CustId = updatedCustomer.CustId;
             request.Context.UserName = updatedCustomer.UserName;
-            result.Add(await Update(new EditMultipleRequest()
+            var updateResult = await Update(new EditRequest()
             {
                 Context = request.Context,
                 Settings = request.Settings
-            }));
+            });
+            
+            result.Add(updateResult);
         }
 
         return result;
@@ -169,19 +170,25 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {
                 foreach (var groupType in productGroup.GroupTypes.Where(gt => IsPTGroupType(gt.Id)))
                 {
-                    updateGroupedPTResults.Add(await ((GroupType153Service)groupItemForEditMapping[PTGroupTypeId]).UpdateGroupedPTMembers(
+                    var updateResult = await ((GroupType153Service)groupItemForEditMapping[PTGroupTypeId]).UpdateGroupedPTMembers(
                         request.Context,
                         productGroup.Id,
                         groupType.Id,
                         string.Join(",", groupedMemberIds),
                         groupType.GroupItems,
-                        appSettings.SettingStatus));
+                        appSettings.SettingStatus);
+                    if (updateResult.ExtraResult != null)
+                    {
+                        updateGroupedPTResults.Add(updateResult.ExtraResult);
+                    }
+
+                    updateGroupedPTResults.Add(updateResult);
                 }
             }
         }
     }
 
-    private async Task<UpdateGroupTypeResult> UpdateGeneralInfo(EditMultipleRequest request)
+    private async Task<UpdateGroupTypeResult> UpdateGeneralInfo(EditRequest request)
     {
         GeneralInfoService generalInfoService = new GeneralInfoService(siteDBGroupService);
         using IObjectDb db = ObjectDbFactory.CreateInstance(generalInfoService.GetSPName());
