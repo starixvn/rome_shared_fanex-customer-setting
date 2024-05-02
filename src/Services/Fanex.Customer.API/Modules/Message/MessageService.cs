@@ -95,6 +95,11 @@ public class MessageService : IMessageService
 
     private IEnumerable<SubMessageContent> TranslateSubMessages<T>(T[] subMessages, string language) where T : SubMessage
     {
+        if (subMessages == null || !subMessages.Any())
+        {
+            return null;
+        }
+        
         var messages = new List<SubMessageContent>();
 
         foreach (var subMessage in subMessages)

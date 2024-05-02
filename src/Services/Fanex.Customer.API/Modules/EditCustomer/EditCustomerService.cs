@@ -113,14 +113,19 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                     && groupedPTMemberIds != null
                     && groupedPTMemberIds.Any(id => id == request.Context.CustId))
                 {
-                    foreach(var updateResult in updateGroupedPTResults.Where(rs => rs.ProductGroupId == productGroup.Id && rs.GroupTypeId == groupType.Id))
+                    foreach (var updateResult in updateGroupedPTResults.Where(rs => rs.ProductGroupId == productGroup.Id && rs.GroupTypeId == groupType.Id))
                     {
                         subResults.Add(updateResult);
                     }
                 }
                 else
                 {
-                    subResults.Add(await UpdateGroupType(request.Context, productGroup.Id, groupType.Id, groupType.GroupItems, appSettings.SettingStatus));
+                    var subResult = await UpdateGroupType(request.Context, productGroup.Id, groupType.Id, groupType.GroupItems, appSettings.SettingStatus);
+                    if (subResult.ExtraResult != null)
+                    {
+                        subResults.Add(subResult.ExtraResult);
+                    }
+                    subResults.Add(subResult);
                 }
             }
         }
@@ -152,7 +157,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                 Context = request.Context,
                 Settings = request.Settings
             });
-            
+
             result.Add(updateResult);
         }
 

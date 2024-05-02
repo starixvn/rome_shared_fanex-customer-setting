@@ -82,6 +82,8 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             {
                 listExcludeGroupItems.Add((item.SportTypeId, item.BettypeId));
             }
+
+            limitPTResult.SubMessages = null;
         }
 
         var groupItemsExcludedLimitPT = groupItems.Where(i => !listExcludeGroupItems.Any(e => e.Item1 == i.SportTypeId && e.Item2 == i.BetTypeId));
@@ -102,6 +104,8 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             {
                 result.ExtraResult = limitPTResult;
             }
+
+            return result;
         }
 
         return limitPTResult;
@@ -151,6 +155,8 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             {
                 listExcludeGroupItems.Add((item.SportTypeId, item.BettypeId));
             }
+
+            limitPTResult.SubMessages = null;
         }
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(GetUpdateGroupedPTSPName(context.UplineRoleId));

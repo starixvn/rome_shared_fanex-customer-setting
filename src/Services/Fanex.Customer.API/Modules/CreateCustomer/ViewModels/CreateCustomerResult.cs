@@ -22,5 +22,5 @@ public class CustomerSettingResult : Result
         SubMessages = subMessages;
     }
 
-    public IEnumerable<SubMessageContent> SubMessages { get; }
+    public IEnumerable<SubMessageContent> SubMessages { get; set;}
 }
