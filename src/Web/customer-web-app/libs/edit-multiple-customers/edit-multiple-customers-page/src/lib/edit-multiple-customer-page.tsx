@@ -8,7 +8,7 @@ import {
     Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
     GeneralInfoActionTypes, generalInformationReducer, initialState
@@ -122,6 +122,7 @@ export function EditMultipleCustomerPage() {
       params.productGroupId,
       GroupTypeIds.PositionTaking
     );
+
     if (unCheckAutoPtItems.length === 0) return newProductGroups;
 
     const newMemberPts: { isCancel: boolean; groupItems: GroupItem[] } = await NiceModal.show(SetMemberPtPopup, {
@@ -135,7 +136,7 @@ export function EditMultipleCustomerPage() {
     }
 
     const currentPTGroup = newProductGroups
-      .find((productGroup) => productGroup.id === ProductGroupIds.SportsBook)
+      .find((productGroup) => productGroup.id === params.productGroupId)
       ?.groupTypes.find((groupType) => groupType.id === GroupTypeIds.PositionTaking);
 
     const newPTGroup = currentPTGroup?.groupItems.map((item) => {

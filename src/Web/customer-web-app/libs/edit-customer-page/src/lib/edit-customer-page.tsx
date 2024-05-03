@@ -185,7 +185,7 @@ export function EditCustomerPage() {
       }
 
       const currentPTGroup = newProductGroups
-        .find((productGroup) => productGroup.id === ProductGroupIds.SportsBook)
+        .find((productGroup) => productGroup.id === params.productGroupId)
         ?.groupTypes.find((groupType) => groupType.id === GroupTypeIds.PositionTaking);
 
       const newPTGroup = currentPTGroup?.groupItems.map((item) => {
