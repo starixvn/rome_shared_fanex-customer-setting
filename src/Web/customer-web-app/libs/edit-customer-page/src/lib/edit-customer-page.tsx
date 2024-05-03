@@ -183,7 +183,7 @@ export function EditCustomerPage() {
         return [];
       }
 
-      const currentPTGroup = productGroups
+      const currentPTGroup = newProductGroups
         .find((productGroup) => productGroup.id === ProductGroupIds.SportsBook)
         ?.groupTypes.find((groupType) => groupType.id === GroupTypeIds.PositionTaking);
 
