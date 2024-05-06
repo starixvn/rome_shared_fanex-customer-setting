@@ -68,20 +68,20 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
 
   const showLosingPercentColumn = (wl: CurrentWinLossAmount) => {
     const { lossPercent, currentAmount, maxLossAmount } = wl;
-    const currentAmountValue = NumberHelper.formatWithCommas(currentAmount);
+    const currentAmountValue = NumberHelper.formatWithCommas(-currentAmount);
     const maxLossAmountValue = NumberHelper.formatWithCommas(maxLossAmount);
     if (lossPercent === 0) return <div>{lossPercent}%</div>;
     if (lossPercent === -1) return <div>{t('unlimited')}</div>;
     if (lossPercent > 0 && lossPercent <= 100)
       return (
         <div>
-          {lossPercent}% ({-currentAmountValue}/{maxLossAmountValue})
+          {lossPercent}% ({currentAmountValue}/{maxLossAmountValue})
         </div>
       );
     if (lossPercent > 100)
       return (
         <div className={styles.textRed}>
-          {lossPercent}% ({-currentAmountValue}/{maxLossAmountValue})
+          {lossPercent}% ({currentAmountValue}/{maxLossAmountValue})
         </div>
       );
   };
