@@ -35,7 +35,7 @@ public class MasterPTSettingItem : PTItem
     public bool IsUpdateSuperPTOnMembers { get; set; }
 
     [JsonProperty("UpdAllMems_Value")]
-    public byte SuperPTOnMembers { get; set; }
+    public decimal SuperPTOnMembers { get; set; }
 
     public bool ShouldSerializeS3()
     {
