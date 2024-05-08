@@ -3,7 +3,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 're
 import { useTranslation } from 'react-i18next';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
-import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, ProductIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { BetLimitGroupItem } from '@customer-web-app/shared-group-settings-types';
@@ -70,7 +70,11 @@ function BetLimitRow({
   if (item.length < 1) return null;
 
   const firstItem = item[0];
-  const isShowNoneInput = params.roleId === UserLevel.Member && isAllowUncheckAll && !firstItem.isMultipleChoice;
+  const isShowNoneInput =
+    params.roleId === UserLevel.Member &&
+    isAllowUncheckAll &&
+    !firstItem.isMultipleChoice &&
+    firstItem.productId === ProductIds.LiveCasino;
   const numberEmptyBlockColumn = MaxBetLimitColumns - item.length - (isShowNoneInput ? 1 : 0);
   return (
     <BlockRow

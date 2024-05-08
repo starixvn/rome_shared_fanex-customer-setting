@@ -34,6 +34,10 @@ export const GroupTypeIds = {
   WinLossLimit: 155,
 };
 
+export const ProductIds = {
+  LiveCasino: 41,
+};
+
 export const SportTypeIds = {
   Soccer: 1,
   Basketball: 2,
