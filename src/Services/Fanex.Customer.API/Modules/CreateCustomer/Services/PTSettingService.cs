@@ -30,7 +30,7 @@ public class PTSettingService : BaseCustomerService, IPTSettingService
 
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request)
     {
-        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency);
+        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency, SharedService.ProfileMode.AddNew);
         var productGroups = settingProfile.Where(p => p.GroupType == 153).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {
@@ -54,7 +54,7 @@ public class PTSettingService : BaseCustomerService, IPTSettingService
                             {
                                 groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
                                 groupItem.SubGroupName = this.cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, request.Language);
-                                groupItem.SportTypeName = IsSabaCasino(groupItem.SportTypeId, groupItem.BetTypeId) ? cacheRefService.GetProductName(SabaCasinoProductId) : cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
+                                groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, request.Language);
                                 groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, request.Language);
 
                                 return groupItem;

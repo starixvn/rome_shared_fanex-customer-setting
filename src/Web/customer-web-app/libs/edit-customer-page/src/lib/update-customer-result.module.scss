@@ -68,6 +68,11 @@
     top: 2px;
     left: -1px;
   }
+  .note-error{
+    margin-top: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+  }
 }
 .note-error {
   color: var(--color-alert-error);
@@ -77,3 +82,4 @@
   margin-top: -3px;
   line-height: 20px;
 }
+ 

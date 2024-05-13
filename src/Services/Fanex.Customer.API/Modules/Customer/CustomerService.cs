@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Headers;
+using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.Customer.Constants;
 using Fanex.Customer.API.Modules.Customer.Criteria;
 using Fanex.Customer.API.Modules.Customer.Models;
@@ -10,6 +11,7 @@ using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 using Fanex.Data.Repository;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.Customer;
@@ -34,6 +36,8 @@ public interface ICustomerService
 
     Task<List<PTSettingInfo>> GetPTSettingInfo(GetPTSettingInformationRequest request);
 
+    Task<IEnumerable<CurrentWinLossAmount>> GetCurrentWinLossAmount(GetCurrentWinLossAmountRequest request);
+
     Task<Object> GetProductCategories(GetProductCategoriesRequest request);
 
     Task<CommissionInfo> GetCommissionInfo(GetCommissionHintRequest request);
@@ -44,15 +48,19 @@ public interface ICustomerService
 public class CustomerService : ICustomerService
 {
     private readonly AppSettings appSettings;
+
     private readonly IDynamicRepository dynamicRepository;
 
     private readonly ICacheRefService cacheRefService;
 
-    public CustomerService(IDynamicRepository dynamicRepository, ICacheRefService cacheRefService, IOptions<AppSettings> appSettings)
+    private readonly ISiteDBService siteDBService;
+
+    public CustomerService(IDynamicRepository dynamicRepository, ICacheRefService cacheRefService, ISiteDBService siteDBService, IOptions<AppSettings> appSettings)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
         this.cacheRefService = cacheRefService;
+        this.siteDBService = siteDBService;
     }
 
     public async Task<CustomerPT> GetCustomerPT(int custId, byte custLevel)
@@ -132,6 +140,24 @@ public class CustomerService : ICustomerService
         return ptSettingInfo;
     }
 
+    public async Task<IEnumerable<CurrentWinLossAmount>> GetCurrentWinLossAmount(GetCurrentWinLossAmountRequest request)
+    {
+        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        var result = await dynamicRepository.FetchAsync<CurrentWinLossAmount>(new GetCurrentWinLossAmountCriteria(
+            request.CustId, 
+            request.SportType, 
+            request.BetType, 
+            appSettings.SettingStatus, 
+            siteDBConfig.LinkedServerName));
+
+        foreach(var item in result)
+        {
+            item.SportTypeName = cacheRefService.GetSportTypeName(item.SportType, request.Language);
+        }
+
+        return result;
+    }
+
     public async Task<Object> GetProductCategories(GetProductCategoriesRequest request)
     {
         const int RNGGameGroupdId = 2;
@@ -154,7 +180,7 @@ public class CustomerService : ICustomerService
                         Products = (subGroup.Select(d => new
                         {
                             Id = d.RealProductId,
-                            Name = cacheRefService.GetProductName(d.RealProductId, request.Language),
+                            Name = cacheRefService.GetProductName(d.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
                             Products = ""
                         }).ToList())
                     })
@@ -221,7 +247,7 @@ public class CustomerService : ICustomerService
         var sportTypeIds = new[] { 43, 44 };
         var sportTypeNameArray = sportTypeIds.Select(sportTypeId => cacheRefService.GetSportTypeName(sportTypeId)).ToArray();
         var isSpecialPlatform = appSettings.Belonging777Group(request.SiteLabel);
-        
+
         string[] betTypeNames = betTypeIds.Select(betTypeId =>
         {
             if (betTypeId == 5)
@@ -238,7 +264,7 @@ public class CustomerService : ICustomerService
             SportName = sportTypeNames,
             BettypeName = betTypeNames
         };
-        
+
         maxPayoutSettingInfo.SabaSport = await dynamicRepository.FetchAsync<SabaSport>(new GetSabaSportsCriteria(request.SiteName));
         foreach (var sabaSport in maxPayoutSettingInfo.SabaSport)
         {

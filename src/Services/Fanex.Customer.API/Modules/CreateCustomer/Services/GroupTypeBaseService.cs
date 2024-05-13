@@ -1,9 +1,16 @@
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
-using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType150;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType151;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType152;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType153;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType155;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType156;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType158;
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType160;
 using Fanex.Customer.API.Modules.CreateCustomer.Helpers;
+using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -26,18 +33,12 @@ public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
 
     protected readonly ICustomerSettingHelper helperService;
 
-    public GroupTypeBaseService(IDynamicRepository dynamicRepository, AppSettings appSettings, ICustomerSettingHelper helperService)
+    public GroupTypeBaseService(IDynamicRepository dynamicRepository, 
+        IOptions<AppSettings> appSettings, ICustomerSettingHelper helperService)
     {
-        this.dynamicRepository = dynamicRepository ?? new DynamicRepository();
-        this.appSettings = appSettings;
+        this.dynamicRepository = dynamicRepository;
+        this.appSettings = appSettings.Value;
         this.helperService = helperService;
-        criteriaMapping = new Dictionary<int, dynamic>(){
-            { 150, new GetCommissionCriteria() },
-            { 153_4, new GetSuperPTCriteria() },
-            { 153_3, new GetMasterPTCriteria() },
-            { 153_2, new GetAgentPTCriteria() },
-            { 153_1, new GetMemberPTCriteria() }
-        };
     }
 
     public async Task<IEnumerable<T>> QueryForAddNew(int uplineCustId, int uplineRoleId, int productGroupId, int groupType)
@@ -60,49 +61,36 @@ public class GroupTypeBaseService<T> : IGroupTypeBaseService<T>
     public async Task<IEnumerable<T>> QueryForEdit(int custId, byte roleId, byte? uplineRoleId, int groupId, int groupType)
     {
         var criteria = GetQueryForEditCriteria(custId, roleId, uplineRoleId, groupId, groupType);
+        if (criteria == null)
+        {
+            return Enumerable.Empty<T>();
+        }
 
         return await dynamicRepository.FetchAsync<T>(criteria);
-
     }
 
     private ICriteria GetQueryForEditCriteria(int custId, byte roleId, byte? uplineRoleId, int groupId, int groupType)
     {
-        dynamic criteria = null;
-        if (criteriaMapping.ContainsKey(groupType))
-            criteria = criteriaMapping[groupType];
-        var key = helperService.GetGroupTypeByCustomerLevel(groupType, roleId);
-        if (criteriaMapping.ContainsKey(key))
-            criteria = criteriaMapping[key];
-
-        if (criteria is null)
-            criteria = new GetCustomerForUpdateCriteria(
-                custId,
-                appSettings.SettingStatus,
-                roleId,
-                groupId,
-                groupType);
-        else
+        return (groupType) switch
         {
-            criteria.CustId = custId;
-            if (groupType == 150)
-            {
-                criteria.RoleId = roleId;
-            }
-
-            if (roleId == 1 && groupType == 150)
-            {
-
-                criteria.UplineRoleId = uplineRoleId.HasValue ? uplineRoleId.Value : roleId + 1;
-            }
-
-            if (roleId == 1 && groupType == 153)
-            {
-                criteria.RoleId = uplineRoleId.HasValue ? uplineRoleId.Value : roleId + 1;
-            }
-
-            criteria.SettingStatus = appSettings.SettingStatus;
-        }
-
-        return criteria;
+            GroupTypes.SBCommission => new GetSBCommissionCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), appSettings.SettingStatus),
+            GroupTypes.Commission => new GetCommissionCriteria(custId, groupId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), appSettings.SettingStatus),
+            GroupTypes.BetSetting => new GetBetSettingCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
+            GroupTypes.ParlayMaxPayout => new GetMaxPayoutCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
+            GroupTypes.PositionTaking => GetPositionTakingCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), groupId, appSettings.SettingStatus),
+            GroupTypes.ProductStatus => new GetProductStatusCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
+            GroupTypes.StakeLevel => new GetStakeLevelCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
+            GroupTypes.WinlossLimit => new GetWinlossLimitCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
+            _ => null
+        };
     }
+
+    private static ICriteria GetPositionTakingCriteria(int custId, byte roleId, int uplineRoleId, int groupId, byte settingStatus) => roleId switch
+    {
+        CustomerLevel.Super => new GetSuperPTCriteria(custId, groupId, settingStatus),
+        CustomerLevel.Master => new GetMasterPTCriteria(custId, groupId, settingStatus),
+        CustomerLevel.Agent => new GetAgentPTCriteria(custId, groupId, settingStatus),
+        CustomerLevel.Member => new GetMemberPTCriteria(custId, groupId, uplineRoleId, settingStatus),
+        _ => null
+    };
 }

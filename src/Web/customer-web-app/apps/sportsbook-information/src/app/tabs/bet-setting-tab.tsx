@@ -1,7 +1,6 @@
 import { Trans } from 'react-i18next';
 
-
-import {i7Markets, i7Sites, SpecialSystemIds} from "@customer-web-app/shared-constants";
+import {i7Markets, i7Sites} from "@customer-web-app/shared-constants";
 
 const MBCMarketBetSetting = () => {
   const SMALevelRoles = [5, 4, 3, 2];
@@ -86,6 +85,6 @@ const I7MarketBetSetting = () => {
 
 export const BetSettingTab = () => {
   const SpecialMarket = i7Markets.includes(informationPageParams.site ?? "") || i7Sites.includes(informationPageParams?.siteLabel ?? "");
-  
+
   return <div>{SpecialMarket ? <I7MarketBetSetting /> : <MBCMarketBetSetting />}</div>;
 };

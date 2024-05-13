@@ -1,5 +1,3 @@
-using System.Linq;
-using EasyNetQ.FluentConfiguration;
 using Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
 using Fanex.Customer.API.Modules.CreateCustomer.Helpers;
 using Fanex.Customer.API.Modules.CreateCustomer.Services;
@@ -60,6 +58,10 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {151, new GroupType151Service()},
             {152, new GroupType152Service()},
             {153, new GroupType153Service()},
+            {155, new GroupType155Service()},
+            {156, new GroupType156Service()},
+            {158, new GroupType158Service()},
+            {160, new GroupType160Service()},
         };
     }
 
@@ -87,28 +89,15 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                 }
             }
         }
-        
+
         return true;
     }
 
     public async Task<UpdateCustomerResult> Update(EditRequest request)
     {
+        var updatedSportTypes = request.Settings.ProductGroups.SelectMany(g => g.GroupTypes.SelectMany(gt => gt.GroupItems.Select(i => i.SportTypeId)));
         var subResults = new List<UpdateGroupTypeResult>();
-        CustomerSettingResult uMResult;
-        // var isPartialUpdate = request.Settings.ProductGroups.SelectMany(g => g.GroupTypes).Count() == 1;
-        // if (isPartialUpdate)
-        // {
-        //     var groupTypeId = request.Settings.ProductGroups.SelectMany(g => g.GroupTypes).FirstOrDefault()?.Id ?? 0;
-        //     var settingType = isPartialUpdate ? await this.sharedService.GetSettingTypeByGroupType(request.Context.SystemId, request.Settings.GeneralInfo.Site, request.Settings.GeneralInfo.Currency, groupTypeId) : 0;
-        //     Fanex.Common.Helper.Check.Argument.IsNotNull(groupTypeId, "groupTypeId");
-        //     Fanex.Common.Helper.Check.Argument.IsNotNull(settingType, "settingType");
-        //     uMResult = uMService.GetUMResult(request.Context.CustId, 1, settingType, request.Context.Language);
-        // }
-        // else
-        // {
-        uMResult = uMService.GetUMResult(request.Context.CustId, 1, null, request.Context.Language);
-        // }
-
+        CustomerSettingResult uMResult = uMService.GetUMResult(request.Context.CustId, request.Settings.ProductGroups.FirstOrDefault()?.Id ?? 0, updatedSportTypes, request.Context.Language);
 
         if (request.Settings.GeneralInfo != null)
         {
@@ -124,15 +113,19 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                     && groupedPTMemberIds != null
                     && groupedPTMemberIds.Any(id => id == request.Context.CustId))
                 {
-                    var updateResult = updateGroupedPTResults.Where(rs => rs.ProductGroupId == productGroup.Id && rs.GroupTypeId == groupType.Id).FirstOrDefault();
-                    if (updateResult != null)
+                    foreach (var updateResult in updateGroupedPTResults.Where(rs => rs.ProductGroupId == productGroup.Id && rs.GroupTypeId == groupType.Id))
                     {
                         subResults.Add(updateResult);
                     }
                 }
                 else
                 {
-                    subResults.Add(await UpdateGroupType(request.Context, productGroup.Id, groupType.Id, groupType.GroupItems, appSettings.SettingStatus));
+                    var subResult = await UpdateGroupType(request.Context, productGroup.Id, groupType.Id, groupType.GroupItems, appSettings.SettingStatus);
+                    if (subResult.ExtraResult != null)
+                    {
+                        subResults.Add(subResult.ExtraResult);
+                    }
+                    subResults.Add(subResult);
                 }
             }
         }
@@ -159,11 +152,13 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         {
             request.Context.CustId = updatedCustomer.CustId;
             request.Context.UserName = updatedCustomer.UserName;
-            result.Add(await Update(new EditRequest()
+            var updateResult = await Update(new EditRequest()
             {
                 Context = request.Context,
                 Settings = request.Settings
-            }));
+            });
+
+            result.Add(updateResult);
         }
 
         return result;
@@ -180,13 +175,19 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {
                 foreach (var groupType in productGroup.GroupTypes.Where(gt => IsPTGroupType(gt.Id)))
                 {
-                    updateGroupedPTResults.Add(await ((GroupType153Service)groupItemForEditMapping[PTGroupTypeId]).UpdateGroupedPTMembers(
+                    var updateResult = await ((GroupType153Service)groupItemForEditMapping[PTGroupTypeId]).UpdateGroupedPTMembers(
                         request.Context,
                         productGroup.Id,
                         groupType.Id,
                         string.Join(",", groupedMemberIds),
                         groupType.GroupItems,
-                        appSettings.SettingStatus));
+                        appSettings.SettingStatus);
+                    if (updateResult.ExtraResult != null)
+                    {
+                        updateGroupedPTResults.Add(updateResult.ExtraResult);
+                    }
+
+                    updateGroupedPTResults.Add(updateResult);
                 }
             }
         }

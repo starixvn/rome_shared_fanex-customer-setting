@@ -4,12 +4,13 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 
 public class GetSettingProfileCriteria : CriteriaBase
 {
-    public GetSettingProfileCriteria(byte settingStatus, string site, int currency, byte systemId)
+    public GetSettingProfileCriteria(byte settingStatus, string site, int currency, byte systemId, int mode)
     {
         SettingStatus = settingStatus;
         Site = site;
         Currency = currency;
         SystemId = systemId;
+        Mode = mode;
     }
 
     public byte SettingStatus { get; }
@@ -19,6 +20,8 @@ public class GetSettingProfileCriteria : CriteriaBase
     public int Currency { get; }
 
     public int SystemId { get; }
+
+    public int Mode { get; }
 
     public override string GetSettingKey() => "Acc_LiteMode_CustSetting_ProductProfileSelect";
 

@@ -3,7 +3,6 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
-using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Models;
@@ -23,16 +22,43 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus)
     {
-        foreach(var item in groupItems)
+        foreach (var item in groupItems)
         {
             var result = item.Validate(context.Language);
-            if(!result.IsSuccessful)
+            if (!result.IsSuccessful)
             {
                 return new UpdateGroupTypeResult(result);
             }
         }
 
         return new UpdateGroupTypeResult(Result.CreateSuccessfulResult());
+    }
+
+    private async Task<UpdateGroupTypeResult> CheckLimitPTUpdate(
+        EditRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
+    {
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Age_LimitPTDailyCheck");
+        await db.ExecuteNonQueryAsync(new Hashtable
+        {
+            {"actorid", context.ActorId},
+            {"custid", context.CustId},
+            {"updatept", ComposeJsonSettingParam(groupItems, false)},
+            {"settingstatus", settingStatus},
+        });
+
+        var outputParams = db.GetOutputParams();
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
+        var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        if (result.IsSuccessful)
+        {
+            result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
+        }
+
+        return result;
     }
 
     public override async Task<UpdateGroupTypeResult> Update(
@@ -48,9 +74,60 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             return validateResult;
         }
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(GetSPName(context.RoleId, context.UplineRoleId));
-        var parameters = GenerateSPParams(groupTypeId, context, groupItems, settingStatus);
-        await db.ExecuteNonQueryAsync(parameters);
+        var limitPTResult = await CheckLimitPTUpdate(context, productGroupId, groupTypeId, groupItems, settingStatus);
+        List<(int, int)> listExcludeGroupItems = new List<(int, int)>();
+        if (!limitPTResult.IsSuccessful)
+        {
+            foreach (var item in limitPTResult.SubMessages)
+            {
+                listExcludeGroupItems.Add((item.SportTypeId, item.BettypeId));
+            }
+
+            limitPTResult.SubMessages = null;
+        }
+
+        var groupItemsExcludedLimitPT = groupItems.Where(i => !listExcludeGroupItems.Any(e => e.Item1 == i.SportTypeId && e.Item2 == i.BetTypeId));
+        if (groupItemsExcludedLimitPT.Any())
+        {
+            using IObjectDb db = ObjectDbFactory.CreateInstance(GetSPName(context.RoleId, context.UplineRoleId));
+            var parameters = GenerateSPParams(productGroupId, groupTypeId, context, groupItems.Where(i => !listExcludeGroupItems.Any(e => e.Item1 == i.SportTypeId && e.Item2 == i.BetTypeId)), settingStatus);
+            await db.ExecuteNonQueryAsync(parameters);
+            var outputParams = db.GetOutputParams();
+            var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
+            var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+            if (result.IsSuccessful)
+            {
+                result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
+            }
+
+            if (!limitPTResult.IsSuccessful)
+            {
+                result.ExtraResult = limitPTResult;
+            }
+
+            return result;
+        }
+
+        return limitPTResult;
+    }
+
+    private async Task<UpdateGroupTypeResult> CheckLimitPTUpdateGroupPT(
+        EditMultipleRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        string groupedMemberIds,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
+    {
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Age_LimitPTCheck_MultiCust");
+        await db.ExecuteNonQueryAsync(new Hashtable
+        {
+            {"actorid", context.ActorId},
+            {"custidlist", groupedMemberIds},
+            {"updatept", ComposeJsonSettingParam(groupItems, false)},
+            {"settingstatus", settingStatus},
+        });
+
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
         var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
@@ -70,19 +147,41 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus)
     {
-        using IObjectDb db = ObjectDbFactory.CreateInstance(GetUpdateGroupedPTSPName(context.UplineRoleId));
-
-        var parameters = GenerateUpdateGroupedPTSPParams(groupTypeId, context, groupedMemberIds, groupItems, settingStatus);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
-        var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
-        if (result.IsSuccessful)
+        var limitPTResult = await CheckLimitPTUpdateGroupPT(context, productGroupId, groupTypeId, groupedMemberIds, groupItems, settingStatus);
+        List<(int, int)> listExcludeGroupItems = new List<(int, int)>();
+        if (!limitPTResult.IsSuccessful)
         {
-            result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
+            foreach (var item in limitPTResult.SubMessages)
+            {
+                listExcludeGroupItems.Add((item.SportTypeId, item.BettypeId));
+            }
+
+            limitPTResult.SubMessages = null;
         }
 
-        return result;
+        using IObjectDb db = ObjectDbFactory.CreateInstance(GetUpdateGroupedPTSPName(context.UplineRoleId));
+        var groupItemsExcludedLimitPT = groupItems.Where(i => !listExcludeGroupItems.Any(e => e.Item1 == i.SportTypeId && e.Item2 == i.BetTypeId));
+        if (groupItemsExcludedLimitPT.Any())
+        {
+            var parameters = GenerateUpdateGroupedPTSPParams(context, groupedMemberIds, groupItemsExcludedLimitPT, settingStatus);
+            await db.ExecuteNonQueryAsync(parameters);
+            var outputParams = db.GetOutputParams();
+            var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
+            var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+            if (result.IsSuccessful)
+            {
+                result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
+            }
+
+            if (!limitPTResult.IsSuccessful)
+            {
+                result.ExtraResult = limitPTResult;
+            }
+
+            return result;
+        }
+
+        return limitPTResult;
     }
 
     private string GetUpdateGroupedPTSPName(byte uplineRoleId)
@@ -95,14 +194,13 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     };
 
     private Hashtable GenerateUpdateGroupedPTSPParams(
-        int groupTypeId,
         EditRequestContext context,
         string groupedMemberIds,
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus = 0)
         => new Hashtable {
             { "custidlist", groupedMemberIds },
-            { "pt", ComposeJsonSettingParam(groupTypeId, groupItems, false) },
+            { "pt", ComposeJsonSettingParam(groupItems, false) },
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
             { "ip", context.IP },
@@ -132,6 +230,7 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     }
 
     private Hashtable GenerateSPParams(
+        int groupId,
         int groupTypeId,
         EditRequestContext context,
         IEnumerable<GroupItemDefault> groupItems,
@@ -139,15 +238,16 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     {
         var spParams = new Hashtable {
             { "custid", context.CustId },
-            { "pt", ComposeJsonSettingParam(groupTypeId, groupItems, false) },
+            { "pt", ComposeJsonSettingParam(groupItems, false) },
             { "userid", context.ActorId },
             { "ip", context.IP },
-            { "settingstatus", settingStatus}
+            { "settingstatus", settingStatus},
+            { "groupid", groupId}
         };
 
         if (context.RoleId != (byte)CustomerLevel.Member)
         {
-            spParams.Add("onlyminpt", ComposeJsonSettingParam(groupTypeId, groupItems, true));
+            spParams.Add("onlyminpt", ComposeJsonSettingParam(groupItems, true));
         }
 
         if (context.RoleId != (byte)CustomerLevel.Super)
@@ -158,7 +258,7 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         return spParams;
     }
 
-    private string ComposeJsonSettingParam(int groupTypeId, IEnumerable<GroupItemDefault> groupItems, bool isMinPTOnly)
+    private string ComposeJsonSettingParam(IEnumerable<GroupItemDefault> groupItems, bool isMinPTOnly)
     {
         if (!groupItems.Any())
         {

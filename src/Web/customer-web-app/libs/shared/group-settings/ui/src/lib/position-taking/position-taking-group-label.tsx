@@ -2,7 +2,7 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { GroupItem } from '@customer-web-app/shared-group-settings-types';
 
-import { CopiedPTItem, renderBlockRowTitle, renderPTLabel } from './utils';
+import { CopyPTICon, CopyStatusPT, isCopySuccess, renderPTLabel } from './utils';
 
 type GroupPTLabel<T> = {
   isFirstGroup: boolean;
@@ -10,9 +10,11 @@ type GroupPTLabel<T> = {
   ptItems: T[];
   group: T[];
   copyIconId: number | undefined;
-  stateCopiedGroup: CopiedPTItem[];
+  stateCopiedGroup: CopyStatusPT[];
   handleCopyPTs: (itemCopied: T, iconId: number | undefined, isBelongCopiedGroup?: (item: T) => boolean) => void;
 };
+
+export const SportsBookCopyAllId = 0;
 
 export function GroupLabel({
   isFirstGroup,
@@ -25,40 +27,29 @@ export function GroupLabel({
 }: GroupPTLabel<GroupItem>) {
   const { isMultipleMode, handleUpdateSettingItems } = useGroupSettingContext();
 
-  const isMultipleEdit = isMultipleMode ?? false;
-  return isFirstGroup
-    ? renderPTLabel(
-        firstGroupItem.sportTypeName,
-        isMultipleEdit,
-        group.every((item) => item.isMultipleModeChecked === true),
-        0,
-        copyIconId === 0,
-        stateCopiedGroup.length > 0 && !stateCopiedGroup.some((item) => item.isCopied === false),
-        (isChecked) => {
-          const groupItems = ptItems.map((item) => {
-            if (item.sportTypeId === firstGroupItem.sportTypeId) {
-              return { ...item, isMultipleModeChecked: isChecked };
-            }
+  const copyIcon = isFirstGroup && (
+    <CopyPTICon
+      id={SportsBookCopyAllId}
+      isCopy={copyIconId === 0}
+      isCopySuccess={isCopySuccess(stateCopiedGroup)}
+      handleCopyClick={() => handleCopyPTs(firstGroupItem, SportsBookCopyAllId, () => true)}
+    />
+  );
 
-            return item;
-          });
-          handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.PositionTaking, groupItems as []);
-        },
-        () => handleCopyPTs(firstGroupItem, 0, () => true)
-      )
-    : renderBlockRowTitle(
-        firstGroupItem.sportTypeName,
-        isMultipleEdit,
-        group.every((item) => item.isMultipleModeChecked === true),
-        (isChecked) => {
-          const groupItems = ptItems.map((item) => {
-            if (item.sportTypeId === firstGroupItem.sportTypeId) {
-              return { ...item, isMultipleModeChecked: isChecked };
-            }
-
-            return item;
-          });
-          handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.PositionTaking, groupItems as []);
+  return renderPTLabel(
+    firstGroupItem.sportTypeName,
+    isMultipleMode ?? false,
+    group.every((item) => item.isMultipleModeChecked === true),
+    copyIcon,
+    (isChecked) => {
+      const groupItems = ptItems.map((item) => {
+        if (item.sportTypeId === firstGroupItem.sportTypeId) {
+          return { ...item, isMultipleModeChecked: isChecked };
         }
-      );
+
+        return item;
+      });
+      handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.PositionTaking, groupItems as []);
+    }
+  );
 }

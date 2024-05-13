@@ -47,5 +47,11 @@ namespace Fanex.Customer.Client.Extensions
                 }
             }
         }
+
+        public static async Task<T> PutAsJsonAsync<T>(this HttpClient httpClient, string requestUri, object payload = null)
+        {
+            var response = await httpClient.PutAsStringAsync(requestUri, payload);
+            return JsonSerializer.Deserialize<T>(response, serializerOptions);
+        }
     }
 }

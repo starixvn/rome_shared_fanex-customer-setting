@@ -11,17 +11,25 @@ import {
   AgentPositionTakingProps,
   GroupItem,
 } from '@customer-web-app/shared-group-settings-types';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import scrollToBLock from '../scroll-helper';
 import { ValidatePTResult } from './master-position-taking';
 import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { GroupSettingBlockProps } from './super-position-taking';
-import { CopiedPTItem, isCopyingPTItem, PTRowProps, renderNoneBlockColumn, usePTCopy } from './utils';
+import { PositionTakingBlockProps } from './types';
+import {
+  CopyStatus,
+  CopyStatusPT,
+  groupSportsBookPTBySportTypeId,
+  isCopyingPTItem,
+  PTRowProps,
+  renderNoneBlockColumn,
+  usePTCopy,
+} from './utils';
 
 function minM2(agentPositionTakingGroupItem: AgentPositionTakingProps) {
   const { n3, a4 } = agentPositionTakingGroupItem;
@@ -74,14 +82,14 @@ function maxN2(a2: number) {
 function AgentPositionTakingRow({
   item,
   label,
-  isCopy,
+  copyStatus,
   isDisableMasterAutoPT,
 }: Readonly<PTRowProps<AgentPositionTakingGroupItem>>) {
-  const { isMultipleMode, handleSettingItemChange } = useGroupSettingContext();
+  const { isMultipleMode, handleSettingItemChange, productGroupId } = useGroupSettingContext();
 
   const handlePTChange = (data: { [x: string]: number | boolean }) => {
     handleSettingItemChange?.(
-      ProductGroupIds.SportsBook,
+      Number(productGroupId),
       GroupTypeIds.PositionTaking,
       item.sportTypeId,
       item.betTypeId,
@@ -89,7 +97,7 @@ function AgentPositionTakingRow({
     );
   };
 
-  const copyRowStyle = { isCopy: isCopy, 'isCopy fail': isCopy === false };
+  const copyRowStyle = { isCopy: copyStatus === CopyStatus.Success, 'isCopy fail': copyStatus === CopyStatus.Fail };
   return (
     <BlockRow label={label ?? item.betTypeName}>
       <BlockColumn>
@@ -214,24 +222,23 @@ const copyAgentPTs = (
   isBelongCopiedGroup?: (item: GroupItem) => boolean
 ) => {
   const newItemCopied = itemCopied as AgentPositionTakingGroupItem;
-
   if (!validateAgentPT(newItemCopied, newItemCopied)) return [];
-
   const { m2, uM2, iM2, a2, n2, isMultipleModeChecked, isUpdateMinPtOnly } = newItemCopied;
   return (positionTakings as AgentPositionTakingGroupItem[]).map((item) => {
     if (isBelongCopiedGroup?.(item)) {
       return validateAgentPT(item, newItemCopied)
-        ? { ...item, m2, uM2, iM2, a2, n2, isMultipleModeChecked, isUpdateMinPtOnly, isCopied: true }
-        : { ...item, isMultipleModeChecked, isCopied: false };
+        ? { ...item, m2, uM2, iM2, a2, n2, isMultipleModeChecked, isUpdateMinPtOnly, copyStatus: CopyStatus.Success }
+        : { ...item, isMultipleModeChecked, copyStatus: CopyStatus.Fail };
     }
-    return { ...item, isCopied: undefined };
+    return { ...item, copyStatus: CopyStatus.NotCopy };
   });
 };
 
 type PositionTakingRowProps = {
+  productGroupId: number;
   ptItems: AgentPositionTakingGroupItem[];
   copyIconId: number | undefined;
-  stateCopiedGroup: CopiedPTItem[];
+  stateCopiedGroup: CopyStatusPT[];
   handleCopyPTs: (
     itemCopied: GroupItem,
     iconId: number | undefined,
@@ -241,66 +248,63 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  productGroupId,
   ptItems,
   copyIconId,
   stateCopiedGroup,
   isDisableMasterAutoPT,
   handleCopyPTs,
 }: Readonly<PositionTakingRowProps>) {
-  let isFirstGroup = true;
-  let sportTypeId = -1;
-  return ptItems.map((ptItem) => {
-    if (sportTypeId !== ptItem.sportTypeId) {
-      sportTypeId = ptItem.sportTypeId;
-      const group = ptItems.filter((item) => item.sportTypeId === ptItem.sportTypeId);
-      const firstGroupItem = group[0];
-
-      const groupPTLabel = (
-        <GroupLabel
-          copyIconId={copyIconId}
-          firstGroupItem={firstGroupItem}
-          group={group}
-          handleCopyPTs={handleCopyPTs}
-          isFirstGroup={isFirstGroup}
-          ptItems={ptItems}
-          stateCopiedGroup={stateCopiedGroup}
-        ></GroupLabel>
-      );
-      isFirstGroup = false;
-
-      return (
-        <div className={styles['block-pt']} key={`${ptItem.sportTypeId}${ptItem.betTypeId}`}>
+  const ptGroups =
+    productGroupId === ProductGroupIds.SportsBook ? Object.values(groupSportsBookPTBySportTypeId(ptItems)) : [ptItems];
+  return (ptGroups as AgentPositionTakingGroupItem[][]).map((group, index) => {
+    const firstGroupItem = group[0];
+    const groupPTLabel = (
+      <GroupLabel
+        copyIconId={copyIconId}
+        firstGroupItem={firstGroupItem}
+        group={group}
+        handleCopyPTs={handleCopyPTs}
+        isFirstGroup={index === 0}
+        ptItems={ptItems}
+        stateCopiedGroup={stateCopiedGroup}
+      ></GroupLabel>
+    );
+    return (
+      <div className={styles['block-pt']} key={`${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`}>
+        {productGroupId === ProductGroupIds.SportsBook && (
           <div className={styles['row-empty']}>
             <BlockRow label={groupPTLabel}>
-              {renderNoneBlockColumn(`${ptItem.sportTypeId}${ptItem.betTypeId}`, isDisableMasterAutoPT ? 3 : 4)}
+              {renderNoneBlockColumn(
+                `${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`,
+                isDisableMasterAutoPT ? 3 : 4
+              )}
             </BlockRow>
           </div>
-          {group?.map((item, index) => {
-            const ptLabel = (
-              <PTLabel
-                group={group}
-                itemIndex={index}
-                item={item}
-                copyIconId={copyIconId}
-                stateCopiedGroup={stateCopiedGroup}
-                handleCopyPTs={handleCopyPTs}
-              />
-            );
-            return (
-              <AgentPositionTakingRow
-                key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
-                item={item}
-                label={ptLabel}
-                isCopy={isCopyingPTItem(stateCopiedGroup, item)}
-                isDisableMasterAutoPT={isDisableMasterAutoPT}
-              />
-            );
-          })}
-        </div>
-      );
-    }
-
-    return null;
+        )}
+        {group?.map((item, index) => {
+          const ptLabel = (
+            <PTLabel
+              group={group}
+              itemIndex={index}
+              item={item}
+              copyIconId={copyIconId}
+              stateCopiedGroup={stateCopiedGroup}
+              handleCopyPTs={handleCopyPTs}
+            />
+          );
+          return (
+            <AgentPositionTakingRow
+              key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
+              item={item}
+              label={ptLabel}
+              copyStatus={isCopyingPTItem(stateCopiedGroup, item)}
+              isDisableMasterAutoPT={isDisableMasterAutoPT}
+            />
+          );
+        })}
+      </div>
+    );
   });
 }
 
@@ -313,7 +317,6 @@ const validateAgentPositionTaking = (item: AgentPositionTakingGroupItem): Valida
         id: `uM2-${item.sportTypeId}-${item.betTypeId}`,
         isValid: uM2 >= minUM2(upline),
         message: 'MasterAutoPTCannotBeGreaterThanMasterMaxPT',
-        // msgParams: { value: minUM2(upline) / 100 },
       };
     }
 
@@ -354,16 +357,18 @@ const validateAgentPositionTaking = (item: AgentPositionTakingGroupItem): Valida
 
 const AgentPTBlockId = 'agent-position-taking';
 
-const AgentPositionTaking = forwardRef<ValidationRefType, GroupSettingBlockProps>(function AgentPositionTaking(
+const AgentPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockProps>(function AgentPositionTaking(
   props,
   ref
 ) {
   const { t } = useTranslation();
   const { title, isDisableMasterAutoPT } = props;
-  const { productGroups, isMultipleMode, handleUpdateSettingItems } = useGroupSettingContext();
-  const agentPTs = getSettingItems<AgentPositionTakingGroupItem>(productGroups, 1, GroupTypeIds.PositionTaking);
+  const { productGroups, isMultipleMode, handleUpdateSettingItems, productGroupId, isEditMode, updateGroupSetting } =
+    useGroupSettingContext();
+  const groupId = Number(productGroupId);
+  const agentPTs = getSettingItems<AgentPositionTakingGroupItem>(productGroups, groupId, GroupTypeIds.PositionTaking);
   const [validateResult, setValidateResult] = useState<ValidatePTResult | undefined>();
-  const { stateCopiedGroup, setStateCopiedGroup, timeId, setCopyIconId, copyIconId } = usePTCopy();
+  const { stateCopiedGroup, copyIconId, handleCopy } = usePTCopy();
   const blockRef = useRef<BlockRefType>(null);
 
   const validateAgentPTs = (agentPTs: AgentPositionTakingGroupItem[]) => {
@@ -416,19 +421,8 @@ const AgentPositionTaking = forwardRef<ValidationRefType, GroupSettingBlockProps
     if (!itemCopied.isMultipleModeChecked) return;
     const newPTs = copyAgentPTs(agentPTs, itemCopied, isBelongCopiedGroup);
     if (newPTs.length > 0) {
-      const newStateCopiedGroup = newPTs.map((item) => {
-        return { betTypeId: item.betTypeId, sportTypeId: item.sportTypeId, isCopied: item.isCopied };
-      });
-      if (JSON.stringify(newStateCopiedGroup) !== JSON.stringify(stateCopiedGroup)) {
-        if (timeId) clearTimeout(timeId.current);
-        setStateCopiedGroup(newStateCopiedGroup);
-        setCopyIconId(iconId);
-        timeId.current = setTimeout(() => {
-          setStateCopiedGroup([]);
-          setCopyIconId(undefined);
-        }, 3000);
-      }
-      handleUpdateSettingItems?.(1, GroupTypeIds.PositionTaking, newPTs);
+      handleCopy(newPTs, iconId);
+      handleUpdateSettingItems?.(groupId, GroupTypeIds.PositionTaking, newPTs);
     }
   };
 
@@ -438,50 +432,55 @@ const AgentPositionTaking = forwardRef<ValidationRefType, GroupSettingBlockProps
       isMultipleModeChecked: isChecked,
       isUpdateMinPtOnly: false,
     }));
-    handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.PositionTaking, newAgentPTs);
+    handleUpdateSettingItems?.(groupId, GroupTypeIds.PositionTaking, newAgentPTs);
   };
 
   return (
-    <div id={AgentPTBlockId}>
-      <Block title={title} ref={blockRef}>
-        <BlockRow
-          isHeaderRow
-          label={
-            isMultipleMode && (
-              <div style={{ display: 'flex', marginLeft: '2px' }}>
-                <input
-                  type="checkbox"
-                  style={{ top: '0' }}
-                  onChange={(e) => handleSelectAll(e.target.checked)}
-                  checked={agentPTs.every((item) => item.isMultipleModeChecked === true)}
-                />
-                <div>{t('SelectAll')}</div>
-              </div>
-            )
-          }
-        >
-          <BlockColumn>{t('MasterPT')}</BlockColumn>
-          {!isDisableMasterAutoPT && <BlockColumn>{t('IsAuto')}</BlockColumn>}
-          <BlockColumn>{t('AgentMaxPT')}</BlockColumn>
-          <BlockColumn>{t('AgentMinPT')}</BlockColumn>
-        </BlockRow>
-        <PositionTakingRows
-          ptItems={agentPTs}
-          copyIconId={copyIconId}
-          stateCopiedGroup={stateCopiedGroup}
-          handleCopyPTs={handleCopyPTs}
-          isDisableMasterAutoPT={isDisableMasterAutoPT}
+    <Block
+      id={AgentPTBlockId}
+      title={title}
+      ref={blockRef}
+      isPartialUpdate={isEditMode === true && !props.isReadOnly}
+      onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
+    >
+      <BlockRow
+        isHeaderRow
+        label={
+          isMultipleMode && (
+            <div style={{ display: 'flex', marginLeft: '2px' }}>
+              <input
+                type="checkbox"
+                style={{ top: '0' }}
+                onChange={(e) => handleSelectAll(e.target.checked)}
+                checked={agentPTs.every((item) => item.isMultipleModeChecked === true)}
+              />
+              <div>{t('SelectAll')}</div>
+            </div>
+          )
+        }
+      >
+        <BlockColumn>{t('MasterPT')}</BlockColumn>
+        {!isDisableMasterAutoPT && <BlockColumn>{t('IsAuto')}</BlockColumn>}
+        <BlockColumn>{t('AgentMaxPT')}</BlockColumn>
+        <BlockColumn>{t('AgentMinPT')}</BlockColumn>
+      </BlockRow>
+      <PositionTakingRows
+        productGroupId={groupId}
+        ptItems={agentPTs}
+        copyIconId={copyIconId}
+        stateCopiedGroup={stateCopiedGroup}
+        handleCopyPTs={handleCopyPTs}
+        isDisableMasterAutoPT={isDisableMasterAutoPT}
+      />
+      {validateResult && !validateResult.isValid && (
+        <WrapperTooltip
+          type="error"
+          anchorSelect={`#${validateResult.id}`}
+          isOpen={!validateResult.isValid}
+          content={t(validateResult.message, validateResult?.msgParams)}
         />
-        {validateResult && !validateResult.isValid && (
-          <WrapperTooltip
-            type="error"
-            anchorSelect={`#${validateResult.id}`}
-            isOpen={!validateResult.isValid}
-            content={t(validateResult.message, validateResult?.msgParams)}
-          />
-        )}
-      </Block>
-    </div>
+      )}
+    </Block>
   );
 });
 

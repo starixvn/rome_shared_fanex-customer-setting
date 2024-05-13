@@ -201,6 +201,30 @@
 		<value>最低投注/最高投注/单场限额无效</value>
 		<comment/>
 	</data>
+	<data name="Msg_10022" xml:space="preserve">
+		<value>您不允许修改每日限额自动重设.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10024" xml:space="preserve">
+		<value>最高赢额应低于或相等于直系上线的最高赢额.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10033" xml:space="preserve">
+		<value>最高输额应低于或相等于直系上线的最高输额.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10034" xml:space="preserve">
+		<value>这帐号的上线无投注本金级别.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10035" xml:space="preserve">
+		<value>每种投注类型至少需要选择一个投注限额。</value>
+		<comment/>
+	</data>
+	<data name="Msg_10036" xml:space="preserve">
+		<value>对于{1} 您只能将最大{0} 投注限额分配给会员。</value>
+		<comment/>
+	</data>
 	<data name="Msg_10059" xml:space="preserve">
 		<value>单场最高派彩错误</value>
 		<comment/>
@@ -237,10 +261,6 @@
 		<value>最低投注必须少于或等于 最高投注，最高投注必须少于或等于单场限额</value>
 		<comment/>
 	</data>
-	<data name="Msg_10068" xml:space="preserve">
-		<value>您已达到每月更新占成的最高允许次数（1 次）。请在 {0} 下午 12:00 GMT+8 之后重试。</value>
-		<comment/>
-	</data>
 	<data name="Msg_10070" xml:space="preserve">
 		<value>每注串关最高派彩的设定值必须为正数</value>
 		<comment/>
@@ -259,6 +279,10 @@
 	</data>
 	<data name="Msg_10074" xml:space="preserve">
 		<value>每注串关最高派彩: 复选6的设置比上线的要高。</value>
+		<comment/>
+	</data>
+	<data name="Msg_10078" xml:space="preserve">
+		<value>RNG娱乐城: 您已达到每月更新占成的最高允许次数（1 次）。请在 {0} 下午 12:00 GMT+8 之后重试。</value>
 		<comment/>
 	</data>
 	<data name="Msg_20001" xml:space="preserve">
@@ -361,6 +385,22 @@
 		<value>无效占成数（上线设置的最低/最高占成数）</value>
 		<comment/>
 	</data>
+	<data name="Msg_60033" xml:space="preserve">
+		<value>由于账号的此产品已关闭导致无法更改下线产品状态。</value>
+		<comment/>
+	</data>
+	<data name="Msg_60035" xml:space="preserve">
+		<value>您不能禁用下线的产品。</value>
+		<comment/>
+	</data>
+	<data name="Msg_60037" xml:space="preserve">
+		<value>您必须先启用 {1}，才能启用 {0}。</value>
+		<comment/>
+	</data>
+	<data name="Msg_90012" xml:space="preserve">
+		<value>您不能执行此操作。</value>
+		<comment/>
+	</data>
 	<data name="GeneralInfo" xml:space="preserve">
 		<value>基本信息</value>
 		<comment/>
@@ -385,6 +425,22 @@
 		<value>占成数设定已更新成功.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_155" xml:space="preserve">
+		<value>输赢限额已成功更新.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_156" xml:space="preserve">
+		<value>佣金已更新成功</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_158" xml:space="preserve">
+		<value>投注限额已成功更新.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_160" xml:space="preserve">
+		<value>产品状态更新成功</value>
+		<comment/>
+	</data>
 	<data name="GroupType150" xml:space="preserve">
 		<value>佣金</value>
 	</data>
@@ -404,12 +460,12 @@
 		<value>佣金</value>
 	</data>
 	<data name="GroupType158" xml:space="preserve">
-		<value>佣金</value>
+		<value>投注限额</value>
 	</data>
 	<data name="GroupType159" xml:space="preserve">
 		<value>投注设定</value>
 	</data>
 	<data name="GroupType160" xml:space="preserve">
-		<value>占成数</value>
+		<value>产品状态</value>
 	</data>
 </root>

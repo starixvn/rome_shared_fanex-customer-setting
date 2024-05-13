@@ -1,4 +1,4 @@
-export default function scrollToBLock(blockId: string) {
+export function scrollToBLock(blockId: string) {
   const block = document.getElementById(blockId);
   window &&
     window.scroll({
@@ -6,3 +6,12 @@ export default function scrollToBLock(blockId: string) {
       behavior: 'smooth',
     });
 }
+
+export const scrollToTop = () => {
+  window &&
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+};

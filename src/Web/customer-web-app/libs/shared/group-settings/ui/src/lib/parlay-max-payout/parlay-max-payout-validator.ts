@@ -3,9 +3,7 @@ import { TFunction } from 'i18next';
 import { Result, ValidationResult } from '@customer-web-app/share-models';
 import { UserLevel } from '@customer-web-app/shared-constants';
 import {
-  ParlayMaxPayoutGroupItem,
-  ParlayMaxPayoutKey,
-  ParlayMaxPayoutProps,
+    ParlayMaxPayoutGroupItem, ParlayMaxPayoutKey, ParlayMaxPayoutProps
 } from '@customer-web-app/shared-group-settings-types';
 
 const ParlayMaxPayoutMissConfigValue = 0.1;

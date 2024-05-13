@@ -6,6 +6,7 @@ import { NumericFormat } from 'react-number-format';
 import { ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
 import { MaxNumberInputLength, SystemIds, UserLevel, UserLevelName } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper, NumberHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/block';
 import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
@@ -72,22 +73,13 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
       return validateResult;
     };
 
-    const scrollToBlock = () => {
-      const element = document.getElementById('general-information');
-      window &&
-        window.scroll({
-          top: element?.offsetTop,
-          behavior: 'smooth',
-        });
-    };
-
     const expandBlock = () => {
       blockRef.current?.expand();
     };
 
     return {
       validate,
-      scrollToBlock,
+      scrollToBlock: () => scrollToBLock('general-information'),
       expandBlock,
     };
   });
@@ -102,7 +94,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
   const napCanNotEditCredit = params.noPermissionEditCredit;
 
   return (
-    <Block id="general-information" title={t('general-information')} ref={blockRef}>
+    <Block id="general-information" title={t('general-information')} ref={blockRef} isPartialUpdate={false}>
       <div className={styles['container']}>
         <div className={styles['subheader']}>{t('AccountDetails')}</div>
         {children}

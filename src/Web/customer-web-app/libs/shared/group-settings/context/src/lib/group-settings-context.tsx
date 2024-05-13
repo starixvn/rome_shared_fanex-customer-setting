@@ -5,8 +5,11 @@ import { GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-s
 
 export type GroupSettingsContextType = {
   generalInfo: GeneralInfo;
+  productGroupId: number;
   productGroups: ProductGroup[];
   isMultipleMode: boolean;
+  isEditMode: boolean;
+  updateGroupSetting: (groupTypeId: number) => void;
   handleSettingItemChange: (
     groupId: number,
     groupTypeId: number,

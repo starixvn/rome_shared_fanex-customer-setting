@@ -1,6 +1,6 @@
 {
   "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 120,
-  "files.autoSave": "off",
+  "files.autoSave": "afterDelay",
   "prettier.printWidth": 120,
   "prettier.configPath": "./src/Web/customer-web-app/.prettierrc",
   "cSpell.words": [

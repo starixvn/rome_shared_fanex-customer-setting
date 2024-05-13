@@ -1,14 +1,10 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  handleChangeGroupSettingValue,
-  handleChangeItemValue,
-  scrollToTop,
-} from '@customer-web-app/edit-customer-page';
+import { handleChangeGroupSettingValue, handleChangeItemValue } from '@customer-web-app/edit-customer-page';
 import { CreateCustomerResult, ValidateRefResult, ValidationRefType } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import { SystemIds } from '@customer-web-app/shared-constants';
+import { ProductGroupIds, SystemIds } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
   GeneralInfo,
@@ -24,7 +20,7 @@ import {
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting } from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, scrollToTop } from '@customer-web-app/shared-group-settings-ui';
 import { encrypt } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -196,6 +192,7 @@ export function CreateCustomerPage() {
             mode: 'createCustomer',
             handleSettingItemChange,
             handleUpdateSettingItems,
+            productGroupId: ProductGroupIds.SportsBook,
           }}
         >
           <GroupSetting ref={groupSettingRef} />

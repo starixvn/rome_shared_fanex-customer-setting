@@ -17,7 +17,7 @@ import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-set
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { getChanges } from '@customer-web-app/shared-group-settings-state';
 import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, scrollToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -28,7 +28,7 @@ import {
     getNewIndirectEditCustomerSettings, getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue,
     handleInitProducts, isGeneralInfoChanged
 } from './handler';
-import { renderUpdateCustomerResult, scrollToTop } from './update-customer-result';
+import { renderUpdateCustomerResult } from './update-customer-result';
 
 export function EditCustomerPage() {
   const { t } = useTranslation();
@@ -168,7 +168,7 @@ export function EditCustomerPage() {
       const unCheckAutoPtItems = getUnCheckAutoPtItems(
         newProductGroups,
         params.roleId,
-        ProductGroupIds.SportsBook,
+        params.productGroupId,
         GroupTypeIds.PositionTaking
       );
 
@@ -176,6 +176,7 @@ export function EditCustomerPage() {
 
       const newMemberPts: { isCancel: boolean; groupItems: GroupItem[] } = await NiceModal.show(SetMemberPtPopup, {
         roleId: params.roleId,
+        productGroupId: params.productGroupId,
         groupItems: unCheckAutoPtItems,
       });
 
@@ -184,7 +185,7 @@ export function EditCustomerPage() {
       }
 
       const currentPTGroup = newProductGroups
-        .find((productGroup) => productGroup.id === ProductGroupIds.SportsBook)
+        .find((productGroup) => productGroup.id === params.productGroupId)
         ?.groupTypes.find((groupType) => groupType.id === GroupTypeIds.PositionTaking);
 
       const newPTGroup = currentPTGroup?.groupItems.map((item) => {
@@ -200,7 +201,7 @@ export function EditCustomerPage() {
 
       return handleChangeGroupSettingValue(
         newProductGroups,
-        ProductGroupIds.SportsBook,
+        params.productGroupId,
         GroupTypeIds.PositionTaking,
         newPTGroup as []
       );
@@ -317,8 +318,11 @@ export function EditCustomerPage() {
         <EditGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
+          productGroupId={params.productGroupId}
           isReadOnly={
-            (params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) || isIndirectUpdate(params)
+            params.productGroupId !== ProductGroupIds.SportsBook ||
+            (params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
+            isIndirectUpdate(params)
           }
           onGeneralInfoChange={handleGeneralInfoChange}
           onUpdate={handleUpdateGeneralInfo}
@@ -358,16 +362,14 @@ export function EditCustomerPage() {
             mode: 'edit',
             handleSettingItemChange,
             handleUpdateSettingItems,
+            productGroupId: params.productGroupId,
+            updateGroupSetting: handleUpdateGroupType,
+            isEditMode:
+              !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
+              AppConfigHelper.isEditBetSettingOnly(),
           }}
         >
-          <GroupSetting
-            ref={groupSettingRef}
-            updateGroupSetting={(id) => handleUpdateGroupType(id)}
-            isEditMode={
-              !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
-              AppConfigHelper.isEditBetSettingOnly()
-            }
-          />
+          <GroupSetting ref={groupSettingRef} />
         </GroupSettingsContextProvider>
         {generalInfo.displayTransferCondition && (
           <TransferCondition

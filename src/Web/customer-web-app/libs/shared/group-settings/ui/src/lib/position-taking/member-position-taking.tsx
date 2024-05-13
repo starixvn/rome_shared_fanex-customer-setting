@@ -11,24 +11,32 @@ import {
   MemberPositionTakingGroupItem,
   MemberPositionTakingProps,
 } from '@customer-web-app/shared-group-settings-types';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import scrollToBLock from '../scroll-helper';
 import { ValidatePTResult } from './master-position-taking';
 import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { GroupSettingBlockProps } from './super-position-taking';
-import { CopiedPTItem, isCopyingPTItem, PTRowProps, renderNoneBlockColumn, usePTCopy } from './utils';
+import { PositionTakingBlockProps } from './types';
+import {
+  CopyStatus,
+  CopyStatusPT,
+  groupSportsBookPTBySportTypeId,
+  isCopyingPTItem,
+  PTRowProps,
+  renderNoneBlockColumn,
+  usePTCopy,
+} from './utils';
 
-function MemberPositionTakingRow({ item, label, isCopy }: Readonly<PTRowProps<MemberPositionTakingGroupItem>>) {
-  const { handleSettingItemChange } = useGroupSettingContext();
+function MemberPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps<MemberPositionTakingGroupItem>>) {
+  const { handleSettingItemChange, productGroupId } = useGroupSettingContext();
 
   const handlePTChange = (data: { [x: string]: number | undefined }) => {
     handleSettingItemChange?.(
-      ProductGroupIds.SportsBook,
+      Number(productGroupId),
       GroupTypeIds.PositionTaking,
       item.sportTypeId,
       item.betTypeId,
@@ -36,7 +44,7 @@ function MemberPositionTakingRow({ item, label, isCopy }: Readonly<PTRowProps<Me
     );
   };
 
-  const copyRowStyle = { isCopy: isCopy, 'isCopy fail': isCopy === false };
+  const copyRowStyle = { isCopy: copyStatus === CopyStatus.Success, 'isCopy fail': copyStatus === CopyStatus.Fail };
   return (
     <BlockRow label={label ?? item.betTypeName}>
       <BlockColumn>
@@ -73,17 +81,18 @@ const copyMemberPTs = (
   return (positionTakings as MemberPositionTakingGroupItem[]).map((item) => {
     if (isBelongCopiedGroup?.(item)) {
       return validateMemberPT(item, newItemCopied)
-        ? { ...item, a1, isMultipleModeChecked, isCopied: true }
-        : { ...item, isMultipleModeChecked, isCopied: false };
+        ? { ...item, a1, isMultipleModeChecked, copyStatus: CopyStatus.Success }
+        : { ...item, isMultipleModeChecked, copyStatus: CopyStatus.Fail };
     }
-    return { ...item, isCopied: undefined };
+    return { ...item, copyStatus: CopyStatus.NotCopy };
   });
 };
 
 type PositionTakingRowProps = {
+  productGroupId: number;
   ptItems: MemberPositionTakingGroupItem[];
   copyIconId: number | undefined;
-  stateCopiedGroup: CopiedPTItem[];
+  stateCopiedGroup: CopyStatusPT[];
   handleCopyPTs: (
     itemCopied: GroupItem,
     iconId: number | undefined,
@@ -92,64 +101,60 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  productGroupId,
   ptItems,
   copyIconId,
   stateCopiedGroup,
   handleCopyPTs,
 }: Readonly<PositionTakingRowProps>) {
-  let isFirstGroup = true;
-  let sportTypeId = -1;
-  return ptItems.map((ptItem) => {
-    if (sportTypeId !== ptItem.sportTypeId) {
-      sportTypeId = ptItem.sportTypeId;
-      const group = ptItems.filter((item) => item.sportTypeId === ptItem.sportTypeId);
-      const firstGroupItem = group[0];
+  const ptGroups =
+    productGroupId === ProductGroupIds.SportsBook ? Object.values(groupSportsBookPTBySportTypeId(ptItems)) : [ptItems];
 
-      const groupPTLabel = (
-        <GroupLabel
-          copyIconId={copyIconId}
-          firstGroupItem={firstGroupItem}
-          group={group}
-          handleCopyPTs={handleCopyPTs}
-          isFirstGroup={isFirstGroup}
-          ptItems={ptItems}
-          stateCopiedGroup={stateCopiedGroup}
-        ></GroupLabel>
-      );
-      isFirstGroup = false;
+  return (ptGroups as MemberPositionTakingGroupItem[][]).map((group, index) => {
+    const firstGroupItem = group[0];
+    const groupPTLabel = (
+      <GroupLabel
+        copyIconId={copyIconId}
+        firstGroupItem={firstGroupItem}
+        group={group}
+        handleCopyPTs={handleCopyPTs}
+        isFirstGroup={index === 0}
+        ptItems={ptItems}
+        stateCopiedGroup={stateCopiedGroup}
+      ></GroupLabel>
+    );
 
-      return (
-        <div className={styles['block-pt']} key={`${ptItem.sportTypeId}${ptItem.betTypeId}`}>
+    return (
+      <div className={styles['block-pt']} key={`${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`}>
+        {productGroupId === ProductGroupIds.SportsBook && (
           <div className={styles['row-empty']}>
             <BlockRow label={groupPTLabel}>
-              {renderNoneBlockColumn(`${ptItem.sportTypeId}${ptItem.betTypeId}`, 1)}
+              {renderNoneBlockColumn(`${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`, 1)}
             </BlockRow>
           </div>
-          {group?.map((item, index) => {
-            const ptLabel = (
-              <PTLabel
-                group={group}
-                itemIndex={index}
-                item={item}
-                copyIconId={copyIconId}
-                stateCopiedGroup={stateCopiedGroup}
-                handleCopyPTs={handleCopyPTs}
-              />
-            );
-            return (
-              <MemberPositionTakingRow
-                key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
-                item={item}
-                label={ptLabel}
-                isCopy={isCopyingPTItem(stateCopiedGroup, item)}
-              />
-            );
-          })}
-        </div>
-      );
-    }
-
-    return null;
+        )}
+        {group?.map((item, index) => {
+          const ptLabel = (
+            <PTLabel
+              group={group}
+              itemIndex={index}
+              item={item}
+              copyIconId={copyIconId}
+              stateCopiedGroup={stateCopiedGroup}
+              handleCopyPTs={handleCopyPTs}
+            />
+          );
+          return (
+            <MemberPositionTakingRow
+              key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
+              item={item}
+              label={ptLabel}
+              copyStatus={isCopyingPTItem(stateCopiedGroup, item)}
+            />
+          );
+        })}
+      </div>
+    );
   });
 }
 const validateMemberPositionTaking = (item: MemberPositionTakingGroupItem): ValidatePTResult => {
@@ -173,16 +178,18 @@ const validateMemberPositionTaking = (item: MemberPositionTakingGroupItem): Vali
 
 const MemberPTBLockId = 'member-position-taking';
 
-const MemberPositionTaking = forwardRef<ValidationRefType, GroupSettingBlockProps>(function MemberPositionTaking(
+const MemberPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockProps>(function MemberPositionTaking(
   props,
   ref
 ) {
   const { t } = useTranslation();
   const { title } = props;
-  const { productGroups, isMultipleMode, handleUpdateSettingItems } = useGroupSettingContext();
-  const memberPTs = getSettingItems<MemberPositionTakingGroupItem>(productGroups, 1, GroupTypeIds.PositionTaking);
+  const { productGroups, isMultipleMode, handleUpdateSettingItems, productGroupId, isEditMode, updateGroupSetting } =
+    useGroupSettingContext();
+  const groupId = Number(productGroupId);
+  const memberPTs = getSettingItems<MemberPositionTakingGroupItem>(productGroups, groupId, GroupTypeIds.PositionTaking);
   const [validateResult, setValidateResult] = useState<ValidatePTResult | undefined>();
-  const { stateCopiedGroup, setStateCopiedGroup, timeId, setCopyIconId, copyIconId } = usePTCopy();
+  const { stateCopiedGroup, copyIconId, handleCopy } = usePTCopy();
   const blockRef = useRef<BlockRefType>(null);
 
   const validateMemberPTs = (memberPTs: MemberPositionTakingGroupItem[]) => {
@@ -235,30 +242,24 @@ const MemberPositionTaking = forwardRef<ValidationRefType, GroupSettingBlockProp
     if (!itemCopied.isMultipleModeChecked) return;
     const newPTs = copyMemberPTs(memberPTs, itemCopied, isBelongCopiedGroup);
     if (newPTs.length > 0) {
-      const newStateCopiedGroup = newPTs.map((item) => {
-        return { betTypeId: item.betTypeId, sportTypeId: item.sportTypeId, isCopied: item.isCopied };
-      });
-      if (JSON.stringify(newStateCopiedGroup) !== JSON.stringify(stateCopiedGroup)) {
-        if (timeId) clearTimeout(timeId.current);
-        setStateCopiedGroup(newStateCopiedGroup);
-        setCopyIconId(iconId);
-        timeId.current = setTimeout(() => {
-          setStateCopiedGroup([]);
-          setCopyIconId(undefined);
-        }, 3000);
-      }
-      handleUpdateSettingItems?.(1, GroupTypeIds.PositionTaking, newPTs);
+      handleCopy(newPTs, iconId);
+      handleUpdateSettingItems?.(groupId, GroupTypeIds.PositionTaking, newPTs);
     }
   };
 
   const handleSelectAll = (isChecked: boolean) => {
     const newMemberPTs = memberPTs.map((item) => ({ ...item, isMultipleModeChecked: isChecked }));
-    handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.PositionTaking, newMemberPTs);
+    handleUpdateSettingItems?.(groupId, GroupTypeIds.PositionTaking, newMemberPTs);
   };
 
   return (
     <div id={MemberPTBLockId} className={styles['short-block']}>
-      <Block ref={blockRef} title={title}>
+      <Block
+        ref={blockRef}
+        title={title}
+        isPartialUpdate={isEditMode === true && !props.isReadOnly}
+        onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
+      >
         <BlockRow
           isHeaderRow
           label={
@@ -278,6 +279,7 @@ const MemberPositionTaking = forwardRef<ValidationRefType, GroupSettingBlockProp
           <BlockColumn>{t('agentPT')}</BlockColumn>
         </BlockRow>
         <PositionTakingRows
+          productGroupId={groupId}
           ptItems={memberPTs}
           copyIconId={copyIconId}
           stateCopiedGroup={stateCopiedGroup}

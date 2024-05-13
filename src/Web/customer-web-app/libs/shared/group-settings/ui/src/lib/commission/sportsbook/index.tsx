@@ -1,118 +1,17 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BetTypeIds, GroupTypeIds, ProductGroupIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
+import { BetTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
-import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
-import { CommissionGroupItem } from '@customer-web-app/shared-group-settings-types';
-import { Block, BlockColumn, BlockItem, BlockRow } from '@customer-web-app/shared/base/block';
+import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
-import { GroupSettingBlockProps } from '../../position-taking/super-position-taking';
+import CommissionLabel from '../commission-label';
 import CommissionSelect from '../commission-select';
+import SelectAllCommissionCheckbox from '../select-all-commission-checkbox';
+import { Props } from '../types';
 import styles from './sportsbook-commission.module.scss';
 
-const renderBlockRowTitle = (
-  isChecked: boolean,
-  blockRowTitle: string | undefined,
-  onChange: (isChecked: boolean) => void
-) => {
-  return (
-    <div>
-      <input type="checkbox" onChange={(e) => onChange(e.target.checked)} checked={isChecked} />
-      <span>{blockRowTitle}</span>
-    </div>
-  );
-};
-
-export default function SportsBookCommission({ title, isReadOnly }: Readonly<GroupSettingBlockProps>) {
-  const { productGroups, handleSettingItemChange, handleUpdateSettingItems } = useGroupSettingContext();
-  const commissions = getSettingItems<CommissionGroupItem>(productGroups, 1, GroupTypeIds.SportsBookCommission);
-
-  const handleCommissionChange = (sportTypeId: number, betTypeId: number, data: Partial<CommissionGroupItem>) => {
-    handleSettingItemChange?.(
-      ProductGroupIds.SportsBook,
-      GroupTypeIds.SportsBookCommission,
-      sportTypeId,
-      betTypeId,
-      data
-    );
-  };
-
-  const handleSelectAll = (isChecked: boolean) => {
-    const newCommissions = commissions.map((item) => ({ ...item, isMultipleModeChecked: isChecked }));
-    handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.SportsBookCommission, newCommissions);
-  };
-
-  const props = { commissions, handleCommissionChange, isReadOnly, handleSelectAll };
-
-  return (
-    <Block title={title}>
-      {params.roleId === UserLevel.Member || params.uplineRoleId === UserLevel.Agent ? (
-        <MemberSportsBookCommission {...props} />
-      ) : (
-        <SMASportsBookCommission {...props} />
-      )}
-    </Block>
-  );
-}
-
-interface Props {
-  isReadOnly: boolean;
-  commissions: CommissionGroupItem[];
-  handleCommissionChange: (sportTypeId: number, betTypeId: number, data: Partial<CommissionGroupItem>) => void;
-  handleSelectAll: (isChecked: boolean) => void;
-}
-
-function SMASportsBookCommission({
-  commissions,
-  isReadOnly,
-  handleCommissionChange,
-  handleSelectAll,
-}: Readonly<Props>) {
-  const { t } = useTranslation();
-  const { isMultipleMode } = useGroupSettingContext();
-
-  return (
-    <div className={styles.container}>
-      {isMultipleMode && !isReadOnly && (
-        <div className={styles['select-all-commission']}>
-          <input
-            type="checkbox"
-            style={{ top: '0' }}
-            onChange={(e) => handleSelectAll(e.target.checked)}
-            checked={commissions.every((item) => item.isMultipleModeChecked === true)}
-          />
-          <div>{t('SelectAll')}</div>
-        </div>
-      )}
-      {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked }) => {
-        return (
-          <BlockItem
-            key={`${sportTypeId}${betTypeId}`}
-            label={
-              isMultipleMode
-                ? renderBlockRowTitle(isMultipleModeChecked, displayName, (isChecked) =>
-                    handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked })
-                  )
-                : displayName
-            }
-          >
-            <CommissionSelect
-              max={upline.discount ?? 0}
-              value={discount ?? 0}
-              isDisable={!isMultipleModeChecked}
-              onChange={(e) => {
-                handleCommissionChange?.(sportTypeId, betTypeId, { discount: Number(e.target.value) });
-              }}
-            />
-          </BlockItem>
-        );
-      })}
-    </div>
-  );
-}
-
-function MemberSportsBookCommission({
+export function MemberSportsBookCommission({
   commissions,
   handleCommissionChange,
   isReadOnly,
@@ -138,13 +37,10 @@ function MemberSportsBookCommission({
           isMultipleMode &&
           !isReadOnly && (
             <div style={{ display: 'flex', marginLeft: '2px' }}>
-              <input
-                type="checkbox"
-                style={{ top: '0' }}
-                onChange={(e) => handleSelectAll(e.target.checked)}
+              <SelectAllCommissionCheckbox
                 checked={commissions.every((item) => item.isMultipleModeChecked === true)}
+                handleChange={handleSelectAll}
               />
-              <div>{t('SelectAll')}</div>
             </div>
           )
         }
@@ -159,11 +55,14 @@ function MemberSportsBookCommission({
           <BlockRow
             key={`${sportTypeId}-${betTypeId}`}
             label={
-              isMultipleMode && !isReadOnly
-                ? renderBlockRowTitle(isMultipleModeChecked, displayName, (isChecked) =>
-                    handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked })
-                  )
-                : displayName
+              <CommissionLabel
+                displayName={displayName as string}
+                isSelected={isMultipleModeChecked}
+                isReadOnly={isReadOnly}
+                handleSelectCommission={(isChecked) =>
+                  handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked })
+                }
+              />
             }
           >
             {params.uplineRoleId === UserLevel.Super && (

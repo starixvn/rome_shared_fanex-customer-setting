@@ -1,5 +1,3 @@
-import { SystemIds } from '@customer-web-app/shared-constants';
-
 export class Result {
   public code: number;
   public message: string;
@@ -86,6 +84,7 @@ export interface Params {
   roleId: number;
   custId: number;
   noPermissionEditCredit: boolean;
+  productGroupId: number;
 }
 
 export interface Note {
@@ -96,10 +95,6 @@ export interface TabOptions {
   name: string;
   id: string;
   url: string;
-  alphaUrl: string;
-
-  exNapUrl: string;
-  napUrl: string;
   isActive: boolean;
   contents: string[];
   index: number;

@@ -1,8 +1,8 @@
 import { CreateCustomerResult, Result, UpdateCustomerResult } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
-import { GroupTypeIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
-import { ProductGroup } from '@customer-web-app/shared-group-settings-types';
+import { CurrentWinLossAmount, ProductGroup } from '@customer-web-app/shared-group-settings-types';
 
 export interface GroupSettingsResponse {
   generalInfo: GeneralInfo;
@@ -57,7 +57,9 @@ export const SettingService = {
     siteLabel = ''
   ): Promise<GroupSettingsResponse> => {
     const response = await axiosInstance.get<GroupSettingsResponse>(
-      `Customer/GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${appConfig.systemId}&siteLabel=${siteLabel}`
+      `Customer/GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${
+        appConfig.systemId
+      }&siteLabel=${siteLabel}&productGroupId=${params.productGroupId ?? ProductGroupIds.SportsBook}`
     );
     return response.data;
   },
@@ -100,6 +102,7 @@ export const SettingService = {
           upLineRoleId,
           generalInfo,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -132,6 +135,7 @@ export const SettingService = {
           customerIds,
           customerNames,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -155,6 +159,7 @@ export const SettingService = {
           roleId,
           uplineRoleId,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -187,6 +192,7 @@ export const SettingService = {
           customerNames,
           uplineRoleId,
           productGroups: JSON.stringify(productGroups),
+          productGroupId: params.productGroupId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -201,4 +207,10 @@ export const SettingService = {
         // Something unexpected
         throw error;
       }),
+  GetCustomerCurrentWinLossAmount: async (custId: number, sportType: number, betType: number) => {
+    const response = await axiosInstance.get<CurrentWinLossAmount[]>(
+      `Customer/GetCurrentWinLossAmount?custId=${custId}&sportType=${sportType}&betType=${betType}`
+    );
+    return response.data;
+  },
 };

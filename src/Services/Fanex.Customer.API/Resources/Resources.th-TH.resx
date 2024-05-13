@@ -197,6 +197,30 @@
 		<value>ค่า เดิมพันขั้นต่ำ/ เดิมพันขั้นสูดสุด/ เดิมพันต่อเกมสูงสุด ไม่ถูกต้อง</value>
 		<comment/>
 	</data>
+	<data name="Msg_10022" xml:space="preserve">
+		<value>ไม่อนุญาตให้เปลี่ยนแปลงวงเงินการตั้งค่าใหม่อัตโนมัติรายวัน</value>
+		<comment/>
+	</data>
+	<data name="Msg_10024" xml:space="preserve">
+		<value>ชนะสูงสุดควรน้อยกว่าหรือเท่ากับชนะสูงสุดของอัปไลน์โดยตรง</value>
+		<comment/>
+	</data>
+	<data name="Msg_10033" xml:space="preserve">
+		<value>แพ้สูงสุดควรน้อยกว่าหรือเท่ากับแพ้สูงสุดของอัปไลน์โดยตรง</value>
+		<comment/>
+	</data>
+	<data name="Msg_10034" xml:space="preserve">
+		<value>อัปไลน์ของผู้ใช้รายนี้ไม่มีระดับเงินเดิมพัน</value>
+		<comment/>
+	</data>
+	<data name="Msg_10035" xml:space="preserve">
+		<value>การเดิมพันแต่ละประเภทจะต้องเลือกอย่างน้อยหนึ่งวงเงินเดิมพัน</value>
+		<comment/>
+	</data>
+	<data name="Msg_10036" xml:space="preserve">
+		<value>คุณสามารถกำหนดวงเงินเดิมพันสูงสุด {0} เฉพาะระดับสมาชิกสำหรับ {1}</value>
+		<comment/>
+	</data>
 	<data name="Msg_10059" xml:space="preserve">
 		<value>ข้อผิดพลาดในการจ่ายเงินสูงสุดต่อคู่การแข่งขัน</value>
 		<comment/>
@@ -233,10 +257,6 @@
 		<value>ค่าเดิมพันขั้นต่ำต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดและค่าเดิมพันสูงสุดต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อคู่การแข่งขัน</value>
 		<comment/>
 	</data>
-	<data name="Msg_10068" xml:space="preserve">
-		<value>การอัปเดตการตั้งค่าความเสี่ยงของคุณถึงขีดจำกัดสูงสุดต่อเดือนแล้ว (1 ครั้ง) โปรดลองอีกครั้งหลังจาก {0} 12:00 PM GMT+8</value>
-		<comment/>
-	</data>
 	<data name="Msg_10070" xml:space="preserve">
 		<value>การจ่ายเงินพาร์เลย์สูงสุดต่อเดิมพันต้องเป็นจำนวนบวก</value>
 		<comment/>
@@ -255,6 +275,10 @@
 	</data>
 	<data name="Msg_10074" xml:space="preserve">
 		<value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบมากกว่า 6 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+		<comment/>
+	</data>
+	<data name="Msg_10078" xml:space="preserve">
+		<value>RNG Casino: การอัปเดตการตั้งค่าความเสี่ยงของคุณถึงขีดจำกัดสูงสุดต่อเดือนแล้ว (1 ครั้ง) โปรดลองอีกครั้งหลังจาก {0} 12:00 PM GMT+8</value>
 		<comment/>
 	</data>
 	<data name="Msg_20001" xml:space="preserve">
@@ -357,6 +381,22 @@
 		<value>ค่าแบ่งสู้ไม่ถูกต้อง (ค่าแบ่งสู้ ต่ำสุด/สูงสุด กำหนดโดยอัพไลน์)</value>
 		<comment/>
 	</data>
+	<data name="Msg_60033" xml:space="preserve">
+		<value>ไม่สามารถแก้ไขสถานะผลิตภัณฑ์ของดาวน์ไลน์ได้ เนื่องจากไม่ได้เปิดการใช้งานผลิตภัณฑ์นี้</value>
+		<comment/>
+	</data>
+	<data name="Msg_60035" xml:space="preserve">
+		<value>คุณไม่สามารถปิดการใช้งานสินค้าให้กับดาวไลน์</value>
+		<comment/>
+	</data>
+	<data name="Msg_60037" xml:space="preserve">
+		<value>ไม่สามารถเปิดใช้งาน {0} เมื่อ {1} ปิดอยู่</value>
+		<comment/>
+	</data>
+	<data name="Msg_90012" xml:space="preserve">
+		<value>คุณไม่สามารถดำเนินการนี้</value>
+		<comment/>
+	</data>
 	<data name="GeneralInfo" xml:space="preserve">
 		<value>ข้อมูลทั่วไป</value>
 		<comment/>
@@ -381,6 +421,22 @@
 		<value>การตั้งค่าแบ่งสู้ ได้อัพเดทเรียบร้อยแล้ว.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_155" xml:space="preserve">
+		<value>ปรับข้อมูลวงเงินแพ้ชนะเรียบร้อยแล้ว</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_156" xml:space="preserve">
+		<value>ค่าคอมมิชชั่น ได้อัพเดทเรียบร้อยแล้ว</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_158" xml:space="preserve">
+		<value>ปรับข้อมูลวงเงินเดิมพันเรียบร้อยแล้ว</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_160" xml:space="preserve">
+		<value>สถานะผลิตภันฑ์ อัพเดทสำเร็จแล้ว</value>
+		<comment/>
+	</data>
 	<data name="GroupType150" xml:space="preserve">
 		<value>คอมมิชชั่น</value>
 	</data>
@@ -400,12 +456,12 @@
 		<value>คอมมิชชั่น</value>
 	</data>
 	<data name="GroupType158" xml:space="preserve">
-		<value>คอมมิชชั่น</value>
+		<value>วงเงินเดิมพัน</value>
 	</data>
 	<data name="GroupType159" xml:space="preserve">
 		<value>การกำหนดการวางเดิมพัน</value>
 	</data>
 	<data name="GroupType160" xml:space="preserve">
-		<value>ค่าความเสี่ยง</value>
+		<value>สถานะผลิตภันฑ์</value>
 	</data>
 </root>

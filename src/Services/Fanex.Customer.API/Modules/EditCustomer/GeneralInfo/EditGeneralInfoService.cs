@@ -49,7 +49,7 @@ public class GeneralInfoService
         return spParams;
     }
 
-    public CustomerSettingResult Validate(EditRequest request)
+    public CustomerSettingResult Validate(EditMultipleRequest request)
     {
         return (CustomerSettingResult)Result.CreateSuccessfulResult();
     }

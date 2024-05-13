@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ValidationRefType } from '@customer-web-app/share-models';
 import { UserLevel } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockRefType } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
@@ -88,22 +89,13 @@ export const TransferCondition = forwardRef<ValidationRefType, TransferCondition
       return true;
     };
 
-    const scrollToBlock = () => {
-      const element = document.getElementById('transfer-condition');
-      window &&
-        window.scroll({
-          top: element?.offsetTop,
-          behavior: 'smooth',
-        });
-    };
-
     const expandBlock = () => {
       blockRef.current?.expand();
     };
 
     return {
       validate,
-      scrollToBlock,
+      scrollToBlock: () => scrollToBLock('transfer-condition'),
       expandBlock,
     };
   });
@@ -176,7 +168,7 @@ export const TransferCondition = forwardRef<ValidationRefType, TransferCondition
   };
 
   return (
-    <Block id="transfer-condition" ref={blockRef} title={t('accBalanceTransferCondition')}>
+    <Block id="transfer-condition" ref={blockRef} title={t('accBalanceTransferCondition')} isPartialUpdate={false}>
       <div
         className={classNames(styles.container, { [styles.disabled]: disabled })}
         onMouseEnter={() => disabled && setOpenTooltip(true)}

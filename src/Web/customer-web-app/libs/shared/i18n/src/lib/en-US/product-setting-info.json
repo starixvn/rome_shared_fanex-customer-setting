@@ -31,6 +31,8 @@
   "CommissionGroup": "Commission Group",
   "BetType": "Bettype",
   "CommissionInformation": "Commission Information",
+  "SportsBookCommissionInformation": "Sportsbook Commission Information",
+  "OtherProductsCommissionInformation": "Other Products Commission Information",
   "CommissionMap": "M = Master, A = Agent, P = Member.",
   "Commission3": "Commission 3 (Comm 3): Applies to other bettypes.",
   "MPSInformation": "Max Payout Setting Information",
@@ -79,5 +81,9 @@
   "UpdateUplineBetSettingNote": "Updating upline's bet setting might decrease all downlines' bet settings to ensure that they are not greater than upline's bet setting.",
   "LiteModePT": "Lite Mode - Position Taking Template",
   "WinLossLimit": "Win Loss Limit",
-  "CustomerSettingInformation": "Customer Setting Information"
+  "CustomerSettingInformation": "Customer Setting Information",
+  "BBINBetSetting2": "[BBIN]: Commission is not applied to the BBIN product, with effective from 11/9/2023  (dd/mm/yyyy). Furthermore, when you edit member's settings, these new settings will take effect on member's next transfer.",
+  "FGGNote": "[FGG] : Commission is not applied to FGG product.",
+  "WinLossLimitNote1": "Live Casino: Compare the Win/Loss Limit settings with the Win/Loss of EACH product.",
+  "WinLossLimitNote2": "RNG Casino: Compare the Win/Loss Limit settings with the total Win/Loss of ALL products."
 }

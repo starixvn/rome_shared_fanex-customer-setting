@@ -2,7 +2,7 @@ namespace Fanex.Customer.API.Modules.Message;
 
 public static class MessageTypes
 {
-    public const int SimpleMessage = 0;
+    public const int PlainMessage = 0;
 
     public const int ParlayMaxPayoutViolation = 31;
 
@@ -31,8 +31,22 @@ public static class MessageTypes
     public const int MinMaxPTViolation = 62;
 
     public const int MinMaxPTViolation_Edit = 4;
-    
+
     public const int BetSettingViolation = 71;
 
     public const int UpdateTooOften = 6;
+
+    public const int ProductStatusViolation = 91;
+
+    public const int ProductStatusDependencyViolation = 92;
+
+    public const int StakeLevelViolation = 131;
+
+    public const int StakeLevelMaxChoiceViolation = 132;
+
+    public const int WinLimitViolatedWithUpline = 111;
+
+    public const int LossLimitViolatedWithUpline = 112;
+    
+    public const int DailyAutoResetViolatedWithUpline = 113;
 }

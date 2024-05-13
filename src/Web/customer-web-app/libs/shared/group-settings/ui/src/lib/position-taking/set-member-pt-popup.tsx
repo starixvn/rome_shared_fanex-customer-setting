@@ -1,10 +1,12 @@
 import classNames from 'classnames';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { UserLevel, UserLevelName } from '@customer-web-app/shared-constants';
+import { isSportsBookProduct, UserLevel, UserLevelName } from '@customer-web-app/shared-constants';
 import {
-    AgentPositionTakingGroupItem, GroupItem, MasterPositionTakingGroupItem
+  AgentPositionTakingGroupItem,
+  GroupItem,
+  MasterPositionTakingGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 import { IconClose } from '@customer-web-app/shared/base/common-icon';
@@ -13,93 +15,106 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
 import PTSelect from './pt-select';
 import styles from './set-member-pt-popup.module.scss';
-import { renderNoneBlockColumn, renderPTLabel } from './utils';
+import {
+  CopyPTICon,
+  CopyStatus,
+  groupSportsBookPTBySportTypeId,
+  isCopySuccess,
+  renderNoneBlockColumn,
+  renderPTLabel,
+  usePTCopy,
+} from './utils';
 
 interface SetMemberPtPopupProps<T> {
   roleId: number;
+  productGroupId: number;
   groupItems: T[];
   setNewGroupItems: (groupItem: GroupItem[]) => void;
 }
 
-export const SetMemberPtPopup = NiceModal.create(({ roleId, groupItems }: SetMemberPtPopupProps<GroupItem>) => {
-  const { t } = useTranslation();
-  const modal = useModal();
-  const theme = useTheme();
-  const [newGroupItems, setNewGroupItems] = useState(groupItems);
+export const SetMemberPtPopup = NiceModal.create(
+  ({ roleId, productGroupId, groupItems }: SetMemberPtPopupProps<GroupItem>) => {
+    const { t } = useTranslation();
+    const modal = useModal();
+    const theme = useTheme();
+    const [newGroupItems, setNewGroupItems] = useState(groupItems);
 
-  return (
-    <div className={styles.overlay} data-theme={theme}>
-      <div className={styles.wrapper}>
-        <div className={styles.content}>
-          <div className={styles.title}>
-            {t(`${UserLevelName[roleId]}SetMemberPtTitle`)}
-            <span
-              onClick={() => {
-                modal.resolve({
-                  isCancel: true,
-                  groupItems: [],
-                });
-                modal.remove();
-              }}
-              className={styles.close}
-              aria-hidden
-            >
-              {IconClose}
-            </span>
-          </div>
-          <div style={{ marginBottom: '10px' }}>{t('UpdateAllMemberPt')}</div>
-          <div>
-            <div className={styles.tableHead}>{t('PositionTaking')}</div>
-            <div className={styles.table}>
-              {roleId === UserLevel.Master ? (
-                <MasterNotTakeAutoPT
-                  groupItems={newGroupItems as MasterPositionTakingGroupItem[]}
-                  setNewGroupItems={(groupItems) => setNewGroupItems(groupItems)}
-                />
-              ) : (
-                <AgentNotTakeAutoPT
-                  groupItems={newGroupItems as AgentPositionTakingGroupItem[]}
-                  setNewGroupItems={(groupItems) => setNewGroupItems(groupItems)}
-                />
-              )}
+    return (
+      <div className={styles.overlay} data-theme={theme}>
+        <div className={styles.wrapper}>
+          <div className={styles.content}>
+            <div className={styles.title}>
+              {t(`${UserLevelName[roleId]}SetMemberPtTitle`)}
+              <span
+                onClick={() => {
+                  modal.resolve({
+                    isCancel: true,
+                    groupItems: [],
+                  });
+                  modal.remove();
+                }}
+                className={styles.close}
+                aria-hidden
+              >
+                {IconClose}
+              </span>
             </div>
-          </div>
-          <div className={styles.button}>
-            <button
-              className={styles['btn-confirm']}
-              style={{ display: 'block' }}
-              onClick={() => {
-                modal.resolve({
-                  isCancel: false,
-                  groupItems: newGroupItems,
-                });
-                modal.remove();
-              }}
-            >
-              {t('Yes')}
-            </button>
-            <button
-              className={styles['btn-cancel']}
-              style={{ display: 'block' }}
-              onClick={() => {
-                modal.resolve({
-                  isCancel: false,
-                  groupItems: [],
-                });
-                modal.remove();
-              }}
-            >
-              {t('No')}
-            </button>
+            <div style={{ marginBottom: '10px' }}>{t('UpdateAllMemberPt')}</div>
+            <div>
+              <div className={styles.tableHead}>{t('PositionTaking')}</div>
+              <div className={styles.table}>
+                {roleId === UserLevel.Master ? (
+                  <MasterNotTakeAutoPT
+                    productGroupId={productGroupId}
+                    groupItems={newGroupItems as MasterPositionTakingGroupItem[]}
+                    setNewGroupItems={(groupItems) => setNewGroupItems(groupItems)}
+                  />
+                ) : (
+                  <AgentNotTakeAutoPT
+                    productGroupId={productGroupId}
+                    groupItems={newGroupItems as AgentPositionTakingGroupItem[]}
+                    setNewGroupItems={(groupItems) => setNewGroupItems(groupItems)}
+                  />
+                )}
+              </div>
+            </div>
+            <div className={styles.button}>
+              <button
+                className={styles['btn-confirm']}
+                style={{ display: 'block' }}
+                onClick={() => {
+                  modal.resolve({
+                    isCancel: false,
+                    groupItems: newGroupItems,
+                  });
+                  modal.remove();
+                }}
+              >
+                {t('Yes')}
+              </button>
+              <button
+                className={styles['btn-cancel']}
+                style={{ display: 'block' }}
+                onClick={() => {
+                  modal.resolve({
+                    isCancel: false,
+                    groupItems: [],
+                  });
+                  modal.remove();
+                }}
+              >
+                {t('No')}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 interface CopySuperPTOnMembersValue extends MasterPositionTakingGroupItem {
-  isCopied: boolean | undefined;
+  copyStatus: CopyStatus;
 }
 
 const validateSuperPTOnMembers = (
@@ -119,135 +134,132 @@ const copySuperPTOnMembers = (
   return groupItems.map((item) => {
     if (isBelongCopiedGroup?.(item)) {
       return validateSuperPTOnMembers(item, itemCopied)
-        ? { ...item, superPTOnMembers: itemCopied.superPTOnMembers, isCopied: true }
-        : { ...item, isCopied: false };
+        ? { ...item, superPTOnMembers: itemCopied.superPTOnMembers, copyStatus: CopyStatus.Success }
+        : { ...item, copyStatus: CopyStatus.Fail };
     }
 
-    return { ...item, isCopied: undefined };
+    return { ...item, copyStatus: CopyStatus.NotCopy };
   });
 };
 
+const SetMemberPopupIconId = 100;
+
 const MasterNotTakeAutoPT = ({
+  productGroupId,
   groupItems,
   setNewGroupItems,
 }: Partial<SetMemberPtPopupProps<MasterPositionTakingGroupItem>>) => {
-  const [itemCopied, setItemCopied] = useState<CopySuperPTOnMembersValue[]>([]);
-  const [copyIconId, setCopyIconId] = useState<number | undefined>();
-  const timeId = useRef<NodeJS.Timeout>();
+  const { stateCopiedGroup, copyIconId, handleCopy } = usePTCopy();
 
-  const masterNotTakeAutoPTIConId = 100;
-  let isFirstGroup = true;
-  let sportTypeId = -1;
-  return groupItems?.map((ptItem) => {
-    if (sportTypeId !== ptItem.sportTypeId) {
-      sportTypeId = ptItem.sportTypeId;
-      const group = groupItems.filter((item) => item.sportTypeId === ptItem.sportTypeId);
-      const firstGroupItem = group[0];
+  if (!groupItems) return null;
 
-      const groupLabel =
-        isFirstGroup && groupItems.length > 1
-          ? renderPTLabel(
-              firstGroupItem.sportTypeName,
-              false,
-              true,
-              masterNotTakeAutoPTIConId,
-              copyIconId === masterNotTakeAutoPTIConId,
-              itemCopied.length > 0 && itemCopied.every((item) => item.isCopied),
-              () => true,
-              () => {
-                const copySuperPTOnMemberValues = copySuperPTOnMembers(groupItems, firstGroupItem, () => true);
-                if (timeId) clearTimeout(timeId.current);
-                setNewGroupItems?.(copySuperPTOnMemberValues);
-                setItemCopied(copySuperPTOnMemberValues);
-                setCopyIconId(masterNotTakeAutoPTIConId);
-                timeId.current = setTimeout(() => {
-                  setItemCopied([]);
-                  setCopyIconId(undefined);
-                }, 3000);
-              }
-            )
-          : firstGroupItem.sportTypeName;
+  const ptGroups = isSportsBookProduct(productGroupId)
+    ? Object.values(groupSportsBookPTBySportTypeId(groupItems as []))
+    : [groupItems];
 
-      isFirstGroup = false;
-      return (
-        <div key={`${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`}>
-          <BlockRow key={firstGroupItem.betTypeName} label={groupLabel}>
-            {renderNoneBlockColumn(`${ptItem.sportTypeId}${ptItem.betTypeId}`, 1)}
-          </BlockRow>
-          {group.map((item, index) => {
-            const label =
-              index === 0 && group.length > 1
-                ? renderPTLabel(
-                    item.betTypeName,
-                    false,
-                    true,
-                    item.sportTypeId + masterNotTakeAutoPTIConId,
-                    copyIconId === item.sportTypeId + masterNotTakeAutoPTIConId,
-                    itemCopied.length > 0 &&
-                      itemCopied.every((i) => (i.sportTypeId === item.sportTypeId ? i.isCopied : !i.isCopied)),
-                    () => true,
-                    () => {
-                      const copySuperPTOnMemberValues = copySuperPTOnMembers(
-                        groupItems,
-                        item,
-                        (i) => i.sportTypeId === item.sportTypeId
-                      );
-                      if (timeId) clearTimeout(timeId.current);
-                      setNewGroupItems?.(copySuperPTOnMemberValues);
-                      setItemCopied(copySuperPTOnMemberValues);
-                      setCopyIconId(item.sportTypeId + masterNotTakeAutoPTIConId);
-                      timeId.current = setTimeout(() => {
-                        setItemCopied([]);
-                        setCopyIconId(undefined);
-                      }, 3000);
-                    }
-                  )
-                : item.betTypeName;
+  const handleCopySuperPTOnMembers = (newSuperPTOnMembers: CopySuperPTOnMembersValue[], iconCopyId: number) => {
+    setNewGroupItems?.(newSuperPTOnMembers);
+    handleCopy(newSuperPTOnMembers, iconCopyId);
+  };
 
-            const copyValue = itemCopied?.find(
-              (i) => item.sportTypeId === i.sportTypeId && item.betTypeId === i.betTypeId
-            );
-            const copyRowStyle = { isCopy: copyValue?.isCopied, 'isCopy fail': copyValue?.isCopied === false };
-            return (
-              <BlockRow key={`${item.sportTypeId}${item.betTypeId}`} label={label}>
-                <BlockColumn>
-                  <div className={classNames('center', copyRowStyle)}>
-                    <PTSelect
-                      min={0}
-                      max={item.upline.s4 - item.m3}
-                      step={item.upline.step}
-                      value={item.superPTOnMembers}
-                      isDisable={false}
-                      onChange={(e) => {
-                        const newGroupItems = groupItems.map((groupItem) => {
-                          if (groupItem.sportTypeId === item.sportTypeId && groupItem.betTypeId === item.betTypeId) {
-                            return {
-                              ...groupItem,
-                              superPTOnMembers: Number(e.target.value),
-                              isUpdateSuperPTOnMembers: true,
-                            };
-                          }
+  const handleOnChange = (item: MasterPositionTakingGroupItem, value: number) => {
+    const newGroupItems = groupItems.map((groupItem) => {
+      if (groupItem.sportTypeId === item.sportTypeId && groupItem.betTypeId === item.betTypeId) {
+        return {
+          ...groupItem,
+          superPTOnMembers: value,
+          isUpdateSuperPTOnMembers: true,
+        };
+      }
 
-                          return groupItem;
-                        });
-                        setNewGroupItems?.(newGroupItems as GroupItem[]);
-                      }}
-                    />
-                  </div>
-                </BlockColumn>
-              </BlockRow>
-            );
-          })}
-        </div>
-      );
-    }
+      return groupItem;
+    });
+    setNewGroupItems?.(newGroupItems as GroupItem[]);
+  };
 
-    return null;
+  const renderGroupLabel = (isFirstGroup: boolean, group: MasterPositionTakingGroupItem[]) => {
+    if (!isSportsBookProduct(productGroupId)) return null;
+    const { sportTypeId, betTypeId, sportTypeName, betTypeName } = group[0];
+    const copyIcon = isFirstGroup && groupItems?.length > 1 && (
+      <CopyPTICon
+        id={SetMemberPopupIconId}
+        isCopy={copyIconId === SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup)}
+        handleCopyClick={() => {
+          const newSuperPTOnMembers = copySuperPTOnMembers(groupItems, group[0], () => true);
+          handleCopySuperPTOnMembers(newSuperPTOnMembers, SetMemberPopupIconId);
+        }}
+      />
+    );
+
+    return (
+      <BlockRow key={betTypeName} label={renderPTLabel(sportTypeName, false, true, copyIcon, () => true)}>
+        {renderNoneBlockColumn(`${sportTypeId}${betTypeId}`, 1)}
+      </BlockRow>
+    );
+  };
+
+  const renderLabel = (item: MasterPositionTakingGroupItem, hasCopyIcon: boolean) => {
+    const { sportTypeId, sportTypeName, betTypeName } = item;
+    const labelName = isSportsBookProduct(productGroupId) ? betTypeName : sportTypeName;
+    const copyIcon = hasCopyIcon && (
+      <CopyPTICon
+        id={sportTypeId + SetMemberPopupIconId}
+        isCopy={copyIconId === sportTypeId + SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup, isSportsBookProduct(productGroupId) ? sportTypeId : undefined)}
+        handleCopyClick={() => {
+          const copySuperPTOnMemberValues = copySuperPTOnMembers(
+            groupItems,
+            item,
+            isSportsBookProduct(productGroupId) ? (i) => i.sportTypeId === sportTypeId : () => true
+          );
+          handleCopySuperPTOnMembers(copySuperPTOnMemberValues, sportTypeId + SetMemberPopupIconId);
+        }}
+      />
+    );
+
+    return hasCopyIcon ? renderPTLabel(labelName, false, true, copyIcon, () => true) : labelName;
+  };
+
+  return (ptGroups as MasterPositionTakingGroupItem[][]).map((group, index) => {
+    return (
+      <div key={`${group[0].sportTypeId}`}>
+        {renderGroupLabel(index === 0, group)}
+        {group.map((item, index) => {
+          const copyValue = stateCopiedGroup?.find(
+            (i) => item.sportTypeId === i.sportTypeId && item.betTypeId === i.betTypeId
+          );
+          const copyRowStyle = {
+            isCopy: copyValue?.copyStatus === CopyStatus.Success,
+            'isCopy fail': copyValue?.copyStatus === CopyStatus.Fail,
+          };
+          return (
+            <BlockRow
+              key={`${item.sportTypeId}${item.betTypeId}`}
+              label={renderLabel(item, index === 0 && group.length > 1)}
+            >
+              <BlockColumn>
+                <div className={classNames('center', copyRowStyle)}>
+                  <PTSelect
+                    min={0}
+                    max={item.upline.s4 - item.m3}
+                    step={item.upline.step}
+                    value={item.superPTOnMembers}
+                    isDisable={false}
+                    onChange={(e) => handleOnChange(item, Number(e.target.value))}
+                  />
+                </div>
+              </BlockColumn>
+            </BlockRow>
+          );
+        })}
+      </div>
+    );
   });
 };
 
 interface CopyMasterPTOnMembersValue extends AgentPositionTakingGroupItem {
-  isCopied: boolean | undefined;
+  copyStatus: CopyStatus;
 }
 
 const validateMasterPTOnMembers = (current: AgentPositionTakingGroupItem, itemCopied: AgentPositionTakingGroupItem) => {
@@ -264,129 +276,123 @@ const copyMasterPTOnMembers = (
   return groupItems.map((item) => {
     if (isBelongCopiedGroup?.(item)) {
       return validateMasterPTOnMembers(item, itemCopied)
-        ? { ...item, masterPTOnMembers: itemCopied.masterPTOnMembers, isCopied: true }
-        : { ...item, isCopied: false };
+        ? { ...item, masterPTOnMembers: itemCopied.masterPTOnMembers, copyStatus: CopyStatus.Success }
+        : { ...item, copyStatus: CopyStatus.Fail };
     }
 
-    return { ...item, isCopied: undefined };
+    return { ...item, copyStatus: CopyStatus.NotCopy };
   });
 };
 
 const AgentNotTakeAutoPT = ({
+  productGroupId,
   groupItems,
   setNewGroupItems,
 }: Partial<SetMemberPtPopupProps<AgentPositionTakingGroupItem>>) => {
-  const [itemCopied, setItemCopied] = useState<CopyMasterPTOnMembersValue[]>([]);
-  const [copyIconId, setCopyIconId] = useState<number | undefined>();
-  const timeId = useRef<NodeJS.Timeout>();
+  const { stateCopiedGroup, copyIconId, handleCopy } = usePTCopy();
 
-  const agentNotTakeAutoPTIConId = 101;
-  let isFirstGroup = true;
-  let sportTypeId = -1;
-  return groupItems?.map((ptItem) => {
-    if (sportTypeId !== ptItem.sportTypeId) {
-      sportTypeId = ptItem.sportTypeId;
-      const group = groupItems.filter((item) => item.sportTypeId === ptItem.sportTypeId);
-      const firstGroupItem = group[0];
+  if (!groupItems) return null;
 
-      const groupLabel =
-        isFirstGroup && groupItems.length > 1
-          ? renderPTLabel(
-              firstGroupItem.sportTypeName,
-              false,
-              true,
-              agentNotTakeAutoPTIConId,
-              copyIconId === agentNotTakeAutoPTIConId,
-              itemCopied.length > 0 && itemCopied.every((item) => item.isCopied),
-              () => true,
-              () => {
-                const copyMasterPTOnMemberValues = copyMasterPTOnMembers(groupItems, firstGroupItem, () => true);
-                setNewGroupItems?.(copyMasterPTOnMemberValues);
-                if (timeId) clearTimeout(timeId.current);
-                setItemCopied(copyMasterPTOnMemberValues);
-                setCopyIconId(agentNotTakeAutoPTIConId);
-                timeId.current = setTimeout(() => {
-                  setItemCopied([]);
-                  setCopyIconId(undefined);
-                }, 3000);
-              }
-            )
-          : firstGroupItem.sportTypeName;
+  const ptGroups = isSportsBookProduct(productGroupId)
+    ? Object.values(groupSportsBookPTBySportTypeId(groupItems as []))
+    : [groupItems];
 
-      isFirstGroup = false;
-      return (
-        <div key={`${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`}>
-          <BlockRow key={firstGroupItem.betTypeName} label={groupLabel}>
-            {renderNoneBlockColumn(`${ptItem.sportTypeId}${ptItem.betTypeId}`, 1)}
-          </BlockRow>
-          {group.map((item, index) => {
-            const label =
-              index === 0 && group.length > 1
-                ? renderPTLabel(
-                    item.betTypeName,
-                    false,
-                    true,
-                    item.sportTypeId + agentNotTakeAutoPTIConId,
-                    copyIconId === item.sportTypeId + agentNotTakeAutoPTIConId,
-                    itemCopied.length > 0 &&
-                      itemCopied.every((i) => (i.sportTypeId === item.sportTypeId ? i.isCopied : !i.isCopied)),
-                    () => true,
-                    () => {
-                      const copyMasterPTOnMemberValues = copyMasterPTOnMembers(
-                        groupItems,
-                        item,
-                        (i) => i.sportTypeId === item.sportTypeId
-                      );
-                      setNewGroupItems?.(copyMasterPTOnMemberValues);
-                      if (timeId) clearTimeout(timeId.current);
-                      setItemCopied(copyMasterPTOnMemberValues);
-                      setCopyIconId(item.sportTypeId + agentNotTakeAutoPTIConId);
-                      timeId.current = setTimeout(() => {
-                        setItemCopied([]);
-                        setCopyIconId(undefined);
-                      }, 3000);
-                    }
-                  )
-                : item.betTypeName;
+  const handleCopyValue = (newMasterPTOnMembers: CopyMasterPTOnMembersValue[], iconCopyId: number) => {
+    setNewGroupItems?.(newMasterPTOnMembers);
+    handleCopy(newMasterPTOnMembers, iconCopyId);
+  };
 
-            const copyValue = itemCopied?.find(
-              (i) => item.sportTypeId === i.sportTypeId && item.betTypeId === i.betTypeId
-            );
-            const copyRowStyle = { isCopy: copyValue?.isCopied, 'isCopy fail': copyValue?.isCopied === false };
-            return (
-              <BlockRow key={`${item.sportTypeId}${item.betTypeId}`} label={label}>
-                <BlockColumn>
-                  <div className={classNames('center', copyRowStyle)}>
-                    <PTSelect
-                      min={0}
-                      max={item.upline.m3 - item.a2}
-                      step={item.upline.step}
-                      value={item.masterPTOnMembers}
-                      isDisable={false}
-                      onChange={(e) => {
-                        const newGroupItems = groupItems.map((groupItem) => {
-                          if (groupItem.sportTypeId === item.sportTypeId && groupItem.betTypeId === item.betTypeId) {
-                            return {
-                              ...groupItem,
-                              masterPTOnMembers: Number(e.target.value),
-                              isUpdateMasterPTOnMembers: true,
-                            };
-                          }
+  const handleOnChange = (item: AgentPositionTakingGroupItem, value: number) => {
+    const newGroupItems = groupItems.map((groupItem) => {
+      if (groupItem.sportTypeId === item.sportTypeId && groupItem.betTypeId === item.betTypeId) {
+        return {
+          ...groupItem,
+          masterPTOnMembers: value,
+          isUpdateMasterPTOnMembers: true,
+        };
+      }
 
-                          return groupItem;
-                        });
-                        setNewGroupItems?.(newGroupItems as GroupItem[]);
-                      }}
-                    />
-                  </div>
-                </BlockColumn>
-              </BlockRow>
-            );
-          })}
-        </div>
-      );
-    }
+      return groupItem;
+    });
+    setNewGroupItems?.(newGroupItems as GroupItem[]);
+  };
 
-    return null;
+  const renderGroupLabel = (isFirstGroup: boolean, group: AgentPositionTakingGroupItem[]) => {
+    if (!isSportsBookProduct(productGroupId)) return null;
+    const { sportTypeId, betTypeId, sportTypeName, betTypeName } = group[0];
+    const copyIcon = isFirstGroup && groupItems?.length > 1 && (
+      <CopyPTICon
+        id={SetMemberPopupIconId}
+        isCopy={copyIconId === SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup)}
+        handleCopyClick={() => {
+          const copyMasterPTOnMemberValues = copyMasterPTOnMembers(groupItems, group[0], () => true);
+          handleCopyValue(copyMasterPTOnMemberValues, SetMemberPopupIconId);
+        }}
+      />
+    );
+
+    return (
+      <BlockRow key={betTypeName} label={renderPTLabel(sportTypeName, false, true, copyIcon, () => true)}>
+        {renderNoneBlockColumn(`${sportTypeId}${betTypeId}`, 1)}
+      </BlockRow>
+    );
+  };
+
+  const renderLabel = (item: AgentPositionTakingGroupItem, hasCopyIcon: boolean) => {
+    const { sportTypeId, sportTypeName, betTypeName } = item;
+    const labelName = isSportsBookProduct(productGroupId) ? betTypeName : sportTypeName;
+    const copyIcon = hasCopyIcon && (
+      <CopyPTICon
+        id={sportTypeId + SetMemberPopupIconId}
+        isCopy={copyIconId === sportTypeId + SetMemberPopupIconId}
+        isCopySuccess={isCopySuccess(stateCopiedGroup, isSportsBookProduct(productGroupId) ? sportTypeId : undefined)}
+        handleCopyClick={() => {
+          const copyMasterPTOnMemberValues = copyMasterPTOnMembers(
+            groupItems,
+            item,
+            isSportsBookProduct(productGroupId) ? (i) => i.sportTypeId === sportTypeId : () => true
+          );
+          handleCopyValue(copyMasterPTOnMemberValues, sportTypeId + SetMemberPopupIconId);
+        }}
+      />
+    );
+    return hasCopyIcon ? renderPTLabel(labelName, false, true, copyIcon, () => true) : labelName;
+  };
+
+  return (ptGroups as AgentPositionTakingGroupItem[][]).map((group, index) => {
+    return (
+      <div key={`${group[0].sportTypeId}`}>
+        {renderGroupLabel(index === 0, group)}
+        {group.map((item, index) => {
+          const copyValue = stateCopiedGroup?.find(
+            (i) => item.sportTypeId === i.sportTypeId && item.betTypeId === i.betTypeId
+          );
+          const copyRowStyle = {
+            isCopy: copyValue?.copyStatus === CopyStatus.Success,
+            'isCopy fail': copyValue?.copyStatus === CopyStatus.Fail,
+          };
+          return (
+            <BlockRow
+              key={`${item.sportTypeId}${item.betTypeId}`}
+              label={renderLabel(item, index === 0 && group.length > 1)}
+            >
+              <BlockColumn>
+                <div className={classNames('center', copyRowStyle)}>
+                  <PTSelect
+                    min={0}
+                    max={item.upline.m3 - item.a2}
+                    step={item.upline.step}
+                    value={item.masterPTOnMembers}
+                    isDisable={false}
+                    onChange={(e) => handleOnChange(item, Number(e.target.value))}
+                  />
+                </div>
+              </BlockColumn>
+            </BlockRow>
+          );
+        })}
+      </div>
+    );
   });
 };

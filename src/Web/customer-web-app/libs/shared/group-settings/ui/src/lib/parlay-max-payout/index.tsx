@@ -6,12 +6,12 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { ParlayMaxPayoutGroupItem } from '@customer-web-app/shared-group-settings-types';
+import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import { ValidationContext } from '../bet-setting/validation-context';
-import { GroupSettingBlockProps } from '../position-taking/super-position-taking';
-import scrollToBLock from '../scroll-helper';
+import { GroupSettingBlockProps } from '../types';
 import ParlayMaxPayoutRow from './parlay-max-payout-row';
 import ParlayMaxPayoutValidator from './parlay-max-payout-validator';
 
@@ -20,7 +20,8 @@ const ParlayMaxPayoutBlockId = 'parlay-max-payout';
 const ParlayMaxPayout = forwardRef<ValidationRefType, GroupSettingBlockProps>(function ParlayMaxPayout(props, ref) {
   const { t } = useTranslation();
   const blockRef = useRef<BlockRefType>(null);
-  const { productGroups, generalInfo, isMultipleMode, handleUpdateSettingItems } = useGroupSettingContext();
+  const { productGroups, generalInfo, isMultipleMode, handleUpdateSettingItems, isEditMode, updateGroupSetting } =
+    useGroupSettingContext();
   const parlayMaxPayouts = getSettingItems<ParlayMaxPayoutGroupItem>(
     productGroups,
     ProductGroupIds.SportsBook,
@@ -76,7 +77,13 @@ const ParlayMaxPayout = forwardRef<ValidationRefType, GroupSettingBlockProps>(fu
   }
 
   return (
-    <Block id={ParlayMaxPayoutBlockId} title={props.title} ref={blockRef}>
+    <Block
+      id={ParlayMaxPayoutBlockId}
+      title={t('ParlayMaxPayout')}
+      ref={blockRef}
+      isPartialUpdate={isEditMode === true && !props.isReadOnly}
+      onSaveClick={() => updateGroupSetting?.(GroupTypeIds.SportsBookBetSetting)}
+    >
       <ValidationContext.Provider value={{ validationState, setValidationState }}>
         <BlockRow
           isHeaderRow

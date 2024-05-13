@@ -2,13 +2,13 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-    getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue, renderUpdateCustomerResult, scrollToTop
+    getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue, renderUpdateCustomerResult
 } from '@customer-web-app/edit-customer-page';
 import {
     Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
     GeneralInfoActionTypes, generalInformationReducer, initialState
@@ -16,7 +16,7 @@ import {
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, scrollToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -119,7 +119,7 @@ export function EditMultipleCustomerPage() {
     const unCheckAutoPtItems = getUnCheckAutoPtItems(
       newProductGroups,
       params.roleId,
-      ProductGroupIds.SportsBook,
+      params.productGroupId,
       GroupTypeIds.PositionTaking
     );
 
@@ -127,6 +127,7 @@ export function EditMultipleCustomerPage() {
 
     const newMemberPts: { isCancel: boolean; groupItems: GroupItem[] } = await NiceModal.show(SetMemberPtPopup, {
       roleId: params.roleId,
+      productGroupId: params.productGroupId,
       groupItems: unCheckAutoPtItems,
     });
 
@@ -135,7 +136,7 @@ export function EditMultipleCustomerPage() {
     }
 
     const currentPTGroup = newProductGroups
-      .find((productGroup) => productGroup.id === ProductGroupIds.SportsBook)
+      .find((productGroup) => productGroup.id === params.productGroupId)
       ?.groupTypes.find((groupType) => groupType.id === GroupTypeIds.PositionTaking);
 
     const newPTGroup = currentPTGroup?.groupItems.map((item) => {
@@ -151,7 +152,7 @@ export function EditMultipleCustomerPage() {
 
     return handleChangeGroupSettingValue(
       newProductGroups,
-      ProductGroupIds.SportsBook,
+      params.productGroupId,
       GroupTypeIds.PositionTaking,
       newPTGroup as []
     );
@@ -259,12 +260,17 @@ export function EditMultipleCustomerPage() {
             generalInfo,
             productGroups,
             isMultipleMode: true,
+            productGroupId: params.productGroupId,
             mode: 'editMultipleCustomers',
             handleSettingItemChange,
             handleUpdateSettingItems,
+            updateGroupSetting: handleUpdateCustomer,
+            isEditMode:
+              !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
+              AppConfigHelper.isEditBetSettingOnly(),
           }}
         >
-          <GroupSetting ref={groupSettingRef} updateGroupSetting={(id) => handleUpdateCustomer(id)} isEditMode={true} />
+          <GroupSetting ref={groupSettingRef} />
         </GroupSettingsContextProvider>
         {renderUpdateButton()}
         <WrapperTooltip id="global-tooltip" className={styles['global-tooltip']} />

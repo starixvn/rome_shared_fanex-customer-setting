@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
@@ -50,13 +52,17 @@ namespace Fanex.Customer.Client.Services
 
         Task<CustomerInfo> GetCustomerInfo(int custId);
 
+        Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US");
+
         Task<string> GetPTSettingInformation(int? custId, bool isTest, string site, string language = "en-US");
 
-        Task<string> GetProductCategories(int? custId, string site, int currency, string language = "en-US");
+        Task<string> GetProductCategories(int? custId, string site, string siteLabel, int currency, string language = "en-US");
 
         Task<string> GetCommissionHint(int custId, string site, string language = "en-US");
 
         Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US");
+
+        Task<List<UpdateCustomerResult>> CopySupersWinLossLimit(CopySupersWinLossLimitParam param);
     }
 
     public class CustomerService : ICustomerService
@@ -174,6 +180,9 @@ namespace Fanex.Customer.Client.Services
         public Task<CustomerInfo> GetCustomerInfo(int custId)
             => httpClient.GetAsJsonAsync<CustomerInfo>($"customer/{custId}");
 
+        public Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US")
+            => httpClient.GetStringAsync($"customer/current-winloss-amount?custId={custId}&sportType={sportType}&betType={betType}&language={language}");
+
         public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "")
             => httpClient.GetStringAsync($"customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}");
 
@@ -198,13 +207,13 @@ namespace Fanex.Customer.Client.Services
             return httpClient.GetStringAsync($"customer/pt-setting-information?site={site}&isTest={isTest}&language={language}");
         }
 
-        public Task<string> GetProductCategories(int? custId, string site, int currencyId, string language = "en-US")
+        public Task<string> GetProductCategories(int? custId, string site, string siteLabel, int currencyId, string language = "en-US")
         {
             if (custId.HasValue)
             {
-                return httpClient.GetStringAsync($"customer/product-categories?custId={custId}&site={site}&currencyId={currencyId}&language={language}");
+                return httpClient.GetStringAsync($"customer/product-categories?custId={custId}&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
             }
-            return httpClient.GetStringAsync($"customer/product-categories?&site={site}&currencyId={currencyId}&language={language}");
+            return httpClient.GetStringAsync($"customer/product-categories?&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
         }
 
         public Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US")
@@ -218,5 +227,8 @@ namespace Fanex.Customer.Client.Services
 
         public Task<bool> IsCustomerEnabled(int custId)
             => httpClient.GetAsJsonAsync<bool>($"customer/{custId}/IsEnabled");
+
+        public Task<List<UpdateCustomerResult>> CopySupersWinLossLimit(CopySupersWinLossLimitParam param)
+            => httpClient.PutAsJsonAsync<List<UpdateCustomerResult>>("customer/copy-supers-winloss-limit", param);
     }
 }

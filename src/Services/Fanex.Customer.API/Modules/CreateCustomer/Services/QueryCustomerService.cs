@@ -1,4 +1,4 @@
-using System.Threading.Tasks.Dataflow;
+using System.Linq.Expressions;
 using EasyNetQ.ConnectionString;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings;
@@ -12,9 +12,9 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Services;
-using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
+using static Fanex.Customer.API.Modules.CreateCustomer.SharedServices.SharedService;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -48,11 +48,26 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
 
     private decimal ptStep = 1;
 
+    private bool isAllowUncheckAll = false;
+
+    private bool IsAllowUncheckAll(int roleId, string site, string siteLabel, AppSettings appSettings)
+    {
+        var isY7 = appSettings.IsSpecialSites(siteLabel);
+        var IsAllowUncheckStakeLevelOnMemberSite = appSettings.IsAllowUncheckStakeLevelOnMember(site);
+        if (roleId != CustomerLevel.Member && !isY7)
+            return true;
+
+        if  (roleId == CustomerLevel.Member && IsAllowUncheckStakeLevelOnMemberSite)
+            return true;
+
+        return false;
+    }
+
     public async Task<CustomerSetting> QuerySuper(QuerySuperRequest request, bool isSportsbookOnly)
     {
         ptStep = appSettings.IsSupportPT3Decimal(request.SiteLabel) ? 0.5M : 1M;
         var generalInfo = new GeneralInformation();
-        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency);
+        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency, ProfileMode.AddNew);
         var customerSetting = new CustomerSetting
         {
             GeneralInfo = generalInfo,
@@ -67,11 +82,13 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
     {
         var generalInfo = await GetGeneralInfo(request);
         ptStep = appSettings.IsSupportPT3Decimal(IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel) ? 0.5M : 1M;
-        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency);
+        isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, appSettings);
+        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
         if (request.RoleId == (byte)CustomerLevel.Agent)
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
         }
+
         var customerSetting = new CustomerSetting
         {
             GeneralInfo = generalInfo,
@@ -106,10 +123,10 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         {
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
-            GroupTypes = (typeof(QueryRequest) == request.GetType()) ?
+            GroupTypes = ((typeof(QueryRequest) == request.GetType()) ?
             (((QueryRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryRequest)request, isSiteLabel777) : GetGroupTypes(g, (QueryRequest)request, isSiteLabel777)) :
-            GetGroupTypesForSuper(g, (QuerySuperRequest)request, isSiteLabel777)
-        }).Where(p => p.GroupTypes.Any(i => i.GroupItems.Any()));
+            GetGroupTypesForSuper(g, (QuerySuperRequest)request, isSiteLabel777)).Where(gt => gt != null)
+        }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
 
     private IEnumerable<GroupType> GetGroupTypesForSuper(IGrouping<int, SettingProfile> g, QuerySuperRequest request, bool isSiteLabel777)
@@ -124,6 +141,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                 var groupType = new GroupType
                 {
                     Id = t.Key.GroupType,
+                    IsAllowUncheckAll = isAllowUncheckAll,
                     Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                     DisplayType = t.Key.DisplayType,
                     GroupItems = GetGroupItems(
@@ -157,6 +175,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                 var groupType = new GroupType
                 {
                     Id = t.Key.GroupType,
+                    IsAllowUncheckAll = isAllowUncheckAll,
                     Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                     DisplayType = t.Key.DisplayType,
                     GroupItems = GetGroupItems(
@@ -190,6 +209,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                 var groupType = new GroupType
                 {
                     Id = t.Key.GroupType,
+                    IsAllowUncheckAll = isAllowUncheckAll,
                     Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                     DisplayType = t.Key.DisplayType,
                     IsReadOnly = request.UplineRoleId - request.RoleId > 1 && !IsPTGroupType(t.Key.GroupType),
@@ -234,9 +254,10 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                 groupItem.MapUpline();
             }
 
+            groupItem.ProductName = cacheRefService.GetProductName(groupItem.ProductId, language);
             groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
             groupItem.SubGroupName = cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
-            groupItem.SportTypeName = IsSabaCasino(groupItem.SportTypeId, groupItem.BetTypeId) ? cacheRefService.GetProductName(SabaCasinoProductId) : cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
+            groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
             groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, language);
             groupItem.DisplayName = cacheRefService.GetDisplayNameByDisplayType(
                 groupItem.SportTypeId,

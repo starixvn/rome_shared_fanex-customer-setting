@@ -31,6 +31,8 @@
   "CommissionGroup": "佣金组别",
   "BetType": "投注类别",
   "CommissionInformation": "佣金信息",
+  "SportsBookCommissionInformation": "体育博彩佣金信息",
+  "OtherProductsCommissionInformation": "其他产品佣金信息",
   "CommissionMap": "M = 总代理, A = 代理, P = 会员",
   "Commission3": "佣金3: 应用于其他投注类别.",
   "MPSInformation": "最高派彩设置信息",
@@ -79,5 +81,9 @@
   "UpdateUplineBetSettingNote": "更新上线的投注设置可会减少所有下线的投注设置，以确保下线们不大于上线的投注设置。",
   "LiteModePT": "精简模式 - 占成数模板",
   "WinLossLimit": "输赢限额",
-  "CustomerSettingInformation": "客户设置信息"
+  "CustomerSettingInformation": "客户设置信息",
+  "BBINBetSetting2": "[BBIN]：不再提供佣金于BBIN产品从11/09/2023 始生效。此外，当您更改会员的设置时，此新更改只会在会员转额进游戏后才会生效。",
+  "FGGNote": "[正博娱乐] : 不提供佣金于正博娱乐.",
+  "WinLossLimitNote1": "娱乐厅：将输赢限额设定与每个产品的输赢进行比较。",
+  "WinLossLimitNote2": "RNG娱乐城：将输赢限额设定与所有产品的输赢进行比较。"
 }

@@ -4,18 +4,20 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupT
 
 public class GetSuperPTCriteria : CriteriaBase
 {
-    // public GetSuperPTCriteria(int custId, byte settingStatus)
-    // {
-    //     CustId = custId;
-    //     SettingStatus = settingStatus;
-    // }
+    public GetSuperPTCriteria(int custId, int groupId, byte settingStatus)
+    {
+        CustId = custId;
+        GroupId = groupId;
+        SettingStatus = settingStatus;
+    }
 
-    public int CustId { get; set;}
+    public int CustId { get; }
 
-    public byte SettingStatus { get; set;}
+    public int GroupId { get; }
 
-    public override string GetSettingKey()
-        => "Acc_CustSetting_SuperPT_153_Select";
+    public byte SettingStatus { get; }
+
+    public override string GetSettingKey() => "Acc_CustSetting_SuperPT_153_Select";
 
     public override bool IsValid() => CustId > 0;
 }

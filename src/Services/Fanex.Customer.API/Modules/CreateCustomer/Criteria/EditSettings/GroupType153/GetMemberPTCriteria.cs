@@ -2,12 +2,13 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupT
 
 public class GetMemberPTCriteria : GetAgentPTCriteria
 {
-    // public GetMemberPTCriteria(int custId, byte settingStatus, int roleId) : base(custId, settingStatus)
-    // {
-    //     RoleId = roleId;
-    // }
+    public GetMemberPTCriteria(int custId, int groupId, int roleId, byte settingStatus)
+        : base(custId, groupId, settingStatus)
+    {
+        RoleId = roleId;
+    }
 
-    public int RoleId { get; set; }
+    public int RoleId { get; }
 
     public override string GetSettingKey()
         => "Acc_CustSetting_MemberPT_153_Select";

@@ -14,14 +14,23 @@ import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { CopiedPTItem, isCopyingPTItem, PTRowProps, renderNoneBlockColumn, usePTCopy } from './utils';
+import { PositionTakingBlockProps } from './types';
+import {
+  CopyStatus,
+  CopyStatusPT,
+  groupSportsBookPTBySportTypeId,
+  isCopyingPTItem,
+  PTRowProps,
+  renderNoneBlockColumn,
+  usePTCopy,
+} from './utils';
 
-function SuperPositionTakingRow({ item, label, isCopy }: Readonly<PTRowProps<SuperPositionTakingGroupItem>>) {
-  const { isMultipleMode, handleSettingItemChange } = useGroupSettingContext();
+function SuperPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps<SuperPositionTakingGroupItem>>) {
+  const { isMultipleMode, handleSettingItemChange, productGroupId } = useGroupSettingContext();
 
   const handlePTChange = (data: { [x: string]: number | undefined }) => {
     handleSettingItemChange?.(
-      ProductGroupIds.SportsBook,
+      Number(productGroupId),
       GroupTypeIds.PositionTaking,
       item.sportTypeId,
       item.betTypeId,
@@ -30,7 +39,7 @@ function SuperPositionTakingRow({ item, label, isCopy }: Readonly<PTRowProps<Sup
   };
 
   const isMultipleEdit = isMultipleMode ?? false;
-  const copyRowStyle = { isCopy: isCopy, 'isCopy fail': isCopy === false };
+  const copyRowStyle = { isCopy: copyStatus === CopyStatus.Success, 'isCopy fail': copyStatus === CopyStatus.Fail };
   return (
     <BlockRow label={label ?? item.betTypeName}>
       <BlockColumn>
@@ -123,18 +132,19 @@ const copySuperPTValues = (
   return (positionTakings as SuperPositionTakingGroupItem[]).map((item) => {
     if (isBelongCopiedGroup?.(item)) {
       return validateSuperPT(item, newItemCopied)
-        ? { ...item, s4, m4, a4, n4, isCopied: true }
-        : { ...item, isCopied: false };
+        ? { ...item, s4, m4, a4, n4, copyStatus: CopyStatus.Success }
+        : { ...item, copyStatus: CopyStatus.Fail };
     }
 
-    return { ...item, isCopied: undefined };
+    return { ...item, copyStatus: CopyStatus.NotCopy };
   });
 };
 
 type PositionTakingRowProps = {
+  productGroupId: number;
   ptItems: SuperPositionTakingGroupItem[];
   copyIconId: number | undefined;
-  stateCopiedGroup: CopiedPTItem[];
+  stateCopiedGroup: CopyStatusPT[];
   handleCopyPTs: (
     itemCopied: GroupItem,
     iconId: number | undefined,
@@ -143,76 +153,68 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  productGroupId,
   ptItems,
   stateCopiedGroup,
   copyIconId,
   handleCopyPTs,
 }: Readonly<PositionTakingRowProps>) {
-  let isFirstGroup = true;
-  let sportTypeId = -1;
-  return ptItems.map((ptItem) => {
-    if (sportTypeId !== ptItem.sportTypeId) {
-      sportTypeId = ptItem.sportTypeId;
-      const group = ptItems.filter((item) => item.sportTypeId === ptItem.sportTypeId);
-      const firstGroupItem = group[0];
-      const groupPTLabel = (
-        <GroupLabel
-          copyIconId={copyIconId}
-          firstGroupItem={firstGroupItem}
-          group={group}
-          handleCopyPTs={handleCopyPTs}
-          isFirstGroup={isFirstGroup}
-          ptItems={ptItems}
-          stateCopiedGroup={stateCopiedGroup}
-        ></GroupLabel>
-      );
-      isFirstGroup = false;
+  const ptGroups =
+    productGroupId === ProductGroupIds.SportsBook ? Object.values(groupSportsBookPTBySportTypeId(ptItems)) : [ptItems];
+  return (ptGroups as SuperPositionTakingGroupItem[][]).map((group, index) => {
+    const firstGroupItem = group[0];
+    const groupPTLabel = (
+      <GroupLabel
+        copyIconId={copyIconId}
+        firstGroupItem={firstGroupItem}
+        group={group}
+        handleCopyPTs={handleCopyPTs}
+        isFirstGroup={index === 0}
+        ptItems={ptItems}
+        stateCopiedGroup={stateCopiedGroup}
+      ></GroupLabel>
+    );
 
-      return (
-        <div className={styles['block-pt']} key={`${ptItem.sportTypeId}${ptItem.betTypeId}`}>
+    return (
+      <div className={styles['block-pt']} key={`${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`}>
+        {productGroupId === ProductGroupIds.SportsBook && (
           <div className={styles['row-empty']}>
             <BlockRow label={groupPTLabel}>
-              {renderNoneBlockColumn(`${ptItem.sportTypeId}${ptItem.betTypeId}`, 4)}
+              {renderNoneBlockColumn(`${firstGroupItem.sportTypeId}${firstGroupItem.betTypeId}`, 4)}
             </BlockRow>
           </div>
-          {group?.map((item, index) => {
-            const ptLabel = (
-              <PTLabel
-                group={group}
-                itemIndex={index}
-                item={item}
-                copyIconId={copyIconId}
-                stateCopiedGroup={stateCopiedGroup}
-                handleCopyPTs={handleCopyPTs}
-              />
-            );
-            return (
-              <SuperPositionTakingRow
-                key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
-                item={item}
-                label={ptLabel}
-                isCopy={isCopyingPTItem(stateCopiedGroup, item)}
-              />
-            );
-          })}
-        </div>
-      );
-    }
-
-    return null;
+        )}
+        {group?.map((item, index) => {
+          const ptLabel = (
+            <PTLabel
+              group={group}
+              itemIndex={index}
+              item={item}
+              copyIconId={copyIconId}
+              stateCopiedGroup={stateCopiedGroup}
+              handleCopyPTs={handleCopyPTs}
+            />
+          );
+          return (
+            <SuperPositionTakingRow
+              key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
+              item={item}
+              label={ptLabel}
+              copyStatus={isCopyingPTItem(stateCopiedGroup, item)}
+            />
+          );
+        })}
+      </div>
+    );
   });
 }
 
-export type GroupSettingBlockProps = {
-  title: React.ReactNode;
-  isReadOnly: boolean;
-  isDisableMasterAutoPT?: boolean;
-};
-
-export default function SuperPositionTaking({ title }: Readonly<GroupSettingBlockProps>) {
-  const { productGroups, handleUpdateSettingItems } = useGroupSettingContext();
-  const superPTs = getSettingItems<SuperPositionTakingGroupItem>(productGroups, 1, GroupTypeIds.PositionTaking);
-  const { stateCopiedGroup, setStateCopiedGroup, timeId, setCopyIconId, copyIconId } = usePTCopy();
+export default function SuperPositionTaking({ title, isReadOnly }: Readonly<PositionTakingBlockProps>) {
+  const { productGroups, handleUpdateSettingItems, productGroupId, isEditMode, updateGroupSetting } =
+    useGroupSettingContext();
+  const groupId = Number(productGroupId);
+  const superPTs = getSettingItems<SuperPositionTakingGroupItem>(productGroups, groupId, GroupTypeIds.PositionTaking);
+  const { stateCopiedGroup, copyIconId, handleCopy } = usePTCopy();
 
   const handleCopyPTs = (
     itemCopied: GroupItem,
@@ -220,29 +222,25 @@ export default function SuperPositionTaking({ title }: Readonly<GroupSettingBloc
     isBelongCopiedGroup?: (item: GroupItem) => boolean
   ) => {
     const newPTs = copySuperPTValues(superPTs, itemCopied, isBelongCopiedGroup);
-    const newStateCopiedGroup = newPTs.map((item) => {
-      return { betTypeId: item.betTypeId, sportTypeId: item.sportTypeId, isCopied: item.isCopied };
-    });
-    if (JSON.stringify(newStateCopiedGroup) !== JSON.stringify(stateCopiedGroup)) {
-      if (timeId) clearTimeout(timeId.current);
-      setStateCopiedGroup(newStateCopiedGroup);
-      setCopyIconId(iconId);
-      timeId.current = setTimeout(() => {
-        setStateCopiedGroup([]);
-        setCopyIconId(undefined);
-      }, 3000);
+    if (newPTs.length > 0) {
+      handleCopy(newPTs, iconId);
+      handleUpdateSettingItems?.(groupId, GroupTypeIds.PositionTaking, newPTs as []);
     }
-    handleUpdateSettingItems?.(1, GroupTypeIds.PositionTaking, newPTs as []);
   };
 
   return (
-    <Block title={title}>
+    <Block
+      title={title}
+      isPartialUpdate={isEditMode === true && !isReadOnly}
+      onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
+    >
       <BlockRow isHeaderRow>
         {['Super Max PT', 'Master Max PT', 'Agent Max PT', 'Super Min PT'].map((name) => (
           <BlockColumn key={name}>{name}</BlockColumn>
         ))}
       </BlockRow>
       <PositionTakingRows
+        productGroupId={groupId}
         ptItems={superPTs}
         copyIconId={copyIconId}
         stateCopiedGroup={stateCopiedGroup}

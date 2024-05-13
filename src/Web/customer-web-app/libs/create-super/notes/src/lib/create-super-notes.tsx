@@ -1,9 +1,10 @@
 import { Block } from '@customer-web-app/shared/base/block';
 
+import styles from './create-super-note.module.scss';
 import HeadlineBelongSites from './headline-belong-sites';
 import NotAllowedSuperPrefixes from './note-allowed-super-prefixes';
 import { HeadlineBelongSite, SuperPrefixes } from './types';
-import styles from './create-super-note.module.scss';
+
 /* eslint-disable-next-line */
 export interface CreateSuperNoteProps {
   belongSites: HeadlineBelongSite[];
@@ -12,7 +13,7 @@ export interface CreateSuperNoteProps {
 
 export function CreateSuperNotes({ belongSites, notAllowedPrefixes }: CreateSuperNoteProps) {
   return (
-    <Block title="Notes">
+    <Block title="Notes" isPartialUpdate={false} onSaveClick={() => {}}>
       <div className={styles['block-note']}>
         <div className={styles['block-alert']}>
           <HeadlineBelongSites data={belongSites} />

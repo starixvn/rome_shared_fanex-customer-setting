@@ -2,14 +2,14 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { GroupItem } from '@customer-web-app/shared-group-settings-types';
 
-import { CopiedPTItem, renderBlockRowTitle, renderPTLabel } from './utils';
+import { CopyPTICon, CopyStatusPT, isCopySuccess, renderPTLabel } from './utils';
 
 type PTLabel<T> = {
   group: T[];
   itemIndex: number;
   item: T;
   copyIconId: number | undefined;
-  stateCopiedGroup: CopiedPTItem[];
+  stateCopiedGroup: CopyStatusPT[];
   handleCopyPTs: (itemCopied: T, iconId: number | undefined, isBelongCopiedGroup?: (item: T) => boolean) => void;
 };
 
@@ -21,46 +21,28 @@ export default function PTLabel({
   stateCopiedGroup,
   handleCopyPTs,
 }: PTLabel<GroupItem>) {
-  const { isMultipleMode, handleSettingItemChange } = useGroupSettingContext();
+  const { isMultipleMode, productGroupId, handleSettingItemChange } = useGroupSettingContext();
 
-  const isMultipleEdit = isMultipleMode ?? false;
   const firstGroupItem = group[0];
-  return itemIndex === 0 && group.length > 1
-    ? renderPTLabel(
-        item.betTypeName,
-        isMultipleEdit,
-        item.isMultipleModeChecked,
-        item.sportTypeId,
-        copyIconId === item.sportTypeId,
-        stateCopiedGroup.length > 0 &&
-          stateCopiedGroup.every((i) =>
-            i.sportTypeId === item.sportTypeId ? i.isCopied === true || i.isCopied === undefined : !i.isCopied
-          ),
-        (isChecked) =>
-          handleSettingItemChange?.(
-            ProductGroupIds.SportsBook,
-            GroupTypeIds.PositionTaking,
-            item.sportTypeId,
-            item.betTypeId,
-            {
-              isMultipleModeChecked: isChecked,
-              isUpdateMinPtOnly: false,
-            } as Partial<GroupItem>
-          ),
-        () =>
-          handleCopyPTs(
-            firstGroupItem,
-            firstGroupItem.sportTypeId,
-            (item) => item.sportTypeId === firstGroupItem.sportTypeId
-          )
-      )
-    : renderBlockRowTitle(item.betTypeName, isMultipleEdit, item.isMultipleModeChecked, (isChecked) =>
-        handleSettingItemChange?.(
-          ProductGroupIds.SportsBook,
-          GroupTypeIds.PositionTaking,
-          item.sportTypeId,
-          item.betTypeId,
-          { isMultipleModeChecked: isChecked }
-        )
-      );
+  const isSportBookProductGroup = Number(productGroupId) === ProductGroupIds.SportsBook;
+  const displayName = isSportBookProductGroup ? item.betTypeName : item.sportTypeName;
+  const isBelongCopiedGroup = isSportBookProductGroup
+    ? (item: GroupItem) => item.sportTypeId === firstGroupItem.sportTypeId
+    : () => true;
+
+  const copyIcon = itemIndex === 0 && group.length > 1 && (
+    <CopyPTICon
+      id={item.sportTypeId}
+      isCopy={copyIconId === item.sportTypeId}
+      isCopySuccess={isCopySuccess(stateCopiedGroup, isSportBookProductGroup ? item.sportTypeId : undefined)}
+      handleCopyClick={() => handleCopyPTs(firstGroupItem, firstGroupItem.sportTypeId, isBelongCopiedGroup)}
+    />
+  );
+
+  return renderPTLabel(displayName, isMultipleMode ?? false, item.isMultipleModeChecked, copyIcon, (isChecked) =>
+    handleSettingItemChange?.(Number(productGroupId), GroupTypeIds.PositionTaking, item.sportTypeId, item.betTypeId, {
+      isMultipleModeChecked: isChecked,
+      isUpdateMinPtOnly: false,
+    } as Partial<GroupItem>)
+  );
 }

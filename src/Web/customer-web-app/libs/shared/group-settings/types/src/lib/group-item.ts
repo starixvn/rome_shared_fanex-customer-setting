@@ -15,6 +15,43 @@ export interface GroupSettingItem<T> extends GroupItem {
   original: T;
 }
 
+export interface ProductStatusProps {
+  isDisabled: boolean;
+  isDisabledUpline: boolean;
+  parentSportType?: number;
+  parentBetType?: number;
+  readonly: boolean;
+}
+
+export interface ProductStatusGroupItem extends ProductStatusProps, GroupSettingItem<ProductStatusProps> {}
+
+export interface BetLimitProps {
+  isChecked: boolean;
+  isMultipleChoice: number;
+  maxChoice: number;
+  productId: number;
+  productName: string;
+  stakeLevelId: number;
+  stakeLevelName: number;
+}
+
+export interface BetLimitGroupItem extends BetLimitProps, GroupSettingItem<BetLimitProps> {}
+
+export interface WinLossLimitProps {
+  isAutoReset: boolean;
+  isAutoResetUpline: boolean;
+  lossLimit: number;
+  lossLimitValue: number;
+  maxLossRange: number;
+  maxWinRange: number;
+  minLossRange: number;
+  productId: number;
+  productName: string;
+  winLimit: number;
+}
+
+export interface WinLossLimitGroupItem extends WinLossLimitProps, GroupSettingItem<WinLossLimitProps> {}
+
 export interface CommissionProps {
   discount?: number;
   discountMember?: number;

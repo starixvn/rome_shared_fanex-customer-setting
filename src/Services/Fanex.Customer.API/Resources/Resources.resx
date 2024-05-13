@@ -217,6 +217,30 @@
 		<value>Invalid Min bet/ Max bet/ Max per match.</value>
 		<comment/>
 	</data>
+	<data name="Msg_10022" xml:space="preserve">
+		<value>You are not allowed to change Daily auto reset limit.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10024" xml:space="preserve">
+		<value>Maximum Win should be less than or equal to Maximum Win of the direct upline.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10033" xml:space="preserve">
+		<value>Maximum Loss should be less than or equal to Maximum Loss of the direct upline.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10034" xml:space="preserve">
+		<value>This user's upline does not have Stake Level.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10035" xml:space="preserve">
+		<value>Each bet type must have at least one Bet Limit value to be selected</value>
+		<comment/>
+	</data>
+	<data name="Msg_10036" xml:space="preserve">
+		<value>You can only assign maximum {0} bet limits to member level for {1}.</value>
+		<comment/>
+	</data>
 	<data name="Msg_10059" xml:space="preserve">
 		<value>Wrong Max Payout Per Match.</value>
 		<comment/>
@@ -253,10 +277,6 @@
 		<value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
 		<comment/>
 	</data>
-	<data name="Msg_10068" xml:space="preserve">
-		<value>You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8.</value>
-		<comment/>
-	</data>
 	<data name="Msg_10070" xml:space="preserve">
 		<value>The Parlay Max Payout value must be a positive amount.</value>
 		<comment/>
@@ -275,6 +295,10 @@
 	</data>
 	<data name="Msg_10074" xml:space="preserve">
 		<value>Parlay Max Payout per Bet: The setting of Combo Over 6 is higher than the upline's.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10078" xml:space="preserve">
+		<value>RNG Casino:  You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8.</value>
 		<comment/>
 	</data>
 	<data name="Msg_20001" xml:space="preserve">
@@ -377,6 +401,22 @@
 		<value>Invalid Position Taking(min/max set by upline).</value>
 		<comment/>
 	</data>
+	<data name="Msg_60033" xml:space="preserve">
+		<value>Unable to edit downline's Product Status because the account disabled for this product.</value>
+		<comment/>
+	</data>
+	<data name="Msg_60035" xml:space="preserve">
+		<value>You are not allowed to disable downline's product.</value>
+		<comment/>
+	</data>
+	<data name="Msg_60037" xml:space="preserve">
+		<value>You cannot Enable {0} when {1} is Disabled.</value>
+		<comment/>
+	</data>
+	<data name="Msg_90012" xml:space="preserve">
+		<value>You are not allowed to perform this action.</value>
+		<comment/>
+	</data>
 	<data name="GeneralInfo" xml:space="preserve">
 		<value>General Information</value>
 		<comment/>
@@ -401,6 +441,22 @@
 		<value>Position taking is updated successfully.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_155" xml:space="preserve">
+		<value>Updated Win Loss Limit successfully.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_156" xml:space="preserve">
+		<value>Updated commission setting successfully.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_158" xml:space="preserve">
+		<value>Updated Bet Limit successfully.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_160" xml:space="preserve">
+		<value>Product Status is updated successfully.</value>
+		<comment/>
+	</data>
 	<data name="GroupType150" xml:space="preserve">
 		<value>Commission</value>
 	</data>
@@ -420,12 +476,12 @@
 		<value>Commission</value>
 	</data>
 	<data name="GroupType158" xml:space="preserve">
-		<value>Commission</value>
+		<value>Bet Limit</value>
 	</data>
 	<data name="GroupType159" xml:space="preserve">
 		<value>Bet Setting</value>
 	</data>
 	<data name="GroupType160" xml:space="preserve">
-		<value>Position Taking</value>
+		<value>Product Status</value>
 	</data>
 </root>

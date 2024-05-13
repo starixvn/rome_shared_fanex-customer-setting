@@ -20,7 +20,7 @@ type MaxPayoutSettingData = {
   isSpecialPlatform: boolean;
 };
 
-export const MaxPayoutSettingTab = ({ alphaUrl, napUrl , exNapUrl}: { alphaUrl: string; napUrl: string , exNapUrl: string}) => {
+export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
   const [data, setData] = useState<MaxPayoutSettingData>({} as MaxPayoutSettingData);
   const [loading, setLoading] = useState(true);
 
@@ -29,11 +29,11 @@ export const MaxPayoutSettingTab = ({ alphaUrl, napUrl , exNapUrl}: { alphaUrl: 
       const response = await axios.get<MaxPayoutSettingData>(url);
       return response.data;
     };
-    fetchData(alphaUrl || napUrl || exNapUrl).then((data) => {
+    fetchData(url).then((data) => {
       setData(data);
       setLoading(false);
     });
-  }, [alphaUrl, napUrl]);
+  }, [url]);
 
   if (loading) {
     return <div />;

@@ -7,10 +7,16 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CopyIcon from '../copy-icon';
 
+export enum CopyStatus {
+  Fail = 1,
+  Success = 2,
+  NotCopy = 3,
+}
+
 export type PTRowProps<T> = {
   item: T;
+  copyStatus: CopyStatus;
   label?: string | React.ReactNode;
-  isCopy: boolean | undefined;
   isDisableMasterAutoPT?: boolean;
 };
 
@@ -20,24 +26,22 @@ export const renderNoneBlockColumn = (key: string, numbers: number) => {
   });
 };
 
-function CopyPTICon({
-  id,
-  isCopy,
-  isCopySuccess,
-  content,
-  handleCopyClick,
-}: Readonly<{
+type CopyPtIconProp = {
   id: number;
   isCopy: boolean;
   isCopySuccess: boolean;
-  content: string;
   handleCopyClick?: () => void;
-}>) {
+};
+
+export function CopyPTICon({ id, isCopy, isCopySuccess, handleCopyClick }: Readonly<CopyPtIconProp>) {
   const { t } = useTranslation();
 
   return (
     <span>
-      <span data-tooltip-id={id.toString()} data-tooltip-content={t(content)}>
+      <span
+        data-tooltip-id={id.toString()}
+        data-tooltip-content={isCopySuccess ? t('CopiedSuccessfully') : t('CopyingFailed')}
+      >
         <CopyIcon
           id="copy-position-taking"
           isCopied={isCopy}
@@ -45,7 +49,7 @@ function CopyPTICon({
             handleCopyClick?.();
           }}
         />
-        {content !== '' && (
+        {isCopy && (
           <WrapperTooltip type={isCopySuccess ? 'success' : 'error'} id={id.toString()} isOpen={true} place="bottom" />
         )}
       </span>
@@ -57,18 +61,9 @@ export const renderPTLabel = (
   labelName: string | undefined,
   isMultipleMode: boolean,
   isMultipleModeChecked: boolean,
-  id: number,
-  isCopy: boolean,
-  isCopySuccess: boolean,
-  handleCheckMultiple: (isChecked: boolean) => void,
-  handleCopyClick?: () => void
+  copyIcon: React.ReactNode,
+  handleCheckMultiple: (isChecked: boolean) => void
 ) => {
-  const getContent = () => {
-    if (isCopy === false) return '';
-
-    return isCopySuccess ? 'CopiedSuccessfully' : 'CopyingFailed';
-  };
-
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'normal' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -81,53 +76,67 @@ export const renderPTLabel = (
         )}
         <span>{labelName}</span>
       </div>
-      <CopyPTICon
-        id={id}
-        isCopy={isCopy}
-        isCopySuccess={isCopySuccess}
-        content={getContent()}
-        handleCopyClick={handleCopyClick}
-      />
+      {copyIcon}
     </div>
   );
 };
 
-export const renderBlockRowTitle = (
-  name: string | undefined,
-  isMultipleMode: boolean,
-  isMultipleModeChecked: boolean,
-  onChange: (isChecked: boolean) => void
-) => {
-  return (
-    <div>
-      {isMultipleMode && (
-        <input type="checkbox" onChange={(e) => onChange(e.target.checked)} checked={isMultipleModeChecked} />
-      )}
-      <span>{name}</span>
-    </div>
-  );
-};
-
-export type CopiedPTItem = {
+export type CopyStatusPT = {
   betTypeId: number;
   sportTypeId: number;
-  isCopied: boolean | undefined;
+  copyStatus: CopyStatus;
 };
 
 export const usePTCopy = () => {
-  const [stateCopiedGroup, setStateCopiedGroup] = useState<CopiedPTItem[]>([]);
+  const [stateCopiedGroup, setStateCopiedGroup] = useState<CopyStatusPT[]>([]);
   const [copyIconId, setCopyIconId] = useState<number | undefined>();
   const timeId = useRef<NodeJS.Timeout>();
 
+  const handleCopy = (newStateCopiedGroup: CopyStatusPT[], iconCopyId: number | undefined) => {
+    if (JSON.stringify(newStateCopiedGroup) !== JSON.stringify(stateCopiedGroup) || iconCopyId !== copyIconId) {
+      if (timeId) clearTimeout(timeId.current);
+      setStateCopiedGroup(newStateCopiedGroup);
+      setCopyIconId(iconCopyId);
+      timeId.current = setTimeout(() => {
+        setStateCopiedGroup([]);
+        setCopyIconId(undefined);
+      }, 3000);
+    }
+  };
+
   return {
-    stateCopiedGroup,
-    setStateCopiedGroup,
     timeId,
     copyIconId,
+    stateCopiedGroup,
     setCopyIconId,
+    setStateCopiedGroup,
+    handleCopy,
   };
 };
 
-export const isCopyingPTItem = (stateCopiedGroup: CopiedPTItem[], item: GroupItem) => {
-  return stateCopiedGroup.find((i) => i.betTypeId === item.betTypeId && i.sportTypeId === item.sportTypeId)?.isCopied;
+export const isCopyingPTItem = (stateCopiedGroup: CopyStatusPT[], item: GroupItem) => {
+  return (
+    stateCopiedGroup.find((i) => i.betTypeId === item.betTypeId && i.sportTypeId === item.sportTypeId)?.copyStatus ??
+    CopyStatus.NotCopy
+  );
+};
+
+export function isCopySuccess(stateCopiedGroup: CopyStatusPT[], sportTypeId?: number) {
+  if (stateCopiedGroup.length <= 0) return false;
+
+  if (sportTypeId === undefined) return !stateCopiedGroup.some((i) => i.copyStatus === CopyStatus.Fail);
+
+  return stateCopiedGroup.every((i) =>
+    i.sportTypeId === sportTypeId ? i.copyStatus === CopyStatus.Success || i.copyStatus === CopyStatus.NotCopy : true
+  );
+}
+
+const StringToPreventAutoSortReduce = 'PreventAutoSort';
+export const groupSportsBookPTBySportTypeId = (items: GroupItem[]) => {
+  return items.reduce((acc: { [key: string]: GroupItem[] }, cur) => {
+    const key = `${StringToPreventAutoSortReduce}-${cur.sportTypeId}`;
+    acc[key] = acc[key] ?? [];
+    acc[key].push(cur);
+    return acc;
+  }, {});
 };
