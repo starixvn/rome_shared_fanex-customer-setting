@@ -35,7 +35,6 @@ export const CommissionHintTab = ({ url }: { url: string }) => {
 
   return (
     <div>
-      <HighlightFrame header={t('Note')} content={t('NoteContent')} />
       <div className={styles.info}>
 
         <div>
