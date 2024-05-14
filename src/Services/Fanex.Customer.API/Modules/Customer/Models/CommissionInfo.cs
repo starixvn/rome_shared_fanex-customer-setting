@@ -1,6 +1,3 @@
-using System.Resources;
-using Fanex.Customer.API.Resources;
-
 namespace Fanex.Customer.API.Modules.Customer.Models;
 
 public class CommissionInfo

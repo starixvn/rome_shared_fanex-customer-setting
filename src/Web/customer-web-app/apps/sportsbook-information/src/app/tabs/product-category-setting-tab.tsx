@@ -70,23 +70,23 @@ export function ProductCategorySettingTab({ url }: { url: string }) {
         <b>{t('ProductSettingInformation')}</b>
       </div>
       <div>{t('ProductGroupTableIntro')}</div>
-      <br/>
+      <br />
       {data?.productSettingInfo.map((e, index) => (
         <BlockV2 key={e.name + index.toString()} isCollapse={false} title={e.name} colorPrimary>
           <table>
             <tbody>
-            {e.products?.map((p) => CheckProductsNotNull(p)).includes(true) ? (
-              renderMultiple(e.products, e.name, e.products.length)
+              {e.products?.map((p) => CheckProductsNotNull(p)).includes(true) ? (
+                renderMultiple(e.products, e.name, e.products.length)
               ) : (
-              <tr>
-                <td>
-                {e.products
-                  .map((product: ProductSetting) => GetProductName(product))
-                  .sort(sortAZ)
-                  .join(', ')}
-                </td>
-              </tr>
-            )}
+                <tr>
+                  <td>
+                    {e.products
+                      .map((product: ProductSetting) => GetProductName(product))
+                      .sort(sortAZ)
+                      .join(', ')}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </BlockV2>

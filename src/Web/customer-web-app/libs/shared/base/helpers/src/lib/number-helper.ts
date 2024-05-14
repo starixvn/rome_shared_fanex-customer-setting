@@ -10,4 +10,7 @@ export const NumberHelper = {
 
     return undefined;
   },
+  roundDownNumber(value: number) {
+    return (Math.trunc(value * 100) / 100).toLocaleString('en-US');
+  },
 };

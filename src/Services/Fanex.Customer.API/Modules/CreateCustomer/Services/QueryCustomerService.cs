@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-using EasyNetQ.ConnectionString;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings;
 using Fanex.Customer.API.Modules.CreateCustomer.Entities;
@@ -9,6 +7,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType153;
+using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Services;
@@ -20,14 +19,19 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
 public interface IQueryCustomerService
 {
-    Task<CustomerSetting> QuerySuper(QuerySuperRequest request, bool isSportsbookOnly);
+    Task<CustomerSetting> QuerySuper(QuerySuperRequest request);
 
-    Task<CustomerSetting> Query(QueryRequest request, bool isSportsbookOnly);
+    Task<CustomerSetting> Query(QueryRequest request);
 }
 
 public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
 {
+    private readonly ICustomerService customerService;
+    private readonly ISiteDBGroupService siteDBGroupService;
+
     public QueryCustomerService(
+        ICustomerService customerService,
+        ISiteDBGroupService siteDBGroupService,
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
         ISharedService sharedService,
@@ -36,6 +40,8 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         ICustomerSettingHelper helperService)
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService)
     {
+        this.customerService = customerService;
+        this.siteDBGroupService = siteDBGroupService;
     }
 
     private readonly IDictionary<string, string> CommissionNameMappings = new Dictionary<string, string>()
@@ -63,7 +69,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         return false;
     }
 
-    public async Task<CustomerSetting> QuerySuper(QuerySuperRequest request, bool isSportsbookOnly)
+    public async Task<CustomerSetting> QuerySuper(QuerySuperRequest request)
     {
         ptStep = appSettings.IsSupportPT3Decimal(request.SiteLabel) ? 0.5M : 1M;
         var generalInfo = new GeneralInformation();
@@ -78,13 +84,13 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         return customerSetting;
     }
 
-    public async Task<CustomerSetting> Query(QueryRequest request, bool isSportsbookOnly)
+    public async Task<CustomerSetting> Query(QueryRequest request)
     {
         var generalInfo = await GetGeneralInfo(request);
         ptStep = appSettings.IsSupportPT3Decimal(IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel) ? 0.5M : 1M;
         isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, appSettings);
         var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
-        if (request.RoleId == (byte)CustomerLevel.Agent)
+        if (request.RoleId == CustomerLevel.Agent)
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
         }
@@ -101,9 +107,18 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
 
     private async Task<GeneralInformation> GetGeneralInfo(QueryRequest request)
     {
-        return await dynamicRepository.GetAsync<GeneralInformation>(request.IsGetUpline ?
-        new GetGeneralInfoForEditCriteria(request.CustId, request.SystemId) :
-        new GetCustomerCriteria(request.CustId, appSettings.SettingStatus, request.RoleId));
+        var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(request.IsGetUpline
+            ? new GetGeneralInfoForEditCriteria(request.CustId, request.SystemId)
+            : new GetCustomerCriteria(request.CustId, appSettings.SettingStatus, request.RoleId));
+
+        if (generalInfo != null && generalInfo.RoleId == CustomerLevel.Member)
+        {
+            var siteDBName = await siteDBGroupService.GetSiteDBName(generalInfo.Site);
+            var memberBalance = await customerService.GetMemberBalance(request.CustId, siteDBName);
+            generalInfo.MaxCreditMin = Math.Max(0, memberBalance.CustomerOutstanding - memberBalance.CustomerCash + memberBalance.PendingTransfer3rd);
+        }
+
+        return generalInfo;
     }
 
     private async Task<IEnumerable<SportsBookCommission>> GetAgentSportsBookCommissions(int agentCustId)
@@ -278,6 +293,6 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
         });
     }
 
-    private bool IsDirectMaster(QueryRequest request)
+    private static bool IsDirectMaster(QueryRequest request)
     => request.CustId <= 100 && !string.IsNullOrWhiteSpace(request.SiteLabel);
 }

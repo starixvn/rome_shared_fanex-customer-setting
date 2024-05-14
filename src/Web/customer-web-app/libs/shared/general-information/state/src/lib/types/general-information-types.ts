@@ -17,6 +17,7 @@ export interface GeneralInfo {
   memberMaxCredit?: number;
   memberMaxCreditMin?: number;
   uplineMaxCredit?: number;
+  uplineMemberMaxCredit?: number;
   roleId: number;
   custId: number;
   uplineRoleId: number;

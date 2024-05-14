@@ -60,17 +60,6 @@ label.checkbox {
   }
 }
 
-.max-credit {
-  margin-top: 2px;
-  color: var(--color-max-credit);
-  font-size: 11px;
-  white-space: nowrap;
-  b {
-    color: var(--color-max-credit-b);
-    font-weight: bold;
-  }
-}
-
 .col-allowpt {
   width: 160px;
 }
@@ -130,4 +119,15 @@ label.checkbox {
   border-radius: 3px;
   padding: 0 5px;
   min-width: 165px;
+}
+
+.max-credit {
+  margin-top: 2px;
+  color: var(--color-max-credit);
+  font-size: 11px;
+  white-space: nowrap;
+  strong {
+    color: var(--color-max-credit-b);
+    font-weight: bold;
+  }
 }

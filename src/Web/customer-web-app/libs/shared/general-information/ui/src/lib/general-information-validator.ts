@@ -143,15 +143,15 @@ export default class GeneralInformationValidator {
     const idEditAgent = isEditMode && memberMaxCreditMin !== undefined;
     if (idEditAgent && (memberMaxCredit > maxCredit || memberMaxCredit < memberMaxCreditMin)) {
       return (this.validationState = new ValidationResult('memberMaxCredit', 'memberMaxCreditInvalid', {
-        min: NumberHelper.formatWithCommas(memberMaxCreditMin, 4),
-        max: NumberHelper.formatWithCommas(maxCredit, 4),
+        min: NumberHelper.roundDownNumber(memberMaxCreditMin),
+        max: NumberHelper.roundDownNumber(maxCredit),
       }));
     }
 
     if (!isEditMode && memberMaxCredit > maxCredit) {
       return (this.validationState = new ValidationResult('memberMaxCredit', 'memberMaxCreditInvalid', {
         min: '0',
-        max: NumberHelper.formatWithCommas(maxCredit, 4),
+        max: NumberHelper.roundDownNumber(maxCredit),
       }));
     }
 
@@ -160,58 +160,49 @@ export default class GeneralInformationValidator {
 
   public validateMaxCredit(isEditMode = false): ValidationResult | boolean {
     this.resetValidationState();
-    const { maxCredit, uplineMaxCredit, roleId, maxCreditMin, maxCreditMax } = this.generalInfo;
+    const { maxCredit, uplineMaxCredit, uplineMemberMaxCredit, roleId, maxCreditMin, maxCreditMax, memberMaxCredit } =
+      this.generalInfo;
 
     if (maxCredit === undefined) {
       return (this.validationState = new ValidationResult('maxCredit', 'RequiredField'));
     }
 
-    if (uplineMaxCredit !== undefined && !isNaN(uplineMaxCredit) && !isEditMode && maxCredit > uplineMaxCredit) {
-      return (this.validationState = new ValidationResult(
-        `maxCredit`,
-        this.invalidateMaxCreditMessages[roleId as UserLevel],
-        {
-          min: '0',
-          max: NumberHelper.formatWithCommas(uplineMaxCredit, 4),
-        }
-      ));
+    if (uplineMaxCredit !== undefined && !isNaN(uplineMaxCredit) && !isEditMode) {
+      const max = uplineMemberMaxCredit ? Math.min(uplineMaxCredit, uplineMemberMaxCredit) : uplineMaxCredit;
+      if (maxCredit > max) {
+        return (this.validationState = new ValidationResult(
+          `maxCredit`,
+          this.invalidateMaxCreditMessages[roleId as UserLevel],
+          {
+            min: '0',
+            max: NumberHelper.roundDownNumber(max),
+          }
+        ));
+      }
     }
 
-    const isEditMasterOrAgent =
-      isEditMode &&
-      (this.generalInfo.roleId === UserLevel.Master || this.generalInfo.roleId === UserLevel.Agent) &&
-      maxCreditMin !== undefined &&
-      maxCreditMax !== undefined;
-    if (isEditMasterOrAgent && (maxCredit < maxCreditMin || maxCredit > maxCreditMax)) {
-      return (this.validationState = new ValidationResult(
-        `maxCredit`,
-        this.invalidateMaxCreditMessages[roleId as UserLevel],
-        {
-          min: NumberHelper.formatWithCommas(maxCreditMin, 4),
-          max: NumberHelper.formatWithCommas(maxCreditMax, 4),
-        }
-      ));
+    if (isEditMode && roleId < UserLevel.Super && maxCreditMin !== undefined && maxCreditMax !== undefined) {
+      const max =
+        roleId === UserLevel.Member && memberMaxCredit ? Math.min(memberMaxCredit, maxCreditMax) : maxCreditMax;
+      if (maxCredit < maxCreditMin || maxCredit > max) {
+        return (this.validationState = new ValidationResult(
+          `maxCredit`,
+          this.invalidateMaxCreditMessages[roleId as UserLevel],
+          {
+            min: NumberHelper.roundDownNumber(maxCreditMin),
+            max: NumberHelper.roundDownNumber(max),
+          }
+        ));
+      }
     }
 
-    const isEditSuper = isEditMode && this.generalInfo.roleId === UserLevel.Super && maxCreditMin !== undefined;
+    const isEditSuper = isEditMode && roleId === UserLevel.Super && maxCreditMin !== undefined;
     if (isEditSuper && maxCredit < maxCreditMin) {
       return (this.validationState = new ValidationResult(
         `maxCredit`,
         this.invalidateMaxCreditMessages[roleId as UserLevel],
         {
-          min: NumberHelper.formatWithCommas(maxCreditMin, 4),
-        }
-      ));
-    }
-
-    const isEditMember = isEditMode && roleId === UserLevel.Member && maxCreditMax !== undefined;
-    if (isEditMember && maxCredit > maxCreditMax) {
-      return (this.validationState = new ValidationResult(
-        `maxCredit`,
-        this.invalidateMaxCreditMessages[roleId as UserLevel],
-        {
-          min: '0',
-          max: NumberHelper.formatWithCommas(maxCreditMax, 4),
+          min: NumberHelper.roundDownNumber(maxCreditMin),
         }
       ));
     }
