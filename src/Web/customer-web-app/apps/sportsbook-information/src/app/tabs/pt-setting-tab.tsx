@@ -35,7 +35,6 @@ export const PtSettingTab = ({ url}: { url: string}) => {
 
   return (
     <div>
-      <HighlightFrame header={t('Note')} content={t('NoteContent')} />
       <div className={styles.info}>
           <b>{t('LiteModePT')}</b> {/*chưa dịch*/}
           <div>{t('CommonPTSettingNote1')}</div>

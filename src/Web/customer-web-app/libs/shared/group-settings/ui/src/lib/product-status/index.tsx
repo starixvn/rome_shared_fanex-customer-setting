@@ -41,7 +41,7 @@ export default function ProductStatus({ isReadOnly }: Readonly<GroupSettingBlock
   };
 
   const itemCounts = productStatusItems.length;
-  const numberOfRow = itemCounts % 2 === 0 ? itemCounts / 2 : Math.floor(itemCounts) + 1;
+  const numberOfRow = itemCounts % 2 === 0 ? itemCounts / 2 : Math.floor(itemCounts / 2) + 1;
   const renderItems = () => {
     const rows = [];
     for (let i = 0; i < numberOfRow; i++) {

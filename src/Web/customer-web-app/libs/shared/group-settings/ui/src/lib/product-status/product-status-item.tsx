@@ -19,6 +19,18 @@ export function ProductStatusItem(props: Readonly<Props>) {
   const { generalInfo } = useGroupSettingContext();
   const userLevel = t(UserLevelName[Number(generalInfo?.roleId)]);
 
+  if (!props.data) {
+    return (
+      <div className={styles.container}>
+        <BlockRow>
+          <div className={styles.status}>
+            <div className={styles.blockCenter}></div>
+          </div>
+        </BlockRow>
+      </div>
+    );
+  }
+
   const { sportTypeName, sportTypeId, betTypeId, isDisabled, readonly, isDisabledUpline } = props.data;
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
