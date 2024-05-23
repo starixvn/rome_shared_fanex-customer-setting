@@ -11,7 +11,7 @@ public class LanguageUsageEndpoint : IEndpoint<Result, UsageLanguageRequest, ILa
         app.MapPost("/api/customer/usage-language", (UsageLanguageRequest request, ILanguageService nicknameService)
             => HandleAsync(request, nicknameService))
             .Produces<Result>()
-            .WithTags(EnpointTags.CustomerSettings);
+            .WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<Result> HandleAsync(UsageLanguageRequest request1, ILanguageService request2)

@@ -11,7 +11,7 @@ public class GetCurrentWinLossAmountEndpoint : IEndpoint<IResult, GetCurrentWinL
         app.MapGet("/api/customer/current-winloss-amount", ([AsParameters] GetCurrentWinLossAmountRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
             .Produces<CustomerInfo>()
-            .WithTags("CustomerInfo");
+            .WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(GetCurrentWinLossAmountRequest request, ICustomerService customerService)

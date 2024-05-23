@@ -10,7 +10,7 @@ public class GetCommissionHintEndpoint : IEndpoint<IResult, GetCommissionHintReq
     {
         app.MapGet("/api/customer/commission-hint", ([AsParameters]GetCommissionHintRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
-            .Produces<CommissionInfo>();
+            .Produces<CommissionInfo>().WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(GetCommissionHintRequest request, ICustomerService customerService)

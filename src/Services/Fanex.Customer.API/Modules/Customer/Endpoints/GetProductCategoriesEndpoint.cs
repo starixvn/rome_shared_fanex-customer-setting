@@ -10,7 +10,7 @@ public class GetProductCategoriesEndpoint:IEndpoint<IResult, GetProductCategorie
     {
         app.MapGet("/api/customer/product-categories", ([AsParameters]GetProductCategoriesRequest request, ICustomerService customerService)
                 => HandleAsync(request, customerService))
-            .Produces<CreditInfo>();
+            .Produces<CreditInfo>().WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(GetProductCategoriesRequest request, ICustomerService customerService)

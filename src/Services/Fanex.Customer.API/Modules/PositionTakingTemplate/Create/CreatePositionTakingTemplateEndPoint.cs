@@ -24,7 +24,7 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
         app.MapPost("/api/customer/pt-templates", (CreatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)
             => HandleAsync(request, dynamicRepository))
             .Produces<PTTemplateResult>()
-            .WithTags(EnpointTags.CustomerSettings);
+            .WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(CreatePositionTakingTemplateRequest request, IDynamicRepository dynamicRepository)

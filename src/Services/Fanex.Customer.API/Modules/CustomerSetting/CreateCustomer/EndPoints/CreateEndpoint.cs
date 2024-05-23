@@ -14,7 +14,7 @@ public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerS
     {
         app.MapPost("/api/customer", (CreateRequest request, ICreateCustomerService service)
             => HandleAsync(request, service))
-            .Produces<CreateCustomerResult>().WithTags(EnpointTags.CustomerSettings);
+            .Produces<CreateCustomerResult>().WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(CreateRequest request, ICreateCustomerService service)

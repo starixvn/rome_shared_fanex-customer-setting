@@ -1,6 +1,6 @@
 namespace Fanex.Customer.API.Modules
 {
-    public static class EnpointTags
+    public static class EndpointTags
     {
         public const string CustomerSettings = "Customer Settings";
 
@@ -15,5 +15,7 @@ namespace Fanex.Customer.API.Modules
         public const string SubAccount = "Sub-Account";
 
         public const string SubMainAccountsPassword = "Sub-Main-Accounts-Password";
+
+        public const string CreateCustomerFullMode = "Create Customer Full Mode";
     }
 }

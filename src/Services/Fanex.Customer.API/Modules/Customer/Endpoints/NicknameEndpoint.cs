@@ -11,7 +11,7 @@ public class NicknameEndpoint : IEndpoint<Result, CreateNicknameParam, INickname
         app.MapPost("/api/customer/nickname", (CreateNicknameParam request, INicknameService nicknameService)
             => HandleAsync(request, nicknameService))
             .Produces<Result>()
-            .WithTags(EnpointTags.CustomerSettings);
+            .WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<Result> HandleAsync(CreateNicknameParam request1, INicknameService request2)

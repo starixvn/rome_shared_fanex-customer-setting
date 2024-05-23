@@ -15,7 +15,7 @@ public class CopySuperWinlossLimitEndpoint : IEndpoint<IResult, CopySuperWinloss
     {
         app.MapPut("/api/customer/copy-supers-winloss-limit", (CopySuperWinlossLimitRequest request, IQueryGroupTypeBaseService<WinLossLimitItem> groupTypeBaseService, IEditCustomerService service)
            => HandleAsync(request, groupTypeBaseService, service))
-           .Produces<UpdateCustomerResult>().WithTags("Customer Settings");
+           .Produces<UpdateCustomerResult>().WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(CopySuperWinlossLimitRequest request, IQueryGroupTypeBaseService<WinLossLimitItem> groupTypeBaseService, IEditCustomerService service)

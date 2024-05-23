@@ -10,7 +10,7 @@ public class GetPTSettingInformationEndpoint : IEndpoint<IResult, GetPTSettingIn
     {
         app.MapGet("/api/customer/pt-setting-information", ([AsParameters]GetPTSettingInformationRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
-            .Produces<List<PTSettingInfo>>();
+            .Produces<List<PTSettingInfo>>().WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(GetPTSettingInformationRequest request, ICustomerService customerService)

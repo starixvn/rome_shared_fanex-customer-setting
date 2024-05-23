@@ -13,7 +13,7 @@ public class EditEndpoint : IEndpoint<IResult, EditRequest, IEditCustomerService
     {
         app.MapPut("/api/customer", (EditRequest request, IEditCustomerService service)
            => HandleAsync(request, service))
-           .Produces<UpdateGroupTypeResult>().WithTags(EnpointTags.CustomerSettings);
+           .Produces<UpdateGroupTypeResult>().WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(EditRequest request, IEditCustomerService service)
@@ -33,7 +33,7 @@ public class EditMultipleEndpoint : IEndpoint<IResult, EditMultipleRequest, IEdi
     {
         app.MapPut("/api/customers", (EditMultipleRequest request, IEditCustomerService service)
            => HandleAsync(request, service))
-           .Produces<List<UpdateCustomerResult>>().WithTags(EnpointTags.CustomerSettings);
+           .Produces<List<UpdateCustomerResult>>().WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(EditMultipleRequest request, IEditCustomerService service)

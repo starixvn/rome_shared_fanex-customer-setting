@@ -18,7 +18,7 @@ public class GetPositionTakingTemplateEndPoint : IEndpoint<IResult, int, IDynami
         app.MapGet("/api/customer/{custId}/pt-templates", (int custId, IDynamicRepository dynamicRepository)
             => HandleAsync(custId, dynamicRepository))
             .Produces<IEnumerable<PTTemplate>>()
-            .WithTags(EnpointTags.CustomerSettings);
+            .WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(int custId, IDynamicRepository dynamicRepository)

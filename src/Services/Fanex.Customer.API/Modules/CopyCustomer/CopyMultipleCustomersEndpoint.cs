@@ -9,7 +9,7 @@ public class CopyMultipleCustomersEndpoint : IEndpoint<IResult, CopyMultipleCust
     {
         app.MapPost("/api/customer/copy-multiple", (CopyMultipleCustomersRequest request, ICopyCustomerService copyCustomerService)
             => HandleAsync(request, copyCustomerService))
-            .Produces<CopyMultipleCustomerResult>();
+            .Produces<CopyMultipleCustomerResult>().WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(CopyMultipleCustomersRequest request, ICopyCustomerService copyCustomerService)

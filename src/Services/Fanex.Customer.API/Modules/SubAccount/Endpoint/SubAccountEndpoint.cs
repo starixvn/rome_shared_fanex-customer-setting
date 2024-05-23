@@ -15,7 +15,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Endpoint
         public void AddRoute(IEndpointRouteBuilder app)
         {
             var subAcc = app.MapGroup("/api/sub-account")
-                .WithTags(EnpointTags.SubAccount);
+                .WithTags(EndpointTags.SubAccount);
 
             subAcc.MapGet("/index", (int custId, ISubAccountService service)
             => HandleAsync(custId, service))

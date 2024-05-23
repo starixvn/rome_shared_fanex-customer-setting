@@ -11,7 +11,7 @@ public class SearchCustomerEndpoint : IEndpoint<IResult, SearchCustomerRequest, 
         app.MapGet("/api/customer/search", ([AsParameters]SearchCustomerRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
             .Produces<SuggestCustomer>()
-            .WithTags(EnpointTags.CustomerInfos);
+            .WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(SearchCustomerRequest request, ICustomerService customerService)

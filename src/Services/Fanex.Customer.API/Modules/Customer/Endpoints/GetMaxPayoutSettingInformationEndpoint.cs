@@ -10,7 +10,7 @@ public class GetMaxPayoutSettingInformationEndpoint : IEndpoint<IResult, GetMaxP
     {
         app.MapGet("/api/customer/max-payout-setting-information", ([AsParameters]GetMaxPayoutSettingInformationRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
-            .Produces<MaxPayoutSettingInfo>();
+            .Produces<MaxPayoutSettingInfo>().WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(GetMaxPayoutSettingInformationRequest request, ICustomerService customerService)

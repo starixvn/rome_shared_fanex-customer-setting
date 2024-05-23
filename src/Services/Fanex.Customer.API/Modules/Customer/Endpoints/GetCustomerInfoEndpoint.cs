@@ -12,7 +12,7 @@ public class GetCustomerInfoEndpoint : IEndpoint<IResult, int, IDynamicRepositor
         app.MapGet("/api/customer/{custId}", (int custId, IDynamicRepository dynamicRepository)
             => HandleAsync(custId, dynamicRepository))
             .Produces<CustomerInfo>()
-            .WithTags("CustomerInfo");
+            .WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(int custId, IDynamicRepository dynamicRepository)

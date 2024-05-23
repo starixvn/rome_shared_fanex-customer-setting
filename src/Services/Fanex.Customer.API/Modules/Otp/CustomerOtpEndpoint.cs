@@ -16,7 +16,7 @@ namespace Fanex.Customer.API.Modules.Otp
         public void AddRoute(IEndpointRouteBuilder app)
         {
             var otp = app.MapGroup("/api/customer/otp")
-                .WithTags(EnpointTags.OTP);
+                .WithTags(EndpointTags.OTP);
 
             otp.MapPost("/change-status", (ChangeOtpStatusParam request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
                 .Produces<Result>();

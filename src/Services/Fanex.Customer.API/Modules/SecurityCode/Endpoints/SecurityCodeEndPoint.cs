@@ -16,7 +16,7 @@ public class SecurityCodeEndPoint :
     public void AddRoute(IEndpointRouteBuilder app)
     {
         var securityCode = app.MapGroup("/api/security-code")
-            .WithTags(EnpointTags.SecurityCode);
+            .WithTags(EndpointTags.SecurityCode);
 
         securityCode.MapGet("/", (int custId, int subAccId, ISecurityCodeService securityCodeService)
             => HandleAsync(custId, subAccId, securityCodeService))

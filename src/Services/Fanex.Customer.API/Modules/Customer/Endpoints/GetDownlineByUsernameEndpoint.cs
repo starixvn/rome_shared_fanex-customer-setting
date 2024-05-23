@@ -17,7 +17,7 @@ public class GetDownlineByUsernameEndpoint : IEndpoint<IResult, int, int, string
         app.MapGet("/api/customer/{custId}/{subAccountId}/downlines/{username}", (int custId, int subAccountId, string username)
             => HandleAsync(custId, subAccountId, username))
             .Produces<Downline>()
-            .WithTags(EnpointTags.CustomerInfos);
+            .WithTags(EndpointTags.CustomerInfos);
     }
 
     public async Task<IResult> HandleAsync(int custId, int subAccountId, string username)

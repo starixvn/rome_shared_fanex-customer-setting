@@ -32,7 +32,7 @@ public class VerifyOtpEndPoint : IEndpoint<IResult, VerifyOtpRequest, IDynamicRe
         app.MapPost("/api/customer/otp/verify", (VerifyOtpRequest request, IDynamicRepository dynamicRepository)
             => HandleAsync(request, dynamicRepository))
             .Produces<IResult>()
-            .WithTags(EnpointTags.OTP);
+            .WithTags(EndpointTags.OTP);
     }
 
     public async Task<IResult> HandleAsync(VerifyOtpRequest request, IDynamicRepository dynamicRepository)
