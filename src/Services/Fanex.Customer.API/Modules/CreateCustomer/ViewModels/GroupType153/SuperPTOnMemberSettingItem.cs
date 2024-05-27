@@ -46,10 +46,10 @@ public class SuperPTOnMemberSettingItem : PTItem
     }
 
     public override bool Is3DecimalPTValue()
-    => (A1 * 10) % 10 != 0
-        || (M1 * 10) % 10 != 0
-        || (S1 * 10) % 10 != 0
-        || (US1 * 10) % 10 != 0
-        || (S4 * 10) % 10 != 0
-        || (M3 * 10) % 10 != 0;
+    => A1 * 10 % 10 != 0
+        || M1 * 10 % 10 != 0
+        || S1 * 10 % 10 != 0
+        || US1 * 10 % 10 != 0
+        || S4 * 10 % 10 != 0
+        || M3 * 10 % 10 != 0;
 }

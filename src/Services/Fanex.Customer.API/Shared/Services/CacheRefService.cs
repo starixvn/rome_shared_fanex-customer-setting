@@ -1,5 +1,6 @@
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.RemotingRef;
+using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Shared.Services;
 
@@ -42,9 +43,13 @@ public class CacheRefService : ICacheRefService
 
     private const string ProductRefId = "Product";
 
+    private const string ProductUATRefId = "Product_UAT";
+
     private const string ProductGroupRefId = "ProductGroup";
 
     private const string DummySportRefId = "DummySport";
+
+    private const string DummySportUATRefId = "DummySport_UAT";
 
     private const string SubGroupRefId = "SubGroup";
 
@@ -55,29 +60,41 @@ public class CacheRefService : ICacheRefService
     private const string G_GT_Sport_Bettype_RefId = "G_GT_Sport_Bettype";
 
     private const string G_GT_Sport_Bettype_RefId_Saba = "G_GT_Sport_BT_Saba";
+
     private Dictionary<string, string> cacheData = new Dictionary<string, string>();
 
-    public CacheRefService() : this(null)
+    private readonly AppSettings _appSettings;
+
+    public CacheRefService() : this(null, null)
     { }
 
-    public CacheRefService(IRemotingRefService remotingRef)
+    public CacheRefService(IRemotingRefService remotingRef, IOptions<AppSettings> appSettings)
     {
         this.remotingRef = remotingRef ?? new RemotingRefService();
+        _appSettings = appSettings.Value;
     }
 
     public string GetProductName(int productId, string language = "en-US", bool isSiteLabel777 = false)
     {
-        if(isSiteLabel777)
+        string name = null;
+        if (isSiteLabel777)
         {
-            var name = remotingRef.GetResourceDataByRefIdAndResourceId($"{ProductRefId}_Saba", productId.ToString(), language, string.Empty);
-            
-            return string.IsNullOrEmpty(name)?
+            name = remotingRef.GetResourceDataByRefIdAndResourceId($"{ProductRefId}_Saba", productId.ToString(), language, string.Empty);
+
+            return string.IsNullOrEmpty(name) ?
                 remotingRef.GetResourceDataByRefIdAndResourceId(ProductRefId, productId.ToString(), language, productId.ToString()) :
                 name;
         }
 
-        return remotingRef.GetResourceDataByRefIdAndResourceId(ProductRefId, productId.ToString(), language, productId.ToString());
-    }        
+        if (_appSettings.SettingStatus != 0)
+        {
+            name = remotingRef.GetResourceDataByRefIdAndResourceId(ProductUATRefId, productId.ToString(), language, string.Empty);
+        }
+
+        return string.IsNullOrEmpty(name) ?
+            remotingRef.GetResourceDataByRefIdAndResourceId(ProductRefId, productId.ToString(), language, productId.ToString()) :
+            name;
+    }
 
     public string GetProductGroupName(int productGroupId, string language = "en-US")
         => remotingRef.GetResourceDataByRefIdAndResourceId(ProductGroupRefId, productGroupId.ToString(), language, productGroupId.ToString());
@@ -90,11 +107,21 @@ public class CacheRefService : ICacheRefService
         var sportTypeName = remotingRef.GetSportName(sportTypeId.ToString(), language);
         if (string.IsNullOrWhiteSpace(sportTypeName))
         {
-            sportTypeName = remotingRef.GetResourceDataByRefIdAndResourceId(
-                DummySportRefId,
+            if (_appSettings.SettingStatus != 0)
+            {
+                sportTypeName = remotingRef.GetResourceDataByRefIdAndResourceId(
+                DummySportUATRefId,
                 sportTypeId.ToString(),
                 language,
                 string.Empty);
+            }
+
+            sportTypeName = string.IsNullOrEmpty(sportTypeName) ? remotingRef.GetResourceDataByRefIdAndResourceId(
+                DummySportRefId,
+                sportTypeId.ToString(),
+                language,
+                sportTypeId.ToString())
+                : sportTypeName;
         }
 
         return sportTypeName;
@@ -174,7 +201,7 @@ public class CacheRefService : ICacheRefService
             {
                 displayName = GetSportTypeName(sportTypeId, language);
             }
-            
+
             return displayName;
         }
     }

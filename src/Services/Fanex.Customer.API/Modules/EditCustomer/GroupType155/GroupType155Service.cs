@@ -51,6 +51,7 @@ public class GroupType155Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     private Hashtable GenerateSPParams(
         EditRequestContext context, 
         IEnumerable<GroupItemDefault> groupItems, 
+        int productGroupId,
         byte settingStatus = 0)
     {
         var spParams = new Hashtable {
@@ -58,6 +59,7 @@ public class GroupType155Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             { "limit", ComposeJsonSettingParam(groupItems) },
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
+            { "groupid", productGroupId },
             { "ip", context.IP },
             { "settingstatus", settingStatus}
         };

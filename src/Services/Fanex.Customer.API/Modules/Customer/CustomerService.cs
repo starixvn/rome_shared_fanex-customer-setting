@@ -176,19 +176,19 @@ public class CustomerService : ICustomerService
             {
                 Id = group.Key,
                 Name = cacheRefService.GetProductGroupName(group.Key, request.Language),
-                Products = (group.GroupBy(d => d.SubGroupId)
+                Products = group.GroupBy(d => d.SubGroupId)
                     .Select(subGroup => new
                     {
                         Id = subGroup.Key,
                         Name = cacheRefService.GetSubGroupName(subGroup.Key, request.Language),
-                        Products = (subGroup.Select(d => new
+                        Products = subGroup.Select(d => new
                         {
                             Id = d.RealProductId,
                             Name = cacheRefService.GetProductName(d.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
                             Products = ""
-                        }).ToList())
+                        }).ToList()
                     })
-                    .ToList())
+                    .ToList()
             })
             .ToList();
         var jsonResponse = new

@@ -250,6 +250,13 @@
             <Mapping DataField="SuperDiscount" ObjectProperty="Discount" Class="SuperCommissionGroup" />
             <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="SuperCommissionGroup" />
     </Setting>
+    <Setting Key="Acc_CustSetting_BetSetting_154_Upd" SpName="Acc_CustSetting_BetSetting_154_Upd_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_BetSetting_154_Select" SpName="Acc_CustSetting_BetSetting_154_Select_UAT4" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+      <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+      <Mapping DataField="MaxPerNumberMax" ObjectProperty="MaxPerBallMax" />
+    </Setting>
     <Setting Key="Acc_CustSetting_Discount156_Sel_Master" SpName="Acc_CustSetting_Discount_156_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
         <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" Class="MasterCommissionGroup" />
         <Mapping DataField="Bettype" ObjectProperty="BettypeId" Class="MasterCommissionGroup" />

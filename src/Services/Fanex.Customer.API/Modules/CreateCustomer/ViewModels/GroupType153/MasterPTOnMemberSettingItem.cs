@@ -40,11 +40,11 @@ public class MasterPTOnMemberSettingItem : PTItem
     }
 
     public override bool Is3DecimalPTValue()
-    => (A1 * 10) % 10 != 0
-        || (M1 * 10) % 10 != 0
-        || (UM1 * 10) % 10 != 0
-        || (M3 * 10) % 10 != 0
-        || (N3 * 10) % 10 != 0;
+    => A1 * 10 % 10 != 0
+        || M1 * 10 % 10 != 0
+        || UM1 * 10 % 10 != 0
+        || M3 * 10 % 10 != 0
+        || N3 * 10 % 10 != 0;
 
 
 }
