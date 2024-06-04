@@ -82,7 +82,7 @@ const ParlayMaxPayout = forwardRef<ValidationRefType, GroupSettingBlockProps>(fu
       title={t('ParlayMaxPayout')}
       ref={blockRef}
       isPartialUpdate={isEditMode === true && !props.isReadOnly}
-      onSaveClick={() => updateGroupSetting?.(GroupTypeIds.SportsBookBetSetting)}
+      onSaveClick={() => updateGroupSetting?.(GroupTypeIds.ParlayMaxPayout)}
     >
       <ValidationContext.Provider value={{ validationState, setValidationState }}>
         <BlockRow
