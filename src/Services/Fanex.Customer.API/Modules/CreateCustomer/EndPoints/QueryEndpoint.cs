@@ -21,14 +21,11 @@ public class QueryCustomerSettingsEndpoint : IEndpoint<IResult, QuerySuperReques
 
     public async Task<IResult> HandleAsync(QuerySuperRequest request, IQueryCustomerService service)
     {
-        Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
         return Results.Ok(await service.QuerySuper(request));
     }
 
     public async Task<IResult> HandleDownlineAsync(QueryRequest request, IQueryCustomerService service)
     {
-        Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
-
         if (string.IsNullOrWhiteSpace(request.Language))
         {
             request.Language = "en-US";

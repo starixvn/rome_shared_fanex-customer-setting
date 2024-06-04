@@ -21,7 +21,6 @@ public class CopySuperWinlossLimitEndpoint : IEndpoint<IResult, CopySuperWinloss
 
     public async Task<IResult> HandleAsync(CopySuperWinlossLimitRequest request, IGroupTypeBaseService<WinLossLimitItem> groupTypeBaseService, IEditCustomerService service)
     {
-        // Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
         var currentWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 3, GroupTypes.WinlossLimit)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
         var editMultipleRequest = new EditMultipleRequest
         {

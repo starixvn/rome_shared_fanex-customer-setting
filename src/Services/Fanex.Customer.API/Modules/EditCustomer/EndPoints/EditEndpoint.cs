@@ -19,7 +19,6 @@ public class EditEndpoint : IEndpoint<IResult, EditRequest, IEditCustomerService
 
     public async Task<IResult> HandleAsync(EditRequest request, IEditCustomerService service)
     {
-        Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
         if (!service.ValidateRequest(request.Settings))
         {
             return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
@@ -40,7 +39,6 @@ public class EditMultipleEndpoint : IEndpoint<IResult, EditMultipleRequest, IEdi
 
     public async Task<IResult> HandleAsync(EditMultipleRequest request, IEditCustomerService service)
     {
-        Fanex.Logging.LogService.Info(JsonConvert.SerializeObject(request));
         if (!service.ValidateRequest(request.Settings))
         {
             return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
