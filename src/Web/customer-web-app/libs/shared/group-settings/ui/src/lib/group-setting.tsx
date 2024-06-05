@@ -95,6 +95,7 @@ export const GroupSetting = forwardRef<ValidationRefType, Props>(function GroupS
       case GroupTypeIds.Commission:
         return <Commission groupTypeId={id} isReadOnly={isReadOnly} />;
       case GroupTypeIds.SportsBookBetSetting:
+      case GroupTypeIds.RNGGamesBetSetting:
         return <SportsBookBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
       case GroupTypeIds.ParlayMaxPayout:
         return <ParlayMaxPayout isReadOnly={isReadOnly} ref={parlayMaxPayoutRef} />;

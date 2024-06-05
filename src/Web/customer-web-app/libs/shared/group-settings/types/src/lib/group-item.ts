@@ -76,6 +76,14 @@ export interface SportsBookBetSettingGroupItem
   extends SportsBookBetSettingProps,
     GroupSettingItem<SportsBookBetSettingProps> {}
 
+export interface RNGGamesBetSettingProps extends BetSettingsProps {
+  maxPerBall?: number;
+}
+
+export interface RNGGamesBetSettingGroupItem
+  extends RNGGamesBetSettingProps,
+    GroupSettingItem<RNGGamesBetSettingProps> {}
+
 export interface ParlayMaxPayoutProps {
   combo2: number;
   isAllowUnlimitCombo2: boolean;
