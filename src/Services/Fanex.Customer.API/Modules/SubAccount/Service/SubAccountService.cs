@@ -11,11 +11,11 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
         public Task<SubAccountModel> GetSubAccount(int custId, int subAccId);
 
-        public Task<Result> UpdateSubAccountInfo(int custId, UpdateSubAccountInfoModel subAccountModel);
+        public Task<Result> UpdateSubAccountInfo(UpdateSubAccountInfoModel subAccountModel);
         
-        public Task<Result> UpdateSubAccountPageAccess(int custId, UpdateSubAccountPageAccessModel subAccountModel);
+        public Task<Result> UpdateSubAccountPageAccess(UpdateSubAccountPageAccessModel subAccountModel);
 
-        public Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel);
+        public Task<Result> AddSubAccount(AddSubAccountModel subAccountModel);
     }
 
     public class SubAccountService : ISubAccountService
@@ -27,12 +27,12 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             this.dynamicRepository = dynamicRepository;
         }
 
-        public async Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel)
+        public async Task<Result> AddSubAccount(AddSubAccountModel subAccountModel)
         {
             var command = new AddSubAccountCriteria
             {
-                CustId = custId,
-                UserId = custId,
+                CustId = subAccountModel.CustId,
+                UserId = subAccountModel.CustId,
                 Username = subAccountModel.Username,
                 UserPwd = subAccountModel.Password,
                 Firstname = subAccountModel.Firstname,
@@ -59,13 +59,13 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             return result ?? Enumerable.Empty<SubAccountModel>();
         }
 
-        public async Task<Result> UpdateSubAccountInfo(int custId, UpdateSubAccountInfoModel subAccountModel)
+        public async Task<Result> UpdateSubAccountInfo(UpdateSubAccountInfoModel subAccountModel)
         {
             var command = new UpdateSubAccountInfoCriteria
             {
                 Closed = subAccountModel.Closed,
-                CustId = custId,
-                UserId = custId,
+                CustId = subAccountModel.CustId,
+                UserId = subAccountModel.CustId,
                 Firstname = subAccountModel.Firstname,
                 Lastname = subAccountModel.Lastname,
                 Language = subAccountModel.Language,
@@ -78,16 +78,16 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             return new Result(command.ErrCode, command.ErrMsg);
         }
 
-        public async Task<Result> UpdateSubAccountPageAccess(int custId, UpdateSubAccountPageAccessModel subAccountModel)
+        public async Task<Result> UpdateSubAccountPageAccess(UpdateSubAccountPageAccessModel subAccountModel)
         {
             var command = new UpdateSubAccountPageAccessCriteria
             {
-                CustId = custId,
+                CustId = subAccountModel.CustId,
                 Language = subAccountModel.Language,
                 LoginIP = subAccountModel.IP,
                 SubAccId = subAccountModel.SubAccId,
                 UpdPageAccess = subAccountModel.PageAccess,
-                UserId = custId
+                UserId = subAccountModel.CustId
             };
 
             await dynamicRepository.ExecuteAsync(command);
