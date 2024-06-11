@@ -1,8 +1,13 @@
 import { initProductStatusGroup } from '@customer-web-app/edit-customer-page';
-import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    AgentPositionTakingGroupItem, BetLimitGroupItem, MasterPositionTakingGroupItem, ParlayMaxPayoutGroupItem,
-    ProductGroup, SportsBookBetSettingGroupItem, WinLossLimitGroupItem
+  AgentPositionTakingGroupItem,
+  BetLimitGroupItem,
+  MasterPositionTakingGroupItem,
+  ParlayMaxPayoutGroupItem,
+  ProductGroup,
+  SportsBookBetSettingGroupItem,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export function getNewMultipleEditCustomerSettings(
@@ -90,7 +95,9 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
               item.minBet = 0;
               item.maxBet = 0;
               item.maxPerMatch = 0;
-              item.maxPayoutPerMatch = 0;
+              item.maxPayoutPerMatch = [SportTypeIds.ESports, SportTypeIds.MuayThai].includes(item.sportTypeId)
+                ? item.maxPayoutPerMatch
+                : 0;
             }
 
             return {
