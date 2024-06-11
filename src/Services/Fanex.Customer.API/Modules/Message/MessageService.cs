@@ -17,12 +17,9 @@ public class MessageService : IMessageService
 
     private readonly int TimeDiffGMT_4ToGMT8 = 12;
 
-    public MessageService() : this(null)
-    { }
-
     public MessageService(ICacheRefService cacheRefService)
     {
-        this.cacheRefService = cacheRefService ?? new CacheRefService();
+        this.cacheRefService = cacheRefService;
     }
 
     public MessageContent TranslateMessage(int messageType, string rawMessage, string language)

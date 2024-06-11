@@ -421,6 +421,10 @@
 		<value>การตั้งค่าแบ่งสู้ ได้อัพเดทเรียบร้อยแล้ว.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_154" xml:space="preserve">
+		<value>การตั้งค่าเดิมพัน ได้อัพเดทเรียบร้อยแล้ว.</value>
+		<comment/>
+	</data>
 	<data name="UpdateSuccess_155" xml:space="preserve">
 		<value>ปรับข้อมูลวงเงินแพ้ชนะเรียบร้อยแล้ว</value>
 		<comment/>

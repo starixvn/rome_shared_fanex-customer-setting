@@ -421,6 +421,10 @@
 		<value>PT được cập nhật thành công.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_154" xml:space="preserve">
+		<value>Thiết lập về tiền cược được cập nhật thành công</value>
+		<comment/>
+	</data>
 	<data name="UpdateSuccess_155" xml:space="preserve">
 		<value>Cập nhật Giới hạn thắng thua thành công.</value>
 		<comment/>

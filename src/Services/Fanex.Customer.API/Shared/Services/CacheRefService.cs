@@ -65,12 +65,9 @@ public class CacheRefService : ICacheRefService
 
     private readonly AppSettings _appSettings;
 
-    public CacheRefService() : this(null, null)
-    { }
-
     public CacheRefService(IRemotingRefService remotingRef, IOptions<AppSettings> appSettings)
     {
-        this.remotingRef = remotingRef ?? new RemotingRefService();
+        this.remotingRef = remotingRef;
         _appSettings = appSettings.Value;
     }
 

@@ -4,8 +4,10 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType160;
 using Fanex.Customer.API.Modules.EditCustomer;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 using Newtonsoft.Json.Linq;
 
@@ -14,7 +16,8 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
 
 public class GroupType160Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
 {
-    public GroupType160Service() : base(null, null) { }
+    public GroupType160Service(IMessageService messageService, ICacheRefService cacheRefService) 
+        : base(messageService, cacheRefService) { }
 
     public override UpdateGroupTypeResult Validate(
         EditRequestContext context,

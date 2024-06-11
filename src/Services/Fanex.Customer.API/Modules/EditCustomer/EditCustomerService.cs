@@ -6,6 +6,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.GroupType152;
 using Fanex.Customer.API.Modules.EditCustomer.GroupType153;
+using Fanex.Customer.API.Modules.EditCustomer.GroupType154;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
 using Fanex.Customer.API.Modules.EditCustomer.Services.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.Message;
@@ -56,14 +57,15 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         this.siteDBGroupService = siteDBGroupService;
         groupItemForEditMapping = new()
         {
-            {150, new GroupType150Service()},
-            {151, new GroupType151Service()},
-            {152, new GroupType152Service()},
-            {153, new GroupType153Service()},
-            {155, new GroupType155Service()},
-            {156, new GroupType156Service()},
-            {158, new GroupType158Service()},
-            {160, new GroupType160Service()},
+            {150, new GroupType150Service(messageService, cacheRefService)},
+            {151, new GroupType151Service(messageService, cacheRefService)},
+            {152, new GroupType152Service(messageService, cacheRefService)},
+            {153, new GroupType153Service(messageService, cacheRefService)},
+            {154, new GroupType154Service(messageService, cacheRefService)},
+            {155, new GroupType155Service(messageService, cacheRefService)},
+            {156, new GroupType156Service(messageService, cacheRefService)},
+            {158, new GroupType158Service(messageService, cacheRefService)},
+            {160, new GroupType160Service(messageService, cacheRefService)},
         };
     }
     

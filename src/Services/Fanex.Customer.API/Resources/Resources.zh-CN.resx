@@ -425,6 +425,10 @@
 		<value>占成数设定已更新成功.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_154" xml:space="preserve">
+		<value>投注设定已更新成功.</value>
+		<comment/>
+	</data>
 	<data name="UpdateSuccess_155" xml:space="preserve">
 		<value>输赢限额已成功更新.</value>
 		<comment/>

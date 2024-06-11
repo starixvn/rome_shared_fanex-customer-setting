@@ -441,6 +441,10 @@
 		<value>Position taking is updated successfully.</value>
 		<comment/>
 	</data>
+	<data name="UpdateSuccess_154" xml:space="preserve">
+		<value>Bet Setting is updated successfully.</value>
+		<comment/>
+	</data>
 	<data name="UpdateSuccess_155" xml:space="preserve">
 		<value>Updated Win Loss Limit successfully.</value>
 		<comment/>

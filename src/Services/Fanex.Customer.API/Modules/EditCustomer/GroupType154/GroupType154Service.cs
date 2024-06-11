@@ -3,8 +3,10 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType154;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 using Newtonsoft.Json.Linq;
 
@@ -12,7 +14,8 @@ namespace Fanex.Customer.API.Modules.EditCustomer.GroupType154;
 
 public class GroupType154Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
 {
-    public GroupType154Service() : base(null, null) { }
+    public GroupType154Service(IMessageService messageService, ICacheRefService cacheRefService) 
+        : base(messageService, cacheRefService) { }
 
     public override UpdateGroupTypeResult Validate(
         EditRequestContext context,
@@ -53,7 +56,7 @@ public class GroupType154Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     {
         var spParams = new Hashtable {
             { "custid", context.CustId },
-            { "betsetting", ComposeJsonSettingParam(groupTypeId, groupItems) },
+            { "betlimit", ComposeJsonSettingParam(groupItems) },
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
             { "ip", context.IP },
@@ -64,7 +67,7 @@ public class GroupType154Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         return spParams;
     }
 
-    private string ComposeJsonSettingParam(int groupTypeId, IEnumerable<GroupItemDefault> groupItems)
+    private string ComposeJsonSettingParam(IEnumerable<GroupItemDefault> groupItems)
     {
         if(!groupItems.Any())
         {
