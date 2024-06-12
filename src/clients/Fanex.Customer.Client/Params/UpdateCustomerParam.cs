@@ -15,6 +15,8 @@ namespace Fanex.Customer.Client.Params
             int roleId,
             int uplineRoleId,
             string ip,
+            string site,
+            string siteLabel,
             string language = Languages.English)
         {
             GeneralInfo = generalInfo;
@@ -26,6 +28,8 @@ namespace Fanex.Customer.Client.Params
             RoleId = roleId;
             UplineRoleId = uplineRoleId;
             Ip = ip;
+            Site = site;
+            SiteLabel = siteLabel;
             Language = language;
         }
 
@@ -48,5 +52,9 @@ namespace Fanex.Customer.Client.Params
         public string Ip { get; }
 
         public string Language { get; }
+
+        public string Site { get; }
+
+        public string SiteLabel { get; }
     }
 }

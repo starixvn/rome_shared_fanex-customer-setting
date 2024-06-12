@@ -34,6 +34,10 @@ public class EditRequestContext
 
     public string IP { get; set; }
 
+    public string Site { get; set; }
+
+    public string SiteLabel { get; set; }
+
     public byte SystemId { get; set; }
 
     public string Language { get; set; }
@@ -46,9 +50,7 @@ public class EditRequest
     public CustomerSetting Settings { get; set; }
 }
 
-public class EditMultipleRequest
+public class EditMultipleRequest: EditRequest
 {
-    public EditMultipleRequestContext Context { get; set; }
-
-    public CustomerSetting Settings { get; set; }
+    public new EditMultipleRequestContext Context { get; set; }
 }

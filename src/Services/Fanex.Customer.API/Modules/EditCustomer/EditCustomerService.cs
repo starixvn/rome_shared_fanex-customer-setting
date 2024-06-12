@@ -21,7 +21,7 @@ namespace Fanex.Customer.API.Modules.EditCustomer.Services;
 
 public interface IEditCustomerService
 {
-    bool ValidateRequest(CustomerSetting settings);
+    bool ValidateRequest(EditRequest request);
 
     Task<UpdateCustomerResult> Update(EditRequest request);
 
@@ -65,27 +65,27 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         };
     }
 
-    public bool ValidateRequest(CustomerSetting settings)
+    public bool ValidateRequest(EditRequest request)
     {
-        if (settings.GeneralInfo != null)
+        if (request.Settings.GeneralInfo != null)
         {
-            if ((!string.IsNullOrWhiteSpace(settings.GeneralInfo.FirstName) && settings.GeneralInfo.FirstName.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.LastName) && settings.GeneralInfo.LastName.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.Phone) && settings.GeneralInfo.Phone.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.MobilePhone) && settings.GeneralInfo.MobilePhone.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.Fax) && settings.GeneralInfo.Fax.ContainsHTML()))
+            if ((!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.FirstName) && request.Settings.GeneralInfo.FirstName.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.LastName) && request.Settings.GeneralInfo.LastName.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Phone) && request.Settings.GeneralInfo.Phone.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.MobilePhone) && request.Settings.GeneralInfo.MobilePhone.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Fax) && request.Settings.GeneralInfo.Fax.ContainsHTML()))
             {
                 return false;
             }
+        }
 
-            if (!appSettings.IsSpecialSites(settings.GeneralInfo.SiteLabel))
+        if (!appSettings.IsSpecialSites(request.Context.SiteLabel))
+        {
+            foreach (var productGroup in request.Settings.ProductGroups)
             {
-                foreach (var productGroup in settings.ProductGroups)
+                if (productGroup.GroupTypes.Any(gt => gt.Id == 153 && gt.GroupItems.Any(gi => gi.Is3DecimalPTValue())))
                 {
-                    if (productGroup.GroupTypes.Any(gt => gt.Id == 153 && gt.GroupItems.Any(gi => gi.Is3DecimalPTValue())))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
         }

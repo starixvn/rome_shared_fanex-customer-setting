@@ -11,6 +11,8 @@ namespace Fanex.Customer.Client.Params
             int creatorId,
             int subAccId,
             string ip,
+            string site,
+            string siteLabel,
             CreationModes mode = CreationModes.LiteMode,
             string language = Languages.English,
             string uiBehavior = null)
@@ -22,6 +24,8 @@ namespace Fanex.Customer.Client.Params
             SubAccId = subAccId;
             Language = language;
             IP = ip;
+            Site = site;
+            SiteLabel = siteLabel;
             Mode = (byte)mode;
         }
 
@@ -40,5 +44,9 @@ namespace Fanex.Customer.Client.Params
         public string IP { get; }
 
         public byte Mode { get; }
+
+        public string Site { get; }
+
+        public string SiteLabel { get; }
     }
 }

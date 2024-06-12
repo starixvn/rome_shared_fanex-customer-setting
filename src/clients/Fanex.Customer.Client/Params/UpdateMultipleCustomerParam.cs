@@ -6,17 +6,19 @@ namespace Fanex.Customer.Client.Params
     public class UpdateMultipleCustomerParam
     {
         public UpdateMultipleCustomerParam(
-           string productGroups,
-           int actorId,
-           int subAccId,
-           int custId,
-           string userName,
-           int roleId,
-           int uplineRoleId,
-           string ip,
-           string customerIds,
-           string customerNames,
-           string language = Languages.English)
+            string productGroups,
+            int actorId,
+            int subAccId,
+            int custId,
+            string userName,
+            int roleId,
+            int uplineRoleId,
+            string ip,
+            string customerIds,
+            string customerNames,
+            string site,
+            string siteLabel,
+            string language = Languages.English)
         {
             ProductGroups = productGroups;
             ActorId = actorId;
@@ -26,6 +28,8 @@ namespace Fanex.Customer.Client.Params
             RoleId = roleId;
             UplineRoleId = uplineRoleId;
             Ip = ip;
+            Site = site;
+            SiteLabel = siteLabel;
             CustomerIds = customerIds;
             CustomerNames = customerNames;
             Language = language;
@@ -54,5 +58,9 @@ namespace Fanex.Customer.Client.Params
         public string CustomerIds { get; }
 
         public string CustomerNames { get; }
+
+        public string Site { get; }
+
+        public string SiteLabel { get; }
     }
 }

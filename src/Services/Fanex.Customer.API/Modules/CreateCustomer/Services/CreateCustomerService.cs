@@ -56,7 +56,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
             return false;
         }
 
-        if (!appSettings.IsSupportPT3Decimal(request.Settings.GeneralInfo.SiteLabel))
+        if (!appSettings.IsSupportPT3Decimal(request.Context.SiteLabel))
         {
             foreach (var productGroup in request.Settings.ProductGroups)
             {
