@@ -91,7 +91,9 @@ export const SettingService = {
     productGroups: ProductGroup[] | [],
     custId: number,
     roleId?: number,
-    upLineRoleId?: number
+    upLineRoleId?: number,
+    site?: string,
+    siteLabel?: string
   ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
@@ -103,6 +105,8 @@ export const SettingService = {
           generalInfo,
           productGroups: JSON.stringify(productGroups),
           productGroupId: params.productGroupId,
+          site,
+          siteLabel,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -123,7 +127,9 @@ export const SettingService = {
     customerIds: string,
     customerNames: string,
     roleId: number,
-    uplineRoleId: number
+    uplineRoleId: number,
+    site: string,
+    siteLabel: string
   ) =>
     axiosInstance
       .post<UpdateCustomerResult[]>(
@@ -136,6 +142,8 @@ export const SettingService = {
           customerNames,
           productGroups: JSON.stringify(productGroups),
           productGroupId: params.productGroupId,
+          site,
+          siteLabel,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -150,7 +158,14 @@ export const SettingService = {
         // Something unexpected
         throw error;
       }),
-  UpdateSuperBetSetting: (productGroups: ProductGroup[] | [], custId: number, roleId: number, uplineRoleId: number) =>
+  UpdateSuperBetSetting: (
+    productGroups: ProductGroup[] | [],
+    custId: number,
+    roleId: number,
+    uplineRoleId: number,
+    site: string,
+    siteLabel: string
+  ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
         'Customer/EditSuperBetSetting',
@@ -160,6 +175,8 @@ export const SettingService = {
           uplineRoleId,
           productGroups: JSON.stringify(productGroups),
           productGroupId: params.productGroupId,
+          site,
+          siteLabel,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -180,7 +197,9 @@ export const SettingService = {
     customerIds: string,
     customerNames: string,
     roleId: number,
-    uplineRoleId: number
+    uplineRoleId: number,
+    site: string,
+    siteLabel: string
   ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
@@ -193,6 +212,8 @@ export const SettingService = {
           uplineRoleId,
           productGroups: JSON.stringify(productGroups),
           productGroupId: params.productGroupId,
+          site,
+          siteLabel,
         },
         {
           headers: getHeadersForPostRequest(),
