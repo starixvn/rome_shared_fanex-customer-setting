@@ -50,7 +50,9 @@ public class EditRequest
     public CustomerSetting Settings { get; set; }
 }
 
-public class EditMultipleRequest: EditRequest
+public class EditMultipleRequest
 {
-    public new EditMultipleRequestContext Context { get; set; }
+    public EditMultipleRequestContext Context { get; set; }
+
+    public CustomerSetting Settings { get; set; }
 }
