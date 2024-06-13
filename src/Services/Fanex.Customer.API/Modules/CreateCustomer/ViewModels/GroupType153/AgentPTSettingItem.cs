@@ -65,5 +65,6 @@ public class AgentPTSettingItem : PTItem
         => (M2 * 10) % 10 != 0
             || (UM2 * 10) % 10 != 0
             || (A2 * 10) % 10 != 0
-            || (N2 * 10) % 10 != 0;
+            || (N2 * 10) % 10 != 0
+            || (MasterPTOnMembers * 10) % 10 != 0;
 }
