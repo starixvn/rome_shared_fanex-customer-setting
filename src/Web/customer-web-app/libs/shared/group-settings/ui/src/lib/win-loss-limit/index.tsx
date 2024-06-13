@@ -8,7 +8,6 @@ import { GroupTypeIds, MaxNumberInputLength, UserLevel } from '@customer-web-app
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { WinLossLimitGroupItem } from '@customer-web-app/shared-group-settings-types';
-import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { IconInfo } from '@customer-web-app/shared/base/common-icon';
@@ -16,6 +15,7 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import NiceModal from '@ebay/nice-modal-react';
 
 import { CustomerSettingInformationPageUrl } from '../customer-setting-information-page-url';
+import { scrollToBLock } from '../scroll-helper';
 import { GroupSettingBlockProps } from '../types';
 import WinLossAmount from './win-loss-amount';
 
@@ -286,21 +286,23 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
         isPartialUpdate={isEditMode === true && !isReadOnly}
         onSaveClick={() => updateGroupSetting?.(GroupTypeIds.WinLossLimit)}
       >
-        <div className="nav-tab">
-          {productIds.map((item) => (
-            <button
-              className={cn('item', { active: item === selectedProductId })}
-              key={item}
-              onClick={() => setSelectedProductId(item)}
-            >
-              {winLossLimitItems.find((i) => i.productId === item)?.productName}
-            </button>
-          ))}
-        </div>
+        {productIds.length > 1 && (
+          <div className="nav-tab">
+            {productIds.map((item) => (
+              <button
+                className={cn('item', { active: item === selectedProductId })}
+                key={item}
+                onClick={() => setSelectedProductId(item)}
+              >
+                {winLossLimitItems.find((i) => i.productId === item)?.productName}
+              </button>
+            ))}
+          </div>
+        )}
         <BlockRow isHeaderRow>
           <BlockColumn>{t('MaximumWin')}</BlockColumn>
           <BlockColumn>{t('MaximumLoss')}</BlockColumn>
-          <div style={{width: "400px", height: "100%"}}>
+          <div style={{ width: '400px', height: '100%' }}>
             <BlockColumn>{t('')}</BlockColumn>
           </div>
         </BlockRow>
@@ -316,33 +318,36 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
                   handleWinLossLimitChange={handleWinLossLimitChange}
                   setTooltipError={setValidateWinLossLimit}
                 />
-                <div style={{width: "400px", height: "100%"}}>
-                <BlockColumn>
-                  <div>
-                    <div className="blockLeft" style={{ display: 'flex', flexDirection: 'column' }}>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <input
-                          type="checkbox"
-                          checked={winLossLimit.isAutoReset}
-                          disabled={!winLossLimit.isAutoResetUpline || isReadOnly}
-                          onChange={(e) => handleWinLossLimitChange(winLossLimit, { isAutoReset: e.target.checked })}
-                        />
-                        <div>
-                          <span>{t('DailyAutoResetLimitAt')} </span>
-                          {params.roleId === UserLevel.Member && (
-                          <span
-                            aria-hidden
-                            onClick={() => showCurrentWinLossAmount(winLossLimit.sportTypeId, winLossLimit.betTypeId)}
-                            style={{ cursor: 'pointer', color: 'blue', display: "inline-block" }}
-                          >{t('ClickToViewCurrentWinLossAmount')}
-                          </span>
-                        )}
-                        </div>                        
-                      </div>                      
+                <div style={{ width: '400px', height: '100%' }}>
+                  <BlockColumn>
+                    <div>
+                      <div className="blockLeft" style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <input
+                            type="checkbox"
+                            checked={winLossLimit.isAutoReset}
+                            disabled={!winLossLimit.isAutoResetUpline || isReadOnly}
+                            onChange={(e) => handleWinLossLimitChange(winLossLimit, { isAutoReset: e.target.checked })}
+                          />
+                          <div>
+                            <span>{t('DailyAutoResetLimitAt')} </span>
+                            {params.roleId === UserLevel.Member && (
+                              <span
+                                aria-hidden
+                                onClick={() =>
+                                  showCurrentWinLossAmount(winLossLimit.sportTypeId, winLossLimit.betTypeId)
+                                }
+                                style={{ cursor: 'pointer', color: 'blue', display: 'inline-block' }}
+                              >
+                                {t('ClickToViewCurrentWinLossAmount')}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
                   </BlockColumn>
-                  </div>
+                </div>
               </BlockRow>
             );
           })}
