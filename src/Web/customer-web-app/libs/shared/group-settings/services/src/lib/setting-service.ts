@@ -123,32 +123,27 @@ export const SettingService = {
       }),
   UpdateMultipleCustomers: (
     productGroups: ProductGroup[] | [],
-    custId: number,
     customerIds: string,
     customerNames: string,
     roleId: number,
     uplineRoleId: number,
     site: string,
     siteLabel: string
-  ) =>
-    axiosInstance
-      .post<UpdateCustomerResult[]>(
-        'Customer/UpdateMultipleCustomers',
-        {
-          custId,
-          roleId,
-          uplineRoleId,
-          customerIds,
-          customerNames,
-          productGroups: JSON.stringify(productGroups),
-          productGroupId: params.productGroupId,
-          site,
-          siteLabel,
-        },
-        {
-          headers: getHeadersForPostRequest(),
-        }
-      )
+  ) => {
+    const bodyFormData = new FormData();
+    bodyFormData.append('roleId', roleId.toString());
+    bodyFormData.append('uplineRoleId', uplineRoleId.toString());
+    bodyFormData.append('customerIds', customerIds);
+    bodyFormData.append('customerNames', customerNames);
+    bodyFormData.append('productGroups', JSON.stringify(productGroups));
+    bodyFormData.append('productGroupId', params.productGroupId.toString());
+    bodyFormData.append('site', site);
+    bodyFormData.append('siteLabel', siteLabel);
+
+    return axiosInstance
+      .post<UpdateCustomerResult[]>('Customer/UpdateMultipleCustomers', bodyFormData, {
+        headers: { ...getHeadersForPostRequest(), 'Content-Type': 'multipart/form-data' },
+      })
       .then((response) => response.data)
       .catch((error) => {
         if (error.response?.status === 401 || error.response?.status === 403) {
@@ -157,7 +152,8 @@ export const SettingService = {
 
         // Something unexpected
         throw error;
-      }),
+      });
+  },
   UpdateSuperBetSetting: (
     productGroups: ProductGroup[] | [],
     custId: number,

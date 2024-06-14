@@ -197,7 +197,6 @@ export function EditMultipleCustomerPage() {
             )
           : await SettingService.UpdateMultipleCustomers(
               productGroupWithPTOnMembers,
-              params.custId,
               params.custIds,
               params.usernames,
               params.roleId,
