@@ -26,6 +26,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
 
   const refDetails = [
     { ref: betSettingRef, id: GroupTypeIds.SportsBookBetSetting },
+    { ref: betSettingRef, id: GroupTypeIds.RNGGamesBetSetting },
     { ref: parlayMaxPayoutRef, id: GroupTypeIds.ParlayMaxPayout },
     { ref: positionTakingRef, id: GroupTypeIds.PositionTaking },
     { ref: winLossLimitRef, id: GroupTypeIds.WinLossLimit },

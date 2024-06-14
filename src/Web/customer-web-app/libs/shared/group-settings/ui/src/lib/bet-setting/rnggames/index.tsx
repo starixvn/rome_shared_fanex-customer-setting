@@ -230,7 +230,7 @@ const RNGGamesBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProps>
         );
       })}
 
-      {validationState && (
+      {validationState && !validationState.isValid && (
         <WrapperTooltip
           type="error"
           anchorSelect={`#${validationState.fieldName}`}

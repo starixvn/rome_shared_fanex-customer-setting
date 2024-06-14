@@ -251,7 +251,7 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
         );
       })}
 
-      {validationState && (
+      {validationState && !validationState.isValid && (
         <WrapperTooltip
           type="error"
           anchorSelect={`#${validationState.fieldName}`}
