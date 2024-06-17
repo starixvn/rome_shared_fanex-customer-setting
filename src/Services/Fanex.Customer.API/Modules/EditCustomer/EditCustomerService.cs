@@ -87,7 +87,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             }
         }
 
-        if (!appSettings.IsSpecialSites(siteLabel))
+        if (!appSettings.IsSupportPT3Decimal(siteLabel))
         {
             foreach (var productGroup in settings.ProductGroups)
             {
