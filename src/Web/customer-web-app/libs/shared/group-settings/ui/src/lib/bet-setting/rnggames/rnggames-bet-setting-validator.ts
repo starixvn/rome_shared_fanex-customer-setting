@@ -2,8 +2,7 @@ import {
   GroupSettingItem,
   RNGGamesBetSettingGroupItem,
   RNGGamesBetSettingProps,
-} from 'libs/shared/group-settings/types/src/lib/group-item';
-
+} from '@customer-web-app/shared-group-settings-types';
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 
 import BetSettingBaseValidator, { ValidateBetSetting } from '../bet-setting-base-validator';
@@ -50,7 +49,7 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
         value: NumberHelper.formatWithCommas(this.upline.maxPerMatch),
       });
 
-    if (this.maxPerBall !== undefined && this.maxPerBall !== null && this.maxPerMatch > this.maxPerBall)
+    if (this.maxPerBall !== undefined && this.maxPerBall !== null && this.maxPerMatch < this.maxPerBall)
       return new ValidateBetSetting(false, fieldName, 'maxPerMatchMustBeGreaterThanOrEqualToMaxPerBall');
 
     if (this.maxBet !== undefined && this.maxBet > this.maxPerMatch)
@@ -68,7 +67,7 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
         value: NumberHelper.formatWithCommas(this.upline.maxPerBall),
       });
 
-    if (this.maxPerMatch !== undefined && this.maxPerBall < this.maxPerMatch && this.maxPerBall !== null)
+    if (this.maxPerMatch !== undefined && this.maxPerBall > this.maxPerMatch && this.maxPerBall !== null)
       return new ValidateBetSetting(false, fieldName, 'maxPerBallMustBeLessThanOrEqualToMaxPerMatch');
 
     return new ValidateBetSetting(true);

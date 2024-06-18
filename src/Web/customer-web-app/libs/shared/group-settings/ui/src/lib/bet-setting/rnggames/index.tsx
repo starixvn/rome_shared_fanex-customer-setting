@@ -101,7 +101,7 @@ const RNGGamesBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProps>
               minBet: sourceBetSetting.minBet,
               maxBet: sourceBetSetting.maxBet,
               maxPerMatch: sourceBetSetting.maxPerMatch,
-              maxPerBall: item.maxPerBall === null ? null : sourceBetSetting.maxPerBall,
+              maxPerBall: sourceBetSetting.maxPerBall === null ? item.maxPerBall : sourceBetSetting.maxPerBall,
               isMultipleModeChecked: sourceBetSetting.isMultipleModeChecked,
             },
           };
