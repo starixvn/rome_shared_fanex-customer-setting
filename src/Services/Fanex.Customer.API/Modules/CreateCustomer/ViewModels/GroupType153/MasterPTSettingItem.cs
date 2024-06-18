@@ -65,5 +65,6 @@ public class MasterPTSettingItem : PTItem
         => (S3 * 10) % 10 != 0
             || (US3 * 10) % 10 != 0
             || (M3 * 10) % 10 != 0
-            || (N3 * 10) % 10 != 0;
+            || (N3 * 10) % 10 != 0
+            || (SuperPTOnMembers * 10) % 10 != 0;
 }

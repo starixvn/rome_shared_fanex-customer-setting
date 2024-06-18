@@ -21,7 +21,9 @@ namespace Fanex.Customer.API.Modules.EditCustomer.Services;
 
 public interface IEditCustomerService
 {
-    bool ValidateRequest(CustomerSetting settings);
+    bool ValidateRequest(EditRequest request);
+
+    bool ValidateMultipleRequest(EditMultipleRequest request);
 
     Task<UpdateCustomerResult> Update(EditRequest request);
 
@@ -64,28 +66,34 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {160, new GroupType160Service()},
         };
     }
+    
+    public bool ValidateMultipleRequest(EditMultipleRequest request)
+        => Validate(request.Settings.GeneralInfo, request.Settings, request.Context.SiteLabel);
 
-    public bool ValidateRequest(CustomerSetting settings)
+    public bool ValidateRequest(EditRequest request)
+        => Validate(request.Settings.GeneralInfo, request.Settings, request.Context.SiteLabel);
+
+    private bool Validate(GeneralInformation generalInformation,CustomerSetting settings, string siteLabel)
     {
-        if (settings.GeneralInfo != null)
+        if (generalInformation != null)
         {
-            if ((!string.IsNullOrWhiteSpace(settings.GeneralInfo.FirstName) && settings.GeneralInfo.FirstName.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.LastName) && settings.GeneralInfo.LastName.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.Phone) && settings.GeneralInfo.Phone.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.MobilePhone) && settings.GeneralInfo.MobilePhone.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(settings.GeneralInfo.Fax) && settings.GeneralInfo.Fax.ContainsHTML()))
+            if ((!string.IsNullOrWhiteSpace(generalInformation.FirstName) && generalInformation.FirstName.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(generalInformation.LastName) && generalInformation.LastName.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(generalInformation.Phone) && generalInformation.Phone.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(generalInformation.MobilePhone) && generalInformation.MobilePhone.ContainsHTML())
+            || (!string.IsNullOrWhiteSpace(generalInformation.Fax) && generalInformation.Fax.ContainsHTML()))
             {
                 return false;
             }
+        }
 
-            if (!appSettings.IsSpecialSites(settings.GeneralInfo.SiteLabel))
+        if (!appSettings.IsSupportPT3Decimal(siteLabel))
+        {
+            foreach (var productGroup in settings.ProductGroups)
             {
-                foreach (var productGroup in settings.ProductGroups)
+                if (productGroup.GroupTypes.Any(gt => gt.Id == 153 && gt.GroupItems.Any(gi => gi.Is3DecimalPTValue())))
                 {
-                    if (productGroup.GroupTypes.Any(gt => gt.Id == 153 && gt.GroupItems.Any(gi => gi.Is3DecimalPTValue())))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
         }

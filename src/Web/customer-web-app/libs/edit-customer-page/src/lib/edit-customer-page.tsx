@@ -147,7 +147,9 @@ export function EditCustomerPage() {
           [],
           params.custId,
           params.roleId,
-          params.uplineRoleId
+          params.uplineRoleId,
+          generalInfo.site,
+          generalInfo.siteLabel
         );
         showUpdateCustomerResult(result);
         setRefreshData(!refreshData);
@@ -244,14 +246,18 @@ export function EditCustomerPage() {
               productGroupWithPTOnMembers,
               params.custId,
               params.roleId,
-              params.uplineRoleId
+              params.uplineRoleId,
+              generalInfo.site,
+              generalInfo.siteLabel
             )
           : await SettingService.UpdateCustomer(
               null,
               productGroupWithPTOnMembers,
               params.custId,
               params.roleId,
-              params.uplineRoleId
+              params.uplineRoleId,
+              generalInfo.site,
+              generalInfo.siteLabel
             );
         setTimeout(() => {
           setRefreshData(!refreshData);
@@ -301,14 +307,18 @@ export function EditCustomerPage() {
               productGroupWithPTOnMembers,
               params.custId,
               params.roleId,
-              params.uplineRoleId
+              params.uplineRoleId,
+              generalInfo.site,
+              generalInfo.siteLabel
             )
           : await SettingService.UpdateCustomer(
               newGeneralInfo,
               productGroupWithPTOnMembers,
               params.custId,
               params.roleId,
-              params.uplineRoleId
+              params.uplineRoleId,
+              generalInfo.site,
+              generalInfo.siteLabel
             );
         setTimeout(() => {
           setRefreshData(!refreshData);

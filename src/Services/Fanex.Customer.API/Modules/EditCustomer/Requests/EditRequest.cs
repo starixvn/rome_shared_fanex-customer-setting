@@ -34,6 +34,10 @@ public class EditRequestContext
 
     public string IP { get; set; }
 
+    public string Site { get; set; }
+
+    public string SiteLabel { get; set; }
+
     public byte SystemId { get; set; }
 
     public string Language { get; set; }

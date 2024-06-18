@@ -8,6 +8,10 @@ public class RequestContext
 
     public int SubAccId { get; set; }
 
+    public string Site { get; set; }
+
+    public string SiteLabel { get; set; }
+
     public string IP { get; set; }
 
     public byte SystemId { get; set; }
