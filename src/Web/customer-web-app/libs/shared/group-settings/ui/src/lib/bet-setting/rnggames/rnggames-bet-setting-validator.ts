@@ -33,11 +33,43 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
   private isUnlimitedOrPreventBetValue() {
     if (this.maxPerBall === null) {
       const betSettings = JSON.stringify([this.minBet, this.maxBet, this.maxPerMatch]);
-      return betSettings === JSON.stringify([0, 0, 0]) || betSettings === JSON.stringify([0, 0.1, 0.1]);
+      return (
+        betSettings === JSON.stringify([0, 0, 0]) ||
+        betSettings === JSON.stringify([0, 0.1, 0.1]) ||
+        (this.minBet === 0 &&
+          this.maxBet <= this.upline.maxBet &&
+          this.maxPerMatch <= this.upline.maxPerMatch &&
+          this.maxBet <= this.maxPerMatch) ||
+        (this.minBet === 0 && this.maxBet === 0 && this.maxPerMatch <= this.upline.maxPerMatch)
+      );
     }
 
     const betSettings = JSON.stringify([this.minBet, this.maxBet, this.maxPerMatch, this.maxPerBall]);
-    return betSettings === JSON.stringify([0, 0, 0, 0]) || betSettings === JSON.stringify([0, 0.1, 0.1, 0.1]);
+    return (
+      betSettings === JSON.stringify([0, 0, 0, 0]) ||
+      betSettings === JSON.stringify([0, 0.1, 0.1, 0.1]) ||
+      (this.minBet === 0 &&
+        this.maxPerBall !== undefined &&
+        this.upline.maxPerBall !== undefined &&
+        this.maxBet <= this.upline.maxBet &&
+        this.maxPerMatch <= this.upline.maxPerMatch &&
+        this.maxPerBall <= this.upline.maxPerBall &&
+        this.maxBet <= this.maxPerMatch &&
+        this.maxPerBall <= this.maxPerMatch) ||
+      (this.minBet === 0 &&
+        this.maxBet === 0 &&
+        this.maxPerBall !== undefined &&
+        this.upline.maxPerBall !== undefined &&
+        this.maxPerMatch <= this.upline.maxPerMatch &&
+        this.maxPerBall <= this.upline.maxPerBall &&
+        this.maxPerBall <= this.maxPerMatch) ||
+      (this.minBet === 0 &&
+        this.maxBet === 0 &&
+        this.maxPerMatch === 0 &&
+        this.maxPerBall !== undefined &&
+        this.upline.maxPerBall !== undefined &&
+        this.maxPerBall <= this.upline.maxPerBall)
+    );
   }
 
   public validateMaxPerMatch(): ValidateBetSetting {
