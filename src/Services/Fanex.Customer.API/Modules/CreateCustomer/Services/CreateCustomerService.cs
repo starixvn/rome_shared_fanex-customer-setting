@@ -6,6 +6,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Helpers;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
+using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
@@ -31,7 +32,7 @@ public interface ICreateCustomerService
 public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 {
     private readonly IBalanceService balanceService;
-
+    private readonly ICustomerService customerService;
     public CreateCustomerService(
         IBalanceService balanceService,
         IDynamicRepository dynamicRepository,
@@ -39,10 +40,13 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         ISharedService sharedService,
         ICacheRefService cacheRefService,
         IMessageService messageService,
-        ICustomerSettingHelper helperService)
+        ICustomerSettingHelper helperService,
+        ICustomerService customerService
+        )
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService)
     {
         this.balanceService = balanceService;
+        this.customerService = customerService;
     }
 
     public bool ValidateRequest(CreateRequest request)
@@ -96,6 +100,13 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
                 request.Settings.GeneralInfo.UserName,
                 request.Context.CreatorId,
                 request.Context.IP);
+        }
+
+        if (result.IsSuccessful)
+        {
+            result.AvailableAlphaDomain = await customerService.GetBackupDomains(
+                request.Settings.GeneralInfo.Site,
+                request.Settings.GeneralInfo.RoleId);
         }
 
         return result;

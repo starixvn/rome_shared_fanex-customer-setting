@@ -12,6 +12,8 @@ public class CreateCustomerResult : CustomerSettingResult
     }
 
     public int NewCustId { get; }
+    
+    public List<string> AvailableAlphaDomain { get; set; }
 }
 
 public class CustomerSettingResult : Result
