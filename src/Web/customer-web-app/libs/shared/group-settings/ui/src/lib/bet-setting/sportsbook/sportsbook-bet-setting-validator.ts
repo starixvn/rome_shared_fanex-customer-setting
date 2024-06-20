@@ -1,3 +1,4 @@
+import { SportTypeIds } from '@customer-web-app/shared-constants';
 import { GroupSettingItem, SportsBookBetSettingProps } from '@customer-web-app/shared-group-settings-types';
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 
@@ -11,7 +12,17 @@ export default class SportsBookBetSettingValidator extends BetSettingBaseValidat
     isSpecialSite: boolean
   ) {
     super(betSettingItem, isSpecialSite);
+
     this.maxPayoutPerMatch = betSettingItem.maxPayoutPerMatch;
+    this.$minConstraintBySystem = this.isSpecialBetTypeOfSpecialSite() ? 1 : 0;
+  }
+
+  public isESportsOrMuayThai() {
+    return [SportTypeIds.ESports, SportTypeIds.MuayThai].includes(this.sportTypeId);
+  }
+
+  public isSpecialBetTypeOfSpecialSite() {
+    return this.isSpecialSite && this.isESportsOrMuayThai();
   }
 
   private isUnlimitedOrPreventBetValue() {

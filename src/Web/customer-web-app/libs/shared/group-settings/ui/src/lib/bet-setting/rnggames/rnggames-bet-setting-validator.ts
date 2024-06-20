@@ -20,7 +20,7 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
 
   public validateBetSettingItem(): { [key: string]: ValidateBetSetting } {
     const id = `${this.sportTypeId}-${this.betTypeId}`;
-    const isValidBetSettingItem = !this.isSpecialBetTypeOfSpecialSite() ? this.isUnlimitedOrPreventBetValue() : false;
+    const isValidBetSettingItem = this.isSpecialSite ? false : this.isUnlimitedOrPreventBetValue();
 
     return {
       [`minBet-${id}`]: isValidBetSettingItem ? new ValidateBetSetting(true) : this.validateMinBet(),
