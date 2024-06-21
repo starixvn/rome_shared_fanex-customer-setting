@@ -6,19 +6,7 @@ import { BlockColumn } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CopyIcon from '../copy-icon';
-
-export enum CopyStatus {
-  Fail = 1,
-  Success = 2,
-  NotCopy = 3,
-}
-
-export type PTRowProps<T> = {
-  item: T;
-  copyStatus: CopyStatus;
-  label?: string | React.ReactNode;
-  isDisableMasterAutoPT?: boolean;
-};
+import { CopyStatus } from './types';
 
 export const renderNoneBlockColumn = (key: string, numbers: number) => {
   return [...Array(numbers)].map((i, index) => {

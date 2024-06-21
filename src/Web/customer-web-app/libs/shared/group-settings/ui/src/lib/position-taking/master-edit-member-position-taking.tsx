@@ -11,22 +11,20 @@ import {
   MasterEditMemberPositionTakingGroupItem,
   MasterEditMemberPositionTakingProps,
 } from '@customer-web-app/shared-group-settings-types';
-import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
+import { scrollToBLock } from '../scroll-helper';
 import { ValidatePTResult } from './master-position-taking';
 import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { PositionTakingBlockProps } from './types';
+import { CopyStatus, PositionTakingBlockProps, PTRowProps } from './types';
 import {
-  CopyStatus,
   CopyStatusPT,
   groupSportsBookPTBySportTypeId,
   isCopyingPTItem,
-  PTRowProps,
   renderNoneBlockColumn,
   usePTCopy,
 } from './utils';
@@ -52,6 +50,7 @@ function maxUM1(item: MasterEditMemberPositionTakingProps) {
 }
 
 function MasterEditMemberPositionTakingRow({
+  isReadOnly,
   item,
   label,
   copyStatus,
@@ -80,7 +79,7 @@ function MasterEditMemberPositionTakingRow({
               max={maxUM1(item)}
               step={item.step}
               value={item.uM1}
-              isDisable={!item.isMultipleModeChecked}
+              isDisable={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 handlePTChange({ uM1: Number(e.target.value) });
               }}
@@ -93,7 +92,7 @@ function MasterEditMemberPositionTakingRow({
               max={maxM1(item)}
               step={item.step}
               value={item.m1}
-              isDisable={!item.isMultipleModeChecked || item.iM2}
+              isDisable={isReadOnly || !item.isMultipleModeChecked || item.iM2}
               onChange={(e) => {
                 handlePTChange({ m1: Number(e.target.value) });
               }}
@@ -107,7 +106,7 @@ function MasterEditMemberPositionTakingRow({
             <input
               type="checkbox"
               checked={item.iM1}
-              disabled={!item.isMultipleModeChecked}
+              disabled={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 handlePTChange({
                   iM1: e.target.checked,
@@ -168,6 +167,7 @@ const copyMasterPTValues = (
 };
 
 type PositionTakingRowProps = {
+  isReadOnly: boolean;
   productGroupId: number;
   ptItems: MasterEditMemberPositionTakingGroupItem[];
   copyIconId: number | undefined;
@@ -181,6 +181,7 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  isReadOnly,
   productGroupId,
   ptItems,
   copyIconId,
@@ -229,6 +230,7 @@ function PositionTakingRows({
           );
           return (
             <MasterEditMemberPositionTakingRow
+              isReadOnly={isReadOnly}
               key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
               item={item}
               label={ptLabel}
@@ -396,6 +398,7 @@ const MasterEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTak
           <BlockColumn>{t('agentPT')}</BlockColumn>
         </BlockRow>
         <PositionTakingRows
+          isReadOnly={props.isReadOnly}
           productGroupId={groupId}
           ptItems={masterPTOnMembers}
           copyIconId={copyIconId}

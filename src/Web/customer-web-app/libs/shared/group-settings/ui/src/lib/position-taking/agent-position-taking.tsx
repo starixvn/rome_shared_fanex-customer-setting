@@ -11,22 +11,20 @@ import {
   AgentPositionTakingProps,
   GroupItem,
 } from '@customer-web-app/shared-group-settings-types';
-import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
+import { scrollToBLock } from '../scroll-helper';
 import { ValidatePTResult } from './master-position-taking';
 import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { PositionTakingBlockProps } from './types';
+import { CopyStatus, PositionTakingBlockProps, PTRowProps } from './types';
 import {
-  CopyStatus,
   CopyStatusPT,
   groupSportsBookPTBySportTypeId,
   isCopyingPTItem,
-  PTRowProps,
   renderNoneBlockColumn,
   usePTCopy,
 } from './utils';
@@ -80,6 +78,7 @@ function maxN2(a2: number) {
 }
 
 function AgentPositionTakingRow({
+  isReadOnly,
   item,
   label,
   copyStatus,
@@ -108,7 +107,7 @@ function AgentPositionTakingRow({
               max={maxUM2(item.upline)}
               step={item.step}
               value={item.uM2}
-              isDisable={!item.isMultipleModeChecked}
+              isDisable={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 const uM2 = Number(e.target.value);
                 const agentMaxPT = maxA2Auto(item);
@@ -126,7 +125,7 @@ function AgentPositionTakingRow({
               max={maxM2(item.upline)}
               step={item.step}
               value={item.m2}
-              isDisable={!item.isMultipleModeChecked}
+              isDisable={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 const m2 = Number(e.target.value);
                 const agentMaxPT = maxA2(item, m2);
@@ -144,7 +143,7 @@ function AgentPositionTakingRow({
             <input
               type="checkbox"
               checked={item.iM2}
-              disabled={!item.isMultipleModeChecked}
+              disabled={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 const isAuto = e.target.checked;
                 const m2 = item.m2 > maxM2(item) ? maxM2(item) : item.m2;
@@ -170,7 +169,7 @@ function AgentPositionTakingRow({
             max={item.iM2 ? maxA2Auto(item.upline) : maxA2(item.upline, item.m2)}
             step={item.step}
             value={item.a2}
-            isDisable={!item.isMultipleModeChecked}
+            isDisable={isReadOnly || !item.isMultipleModeChecked}
             onChange={(e) => {
               const a2 = Number(e.target.value);
               const n2 = item.n2 > a2 ? a2 : item.n2;
@@ -181,7 +180,7 @@ function AgentPositionTakingRow({
       </BlockColumn>
       <BlockColumn>
         <div className={classNames('center', copyRowStyle, { 'is-multiple-mode': isMultipleMode })}>
-          {isMultipleMode && (
+          {isMultipleMode && !isReadOnly && (
             <div className={styles['checkbox-multiple']}>
               <input
                 type="checkbox"
@@ -196,7 +195,7 @@ function AgentPositionTakingRow({
             max={maxN2(item.a2)}
             step={item.step}
             value={item.n2}
-            isDisable={!item.isMultipleModeChecked && !item.isUpdateMinPtOnly}
+            isDisable={isReadOnly || (!item.isMultipleModeChecked && !item.isUpdateMinPtOnly)}
             onChange={(e) => handlePTChange({ n2: Number(e.target.value) })}
           />
         </div>
@@ -235,6 +234,7 @@ const copyAgentPTs = (
 };
 
 type PositionTakingRowProps = {
+  isReadOnly: boolean;
   productGroupId: number;
   ptItems: AgentPositionTakingGroupItem[];
   copyIconId: number | undefined;
@@ -248,6 +248,7 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  isReadOnly,
   productGroupId,
   ptItems,
   copyIconId,
@@ -295,6 +296,7 @@ function PositionTakingRows({
           );
           return (
             <AgentPositionTakingRow
+              isReadOnly={isReadOnly}
               key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
               item={item}
               label={ptLabel}
@@ -358,11 +360,10 @@ const validateAgentPositionTaking = (item: AgentPositionTakingGroupItem): Valida
 const AgentPTBlockId = 'agent-position-taking';
 
 const AgentPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockProps>(function AgentPositionTaking(
-  props,
+  { isReadOnly, title, isDisableMasterAutoPT },
   ref
 ) {
   const { t } = useTranslation();
-  const { title, isDisableMasterAutoPT } = props;
   const { productGroups, isMultipleMode, handleUpdateSettingItems, productGroupId, isEditMode, updateGroupSetting } =
     useGroupSettingContext();
   const groupId = Number(productGroupId);
@@ -440,7 +441,7 @@ const AgentPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPro
       id={AgentPTBlockId}
       title={title}
       ref={blockRef}
-      isPartialUpdate={isEditMode === true && !props.isReadOnly}
+      isPartialUpdate={isEditMode === true && !isReadOnly}
       onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
     >
       <BlockRow
@@ -465,6 +466,7 @@ const AgentPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPro
         <BlockColumn>{t('AgentMinPT')}</BlockColumn>
       </BlockRow>
       <PositionTakingRows
+        isReadOnly={isReadOnly}
         productGroupId={groupId}
         ptItems={agentPTs}
         copyIconId={copyIconId}
