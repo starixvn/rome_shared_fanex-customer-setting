@@ -8,6 +8,7 @@ public class BetSettingItem : GroupItemDefault
 
     public decimal MaxBet { get; set; }
 
+    [JsonProperty(PropertyName = "MPM")]
     public decimal MaxPerMatch { get; set; }
 
     [JsonProperty(PropertyName = "MaxPerNumber", NullValueHandling = NullValueHandling.Ignore)]
