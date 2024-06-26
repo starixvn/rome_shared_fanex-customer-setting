@@ -47,6 +47,8 @@ public class MessageService : IMessageService
                 => TranslateMessage<SBMemberCommissionViolationSubMessage>(rawMessage, language),
             MessageTypes.ParlayMaxPayoutViolation
                 => TranslateMessage<ParlayMaxPayoutViolationSubMessage>(rawMessage, language),
+            MessageTypes.SportsbookBetSettingViolation
+                => TranslateMessage<SportsbookBetSettingViolationSubMessage>(rawMessage, language),
             MessageTypes.BetSettingViolation
                 => TranslateMessage<BetSettingViolationSubMessage>(rawMessage, language),
             MessageTypes.CommissionViolation
