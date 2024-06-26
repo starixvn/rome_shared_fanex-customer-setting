@@ -99,11 +99,11 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
         value: NumberHelper.formatWithCommas(this.upline.maxPerBall),
       });
 
+    if (this.maxBet !== undefined && this.maxPerBall !== null && this.maxBet > this.maxPerBall)
+      return new ValidateBetSetting(false, fieldName, 'maxPerBallMustBeGreaterThanOrEqualToMaxBet');
+
     if (this.maxPerMatch !== undefined && this.maxPerBall > this.maxPerMatch && this.maxPerBall !== null)
       return new ValidateBetSetting(false, fieldName, 'maxPerBallMustBeLessThanOrEqualToMaxPerMatch');
-
-    if (this.maxBet !== undefined && this.maxBet > this.maxPerBall)
-      return new ValidateBetSetting(false, fieldName, 'maxPerBallMustBeGreaterThanOrEqualToMaxBet');
 
     return new ValidateBetSetting(true);
   }
