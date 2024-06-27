@@ -42,7 +42,6 @@ export default class BetSettingBaseValidator<T extends BetSettingsProps> {
   }
 
   public validateMinBet(): ValidateBetSetting {
-    console.log(this.$minConstraint);
     const fieldName = `minBet-${this.sportTypeId}-${this.betTypeId}`;
     if (this.minBet === undefined) return new ValidateBetSetting(false, fieldName, 'RequiredField');
 

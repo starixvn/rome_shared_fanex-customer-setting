@@ -95,7 +95,7 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
     if (this.maxPerBall === undefined) return new ValidateBetSetting(false, fieldName, 'RequiredField');
 
     if (this.upline.maxPerBall && this.upline.maxPerBall !== 0 && this.maxPerBall > this.upline.maxPerBall)
-      return new ValidateBetSetting(false, fieldName, 'maxPayoutPerMatchMustBeLessThanOrEqualTo', {
+      return new ValidateBetSetting(false, fieldName, 'maxPerBallMustBeLessThanOrEqualTo', {
         value: NumberHelper.formatWithCommas(this.upline.maxPerBall),
       });
 
