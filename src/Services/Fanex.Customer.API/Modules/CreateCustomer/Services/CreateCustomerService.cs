@@ -106,7 +106,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         {
             result.AvailableAlphaDomain = await customerService.GetBackupDomains(
                 request.Settings.GeneralInfo.Site,
-                request.Settings.GeneralInfo.RoleId);
+                (byte)(request.Settings.GeneralInfo.UplineRoleId  - 1));
         }
 
         return result;
