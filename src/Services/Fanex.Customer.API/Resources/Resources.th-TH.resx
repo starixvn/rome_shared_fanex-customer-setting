@@ -197,6 +197,54 @@
 		<value>ค่า เดิมพันขั้นต่ำ/ เดิมพันขั้นสูดสุด/ เดิมพันต่อเกมสูงสุด ไม่ถูกต้อง</value>
 		<comment/>
 	</data>
+	<data name="Msg_10006" xml:space="preserve">
+		<value>ค่าวางเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับ ค่าการเดิมพันต่ำสุดของเอเจนท์</value>
+		<comment/>
+	</data>
+	<data name="Msg_10007" xml:space="preserve">
+		<value>ค่าวางเดิมพันขั้นสุงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันสูงสุดของเอเจนท์</value>
+		<comment/>
+	</data>
+	<data name="Msg_10008" xml:space="preserve">
+		<value>ค่าวางเดิมพันต่อแมทซ์สูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันสูงสุดต่อแมทซ์ของเอเจนท์</value>
+		<comment/>
+	</data>
+	<data name="Msg_10009" xml:space="preserve">
+		<value> Per Ball must be equal to or less than Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10010" xml:space="preserve">
+		<value>Max Per Ball must be equal to or less than Super Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10011" xml:space="preserve">
+		<value> Per Ball must be equal to or less than Master Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10016" xml:space="preserve">
+		<value>ค่าวางเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับ ค่าการเดิมพันขั้นต่ำของซูเปอร์เอเจนท์ </value>
+		<comment/>
+	</data>
+	<data name="Msg_10017" xml:space="preserve">
+		<value>ค่าวางเดิมพันขั้นสูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดของซูเปอร์เอเจนท์ </value>
+		<comment/>
+	</data>
+	<data name="Msg_10018" xml:space="preserve">
+		<value>ค่าวางเดิมพันขั้นสูงสุดต่อแมทซ์ต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดของซูเปอร์เอเจนท์ต่อแมทซ์ </value>
+		<comment/>
+	</data>
+	<data name="Msg_10019" xml:space="preserve">
+		<value>ค่าวางเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับ ค่าการเดิมพันขั้นต่ำของมาสเตอร์เอเจนท์ </value>
+		<comment/>
+	</data>
+	<data name="Msg_10020" xml:space="preserve">
+		<value>ค่าวางเดิมพันขั้นสูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดของมาสเตอร์เอเจนท์ </value>
+		<comment/>
+	</data>
+	<data name="Msg_10021" xml:space="preserve">
+		<value>ค่าวางเดิมพันต่อแมทซ์สูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดต่อแมทซ์ของมาสเตอร์เอเจนท์</value>
+		<comment/>
+	</data>
 	<data name="Msg_10022" xml:space="preserve">
 		<value>ไม่อนุญาตให้เปลี่ยนแปลงวงเงินการตั้งค่าใหม่อัตโนมัติรายวัน</value>
 		<comment/>

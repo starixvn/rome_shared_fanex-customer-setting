@@ -201,6 +201,54 @@
 		<value>最低投注/最高投注/单场限额无效</value>
 		<comment/>
 	</data>
+	<data name="Msg_10006" xml:space="preserve">
+		<value>最低投注必须大于或相等于代理最低投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10007" xml:space="preserve">
+		<value>最高投注必须少于或相等于代理最高投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10008" xml:space="preserve">
+		<value>单场限额必须少于或相等于代理单场投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10009" xml:space="preserve">
+		<value> Per Ball must be equal to or less than Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10010" xml:space="preserve">
+		<value>Max Per Ball must be equal to or less than Super Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10011" xml:space="preserve">
+		<value> Per Ball must be equal to or less than Master Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10016" xml:space="preserve">
+		<value>最低投注大于或相等于超级总代理最低投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10017" xml:space="preserve">
+		<value>最高投注必须少于或相等于超级总代理最高投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10018" xml:space="preserve">
+		<value>单场限额必须少于或相等于超级总代理单场投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10019" xml:space="preserve">
+		<value>最低投注大于或相等于总代理最低投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10020" xml:space="preserve">
+		<value>最高投注必须少于或相等于总代理最高投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10021" xml:space="preserve">
+		<value>单场限额必须少于或相等于总代理单场投注限额</value>
+		<comment/>
+	</data>
 	<data name="Msg_10022" xml:space="preserve">
 		<value>您不允许修改每日限额自动重设.</value>
 		<comment/>
