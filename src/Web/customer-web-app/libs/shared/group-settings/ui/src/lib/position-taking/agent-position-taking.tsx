@@ -447,7 +447,9 @@ const AgentPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPro
       <BlockRow
         isHeaderRow
         label={
-          isMultipleMode && (
+          isMultipleMode &&
+          agentPTs.length > 1 &&
+          !isReadOnly && (
             <div style={{ display: 'flex', marginLeft: '2px' }}>
               <input
                 type="checkbox"

@@ -374,7 +374,9 @@ const SuperEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTaki
         <BlockRow
           isHeaderRow
           label={
-            isMultipleMode && (
+            isMultipleMode &&
+            superPTOnMembers.length > 0 &&
+            !props.isReadOnly && (
               <div style={{ display: 'flex', marginLeft: '2px' }}>
                 <input
                   type="checkbox"

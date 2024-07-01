@@ -444,6 +444,7 @@ const MasterPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPr
         isHeaderRow
         label={
           isMultipleMode &&
+          masterPTs.length > 1 &&
           !props.isReadOnly && (
             <div style={{ display: 'flex', marginLeft: '2px' }}>
               <input
