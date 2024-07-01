@@ -375,7 +375,7 @@ const SuperEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTaki
           isHeaderRow
           label={
             isMultipleMode &&
-            superPTOnMembers.length > 0 &&
+            superPTOnMembers.length > 1 &&
             !props.isReadOnly && (
               <div style={{ display: 'flex', marginLeft: '2px' }}>
                 <input

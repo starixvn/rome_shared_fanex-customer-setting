@@ -381,7 +381,7 @@ const MasterEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTak
           isHeaderRow
           label={
             isMultipleMode &&
-            masterPTOnMembers.length > 0 &&
+            masterPTOnMembers.length > 1 &&
             !props.isReadOnly && (
               <div style={{ display: 'flex', marginLeft: '2px' }}>
                 <input
