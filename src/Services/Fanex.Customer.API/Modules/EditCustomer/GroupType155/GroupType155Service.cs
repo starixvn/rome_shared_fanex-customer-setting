@@ -37,7 +37,7 @@ public class GroupType155Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         byte settingStatus)
     {
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_WinLossLimit_155_Upd");
-        var parameters = GenerateSPParams(context, groupItems, settingStatus);
+        var parameters = GenerateSPParams(context, groupItems, productGroupId, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
