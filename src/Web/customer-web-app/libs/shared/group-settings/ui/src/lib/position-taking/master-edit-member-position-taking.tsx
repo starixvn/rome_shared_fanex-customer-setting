@@ -195,6 +195,7 @@ function PositionTakingRows({
     const firstGroupItem = group[0];
     const groupPTLabel = (
       <GroupLabel
+        isReadOnly={isReadOnly}
         copyIconId={copyIconId}
         firstGroupItem={firstGroupItem}
         group={group}
@@ -220,6 +221,7 @@ function PositionTakingRows({
         {group?.map((item, index) => {
           const ptLabel = (
             <PTLabel
+              isReadOnly={isReadOnly}
               group={group}
               itemIndex={index}
               item={item}
@@ -405,7 +407,7 @@ const MasterEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTak
           ptItems={masterPTOnMembers}
           copyIconId={copyIconId}
           stateCopiedGroup={stateCopiedGroup}
-          handleCopyPTs={props.isReadOnly ? ()=> void 0: handleCopyPTs}
+          handleCopyPTs={handleCopyPTs}
           isDisableMasterAutoPT={isDisableMasterAutoPT}
         />
         {validateResult && !validateResult.isValid && (
