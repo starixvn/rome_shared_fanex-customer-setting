@@ -55,6 +55,7 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
         this.maxPerMatch <= this.upline.maxPerMatch &&
         this.maxPerBall <= this.upline.maxPerBall &&
         this.maxBet <= this.maxPerMatch &&
+        this.maxPerBall >= this.maxBet &&
         this.maxPerBall <= this.maxPerMatch) ||
       (this.minBet === 0 &&
         this.maxBet === 0 &&
@@ -65,10 +66,10 @@ export default class RNGGamesBetSettingValidator extends BetSettingBaseValidator
         this.maxPerBall <= this.maxPerMatch) ||
       (this.minBet === 0 &&
         this.maxBet === 0 &&
-        this.maxPerMatch === 0 &&
-        this.maxPerBall !== undefined &&
-        this.upline.maxPerBall !== undefined &&
-        this.maxPerBall <= this.upline.maxPerBall)
+        this.maxPerBall === 0 &&
+        this.maxPerMatch !== undefined &&
+        this.upline.maxPerMatch !== undefined &&
+        this.maxPerMatch <= this.upline.maxPerMatch)
     );
   }
 
