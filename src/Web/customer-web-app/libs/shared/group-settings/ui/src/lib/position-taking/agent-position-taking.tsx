@@ -473,7 +473,7 @@ const AgentPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPro
         ptItems={agentPTs}
         copyIconId={copyIconId}
         stateCopiedGroup={stateCopiedGroup}
-        handleCopyPTs={handleCopyPTs}
+        handleCopyPTs={isReadOnly ? ()=> void 0: handleCopyPTs}
         isDisableMasterAutoPT={isDisableMasterAutoPT}
       />
       {validateResult && !validateResult.isValid && (

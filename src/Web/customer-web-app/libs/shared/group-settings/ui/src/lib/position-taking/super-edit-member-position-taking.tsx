@@ -399,7 +399,7 @@ const SuperEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTaki
           ptItems={superPTOnMembers}
           copyIconId={copyIconId}
           stateCopiedGroup={stateCopiedGroup}
-          handleCopyPTs={handleCopyPTs}
+          handleCopyPTs={props.isReadOnly ? ()=> void 0: handleCopyPTs}
         />
         {validateResult && !validateResult.isValid && (
           <WrapperTooltip

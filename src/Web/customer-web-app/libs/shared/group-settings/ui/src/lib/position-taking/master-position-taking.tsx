@@ -468,7 +468,7 @@ const MasterPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPr
         ptItems={masterPTs}
         copyIconId={copyIconId}
         stateCopiedGroup={stateCopiedGroup}
-        handleCopyPTs={handleCopyPTs}
+        handleCopyPTs={props.isReadOnly ? () => void 0 : handleCopyPTs}
       />
       {validateResult && !validateResult.isValid && (
         <WrapperTooltip

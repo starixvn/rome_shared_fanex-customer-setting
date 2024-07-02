@@ -252,7 +252,7 @@ export default function SuperPositionTaking({ title, isReadOnly }: Readonly<Posi
         ptItems={superPTs}
         copyIconId={copyIconId}
         stateCopiedGroup={stateCopiedGroup}
-        handleCopyPTs={handleCopyPTs}
+        handleCopyPTs={isReadOnly ? () => void 0 : handleCopyPTs}
       />
     </Block>
   );

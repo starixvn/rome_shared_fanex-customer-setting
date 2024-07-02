@@ -405,7 +405,7 @@ const MasterEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTak
           ptItems={masterPTOnMembers}
           copyIconId={copyIconId}
           stateCopiedGroup={stateCopiedGroup}
-          handleCopyPTs={handleCopyPTs}
+          handleCopyPTs={props.isReadOnly ? ()=> void 0: handleCopyPTs}
           isDisableMasterAutoPT={isDisableMasterAutoPT}
         />
         {validateResult && !validateResult.isValid && (

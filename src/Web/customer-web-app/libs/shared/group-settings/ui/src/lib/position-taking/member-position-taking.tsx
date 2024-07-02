@@ -292,7 +292,7 @@ const MemberPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPr
           ptItems={memberPTs}
           copyIconId={copyIconId}
           stateCopiedGroup={stateCopiedGroup}
-          handleCopyPTs={handleCopyPTs}
+          handleCopyPTs={props.isReadOnly ? ()=> void 0: handleCopyPTs}
         />
         {validateResult && !validateResult.isValid && (
           <WrapperTooltip

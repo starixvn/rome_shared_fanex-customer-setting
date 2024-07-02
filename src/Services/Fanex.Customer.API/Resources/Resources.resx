@@ -230,15 +230,15 @@
 		<comment/>
 	</data>
 	<data name="Msg_10009" xml:space="preserve">
-		<value> Per Ball must be equal to or less than Agent Max Per Ball</value>
+		<value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
 		<comment/>
 	</data>
 	<data name="Msg_10010" xml:space="preserve">
-		<value>Max Per Ball must be equal to or less than Super Agent Max Per Ball</value>
+		<value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
 		<comment/>
 	</data>
 	<data name="Msg_10011" xml:space="preserve">
-		<value> Per Ball must be equal to or less than Master Agent Max Per Ball</value>
+		<value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
 		<comment/>
 	</data>
 	<data name="Msg_10016" xml:space="preserve">
