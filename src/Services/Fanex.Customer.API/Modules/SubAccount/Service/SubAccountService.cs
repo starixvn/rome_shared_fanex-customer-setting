@@ -37,7 +37,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 UserPwd = subAccountModel.Password,
                 Firstname = subAccountModel.Firstname,
                 Lastname = subAccountModel.Lastname,
-                PageAccess = subAccountModel.PageAccess,
+                PageAccess = subAccountModel.PageAccess ?? string.Empty,
                 LoginIP = subAccountModel.IP,
                 Language = subAccountModel.Language
             };
@@ -86,7 +86,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 Language = subAccountModel.Language,
                 LoginIP = subAccountModel.IP,
                 SubAccId = subAccountModel.SubAccId,
-                UpdPageAccess = subAccountModel.PageAccess,
+                UpdPageAccess = subAccountModel.PageAccess ?? string.Empty,
                 UserId = subAccountModel.CustId
             };
 
