@@ -170,5 +170,9 @@
   "Winning": "贏",
   "Losing": "輸",
   "BBinSettingNote": "注意：BBIN\"贏數額巴仙\"的欄位顯示\"N/A\" 的意思是最高的贏數額不適用於BBIN的產品。",
-  "ViewWinLossLimitInfo": "點擊查看輸贏限額資訊"
+  "ViewWinLossLimitInfo": "點擊查看輸贏限額資訊",
+  "Member": "會員",
+  "Master": "總代理",
+  "Agent": "代理",
+  "Super": "超級"
 }
