@@ -21,7 +21,55 @@ public class CopySuperWinlossLimitEndpoint : IEndpoint<IResult, CopySuperWinloss
 
     public async Task<IResult> HandleAsync(CopySuperWinlossLimitRequest request, IGroupTypeBaseService<WinLossLimitItem> groupTypeBaseService, IEditCustomerService service)
     {
-        var currentWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 3, GroupTypes.WinlossLimit)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
+        if(request.SourceSuperId == 0 || string.IsNullOrWhiteSpace(request.CopiedSuperIds))
+        {
+            return Results.BadRequest("SourceSuperId and CopiedSuperIds cannot be empty.");
+        }
+
+        if(!request.SportTypeIds.Any())
+        {
+            return Results.BadRequest("SportTypeIds cannot be empty.");
+        }
+
+        var currentLiveCSWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 3, GroupTypes.WinlossLimit)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
+        var currentRNGGamesWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 2, GroupTypes.WinlossLimit)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
+        if (!currentLiveCSWLLimit.Any() && !currentRNGGamesWLLimit.Any())
+        { 
+            return Results.BadRequest("There is no GroupItems existed.");
+        }
+
+        var productGroups = new List<ProductGroup>();
+
+        if (currentLiveCSWLLimit.Any())
+        {
+            productGroups.Add(new ProductGroup()
+            {
+                Id = 3,
+                GroupTypes = new List<GroupType>(){
+                    new GroupType()
+                    {
+                        Id = 155,
+                        GroupItems = currentLiveCSWLLimit.ToList()
+                    }
+                }
+            });
+        }
+
+        if (currentRNGGamesWLLimit.Any())
+        {
+            productGroups.Add(new ProductGroup()
+            {
+                Id = 2,
+                GroupTypes = new List<GroupType>(){
+                            new GroupType()
+                            {
+                                Id = 155,
+                                GroupItems = currentRNGGamesWLLimit.ToList()
+                            }
+                        }
+            });
+        }
+
         var editMultipleRequest = new EditMultipleRequest
         {
             Context = new EditMultipleRequestContext()
@@ -37,24 +85,10 @@ public class CopySuperWinlossLimitEndpoint : IEndpoint<IResult, CopySuperWinloss
             },
             Settings = new CustomerSetting()
             {
-                ProductGroups = new List<ProductGroup>()
-            {
-                new ProductGroup()
-                {
-                    Id = 3,
-                    GroupTypes = new List<GroupType>(){
-                        new GroupType()
-                        {
-                            Id = 155,
-                            GroupItems = currentWLLimit.ToList()
-                        }
-                    }
-                }
-            }
+                ProductGroups = productGroups
             }
         };
 
-        
         return Results.Ok(await service.UpdateMultiple(editMultipleRequest));
     }
 }
