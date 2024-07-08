@@ -73,7 +73,7 @@ export const SettingService = {
     const { custId, ...otherInfo } = generalInfo;
     return await axiosInstance
       .post<CreateCustomerResult>(
-        'Create',
+        'Customer/Create',
         {
           generalInfo: { ...otherInfo },
           group,
@@ -177,7 +177,7 @@ export const SettingService = {
   ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
-        'EditSuperBetSetting',
+        'Customer/EditSuperBetSetting',
         {
           custId,
           roleId,

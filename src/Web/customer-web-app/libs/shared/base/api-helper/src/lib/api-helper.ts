@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: `${location.hostname}${appConfig.applicationPath}`,
+  baseURL: appConfig.applicationPath,
 });
 
 export const getHeadersForPostRequest = () => ({
-  __RequestVerificationToken: (document.getElementsByName('__RequestVerificationToken')[0] as HTMLInputElement).value,
+  RequestVerificationToken: (document.getElementsByName('__RequestVerificationToken')[0] as HTMLInputElement).value,
   'X-Requested-With': 'XMLHttpRequest',
 });
