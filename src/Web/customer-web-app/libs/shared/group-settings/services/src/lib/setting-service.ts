@@ -47,7 +47,7 @@ export const SettingService = {
     return { generalInfo, group: '', productGroups: newProductGroups };
   },
   CheckExistedCustomer: async (userName: string): Promise<boolean> => {
-    const response = await axiosInstance.get<boolean>(`CheckExistedCustomer?userName=${userName}`);
+    const response = await axiosInstance.get<boolean>(`Customer/CheckExistedCustomer?userName=${userName}`);
     return response.data;
   },
   GetCustomerSetting: async (
@@ -61,7 +61,7 @@ export const SettingService = {
     isCopy = false
   ): Promise<GroupSettingsResponse> => {
     const response = await axiosInstance.get<GroupSettingsResponse>(
-      `GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${
+      `Customer/GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${
         appConfig.systemId
       }&siteLabel=${siteLabel}&productGroupId=${
         params.productGroupId ?? ProductGroupIds.SportsBook
@@ -105,7 +105,7 @@ export const SettingService = {
   ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
-        'Update',
+        'Customer/Update',
         {
           custId,
           roleId,
@@ -212,7 +212,7 @@ export const SettingService = {
   ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
-        'EditMultipleSuperBetSetting',
+        'Customer/EditMultipleSuperBetSetting',
         {
           custId,
           roleId,
@@ -239,7 +239,7 @@ export const SettingService = {
       }),
   GetCustomerCurrentWinLossAmount: async (custId: number, sportType: number, betType: number) => {
     const response = await axiosInstance.get<CurrentWinLossAmount[]>(
-      `GetCurrentWinLossAmount?custId=${custId}&sportType=${sportType}&betType=${betType}`
+      `Customer/GetCurrentWinLossAmount?custId=${custId}&sportType=${sportType}&betType=${betType}`
     );
     return response.data;
   },

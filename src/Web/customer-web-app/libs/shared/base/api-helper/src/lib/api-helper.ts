@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: appConfig.applicationPath,
+  baseURL: `${location.hostname}${appConfig.applicationPath}`,
 });
 
 export const getHeadersForPostRequest = () => ({
