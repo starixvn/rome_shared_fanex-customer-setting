@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
@@ -52,6 +51,8 @@ namespace Fanex.Customer.Client.Services
         Task<string> DeletePTTemplate(DeletePTTemplateParam param);
 
         Task<CustomerInfo> GetCustomerInfo(int custId);
+
+        Task<Result> UpdateCustomerInfo(UpdateCustomerInfoParam param);
 
         Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US");
 
@@ -208,6 +209,9 @@ namespace Fanex.Customer.Client.Services
 
         public Task<CustomerInfo> GetCustomerInfo(int custId)
             => httpClient.GetAsJsonAsync<CustomerInfo>($"customer/{custId}");
+
+        public Task<Result> UpdateCustomerInfo(UpdateCustomerInfoParam param)
+            => httpClient.PutAsJsonAsync<Result>("customer/info", param);
 
         public Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US")
             => httpClient.GetStringAsync($"customer/current-winloss-amount?custId={custId}&sportType={sportType}&betType={betType}&language={language}");

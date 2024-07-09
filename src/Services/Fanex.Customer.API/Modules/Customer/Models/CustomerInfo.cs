@@ -14,6 +14,8 @@ public class CustomerInfo
 
     public string MobilePhone { get; init; }
 
+    public string Email { get; init; }
+
     public string Fax { get; init; }
 
     public int CurrencyId { get; init; }

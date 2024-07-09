@@ -69,6 +69,7 @@
       <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="GeneralInformationDTO" />
       <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CustomerInfo" />
     </Setting>
+    <Setting Key="Age_CustomerUpdUserInfo" SpName="Age_CustomerUpdUserInfo" DbName="DBCUST.CustDB.wsv_alp" />
   </Function>
   <Function Name="Copy Account">
     <Setting Key="Acc_CustomerSelSAgentInfo" SpName="Acc_CustomerSelSAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">

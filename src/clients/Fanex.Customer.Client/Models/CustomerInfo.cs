@@ -17,6 +17,8 @@ namespace Fanex.Customer.Client.Models
 
         public string MobilePhone { get; set; }
 
+        public string Email { get; set; }
+
         public string Fax { get; set; }
 
         public int CurrencyId { get; set; }
