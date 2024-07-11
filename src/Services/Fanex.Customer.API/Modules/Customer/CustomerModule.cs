@@ -1,3 +1,5 @@
+using Fanex.Customer.API.Modules.PositionTaking;
+
 namespace Fanex.Customer.API.Modules.Customer;
 
 public static class CustomerCodeModule
@@ -9,6 +11,7 @@ public static class CustomerCodeModule
         services.AddSingleton<IProtectionCodeService, ProtectionCodeService>();
         services.AddSingleton<IProfilePictureService, ProfilePictureService>();
         services.AddSingleton<ILanguageService, LanguageService>();
+        services.AddSingleton<IPositionTakingService, PositionTakingService>();
 
         return services;
     }
