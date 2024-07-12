@@ -26,5 +26,5 @@ public class PositionTakingEntity
 
         public decimal PositionTaking { get; set; }
 
-        public int GroupIndex { get; set; }
+        public int RowNumber { get; set; }
 }

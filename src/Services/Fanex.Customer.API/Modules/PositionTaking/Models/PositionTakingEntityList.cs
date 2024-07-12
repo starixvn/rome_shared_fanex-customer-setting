@@ -4,5 +4,5 @@ public class PositionTakingEntityList
 {
     public IEnumerable<PositionTakingEntity> CustPT { get; set; }
 
-    public int TotalPage { get; set; }
+    public int TotalPages { get; set; }
 }
