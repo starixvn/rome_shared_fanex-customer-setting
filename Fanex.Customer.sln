@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Customer.Client", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Customer.Client.NETFramework", "src\clients\Fanex.Customer.Client.NETFramework\Fanex.Customer.Client.NETFramework.csproj", "{110A46A2-C0D1-436D-9DF9-C052555A7567}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{9DC313DA-249C-4201-B981-055F6EA11E74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deposit.ApiGateways", "src\ApiGateways\Deposit.ApiGateways\Deposit.ApiGateways.csproj", "{AEC5C9ED-D399-4557-86BE-0D3748F5E1EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +42,10 @@ Global
 		{110A46A2-C0D1-436D-9DF9-C052555A7567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{110A46A2-C0D1-436D-9DF9-C052555A7567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{110A46A2-C0D1-436D-9DF9-C052555A7567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC5C9ED-D399-4557-86BE-0D3748F5E1EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC5C9ED-D399-4557-86BE-0D3748F5E1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC5C9ED-D399-4557-86BE-0D3748F5E1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC5C9ED-D399-4557-86BE-0D3748F5E1EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,8 @@ Global
 		{2BAAFA69-4718-4666-8761-F1C270B05E8D} = {8FAA606E-FD83-44F7-B439-4725F5019829}
 		{9EE28FCC-B89D-4B5E-8E05-CE133699B710} = {2BAAFA69-4718-4666-8761-F1C270B05E8D}
 		{110A46A2-C0D1-436D-9DF9-C052555A7567} = {2BAAFA69-4718-4666-8761-F1C270B05E8D}
+		{9DC313DA-249C-4201-B981-055F6EA11E74} = {8FAA606E-FD83-44F7-B439-4725F5019829}
+		{AEC5C9ED-D399-4557-86BE-0D3748F5E1EC} = {9DC313DA-249C-4201-B981-055F6EA11E74}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DAF03FB-26A5-4D6E-A7A9-53485196FB35}
