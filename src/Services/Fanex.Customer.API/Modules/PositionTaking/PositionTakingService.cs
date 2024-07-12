@@ -53,21 +53,21 @@ public class PositionTakingService : IPositionTakingService
             case CustomerLevel.Super:
                 var masterCriteria = criteria as GetMasterPositionTakingCriteria;
                 masterCriteria.SRecommend = request.CustId;
-                positionTakingEntities = await dynamicRepository.FetchAsync<PositionTakingEntity>(masterCriteria);
+                positionTakingEntities = await GetPositionTakingEntities(masterCriteria);
 
                 break;
 
             case CustomerLevel.Master:
                 var agentCriteria = criteria as GetAgentPositionTakingCriteria;
                 agentCriteria.MRecommend = request.CustId;
-                positionTakingEntities = await dynamicRepository.FetchAsync<PositionTakingEntity>(agentCriteria);
+                positionTakingEntities = await GetPositionTakingEntities(agentCriteria);
 
                 break;
 
             default:
                 var memberCriteria = criteria as GetMemberPositionTakingCriteria;
                 memberCriteria.Recommend = request.CustId;
-                positionTakingEntities = await dynamicRepository.FetchAsync<PositionTakingEntity>(memberCriteria);
+                positionTakingEntities = await GetPositionTakingEntities(memberCriteria);
 
                 break;
         }
@@ -267,7 +267,7 @@ public class PositionTakingService : IPositionTakingService
             {
                 Id = sportId,
                 Name = sportNameDictionary[sportId],
-                PositionTakingByGroups = LiveTypePT(sportInfo, sportGroup, sportNameDictionary, betTypeNameDictionary, liveTypeNameDictionary, languageCode)
+                PositionTakingByGroups = LiveTypePT(sportInfo, sportGroup, betTypeNameDictionary, liveTypeNameDictionary, languageCode)
             });
 
             if (sportInfo != null)
@@ -282,7 +282,6 @@ public class PositionTakingService : IPositionTakingService
     private List<PositionTakingByGroupModel> LiveTypePT(
         ActivationGroupModel sportInfo,
         IEnumerable<PositionTakingEntity> sportGroup,
-        Dictionary<int, string> sportNameDictionary,
         Dictionary<int, string> betTypeNameDictionary,
         Dictionary<int, string> liveTypeNameDictionary,
         string languageCode)
@@ -312,7 +311,7 @@ public class PositionTakingService : IPositionTakingService
             {
                 Id = liveType,
                 Name = liveTypeNameDictionary[liveType],
-                PositionTakingByGroups = BetTypePT(liveTypeInfo, liveTypeGroup, sportNameDictionary, betTypeNameDictionary, liveTypeNameDictionary, languageCode)
+                PositionTakingByGroups = BetTypePT(liveTypeInfo, liveTypeGroup, betTypeNameDictionary, languageCode)
             };
 
             liveTypePTs.Add(liveTypePT);
@@ -329,9 +328,7 @@ public class PositionTakingService : IPositionTakingService
     private List<PositionTakingByGroupModel> BetTypePT(
         ActivationGroupModel liveTypeInfo,
         IEnumerable<PositionTakingEntity> liveTypeGroup,
-        Dictionary<int, string> sportNameDictionary,
         Dictionary<int, string> betTypeNameDictionary,
-        Dictionary<int, string> liveTypeNameDictionary,
         string languageCode)
     {
         var dummySportForRNGSlot = "9906";
