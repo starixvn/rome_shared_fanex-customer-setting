@@ -1,0 +1,222 @@
+﻿{
+     "Products": [
+          {
+               "id": "1",
+               "name": "Sportsbook",
+               "active": "true",
+               "sportId": "0",
+               "reportSPParam": "showsb",
+               "viewPTLink": "PositionTaking/Index?productId=1&showpticon=true",
+               "viewCommLink": "_MemberInfo/Commission/MemberCommissionSportbook.aspx"
+          },
+          {
+               "id": "3",
+               "name": "Number Game",
+               "active": "true",
+               "sportId": "161",
+               "reportSPParam": "showng",
+               "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=3&showpticon=true"
+          },
+          {
+               "id": "8",
+               "name": "Keno",
+               "active": "true",
+               "sportId": "202",
+               "reportSPParam": "showkeno",
+               "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=8&showpticon=true"
+          },
+          {
+               "id": "21",
+               "name": "Allbet",
+               "active": "true",
+               "sportId": "211",
+               "reportSPParam": "showab",
+               "viewCommLink": "Commission/CommByProduct?productId=21",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=21"
+          },
+          {
+               "id": "39",
+               "name": "SA Gaming",
+               "active": "true",
+               "sportId": "244",
+               "reportSPParam": "showsa",
+               "viewCommLink": "Commission/CommByProduct?productId=39",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=39"
+          },
+          {
+               "id": "45",
+               "name": "Sexy Gaming",
+               "active": "true",
+               "sportId": "243",
+               "reportSPParam": "showsexy",
+               "viewCommLink": "Commission/CommByProduct?productId=45",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=45"
+          },
+          {
+               "id": "46",
+               "name": "GT Casino",
+               "active": "true",
+               "sportId": "242",
+               "reportSPParam": "showgt",
+               "viewCommLink": "Commission/CommByProduct?productId=46",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=46"
+          },
+          {
+               "id": "47",
+               "name": "BBIN",
+               "active": "true",
+               "sportId": "241",
+               "reportSPParam": "showbbin",
+               "viewCommLink": "Commission/CommByProduct?productId=47",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=47"
+          },
+          {
+               "id": "52",
+               "name": "ION",
+               "active": "true",
+               "sportId": "225",
+               "reportSPParam": "showion",
+               "viewCommLink": "Commission/CommByProduct?productId=52",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=52"
+          },
+          {
+               "id": "51",
+               "name": "WM",
+               "active": "true",
+               "sportId": "233",
+               "reportSPParam": "showwm",
+               "viewCommLink": "Commission/CommByProduct?productId=51",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=51"
+          },
+          {
+               "id": "59",
+               "name": "GDG",
+               "active": "true",
+               "sportId": "236",
+               "reportSPParam": "showgdg",
+               "viewCommLink": "Commission/CommByProduct?productId=59",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=59"
+          },
+          {
+               "id": "57",
+               "name": "BG",
+               "active": "true",
+               "sportId": "239",
+               "reportSPParam": "showbg",
+               "viewCommLink": "Commission/CommByProduct?productId=57",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=57"
+          },
+          {
+               "id": "65",
+               "name": "PPLiveCasino",
+               "active": "true",
+               "sportId": "170",
+               "reportSPParam": "showpplivecasino",
+               "viewCommLink": "Commission/CommByProduct?productId=65",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=65"
+          },
+          {
+               "id": "76",
+               "name": "YeeBet",
+               "active": "true",
+               "sportId": "159",
+               "reportSPParam": "showyeebet",
+               "viewCommLink": "Commission/CommByProduct?productId=76",
+               "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=76"
+          },
+          {
+               "id": "41",
+               "name": "Live Casino",
+               "active": "true",
+               "viewCommLink": "Commission/CommByProduct?productId=41",
+               "viewPTLink": "PositionTaking/Index?productId=41"
+          },
+          {
+               "id": "5",
+               "name": "VirtualSports",
+               "active": "true",
+               "sportId": "180",
+               "reportSPParam": "showvs",
+               "viewPTLink": "PositionTaking/Index?productId=5&showpticon=true",
+               "microSiteNameAppSetting": "OldMainAppPath",
+               "customerSettingLink": "~/dcs/viewcustomersetting",
+               "statusHandlerType": "Product_5"
+          },
+          {
+               "id": "28",
+               "name": "Lottery",
+               "active": "true",
+               "sportId": "220",
+               "reportSPParam": "showlt",
+               "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=28&showpticon=true"
+          },
+          {
+               "id": "40",
+               "name": "Table Games",
+               "active": "true",
+               "sportId": "222",
+               "reportSPParam": "showtg",
+               "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=40&showpticon=true"
+          },
+          {
+               "id": "50",
+               "name": "RNG War",
+               "active": "true",
+               "sportId": "224",
+               "reportSPParam": "showrngwar",
+               "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=50&showpticon=true"
+          },
+          {
+               "id": "63",
+               "name": "Sports Lottery",
+               "active": "true",
+               "sportId": "169",
+               "reportSPParam": "showSLT",
+               "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=63&showpticon=true"
+          },
+          {
+               "id": "44",
+               "name": "RNG Lottery",
+               "active": "true",
+               "microSiteNameAppSetting": "OldMainAppPath",
+               "customerSettingLink": "~/dcs/viewcustomersetting",
+               "statusHandlerType": "Product_5"
+          },
+          {
+               "id": "64",
+               "name": "VirtualGames",
+               "active": "true",
+               "microSiteNameAppSetting": "OldMainAppPath",
+               "customerSettingLink": "~/dcs/viewcustomersetting",
+               "statusHandlerType": "Product_5"
+          },
+          {
+               "id": "38",
+               "name": "Virtual Games",
+               "active": "true",
+               "sportId": "245",
+               "reportSPParam": "showvg",
+               "customerSettingLink": "~/dcs/viewcustomersetting",
+               "viewPTLink": "PositionTaking/Index?productId=64&mainProductId=38&showpticon=false"
+          },
+          {
+               "id": "69",
+               "name": "Bitcoin",
+               "active": "true",
+               "sportId": "171",
+               "reportSPParam": "showBitcoin",
+               "viewPTLink": "PositionTaking/Index?productId=69",
+               "viewCommLink": "Commission/CommByProduct?productId=69",
+               "microSiteNameAppSetting": "OldMainAppPath",
+               "customerSettingLink": "~/dcs/viewcustomersetting",
+               "statusHandlerType": "Product_5"
+          },
+          {
+               "id": "53",
+               "name": "RNG Casino",
+               "active": "true",
+               "viewPTLink": "PositionTaking/Index?productId=53",
+               "viewCommLink": "Commission/CommByProduct?productId=53"
+          }
+     ]
+}

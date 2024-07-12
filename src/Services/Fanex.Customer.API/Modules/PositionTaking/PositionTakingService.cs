@@ -1,9 +1,13 @@
+using System.Globalization;
 using Fanex.Customer.API.Modules.PositionTaking.Criterias;
 using Fanex.Customer.API.Modules.PositionTaking.Models;
+using Fanex.Customer.API.Modules.PositionTaking.Resources;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using Fanex.RemotingRef;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace Fanex.Customer.API.Modules.PositionTaking;
 
@@ -24,6 +28,8 @@ public class PositionTakingService : IPositionTakingService
 
     private const int Voidbridge = 4001;
 
+    private readonly int[] NewSettingProductGroups = new[] { ProductGroupConstants.Sportsbook, ProductGroupConstants.LiveAndRNGCasino };
+
     public PositionTakingService(IOptions<AppSettings> appSettingOptions, IDynamicRepository dynamicRepository, IRemotingRefService remotingRefService)
     {
         this.appSettings = appSettingOptions.Value;
@@ -38,13 +44,21 @@ public class PositionTakingService : IPositionTakingService
 
     public async Task<PositionTakingViewModel> GetPT(PositionTakingRequest request)
     {
+        ProductViewModel productViewModel;
+        using (var sr = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/App_Data/ProductSection.json"))
+        {
+            string jsonString = sr.ReadToEnd();
+            productViewModel = JsonConvert.DeserializeObject<ProductViewModel>(jsonString);
+        }
+
+        var product = productViewModel.Products.SingleOrDefault(p => p.Id == request.ProductId);
         IEnumerable<PositionTakingEntity> positionTakingEntities;
         var criteria = new GetPositionTakingCriteriaBase
         {
             SettingStatus = appSettings.SettingStatus,
             PageSize = request.PageSize,
             PageIndex = request.PageIndex,
-            ProductId = request.ProductId,
+            ProductId = product.MainProductId != 0 ? product.MainProductId : request.ProductId,
             TotalPages = request.TotalPages
         };
 
@@ -72,7 +86,6 @@ public class PositionTakingService : IPositionTakingService
                 break;
         }
 
-        //var  product = ProductManager.GetProduct(criteria.ProductId);
         var result = new PositionTakingViewModel
         {
             PageSizeList = GetPageSizeList(),
@@ -94,13 +107,14 @@ public class PositionTakingService : IPositionTakingService
             Product = new ProductModel
             {
                 Id = criteria.ProductId,
-                // Name = product != null ? product.RemotingRefName : ProductService.ProductName(criteria.ProductId),
-                // ActivationGroups = new List<ActivationGroupModel>(),
-                // ShowPTIcon = criteria.ShowPTIcon,
-                // CustomerSettingLink = product != null ? product.CustomerSettingLink : null,
-                // MainProductId = criteria.MainProductId,
-                // GroupId = criteria.ProductGroupId,
-                // IsNewSetting = NewSettingProductGroups.Contains(criteria.ProductGroupId)
+                Name = product != null ? remotingRefService.GetResourceDataByRefIdAndResourceId("Product", product.Id.ToString(), request.Language, string.Empty) : 
+                    ProductName(criteria.ProductId, LanguageUtils.ToLanguage(request.Language)),
+                ActivationGroups = new List<ActivationGroupModel>(),
+                ShowPTIcon = product.ShowPTIcon,
+                CustomerSettingLink = product != null ? product.CustomerSettingLink : null,
+                MainProductId = product.MainProductId,
+                GroupId = request.ProductGroupId,
+                IsNewSetting = NewSettingProductGroups.Contains(request.ProductGroupId)
             }
         };
 
@@ -110,7 +124,6 @@ public class PositionTakingService : IPositionTakingService
             TotalPages = criteria.TotalPages
         };
 
-        criteria.ProductId = request.MainProductId != 0 ? request.MainProductId : request.ProductId;
         result.TotalPage = rawData.TotalPages;
 
         var sportNameDictionary = new Dictionary<int, string>();
@@ -366,5 +379,10 @@ public class PositionTakingService : IPositionTakingService
         }
 
         return betTypePTs;
+    }
+
+    private string ProductName(int productId, string language)
+    {
+        return Lang.ResourceManager.GetString(string.Format("{0}{1}", "product_name_", productId), new CultureInfo(language)) ?? string.Empty;
     }
 }

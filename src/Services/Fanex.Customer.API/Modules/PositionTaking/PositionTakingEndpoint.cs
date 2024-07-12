@@ -6,7 +6,7 @@ public class PositionTakingEndpoint : IEndpoint<IResult, PositionTakingRequest, 
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/position-taking", (PositionTakingRequest request1, IPositionTakingService request2)
+        app.MapGet("/api/customer/position-taking", ([AsParameters] PositionTakingRequest request1, IPositionTakingService request2)
             => HandleAsync(request1, request2))
             .Produces<IResult>().WithTags(EndpointTags.CustomerSettings);
     }
