@@ -154,8 +154,6 @@
     <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
   </Function>
   <Function Name="Create Customer">
-    <Setting Key="Acc_CustomerIns_Register" SpName="Acc_CustomerIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_CustSetting_SiteCurrencySettingInfoSel" SpName="Acc_CustSetting_SiteCurrencySettingInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
@@ -263,7 +261,6 @@
     <Setting Key="DBSite2_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite3_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
-    <Setting Key="Acc_SuperPrefixByGroupSel" SpName="Acc_SuperPrefixByGroupSel" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" />
     <Setting Key="EAS_CustomerDateLimitMultipleUpd" SpName="EAS_CustomerDateLimitMultipleUpd" DbName="DBCust.CustDB.wsv_nap" />
     <Setting Key="Acc_CustomerInsAutoTransferAgent" SpName="Acc_CustomerInsAutoTransferAgent" DbName="DBCust.CustDB.wsv_nap" />
