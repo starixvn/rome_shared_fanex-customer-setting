@@ -1,3 +1,6 @@
+using System.Globalization;
+using Fanex.Customer.API.Modules.PositionTaking.Resources;
+
 namespace Fanex.Customer.API.Modules.PositionTaking.Models;
 
 public sealed class CustomerLockedAccess
@@ -6,10 +9,10 @@ public sealed class CustomerLockedAccess
     private const byte FalseOTPSC = 1; // blue: #86c5e4
     private const byte FalsePassword = 2; // gray: #ccc7ba
 
-    public CustomerLockedAccess(byte locked)
+    public CustomerLockedAccess(byte locked, string language)
     {
         Locked = locked;
-        AssignParameters();
+        AssignParameters(language);
     }
 
     public byte Locked { get; }
@@ -20,17 +23,17 @@ public sealed class CustomerLockedAccess
 
     public string UnlockConfirmMessage { get; private set; }
 
-    private void AssignParameters()
+    private void AssignParameters(string language)
     {
         if (Locked == FalseOTPSC)
         {
             ClassName = "locked-falseOTPSC";
-            //TODO:UnlockConfirmMessage = CoreLang.FalseOTPSCUnlockConfirm;
+            UnlockConfirmMessage = Lang.ResourceManager.GetString("FalseOTPSCUnlockConfirm", new CultureInfo(language));
         }
         else if (Locked == FalsePassword)
         {
             ClassName = "locked-falsePassword";
-            //TODO:UnlockConfirmMessage = CoreLang.FalsePasswordUnlockConfirm;
+            UnlockConfirmMessage = Lang.ResourceManager.GetString("FalsePasswordUnlockConfirm", new CultureInfo(language));
         }
     }
 }

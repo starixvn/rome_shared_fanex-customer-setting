@@ -144,4 +144,19 @@
   <data name="Voidbridge" xml:space="preserve">
     <value>Macau Games</value>
   </data>
+  <data name="ClosedByAdmin" xml:space="preserve">
+    <value>This account was closed by admin.</value>
+  </data>
+  <data name="ClosedByUpline" xml:space="preserve">
+    <value>This account was closed by upline.</value>
+  </data>
+  <data name="ClosedByArchive" xml:space="preserve">
+    <value>This account was closed by inactivity</value>
+  </data>
+  <data name="FalseOTPSCUnlockConfirm" xml:space="preserve">
+    <value>由於一次性密碼/保安碼多次驗證失敗，導致此賬號已被鎖定，請問需要進行解鎖嗎？</value>
+  </data>
+  <data name="FalsePasswordUnlockConfirm" xml:space="preserve">
+    <value>由於多次輸入錯誤密碼，導致此賬號已被鎖定，請問需要進行解鎖嗎？</value>
+  </data>
 </root>

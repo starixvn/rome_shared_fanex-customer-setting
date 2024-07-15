@@ -149,5 +149,50 @@ namespace Fanex.Customer.API.Modules.PositionTaking.Resources
                 return ResourceManager.GetString("Voidbridge", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to This account was closed by admin..
+        /// </summary>
+        public static string ClosedByAdmin {
+            get {
+                return ResourceManager.GetString("ClosedByAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This account was closed by inactivity.
+        /// </summary>
+        public static string ClosedByArchive {
+            get {
+                return ResourceManager.GetString("ClosedByArchive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This account was closed by upline..
+        /// </summary>
+        public static string ClosedByUpline {
+            get {
+                return ResourceManager.GetString("ClosedByUpline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This account has been locked due to multiple failed OTP/Security Code authentication attempts. Are you sure you want to unlock it?.
+        /// </summary>
+        public static string FalseOTPSCUnlockConfirm {
+            get {
+                return ResourceManager.GetString("FalseOTPSCUnlockConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This account has been locked due to multiple failed password attempts. Are you sure you want to unlock it?.
+        /// </summary>
+        public static string FalsePasswordUnlockConfirm {
+            get {
+                return ResourceManager.GetString("FalsePasswordUnlockConfirm", resourceCulture);
+            }
+        }
     }
 }

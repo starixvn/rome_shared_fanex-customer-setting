@@ -144,4 +144,19 @@
   <data name="Voidbridge" xml:space="preserve">
     <value>Macau Games</value>
   </data>
+  <data name="ClosedByAdmin" xml:space="preserve">
+    <value>This account was closed by admin.</value>
+  </data>
+  <data name="ClosedByUpline" xml:space="preserve">
+    <value>This account was closed by upline.</value>
+  </data>
+  <data name="ClosedByArchive" xml:space="preserve">
+    <value>This account was closed by inactivity</value>
+  </data>
+  <data name="FalseOTPSCUnlockConfirm" xml:space="preserve">
+    <value>Tài khoản này đã bị khóa do nhiều lần nhập sai Mã OTP/Mã bảo mật. Bạn có muốn mở khoá không?</value>
+  </data>
+  <data name="FalsePasswordUnlockConfirm" xml:space="preserve">
+    <value>Tài khoản này đã bị khóa do nhiều lần nhập sai mật khẩu. Bạn có muốn mở khóa không?</value>
+  </data>
 </root>

@@ -203,10 +203,10 @@ public class PositionTakingService : IPositionTakingService
                     CustId = customerGroup.Key.CustId,
                     CustName = customerGroup.Key.CustName,
                     Closed = customerGroup.Key.Closed,
-                    ClosedReason = customerGroup.Key.Closed ? new CustomerClosedReason(customerGroup.Key.ClosedReason) : null,
+                    ClosedReason = customerGroup.Key.Closed ? new CustomerClosedReason(customerGroup.Key.ClosedReason, LanguageUtils.ToLanguage(languageCode)) : null,
                     Suspended = customerGroup.Key.Suspended,
                     Enabled = customerGroup.Key.Enabled,
-                    LockedAccess = new CustomerLockedAccess(customerGroup.Key.Locked)
+                    LockedAccess = new CustomerLockedAccess(customerGroup.Key.Locked, LanguageUtils.ToLanguage(languageCode))
                 },
                 UplinePT = new List<PositionTakingModel>(),
                 GroupIndex = customerGroup.Key.GroupIndex,
@@ -228,10 +228,10 @@ public class PositionTakingService : IPositionTakingService
                         CustId = customerGroup.Key.CustId,
                         CustName = customerGroup.Key.CustName,
                         Closed = customerGroup.Key.Closed,
-                        ClosedReason = customerGroup.Key.Closed ? new CustomerClosedReason(customerGroup.Key.ClosedReason) : null,
+                        ClosedReason = customerGroup.Key.Closed ? new CustomerClosedReason(customerGroup.Key.ClosedReason, LanguageUtils.ToLanguage(languageCode)) : null,
                         Suspended = customerGroup.Key.Suspended,
                         Enabled = customerGroup.Key.Enabled,
-                        LockedAccess = new CustomerLockedAccess(customerGroup.Key.Locked)
+                        LockedAccess = new CustomerLockedAccess(customerGroup.Key.Locked, LanguageUtils.ToLanguage(languageCode))
                     },
                     PositionTakingByGroups = SportPT(
                         result,
