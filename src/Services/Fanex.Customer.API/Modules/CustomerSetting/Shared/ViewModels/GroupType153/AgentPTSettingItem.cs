@@ -55,10 +55,10 @@ public class AgentPTSettingItem : PTItem
     {
         if (N2 > A2)
         {
-            return Result.CreateErrorResult(StaticResources.Get("AgentMinPTCannotBeGreaterThanAgentMaxPT", language), ErrorCodes.AgentMinPTIsGreaterThanAgentMaxPT);
+            return Result.Create(StaticResources.Get("AgentMinPTCannotBeGreaterThanAgentMaxPT", language), ErrorCodes.AgentMinPTIsGreaterThanAgentMaxPT);
         }
 
-        return Result.CreateSuccessfulResult();
+        return Result.CreateSuccess();
     }
 
     public override bool Is3DecimalPTValue()

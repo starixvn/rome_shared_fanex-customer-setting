@@ -51,7 +51,7 @@ public class GeneralInfoService
 
     public CustomerSettingResult Validate(EditMultipleRequest request)
     {
-        return (CustomerSettingResult)Result.CreateSuccessfulResult();
+        return (CustomerSettingResult)Result.CreateSuccess();
     }
 
     private async Task<decimal> GetTotalAmtountMember(int custId, string site)

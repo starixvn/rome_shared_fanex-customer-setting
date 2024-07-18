@@ -21,7 +21,7 @@ public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerS
     {
         if (!service.ValidateRequest(request))
         {
-            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
+            return Results.Ok(Shared.Models.Result.Create(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
         return Results.Ok(await service.Create(request));

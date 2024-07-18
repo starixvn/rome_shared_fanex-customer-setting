@@ -67,7 +67,7 @@ public class CopyCustomerService : ICopyCustomerService
 
         do
         {
-            var suggestUsernameResult = Result.CreateSuccessfulResult();
+            var suggestUsernameResult = Result.CreateSuccess();
             var result = await CopyCustomer(request);
             if (result.IsSuccessful)
             {

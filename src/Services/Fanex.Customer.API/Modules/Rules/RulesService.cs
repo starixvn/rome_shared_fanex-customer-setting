@@ -32,7 +32,7 @@ namespace Fanex.Customer.API.Modules.Rules
             await dynamicRepository.ExecuteAsync(command);
 
             return command.IsAllowed
-                ? Result.CreateSuccessfulResult()
+                ? Result.CreateSuccess()
                 : GetLimitNewDownlineErrorResult(Enumeration.FromValue<UserLevel>(request.CustLevel), request.Language);
         }
 
@@ -42,8 +42,8 @@ namespace Fanex.Customer.API.Modules.Rules
             await dynamicRepository.ExecuteAsync(command);
 
             return command.ErrCode == 0
-                ? Result.CreateSuccessfulResult()
-                : Result.CreateErrorResult(command.ErrMsg);
+                ? Result.CreateSuccess()
+                : Result.Create(command.ErrMsg);
         }
 
         public async Task<Result> CheckMaxNewMemberBySuper(CheckAllLimitedRulesRequest request)
@@ -52,13 +52,13 @@ namespace Fanex.Customer.API.Modules.Rules
             await dynamicRepository.ExecuteAsync(command);
 
             return command.ErrCode == 0
-                ? Result.CreateSuccessfulResult()
-                : Result.CreateErrorResult(command.ErrMsg);
+                ? Result.CreateSuccess()
+                : Result.Create(command.ErrMsg);
         }
 
         public async Task<Result> CheckAllLimitedRules(CheckAllLimitedRulesRequest request)
         {
-            var result = Result.CreateSuccessfulResult();
+            var result = Result.CreateSuccess();
 
             if (request.CustLevel == UserLevel.Agent.Value)
             {

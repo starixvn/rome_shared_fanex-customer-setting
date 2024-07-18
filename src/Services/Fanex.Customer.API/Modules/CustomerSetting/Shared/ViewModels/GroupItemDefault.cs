@@ -66,7 +66,7 @@ public class GroupItemDefault
     public virtual void MapUpline() { }
 
     public virtual Result Validate(string language = "en-US")
-        => Result.CreateSuccessfulResult();
+        => Result.CreateSuccess();
 
     public virtual bool Is3DecimalPTValue()
         => false;

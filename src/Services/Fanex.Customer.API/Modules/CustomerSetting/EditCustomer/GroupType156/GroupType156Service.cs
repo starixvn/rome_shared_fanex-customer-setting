@@ -26,7 +26,7 @@ public class GroupType156Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus)
     {
-        return (UpdateGroupTypeResult)Result.CreateSuccessfulResult();
+        return (UpdateGroupTypeResult)Result.CreateSuccess();
     }
 
     public override async Task<UpdateGroupTypeResult> Update(

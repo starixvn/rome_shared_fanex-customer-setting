@@ -34,7 +34,7 @@ public class GroupType153Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             }
         }
 
-        return new UpdateGroupTypeResult(Result.CreateSuccessfulResult());
+        return new UpdateGroupTypeResult(Result.CreateSuccess());
     }
 
     private async Task<UpdateGroupTypeResult> CheckLimitPTUpdate(

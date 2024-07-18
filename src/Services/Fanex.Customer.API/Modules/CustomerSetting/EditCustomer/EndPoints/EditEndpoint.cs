@@ -20,7 +20,7 @@ public class EditEndpoint : IEndpoint<IResult, EditRequest, IEditCustomerService
     {
         if (!service.ValidateRequest(request))
         {
-            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
+            return Results.Ok(Shared.Models.Result.Create(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
         return Results.Ok(await service.Update(request));
@@ -40,7 +40,7 @@ public class EditMultipleEndpoint : IEndpoint<IResult, EditMultipleRequest, IEdi
     {
         if (!service.ValidateMultipleRequest(request))
         {
-            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
+            return Results.Ok(Shared.Models.Result.Create(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
         return Results.Ok(await service.UpdateMultiple(request));

@@ -55,7 +55,7 @@ namespace Fanex.Customer.API.Modules.Customer
                 return Execute(command);
             }
 
-            return Task.FromResult(Result.CreateErrorResult(NicknameResource.ResourceManager.GetString("NicknameRule", new CultureInfo(LanguageUtils.ToLanguage(param.LanguageKey))), Code));
+            return Task.FromResult(Result.Create(NicknameResource.ResourceManager.GetString("NicknameRule", new CultureInfo(LanguageUtils.ToLanguage(param.LanguageKey))), Code));
         }
 
         private Task<Result> UpdateNicknameLoginOnly(UpdateNicknameLoginOnlyParam param)
@@ -71,7 +71,7 @@ namespace Fanex.Customer.API.Modules.Customer
         {
             await dynamicRepository.ExecuteAsync(command);
 
-            return Result.CreateErrorResult(
+            return Result.Create(
                 command.ErrCode == 0 ? NicknameResource.ResourceManager.GetString("ConfiguredNicknameSuccessfully", new CultureInfo(LanguageUtils.ToLanguage(command.Language))) : command.ErrMsg,
                 command.ErrCode);
         }

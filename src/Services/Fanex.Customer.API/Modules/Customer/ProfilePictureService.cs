@@ -35,7 +35,7 @@ namespace Fanex.Customer.API.Modules.Customer
 
             await dynamicRepository.ExecuteAsync(command);
 
-            return Result.CreateErrorResult(command.ErrMsg, command.ErrCode);
+            return Result.Create(command.ErrMsg, command.ErrCode);
         }
     }
 }

@@ -26,10 +26,10 @@ public class SuperPTSettingItem : PTItem
     {
         if (N4 > S4)
         {
-            return Result.CreateErrorResult(StaticResources.Get("SuperMinPTCannotBeGreaterThanSuperMaxPT", language), ErrorCodes.SuperMinPTIsGreaterThanSuperMaxPTErrorCode);
+            return Result.Create(StaticResources.Get("SuperMinPTCannotBeGreaterThanSuperMaxPT", language), ErrorCodes.SuperMinPTIsGreaterThanSuperMaxPTErrorCode);
         }
 
-        return Result.CreateSuccessfulResult();
+        return Result.CreateSuccess();
     }
 
     public override bool Is3DecimalPTValue()

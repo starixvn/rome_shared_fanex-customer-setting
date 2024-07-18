@@ -31,7 +31,7 @@ public class CreatePositionTakingTemplateEndPoint : IEndpoint<IResult, CreatePos
     {
         if (request.TemplateName.ContainsHTML())
         {
-            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Language ?? LanguageUtils.DefaultLanguage)));
+            return Results.Ok(Shared.Models.Result.Create(StaticResources.Get("InvalidParameterValue", request.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
         var command = new CreatePositionTakingTemplateCommand(

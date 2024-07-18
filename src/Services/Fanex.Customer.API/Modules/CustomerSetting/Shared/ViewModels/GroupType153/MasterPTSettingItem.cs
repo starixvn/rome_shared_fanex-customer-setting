@@ -55,10 +55,10 @@ public class MasterPTSettingItem : PTItem
     {
         if (N3 > M3)
         {
-            return Result.CreateErrorResult(StaticResources.Get("MasterMinPTCannotBeGreaterThanMasterMaxPT", language), ErrorCodes.MasterMinPTIsGreaterThanMasterMaxPT);
+            return Result.Create(StaticResources.Get("MasterMinPTCannotBeGreaterThanMasterMaxPT", language), ErrorCodes.MasterMinPTIsGreaterThanMasterMaxPT);
         }
 
-        return Result.CreateSuccessfulResult();
+        return Result.CreateSuccess();
     }
 
     public override bool Is3DecimalPTValue()
