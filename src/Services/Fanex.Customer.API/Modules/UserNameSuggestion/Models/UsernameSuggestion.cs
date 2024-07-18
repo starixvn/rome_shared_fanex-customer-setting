@@ -1,4 +1,4 @@
-namespace Fanex.Customer.API.UserNameSuggestion.Models
+namespace Fanex.Customer.API.Modules.UserNameSuggestion.Models
 {
     public class UsernameSuggestion
     {

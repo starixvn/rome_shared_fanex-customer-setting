@@ -1,5 +1,5 @@
 using Fanex.Customer.API.Modules.PositionTaking;
-using Fanex.Customer.API.UserNameSuggestion;
+using Fanex.Customer.API.Modules.UserNameSuggestion;
 
 namespace Fanex.Customer.API.Modules.Customer;
 

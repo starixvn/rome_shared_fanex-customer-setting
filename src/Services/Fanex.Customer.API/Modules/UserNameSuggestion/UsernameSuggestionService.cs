@@ -1,7 +1,7 @@
-﻿using Fanex.Customer.API.UserNameSuggestion.Models;
+﻿using Fanex.Customer.API.Modules.UserNameSuggestion.Models;
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.UserNameSuggestion
+namespace Fanex.Customer.API.Modules.UserNameSuggestion
 {
     public interface UsernameSuggestionService
     {

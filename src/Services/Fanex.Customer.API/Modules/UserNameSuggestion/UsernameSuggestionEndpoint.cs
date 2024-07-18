@@ -1,7 +1,7 @@
 using Fanex.Customer.API.Modules;
 using MinimalApi.Endpoint;
 
-namespace Fanex.Customer.API.UserNameSuggestion;
+namespace Fanex.Customer.API.Modules.UserNameSuggestion;
 
 public class UserNameSuggestionEndpoint : IEndpoint<IResult, UserNameSuggestionQuery, UsernameSuggestionService>
 {

@@ -1,7 +1,7 @@
 ﻿using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.UserNameSuggestion;
+namespace Fanex.Customer.API.Modules.UserNameSuggestion;
 
 public class SelectAutoSuggestionCriteria : CriteriaBase
 {

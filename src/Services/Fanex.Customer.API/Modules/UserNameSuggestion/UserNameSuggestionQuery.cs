@@ -1,4 +1,4 @@
-﻿namespace Fanex.Customer.API.UserNameSuggestion;
+﻿namespace Fanex.Customer.API.Modules.UserNameSuggestion;
 
 public class UserNameSuggestionQuery
 {
