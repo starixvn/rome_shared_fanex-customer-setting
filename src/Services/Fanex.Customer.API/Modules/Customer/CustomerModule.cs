@@ -1,4 +1,5 @@
 using Fanex.Customer.API.Modules.PositionTaking;
+using Fanex.Customer.API.UserNameSuggestion;
 
 namespace Fanex.Customer.API.Modules.Customer;
 
@@ -12,6 +13,7 @@ public static class CustomerCodeModule
         services.AddSingleton<IProfilePictureService, ProfilePictureService>();
         services.AddSingleton<ILanguageService, LanguageService>();
         services.AddSingleton<IPositionTakingService, PositionTakingService>();
+        services.AddSingleton<UsernameSuggestionService, UsernameSuggestionServiceImpl>();
 
         return services;
     }
