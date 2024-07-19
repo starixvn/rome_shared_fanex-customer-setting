@@ -10,7 +10,7 @@ public class GetAccountInfoEndpoint: IEndpoint<IResult,int, ICustomerService>
     public void AddRoute(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/account/{custId}", (int custId, ICustomerService customerService)
-            => HandleAsync(custId, customerService)).Produces<IResult>();
+            => HandleAsync(custId, customerService)).Produces<AccountInfo>();
     }
 
     public async Task<IResult> HandleAsync(int custId, ICustomerService customerService)

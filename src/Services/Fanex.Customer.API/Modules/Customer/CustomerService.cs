@@ -321,7 +321,7 @@ public class CustomerService : ICustomerService
     {
         var accountInfo = await dynamicRepository.GetAsync<AccountInfo>(new GetCustomerInfoCriteria { CustId = custId });
         var domains = await GetBackupDomains(accountInfo.Site, accountInfo.RoleId);
-        accountInfo.domains = domains;
+        accountInfo.Domains = domains;
         return accountInfo;
     }
 }

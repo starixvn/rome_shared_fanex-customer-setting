@@ -35,5 +35,5 @@ public class CustomerInfo
 
 public class AccountInfo : CustomerInfo
 {
-    public List<string> domains { get; set; }
+    public List<string> Domains { get; set; }
 }
