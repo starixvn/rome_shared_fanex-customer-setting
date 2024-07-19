@@ -1,19 +1,27 @@
-using Deposit.ApiGateways;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+var env = builder.Environment;
+builder.Configuration
+    .SetBasePath(env.ContentRootPath)
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
+    .AddJsonFile("ocelot.json", true, true)
+    .AddJsonFile($"ocelot.{env.EnvironmentName}.json", true, true)
+    .AddEnvironmentVariables();
+
+builder.Services.AddHealthChecks();
 
 builder.Services
-    .AddOcelot()
-    .AddDelegatingHandler<ApiKeyHandler>(true);
+    .AddOcelot();
 
 var app = builder.Build();
+app.UseRouting();
 
+app.MapHealthChecks("/heathz");
+app.MapGet("/", () => "Hello world!");
+app.UseEndpoints(_ => { });
 app.UseOcelot().Wait();
-
-app.MapGet("/", () => "Hello World!");
-
 app.Run();

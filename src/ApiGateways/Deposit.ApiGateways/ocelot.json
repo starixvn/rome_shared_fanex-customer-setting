@@ -1,24 +1,21 @@
 {
     "Routes": [
         {
-            "DownstreamPathTemplate": "/todos/{id}",
+            "DownstreamPathTemplate": "/api/customer/CreateNewMember",
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "jsonplaceholder.typicode.com",
+                    "Host": "deposit-api.nexdev.net",
                     "Port": 443
                 }
             ],
-            "UpstreamPathTemplate": "/todos/{id}",
+            "UpstreamPathTemplate": "/api/deposit/member",
             "UpstreamHttpMethod": [
-                "Get"
+                "POST"
             ]
         }
     ],
     "GlobalConfiguration": {
-        "BaseUrl": "https://localhost:5092"
-    },
-    "DelegatingHandlers": [
-        "ApiKeyHandler"
-    ]
+        "BaseUrl": "http://localhost:5092"
+    }
 }
