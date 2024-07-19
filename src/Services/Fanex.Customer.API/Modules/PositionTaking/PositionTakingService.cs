@@ -53,34 +53,44 @@ public class PositionTakingService : IPositionTakingService
 
         var product = productViewModel.Products.SingleOrDefault(p => p.Id == request.ProductId);
         IEnumerable<PositionTakingEntity> positionTakingEntities;
-        var criteria = new GetPositionTakingCriteriaBase
+        var criteria = new GetMasterPositionTakingCriteria
         {
             SettingStatus = appSettings.SettingStatus,
             PageSize = request.PageSize,
             PageIndex = request.PageIndex,
             ProductId = product.MainProductId != 0 ? product.MainProductId : request.ProductId,
-            TotalPages = request.TotalPages
+            SRecommend = request.CustId
         };
 
         switch (request.RoleId)
         {
             case CustomerLevel.Super:
-                var masterCriteria = criteria as GetMasterPositionTakingCriteria;
-                masterCriteria.SRecommend = request.CustId;
-                positionTakingEntities = await GetPositionTakingEntities(masterCriteria);
+                positionTakingEntities = await GetPositionTakingEntities(criteria);
 
                 break;
 
             case CustomerLevel.Master:
-                var agentCriteria = criteria as GetAgentPositionTakingCriteria;
-                agentCriteria.MRecommend = request.CustId;
+                var agentCriteria = new GetAgentPositionTakingCriteria
+                {
+                    SettingStatus = appSettings.SettingStatus,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    ProductId = product.MainProductId != 0 ? product.MainProductId : request.ProductId,
+                    MRecommend = request.CustId
+                };
                 positionTakingEntities = await GetPositionTakingEntities(agentCriteria);
 
                 break;
 
             default:
-                var memberCriteria = criteria as GetMemberPositionTakingCriteria;
-                memberCriteria.Recommend = request.CustId;
+                var memberCriteria = new GetMemberPositionTakingCriteria
+                {
+                    SettingStatus = appSettings.SettingStatus,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    ProductId = product.MainProductId != 0 ? product.MainProductId : request.ProductId,
+                    Recommend = request.CustId
+                };
                 positionTakingEntities = await GetPositionTakingEntities(memberCriteria);
 
                 break;
@@ -107,7 +117,7 @@ public class PositionTakingService : IPositionTakingService
             Product = new ProductModel
             {
                 Id = criteria.ProductId,
-                Name = product != null ? remotingRefService.GetResourceDataByRefIdAndResourceId("Product", product.Id.ToString(), request.Language, string.Empty) : 
+                Name = product != null ? remotingRefService.GetResourceDataByRefIdAndResourceId("Product", product.Id.ToString(), request.Language, string.Empty) :
                     ProductName(criteria.ProductId, LanguageUtils.ToLanguage(request.Language)),
                 ActivationGroups = new List<ActivationGroupModel>(),
                 ShowPTIcon = product.ShowPTIcon,

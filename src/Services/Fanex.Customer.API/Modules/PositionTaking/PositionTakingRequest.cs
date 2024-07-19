@@ -14,8 +14,6 @@ public class PositionTakingRequest
 
     public int PageIndex { get; set; }
 
-    public int TotalPages { get; set; }
-
     public string Language { get; set; }
 
     public int ProductGroupId { get; set; } = ProductGroupConstants.Sportsbook;

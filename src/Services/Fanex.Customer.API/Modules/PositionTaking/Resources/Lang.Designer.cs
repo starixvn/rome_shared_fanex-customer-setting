@@ -45,7 +45,7 @@ namespace Fanex.Customer.API.Modules.PositionTaking.Resources
             {
                 if (object.ReferenceEquals(resourceMan, null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Customer.API.Modules.PositionTaking.Resources", typeof(Lang).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Customer.API.Modules.PositionTaking.Resources.Lang", typeof(Lang).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
