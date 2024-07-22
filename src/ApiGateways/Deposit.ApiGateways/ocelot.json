@@ -5,6 +5,7 @@
     "SwaggerEndPoints": [
         {
             "Key": "Deposit",
+            "TransformByOcelotConfig": false,
             "Config": [
                 {
                     "Name": "Deposit API",

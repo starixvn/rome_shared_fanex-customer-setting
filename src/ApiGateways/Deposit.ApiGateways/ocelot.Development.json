@@ -9,7 +9,7 @@
                     "Port": 443
                 }
             ],
-            "UpstreamPathTemplate": "/api/{version}/deposit/{everything}",
+            "UpstreamPathTemplate": "/api/deposit/{everything}",
             "UpstreamHttpMethod": [
                 "POST"
             ]

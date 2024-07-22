@@ -20,7 +20,10 @@ builder.Services
     .AddDelegatingHandler<ApiKeyHandler>(true);
 
 builder.Services
-        .AddSwaggerForOcelot(builder.Configuration);
+        .AddSwaggerForOcelot(builder.Configuration, (o) =>
+        {
+            o.GenerateDocsForGatewayItSelf = true;
+        });
 builder.Services.AddMvc();
 
 
