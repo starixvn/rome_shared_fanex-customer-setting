@@ -1,4 +1,6 @@
 using Deposit.ApiGateways;
+using Deposit.ApiGateways.Extensions;
+using Deposit.ApiGateways.Middlewares;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -13,19 +15,19 @@ builder.Configuration
     .AddJsonFile($"ocelot.{env.EnvironmentName}.json", true, true)
     .AddEnvironmentVariables();
 
-builder.Services.AddHealthChecks();
+builder.Services
+    .AddOneBookUm(builder.Configuration)
+    .AddHealthChecks();
+
+builder.Services.AddControllers();
 
 builder.Services
+    .AddSwaggerForOcelot(builder.Configuration, (options) =>
+    {
+        options.GenerateDocsForGatewayItSelf = true;
+    })
     .AddOcelot()
     .AddDelegatingHandler<ApiKeyHandler>(true);
-
-builder.Services
-        .AddSwaggerForOcelot(builder.Configuration, (o) =>
-        {
-            o.GenerateDocsForGatewayItSelf = true;
-        });
-builder.Services.AddMvc();
-
 
 var app = builder.Build();
 app.UseRouting();
@@ -34,10 +36,12 @@ app.MapHealthChecks("/healthz");
 app.MapGet("/", () => "Hello, I'm Dep Api!");
 app.UseEndpoints(_ => { });
 
+app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), builder => builder.UseMiddleware<UMMiddleware>());
+
 app.UseSwaggerForOcelotUI(opt =>
-            {
-                opt.PathToSwaggerGenerator = "/swagger/docs";
-            })
+    {
+        opt.PathToSwaggerGenerator = "/swagger/docs";
+    })
     .UseOcelot()
     .Wait();
 if (!app.Environment.IsDevelopment())
