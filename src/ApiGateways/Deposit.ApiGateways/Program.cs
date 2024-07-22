@@ -1,5 +1,4 @@
 using Deposit.ApiGateways;
-using Microsoft.OpenApi.Models;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -29,7 +28,7 @@ var app = builder.Build();
 app.UseRouting();
 
 app.MapHealthChecks("/healthz");
-app.MapGet("/", () => "Hello world!");
+app.MapGet("/", () => "Hello, I'm Dep Api!");
 app.UseEndpoints(_ => { });
 
 app.UseSwaggerForOcelotUI(opt =>

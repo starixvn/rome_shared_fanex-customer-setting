@@ -16,6 +16,6 @@
         }
     ],
     "GlobalConfiguration": {
-        "BaseUrl": "https://deposit-api-gateway.nexdev.net/main"
+        "BaseUrl": "https://dep-api-gw.nexdev.net/main"
     }
 }
