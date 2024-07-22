@@ -1,3 +1,5 @@
+using Deposit.ApiGateways;
+using Microsoft.OpenApi.Models;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -15,13 +17,29 @@ builder.Configuration
 builder.Services.AddHealthChecks();
 
 builder.Services
-    .AddOcelot();
+    .AddOcelot()
+    .AddDelegatingHandler<ApiKeyHandler>(true);
+
+builder.Services
+        .AddSwaggerForOcelot(builder.Configuration);
+builder.Services.AddMvc();
+
 
 var app = builder.Build();
 app.UseRouting();
 
-app.MapHealthChecks("/heathz");
+app.MapHealthChecks("/healthz");
 app.MapGet("/", () => "Hello world!");
 app.UseEndpoints(_ => { });
-app.UseOcelot().Wait();
+
+app.UseSwaggerForOcelotUI(opt =>
+            {
+                opt.PathToSwaggerGenerator = "/swagger/docs";
+            })
+    .UseOcelot()
+    .Wait();
+if (!app.Environment.IsDevelopment())
+{
+    builder.WebHost.UseUrls("http://0.0.0.0:5000");
+}
 app.Run();

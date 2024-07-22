@@ -1,0 +1,21 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "licensee_deposit_api_LOCAL",
+                    "Port": 5000
+                }
+            ],
+            "UpstreamPathTemplate": "/api/{version}/deposit/{everything}",
+            "UpstreamHttpMethod": [
+                "POST"
+            ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://deposit-api-gateway.nexdev.net/main"
+    }
+}

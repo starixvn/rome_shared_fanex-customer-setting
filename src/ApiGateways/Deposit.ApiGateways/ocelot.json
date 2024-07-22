@@ -1,21 +1,17 @@
 {
-    "Routes": [
+    "DelegatingHandlers": [
+        "ApiKeyHandler"
+    ],
+    "SwaggerEndPoints": [
         {
-            "DownstreamPathTemplate": "/api/customer/CreateNewMember",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
+            "Key": "Deposit",
+            "Config": [
                 {
-                    "Host": "deposit-api.nexdev.net",
-                    "Port": 443
+                    "Name": "Deposit API",
+                    "Version": "v1",
+                    "Url": "http://deposit-api.nexdev.net/swagger/v1/swagger.json"
                 }
-            ],
-            "UpstreamPathTemplate": "/api/deposit/member",
-            "UpstreamHttpMethod": [
-                "POST"
             ]
         }
-    ],
-    "GlobalConfiguration": {
-        "BaseUrl": "http://localhost:5092"
-    }
+    ]
 }
