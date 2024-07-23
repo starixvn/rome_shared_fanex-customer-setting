@@ -9,7 +9,7 @@
                     "Port": 5000
                 }
             ],
-            "UpstreamPathTemplate": "/api/{version}/deposit/{everything}",
+            "UpstreamPathTemplate": "/api/deposit/{everything}",
             "UpstreamHttpMethod": [
                 "POST"
             ]

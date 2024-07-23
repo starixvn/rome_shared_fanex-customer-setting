@@ -10,7 +10,7 @@ namespace Deposit.ApiGateways
         {
             if (!IsValidKey(request))
             {
-                var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                var response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
                 return Task.FromResult(response);
             }
 
