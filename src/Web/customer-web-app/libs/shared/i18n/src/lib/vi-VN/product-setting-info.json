@@ -11,7 +11,7 @@
   "MemberNote": "Nhập tất cả giá trị của giới hạn cược = 0 để ngăn không cho Member đặt cược.",
   "MixSportsParlayBetSetting": "Mix Sports Parlay: parlay mà các vé cược không chỉ là Bóng Đá <br> Ví dụ: Bóng Đá - Bóng Đá - Bóng Rổ, Quần Vợt - Quần Vợt - Quần Vợt, Bóng Rổ - Đánh Golf - Bóng Bầu Dục",
   "CommonWinLossLimitNote": "Giới Hạn Thắng Thua và Tự Động Reset Giới Hạn Chuyển Khoản Mỗi Ngày sẽ được sao chép từ cấp trên.",
-  "RNGKenoNumberGameWinLossLimitNote": "Giới Hạn Thắng Thua không áp dụng cho RNG Keno và Number Game",
+  "RNGKenoNumberGameWinLossLimitNote": "So sánh Giới hạn Thắng/Thua với Thắng/Thua của TỪNG sản phẩm.",
   "BBINBetSetting": "Lưu ý, đối với BBIN, khi bạn chỉnh sửa các thiết lập của Member, các thiết lập mới này sẽ được áp dụng từ lần chuyển tiền tiếp theo của Member.",
   "WinLossLimitNote3": "Giới Hạn Cược, Giới Hạn Thắng Thua, Giới Hạn Thua và Tự Động Reset Giới Hạn Chuyển Khoản Mỗi Ngày sẽ được sao chép từ cấp trên.",
   "CommonPTSettingNote1": "Trong Thiết Lập Rút Gọn, bạn có thể thiết lập Mẫu Position Taking mặc định khi tạo cấp dưới mới bằng cách sử dụng tính năng Mẫu Position Taking.",

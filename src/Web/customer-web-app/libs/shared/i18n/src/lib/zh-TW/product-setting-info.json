@@ -11,7 +11,7 @@
   "MemberNote": "輸入所有投注設置欄位= 0 防止會員進行投注。",
   "MixSportsParlayBetSetting": "混合體育過關n: 它的票不只是足球的混合過關. <br> 示例：足球 - 足球 - 籃球，網球 - 網球 - 網球，棒球 - 高爾夫 - 足球 - 美式足球",
   "CommonWinLossLimitNote": "輸贏限額及每日限額自動重設將從上線複製。",
-  "RNGKenoNumberGameWinLossLimitNote": "输赢限额的設置不适用于快乐彩及数字游戏",
+  "RNGKenoNumberGameWinLossLimitNote": "將輸贏限額設定與每個產品的輸贏進行比較。",
   "BBINBetSetting": "請知悉: [BBIN 產品] 當您更改會員的設置時，此新更改只會在會員轉額進遊戲後才會生效。",
   "WinLossLimitNote3": "投注限額, 輸贏限額. 輸限額, 及每日限額自動重設將從上線複製。",
   "CommonPTSettingNote1": "在精簡模式下，您可以在創建新下線時在佔成數模板功能中設置默認的佔成數模板。",
