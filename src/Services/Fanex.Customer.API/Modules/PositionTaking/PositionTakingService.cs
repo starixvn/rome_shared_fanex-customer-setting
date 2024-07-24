@@ -117,7 +117,7 @@ public class PositionTakingService : IPositionTakingService
             Product = new ProductModel
             {
                 Id = criteria.ProductId,
-                Name = product != null ? remotingRefService.GetResourceDataByRefIdAndResourceId("Product", product.Id.ToString(), request.Language, string.Empty) :
+                Name = product != null ? remotingRefService.GetResourceDataByRefIdAndResourceId("Product", product.Id.ToString(), LanguageUtils.ToLanguage(request.Language), string.Empty) :
                     ProductName(criteria.ProductId, LanguageUtils.ToLanguage(request.Language)),
                 ActivationGroups = new List<ActivationGroupModel>(),
                 ShowPTIcon = product.ShowPTIcon,
@@ -274,7 +274,7 @@ public class PositionTakingService : IPositionTakingService
 
             if (!sportNameDictionary.ContainsKey(sportId))
             {
-                sportNameDictionary.Add(sportId, remotingRefService.GetSportName(sportId.ToString(), languageCode));
+                sportNameDictionary.Add(sportId, remotingRefService.GetSportName(sportId.ToString(), LanguageUtils.ToLanguage(languageCode)));
                 sportInfo = new ActivationGroupModel
                 {
                     Id = sportId,
@@ -365,8 +365,8 @@ public class PositionTakingService : IPositionTakingService
                 betTypeNameDictionary.Add(
                     betTypeId,
                     betTypeId == Voidbridge ?
-                    remotingRefService.GetResourceDataByRefIdAndResourceId("DummySport", dummySportForRNGSlot, languageCode, string.Empty) :
-                    remotingRefService.GetBetTypeName(betTypeId.ToString(), languageCode));
+                    remotingRefService.GetResourceDataByRefIdAndResourceId("DummySport", dummySportForRNGSlot, LanguageUtils.ToLanguage(languageCode), string.Empty) :
+                    remotingRefService.GetBetTypeName(betTypeId.ToString(), LanguageUtils.ToLanguage(languageCode)));
             }
 
             ActivationGroupModel betTypeInfo = new ActivationGroupModel
@@ -382,7 +382,7 @@ public class PositionTakingService : IPositionTakingService
             {
                 Id = betTypeId,
                 Name = betTypeNameDictionary[betTypeId],
-                Value = betTypePT.PositionTaking
+                Value = betTypePT.PositionTaking / 100
             });
 
             liveTypeInfo.ActivationGroups.Add(betTypeInfo);
