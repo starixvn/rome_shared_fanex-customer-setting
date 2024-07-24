@@ -1,51 +1,92 @@
 using Deposit.ApiGateways;
 using Deposit.ApiGateways.Extensions;
 using Deposit.ApiGateways.Middlewares;
+using Microsoft.AspNetCore.HttpLogging;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-var env = builder.Environment;
-builder.Configuration
-    .SetBasePath(env.ContentRootPath)
-    .AddJsonFile("appsettings.json", true, true)
-    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
-    .AddJsonFile("ocelot.json", true, true)
-    .AddJsonFile($"ocelot.{env.EnvironmentName}.json", true, true)
-    .AddEnvironmentVariables();
-
-builder.Services
-    .AddOneBookUm(builder.Configuration)
-    .AddHealthChecks();
-
-builder.Services.AddControllers();
-
-builder.Services
-    .AddSwaggerForOcelot(builder.Configuration, (options) =>
-    {
-        options.GenerateDocsForGatewayItSelf = true;
-    })
-    .AddOcelot()
-    .AddDelegatingHandler<ApiKeyHandler>(true);
-
-var app = builder.Build();
-app.UseRouting();
-
-app.MapHealthChecks("/healthz");
-app.MapGet("/", () => "Hello, I'm Dep Api!");
-app.UseEndpoints(_ => { });
-
-app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), builder => builder.UseMiddleware<UMMiddleware>());
-
-app.UseSwaggerForOcelotUI(opt =>
-    {
-        opt.PathToSwaggerGenerator = "/swagger/docs";
-    })
-    .UseOcelot()
-    .Wait();
-if (!app.Environment.IsDevelopment())
+try
 {
-    builder.WebHost.UseUrls("http://0.0.0.0:5000");
+    Log.Information("Starting web application");
+    var builder = WebApplication.CreateBuilder(args);
+
+    var env = builder.Environment;
+    builder.Configuration
+        .SetBasePath(env.ContentRootPath)
+        .AddJsonFile("appsettings.json", true, true)
+        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
+        .AddJsonFile("ocelot.json", true, true)
+        .AddJsonFile($"ocelot.{env.EnvironmentName}.json", true, true)
+        .AddEnvironmentVariables();
+
+    builder.Services.AddSerilog((services, lc) => lc
+        .ReadFrom.Configuration(builder.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .Enrich.WithProperty("Application", env.ApplicationName));
+
+    builder.Services.AddHttpLogging(logging =>
+    {
+        logging.LoggingFields = HttpLoggingFields.All;
+        logging.RequestHeaders.Add("sec-ch-ua");
+        logging.RequestHeaders.Add("x-forwarded-for");
+        logging.MediaTypeOptions.AddText("application/javascript");
+        logging.RequestBodyLogLimit = 4096;
+        logging.ResponseBodyLogLimit = 4096;
+        logging.CombineLogs = true;
+    });
+
+    builder.Services
+        .AddOneBookUm(builder.Configuration)
+        .AddHealthChecks();
+
+    builder.Services.AddControllers();
+
+    builder.Services
+        .AddSwaggerForOcelot(builder.Configuration, (options) =>
+        {
+            options.GenerateDocsForGatewayItSelf = true;
+        })
+        .AddOcelot()
+        .AddDelegatingHandler<ApiKeyHandler>(true);
+
+    var app = builder.Build();
+    app.UseSerilogRequestLogging();
+
+    app.UseHttpLogging();
+    app.UseRouting();
+
+    app.MapHealthChecks("/healthz");
+    app.MapGet("/", () => "Hello, I'm Dep Api!");
+    app.UseEndpoints(_ => { });
+
+    app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), builder => builder.UseMiddleware<UMMiddleware>());
+
+    app.UseSwaggerForOcelotUI(opt =>
+        {
+            opt.PathToSwaggerGenerator = "/swagger/docs";
+        })
+        .UseOcelot()
+        .Wait();
+    if (!app.Environment.IsDevelopment())
+    {
+        builder.WebHost.UseUrls("http://0.0.0.0:5000");
+    }
+    app.Run();
 }
-app.Run();
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
+
+
