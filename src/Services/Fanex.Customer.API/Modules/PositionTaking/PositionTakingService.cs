@@ -107,8 +107,8 @@ public class PositionTakingService : IPositionTakingService
             Language = request.Language,
             CustomerInfo = new CustomerListInfo
             {
-                CustId = request.CustId,
-                RoleId = request.RoleId,
+                CustId = request.ActorId,
+                RoleId = request.ActorRoleId,
             },
             ViewedCustomerInfo = new CustomerListInfo
             {
