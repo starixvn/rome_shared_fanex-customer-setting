@@ -1,6 +1,4 @@
-﻿using Fanex.Data;
-
-namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
+﻿namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
 
 public class CopyMasterCommand : CopyCustomerCommand
 {

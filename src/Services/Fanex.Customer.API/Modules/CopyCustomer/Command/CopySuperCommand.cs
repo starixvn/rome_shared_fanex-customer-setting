@@ -1,5 +1,4 @@
 using Fanex.Customer.API.Shared.Constants;
-using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
 

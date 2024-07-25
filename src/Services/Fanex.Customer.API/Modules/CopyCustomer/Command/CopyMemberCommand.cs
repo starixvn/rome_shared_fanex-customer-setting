@@ -1,5 +1,3 @@
-using Fanex.Data;
-
 namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
 
 public class CopyMemberCommand : CopyCustomerCommand

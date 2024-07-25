@@ -1,5 +1,4 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Command;
 

@@ -17,9 +17,9 @@ using MinimalApi.Endpoint.Extensions;
 using ONEbook.OTP.Services;
 using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
-using Fanex.Customer.API.Modules.CreateCustomer.Helpers;
 using Fanex.Customer.API.Modules.Balance;
 using Fanex.Customer.API.Modules.EditCustomer;
+using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration);
@@ -31,6 +31,7 @@ builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.AddSingleton<ISiteDBGroupService, SiteDBGroupService>();
 builder.Services.AddSingleton<ISiteDBService, SiteDBService>();
+builder.Services.AddSingleton<IScaleoutDBService, ScaleoutDBService>();
 builder.Services.AddSingleton<IBalanceService, BalanceService>();
 builder.Services.AddSingleton<IMessageService, MessageService>();
 builder.Services.AddSingleton<ISharedService, SharedService>();
