@@ -2,7 +2,7 @@ using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria;
+namespace Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 
 public class GetCustomerCriteria : CriteriaBase
 {

@@ -1,7 +1,7 @@
 using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
@@ -9,13 +9,7 @@ using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
-
-public interface ICreateMasterFullModeService
-{
-    Task<CreateCustomerResult> Create(CreateRequest request);
-}
-
-public class CreateMasterFullModeService : ICreateMasterFullModeService
+public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
 
     private const string CheckPermissionSPName = "Acc_GetDeniedSiteCurrencyByUser";
@@ -28,26 +22,15 @@ public class CreateMasterFullModeService : ICreateMasterFullModeService
 
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
-    private readonly IScaleoutDBService scaleoutDBService;
-
-    private readonly IMessageService messageService;
-
-    private readonly AppSettings appSettings;
-
-    private readonly ICustomerSettingHelper helperService;
-
     public CreateMasterFullModeService(IMessageService messageService, 
         AppSettings appSettings, 
         IScaleoutDBService scaleoutDBService,
         ICustomerSettingHelper helperService)
+        : base( messageService, appSettings, scaleoutDBService, helperService)
     {
-        this.messageService = messageService;
-        this.appSettings = appSettings;
-        this.scaleoutDBService = scaleoutDBService;
-        this.helperService = helperService;
     }
 
-    public async Task<CreateCustomerResult> Create(CreateRequest request)
+    public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         var result = await CheckPermission(request);
         if (!result.IsSuccessful)

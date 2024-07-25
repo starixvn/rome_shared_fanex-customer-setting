@@ -1,12 +1,12 @@
 using Fanex.Caching;
-using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
-using Fanex.Customer.API.Modules.CreateCustomer.Entities;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
+using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
+namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
-public class SharedService : ISharedService
+public class SettingProfileService : ISettingProfileService
 {
     private const int CacheDurationInHour = 24;
 
@@ -22,7 +22,7 @@ public class SharedService : ISharedService
         Edit = 2
     }
 
-    public SharedService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService)
+    public SettingProfileService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService)
     {
         this.dynamicRepository = dynamicRepository ?? new DynamicRepository();
         this.appSettings = appSettings.Value;

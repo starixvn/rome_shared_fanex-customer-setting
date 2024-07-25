@@ -3,9 +3,9 @@ using Fanex.Customer.API.Modules.Balance;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
-using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
@@ -36,7 +36,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         IBalanceService balanceService,
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
-        ISharedService sharedService,
+        ISettingProfileService sharedService,
         ICacheRefService cacheRefService,
         IMessageService messageService,
         ICustomerSettingHelper helperService,
@@ -79,10 +79,10 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     {
         CreateCustomerResult result;
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
-        if (Enumeration.FromValue<UserLevel>(uplineRoleId).IsCompanyLevel())
+        if (request.Context.IsFullMode())
         {
-            CreateSuperFullModeService createSuperFullModeService = new CreateSuperFullModeService(messageService, appSettings, scaleoutDBService, helperService);
-            result = await createSuperFullModeService.Create(request);
+            var createCustomerService = GetCreateCusstomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId);
+            result = await createCustomerService.Create(request);
         }
         else
         {
@@ -120,6 +120,25 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         }
 
         return result;
+    }
+
+    private CreateCustomerBaseService GetCreateCusstomerService(bool isFullMode, int uplineRoleId)
+    {
+        if (isFullMode)
+        {
+            return uplineRoleId switch
+            {
+                CustomerLevel.Company => new CreateSuperFullModeService(messageService, appSettings, scaleoutDBService, helperService),
+                CustomerLevel.Super => new CreateMasterFullModeService(messageService, appSettings, scaleoutDBService, helperService),
+                CustomerLevel.Master => new CreateAgentFullModeService(messageService, appSettings, scaleoutDBService, helperService),
+                CustomerLevel.Agent => new CreateMemberFullModeService(messageService, appSettings, scaleoutDBService, helperService),
+                _ => null
+            };
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private Hashtable GetCreateCustomerParams(CreateRequest request, AppSettings appSettings)

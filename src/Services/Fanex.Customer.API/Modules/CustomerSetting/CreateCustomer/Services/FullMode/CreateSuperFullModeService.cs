@@ -1,7 +1,7 @@
 using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
@@ -9,7 +9,7 @@ using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
-public class CreateSuperFullModeService : CreateCustomerFullModeBaseService, ICreateCustomerFullModeBaseService
+public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
 
     private const string CheckPermissionSPName = "Acc_GetDeniedSiteCurrencyByUser";

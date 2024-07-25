@@ -6,7 +6,6 @@ using Fanex.Customer.API.Middlewares;
 using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.Rules;
 using Fanex.Customer.API.Modules.CreateCustomer;
-using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.SecurityCode;
@@ -19,7 +18,8 @@ using TelegramBot.Client.Services;
 using SophosOtp = ONEbook.OTP.Services.OtpService;
 using Fanex.Customer.API.Modules.Balance;
 using Fanex.Customer.API.Modules.EditCustomer;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration);
@@ -34,7 +34,7 @@ builder.Services.AddSingleton<ISiteDBService, SiteDBService>();
 builder.Services.AddSingleton<IScaleoutDBService, ScaleoutDBService>();
 builder.Services.AddSingleton<IBalanceService, BalanceService>();
 builder.Services.AddSingleton<IMessageService, MessageService>();
-builder.Services.AddSingleton<ISharedService, SharedService>();
+builder.Services.AddSingleton<ISettingProfileService, SettingProfileService>();
 builder.Services.AddSingleton<IUMService, UMService>();
 builder.Services.AddSingleton<ICustomerSettingHelper, CustomerSettingHelper>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>

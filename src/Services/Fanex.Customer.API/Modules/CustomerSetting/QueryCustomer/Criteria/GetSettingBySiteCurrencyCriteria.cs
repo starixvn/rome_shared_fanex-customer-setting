@@ -1,6 +1,6 @@
 using Fanex.Data.Repository;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.Criteria;
+namespace Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 
 public class GetSettingBySiteCurrencyCriteria : CriteriaBase
 {

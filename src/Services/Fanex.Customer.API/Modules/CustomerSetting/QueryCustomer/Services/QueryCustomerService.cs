@@ -1,19 +1,17 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
-using Fanex.Customer.API.Modules.CreateCustomer.Entities;
-using Fanex.Customer.API.Modules.CreateCustomer.Requests;
-using Fanex.Customer.API.Modules.CreateCustomer.Resources;
-using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType153;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.EditSettings;
+using Fanex.Customer.API.Modules.QueryCustomer.Requests;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
-using static Fanex.Customer.API.Modules.CreateCustomer.SharedServices.SharedService;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
+using static Fanex.Customer.API.Modules.CustomerSetting.Shared.Services.SettingProfileService;
+using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
@@ -24,15 +22,8 @@ public interface IQueryCustomerService
     Task<CustomerSettingModel> Query(QueryRequest request);
 }
 
-public class QueryCustomerService : IQueryCustomerService
+public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerService
 {
-    protected readonly IDynamicRepository dynamicRepository;
-    protected readonly AppSettings appSettings;
-    protected readonly ISharedService sharedService;
-    protected readonly ICacheRefService cacheRefService;
-    protected readonly IMessageService messageService;
-    protected readonly ICustomerSettingHelper helperService;
-    protected readonly Dictionary<int, dynamic> groupItemMapping;
     private readonly ICustomerService customerService;
     private readonly ISiteDBGroupService siteDBGroupService;
 
@@ -41,19 +32,14 @@ public class QueryCustomerService : IQueryCustomerService
         ISiteDBGroupService siteDBGroupService,
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
-        ISharedService sharedService,
+        ISettingProfileService settingProfileService,
         ICacheRefService cacheRefService,
         IMessageService messageService,
         ICustomerSettingHelper helperService)
+        : base(dynamicRepository, appSettings, settingProfileService, cacheRefService, messageService, null, helperService)
     {
         this.customerService = customerService;
         this.siteDBGroupService = siteDBGroupService;
-        this.dynamicRepository = dynamicRepository;
-        this.appSettings = appSettings.Value;
-        this.sharedService = sharedService;
-        this.cacheRefService = cacheRefService;
-        this.messageService = messageService;
-        this.helperService = helperService;
     }
 
     private readonly IDictionary<string, string> CommissionNameMappings = new Dictionary<string, string>()
@@ -75,7 +61,7 @@ public class QueryCustomerService : IQueryCustomerService
         if (roleId != CustomerLevel.Member && !isY7)
             return true;
 
-        if  (roleId == CustomerLevel.Member && IsAllowUncheckStakeLevelOnMemberSite)
+        if (roleId == CustomerLevel.Member && IsAllowUncheckStakeLevelOnMemberSite)
             return true;
 
         return false;
@@ -85,7 +71,7 @@ public class QueryCustomerService : IQueryCustomerService
     {
         ptStep = appSettings.IsSupportPT3Decimal(request.SiteLabel) ? 0.5M : 1M;
         var generalInfo = new GeneralInformation();
-        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency, ProfileMode.AddNew);
+        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, request.Site, request.Currency, ProfileMode.AddNew);
         var customerSetting = new CustomerSettingModel
         {
             GeneralInfo = generalInfo,
@@ -101,7 +87,7 @@ public class QueryCustomerService : IQueryCustomerService
         var generalInfo = await GetGeneralInfo(request);
         ptStep = appSettings.IsSupportPT3Decimal(IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel) ? 0.5M : 1M;
         isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, appSettings);
-        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
+        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
         if (request.RoleId == CustomerLevel.Agent)
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
@@ -169,7 +155,7 @@ public class QueryCustomerService : IQueryCustomerService
                 {
                     Id = t.Key.GroupType,
                     IsAllowUncheckAll = isAllowUncheckAll,
-                    Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
+                    Name = Resources.Resources.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                     DisplayType = t.Key.DisplayType,
                     GroupItems = GetGroupItems(
                         g.Key,
@@ -203,7 +189,7 @@ public class QueryCustomerService : IQueryCustomerService
                 {
                     Id = t.Key.GroupType,
                     IsAllowUncheckAll = isAllowUncheckAll,
-                    Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
+                    Name = Resources.Resources.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                     DisplayType = t.Key.DisplayType,
                     GroupItems = GetGroupItems(
                         g.Key,
@@ -237,7 +223,7 @@ public class QueryCustomerService : IQueryCustomerService
                 {
                     Id = t.Key.GroupType,
                     IsAllowUncheckAll = isAllowUncheckAll,
-                    Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
+                    Name = Resources.Resources.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                     DisplayType = t.Key.DisplayType,
                     IsReadOnly = IsReadOnlyGroupType(request, t.Key.GroupType),
                     GroupItems = GetGroupItems(
@@ -261,7 +247,7 @@ public class QueryCustomerService : IQueryCustomerService
 
     private bool IsReadOnlyGroupType(QueryRequest request, int groupTypeId)
     {
-        if((request.SystemId == Systems.EXT || request.SystemId == Systems.EXTY7) && request.RoleId == CustomerLevel.Super)
+        if ((request.SystemId == Systems.EXT || request.SystemId == Systems.EXTY7) && request.RoleId == CustomerLevel.Super)
         {
             return true;
         }

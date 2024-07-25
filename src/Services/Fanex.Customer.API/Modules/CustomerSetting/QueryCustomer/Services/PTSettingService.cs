@@ -1,36 +1,36 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Resources;
-using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.QueryCustomer.Requests;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
+namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
 public interface IPTSettingService
 {
     Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request);
 }
 
-public class PTSettingService : BaseCustomerService, IPTSettingService
+public class PTSettingService : BaseQueryCustomerService, IPTSettingService
 {
     public PTSettingService(
         IDynamicRepository dynamicRepository, 
         IOptions<AppSettings> appSettings, 
-        ISharedService sharedService, 
+        ISettingProfileService settingProfileService, 
         ICacheRefService cacheRefService, 
         IMessageService messageService,
         ICustomerSettingHelper helperService)
-        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService)
+        : base(dynamicRepository, appSettings, settingProfileService, cacheRefService, messageService, null, helperService)
     {
     }
 
     public async Task<IEnumerable<ProductGroup>> GetPTSettings(QueryPTTemplateRequest request)
     {
-        var settingProfile = await sharedService.GetSettingProfiles(request.SystemId, request.Site, request.Currency, SharedService.ProfileMode.AddNew);
+        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, request.Site, request.Currency, SettingProfileService.ProfileMode.AddNew);
         var productGroups = settingProfile.Where(p => p.GroupType == 153).GroupBy(p => p.GroupId)
             .Select((g) => new ProductGroup
             {

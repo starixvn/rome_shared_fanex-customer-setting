@@ -1,5 +1,5 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType150;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType151;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType152;

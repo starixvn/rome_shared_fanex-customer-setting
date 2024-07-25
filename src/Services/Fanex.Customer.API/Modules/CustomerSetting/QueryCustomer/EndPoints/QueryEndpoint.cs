@@ -1,5 +1,5 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
+using Fanex.Customer.API.Modules.QueryCustomer.Requests;
 using Fanex.Customer.API.Modules.QueryCustomer.Services;
 using MinimalApi.Endpoint;
 

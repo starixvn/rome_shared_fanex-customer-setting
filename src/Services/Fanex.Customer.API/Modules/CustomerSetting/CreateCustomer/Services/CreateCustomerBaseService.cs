@@ -1,16 +1,17 @@
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
-public interface ICreateCustomerFullModeBaseService
+public interface ICreateCustomerBaseService
 {
     Task<CreateCustomerResult> Create(CreateRequest request);
 }
-public class CreateCustomerFullModeBaseService: ICreateCustomerFullModeBaseService
+
+public class CreateCustomerBaseService: ICreateCustomerBaseService
 {
     protected readonly IScaleoutDBService scaleoutDBService;
 
@@ -20,7 +21,7 @@ public class CreateCustomerFullModeBaseService: ICreateCustomerFullModeBaseServi
 
     protected readonly ICustomerSettingHelper helperService;
 
-    public CreateCustomerFullModeBaseService(IMessageService messageService, 
+    public CreateCustomerBaseService(IMessageService messageService, 
         AppSettings appSettings, 
         IScaleoutDBService scaleoutDBService,
         ICustomerSettingHelper helperService)

@@ -1,4 +1,4 @@
-namespace Fanex.Customer.API.Modules.CreateCustomer.Entities;
+namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 
 public class SettingProfile
 {

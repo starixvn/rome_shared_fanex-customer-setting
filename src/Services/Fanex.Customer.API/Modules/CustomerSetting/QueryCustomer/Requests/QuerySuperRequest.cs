@@ -1,4 +1,4 @@
-namespace Fanex.Customer.API.Modules.CreateCustomer.Requests;
+namespace Fanex.Customer.API.Modules.QueryCustomer.Requests;
 
 public class QuerySuperRequest : BaseQueryRequest
 {

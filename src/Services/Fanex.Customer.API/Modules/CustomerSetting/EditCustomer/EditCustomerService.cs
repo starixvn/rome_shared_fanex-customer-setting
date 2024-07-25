@@ -1,8 +1,7 @@
 using Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
-using Fanex.Customer.API.Modules.CreateCustomer.Services;
-using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.GroupType152;
 using Fanex.Customer.API.Modules.EditCustomer.GroupType153;
@@ -47,12 +46,12 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         ISiteDBGroupService siteDBGroupService,
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
-        ISharedService sharedService,
+        ISettingProfileService settingProfileService,
         ICacheRefService cacheRefService,
         IMessageService messageService,
         IUMService uMService,
         ICustomerSettingHelper helperService)
-        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, uMService, helperService)
+        : base(dynamicRepository, appSettings, settingProfileService, cacheRefService, messageService, uMService, helperService)
     {
         this.siteDBGroupService = siteDBGroupService;
         groupItemForEditMapping = new()

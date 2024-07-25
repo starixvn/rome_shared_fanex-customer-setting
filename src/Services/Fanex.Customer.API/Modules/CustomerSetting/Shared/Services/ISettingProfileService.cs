@@ -1,9 +1,9 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Entities;
-using static Fanex.Customer.API.Modules.CreateCustomer.SharedServices.SharedService;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
+using static Fanex.Customer.API.Modules.CustomerSetting.Shared.Services.SettingProfileService;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
+namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
-public interface ISharedService
+public interface ISettingProfileService
 {
     Task<IEnumerable<SettingProfile>> GetSettingProfiles(byte systemId, string site, int currency, ProfileMode mode);
 

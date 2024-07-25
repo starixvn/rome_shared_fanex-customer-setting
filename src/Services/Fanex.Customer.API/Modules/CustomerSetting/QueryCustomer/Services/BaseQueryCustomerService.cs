@@ -1,4 +1,3 @@
-using Fanex.Customer.API.Modules.CreateCustomer.SharedServices;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType150;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType151;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType152;
@@ -6,44 +5,30 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType153;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType158;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType160;
-using Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.EditCustomer;
 using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Modules.QueryCustomer.Services;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
+namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
-public class BaseCustomerService
+public class BaseQueryCustomerService : BaseCustomerService
 {
-    protected readonly IDynamicRepository dynamicRepository;
-    protected readonly AppSettings appSettings;
-    protected readonly ISharedService sharedService;
-    protected readonly ICacheRefService cacheRefService;
-    protected readonly IMessageService messageService;
-    protected readonly IUMService uMService;
-    protected readonly ICustomerSettingHelper helperService;
     protected readonly Dictionary<int, dynamic> groupItemMapping;
 
-    protected BaseCustomerService(
+    protected BaseQueryCustomerService(
         IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings,
-        ISharedService sharedService,
+        ISettingProfileService settingProfileService,
         ICacheRefService cacheRefService,
         IMessageService messageService,
         IUMService uMService,
         ICustomerSettingHelper helperService)
+        : base(dynamicRepository, appSettings, settingProfileService, cacheRefService, messageService, uMService, helperService)
     {
-        this.dynamicRepository = dynamicRepository;
-        this.appSettings = appSettings.Value;
-        this.sharedService = sharedService;
-        this.cacheRefService = cacheRefService;
-        this.messageService = messageService;
-        this.uMService = uMService;
-        this.helperService = helperService;
-
         groupItemMapping = new()
         {
             {150_4, new QueryGroupTypeBaseService<SuperCommissionGroup>(dynamicRepository, appSettings, helperService)},

@@ -2,7 +2,7 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Fanex.Customer.API.Modules.CustomrSetting.Shared.Helpers;
+namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 
 public interface ICustomerSettingHelper
 {

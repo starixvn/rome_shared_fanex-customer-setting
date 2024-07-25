@@ -1,8 +1,8 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Requests;
-using Fanex.Customer.API.Modules.CreateCustomer.Services;
+using Fanex.Customer.API.Modules.QueryCustomer.Requests;
+using Fanex.Customer.API.Modules.QueryCustomer.Services;
 using MinimalApi.Endpoint;
 
-namespace Fanex.Customer.API.Modules.CreateCustomer.EndPoints;
+namespace Fanex.Customer.API.Modules.QueryCustomer.EndPoints;
 
 public class GetPTTemplateEndpoint : IEndpoint<IResult, QueryPTTemplateRequest, IPTSettingService>
 {
