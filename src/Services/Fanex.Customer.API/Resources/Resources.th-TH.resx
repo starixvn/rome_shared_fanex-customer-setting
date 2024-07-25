@@ -145,6 +145,18 @@
 		<value>บัญชีต้นทางนี้ถูกปิดการใช้งานอยู่</value>
 		<comment/>
 	</data>
+	<data name="Live" xml:space="preserve">
+		<value>สด</value>
+		<comment/>
+	</data>
+	<data name="Max" xml:space="preserve">
+		<value>สูงสุด</value>
+		<comment/>
+	</data>
+	<data name="Min" xml:space="preserve">
+		<value>ต่ำสุด</value>
+		<comment/>
+	</data>
 	<data name="InvalidParameterValue" xml:space="preserve">
 		<value>ค่าพารามิเตอร์ไม่ถูกต้อง</value>
 		<comment/>

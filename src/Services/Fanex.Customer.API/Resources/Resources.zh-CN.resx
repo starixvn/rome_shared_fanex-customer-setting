@@ -149,6 +149,18 @@
 		<value>此账号来源已被禁用。</value>
 		<comment/>
 	</data>
+	<data name="Live" xml:space="preserve">
+		<value>现场</value>
+		<comment/>
+	</data>
+	<data name="Max" xml:space="preserve">
+		<value>最高</value>
+		<comment/>
+	</data>
+	<data name="Min" xml:space="preserve">
+		<value>最低</value>
+		<comment/>
+	</data>
 	<data name="InvalidParameterValue" xml:space="preserve">
 		<value>参数值无效。</value>
 		<comment/>

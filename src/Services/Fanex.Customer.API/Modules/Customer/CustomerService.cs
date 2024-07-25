@@ -205,7 +205,7 @@ public class CustomerService : ICustomerService
                             {
                                 Id = d.Key.DummySportTypeId,
                                 Name = d.Key.DummySportTypeId == KenoLotterySportId ? 
-                                    $"{cacheRefService.GetSportTypeName(d.Key.DummySportTypeId)} ({string.Join(", ", d.Select(e => cacheRefService.GetProductName(e.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel))))})" 
+                                    $"{cacheRefService.GetSportTypeName(d.Key.DummySportTypeId, request.Language)} ({string.Join(", ", d.Select(e => cacheRefService.GetProductName(e.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel))))})" 
                                     : cacheRefService.GetProductName(d.Key.DummySportTypeId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
                                 Products = ""
                             })

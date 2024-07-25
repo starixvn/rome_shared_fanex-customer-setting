@@ -149,6 +149,18 @@
 		<value>此賬號來源已被禁用。</value>
 		<comment/>
 	</data>
+	<data name="Live" xml:space="preserve">
+		<value>現場</value>
+		<comment/>
+	</data>
+	<data name="Max" xml:space="preserve">
+		<value>最高</value>
+		<comment/>
+	</data>
+	<data name="Min" xml:space="preserve">
+		<value>最低</value>
+		<comment/>
+	</data>
 	<data name="InvalidParameterValue" xml:space="preserve">
 		<value>參數值無效。</value>
 		<comment/>
