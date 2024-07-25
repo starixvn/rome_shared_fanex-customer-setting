@@ -62,6 +62,9 @@ public class PositionTakingService : IPositionTakingService
             SRecommend = request.CustId
         };
 
+        GetAgentPositionTakingCriteria agentCriteria = new();
+        GetMemberPositionTakingCriteria memberCriteria = new();
+
         switch (request.RoleId)
         {
             case CustomerLevel.Super:
@@ -70,7 +73,7 @@ public class PositionTakingService : IPositionTakingService
                 break;
 
             case CustomerLevel.Master:
-                var agentCriteria = new GetAgentPositionTakingCriteria
+                agentCriteria = new()
                 {
                     SettingStatus = appSettings.SettingStatus,
                     PageSize = request.PageSize,
@@ -83,7 +86,7 @@ public class PositionTakingService : IPositionTakingService
                 break;
 
             default:
-                var memberCriteria = new GetMemberPositionTakingCriteria
+                memberCriteria = new()
                 {
                     SettingStatus = appSettings.SettingStatus,
                     PageSize = request.PageSize,
@@ -131,7 +134,11 @@ public class PositionTakingService : IPositionTakingService
         var rawData = new PositionTakingEntityList
         {
             CustPT = positionTakingEntities,
-            TotalPages = criteria.TotalPages
+            TotalPages = request.RoleId switch {
+                CustomerLevel.Super => criteria.TotalPages,
+                CustomerLevel.Master => agentCriteria.TotalPages,
+                _ => memberCriteria.TotalPages
+            }
         };
 
         result.TotalPage = rawData.TotalPages;
