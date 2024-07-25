@@ -281,7 +281,9 @@ public class PositionTakingService : IPositionTakingService
 
             if (!sportNameDictionary.ContainsKey(sportId))
             {
-                sportNameDictionary.Add(sportId, remotingRefService.GetSportName(sportId.ToString(), LanguageUtils.ToLanguage(languageCode)));
+                sportNameDictionary.Add(sportId, 
+                    remotingRefService.GetSportName(sportId.ToString(), LanguageUtils.ToLanguage(languageCode), null) ??
+                    remotingRefService.GetResourceDataByRefIdAndResourceId("DummySport", sportId.ToString(), LanguageUtils.ToLanguage(languageCode), string.Empty));
                 sportInfo = new ActivationGroupModel
                 {
                     Id = sportId,
