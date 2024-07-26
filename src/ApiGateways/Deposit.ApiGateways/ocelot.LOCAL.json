@@ -11,7 +11,8 @@
             ],
             "UpstreamPathTemplate": "/api/deposit/{everything}",
             "UpstreamHttpMethod": [
-                "POST"
+                "POST",
+                "PUT"
             ]
         }
     ],
