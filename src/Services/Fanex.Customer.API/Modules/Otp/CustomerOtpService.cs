@@ -203,7 +203,7 @@ namespace Fanex.Customer.API.Modules.Otp
             var deleteResult = new CustomResult
             {
                 Code = command.ErrCode,
-                Message = GetRemovedOtpMessage(command.ErrCode, param.IsResetDownlineOrSubAccount, command.ErrMsg, param.Language)
+                Message = GetRemovedOtpMessage(command.ErrCode, param.IsResetDownlineOrSubAccount, command.ErrMsg, LanguageUtils.ToLanguage(param.Language))
             };
 
             return deleteResult;
