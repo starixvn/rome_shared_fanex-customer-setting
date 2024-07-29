@@ -112,6 +112,7 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
             { "subaccid", request.Context.SubAccId },
             { "credit", request.Settings.GeneralInfo.MaxCredit },
             { "recommend", request.Settings.GeneralInfo.UplineCustId },
+            { "ugroup", request.Settings.GeneralInfo.Group },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
             { "settingstatus", appSettings.SettingStatus },
