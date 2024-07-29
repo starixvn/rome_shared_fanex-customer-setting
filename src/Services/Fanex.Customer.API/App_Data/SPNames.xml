@@ -75,7 +75,7 @@
             <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" Class="CreditInfo"/>
             <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CreditInfo" />
     </Setting>
-    <Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBCust.DBGLOB.wsv_nap" Plain="0" />
     <Setting Key="Age_CustomerSelCheckBelonging_ByUsername" SpName="Age_CustomerSelCheckBelonging_ByUsername" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerSelCheckEnable" SpName="Acc_CustomerSelCheckEnable" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_Chatbot_CustomerStatusSel" SpName="Age_Chatbot_CustomerStatusSel" DbName="DBCust.CustDB.wsv_alp" />
@@ -151,10 +151,13 @@
       <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
       <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
     </Setting>
-    <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />

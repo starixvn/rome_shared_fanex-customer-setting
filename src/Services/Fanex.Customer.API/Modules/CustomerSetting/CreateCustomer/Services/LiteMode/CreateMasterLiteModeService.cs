@@ -12,39 +12,30 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Services.Lit
 
 public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
-
-    private const string CheckPermissionSPName = "Acc_GetDeniedSiteCurrencyByUser";
-
-    private const string ValidateSPName = "Acc_CustomerInsMember_SAg_Validate";
+    private const string ValidateSPName = "Acc_LiteMode_CustomerInsMember_SAg_Validate";
 
     private const string RegisterSPName = "Acc_CustomerIns_Register";
 
-    private const string CreateNewSPName = "Acc_CustomerInsMember_SAg";
+    private const string CreateNewSPName = "Acc_LiteMode_CustomerInsMember_SAg";
 
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
-    public CreateMasterLiteModeService(IMessageService messageService, 
-        AppSettings appSettings, 
+    public CreateMasterLiteModeService(IMessageService messageService,
+        AppSettings appSettings,
         IScaleoutDBService scaleoutDBService,
         ICustomerSettingHelper helperService)
-        : base( messageService, appSettings, scaleoutDBService, helperService)
+        : base(messageService, appSettings, scaleoutDBService, helperService)
     {
     }
 
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
-        var result = await CheckPermission(request);
+        var result = await ValidateSetting(request);
         if (!result.IsSuccessful)
         {
             return result;
         }
-        
-        result = await ValidateSetting(request);
-        if (!result.IsSuccessful)
-        {
-            return result;
-        }
-        
+
         result = await Register(request);
         if (!result.IsSuccessful)
         {
@@ -61,36 +52,19 @@ public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCus
         return result;
     }
 
-    private async Task<CreateCustomerResult> CheckPermission(CreateRequest request)
-    {
-        var parameters = new Hashtable
-        {
-            { "site", request.Settings.GeneralInfo.Site },
-            { "currency", request.Settings.GeneralInfo.Currency },
-            { "creator", request.Context.CreatorId },
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CheckPermissionSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
-    }
-
     private async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)
     {
         var parameters = new Hashtable
         {
+            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
             { "site", request.Settings.GeneralInfo.Site },
-            { "creator", request.Context.CreatorId },
-            { "username", request.Settings.GeneralInfo.UserName },
             { "srecommend", request.Settings.GeneralInfo.UplineCustId },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "credit", request.Settings.GeneralInfo.MaxCredit },
+            { "creator", request.Context.CreatorId },
             { "ip", request.Context.IP },
+            { "username", request.Settings.GeneralInfo.UserName },
             { "settingstatus", appSettings.SettingStatus },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
             { "systemid", request.Context.SystemId },
         };
 
@@ -132,6 +106,9 @@ public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCus
             { "fax", request.Settings.GeneralInfo.Fax ?? string.Empty},
             { "transferoption", request.Settings.GeneralInfo.TransferOption},
             { "disableautompt", request.Settings.GeneralInfo.DisableAutoMPT},
+            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
+            { "templatename", request.Settings.GeneralInfo.TemplateName},
+            { "settingtypeall",  helperService.ObjectToXml(request.Context.UIBehavior)},
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "subaccid", request.Context.SubAccId },
             { "credit", request.Settings.GeneralInfo.MaxCredit },
@@ -140,7 +117,6 @@ public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCus
             { "ip", request.Context.IP },
             { "site", request.Settings.GeneralInfo.Site },
             { "settingstatus", appSettings.SettingStatus },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(CreateNewSPName);

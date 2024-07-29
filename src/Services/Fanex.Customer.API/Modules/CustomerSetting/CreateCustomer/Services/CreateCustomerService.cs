@@ -16,6 +16,7 @@ using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
+using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Services.LiteMode;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -79,20 +80,8 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     {
         CreateCustomerResult result;
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
-        if (request.Context.IsFullMode())
-        {
-            var createCustomerService = GetCreateCusstomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId);
-            result = await createCustomerService.Create(request);
-        }
-        else
-        {
-            var parameters = GetCreateCustomerParams(request, appSettings);
-            using IObjectDb db = ObjectDbFactory.CreateInstance(GetCreateNewSPName(uplineRoleId, request.Context.IsFullMode()));
-            await db.ExecuteNonQueryAsync(parameters);
-            var outputParams = db.GetOutputParams();
-            var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-            result = new CreateCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
-        }
+        var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId);
+        result = await createCustomerService.Create(request);
 
         if (result.IsSuccessful && Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel())
         {
@@ -122,7 +111,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         return result;
     }
 
-    private CreateCustomerBaseService GetCreateCusstomerService(bool isFullMode, int uplineRoleId)
+    private CreateCustomerBaseService GetCreateCustomerService(bool isFullMode, int uplineRoleId)
     {
         if (isFullMode)
         {
@@ -137,7 +126,13 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         }
         else
         {
-            return null;
+            return uplineRoleId switch
+            {
+                CustomerLevel.Super => new CreateMasterLiteModeService(messageService, appSettings, scaleoutDBService, helperService),
+                CustomerLevel.Master => new CreateAgentLiteModeService(messageService, appSettings, scaleoutDBService, helperService),
+                CustomerLevel.Agent => new CreateMemberLiteModeService(messageService, appSettings, scaleoutDBService, helperService),
+                _ => null
+            };
         }
     }
 

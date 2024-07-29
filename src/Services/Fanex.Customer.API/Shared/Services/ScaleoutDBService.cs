@@ -62,6 +62,8 @@ public interface IScaleoutDBService
 public class ScaleoutDBService : IScaleoutDBService
 {
     private readonly IDynamicRepository dynamicRepository;
+
+    private const int DefaultCustDBGroupID = 3;
     
     public ScaleoutDBService(IDynamicRepository dynamicRepository)
     {
@@ -72,7 +74,7 @@ public class ScaleoutDBService : IScaleoutDBService
     => await dynamicRepository.FetchAsync<ServerDBConfig>(new GetServerDBConfigCriteria(site));
 
     public async Task<int> GetCustDBGroupIdBySite(string site)
-    => (await GetServerDBConfigBySite(site)).ToList().DefaultIfEmpty(new ServerDBConfig() {CustDBGroupID = 3}).FirstOrDefault().CustDBGroupID;
+    => (await GetServerDBConfigBySite(site)).ToList().DefaultIfEmpty(new ServerDBConfig() {CustDBGroupID = DefaultCustDBGroupID}).FirstOrDefault().CustDBGroupID;
 
     public async Task<IEnumerable<ServerDBConfig>> GetServerDBConfigByCust(string site)
     => await dynamicRepository.FetchAsync<ServerDBConfig>(new GetServerDBConfigCriteria(site));

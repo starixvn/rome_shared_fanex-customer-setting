@@ -1,3 +1,4 @@
+using Fanex.Common.Extensions;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -35,7 +36,11 @@ public class CustomerSettingHelper : ICustomerSettingHelper
 
     public string ObjectToXml(object o)
     {
-        Common.Helper.Check.Argument.IsNotNull(o, "o");
+        if (o == null)
+        {
+            return string.Empty;
+        }
+        
         var jsonObj = JsonConvert.SerializeObject(o);
         var wrappedDocument = string.Format("{{ item: {0} }}", jsonObj);
         return JsonConvert.DeserializeXmlNode(wrappedDocument)?.OuterXml.Replace("<item>", string.Empty).Replace("</item>", string.Empty);
