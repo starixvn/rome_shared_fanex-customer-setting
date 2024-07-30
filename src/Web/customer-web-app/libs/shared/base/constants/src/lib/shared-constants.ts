@@ -84,3 +84,7 @@ export const ExternalNapSystemIds = [
 export const MaxNumberInputLength = 18;
 export const i7Markets = ['789y'];
 export const i7Sites = ['yUT', 'y789', 'y889', 'yOther', '789y'];
+
+export const Currencies = {
+  Won: '45',
+};

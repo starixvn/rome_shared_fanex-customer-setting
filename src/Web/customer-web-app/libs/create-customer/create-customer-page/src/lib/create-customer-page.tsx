@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { handleChangeGroupSettingValue, handleChangeItemValue } from '@customer-web-app/edit-customer-page';
 import { CreateCustomerResult, ValidateRefResult, ValidationRefType } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import { ProductGroupIds, SystemIds } from '@customer-web-app/shared-constants';
+import { Currencies, ProductGroupIds, SystemIds } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
   GeneralInfo,
@@ -75,7 +75,7 @@ export function CreateCustomerPage() {
           uplineCustId: params.uplineId,
           uplineRoleId: params.uplineRoleId,
           displayTransferCondition: generalInfo.transferOption === TransferOptions.Daily,
-          group: 'a',
+          group: generalInfo.currency.toString() === Currencies.Won.toString() ? 'dea' : 'a',
         },
       });
       setIsLoading(false);
