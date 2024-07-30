@@ -58,7 +58,7 @@ public class CreateSubAccService : BaseSubAccountService, ICreateSubAccountServi
             { "loginsubaccid", request.LoginSubAccId},
             { "language", LanguageUtils.ToLanguageKey(request.Language) },
             { "userid", request.UserId },
-            { "ip", request.IP }
+            { "loginip", request.IP }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(CreateNewSPName);
