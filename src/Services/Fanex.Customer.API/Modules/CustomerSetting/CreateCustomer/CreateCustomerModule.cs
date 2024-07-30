@@ -2,6 +2,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Services;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.EditCustomer.Services;
 using Fanex.Customer.API.Modules.QueryCustomer.Services;
+using Fanex.Customer.API.Modules.CreateSubAcc.Services;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer;
 
@@ -14,7 +15,8 @@ public static class CreateCustomerModule
         services.AddSingleton<IQueryGroupTypeBaseService<WinLossLimitItem>, QueryGroupTypeBaseService<WinLossLimitItem>>();
         services.AddSingleton<IEditCustomerService, EditCustomerService>();
         services.AddSingleton<IPTSettingService, PTSettingService>();
-
+        services.AddSingleton<ICreateSubAccountService, CreateSubAccService>();
+        
         //services.AddSingleton<ICreateSuperFullModeService, CreateSuperFullModeService>();
 
         return services;
