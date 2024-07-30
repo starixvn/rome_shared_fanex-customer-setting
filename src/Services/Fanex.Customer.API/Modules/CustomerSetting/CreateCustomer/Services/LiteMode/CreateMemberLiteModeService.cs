@@ -4,6 +4,7 @@ using Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
@@ -82,6 +83,9 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
         {
             { "username", request.Settings.GeneralInfo.UserName },
             { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Context.Site) },
+            { "site", request.Settings.GeneralInfo.Site },
+            { "roleid", CustomerLevel.Member },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
         };
 

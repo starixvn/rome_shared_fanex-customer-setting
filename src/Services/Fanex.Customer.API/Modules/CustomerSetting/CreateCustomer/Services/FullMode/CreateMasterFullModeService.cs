@@ -6,6 +6,7 @@ using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
+using Fanex.Customer.API.Shared.Constants;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
@@ -106,6 +107,9 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
         {
             { "username", request.Settings.GeneralInfo.UserName },
             { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Context.Site) },
+            { "site", request.Settings.GeneralInfo.Site },
+            { "roleid", CustomerLevel.Master },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
         };
 
