@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Fanex.Customer.Client.Models
 {
 
@@ -33,4 +35,10 @@ namespace Fanex.Customer.Client.Models
 
         public decimal MemberMaxCredit { get; set; }
     }
+
+    public class AccountInfo : CustomerInfo
+    {
+        public List<string> domains { get; set; }
+    }
+
 }

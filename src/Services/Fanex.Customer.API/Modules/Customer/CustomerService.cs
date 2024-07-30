@@ -4,6 +4,7 @@ using Fanex.Customer.API.Modules.Customer.Criteria;
 using Fanex.Customer.API.Modules.Customer.Models;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Resources;
+using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
@@ -42,6 +43,10 @@ public interface ICustomerService
     Task<MaxPayoutSettingInfo> GetMaxPayoutSettingInfo(GetMaxPayoutSettingInformationRequest request);
 
     Task<MemberBalance> GetMemberBalance(int custId, string siteDBName);
+
+    Task<List<string>> GetBackupDomains(string site, byte roleId);
+
+    Task<AccountInfo> GetAccountInfo(int custId);
 }
 
 public class CustomerService : ICustomerService
@@ -289,5 +294,34 @@ public class CustomerService : ICustomerService
             CustomerOutstanding = memberOutstandingCriteria.Outstanding,
             NetPosition = memberBalanceCriteria.NetPosition
         };
+    }
+    
+    public async Task<List<string>> GetBackupDomains(string site, byte roleId)
+    {
+        var backupDomainsResult = await dynamicRepository.FetchAsync<BackupDomain>(new GetGetBackupDomainsCriteria(site));
+        var agencyDomains = new List<string>();
+        var memberDomains = new List<string>();
+
+        foreach (var item in backupDomainsResult)
+        {
+            if (item.IsAgency)
+            {
+                agencyDomains.Add(item.Domain);
+            }
+            else
+            {
+                memberDomains.Add(item.Domain);
+            }
+        }
+        var domains = roleId == CustomerLevel.Member ? memberDomains : agencyDomains;
+        return domains;
+    }
+    
+    public async Task<AccountInfo> GetAccountInfo(int custId)
+    {
+        var accountInfo = await dynamicRepository.GetAsync<AccountInfo>(new GetCustomerInfoCriteria { CustId = custId });
+        var domains = await GetBackupDomains(accountInfo.Site, accountInfo.RoleId);
+        accountInfo.Domains = domains;
+        return accountInfo;
     }
 }

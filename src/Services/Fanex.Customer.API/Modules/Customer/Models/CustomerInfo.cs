@@ -33,3 +33,7 @@ public class CustomerInfo
     public decimal MemberMaxCredit { get; init; }
 }
 
+public class AccountInfo : CustomerInfo
+{
+    public List<string> Domains { get; set; }
+}

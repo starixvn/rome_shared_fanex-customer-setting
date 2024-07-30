@@ -50,10 +50,12 @@ public class CopyCustomerService : ICopyCustomerService
     public async Task<CopyMultipleCustomerResult> CopyCustomers(CopyMultipleCustomersRequest request)
     {
         var isSourceAccountEnable = request.SourceCustId > 0 && await customerService.IsEnableCustomer(request.SourceCustId);
-
+        var domains = await customerService.GetBackupDomains(request.Site, request.CustLevel);
+        
         if (!isSourceAccountEnable)
         {
             return new CopyMultipleCustomerResult(
+                Enumerable.Empty<string>(),
                 Enumerable.Empty<string>(),
                 100,
                 messageContent: new MessageContent(StaticResources.Get("ThisSourceAccountWasDisabled", request.Language)));
@@ -81,7 +83,7 @@ public class CopyCustomerService : ICopyCustomerService
 
                 if (!suggestUsernameResult.IsSuccessful)
                 {
-                    return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, mainMessage: suggestUsernameResult.Message);
+                    return new CopyMultipleCustomerResult(usernames, domains, suggestUsernameResult.Code, mainMessage: suggestUsernameResult.Message);
                 }
 
                 request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
@@ -96,20 +98,20 @@ public class CopyCustomerService : ICopyCustomerService
                     if (!suggestUsernameResult.IsSuccessful)
                     {
                         var content = new MessageContent(suggestUsernameResult.Message);
-                        return new CopyMultipleCustomerResult(usernames, suggestUsernameResult.Code, messageContent: content);
+                        return new CopyMultipleCustomerResult(usernames, domains, suggestUsernameResult.Code, messageContent: content);
                     }
 
                     request.UserName = $"{request.ActorUsername}{suggestUsernameResult.CustomData}";
                 }
                 else
                 {
-                    return new CopyMultipleCustomerResult(usernames, result.Code, result.MsgType, messageContent: result.MessageContent);
+                    return new CopyMultipleCustomerResult(usernames, domains, result.Code, result.MsgType, messageContent: result.MessageContent);
                 }
             }
 
         } while (index < request.NumberOfAccounts);
 
-        return new CopyMultipleCustomerResult(usernames, 0, 0);
+        return new CopyMultipleCustomerResult(usernames, domains, 0, 0);
     }
 
     public async Task<CopyCustomerResult> CopyCustomer(CopyCustomerRequest request)
