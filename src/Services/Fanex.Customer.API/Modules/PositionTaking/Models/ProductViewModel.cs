@@ -3,15 +3,8 @@ namespace Fanex.Customer.API.Modules.PositionTaking.Models;
 public class Product
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public bool Active { get; set; }
-    public int SportId { get; set; }
-    public string ReportSPParam { get; set; }
     public string ViewPTLink { get; set; }
-    public string ViewCommLink { get; set; }
-    public string MicroSiteNameAppSetting { get; set; }
     public string CustomerSettingLink { get; set; }
-    public string StatusHandlerType { get; set; }
     public bool ShowPTIcon
     {
         get

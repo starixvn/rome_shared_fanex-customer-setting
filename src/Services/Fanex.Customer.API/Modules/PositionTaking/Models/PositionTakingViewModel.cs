@@ -22,7 +22,5 @@ public class PositionTakingViewModel
 
     public ProductModel Product { get; set; }
 
-    public string SiteLabel { get; set; }
-
     public string Language { get; set; }
 }
