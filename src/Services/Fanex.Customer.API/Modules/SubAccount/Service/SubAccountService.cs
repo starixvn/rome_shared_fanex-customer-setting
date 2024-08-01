@@ -44,6 +44,11 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
             await dynamicRepository.ExecuteAsync(command);
 
+            if (command.SubAccId > 0 && command.ErrCode == 0)
+            {
+                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(subAccountModel.CustId, command.SubAccId, subAccountModel.RoleId));
+            }
+
             return new Result(command.ErrCode, command.ErrMsg, command.SubAccId.ToString());
         }
 
@@ -91,6 +96,11 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             };
 
             await dynamicRepository.ExecuteAsync(command);
+
+            if (command.ErrCode == 0)
+            {
+                await dynamicRepository.ExecuteAsync(new KickoutSubAccountCriteria(subAccountModel.CustId, subAccountModel.SubAccId));
+            }
 
             return new Result(command.ErrCode, command.ErrMsg);
         }

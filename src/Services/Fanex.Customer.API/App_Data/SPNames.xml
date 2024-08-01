@@ -424,6 +424,8 @@
         <Setting Key="Age_CustSubUpdPageAccess" SpName="Age_CustSubUpdPageAccess" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
         <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
         <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+        <Setting Key="Age_On_UserKickedout" SpName="Age_On_UserKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
+        <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
     </Function>
     <Function Name="Password">
         <Setting Key="ResetMainAccountPassword" SpName="Age_CustomerUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />

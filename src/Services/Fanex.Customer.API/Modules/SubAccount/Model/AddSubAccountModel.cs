@@ -17,5 +17,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Model
         public string IP { get; set; }
 
         public string Language { get; set; }
+
+        public int RoleId { get; set; }
     }
 }
