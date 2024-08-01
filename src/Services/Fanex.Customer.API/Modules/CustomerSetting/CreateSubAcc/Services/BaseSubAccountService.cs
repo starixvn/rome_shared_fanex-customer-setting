@@ -16,6 +16,7 @@ public class BaseSubAccountService
 
     public virtual async Task<CustomerSettingResult> Create(CreateSubAccRequest request)
     {
+        Console.WriteLine("abc");
         var result = await Register(request);
         if (!result.IsSuccessful)
         {
@@ -23,7 +24,7 @@ public class BaseSubAccountService
         }
 
         int newId = result.NewCustId;
-        result = await CreateAgent(request, newId);
+        result = await DoProcessing(request, newId);
         if (!result.IsSuccessful)
         {
             Rollback(request.CustId, newId);
@@ -34,7 +35,7 @@ public class BaseSubAccountService
 
     protected virtual Task<CreateCustomerResult> Register(CreateSubAccRequest request) => throw new NotImplementedException();
 
-    protected virtual Task<CreateCustomerResult> CreateAgent(CreateSubAccRequest request, int subAccId) => throw new NotImplementedException();
+    protected virtual Task<CreateCustomerResult> DoProcessing(CreateSubAccRequest request, int subAccId) => throw new NotImplementedException();
 
     protected virtual void Rollback(int custId, int subAccId) => throw new NotImplementedException();
 }

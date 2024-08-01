@@ -2,6 +2,8 @@ namespace Fanex.Customer.API.Modules.CreateSubAcc.Requests;
 public class CreateSubAccRequest
 {
     public int CustId { get; set; }
+    
+    public int RoleId { get; set; }
     public string UserName { get; set; }
     public string Password { get; set; }
     public string FirstName { get; set; }
