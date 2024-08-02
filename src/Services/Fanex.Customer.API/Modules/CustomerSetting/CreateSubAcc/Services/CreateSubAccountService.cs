@@ -80,12 +80,10 @@ public class CreateSubAccService : BaseSubAccountService, ICreateSubAccountServi
 
     protected override async void Rollback(int custId, int subAccId)
     {
-        const int IsResetNickname = 1;
         var parameters = new Hashtable
         {
             { "custid", custId },
-            { "SubAccId", subAccId },
-            { "IsResetNickname", IsResetNickname },
+            { "SubAccId", subAccId }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(RollbackSPName);

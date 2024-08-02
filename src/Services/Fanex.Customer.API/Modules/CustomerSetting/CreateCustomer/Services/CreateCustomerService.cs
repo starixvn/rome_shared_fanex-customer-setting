@@ -13,10 +13,10 @@ using Fanex.Customer.API.Shared.Extensions;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
-using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Services.LiteMode;
+using Fanex.Customer.API.Modules.Customer;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -43,7 +43,6 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         ICustomerSettingHelper helperService,
         ICustomerService customerService,
         IScaleoutDBService scaleoutDBService)
-        )
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService)
     {
         this.balanceService = balanceService;
@@ -105,7 +104,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         {
             result.AvailableAlphaDomain = await customerService.GetBackupDomains(
                 request.Settings.GeneralInfo.Site,
-                (byte)(request.Settings.GeneralInfo.UplineRoleId  - 1));
+                (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
         }
 
         return result;
