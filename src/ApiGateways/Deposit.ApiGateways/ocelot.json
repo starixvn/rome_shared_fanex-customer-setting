@@ -1,6 +1,7 @@
 {
     "DelegatingHandlers": [
-        "ApiKeyHandler"
+        "ApiKeyHandler",
+        "NoGzipDelegatingHandler"
     ],
     "SwaggerEndPoints": [
         {

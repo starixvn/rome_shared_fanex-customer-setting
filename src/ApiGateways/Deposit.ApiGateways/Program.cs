@@ -1,4 +1,5 @@
 using Deposit.ApiGateways;
+using Deposit.ApiGateways.DelegatingHandlers;
 using Deposit.ApiGateways.Extensions;
 using Deposit.ApiGateways.Middlewares;
 using Microsoft.AspNetCore.HttpLogging;
@@ -44,9 +45,11 @@ try
 
     builder.Services
         .AddOneBookUm(builder.Configuration)
+        .AddFanexLogging(builder.Configuration)
         .AddHealthChecks();
 
     builder.Services.AddControllers();
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
     builder.Services
         .AddSwaggerForOcelot(builder.Configuration, (options) =>
@@ -54,7 +57,8 @@ try
             options.GenerateDocsForGatewayItSelf = true;
         })
         .AddOcelot()
-        .AddDelegatingHandler<ApiKeyHandler>(true);
+        .AddDelegatingHandler<ApiKeyHandler>(true)
+        .AddDelegatingHandler<NoGzipDelegatingHandler>(true);
 
     var app = builder.Build();
     app.UseSerilogRequestLogging();
