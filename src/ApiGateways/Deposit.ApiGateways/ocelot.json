@@ -2,18 +2,5 @@
     "DelegatingHandlers": [
         "ApiKeyHandler",
         "NoGzipDelegatingHandler"
-    ],
-    "SwaggerEndPoints": [
-        {
-            "Key": "Deposit",
-            "TransformByOcelotConfig": false,
-            "Config": [
-                {
-                    "Name": "Deposit API",
-                    "Version": "v1",
-                    "Url": "http://deposit-api.nexdev.net/swagger/v1/swagger.json"
-                }
-            ]
-        }
     ]
 }

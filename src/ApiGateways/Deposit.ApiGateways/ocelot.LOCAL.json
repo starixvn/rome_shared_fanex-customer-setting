@@ -14,9 +14,48 @@
                 "POST",
                 "PUT"
             ]
+        },
+        {
+            "DownstreamPathTemplate": "/licensees/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "licensee_admin_setting_api_LOCAL",
+                    "Port": 5000
+                }
+            ],
+            "UpstreamPathTemplate": "/api/licensees/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ]
         }
     ],
     "GlobalConfiguration": {
         "BaseUrl": "https://dep-api-gw.nexdev.net/main"
-    }
+    },
+    "SwaggerEndPoints": [
+        {
+            "Key": "Deposit",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "Deposit API",
+                    "Version": "v1",
+                    "Url": "http://licensee_deposit_api_LOCAL:5000/swagger/v1/swagger.json"
+                }
+            ]
+        },
+        {
+            "Key": "AdminSetting",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "Licensee Admin Setting API",
+                    "Version": "v1",
+                    "Url": "http://licensee_admin_setting_api_LOCAL:5000/swagger/v1/swagger.json"
+                }
+            ]
+        }
+    ]
 }

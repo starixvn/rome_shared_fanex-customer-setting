@@ -1,6 +1,8 @@
 using Fanex.Data.SqlServer;
 using Licensee.AdminSetting.API;
 using Licensee.AdminSetting.API.Extensions;
+using Licensee.AdminSetting.API.Features.Licensees;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,28 +11,30 @@ builder.Services
     .AddFanexSql(builder.Configuration)
     .AddExceptionHandler<GlobalExceptionHandler>();
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApiDocument(config =>
+builder.Services.AddSwaggerGen(c =>
 {
-    config.DocumentName = "LicenseeAdminSettingAPI";
-    config.Title = "LicenseeAdminSettingAPI v1";
-    config.Version = "v1";
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Licensee Admin Setting API", Version = "v1" });
 });
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseOpenApi();
-    app.UseSwaggerUi(config =>
-    {
-        config.DocumentTitle = "LicenseeAdminSettingAPI";
-        config.Path = "/swagger";
-        config.DocumentPath = "/swagger/{documentName}/swagger.json";
-        config.DocExpansion = "list";
-    });
-}
+    c.RoutePrefix = "swagger";
+    c.SwaggerEndpoint("v1/swagger.json", "Licensee Admin Setting API V1");
+});
 
 app.MapGet("/", () => "Hello World!");
+app.MapHealthChecks("/healthz");
+app.RegisterLicenseesEndpoints();
+
+if (!app.Environment.IsDevelopment())
+{
+    builder.WebHost.UseUrls("http://0.0.0.0:5000");
+}
 
 app.Run();
