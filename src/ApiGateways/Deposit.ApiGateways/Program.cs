@@ -80,7 +80,11 @@ try
 
     app.UseSwaggerForOcelotUI(opt =>
         {
-            opt.PathToSwaggerGenerator = $"{pathBase ?? ""}/swagger/docs";
+            if (!string.IsNullOrEmpty(pathBase))
+            {
+                opt.DownstreamSwaggerEndPointBasePath = $"{pathBase}/swagger/docs";
+            }
+            opt.PathToSwaggerGenerator = "/swagger/docs";
         })
         .UseOcelot()
         .Wait();
