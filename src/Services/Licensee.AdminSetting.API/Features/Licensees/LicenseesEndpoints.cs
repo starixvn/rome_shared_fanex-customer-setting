@@ -8,21 +8,23 @@ namespace Licensee.AdminSetting.API.Features.Licensees
     {
         public static IEndpointRouteBuilder RegisterLicenseesEndpoints(this IEndpointRouteBuilder endpoints)
         {
-            var licensees = endpoints.MapGroup("/licensees");
+            var licensees = endpoints.MapGroup("/api/licensees");
 
             licensees.MapPost("/", CreateLicensee);
 
             return endpoints;
         }
 
-        static async Task<Results<Ok<Result>, ValidationProblem>> CreateLicensee(CreateLicenseeRequest request)
+        static async Task<Results<Ok<Result>, ValidationProblem>> CreateLicensee(CreateLicenseeRequest request, ILicenseesHandler licenseesHandler)
         {
             if (!MiniValidator.TryValidate(request, out var errors))
             {
                 return TypedResults.ValidationProblem(errors);
             }
 
-            return TypedResults.Ok(new Result(0, ""));
+            var result = await licenseesHandler.CreateLicensee(request);
+
+            return TypedResults.Ok(result);
         }
 
     }

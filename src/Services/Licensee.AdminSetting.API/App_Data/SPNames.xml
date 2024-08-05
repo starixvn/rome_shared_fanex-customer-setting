@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Functions>
     <Function Name="Create New Licensee">
-        <Setting Key="Acc_CheckUM" SpName="Acc_CheckUM" DbName="DBCust.CustDB.wsv_nap" />
+        <Setting Key="API_SiteBuilder_GetCustomerSiteDB" SpName="API_SiteBuilder_GetCustomerSiteDB" DbName="DBCust.DBGLOB.wsv_nap">
+            <Mapping DataField="CustDBGroupID" ObjectProperty="GroupId" Class="CustomerSiteDB" />
+            <Mapping DataField="LinkedServerNameDBCUST" ObjectProperty="ServerName" Class="CustomerSiteDB" />
+        </Setting>
     </Function>
 </Functions>

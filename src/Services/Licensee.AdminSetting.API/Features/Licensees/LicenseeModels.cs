@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Licensee.AdminSetting.API.Features.Shared;
 
 namespace Licensee.AdminSetting.API.Features.Licensees;
 
@@ -33,4 +34,17 @@ public record CreateLicenseeRequest(
     [Required] bool IsChinaView,
     [Required] byte SiteDBGroupId,
     [Required] byte SpecialPlatform);
+
+public class CustomerSiteDB
+{
+    public int GroupId { get; init; }
+
+    public string ServerName { get; init; }
+}
+
+public class ValidateCreateLicenseeResult(int errorCode, string errorMessage, string customers)
+    : Result(errorCode, errorMessage)
+{
+    public string Customers { get; } = customers;
+}
 
