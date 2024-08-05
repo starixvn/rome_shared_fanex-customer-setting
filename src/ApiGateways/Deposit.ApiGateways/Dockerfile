@@ -5,8 +5,7 @@ WORKDIR /src
 COPY ./src/ApiGateways/Deposit.ApiGateways/Deposit.ApiGateways.csproj ./ApiGateways/Deposit.ApiGateways/Deposit.ApiGateways.csproj
 
 RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
-RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet restore ApiGateways/Deposit.ApiGateways -v n
+RUN dotnet restore ApiGateways/Deposit.ApiGateways/Deposit.ApiGateways.csproj -v n
 
 COPY ./src/ApiGateways/Deposit.ApiGateways/ ./ApiGateways/Deposit.ApiGateways/
 
@@ -18,8 +17,7 @@ COPY "./src/ApiGateways/Deposit.ApiGateways/ocelot.$TRANSFORM_CONFIG.json" ./Api
 WORKDIR /src/ApiGateways/Deposit.ApiGateways/
 
 
-RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet publish --use-current-runtime --self-contained false -o /app  
+RUN dotnet publish --use-current-runtime --self-contained false -o /app  
 
 FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine AS base
 

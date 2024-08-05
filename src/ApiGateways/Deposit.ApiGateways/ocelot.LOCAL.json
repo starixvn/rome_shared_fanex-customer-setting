@@ -13,7 +13,8 @@
             "UpstreamHttpMethod": [
                 "POST",
                 "PUT"
-            ]
+            ],
+            "SwaggerKey": "Deposit"
         },
         {
             "DownstreamPathTemplate": "/licensees/{everything}",
@@ -28,7 +29,8 @@
             "UpstreamHttpMethod": [
                 "POST",
                 "PUT"
-            ]
+            ],
+            "SwaggerKey": "AdminSetting"
         }
     ],
     "GlobalConfiguration": {

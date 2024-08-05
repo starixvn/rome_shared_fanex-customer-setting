@@ -66,6 +66,12 @@ try
     app.UseHttpLogging();
     app.UseRouting();
 
+    var pathBase = builder.Configuration["PathBase"];
+    if (!string.IsNullOrEmpty(pathBase))
+    {
+        app.UsePathBase(pathBase);
+    }
+
     app.MapHealthChecks("/healthz");
     app.MapGet("/", () => "Hello, I'm Dep Api!");
     app.UseEndpoints(_ => { });
@@ -74,7 +80,7 @@ try
 
     app.UseSwaggerForOcelotUI(opt =>
         {
-            opt.PathToSwaggerGenerator = "/swagger/docs";
+            opt.PathToSwaggerGenerator = $"{pathBase ?? ""}/swagger/docs";
         })
         .UseOcelot()
         .Wait();
