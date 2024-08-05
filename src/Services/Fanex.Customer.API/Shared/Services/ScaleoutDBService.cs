@@ -57,6 +57,8 @@ public interface IScaleoutDBService
     Task<int> GetCustDBGroupIdBySite(string site);
 
     Task<IEnumerable<ServerDBConfig>> GetServerDBConfigBySite(string site);
+
+    string GetSPNameWithPrefix(string spName, int sitedbgroupid); 
 }
 
 public class ScaleoutDBService : IScaleoutDBService
@@ -78,4 +80,7 @@ public class ScaleoutDBService : IScaleoutDBService
 
     public async Task<IEnumerable<ServerDBConfig>> GetServerDBConfigByCust(string site)
     => await dynamicRepository.FetchAsync<ServerDBConfig>(new GetServerDBConfigCriteria(site));
+
+    public string GetSPNameWithPrefix(string spName, int sitedbgroupid)
+        => sitedbgroupid == 0 ? spName : $"SiteDB{sitedbgroupid}_{spName}";
 }
