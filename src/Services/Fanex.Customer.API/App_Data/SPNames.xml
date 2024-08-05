@@ -47,7 +47,8 @@
     </Setting>
   </Function>
   <Function Name="Copy Account">
-        <Setting Key="Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_Com_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_CustomerSelSAgentInfo" SpName="Acc_CustomerSelSAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="NewUserName" ObjectProperty="Suffix" />
       <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
@@ -60,7 +61,9 @@
       <Mapping DataField="NewUserName" ObjectProperty="Suffix" />
       <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
     </Setting>
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />

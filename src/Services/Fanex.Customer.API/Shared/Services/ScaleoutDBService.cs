@@ -63,7 +63,7 @@ public class ScaleoutDBService : IScaleoutDBService
 {
     private readonly IDynamicRepository dynamicRepository;
 
-    private const int DefaultCustDBGroupID = 3;
+    private const int DefaultCustDBGroupID = 0;
     
     public ScaleoutDBService(IDynamicRepository dynamicRepository)
     {
