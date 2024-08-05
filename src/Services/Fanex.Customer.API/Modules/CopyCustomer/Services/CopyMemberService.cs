@@ -9,11 +9,11 @@ namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
 
 public class CopyMemberService : CopyCustomerBaseService
 {
-    private const string ValidateSPName = "Acc_CustomerInsMember_CloneSetting_Ag_Validate";
+    private const string ValidateSPName = "Acc_CustomerInsMember_Ag_Validate";
 
     private const string RegisterSPName = "Acc_CustomerIns_Register";
 
-    private const string CopySPName = "Acc_CustomerInsMember_CloneSetting_Ag";
+    private const string CopySPName = "Acc_CustomerInsMember_Ag";
 
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
