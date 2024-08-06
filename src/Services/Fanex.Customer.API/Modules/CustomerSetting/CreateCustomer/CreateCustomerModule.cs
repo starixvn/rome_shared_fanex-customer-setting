@@ -16,7 +16,9 @@ public static class CreateCustomerModule
         services.AddSingleton<IEditCustomerService, EditCustomerService>();
         services.AddSingleton<IPTSettingService, PTSettingService>();
         services.AddSingleton<ICreateSubAccountService, CreateSubAccService>();
-        
+        services.AddSingleton<ICreateNickNameService, CreateNickNameService>();
+        services.AddSingleton<ICreateNickNameSubAccountService, CreateNickNameSubAccountService>();
+
         //services.AddSingleton<ICreateSuperFullModeService, CreateSuperFullModeService>();
 
         return services;

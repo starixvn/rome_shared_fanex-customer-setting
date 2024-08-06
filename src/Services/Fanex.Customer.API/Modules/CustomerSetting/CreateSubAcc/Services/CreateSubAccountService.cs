@@ -11,85 +11,53 @@ using Fanex.Customer.API.Modules.CopyCustomer.Command;
 namespace Fanex.Customer.API.Modules.CreateSubAcc.Services;
 public interface ICreateSubAccountService
 {
-    bool ValidateRequest(CreateSubAccRequest request);
-    Task<CustomerSettingResult> Create(CreateSubAccRequest request);
+    bool ValidateRequest(BaseSubAccountRequest request);
+    Task<CustomerSettingResult> Create(BaseSubAccountRequest request);
 }
 
 public class CreateSubAccService : BaseSubAccountService, ICreateSubAccountService
 {
     private readonly Logging.ILogger logger;
-    private readonly IDynamicRepository dynamicRepository;
 
-    public CreateSubAccService(IMessageService messageService, IScaleoutDBService scaleoutDBService, Logging.ILogger logger, IDynamicRepository dynamicRepository) : base(messageService, scaleoutDBService)
+    public CreateSubAccService(IMessageService messageService, IScaleoutDBService scaleoutDBService, Logging.ILogger logger, IDynamicRepository dynamicRepository) 
+        : base(messageService, scaleoutDBService, dynamicRepository)
     {
         this.logger = logger;
-        this.dynamicRepository = dynamicRepository;
     }
-    private const string RegisterSPName = "Age_CustSubIns_Register";
-
+    
     private const string CreateNewSPName = "Age_CustSubIns";
 
-    private const string RollbackSPName = "Acc_CustomerIns_Rollback";
+    protected override int IsResetNickName => 0;
 
-    public bool ValidateRequest(CreateSubAccRequest request) => true;
+    public bool ValidateRequest(BaseSubAccountRequest request) => true;
 
-    protected override async Task<CreateCustomerResult> Register(CreateSubAccRequest request)
+    protected override async Task<CreateCustomerResult> DoProcessing(BaseSubAccountRequest request, int subAccId)
     {
-        var parameters = new Hashtable
-        {
-            { "username", request.UserName },
-            { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Site) },
-            { "language", LanguageUtils.ToLanguageKey(request.Language) },
-            { "custid", request.CustId },
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var message = messageService.TranslateMessage(Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]), request.Language);
-
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["subaccid"]), Convert.ToInt32(outputParams["errcode"]), message.MainMessage, message.SubMessages);
-    }
-
-    protected override async Task<CreateCustomerResult> DoProcessing(CreateSubAccRequest request, int subAccId)
-    {
+        var createRequest = (CreateSubAccountRequest)request;
         var parameters = new Hashtable
         {
             { "subaccid", subAccId },
-            { "custid", request.CustId },
-            { "username", request.UserName },
-            { "userpwd", request.Password},
-            { "firstname", request.FirstName },
-            { "lastname", request.LastName },
-            { "pageaccess", request.PageAccess },
-            { "loginsubaccid", request.LoginSubAccId},
-            { "language", LanguageUtils.ToLanguageKey(request.Language) },
-            { "userid", request.UserId },
-            { "loginip", request.IP }
+            { "custid", createRequest.CustId },
+            { "username", createRequest.UserName },
+            { "userpwd", createRequest.Password},
+            { "firstname", createRequest.FirstName },
+            { "lastname", createRequest.LastName },
+            { "pageaccess", createRequest.PageAccess },
+            { "loginsubaccid", createRequest.LoginSubAccId},
+            { "language", LanguageUtils.ToLanguageKey(createRequest.Language) },
+            { "userid", createRequest.UserId },
+            { "loginip", createRequest.IP }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(CreateNewSPName);
         await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]), request.Language);
+        var outputParams = db.GetOutputParams();        
 
-        Task.Run(() => { InsertUnreadMessage(request.CustId, request.RoleId, subAccId); });
+        Task.Run(() => { InsertUnreadMessage(createRequest.CustId, createRequest.RoleId, subAccId); });
 
-        return new CreateCustomerResult(subAccId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        return new CreateCustomerResult(subAccId, Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
     }
-
-    protected override async void Rollback(int custId, int subAccId)
-    {
-        var parameters = new Hashtable
-        {
-            { "custid", custId },
-            { "SubAccId", subAccId }
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RollbackSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-    }
-
+    
     private async Task InsertUnreadMessage(int custId, int roleId, int subAccId)
     {
         var criteria = new CustomerReadMessageCommand(custId, roleId, subAccId, 0, string.Empty);

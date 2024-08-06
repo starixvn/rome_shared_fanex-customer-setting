@@ -712,6 +712,8 @@ namespace Fanex.Customer.API.Resources
 		/// Looks up a localized string similar to Product Status.
 		/// </summary>
 		public static string GroupType160 => ResourceManager.GetString("GroupType160", resourceCulture);
+
+		public static string NicknameRule => ResourceManager.GetString("NicknameRule", resourceCulture);
 	
 	}
 }

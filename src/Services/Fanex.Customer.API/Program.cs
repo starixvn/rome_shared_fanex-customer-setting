@@ -76,9 +76,9 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.MapEndpoints();
 app.MapHealthChecks("/healthz");
 
-if (!app.Environment.IsDevelopment())
-{
-    builder.WebHost.UseUrls("http://0.0.0.0:5000");
-}
+//if (!app.Environment.IsDevelopment())
+//{
+    builder.WebHost.UseUrls("http://localhost:6001");
+//}
 
 app.Run();
