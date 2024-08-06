@@ -159,9 +159,7 @@
 	<data name="Min" xml:space="preserve">
 		<value>最低</value>
 		<comment/>
-	</data>
-    <comment/>
-  </data>
+	</data>    
   <data name="GroupType150" xml:space="preserve">
     <value>佣金</value>
   </data>

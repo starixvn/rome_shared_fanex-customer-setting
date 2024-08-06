@@ -156,8 +156,7 @@
 		<value>Nhỏ nhất</value>
 		<comment/>
 	</data>
-    <comment/>
-  </data>
+
   <data name="GeneralInfo" xml:space="preserve">
     <value>Thông tin Chung</value>
     <comment/>

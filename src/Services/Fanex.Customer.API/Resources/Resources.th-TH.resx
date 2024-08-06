@@ -156,8 +156,7 @@
 		<value>ต่ำสุด</value>
 		<comment/>
 	</data>
-    <comment/>
-  </data>
+
   <data name="GeneralInfo" xml:space="preserve">
     <value>ข้อมูลทั่วไป</value>
     <comment/>
