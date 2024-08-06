@@ -7,5 +7,7 @@ namespace Licensee.AdminSetting.API.Features.Shared
         public string ErrorMessage { get; } = errorMessage;
 
         public bool IsOK => ErrorCode == 0;
+
+        public bool IsNotOK => !IsOK;
     }
 }

@@ -2,6 +2,7 @@ using Fanex.Data.SqlServer;
 using Licensee.AdminSetting.API;
 using Licensee.AdminSetting.API.Extensions;
 using Licensee.AdminSetting.API.Features.Licensees;
+using Licensee.AdminSetting.API.Features.Shared.SiteDB;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,9 @@ builder.Services
     .AddFanexLogging(builder.Configuration)
     .AddFanexSql(builder.Configuration)
     .AddExceptionHandler<GlobalExceptionHandler>();
+
+builder.Services.AddSingleton<ISiteDBHandler, SiteDBHandler>();
+builder.Services.AddSingleton<ILicenseesHandler, LicenseesHandler>();
 
 builder.Services.AddHealthChecks();
 

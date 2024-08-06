@@ -1,6 +1,6 @@
 using Fanex.Data.Repository;
 
-namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
+namespace Licensee.AdminSetting.API.Features.Shared.SiteDB
 {
     public class GetCustomerSiteDBCriteria(int siteDBGroupId) : CriteriaBase
     {

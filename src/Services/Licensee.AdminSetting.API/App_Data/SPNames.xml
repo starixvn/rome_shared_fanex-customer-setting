@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Functions>
-    <Function Name="Create New Licensee">
+    <Function Name="Site DB">
         <Setting Key="API_SiteBuilder_GetCustomerSiteDB" SpName="API_SiteBuilder_GetCustomerSiteDB" DbName="DBCust.DBGLOB.wsv_nap">
             <Mapping DataField="CustDBGroupID" ObjectProperty="GroupId" Class="CustomerSiteDB" />
             <Mapping DataField="LinkedServerNameDBCUST" ObjectProperty="ServerName" Class="CustomerSiteDB" />
         </Setting>
+    </Function>
+    <Function Name="Create New Licensee">
+        <Setting Key="API_SiteBuilder_Validate" SpName="API_SiteBuilder_Validate" DbName="DBCust.CustDB.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register" DbName="DBCust.DBGLOB.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_Licensee_Insert" SpName="API_SiteBuilder_Licensee_Insert" DbName="DBCust.CustDB.wsv_nap"/>
     </Function>
 </Functions>

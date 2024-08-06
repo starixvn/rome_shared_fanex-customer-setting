@@ -1,5 +1,6 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
+using Licensee.AdminSetting.API.Features.Shared.SiteDB;
 
 namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 {
@@ -25,18 +26,10 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public string ErrMsg { get; set; }
 
-        [SpParam(SqlParamName = "CustList_Register")]
-        public string Customers { get; set; }
+        [SpParam(SqlParamName = "Usernames_Register")]
+        public string RegisterUsernames { get; set; }
 
-        public override string GetSettingKey()
-        {
-            if (CustDBGroupId > 0)
-            {
-                return $"SiteDB{CustDBGroupId}_API_SiteBuilder_Validate";
-            }
-
-            return "API_SiteBuilder_Validate";
-        }
+        public override string GetSettingKey() => SiteDBHelpers.GetSPNameInSiteDB(CustDBGroupId, "API_SiteBuilder_Validate");
 
         public override bool IsValid()
             => !string.IsNullOrWhiteSpace(ProductPT)

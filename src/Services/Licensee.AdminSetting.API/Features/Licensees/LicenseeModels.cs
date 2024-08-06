@@ -35,16 +35,18 @@ public record CreateLicenseeRequest(
     [Required] byte SiteDBGroupId,
     [Required] byte SpecialPlatform);
 
-public class CustomerSiteDB
-{
-    public int GroupId { get; init; }
 
-    public string ServerName { get; init; }
-}
-
-public class ValidateCreateLicenseeResult(int errorCode, string errorMessage, string customers)
+public class ValidateCreateLicenseeResult(int errorCode, string errorMessage, string registerUsernames)
     : Result(errorCode, errorMessage)
 {
+    public string RegisterUsernames { get; } = registerUsernames;
+}
+
+public class RegisterCustomersResult(int errorCode, string errorMessage, int siteId, string customers)
+    : Result(errorCode, errorMessage)
+{
+    public int SiteId { get; } = siteId;
+
     public string Customers { get; } = customers;
 }
 
