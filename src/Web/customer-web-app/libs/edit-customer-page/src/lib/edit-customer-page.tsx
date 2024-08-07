@@ -288,7 +288,8 @@ export function EditCustomerPage() {
   const handleUpdate = async () => {
     resetStateBeforeUpdate();
     const isEditBetSetting = AppConfigHelper.isEditBetSettingOnly();
-    const isValidGeneralInfo = !isEditBetSetting ? await validateGeneralInfo() : true;
+    const isValidGeneralInfo =
+      !isEditBetSetting && params.productGroupId === ProductGroupIds.SportsBook ? await validateGeneralInfo() : true;
     const validateGroupSettingResult = (await validateGroupTypes()) as ValidateRefResult;
     if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
       const newProductGroups = getCustomerSettingChange();
