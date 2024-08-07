@@ -3,9 +3,10 @@ using Fanex.Data.Repository;
 public class CreateSubAccountNicknameCommand: NonQueryCommand
 {
     public CreateSubAccountNicknameCommand(
-        int custId, string nickname, string language, string ip)
+        int custId, int subAccId, string nickname, string language, string ip)
     {
         NickName = nickname;
+        SubAccId = subAccId;
         CustId = custId;
         IP = ip;
         Language = language;

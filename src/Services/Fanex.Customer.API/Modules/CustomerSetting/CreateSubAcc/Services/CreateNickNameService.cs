@@ -65,7 +65,7 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
 
     private async Task<CreateCustomerResult> CreateNickName(BaseSubAccountRequest request, int subAccId)
     {
-        var command = new CreateSubAccountNicknameCommand(request.CustId, request.NickName, LanguageUtils.ToLanguageKey(request.Language), request.IP);
+        var command = new CreateSubAccountNicknameCommand(request.CustId, subAccId, request.NickName, LanguageUtils.ToLanguageKey(request.Language), request.IP);
         await dynamicRepository.ExecuteAsync(command);
         var errMsg = command.ErrCode == 0 ? StaticResources.Get("ConfiguredNicknameSuccessfully", request.Language) : command.ErrMsg;
 
