@@ -63,6 +63,17 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
         return result;
     }
 
+    protected override async void Rollback(int custId, int subAccId)
+    {
+        var parameters = new Hashtable
+        {
+            { "custid", custId },
+            { "SubAccId", subAccId }
+        };
+
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Age_CustomerInsNickName_Rollback");
+        await db.ExecuteNonQueryAsync(parameters);
+    }
     private async Task<CreateCustomerResult> CreateNickName(BaseSubAccountRequest request, int subAccId)
     {
         var command = new CreateSubAccountNicknameCommand(request.CustId, subAccId, request.NickName, LanguageUtils.ToLanguageKey(request.Language), request.IP);
