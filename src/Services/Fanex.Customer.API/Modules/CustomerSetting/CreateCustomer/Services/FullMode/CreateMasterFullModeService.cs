@@ -63,6 +63,11 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
 
     private async Task<CreateCustomerResult> CheckPermission(CreateRequest request)
     {
+        if(request.Context.SystemId != Systems.NAP)
+        {
+            return new CreateCustomerResult(0);
+        }
+
         var parameters = new Hashtable
         {
             { "site", request.Settings.GeneralInfo.Site },

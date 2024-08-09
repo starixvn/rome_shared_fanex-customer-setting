@@ -82,5 +82,5 @@ public class ScaleoutDBService : IScaleoutDBService
     => await dynamicRepository.FetchAsync<ServerDBConfig>(new GetServerDBConfigCriteria(site));
 
     public string GetSPNameWithPrefix(string spName, int sitedbgroupid)
-        => sitedbgroupid == 0 ? spName : $"SiteDB{sitedbgroupid}_{spName}";
+        => sitedbgroupid == 0 ? spName : $"DBSite{sitedbgroupid}_{spName}";
 }
