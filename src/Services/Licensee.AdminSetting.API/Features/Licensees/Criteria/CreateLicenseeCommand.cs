@@ -49,6 +49,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public string ErrMsg { get; set; }
 
+
         public override string GetSettingKey() => SiteDBHelpers.GetSPNameInSiteDB(CustDBGroupId, "API_SiteBuilder_Licensee_Insert");
 
         public override bool IsValid() => !string.IsNullOrEmpty(Customers);

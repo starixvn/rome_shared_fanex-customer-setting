@@ -32,6 +32,12 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
             return registerResult;
         }
 
+        var insertBetRestrictionSiteResult = await InsertBetRestrictionSite(registerResult.SiteId, customerSiteDb.GroupId);
+        if (insertBetRestrictionSiteResult.IsNotOK)
+        {
+            return insertBetRestrictionSiteResult;
+        }
+
         return await CreateLicensee(request, registerResult.Customers, customerSiteDb.GroupId);
     }
 
@@ -42,7 +48,8 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
             JsonSerializer.Serialize(request.ProductBetSetting),
             JsonSerializer.Serialize(request.ProductPT),
             JsonSerializer.Serialize(request.ProductStakeLevel),
-            request.SiteName);
+            request.SiteName,
+            CreateMode.NewLicensee);
 
         await repository.ExecuteAsync(command);
 
@@ -51,9 +58,26 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
 
     private async Task<RegisterCustomersResult> RegisterCustomers(CreateLicenseeRequest request, string registerUsernames)
     {
-        var command = new RegisterCustomersCommand(registerUsernames, request.SiteName, request.IsChinaView, request.SpecialPlatform, 1, request.SiteDBGroupId);
+        var command = new RegisterCustomersCommand(
+            registerUsernames,
+            request.SiteName,
+            request.IsChinaView,
+            request.SpecialPlatform,
+            JsonSerializer.Serialize(request.ProductStakeLevel),
+            request.IP,
+            CreateMode.NewLicensee,
+            request.SiteDBGroupId);
+
         await repository.ExecuteAsync(command);
+
         return new RegisterCustomersResult(command.ErrCode, command.ErrMsg, command.SiteId, command.Customers);
+    }
+
+    private async Task<Result> InsertBetRestrictionSite(int siteId, int custDBGroupId)
+    {
+        var command = new InsertBetRestrictionSiteCommand(custDBGroupId, siteId);
+        await repository.ExecuteAsync(command);
+        return new Result(command.ErrCode, command.ErrMsg);
     }
 
     private async Task<Result> CreateLicensee(CreateLicenseeRequest request, string customers, int custDBGroupId)

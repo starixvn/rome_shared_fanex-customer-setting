@@ -10,5 +10,6 @@
         <Setting Key="API_SiteBuilder_Validate" SpName="API_SiteBuilder_Validate" DbName="DBCust.CustDB.wsv_nap"/>
         <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register" DbName="DBCust.DBGLOB.wsv_nap"/>
         <Setting Key="API_SiteBuilder_Licensee_Insert" SpName="API_SiteBuilder_Licensee_Insert" DbName="DBCust.CustDB.wsv_nap"/>
+        <Setting Key="NAP_BetRestriction_SiteIns" SpName="NAP_BetRestriction_SiteIns" DbName="DBCust.CustDB.wsv_nap"/>
     </Function>
 </Functions>

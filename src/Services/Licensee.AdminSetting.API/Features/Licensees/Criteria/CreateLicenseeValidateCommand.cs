@@ -9,7 +9,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         string productBetSetting,
         string productPT,
         string productStakeLevel,
-        string siteName) : NonQueryCommand
+        string siteName,
+        byte mode) : NonQueryCommand
     {
         [SpParam(Ignored = true)]
         public int CustDBGroupId { get; } = custDBGroupId;
@@ -21,6 +22,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         public string ProductStakeLevel { get; } = productStakeLevel;
 
         public string SiteName { get; } = siteName;
+
+        public byte Mode { get; } = mode;
 
         public int ErrCode { get; set; }
 
