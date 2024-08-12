@@ -6,10 +6,16 @@
             <Mapping DataField="LinkedServerNameDBCUST" ObjectProperty="ServerName" Class="CustomerSiteDB" />
         </Setting>
     </Function>
+
     <Function Name="Create New Licensee">
         <Setting Key="API_SiteBuilder_Validate" SpName="API_SiteBuilder_Validate" DbName="DBCust.CustDB.wsv_nap"/>
         <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register" DbName="DBCust.DBGLOB.wsv_nap"/>
         <Setting Key="API_SiteBuilder_Licensee_Insert" SpName="API_SiteBuilder_Licensee_Insert" DbName="DBCust.CustDB.wsv_nap"/>
         <Setting Key="NAP_BetRestriction_SiteIns" SpName="NAP_BetRestriction_SiteIns" DbName="DBCust.CustDB.wsv_nap"/>
+    </Function>
+
+    <Function Name="User Log">
+        <Setting Key="Main_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_alp"/>
+        <Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBCust.DBGLOB.wsv_nap"/>
     </Function>
 </Functions>

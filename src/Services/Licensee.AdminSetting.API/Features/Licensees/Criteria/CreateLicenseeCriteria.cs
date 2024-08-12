@@ -4,7 +4,7 @@ using Licensee.AdminSetting.API.Features.Shared.SiteDB;
 
 namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 {
-    public class CreateLicenseeCommand(
+    public class CreateLicenseeCriteria(
         int custDBGroupId,
         string customers,
         string productBetSetting,
@@ -16,8 +16,9 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         string licenseeType,
         bool isChinaView,
         int siteDBGroupId,
-        byte specialPlatform
-    ) : NonQueryCommand
+        byte specialPlatform,
+        int siteId
+    ) : CriteriaBase
     {
         [SpParam(Ignored = true)]
         public int CustDBGroupId { get; } = custDBGroupId;
@@ -45,10 +46,17 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public byte SpecialPlatform { get; } = specialPlatform;
 
+        public int SiteId { get; } = siteId;
+
         public int ErrCode { get; set; }
 
         public string ErrMsg { get; set; }
 
+        public string InsBalExceptCustList { get; set; }
+
+        public string FailedCurrencies { get; set; }
+
+        public string ListSuperRollBack { get; set; }
 
         public override string GetSettingKey() => SiteDBHelpers.GetSPNameInSiteDB(CustDBGroupId, "API_SiteBuilder_Licensee_Insert");
 

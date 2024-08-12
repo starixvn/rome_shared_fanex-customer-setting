@@ -50,3 +50,9 @@ public class RegisterCustomersResult(int errorCode, string errorMessage, int sit
     public string Customers { get; } = customers;
 }
 
+public class CreateLicenseeResult(int errorCode, string errorMessage, string[] failedCurrencies)
+    : Result(errorCode, errorMessage)
+{
+    public string[] FailedCurrencies { get; } = failedCurrencies;
+}
+

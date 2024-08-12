@@ -1,8 +1,10 @@
+using Fanex.Data.Repository;
 using Fanex.Data.SqlServer;
 using Licensee.AdminSetting.API;
 using Licensee.AdminSetting.API.Extensions;
 using Licensee.AdminSetting.API.Features.Licensees;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;
+using Licensee.AdminSetting.API.Features.UserLog;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services
     .AddFanexSql(builder.Configuration)
     .AddExceptionHandler<GlobalExceptionHandler>();
 
+builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
+builder.Services.AddSingleton<IUserLogHandler, UserLogHandler>();
 builder.Services.AddSingleton<ISiteDBHandler, SiteDBHandler>();
 builder.Services.AddSingleton<ILicenseesHandler, LicenseesHandler>();
 
