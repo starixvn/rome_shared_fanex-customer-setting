@@ -11,6 +11,14 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public int SiteId { get; } = siteId;
 
+        public int UserId { get; } = 10278938;
+
+        public int LiveBetAccept { get; } = -2;
+
+        public byte SeizeBetTicket { get; } = 0;
+
+        public string FollowAccount { get; } = null;
+
         public int ErrCode { get; set; }
 
         public string ErrMsg { get; set; }

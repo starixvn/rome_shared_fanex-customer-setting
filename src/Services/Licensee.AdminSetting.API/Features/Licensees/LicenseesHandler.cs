@@ -37,11 +37,7 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
 
         failedCurrencies.AddRange([.. registerResult.failedCurrencies]);
 
-        var insertBetRestrictionSiteResult = await InsertBetRestrictionSite(registerResult.result.SiteId, customerSiteDb.GroupId);
-        if (insertBetRestrictionSiteResult.IsNotOK)
-        {
-            return insertBetRestrictionSiteResult;
-        }
+        _ = Task.Run(() => InsertBetRestrictionSite(registerResult.result.SiteId, customerSiteDb.GroupId));
 
         var createResult = await CreateLicensee(request, registerResult.result.Customers, registerResult.result.SiteId, customerSiteDb.GroupId);
         failedCurrencies.AddRange([.. createResult.failedCurrencies]);
@@ -108,7 +104,6 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
             siteId);
 
         var logParams = await repository.FetchAsync<LogParam>(criteria);
-
         var result = new Result(criteria.ErrCode, criteria.ErrMsg);
 
         if (result.IsOK && logParams.Any())

@@ -12,6 +12,10 @@
         <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register" DbName="DBCust.DBGLOB.wsv_nap"/>
         <Setting Key="API_SiteBuilder_Licensee_Insert" SpName="API_SiteBuilder_Licensee_Insert" DbName="DBCust.CustDB.wsv_nap"/>
         <Setting Key="NAP_BetRestriction_SiteIns" SpName="NAP_BetRestriction_SiteIns" DbName="DBCust.CustDB.wsv_nap"/>
+        <Setting Key="Acc_CustomerIns_Rollback_Multiple" SpName="Acc_CustomerIns_Rollback_Multiple" DbName="DBCust.DBGLOB.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBTXN.bodb02.wsv_alp"/>
+        <Setting Key="SiteBD1_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBSite01.bodb02.wsv_alp"/>
+        <Setting Key="SiteBD3_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBSite03.bodb02.wsv_alp"/>
     </Function>
 
     <Function Name="User Log">
