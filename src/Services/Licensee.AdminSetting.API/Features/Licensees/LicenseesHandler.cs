@@ -44,6 +44,7 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
         }
 
         var createResult = await CreateLicensee(request, registerResult.result.Customers, registerResult.result.SiteId, customerSiteDb.GroupId);
+        failedCurrencies.AddRange([.. createResult.failedCurrencies]);
 
         return createResult.result;
     }
@@ -55,6 +56,7 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
             JsonSerializer.Serialize(request.ProductBetSetting),
             JsonSerializer.Serialize(request.ProductPT),
             JsonSerializer.Serialize(request.ProductStakeLevel),
+            JsonSerializer.Serialize(request.ProductComm),
             request.SiteName,
             CreateMode.NewLicensee);
 
@@ -95,6 +97,7 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
             JsonSerializer.Serialize(request.ProductBetSetting),
             JsonSerializer.Serialize(request.ProductPT),
             JsonSerializer.Serialize(request.ProductStakeLevel),
+            JsonSerializer.Serialize(request.ProductComm),
             request.Creator,
             request.IP,
             request.IsCreateSub,
@@ -115,7 +118,7 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
 
         if (!string.IsNullOrWhiteSpace(criteria.InsBalExceptCustList))
         {
-            _ = Task.Run(() => InsertBalanceException(criteria.InsBalExceptCustList));
+            _ = Task.Run(() => InsertBalanceException(criteria.InsBalExceptCustList, request.SiteDBGroupId));
         }
 
         if (!string.IsNullOrWhiteSpace(criteria.ListSuperRollBack))
@@ -129,8 +132,8 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
     private ParallelLoopResult WriteCreateLicenseeLogs(int custDBGroupId, IEnumerable<LogParam> logParams)
         => Parallel.ForEach(logParams, param => userLogHandler.WriteLog(custDBGroupId, param));
 
-    private Task InsertBalanceException(string insBalExceptCustList)
-        => repository.ExecuteAsync(new InsertBalanceExceptionCommand(insBalExceptCustList));
+    private Task InsertBalanceException(string insBalExceptCustList, int siteDBGroupId)
+        => repository.ExecuteAsync(new InsertBalanceExceptionCommand(insBalExceptCustList, siteDBGroupId));
 
     private Task Rollback(string custIds)
         => repository.ExecuteAsync(new RollbackCreateLicenseeCommand(custIds));

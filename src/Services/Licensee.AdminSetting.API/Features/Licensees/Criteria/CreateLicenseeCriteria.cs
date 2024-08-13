@@ -10,6 +10,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         string productBetSetting,
         string productPT,
         string productStakeLevel,
+        string productComm,
         string creator,
         string ip,
         bool isCreateSub,
@@ -31,6 +32,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         public string ProductPT { get; } = productPT;
 
         public string ProductStakeLevel { get; } = productStakeLevel;
+
+        public string ProductComm { get; } = productComm;
 
         public string Creator { get; } = creator;
 

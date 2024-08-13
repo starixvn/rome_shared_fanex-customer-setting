@@ -9,6 +9,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         string productBetSetting,
         string productPT,
         string productStakeLevel,
+        string productComm,
         string siteName,
         byte mode) : NonQueryCommand
     {
@@ -20,6 +21,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         public string ProductPT { get; } = productPT;
 
         public string ProductStakeLevel { get; } = productStakeLevel;
+
+        public string ProductComm { get; } = productComm;
 
         public string SiteName { get; } = siteName;
 

@@ -22,11 +22,14 @@ public record StakeLevel(
     decimal MinStake,
     decimal MaxStake);
 
+public record Commission(int ProductId, decimal Comm);
+
 public record CreateLicenseeRequest(
     [Required] string SiteName,
     [Required] BetSetting[] ProductBetSetting,
     [Required] PositionTaking[] ProductPT,
     [Required] StakeLevel[] ProductStakeLevel,
+    [Required] Commission[] ProductComm,
     [Required] string Creator,
     [Required] string IP,
     [Required] bool IsCreateSub,
