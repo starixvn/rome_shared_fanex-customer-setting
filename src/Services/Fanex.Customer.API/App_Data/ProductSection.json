@@ -2,171 +2,100 @@
      "Products": [
           {
                "id": "1",
-               "name": "Sportsbook",
-               "active": "true",
-               "sportId": "0",
                "viewPTLink": "PositionTaking/Index?productId=1&showpticon=true"
           },
           {
                "id": "3",
-               "name": "Number Game",
-               "active": "true",
-               "sportId": "161",
                "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=3&showpticon=true"
           },
           {
                "id": "8",
-               "name": "Keno",
-               "active": "true",
-               "sportId": "202",
                "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=8&showpticon=true"
           },
           {
                "id": "21",
-               "name": "Allbet",
-               "active": "true",
-               "sportId": "211",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=21"
           },
           {
                "id": "39",
-               "name": "SA Gaming",
-               "active": "true",
-               "sportId": "244",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=39"
           },
           {
                "id": "45",
-               "name": "Sexy Gaming",
-               "active": "true",
-               "sportId": "243",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=45"
           },
           {
                "id": "46",
-               "name": "GT Casino",
-               "active": "true",
-               "sportId": "242",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=46"
           },
           {
                "id": "47",
-               "name": "BBIN",
-               "active": "true",
-               "sportId": "241",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=47"
           },
           {
                "id": "52",
-               "name": "ION",
-               "active": "true",
-               "sportId": "225",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=52"
           },
           {
                "id": "51",
-               "name": "WM",
-               "active": "true",
-               "sportId": "233",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=51"
           },
           {
                "id": "59",
-               "name": "GDG",
-               "active": "true",
-               "sportId": "236",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=59"
           },
           {
                "id": "57",
-               "name": "BG",
-               "active": "true",
-               "sportId": "239",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=57"
           },
           {
                "id": "65",
-               "name": "PPLiveCasino",
-               "active": "true",
-               "sportId": "170",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=65"
           },
           {
                "id": "76",
-               "name": "YeeBet",
-               "active": "true",
-               "sportId": "159",
                "viewPTLink": "PositionTaking/Index?productId=41&mainProductId=76"
           },
           {
                "id": "41",
-               "name": "Live Casino",
-               "active": "true",
                "viewPTLink": "PositionTaking/Index?productId=41"
           },
           {
                "id": "5",
-               "name": "VirtualSports",
-               "active": "true",
-               "sportId": "180",
                "viewPTLink": "PositionTaking/Index?productId=5&showpticon=true"
           },
           {
                "id": "28",
-               "name": "Lottery",
-               "active": "true",
-               "sportId": "220",
                "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=28&showpticon=true"
           },
           {
                "id": "40",
-               "name": "Table Games",
-               "active": "true",
-               "sportId": "222",
                "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=40&showpticon=true"
           },
           {
                "id": "50",
-               "name": "RNG War",
-               "active": "true",
-               "sportId": "224",
                "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=50&showpticon=true"
           },
           {
                "id": "63",
-               "name": "Sports Lottery",
-               "active": "true",
-               "sportId": "169",
                "viewPTLink": "PositionTaking/Index?productId=44&mainProductId=63&showpticon=true"
           },
           {
-               "id": "44",
-               "name": "RNG Lottery",
-               "active": "true"
+               "id": "44"
           },
           {
-               "id": "64",
-               "name": "VirtualGames",
-               "active": "true"
+               "id": "64"
           },
           {
                "id": "38",
-               "name": "Virtual Games",
-               "active": "true",
-               "sportId": "245",
                "viewPTLink": "PositionTaking/Index?productId=64&mainProductId=38&showpticon=false"
           },
           {
                "id": "69",
-               "name": "Bitcoin",
-               "active": "true",
-               "sportId": "171",
                "viewPTLink": "PositionTaking/Index?productId=69"
           },
           {
                "id": "53",
-               "name": "RNG Casino",
-               "active": "true",
                "viewPTLink": "PositionTaking/Index?productId=53"
           }
      ]
