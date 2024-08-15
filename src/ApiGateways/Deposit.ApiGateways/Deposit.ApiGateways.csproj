@@ -16,6 +16,7 @@
     <PackageReference Include="ONEbook.UM.Transport" Version="3.1.2" />
     <PackageReference Include="Sentry" Version="3.15.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Http" Version="9.0.0" />
   </ItemGroup>
 

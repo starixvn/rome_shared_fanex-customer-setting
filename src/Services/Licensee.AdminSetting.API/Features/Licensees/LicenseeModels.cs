@@ -24,6 +24,16 @@ public record StakeLevel(
 
 public record Commission(int ProductId, decimal Comm);
 
+public record CreateCurrencyRequest(
+    [Required] BetSetting[] ProductBetSetting,
+    [Required] PositionTaking[] ProductPT,
+    [Required] StakeLevel[] ProductStakeLevel,
+    [Required] Commission[] ProductComm,
+    [Required] string Creator,
+    [Required] string IP,
+    [Required] bool IsCreateSub,
+    [Required] string LicenseeType);
+
 public record CreateLicenseeRequest(
     [Required] string SiteName,
     [Required] BetSetting[] ProductBetSetting,
@@ -36,7 +46,16 @@ public record CreateLicenseeRequest(
     [Required] string LicenseeType,
     [Required] bool IsChinaView,
     [Required] byte SiteDBGroupId,
-    [Required] byte SpecialPlatform);
+    [Required] byte SpecialPlatform)
+    : CreateCurrencyRequest(
+        ProductBetSetting,
+        ProductPT,
+        ProductStakeLevel,
+        ProductComm,
+        Creator,
+        IP,
+        IsCreateSub,
+        LicenseeType);
 
 
 public class ValidateCreateLicenseeResult(int errorCode, string errorMessage, string registerUsernames)

@@ -29,12 +29,14 @@ try
         .ReadFrom.Configuration(builder.Configuration)
         .ReadFrom.Services(services)
         .Enrich.FromLogContext()
+        .Filter.ByExcluding("RequestPath like '/health%'")
         .WriteTo.Console()
+        .Enrich.WithProperty("Team", "Rome")
         .Enrich.WithProperty("Application", env.ApplicationName));
 
     builder.Services.AddHttpLogging(logging =>
     {
-        logging.LoggingFields = HttpLoggingFields.All;
+        logging.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
         logging.RequestHeaders.Add("sec-ch-ua");
         logging.RequestHeaders.Add("x-forwarded-for");
         logging.MediaTypeOptions.AddText("application/javascript");
