@@ -28,7 +28,7 @@ public class PositionTakingService : IPositionTakingService
 
     private const int Voidbridge = 4001;
 
-    private readonly int[] NewSettingProductGroups = new[] { ProductGroupConstants.Sportsbook, ProductGroupConstants.LiveAndRNGCasino };
+    private readonly int[] NewSettingProductGroups = [ProductGroupConstants.Sportsbook, ProductGroupConstants.LiveAndRNGCasino];
 
     public PositionTakingService(IOptions<AppSettings> appSettingOptions, IDynamicRepository dynamicRepository, IRemotingRefService remotingRefService)
     {
@@ -39,7 +39,7 @@ public class PositionTakingService : IPositionTakingService
 
     public IList<int> GetPageSizeList()
     {
-        return new List<int> { 10, 50, 100, 500 };
+        return [10, 50, 100, 500];
     }
 
     public async Task<PositionTakingViewModel> GetPT(PositionTakingRequest request)
@@ -116,7 +116,7 @@ public class PositionTakingService : IPositionTakingService
                 RoleId = request.RoleId
             },
 
-            CustomerList = new List<PositionTakingModel>(),
+            CustomerList = [],
             Product = new ProductModel
             {
                 Id = criteria.ProductId,
@@ -150,31 +150,31 @@ public class PositionTakingService : IPositionTakingService
         switch (request.RoleId)
         {
             case CustomerLevel.Super:
-                result.ViewedLevels = new int[] { request.RoleId };
+                result.ViewedLevels = [request.RoleId];
                 break;
 
             case CustomerLevel.Master:
-                result.ViewedLevels = new int[] { CustomerLevel.Master, CustomerLevel.Agent };
+                result.ViewedLevels = [CustomerLevel.Master, CustomerLevel.Agent];
                 break;
 
             case CustomerLevel.Agent:
                 if (result.CustomerInfo.RoleId == CustomerLevel.Super)
                 {
-                    result.ViewedLevels = new int[] { CustomerLevel.Super, CustomerLevel.Master, CustomerLevel.Agent };
+                    result.ViewedLevels = [CustomerLevel.Super, CustomerLevel.Master, CustomerLevel.Agent];
                 }
                 else if (result.CustomerInfo.RoleId == CustomerLevel.Master)
                 {
-                    result.ViewedLevels = new int[] { CustomerLevel.Master, CustomerLevel.Agent };
+                    result.ViewedLevels = [CustomerLevel.Master, CustomerLevel.Agent];
                 }
                 else
                 {
-                    result.ViewedLevels = new int[] { CustomerLevel.Agent };
+                    result.ViewedLevels = [CustomerLevel.Agent];
                 }
 
                 break;
 
             default:
-                result.ViewedLevels = new int[] { request.RoleId };
+                result.ViewedLevels = [request.RoleId];
                 break;
         }
 
