@@ -10,14 +10,7 @@
 
         public string Language { get; set; }
 
-        public int LoginSubAccId
-        {
-            get
-            {
-                //// Hard code because store procedured do nothing with this param
-                return 0;
-            }
-        }
+        public int LoginSubAccId => 0;
 
         public string LoginIP { get; set; }
 

@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Fanex.Customer.Client.Models;
-
 namespace Fanex.Customer.Client.Params
 {
     public class PTTemplateBaseParam

@@ -1,7 +1,5 @@
 ﻿namespace Fanex.Customer.API.Modules.Password.Criteria
 {
-    using Fanex.Data.Repository;
-
     public class UpdateSubAccountPasswordCriteria : BaseCommand
     {
         public int CustId { get; set; }
