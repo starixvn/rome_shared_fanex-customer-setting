@@ -16,9 +16,9 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         bool isCreateSub,
         string licenseeType,
         bool isChinaView,
-        int siteDBGroupId,
         byte specialPlatform,
-        int siteId
+        int siteId,
+        string siteName
     ) : CriteriaBase
     {
         [SpParam(Ignored = true)]
@@ -45,11 +45,11 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public bool IsChinaView { get; } = isChinaView;
 
-        public int SiteDBGroupId { get; } = siteDBGroupId;
-
         public byte SpecialPlatform { get; } = specialPlatform;
 
         public int SiteId { get; } = siteId;
+
+        public string SiteName { get; } = siteName;
 
         public int ErrCode { get; set; }
 
@@ -60,6 +60,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         public string FailedCurrencies { get; set; }
 
         public string ListSuperRollBack { get; set; }
+
+        public virtual byte Mode => CreateMode.NewLicensee;
 
         public override string GetSettingKey() => SiteDBHelpers.GetSPNameInSiteDB(CustDBGroupId, "API_SiteBuilder_Licensee_Insert");
 

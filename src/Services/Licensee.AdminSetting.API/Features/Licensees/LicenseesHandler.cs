@@ -12,16 +12,14 @@ public interface ILicenseesHandler
     Task<Result> CreateLicensee(CreateLicenseeRequest request);
 }
 
-public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler) : ILicenseesHandler
+public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler)
+        : BaseHandler(repository, siteDBHandler, userLogHandler), ILicenseesHandler
 {
-    private readonly IDynamicRepository repository = repository;
-    private readonly ISiteDBHandler siteDBHandler = siteDBHandler;
-    private readonly IUserLogHandler userLogHandler = userLogHandler;
 
     public async Task<Result> CreateLicensee(CreateLicenseeRequest request)
     {
-        var customerSiteDb = await siteDBHandler.GetCustomerSiteDB(request.SiteDBGroupId);
-        var validationResult = await ValidateCreateLicensee(request, customerSiteDb.GroupId);
+        var siteDBConfig = await siteDBHandler.GetBySiteDBGroupId(request.SiteDBGroupId);
+        var validationResult = await ValidateRequest(request.SiteName, request, siteDBConfig.CustDBGroupId);
 
         if (validationResult.IsNotOK)
         {
@@ -29,7 +27,16 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
         }
 
         var failedCurrencies = new List<string>();
-        var registerResult = await RegisterCustomers(request, validationResult.RegisterUsernames);
+        var registerResult = await RegisterCustomers(
+            validationResult.RegisterUsernames,
+            request.SiteName,
+            request.ProductStakeLevel,
+            request.IP,
+            CreateMode.NewLicensee,
+            siteDBConfig.SiteDBGroupId,
+            request.IsChinaView,
+            request.SpecialPlatform);
+
         if (registerResult.result.IsNotOK)
         {
             return registerResult.result;
@@ -37,45 +44,12 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
 
         failedCurrencies.AddRange([.. registerResult.failedCurrencies]);
 
-        _ = Task.Run(() => InsertBetRestrictionSite(registerResult.result.SiteId, customerSiteDb.GroupId));
+        _ = Task.Run(() => InsertBetRestrictionSite(registerResult.result.SiteId, siteDBConfig.CustDBGroupId));
 
-        var createResult = await CreateLicensee(request, registerResult.result.Customers, registerResult.result.SiteId, customerSiteDb.GroupId);
+        var createResult = await CreateLicensee(request, registerResult.result.Customers, registerResult.result.SiteId, siteDBConfig.CustDBGroupId);
         failedCurrencies.AddRange([.. createResult.failedCurrencies]);
 
         return createResult.result;
-    }
-
-    private async Task<ValidateCreateLicenseeResult> ValidateCreateLicensee(CreateLicenseeRequest request, int custDBGroupId)
-    {
-        var command = new CreateLicenseeValidateCommand(
-            custDBGroupId,
-            JsonSerializer.Serialize(request.ProductBetSetting),
-            JsonSerializer.Serialize(request.ProductPT),
-            JsonSerializer.Serialize(request.ProductStakeLevel),
-            JsonSerializer.Serialize(request.ProductComm),
-            request.SiteName,
-            CreateMode.NewLicensee);
-
-        await repository.ExecuteAsync(command);
-
-        return new ValidateCreateLicenseeResult(command.ErrCode, command.ErrMsg, command.RegisterUsernames);
-    }
-
-    private async Task<(RegisterCustomersResult result, List<string> failedCurrencies)> RegisterCustomers(CreateLicenseeRequest request, string registerUsernames)
-    {
-        var command = new RegisterCustomersCommand(
-            registerUsernames,
-            request.SiteName,
-            request.IsChinaView,
-            request.SpecialPlatform,
-            JsonSerializer.Serialize(request.ProductStakeLevel),
-            request.IP,
-            CreateMode.NewLicensee,
-            request.SiteDBGroupId);
-
-        await repository.ExecuteAsync(command);
-
-        return (new RegisterCustomersResult(command.ErrCode, command.ErrMsg, command.SiteId, command.Customers), command.FailedCurrencies?.Split(',')?.ToList());
     }
 
     private async Task<Result> InsertBetRestrictionSite(int siteId, int custDBGroupId)
@@ -99,16 +73,16 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
             request.IsCreateSub,
             request.LicenseeType,
             request.IsChinaView,
-            request.SiteDBGroupId,
             request.SpecialPlatform,
-            siteId);
+            siteId,
+            request.SiteName);
 
         var logParams = await repository.FetchAsync<LogParam>(criteria);
         var result = new Result(criteria.ErrCode, criteria.ErrMsg);
 
         if (result.IsOK && logParams.Any())
         {
-            _ = Task.Run(() => WriteCreateLicenseeLogs(custDBGroupId, logParams));
+            _ = Task.Run(() => WriteLogs(custDBGroupId, logParams));
         }
 
         if (!string.IsNullOrWhiteSpace(criteria.InsBalExceptCustList))
@@ -124,12 +98,9 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
         return (result, criteria.FailedCurrencies.Split(',').ToList());
     }
 
-    private ParallelLoopResult WriteCreateLicenseeLogs(int custDBGroupId, IEnumerable<LogParam> logParams)
-        => Parallel.ForEach(logParams, param => userLogHandler.WriteLog(custDBGroupId, param));
+    
 
-    private Task InsertBalanceException(string insBalExceptCustList, int siteDBGroupId)
-        => repository.ExecuteAsync(new InsertBalanceExceptionCommand(insBalExceptCustList, siteDBGroupId));
+    
 
-    private Task Rollback(string custIds)
-        => repository.ExecuteAsync(new RollbackCreateLicenseeCommand(custIds));
+
 }
