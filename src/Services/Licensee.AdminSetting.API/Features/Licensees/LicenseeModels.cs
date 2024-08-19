@@ -78,3 +78,11 @@ public class CreateLicenseeResult(int errorCode, string errorMessage, string[] f
     public string[] FailedCurrencies { get; } = failedCurrencies;
 }
 
+
+public class RegisterDummyMemberResult(int errorCode, string errorMessage, int custId, string username)
+    : Result(errorCode, errorMessage)
+{
+    public int CustId { get; } = custId;
+
+    public string Username { get; } = username;
+}

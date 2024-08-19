@@ -17,5 +17,7 @@ namespace Licensee.AdminSetting.API.Features.Shared.SiteDB
         public string ClientAccessNameDBCust { get; init; }
 
         public string AGIP_DBCust { get; init; }
+
+        public string Site { get; init; }
     }
 }

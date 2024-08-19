@@ -3,6 +3,8 @@
     <Function Name="Site DB">
         <Setting Key="API_SiteBuilder_GetCustomerSiteDB" SpName="API_SiteBuilder_GetCustomerSiteDB" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
         <Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
+        <Setting Key="Acc_Dep_ServerDBConfigSelByCust" SpName="Acc_Dep_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
+        <Setting Key="API_Dep_GetSiteID_LicVendorProfile" SpName="API_Dep_GetSiteID_LicVendorProfile" DbName="DBGLOB.SiteConfig.wsv_nap"/>
     </Function>
 
     <Function Name="Create New Licensee">
@@ -15,7 +17,18 @@
         <Setting Key="SiteBD1_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB01.bodb02.wsv_alp"/>
         <Setting Key="SiteBD3_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB03.bodb02.wsv_alp"/>
 
-        <Setting Key="API_SiteBuilder_LicenseeDB_CurrencyIns" SpName="API_SiteBuilder_LicenseeDB_CurrencyIns" DbName="DBCust.CustDB.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_LicenseeDB_CurrencyIns" SpName="API_SiteBuilder_LicenseeDB_CurrencyIns" DbName="DBCust.bodb_Licensee.wsv_nap"/>
+        <Setting Key="Dot_Dep_CWL_InsertSetting" SpName="Dot_Dep_CWL_InsertSetting" DbName="DBCust.CustDB.wsv_nap"/>
+    </Function>
+
+    <Function Name="Create Dummy Member">
+        <Setting Key="API_Dep_CustomerCheckOddsAdj" SpName="API_Dep_CustomerCheckOddsAdj" DbName="DBPRO.bodb02.wsv_nap"/>
+        <Setting Key="API_InsOddsAdj_Register" SpName="API_InsOddsAdj_Register" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
+        <Setting Key="Acc_Dep_CustomerInsMember_Ag" SpName="Acc_Dep_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap"/>
+        <Setting Key="Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins " DbName="DBTXN.bodb02.wsv_alp"/>
+        <Setting Key="SiteBD1_Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins " DbName="SiteDB01.bodb02.wsv_alp"/>
+        <Setting Key="SiteBD3_Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins " DbName="SiteDB03.bodb02.wsv_alp"/>
+        <Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
     </Function>
 
     <Function Name="User Log">

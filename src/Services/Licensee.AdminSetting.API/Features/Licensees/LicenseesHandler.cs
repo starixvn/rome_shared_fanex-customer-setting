@@ -1,4 +1,5 @@
 using Fanex.Data.Repository;
+using Licensee.AdminSetting.API.Features.Accounts;
 using Licensee.AdminSetting.API.Features.Licensees.Criteria;
 using Licensee.AdminSetting.API.Features.Shared;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;
@@ -12,8 +13,8 @@ public interface ILicenseesHandler
     Task<Result> CreateLicensee(CreateLicenseeRequest request);
 }
 
-public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler)
-        : BaseHandler(repository, siteDBHandler, userLogHandler), ILicenseesHandler
+public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler, IAccountsHandler accountsHandler)
+        : BaseHandler(repository, siteDBHandler, userLogHandler, accountsHandler), ILicenseesHandler
 {
 
     public async Task<Result> CreateLicensee(CreateLicenseeRequest request)
@@ -92,15 +93,13 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
 
         if (!string.IsNullOrWhiteSpace(criteria.ListSuperRollBack))
         {
-            await Rollback(criteria.ListSuperRollBack);
+            await RollbackMultiple(criteria.ListSuperRollBack);
+        }
+
+        if (!string.IsNullOrWhiteSpace(criteria.AgentList) && criteria.AgentList.Split(',').Length > 0)
+        {
         }
 
         return (result, criteria.FailedCurrencies.Split(',').ToList());
     }
-
-    
-
-    
-
-
 }

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Fanex.Data.Repository;
+using Licensee.AdminSetting.API.Features.Accounts;
 using Licensee.AdminSetting.API.Features.Licensees.Criteria;
 using Licensee.AdminSetting.API.Features.Shared;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;
@@ -12,8 +13,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         Task<Result> CreateCurrency(string site, CreateCurrencyRequest request);
     }
 
-    public class CurrencyHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler)
-        : BaseHandler(repository, siteDBHandler, userLogHandler), ICurrencyHandler
+    public class CurrencyHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler, IAccountsHandler accountsHandler)
+        : BaseHandler(repository, siteDBHandler, userLogHandler, accountsHandler), ICurrencyHandler
     {
         public async Task<Result> CreateCurrency(string siteName, CreateCurrencyRequest request)
         {
@@ -80,17 +81,22 @@ namespace Licensee.AdminSetting.API.Features.Licensees
                 _ = Task.Run(() => InsertBalanceException(criteria.InsBalExceptCustList, siteDBConfig.SiteDBGroupId));
             }
 
-            _ = Task.Run(() => InsertLicenseeData(siteName, criteria.CurrencyList, criteria.PT_Sportsbook, request.IP));
+            _ = Task.Run(() => InsertCurrencyData(siteName, criteria.CurrencyList, criteria.PT_Sportsbook, request.IP));
+
+            // if (!string.IsNullOrWhiteSpace(criteria.AgentList) && criteria.AgentList.Split(',').Length > 0)
+            // {
+            //     await CreateDummyMembers(siteDBConfig)
+            // }
 
             if (!string.IsNullOrWhiteSpace(criteria.ListSuperRollBack))
             {
-                await Rollback(criteria.ListSuperRollBack);
+                await RollbackMultiple(criteria.ListSuperRollBack);
             }
 
             return (result, criteria.FailedCurrencies.Split(',').ToList());
         }
 
-        private async Task<Result> InsertLicenseeData(string siteName, string currencyList, decimal PT_Sportsbook, string ip)
+        private async Task<Result> InsertCurrencyData(string siteName, string currencyList, decimal PT_Sportsbook, string ip)
         {
             var insertCurrencyCommand = new InsertCurrencyCommand(siteName, currencyList, PT_Sportsbook, ip);
             await repository.ExecuteAsync(insertCurrencyCommand);

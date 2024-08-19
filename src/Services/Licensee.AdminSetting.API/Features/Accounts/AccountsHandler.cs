@@ -1,0 +1,86 @@
+using Fanex.Data.Repository;
+using Licensee.AdminSetting.API.Features.Accounts.Criteria;
+using Licensee.AdminSetting.API.Features.Shared;
+using Licensee.AdminSetting.API.Features.Shared.SiteDB;
+
+namespace Licensee.AdminSetting.API.Features.Accounts
+{
+    public interface IAccountsHandler
+    {
+        Task<Result> CreateDummyMember(int agentId, CreateDummyMemberRequest request);
+        Task<Result> CreateDummyMember(SiteDBConfig siteDBConfig, string site, int agentId, int creator, string ip);
+    }
+
+    public class AccountsHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler) : IAccountsHandler
+    {
+        private readonly IDynamicRepository repository = repository;
+        private readonly ISiteDBHandler siteDBHandler = siteDBHandler;
+
+        public async Task<Result> CreateDummyMember(int agentId, CreateDummyMemberRequest request)
+        {
+            var siteDBConfig = await siteDBHandler.GetByCustId(agentId);
+            var siteId = await siteDBHandler.GetSiteId(siteDBConfig.Site);
+
+            var checkOddspreadAdjustmentResult = await CheckOddspreadAdjustment(siteId);
+            if (checkOddspreadAdjustmentResult.IsNotOK)
+            {
+                return checkOddspreadAdjustmentResult;
+            }
+
+            return await CreateDummyMember(siteDBConfig, siteDBConfig.Site, agentId, request.Creator, request.IP);
+        }
+
+        private async Task<Result> CheckOddspreadAdjustment(string siteId)
+        {
+            var command = new CheckOddsAdjCommand(siteId);
+            await repository.ExecuteAsync(command);
+
+            return new Result(command.ErrCode, command.ErrMsg);
+        }
+
+        public async Task<Result> CreateDummyMember(SiteDBConfig siteDBConfig, string site, int agentId, int creator, string ip)
+        {
+            var generateResult = await GenerateDummyMember(siteDBConfig.SiteDBGroupId, site, agentId);
+            if (generateResult.IsNotOK)
+            {
+                return generateResult;
+            }
+
+            return await CreateMember(siteDBConfig.CustDBGroupId, generateResult.CustId, generateResult.Username, agentId, creator, ip);
+        }
+
+        private async Task<RegisterDummyMemberResult> GenerateDummyMember(int siteDBGroupId, string site, int agentId)
+        {
+            var command = new RegisterDummyMemberCommand(agentId, site, siteDBGroupId);
+            await repository.ExecuteAsync(command);
+            return new RegisterDummyMemberResult(command.ErrCode, command.ErrMsg, command.CustId, command.Username);
+        }
+
+        private async Task<Result> CreateMember(int custDBGroupId, int custId, string username, int agentId, int creator, string ip)
+        {
+            var command = new CreateDummyMemberCriteria(custDBGroupId, custId, username, creator, agentId, ip);
+            await repository.ExecuteAsync(command);
+
+            var result = new Result(command.ErrCode, command.ErrMsg);
+
+            if (result.IsOK)
+            {
+                await InsertBalanceException(custId, username);
+            }
+            else
+            {
+                await Rollback(custId);
+            }
+
+            return result;
+        }
+
+        private Task<int> InsertBalanceException(int custId, string username)
+            => repository.ExecuteAsync(new InsertBalanceExceptionCommand(custId, username));
+
+        private Task<int> Rollback(int custId)
+            => repository.ExecuteAsync(new RollbackCommand(custId));
+
+
+    }
+}

@@ -1,16 +1,22 @@
 using System.Text.Json;
 using Fanex.Data.Repository;
+using Licensee.AdminSetting.API.Features.Accounts;
 using Licensee.AdminSetting.API.Features.Licensees.Criteria;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;
 using Licensee.AdminSetting.API.Features.UserLog;
 
 namespace Licensee.AdminSetting.API.Features.Licensees
 {
-    public abstract class BaseHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler)
+    public abstract class BaseHandler(
+        IDynamicRepository repository,
+        ISiteDBHandler siteDBHandler,
+        IUserLogHandler userLogHandler,
+        IAccountsHandler accountsHandler)
     {
         protected readonly IDynamicRepository repository = repository;
         protected readonly ISiteDBHandler siteDBHandler = siteDBHandler;
         protected readonly IUserLogHandler userLogHandler = userLogHandler;
+        protected readonly IAccountsHandler accountsHandler = accountsHandler;
 
         protected async Task<ValidateCreateLicenseeResult> ValidateRequest(string siteName, CreateCurrencyRequest request, int custDBGroupId)
         {
@@ -53,13 +59,32 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             return (new RegisterCustomersResult(command.ErrCode, command.ErrMsg, command.SiteId, command.Customers), command.FailedCurrencies?.Split(',')?.ToList());
         }
 
-        protected ParallelLoopResult WriteLogs(int custDBGroupId, IEnumerable<LogParam> logParams)
-            => Parallel.ForEach(logParams, param => userLogHandler.WriteLog(custDBGroupId, param));
+        protected Task WriteLogs(int custDBGroupId, IEnumerable<LogParam> logParams)
+        {
+            ParallelOptions parallelOptions = new()
+            {
+                MaxDegreeOfParallelism = 3
+            };
+            return Parallel.ForEachAsync(logParams, parallelOptions, async (param, _) => await Task.Run(() => userLogHandler.WriteLog(custDBGroupId, param), _));
+        }
 
-        protected Task InsertBalanceException(string insBalExceptCustList, int siteDBGroupId)
+        protected Task<int> InsertBalanceException(string insBalExceptCustList, int siteDBGroupId)
             => repository.ExecuteAsync(new InsertBalanceExceptionCommand(insBalExceptCustList, siteDBGroupId));
 
-        protected Task Rollback(string custIds)
+        protected Task<int> RollbackMultiple(string custIds)
             => repository.ExecuteAsync(new RollbackCreateLicenseeCommand(custIds));
+
+        protected Task CreateDummyMembers(SiteDBConfig siteDBConfig, string site, int creator, string ip, int[] agentIds)
+        {
+            ParallelOptions parallelOptions = new()
+            {
+                MaxDegreeOfParallelism = 3
+            };
+
+            return Parallel.ForEachAsync(
+                agentIds,
+                parallelOptions,
+                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(siteDBConfig, site, agentId, creator, ip)));
+        }
     }
 }
