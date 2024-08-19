@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Functions>
     <Function Name="Site DB">
-        <Setting Key="API_SiteBuilder_GetCustomerSiteDB" SpName="API_SiteBuilder_GetCustomerSiteDB" DbName="DBCust.DBGLOB.wsv_nap"/>
-        <Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBCust.DBGLOB.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_GetCustomerSiteDB" SpName="API_SiteBuilder_GetCustomerSiteDB" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
+        <Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
     </Function>
 
     <Function Name="Create New Licensee">
         <Setting Key="API_SiteBuilder_Validate" SpName="API_SiteBuilder_Validate" DbName="DBCust.CustDB.wsv_nap"/>
-        <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register" DbName="DBCust.DBGLOB.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
         <Setting Key="API_SiteBuilder_Licensee_Insert" SpName="API_SiteBuilder_Licensee_Insert" DbName="DBCust.CustDB.wsv_nap"/>
         <Setting Key="NAP_BetRestriction_SiteIns" SpName="NAP_BetRestriction_SiteIns" DbName="DBCust.CustDB.wsv_nap"/>
-        <Setting Key="Acc_CustomerIns_Rollback_Multiple" SpName="Acc_CustomerIns_Rollback_Multiple" DbName="DBCust.DBGLOB.wsv_nap"/>
+        <Setting Key="Acc_CustomerIns_Rollback_Multiple" SpName="Acc_CustomerIns_Rollback_Multiple" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
         <Setting Key="API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBTXN.bodb02.wsv_alp"/>
-        <Setting Key="SiteBD1_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBSite01.bodb02.wsv_alp"/>
-        <Setting Key="SiteBD3_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBSite03.bodb02.wsv_alp"/>
+        <Setting Key="SiteBD1_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB01.bodb02.wsv_alp"/>
+        <Setting Key="SiteBD3_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB03.bodb02.wsv_alp"/>
 
         <Setting Key="API_SiteBuilder_LicenseeDB_CurrencyIns" SpName="API_SiteBuilder_LicenseeDB_CurrencyIns" DbName="DBCust.CustDB.wsv_nap"/>
     </Function>
 
     <Function Name="User Log">
         <Setting Key="Main_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_alp"/>
-        <Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBCust.DBGLOB.wsv_nap"/>
+        <Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
     </Function>
 </Functions>
