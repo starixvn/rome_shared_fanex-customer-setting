@@ -67,7 +67,7 @@ public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCust
             { "settingstatus", appSettings.SettingStatus },
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
             { "systemid", request.Context.SystemId },
-            { "site", request.Settings.GeneralInfo.Site },
+            { "site", request.Context.Site },
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(ValidateSPName);
@@ -117,6 +117,7 @@ public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCust
             { "mrecommend", request.Settings.GeneralInfo.UplineCustId },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
+            { "site", request.Context.Site },
             { "settingstatus", appSettings.SettingStatus },
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
         };
