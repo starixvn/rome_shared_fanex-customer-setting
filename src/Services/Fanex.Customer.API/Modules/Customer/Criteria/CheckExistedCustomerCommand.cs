@@ -13,6 +13,6 @@ public class CheckExistedCustomerCommand : NonQueryCommand
 
     public bool IsExists { get; set; }
 
-    public override string GetSettingKey() => "Age_CustomerCheckExists";
+    public override string GetSettingKey() => "Acc_CustomerCheckExists";
     public override bool IsValid() => !string.IsNullOrEmpty(Username);
 }
