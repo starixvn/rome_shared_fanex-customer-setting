@@ -19,9 +19,10 @@ namespace Fanex.Customer.Client.Params
             string site,
             bool isQRCode,
             string ip,
+            int custDBGroupID,
             string language = "en-US",
             bool isInternal = false)
-        : base(actorId, actorSubAccId, uplineId, custLevel, actorUsername, userName, password, credit, maxCredit, sourceCustId, site, isQRCode, ip, language, isInternal)
+        : base(actorId, actorSubAccId, uplineId, custLevel, actorUsername, userName, password, credit, maxCredit, sourceCustId, site, isQRCode, ip, custDBGroupID, language, isInternal)
         {
             NumberOfAccounts = numberOfAccounts;
         }
@@ -45,6 +46,7 @@ namespace Fanex.Customer.Client.Params
             string site,
             bool isQRCode,
             string ip,
+            int custDBGroupID,
             string language = Languages.English,
             bool isInternal = false)
         {
@@ -62,6 +64,7 @@ namespace Fanex.Customer.Client.Params
             IsQrCode = isQRCode;
             Language = language;
             IP = ip;
+            CustDBGroupID = custDBGroupID;
             IsInternal = isInternal;
         }
 
@@ -94,6 +97,8 @@ namespace Fanex.Customer.Client.Params
         public string IP { get; }
 
         public int SystemId { get; internal set; }
+
+        public int CustDBGroupID { get; }
 
         public bool IsInternal { get; }
 

@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-    <Version>1.0.1.0-beta-06</Version>
+    <Version>1.0.1.0-beta-08</Version>
     <Authors>@Rome</Authors>
     <Company>Nexcel</Company>
     <Product>Fanex</Product>
-    <PackageReleaseNotes>Support Scale out CustDB (#199915)</PackageReleaseNotes>
+    <PackageReleaseNotes>Support Scale out CustDB (#199915) - Export CustDBGroupId parameter.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

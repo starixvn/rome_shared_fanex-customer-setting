@@ -16,6 +16,8 @@ public class RequestContext
 
     public byte SystemId { get; set; }
 
+    public int CustDBGroupID { get; set; }
+
     public string Language { get; set; }
 
     /// <summary>
