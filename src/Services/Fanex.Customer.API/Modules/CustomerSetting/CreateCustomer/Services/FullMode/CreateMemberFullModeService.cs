@@ -114,7 +114,6 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             { "ugroup", request.Settings.GeneralInfo.Group},
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
-            { "site", request.Settings.GeneralInfo.Site },
             { "settingstatus", appSettings.SettingStatus },
         };
 
