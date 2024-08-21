@@ -38,7 +38,7 @@ export function SportsBookBetSettingRow({
   validationState,
   setErrorTooltip,
 }: Readonly<SportsBookBetSettingRowProps>) {
-  const { handleSettingItemChange, generalInfo } = useGroupSettingContext();
+  const { handleSettingItemChange, generalInfo, isMultipleMode } = useGroupSettingContext();
   const [itemValidateResult, setItemValidateResult] = useState<{ [key: string]: ValidateBetSetting }>({});
   const isSpecialSite = generalInfo?.isSpecialSite ?? false;
   const { sportTypeId, betTypeId, upline } = settingItem;
@@ -82,6 +82,21 @@ export function SportsBookBetSettingRow({
   ) => {
     if (betSettingItem[fieldName] === null) return null;
 
+    const isDisable = () => {
+      if (isMultipleMode && settingItem.isMultipleModeChecked === false) {
+        return true;
+      }
+
+      const fields = {
+        minBet: settingItem.isDisableMinBet,
+        maxBet: settingItem.isDisableMaxBet,
+        maxPerMatch: settingItem.isDisableMaxPerMatch,
+        maxPayoutPerMatch: settingItem.isDisableMaxPayoutPerMatch,
+      };
+
+      return Object.keys(fields).includes(fieldName) ? Boolean(fields[fieldName]) : false;
+    };
+
     const id = `${fieldName}-${sportTypeId}-${betTypeId}`;
     return isReadOnly ? (
       <div className="show-value">{settingItem[fieldName]}</div>
@@ -89,10 +104,10 @@ export function SportsBookBetSettingRow({
       <BetSettingCell
         key={id}
         id={id}
-        value={settingItem[fieldName]}
-        isDisable={!settingItem.isMultipleModeChecked}
+        value={Number(settingItem[fieldName])}
+        isDisable={isDisable()}
         operator={fieldName === 'minBet' ? Operator['>='] : Operator['<=']}
-        limit={upline[fieldName]}
+        limit={Number(upline[fieldName])}
         isError={itemValidateResult[id] && !itemValidateResult[id].isValid}
         onChange={(e) => handleBetSettingChange(fieldName, id, e)}
         isCopied={isCopied}

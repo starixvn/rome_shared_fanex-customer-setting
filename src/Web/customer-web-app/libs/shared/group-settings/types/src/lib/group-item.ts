@@ -64,10 +64,14 @@ export interface BetSettingsProps {
   minBet: number;
   maxBet: number;
   maxPerMatch: number;
+  isDisableMinBet?: boolean;
+  isDisableMaxBet?: boolean;
+  isDisableMaxPerMatch?: boolean;
 }
 
 export interface SportsBookBetSettingProps extends BetSettingsProps {
   maxPayoutPerMatch?: number;
+  isDisableMaxPayoutPerMatch?: boolean;
 }
 
 export interface SportsBookBetSettingGroupItem
