@@ -10,8 +10,6 @@ using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
-using Fanex.Customer.API.Shared.Services;
-using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 
@@ -32,7 +30,6 @@ public class CopyCustomerService : ICopyCustomerService
     private readonly Logging.ILogger logger;
     private readonly IBalanceService balanceService;
     private readonly IMessageService messageService;
-    private readonly IScaleoutDBService scaleoutDBService;
 
     public CopyCustomerService(
         IDynamicRepository dynamicRepository,
@@ -40,8 +37,7 @@ public class CopyCustomerService : ICopyCustomerService
         ICustomerService customerService,
         Logging.ILogger logger,
         IBalanceService balanceService,
-        IMessageService messageService,
-        IScaleoutDBService scaleoutDBService)
+        IMessageService messageService)
     {
         this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
@@ -49,7 +45,6 @@ public class CopyCustomerService : ICopyCustomerService
         this.logger = logger;
         this.balanceService = balanceService;
         this.messageService = messageService;
-        this.scaleoutDBService = scaleoutDBService;
     }
 
     public async Task<CopyMultipleCustomerResult> CopyCustomers(CopyMultipleCustomersRequest request)
@@ -145,10 +140,10 @@ public class CopyCustomerService : ICopyCustomerService
     {
         return roleId switch
         {
-            CustomerLevel.Super => new CopySuperService(messageService, appSettings, scaleoutDBService),
-            CustomerLevel.Master => new CopyMasterService(messageService, appSettings, scaleoutDBService),
-            CustomerLevel.Agent => new CopyAgentService(messageService, appSettings, scaleoutDBService),
-            CustomerLevel.Member => new CopyMemberService(messageService, appSettings, scaleoutDBService),
+            CustomerLevel.Super => new CopySuperService(messageService, appSettings),
+            CustomerLevel.Master => new CopyMasterService(messageService, appSettings),
+            CustomerLevel.Agent => new CopyAgentService(messageService, appSettings),
+            CustomerLevel.Member => new CopyMemberService(messageService, appSettings),
             _ => throw new ArgumentOutOfRangeException(nameof(roleId))
         };
     }

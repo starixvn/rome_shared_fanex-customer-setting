@@ -2,7 +2,6 @@ using System.Collections;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
@@ -18,9 +17,8 @@ public class CopyMasterService : CopyCustomerBaseService
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
     public CopyMasterService(IMessageService messageService,
-        AppSettings appSettings,
-        IScaleoutDBService scaleoutDBService)
-        : base(messageService, appSettings, scaleoutDBService)
+        AppSettings appSettings)
+        : base(messageService, appSettings)
     {
     }
 
@@ -72,7 +70,7 @@ public class CopyMasterService : CopyCustomerBaseService
         var parameters = new Hashtable
         {
             { "username", request.UserName },
-            { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Site) },
+            { "sitedbgroupid", request.CustDBGroupID },
             { "site", request.Site },
             { "roleid", CustomerLevel.Master },
             { "uplineid", request.UplineId },

@@ -1,4 +1,3 @@
-using Fanex.Common.Extensions;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

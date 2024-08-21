@@ -3,7 +3,6 @@ using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Customer.API.Shared.Constants;
@@ -25,9 +24,8 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
 
     public CreateSuperFullModeService(IMessageService messageService, 
         AppSettings appSettings, 
-        IScaleoutDBService scaleoutDBService,
         ICustomerSettingHelper helperService)
-        : base( messageService, appSettings, scaleoutDBService, helperService)
+        : base( messageService, appSettings, helperService)
     {
     }
 
@@ -92,7 +90,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(ValidateSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
@@ -104,7 +102,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
         var parameters = new Hashtable
         {
             { "username", request.Settings.GeneralInfo.UserName },
-            { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Context.Site) },
+            { "sitedbgroupid", request.Context.CustDBGroupID },
             { "site", request.Context.Site },
             { "roleid", CustomerLevel.Super },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
@@ -141,7 +139,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CreateNewSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);

@@ -3,7 +3,6 @@ using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Customer.API.Shared.Constants;
@@ -20,11 +19,10 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
 
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
-    public CreateMemberFullModeService(IMessageService messageService, 
-        AppSettings appSettings, 
-        IScaleoutDBService scaleoutDBService,
+    public CreateMemberFullModeService(IMessageService messageService,
+        AppSettings appSettings,
         ICustomerSettingHelper helperService)
-        : base( messageService, appSettings, scaleoutDBService, helperService)
+        : base(messageService, appSettings, helperService)
     {
     }
 
@@ -35,7 +33,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
         {
             return result;
         }
-        
+
         result = await Register(request);
         if (!result.IsSuccessful)
         {
@@ -67,7 +65,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             { "ip", request.Context.IP },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(ValidateSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
@@ -79,7 +77,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
         var parameters = new Hashtable
         {
             { "username", request.Settings.GeneralInfo.UserName },
-            { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Context.Site) },
+            { "sitedbgroupid", request.Context.CustDBGroupID },
             { "site", request.Settings.GeneralInfo.Site },
             { "roleid", CustomerLevel.Member },
             { "uplineid", request.Settings.GeneralInfo.UplineCustId },
@@ -117,7 +115,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             { "settingstatus", appSettings.SettingStatus },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CreateNewSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);

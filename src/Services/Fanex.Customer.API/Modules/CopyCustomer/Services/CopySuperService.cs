@@ -2,7 +2,7 @@ using System.Collections;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
-using Fanex.Customer.API.Shared.Services;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
@@ -20,35 +20,33 @@ public class CopySuperService : CopyCustomerBaseService
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
     public CopySuperService(IMessageService messageService,
-        AppSettings appSettings,
-        IScaleoutDBService scaleoutDBService)
-        : base(messageService, appSettings, scaleoutDBService)
+        AppSettings appSettings)
+        : base(messageService, appSettings)
     {
     }
 
     public override async Task<CopyCustomerResult> Copy(CopyCustomerRequest request)
     {
-        var siteDBGroupId = await scaleoutDBService.GetCustDBGroupIdBySite(request.Site);
-        var result = await CheckPermission(request, siteDBGroupId);
+        var result = await CheckPermission(request);
         if (!result.IsSuccessful)
         {
             return result;
         }
         
-        result = await Validate(request, siteDBGroupId);
+        result = await Validate(request);
         if (!result.IsSuccessful)
         {
             return result;
         }
         
-        result = await Register(request, siteDBGroupId);
+        result = await Register(request);
         if (!result.IsSuccessful)
         {
             return result;
         }
 
         int newCustId = result.CustId;
-        result = await CopySuper(request, newCustId, siteDBGroupId);
+        result = await CopySuper(request, newCustId);
         if (!result.IsSuccessful)
         {
             Rollback(newCustId);
@@ -57,7 +55,7 @@ public class CopySuperService : CopyCustomerBaseService
         return result;
     }
 
-    private async Task<CopyCustomerResult> CheckPermission(CopyCustomerRequest request, int siteDBGroupId)
+    private async Task<CopyCustomerResult> CheckPermission(CopyCustomerRequest request)
     {
         var parameters = new Hashtable
         {
@@ -66,14 +64,14 @@ public class CopySuperService : CopyCustomerBaseService
             { "language", request.LanguageKey },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(scaleoutDBService.GetSPNameWithPrefix(CheckPermissionSPName, siteDBGroupId));
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CheckPermissionSPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);
         return new CopyCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), 0, msg.MainMessage);
     }
 
-    private async Task<CopyCustomerResult> Validate(CopyCustomerRequest request, int siteDBGroupId)
+    private async Task<CopyCustomerResult> Validate(CopyCustomerRequest request)
     {
         var parameters = new Hashtable
         {
@@ -85,19 +83,19 @@ public class CopySuperService : CopyCustomerBaseService
             { "language", request.LanguageKey },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(scaleoutDBService.GetSPNameWithPrefix(ValidateSPName, siteDBGroupId));
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);
         return new CopyCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), 0, msg.MainMessage);
     }
 
-    private async Task<CopyCustomerResult> Register(CopyCustomerRequest request, int siteDBGroupId)
+    private async Task<CopyCustomerResult> Register(CopyCustomerRequest request)
     {
         var parameters = new Hashtable
         {
             { "username", request.UserName },
-            { "sitedbgroupid", siteDBGroupId },
+            { "sitedbgroupid", request.CustDBGroupID },
             { "site", request.Site },
             { "roleid", CustomerLevel.Super },
             { "language", request.LanguageKey }
@@ -110,7 +108,7 @@ public class CopySuperService : CopyCustomerBaseService
         return new CopyCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), 0, msg.MainMessage);
     }
 
-    private async Task<CopyCustomerResult> CopySuper(CopyCustomerRequest request, int newCustId, int siteDBGroupId)
+    private async Task<CopyCustomerResult> CopySuper(CopyCustomerRequest request, int newCustId)
     {
         var parameters = new Hashtable
         {
@@ -133,7 +131,7 @@ public class CopySuperService : CopyCustomerBaseService
             { "settingstatus", appSettings.SettingStatus },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(scaleoutDBService.GetSPNameWithPrefix(CopySPName, siteDBGroupId));
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CopySPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);

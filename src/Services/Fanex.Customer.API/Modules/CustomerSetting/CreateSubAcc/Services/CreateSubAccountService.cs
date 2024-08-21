@@ -1,7 +1,6 @@
 using System.Collections;
 using Fanex.Data;
 using Fanex.Data.Repository;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.CreateSubAcc.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
@@ -19,8 +18,8 @@ public class CreateSubAccService : BaseSubAccountService, ICreateSubAccountServi
 {
     private readonly Logging.ILogger logger;
 
-    public CreateSubAccService(IMessageService messageService, IScaleoutDBService scaleoutDBService, Logging.ILogger logger, IDynamicRepository dynamicRepository) 
-        : base(messageService, scaleoutDBService, dynamicRepository)
+    public CreateSubAccService(IMessageService messageService, Logging.ILogger logger, IDynamicRepository dynamicRepository) 
+        : base(messageService, dynamicRepository)
     {
         this.logger = logger;
     }
@@ -49,7 +48,7 @@ public class CreateSubAccService : BaseSubAccountService, ICreateSubAccountServi
             { "loginip", createRequest.IP }
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CreateNewSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();        
 

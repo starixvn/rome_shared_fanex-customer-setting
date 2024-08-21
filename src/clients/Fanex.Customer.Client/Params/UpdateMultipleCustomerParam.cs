@@ -14,6 +14,7 @@ namespace Fanex.Customer.Client.Params
             int roleId,
             int uplineRoleId,
             string ip,
+            int custDBGroupID,
             string customerIds,
             string customerNames,
             string site,
@@ -28,6 +29,7 @@ namespace Fanex.Customer.Client.Params
             RoleId = roleId;
             UplineRoleId = uplineRoleId;
             Ip = ip;
+            CustDBGroupID = custDBGroupID;
             Site = site;
             SiteLabel = siteLabel;
             CustomerIds = customerIds;
@@ -52,6 +54,8 @@ namespace Fanex.Customer.Client.Params
         public int UplineRoleId { get; }
 
         public string Ip { get; }
+
+        public int CustDBGroupID { get; }
 
         public string Language { get; }
 

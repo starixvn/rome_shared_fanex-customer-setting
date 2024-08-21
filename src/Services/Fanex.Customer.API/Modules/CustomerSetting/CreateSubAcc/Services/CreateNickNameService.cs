@@ -1,7 +1,6 @@
 using System.Collections;
 using Fanex.Data;
 using Fanex.Data.Repository;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.CreateSubAcc.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
@@ -19,8 +18,8 @@ public interface ICreateNickNameSubAccountService
 
 public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNickNameSubAccountService
 {
-    public CreateNickNameSubAccountService(IMessageService messageService, IScaleoutDBService scaleoutDBService, IDynamicRepository dynamicRepository)
-        : base(messageService, scaleoutDBService, dynamicRepository)
+    public CreateNickNameSubAccountService(IMessageService messageService, IDynamicRepository dynamicRepository)
+        : base(messageService, dynamicRepository)
     {
     }
 
@@ -40,7 +39,7 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
         {
             { "subaccid", nickNameRequest.SubAccId },
             { "nickname", request.NickName },
-            { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Site) },
+            { "sitedbgroupid", request.CustDBGroupID },
             { "language", LanguageUtils.ToLanguageKey(request.Language) },
             { "custid", request.CustId },
         };
@@ -76,7 +75,7 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
     }
     private async Task<CreateCustomerResult> CreateNickName(BaseSubAccountRequest request, int subAccId)
     {
-        var command = new CreateSubAccountNicknameCommand(request.CustId, subAccId, request.NickName, LanguageUtils.ToLanguageKey(request.Language), request.IP);
+        var command = new CreateSubAccountNicknameCommand(request.CustId, subAccId, request.NickName, LanguageUtils.ToLanguageKey(request.Language), request.IP, request.CustDBGroupID);
         await dynamicRepository.ExecuteAsync(command);
         var errMsg = command.ErrCode == 0 ? StaticResources.Get("ConfiguredNicknameSuccessfully", request.Language) : command.ErrMsg;
 
@@ -85,7 +84,7 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
 
     private async Task<CreateCustomerResult> UpdateLoginNickNameOnlyMode(BaseSubAccountRequest request, int subAccId)
     {
-        var command = new UpdateSubAccountNicknameLoginOnlyCommand(request.CustId, subAccId, LanguageUtils.ToLanguageKey(request.Language), request.IP);
+        var command = new UpdateSubAccountNicknameLoginOnlyCommand(request.CustId, subAccId, LanguageUtils.ToLanguageKey(request.Language), request.IP, request.CustDBGroupID);
         await dynamicRepository.ExecuteAsync(command);
         var errMsg = command.ErrCode == 0 ? StaticResources.Get("ConfiguredNicknameSuccessfully", request.Language) : command.ErrMsg;
 

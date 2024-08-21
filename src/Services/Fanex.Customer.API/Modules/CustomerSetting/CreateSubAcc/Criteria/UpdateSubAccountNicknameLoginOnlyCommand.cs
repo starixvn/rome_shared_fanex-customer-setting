@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 public class UpdateSubAccountNicknameLoginOnlyCommand : NonQueryCommand
 {
@@ -5,12 +6,14 @@ public class UpdateSubAccountNicknameLoginOnlyCommand : NonQueryCommand
         int custId,
         int subAccId,
         string language,
-        string ip)
+        string ip,
+        int custDBGroupID)
     {
         SubAccId = subAccId;
         CustId = custId;
         IP = ip;
         Language = language;
+        CustDBGroupID = custDBGroupID;
     }
 
     public bool NickNameLoginOnly => true;
@@ -21,6 +24,8 @@ public class UpdateSubAccountNicknameLoginOnlyCommand : NonQueryCommand
 
     public string IP { get; }
 
+    public int CustDBGroupID { get; }
+
     public string Language { get; }
 
     public int ErrCode { get; set; }
@@ -28,7 +33,7 @@ public class UpdateSubAccountNicknameLoginOnlyCommand : NonQueryCommand
     public string ErrMsg { get; set; }
 
     public override string GetSettingKey()
-        => "Age_CustSubUpdNicknameLoginOnly";
+        => SPNameUtils.GetSPNameWithPrefix("Age_CustSubUpdNicknameLoginOnly", CustDBGroupID);
 
     public override bool IsValid() => SubAccId > 0 && CustId > 0;
 }

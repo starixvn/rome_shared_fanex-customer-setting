@@ -10,6 +10,7 @@ namespace Fanex.Customer.Client.Params
            string nickName,
            string ip, 
            string site,
+           int custDBGroupID,
            string language= Languages.English)
         {
             CustId = custId;
@@ -17,6 +18,7 @@ namespace Fanex.Customer.Client.Params
             Language = language;
             SubAccId = subAccId;
             IP = ip;
+            CustDBGroupID = custDBGroupID;
             Site = site;
         }
 
@@ -25,6 +27,7 @@ namespace Fanex.Customer.Client.Params
         public string Language { get; }
         public int SubAccId { get; }
         public string IP { get; }
+        public int CustDBGroupID { get; }
         public string Site { get; }
     }
 }

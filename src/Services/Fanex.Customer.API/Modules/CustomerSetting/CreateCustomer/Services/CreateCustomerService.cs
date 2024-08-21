@@ -1,4 +1,3 @@
-using System.Collections;
 using Fanex.Customer.API.Modules.Balance;
 using Fanex.Customer.API.Modules.CreateCustomer.Criteria;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
@@ -12,7 +11,6 @@ using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Extensions;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
-using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Services.LiteMode;
@@ -31,7 +29,6 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
 {
     private readonly IBalanceService balanceService;
     private readonly ICustomerService customerService;
-    private readonly IScaleoutDBService scaleoutDBService;
 
     public CreateCustomerService(
         IBalanceService balanceService,
@@ -41,13 +38,11 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         ICacheRefService cacheRefService,
         IMessageService messageService,
         ICustomerSettingHelper helperService,
-        ICustomerService customerService,
-        IScaleoutDBService scaleoutDBService)
+        ICustomerService customerService)
         : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService)
     {
         this.balanceService = balanceService;
         this.customerService = customerService;
-        this.scaleoutDBService = scaleoutDBService;
     }
 
     public bool ValidateRequest(CreateRequest request)
@@ -116,10 +111,10 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         {
             return uplineRoleId switch
             {
-                CustomerLevel.Company => new CreateSuperFullModeService(messageService, appSettings, scaleoutDBService, helperService),
-                CustomerLevel.Super => new CreateMasterFullModeService(messageService, appSettings, scaleoutDBService, helperService),
-                CustomerLevel.Master => new CreateAgentFullModeService(messageService, appSettings, scaleoutDBService, helperService),
-                CustomerLevel.Agent => new CreateMemberFullModeService(messageService, appSettings, scaleoutDBService, helperService),
+                CustomerLevel.Company => new CreateSuperFullModeService(messageService, appSettings, helperService),
+                CustomerLevel.Super => new CreateMasterFullModeService(messageService, appSettings, helperService),
+                CustomerLevel.Master => new CreateAgentFullModeService(messageService, appSettings, helperService),
+                CustomerLevel.Agent => new CreateMemberFullModeService(messageService, appSettings, helperService),
                 _ => null
             };
         }
@@ -127,9 +122,9 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         {
             return uplineRoleId switch
             {
-                CustomerLevel.Super => new CreateMasterLiteModeService(messageService, appSettings, scaleoutDBService, helperService),
-                CustomerLevel.Master => new CreateAgentLiteModeService(messageService, appSettings, scaleoutDBService, helperService),
-                CustomerLevel.Agent => new CreateMemberLiteModeService(messageService, appSettings, scaleoutDBService, helperService),
+                CustomerLevel.Super => new CreateMasterLiteModeService(messageService, appSettings, helperService),
+                CustomerLevel.Master => new CreateAgentLiteModeService(messageService, appSettings, helperService),
+                CustomerLevel.Agent => new CreateMemberLiteModeService(messageService, appSettings, helperService),
                 _ => null
             };
         }

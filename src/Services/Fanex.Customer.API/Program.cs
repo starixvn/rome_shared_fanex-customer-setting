@@ -31,7 +31,6 @@ builder.Services.AddSingleton<ICacheRefService, CacheRefService>();
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.AddSingleton<ISiteDBGroupService, SiteDBGroupService>();
 builder.Services.AddSingleton<ISiteDBService, SiteDBService>();
-builder.Services.AddSingleton<IScaleoutDBService, ScaleoutDBService>();
 builder.Services.AddSingleton<IBalanceService, BalanceService>();
 builder.Services.AddSingleton<IMessageService, MessageService>();
 builder.Services.AddSingleton<ISettingProfileService, SettingProfileService>();

@@ -5,7 +5,6 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 
@@ -24,9 +23,8 @@ public class CreateAgentLiteModeService : CreateCustomerBaseService, ICreateCust
 
     public CreateAgentLiteModeService(IMessageService messageService, 
         AppSettings appSettings, 
-        IScaleoutDBService scaleoutDBService,
         ICustomerSettingHelper helperService)
-        : base( messageService, appSettings, scaleoutDBService, helperService)
+        : base( messageService, appSettings, helperService)
     {
     }
 
@@ -70,7 +68,7 @@ public class CreateAgentLiteModeService : CreateCustomerBaseService, ICreateCust
             { "settingstatus", appSettings.SettingStatus },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(ValidateSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
@@ -82,7 +80,7 @@ public class CreateAgentLiteModeService : CreateCustomerBaseService, ICreateCust
         var parameters = new Hashtable
         {
             { "username", request.Settings.GeneralInfo.UserName },
-            { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Context.Site) },
+            { "sitedbgroupid", request.Context.CustDBGroupID },
             { "site", request.Settings.GeneralInfo.Site },
             { "roleid", CustomerLevel.Agent },
             { "uplineid", request.Settings.GeneralInfo.UplineCustId },
@@ -123,7 +121,7 @@ public class CreateAgentLiteModeService : CreateCustomerBaseService, ICreateCust
             { "settingstatus", appSettings.SettingStatus },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CreateNewSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);

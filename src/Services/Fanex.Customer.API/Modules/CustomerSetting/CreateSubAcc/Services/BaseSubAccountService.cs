@@ -1,12 +1,10 @@
 using System.Collections;
 using Fanex.Data;
 using Fanex.Data.Repository;
-using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CreateSubAcc.Requests;
 using Fanex.Customer.API.Shared.Utils;
-using Fanex.Customer.API.Modules.EditCustomer.EndPoints;
 
 namespace Fanex.Customer.API.Modules.CreateSubAcc.Services;
 public class BaseSubAccountService
@@ -14,13 +12,12 @@ public class BaseSubAccountService
     private const string RegisterSPName = "Age_CustSubIns_Register";
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
-    public BaseSubAccountService(IMessageService messageService, IScaleoutDBService scaleoutDBService, IDynamicRepository dynamicRepository)
+    public BaseSubAccountService(IMessageService messageService, IDynamicRepository dynamicRepository)
     {
-        this.scaleoutDBService = scaleoutDBService;
         this.messageService = messageService;
         this.dynamicRepository = dynamicRepository;
     }
-    protected readonly IScaleoutDBService scaleoutDBService;
+
     protected readonly IMessageService messageService;
     protected readonly IDynamicRepository dynamicRepository;
 
@@ -28,7 +25,6 @@ public class BaseSubAccountService
 
     public virtual async Task<CustomerSettingResult> Create(BaseSubAccountRequest request)
     {
-        Console.WriteLine("processing...");
         var result = await Register(request);
         if (!result.IsSuccessful)
         {
@@ -51,7 +47,7 @@ public class BaseSubAccountService
         {
             { "username", request.UserName },
             { "nickname", request.NickName },
-            { "sitedbgroupid", await scaleoutDBService.GetCustDBGroupIdBySite(request.Site) },
+            { "sitedbgroupid", request.CustDBGroupID },
             { "language", LanguageUtils.ToLanguageKey(request.Language) },
             { "custid", request.CustId },
         };

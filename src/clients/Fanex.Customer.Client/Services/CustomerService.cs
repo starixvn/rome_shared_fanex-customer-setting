@@ -126,6 +126,7 @@ namespace Fanex.Customer.Client.Services
                     systemId = configuration.SystemId,
                     language = param.Language,
                     mode = param.Mode,
+                    custDBGroupId = param.CustDBGroupID,
                     site = param.Site,
                     siteLabel = param.SiteLabel,
                     uiBehavior = !string.IsNullOrWhiteSpace(param.UiBehavior) ? JsonNode.Parse(param.UiBehavior) : null
@@ -149,6 +150,7 @@ namespace Fanex.Customer.Client.Services
                     roleId = param.RoleId,
                     uplineRoleId = param.UplineRoleId,
                     ip = param.Ip,
+                    custDBGroupId = param.CustDBGroupID,
                     site = param.Site,
                     siteLabel = param.SiteLabel,
                     systemId = configuration.SystemId,
@@ -173,6 +175,7 @@ namespace Fanex.Customer.Client.Services
                     roleId = param.RoleId,
                     uplineRoleId = param.UplineRoleId,
                     ip = param.Ip,
+                    custDBGroupId = param.CustDBGroupID,
                     site = param.Site,
                     siteLabel = param.SiteLabel,
                     systemId = configuration.SystemId,

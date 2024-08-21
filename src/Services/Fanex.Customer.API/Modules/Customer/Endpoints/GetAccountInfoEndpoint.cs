@@ -1,6 +1,4 @@
-﻿using Fanex.Customer.API.Modules.Customer.Criteria;
-using Fanex.Customer.API.Modules.Customer.Models;
-using Fanex.Data.Repository;
+﻿using Fanex.Customer.API.Modules.Customer.Models;
 using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.Customer.Endpoints;
