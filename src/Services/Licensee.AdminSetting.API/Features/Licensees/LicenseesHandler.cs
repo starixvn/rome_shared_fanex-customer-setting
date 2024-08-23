@@ -13,10 +13,15 @@ public interface ILicenseesHandler
     Task<Result> CreateLicensee(CreateLicenseeRequest request);
 }
 
-public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler, IAccountsHandler accountsHandler)
-        : BaseHandler(repository, siteDBHandler, userLogHandler, accountsHandler), ILicenseesHandler
+public class LicenseesHandler(
+    IConfiguration configuration,
+    IDynamicRepository repository,
+    ISiteDBHandler siteDBHandler,
+    IUserLogHandler userLogHandler,
+    IAccountsHandler accountsHandler,
+    Fanex.Logging.ILogger logger)
+    : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, accountsHandler, logger), ILicenseesHandler
 {
-
     public async Task<Result> CreateLicensee(CreateLicenseeRequest request)
     {
         var siteDBConfig = await siteDBHandler.GetBySiteDBGroupId(request.SiteDBGroupId);
@@ -76,14 +81,23 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
             request.IsChinaView,
             request.SpecialPlatform,
             siteId,
-            request.SiteName);
+            request.SiteName,
+            SettingStatus);
 
         var logParams = await repository.FetchAsync<LogParam>(criteria);
+
+        if (!string.IsNullOrWhiteSpace(criteria.ErrExtraInfo))
+        {
+            await logger.ErrorAsync(criteria.ErrExtraInfo);
+        }
+
         var result = new Result(criteria.ErrCode, criteria.ErrMsg);
 
-        if (result.IsOK && logParams.Any())
+        if (result.IsOK)
         {
-            _ = Task.Run(() => WriteLogs(custDBGroupId, logParams));
+            var writeLogsTask = WriteLogs(custDBGroupId, logParams);
+            var insertLicenseeDataTask = InsertLicenseeData(criteria.SiteName, criteria.ProductList, criteria.LicenseeType);
+            await Task.WhenAll(writeLogsTask, insertLicenseeDataTask);
         }
 
         if (!string.IsNullOrWhiteSpace(criteria.InsBalExceptCustList))
@@ -98,8 +112,23 @@ public class LicenseesHandler(IDynamicRepository repository, ISiteDBHandler site
 
         if (!string.IsNullOrWhiteSpace(criteria.AgentList) && criteria.AgentList.Split(',').Length > 0)
         {
+            _ = Task.Run(() => CreateDummyMembers(criteria.IP, criteria.AgentList.Split(',').Select(x => Convert.ToInt32(x)).ToArray()));
         }
 
-        return (result, criteria.FailedCurrencies.Split(',').ToList());
+        return (result, criteria.FailedCurrencies?.Split(',').ToList() ?? []);
+    }
+
+    private async Task<Result> InsertLicenseeData(string siteName, string productList, string licenseeType)
+    {
+        var command = new InsertLicenseeDataCommand(siteName, productList, licenseeType);
+        await repository.ExecuteAsync(command);
+        var result = new Result(command.ErrCode, command.ErrMsg);
+
+        if (result.IsOK)
+        {
+            return await InsertCompanyWinLimit(command.LicenseeId);
+        }
+
+        return result;
     }
 }

@@ -13,6 +13,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         byte mode,
         int siteDBGroupId) : NonQueryCommand
     {
+        [SpParam(SqlParamName = "Usernames_Register")]
         public string RegisterUsernames { get; } = registerUsernames;
 
         public string SiteName { get; } = siteName;
@@ -39,6 +40,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         public string Customers { get; set; }
 
         public string FailedCurrencies { get; set; }
+
+        public string ErrExtraInfo { get; set; }
 
         public override string GetSettingKey() => "API_SiteBuilder_Customers_Register";
 

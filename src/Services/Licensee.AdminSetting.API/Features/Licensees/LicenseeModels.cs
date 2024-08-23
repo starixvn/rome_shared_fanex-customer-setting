@@ -4,9 +4,9 @@ using Licensee.AdminSetting.API.Features.Shared;
 namespace Licensee.AdminSetting.API.Features.Licensees;
 
 public record BetSetting(
-    int ProductId,
-    int SportType,
-    int BetType,
+    int ProductID,
+    int Sporttype,
+    int Bettype,
     int Currency,
     decimal MinBet,
     decimal MaxBet,
@@ -14,15 +14,15 @@ public record BetSetting(
     decimal MPB,
     decimal MPPM);
 
-public record PositionTaking(int ProductId, decimal PT);
+public record PositionTaking(int ProductID, decimal PT);
 
 public record StakeLevel(
     int Currency,
-    int GameTypeId,
+    int GameTypeID,
     decimal MinStake,
     decimal MaxStake);
 
-public record Commission(int ProductId, decimal Comm);
+public record Commission(int ProductID, decimal Comm);
 
 public record CreateCurrencyRequest(
     [Required] BetSetting[] ProductBetSetting,

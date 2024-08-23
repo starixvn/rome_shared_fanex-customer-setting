@@ -2,32 +2,39 @@ using System.Text.Json;
 using Fanex.Data.Repository;
 using Licensee.AdminSetting.API.Features.Accounts;
 using Licensee.AdminSetting.API.Features.Licensees.Criteria;
+using Licensee.AdminSetting.API.Features.Shared;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;
 using Licensee.AdminSetting.API.Features.UserLog;
 
 namespace Licensee.AdminSetting.API.Features.Licensees
 {
     public abstract class BaseHandler(
+        IConfiguration configuration,
         IDynamicRepository repository,
         ISiteDBHandler siteDBHandler,
         IUserLogHandler userLogHandler,
-        IAccountsHandler accountsHandler)
+        IAccountsHandler accountsHandler,
+        Fanex.Logging.ILogger logger)
     {
+        protected readonly IConfiguration configuration = configuration;
         protected readonly IDynamicRepository repository = repository;
         protected readonly ISiteDBHandler siteDBHandler = siteDBHandler;
         protected readonly IUserLogHandler userLogHandler = userLogHandler;
         protected readonly IAccountsHandler accountsHandler = accountsHandler;
+        protected readonly Fanex.Logging.ILogger logger = logger;
+
+        protected byte SettingStatus = configuration.GetValue<byte>("SettingStatus", 0);
 
         protected async Task<ValidateCreateLicenseeResult> ValidateRequest(string siteName, CreateCurrencyRequest request, int custDBGroupId)
         {
-            var command = new CreateLicenseeValidateCommand(
+            var command = new SiteBuilderValidateCommand(
                 custDBGroupId,
                 JsonSerializer.Serialize(request.ProductBetSetting),
                 JsonSerializer.Serialize(request.ProductPT),
-                JsonSerializer.Serialize(request.ProductStakeLevel),
-                JsonSerializer.Serialize(request.ProductComm),
                 siteName,
-                CreateMode.NewLicensee);
+                CreateMode.NewLicensee,
+                SettingStatus,
+                request.IsCreateSub);
 
             await repository.ExecuteAsync(command);
 
@@ -56,7 +63,12 @@ namespace Licensee.AdminSetting.API.Features.Licensees
 
             await repository.ExecuteAsync(command);
 
-            return (new RegisterCustomersResult(command.ErrCode, command.ErrMsg, command.SiteId, command.Customers), command.FailedCurrencies?.Split(',')?.ToList());
+            if (!string.IsNullOrWhiteSpace(command.ErrExtraInfo))
+            {
+                await logger.ErrorAsync(command.ErrExtraInfo);
+            }
+
+            return (new RegisterCustomersResult(command.ErrCode, command.ErrMsg, command.SiteId, command.Customers), command.FailedCurrencies?.Split(',')?.ToList() ?? []);
         }
 
         protected Task WriteLogs(int custDBGroupId, IEnumerable<LogParam> logParams)
@@ -74,7 +86,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         protected Task<int> RollbackMultiple(string custIds)
             => repository.ExecuteAsync(new RollbackCreateLicenseeCommand(custIds));
 
-        protected Task CreateDummyMembers(SiteDBConfig siteDBConfig, string site, int creator, string ip, int[] agentIds)
+        protected Task CreateDummyMembers(string ip, int[] agentIds)
         {
             ParallelOptions parallelOptions = new()
             {
@@ -84,7 +96,14 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             return Parallel.ForEachAsync(
                 agentIds,
                 parallelOptions,
-                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(siteDBConfig, site, agentId, creator, ip)));
+                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(agentId, new CreateDummyMemberRequest(10278938, ip))));
+        }
+
+        protected async Task<Result> InsertCompanyWinLimit(int licenseeId)
+        {
+            var command = new InsertCompanyWinLimitCommand(licenseeId);
+            await repository.ExecuteAsync(command);
+            return new Result(command.ErrCode, command.ErrMsg);
         }
     }
 }

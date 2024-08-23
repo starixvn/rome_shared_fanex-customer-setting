@@ -1,5 +1,3 @@
-using Licensee.AdminSetting.API.Features.Shared.SiteDB;
-
 namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 {
     public class CreateLicenseeCriteria(
@@ -16,7 +14,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         bool isChinaView,
         byte specialPlatform,
         int siteId,
-        string siteName)
+        string siteName,
+        byte settingStatus)
         : SiteBuilderBaseCriteria(
             custDBGroupId,
             customers,
@@ -29,7 +28,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
             isCreateSub,
             licenseeType,
             siteId,
-            siteName)
+            siteName,
+            settingStatus)
     {
         public bool IsChinaView { get; } = isChinaView;
 

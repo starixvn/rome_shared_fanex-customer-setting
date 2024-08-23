@@ -13,8 +13,14 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         Task<Result> CreateCurrency(string site, CreateCurrencyRequest request);
     }
 
-    public class CurrencyHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, IUserLogHandler userLogHandler, IAccountsHandler accountsHandler)
-        : BaseHandler(repository, siteDBHandler, userLogHandler, accountsHandler), ICurrencyHandler
+    public class CurrencyHandler(
+        IConfiguration configuration,
+        IDynamicRepository repository,
+        ISiteDBHandler siteDBHandler,
+        IUserLogHandler userLogHandler,
+        IAccountsHandler accountsHandler,
+        Fanex.Logging.ILogger logger)
+        : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, accountsHandler, logger), ICurrencyHandler
     {
         public async Task<Result> CreateCurrency(string siteName, CreateCurrencyRequest request)
         {
@@ -66,14 +72,17 @@ namespace Licensee.AdminSetting.API.Features.Licensees
                 request.IsCreateSub,
                 request.LicenseeType,
                 siteId,
-                siteName);
+                siteName,
+                SettingStatus);
 
             var logParams = await repository.FetchAsync<LogParam>(criteria);
             var result = new Result(criteria.ErrCode, criteria.ErrMsg);
 
             if (result.IsOK && logParams.Any())
             {
-                _ = Task.Run(() => WriteLogs(siteDBConfig.CustDBGroupId, logParams));
+                await Task.WhenAll(
+                    WriteLogs(siteDBConfig.CustDBGroupId, logParams),
+                    InsertCurrencyData(siteName, criteria.CurrencyList, criteria.PT_Sportsbook, request.IP));
             }
 
             if (!string.IsNullOrWhiteSpace(criteria.InsBalExceptCustList))
@@ -81,12 +90,10 @@ namespace Licensee.AdminSetting.API.Features.Licensees
                 _ = Task.Run(() => InsertBalanceException(criteria.InsBalExceptCustList, siteDBConfig.SiteDBGroupId));
             }
 
-            _ = Task.Run(() => InsertCurrencyData(siteName, criteria.CurrencyList, criteria.PT_Sportsbook, request.IP));
-
-            // if (!string.IsNullOrWhiteSpace(criteria.AgentList) && criteria.AgentList.Split(',').Length > 0)
-            // {
-            //     await CreateDummyMembers(siteDBConfig)
-            // }
+            if (!string.IsNullOrWhiteSpace(criteria.AgentList) && criteria.AgentList.Split(',').Length > 0)
+            {
+                _ = Task.Run(() => CreateDummyMembers(criteria.IP, criteria.AgentList.Split(',').Select(x => Convert.ToInt32(x)).ToArray()));
+            }
 
             if (!string.IsNullOrWhiteSpace(criteria.ListSuperRollBack))
             {
@@ -101,15 +108,13 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             var insertCurrencyCommand = new InsertCurrencyCommand(siteName, currencyList, PT_Sportsbook, ip);
             await repository.ExecuteAsync(insertCurrencyCommand);
 
-            if (insertCurrencyCommand.ErrCode != 0)
+            var result = new Result(insertCurrencyCommand.ErrCode, insertCurrencyCommand.ErrMsg);
+            if (result.IsOK)
             {
-                return new Result(insertCurrencyCommand.ErrCode, insertCurrencyCommand.ErrMsg);
+                return await InsertCompanyWinLimit(insertCurrencyCommand.LicenseeId);
             }
 
-            var insertCompanyWinLimitCommand = new InsertCompanyWinLimitCommand(insertCurrencyCommand.LicenseeId);
-            await repository.ExecuteAsync(insertCompanyWinLimitCommand);
-
-            return new Result(insertCompanyWinLimitCommand.ErrCode, insertCompanyWinLimitCommand.ErrMsg);
+            return result;
         }
     }
 }

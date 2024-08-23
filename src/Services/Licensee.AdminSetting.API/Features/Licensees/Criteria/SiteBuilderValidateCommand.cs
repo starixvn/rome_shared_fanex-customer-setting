@@ -4,14 +4,14 @@ using Licensee.AdminSetting.API.Features.Shared.SiteDB;
 
 namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 {
-    public class CreateLicenseeValidateCommand(
+    public class SiteBuilderValidateCommand(
         int custDBGroupId,
         string productBetSetting,
         string productPT,
-        string productStakeLevel,
-        string productComm,
         string siteName,
-        byte mode) : NonQueryCommand
+        byte mode,
+        byte settingStatus,
+        bool isCreateSub) : NonQueryCommand
     {
         [SpParam(Ignored = true)]
         public int CustDBGroupId { get; } = custDBGroupId;
@@ -20,13 +20,13 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public string ProductPT { get; } = productPT;
 
-        public string ProductStakeLevel { get; } = productStakeLevel;
-
-        public string ProductComm { get; } = productComm;
-
         public string SiteName { get; } = siteName;
 
         public byte Mode { get; } = mode;
+
+        public byte SettingStatus { get; } = settingStatus;
+
+        public bool IsCreateSub { get; } = isCreateSub;
 
         public int ErrCode { get; set; }
 
@@ -39,7 +39,6 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public override bool IsValid()
             => !string.IsNullOrWhiteSpace(ProductPT)
-            && !string.IsNullOrWhiteSpace(ProductStakeLevel)
             && !string.IsNullOrWhiteSpace(ProductBetSetting)
             && !string.IsNullOrWhiteSpace(SiteName);
     }

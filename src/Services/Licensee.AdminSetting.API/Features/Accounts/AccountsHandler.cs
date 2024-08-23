@@ -8,13 +8,13 @@ namespace Licensee.AdminSetting.API.Features.Accounts
     public interface IAccountsHandler
     {
         Task<Result> CreateDummyMember(int agentId, CreateDummyMemberRequest request);
-        Task<Result> CreateDummyMember(SiteDBConfig siteDBConfig, string site, int agentId, int creator, string ip);
     }
 
-    public class AccountsHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler) : IAccountsHandler
+    public class AccountsHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, Fanex.Logging.ILogger logger) : IAccountsHandler
     {
         private readonly IDynamicRepository repository = repository;
         private readonly ISiteDBHandler siteDBHandler = siteDBHandler;
+        private readonly Fanex.Logging.ILogger logger = logger;
 
         public async Task<Result> CreateDummyMember(int agentId, CreateDummyMemberRequest request)
         {
@@ -38,15 +38,15 @@ namespace Licensee.AdminSetting.API.Features.Accounts
             return new Result(command.ErrCode, command.ErrMsg);
         }
 
-        public async Task<Result> CreateDummyMember(SiteDBConfig siteDBConfig, string site, int agentId, int creator, string ip)
+        private async Task<Result> CreateDummyMember(SiteDBConfig siteDBConfig, string site, int agentId, int creator, string ip)
         {
-            var generateResult = await GenerateDummyMember(siteDBConfig.SiteDBGroupId, site, agentId);
+            var generateResult = await GenerateDummyMember(siteDBConfig.CustDBGroupId, site, agentId);
             if (generateResult.IsNotOK)
             {
                 return generateResult;
             }
 
-            return await CreateMember(siteDBConfig.CustDBGroupId, generateResult.CustId, generateResult.Username, agentId, creator, ip);
+            return await CreateMember(siteDBConfig, generateResult.CustId, generateResult.Username, agentId, creator, ip);
         }
 
         private async Task<RegisterDummyMemberResult> GenerateDummyMember(int siteDBGroupId, string site, int agentId)
@@ -56,16 +56,21 @@ namespace Licensee.AdminSetting.API.Features.Accounts
             return new RegisterDummyMemberResult(command.ErrCode, command.ErrMsg, command.CustId, command.Username);
         }
 
-        private async Task<Result> CreateMember(int custDBGroupId, int custId, string username, int agentId, int creator, string ip)
+        private async Task<Result> CreateMember(SiteDBConfig siteDBConfig, int custId, string username, int agentId, int creator, string ip)
         {
-            var command = new CreateDummyMemberCriteria(custDBGroupId, custId, username, creator, agentId, ip);
+            var command = new CreateDummyMemberCommand(siteDBConfig.CustDBGroupId, custId, username, creator, agentId, ip);
             await repository.ExecuteAsync(command);
+
+            if (!string.IsNullOrWhiteSpace(command.ErrExtraInfo))
+            {
+                await logger.ErrorAsync(command.ErrExtraInfo);
+            }
 
             var result = new Result(command.ErrCode, command.ErrMsg);
 
             if (result.IsOK)
             {
-                await InsertBalanceException(custId, username);
+                await InsertBalanceException(siteDBConfig.SiteDBGroupId, custId, username);
             }
             else
             {
@@ -75,12 +80,10 @@ namespace Licensee.AdminSetting.API.Features.Accounts
             return result;
         }
 
-        private Task<int> InsertBalanceException(int custId, string username)
-            => repository.ExecuteAsync(new InsertBalanceExceptionCommand(custId, username));
+        private Task<int> InsertBalanceException(int siteDBGroupId, int custId, string username)
+            => repository.ExecuteAsync(new InsertBalanceExceptionCommand(siteDBGroupId, custId, username));
 
         private Task<int> Rollback(int custId)
             => repository.ExecuteAsync(new RollbackCommand(custId));
-
-
     }
 }

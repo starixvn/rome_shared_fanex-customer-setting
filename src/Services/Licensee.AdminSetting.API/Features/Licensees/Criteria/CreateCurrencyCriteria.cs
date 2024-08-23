@@ -12,7 +12,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         bool isCreateSub,
         string licenseeType,
         int siteId,
-        string siteName)
+        string siteName,
+        byte settingStatus)
         : SiteBuilderBaseCriteria(
             custDBGroupId,
             customers,
@@ -25,7 +26,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
             isCreateSub,
             licenseeType,
             siteId,
-            siteName)
+            siteName,
+            settingStatus)
     {
         public string CurrencyList { get; set; }
 

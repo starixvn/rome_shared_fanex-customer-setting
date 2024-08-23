@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Functions>
     <Function Name="Site DB">
-        <Setting Key="API_SiteBuilder_GetCustomerSiteDB" SpName="API_SiteBuilder_GetCustomerSiteDB" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
-        <Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
-        <Setting Key="Acc_Dep_ServerDBConfigSelByCust" SpName="Acc_Dep_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
-        <Setting Key="API_Dep_GetSiteID_LicVendorProfile" SpName="API_Dep_GetSiteID_LicVendorProfile" DbName="DBGLOB.SiteConfig.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_GetCustomerSiteDB" SpName="API_SiteBuilder_GetCustomerSiteDB" DbName="DBGLOB.GlobCustDB.asv_cust"/>
+        <Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.asv_cust"/>
+        <Setting Key="Acc_Dep_ServerDBConfigSelByCust" SpName="Acc_Dep_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.asv_cust"/>
+        <Setting Key="API_Dep_GetSiteID_LicVendorProfile" SpName="API_Dep_GetSiteID_LicVendorProfile_UAT2" DbName="DBGLOB.SiteConfig.asv_cust"/>
     </Function>
 
     <Function Name="Create New Licensee">
-        <Setting Key="API_SiteBuilder_Validate" SpName="API_SiteBuilder_Validate" DbName="DBCust.CustDB.wsv_nap"/>
-        <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
-        <Setting Key="API_SiteBuilder_Licensee_Insert" SpName="API_SiteBuilder_Licensee_Insert" DbName="DBCust.CustDB.wsv_nap"/>
-        <Setting Key="NAP_BetRestriction_SiteIns" SpName="NAP_BetRestriction_SiteIns" DbName="DBCust.CustDB.wsv_nap"/>
-        <Setting Key="Acc_CustomerIns_Rollback_Multiple" SpName="Acc_CustomerIns_Rollback_Multiple" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
-        <Setting Key="API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBTXN.bodb02.wsv_alp"/>
-        <Setting Key="SiteBD1_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB01.bodb02.wsv_alp"/>
-        <Setting Key="SiteBD3_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB03.bodb02.wsv_alp"/>
-
-        <Setting Key="API_SiteBuilder_LicenseeDB_CurrencyIns" SpName="API_SiteBuilder_LicenseeDB_CurrencyIns" DbName="DBCust.bodb_Licensee.wsv_nap"/>
-        <Setting Key="Dot_Dep_CWL_InsertSetting" SpName="Dot_Dep_CWL_InsertSetting" DbName="DBCust.CustDB.wsv_nap"/>
+        <Setting Key="API_SiteBuilder_Validate" SpName="API_SiteBuilder_Validate_UAT2" DbName="DBCust.CustDB.asv_cust"/>
+        <Setting Key="API_SiteBuilder_Customers_Register" SpName="API_SiteBuilder_Customers_Register_UAT2" DbName="DBGLOB.GlobCustDB.asv_cust"/>
+        <Setting Key="API_SiteBuilder_Licensee_Insert" SpName="API_SiteBuilder_Licensee_Insert_UAT2" DbName="DBCust.CustDB.asv_cust"/>
+        <Setting Key="NAP_BetRestriction_SiteIns" SpName="NAP_BetRestriction_SiteIns_UAT2" DbName="DBCust.CustDB.asv_cust"/>
+        <Setting Key="Acc_CustomerIns_Rollback_Multiple" SpName="Acc_CustomerIns_Rollback_Multiple_UAT2" DbName="DBGLOB.GlobCustDB.asv_cust"/>
+        <Setting Key="API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception_UAT2" DbName="DBTXN.bodb02.asv_cust"/>
+        <Setting Key="SiteDB1_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception_UAT2" DbName="SiteDB01.bodb02.asv_cust"/>
+        <Setting Key="SiteDB3_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception_UAT2" DbName="SiteDB03.bodb02.asv_cust"/>
+        <Setting Key="API_SiteBuilder_LicenseeDB_Ins" SpName="API_SiteBuilder_LicenseeDB_Ins_UAT2" DbName="DBCust.bodb_Licensee.asv_cust"/>
+        <Setting Key="API_SiteBuilder_LicenseeDB_CurrencyIns" SpName="API_SiteBuilder_LicenseeDB_CurrencyIns_UAT2" DbName="DBCust.bodb_Licensee.asv_cust"/>
+        <Setting Key="Dot_Dep_CWL_InsertSetting" SpName="Dot_Dep_CWL_InsertSetting_UAT2" DbName="DBCust.CustDB.asv_cust"/>
     </Function>
 
     <Function Name="Create Dummy Member">
-        <Setting Key="API_Dep_CustomerCheckOddsAdj" SpName="API_Dep_CustomerCheckOddsAdj" DbName="DBPRO.bodb02.wsv_nap"/>
-        <Setting Key="API_InsOddsAdj_Register" SpName="API_InsOddsAdj_Register" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
-        <Setting Key="Acc_Dep_CustomerInsMember_Ag" SpName="Acc_Dep_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap"/>
-        <Setting Key="Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins " DbName="DBTXN.bodb02.wsv_alp"/>
-        <Setting Key="SiteBD1_Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins " DbName="SiteDB01.bodb02.wsv_alp"/>
-        <Setting Key="SiteBD3_Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins " DbName="SiteDB03.bodb02.wsv_alp"/>
-        <Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
+        <Setting Key="API_Dep_CustomerCheckOddsAdj" SpName="API_Dep_CustomerCheckOddsAdj_UAT2" DbName="DBPRO.bodb02.asv_cust"/>
+        <Setting Key="API_InsOddsAdj_Register" SpName="API_InsOddsAdj_Register_UAT2" DbName="DBGLOB.GlobCustDB.asv_cust"/>
+        <Setting Key="Acc_Dep_CustomerInsMember_Ag" SpName="Acc_Dep_CustomerInsMember_Ag_UAT2" DbName="DBCust.CustDB.asv_cust"/>
+        <Setting Key="Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins_UAT2" DbName="DBTXN.bodb02.asv_cust"/>
+        <Setting Key="SiteBD1_Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins_UAT2" DbName="SiteDB01.bodb02.asv_cust"/>
+        <Setting Key="SiteBD3_Task_Cust_CheckBalance_Exception_Ins " SpName="Task_Cust_CheckBalance_Exception_Ins_UAT2" DbName="SiteDB03.bodb02.asv_cust"/>
+        <Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback_UAT2" DbName="DBGLOB.GlobCustDB.asv_cust"/>
     </Function>
 
     <Function Name="User Log">
-        <Setting Key="Main_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_alp"/>
-        <Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBGLOB.GlobCustDB.wsv_nap"/>
+        <Setting Key="Main_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP_UAT2" DbName="DBLOG.bodb_CustomerLog.asv_cust"/>
+        <Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP_UAT2" DbName="DBGLOB.GlobCustDB.asv_cust"/>
     </Function>
 </Functions>

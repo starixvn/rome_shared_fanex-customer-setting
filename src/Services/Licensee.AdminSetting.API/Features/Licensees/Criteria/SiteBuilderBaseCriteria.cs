@@ -16,7 +16,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         bool isCreateSub,
         string licenseeType,
         int siteId,
-        string siteName) : CriteriaBase
+        string siteName,
+        byte settingStatus) : CriteriaBase
     {
         [SpParam(Ignored = true)]
         public int CustDBGroupId { get; } = custDBGroupId;
@@ -44,9 +45,13 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
 
         public string SiteName { get; } = siteName;
 
+        public byte SettingStatus { get; } = settingStatus;
+
         public int ErrCode { get; set; }
 
         public string ErrMsg { get; set; }
+
+        public string ErrExtraInfo { get; set; }
 
         public string AgentList { get; set; }
 
