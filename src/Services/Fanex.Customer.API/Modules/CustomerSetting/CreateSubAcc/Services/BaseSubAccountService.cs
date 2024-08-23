@@ -55,9 +55,8 @@ public class BaseSubAccountService
         using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
-        var message = messageService.TranslateMessage(Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]), request.Language);
-
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["subaccid"]), Convert.ToInt32(outputParams["errcode"]), message.MainMessage, message.SubMessages);
+        
+        return new CreateCustomerResult(Convert.ToInt32(outputParams["subaccid"]), Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
     }
 
     protected virtual Task<CreateCustomerResult> DoProcessing(BaseSubAccountRequest request, int subAccId) => throw new NotImplementedException();
