@@ -64,7 +64,7 @@ public class CopySuperService : CopyCustomerBaseService
             { "language", request.LanguageKey },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CheckPermissionSPName, request.CustDBGroupID));
+        using IObjectDb db = ObjectDbFactory.CreateInstance(CheckPermissionSPName);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);

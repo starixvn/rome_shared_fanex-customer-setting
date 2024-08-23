@@ -224,9 +224,9 @@
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateUpd" SpName="Acc_LiteMode_CustSetting_CustPTTemplateUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_AgentCommSBSel" SpName="Acc_LiteMode_CustSetting_AgentCommSBSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB1.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB2.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB3.wsv_alp" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust1.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust2.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust3.CustDB.wsv_alp" Plain="0" />
 
     <Setting Key="Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite1_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
