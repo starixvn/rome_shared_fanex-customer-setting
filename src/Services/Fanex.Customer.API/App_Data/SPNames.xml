@@ -34,19 +34,19 @@
   <Function Name="Sub Account">
     <Setting Key="Age_CustSubIns_Register" SpName="Age_CustSubIns_Register" DbName="DBCust.DBGLOB.wsv_alp" />
     <Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite1_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite2_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite3_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST.CustDB.wsv_alp" />
+    <Setting Key="DBSite1_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST1.CustDB.wsv_alp" />
+    <Setting Key="DBSite2_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST2.CustDB.wsv_alp" />
+    <Setting Key="DBSite3_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST3.CustDB.wsv_alp" />
 
     <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite1_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite2_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite3_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST.CustDB.wsv_alp" />
+    <Setting Key="DBSite1_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST1.CustDB.wsv_alp" />
+    <Setting Key="DBSite2_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST2.CustDB.wsv_alp" />
+    <Setting Key="DBSite3_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST3.CustDB.wsv_alp" />
     
     <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="DBSite1_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST1.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="DBSite2_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST2.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="DBSite3_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST3.CustDB.wsv_alp" Plain="0" />
   </Function>
   <Function Name="CustomerInfo">
     <Setting Key="Acc_CustSetting_CustomerInfoSBSelect" SpName="Acc_CustSetting_CustomerInfoSBSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0">
@@ -73,37 +73,37 @@
       <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
     </Setting>
     <Setting Key="Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_UpdCSStatus_Cust" SpName="Acc_UpdCSStatus_Cust" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_MaxMemberLimitBySuperCheck" SpName="Age_MaxMemberLimitBySuperCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_CustomerCheckReachDownline" SpName="Age_CustomerCheckReachDownline" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
@@ -188,34 +188,34 @@
       <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
     </Setting>
     <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
     
     <Setting Key="Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
     <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
     <Setting Key="Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
     <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
     <Setting Key="Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
     <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
@@ -224,34 +224,34 @@
     <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateUpd" SpName="Acc_LiteMode_CustSetting_CustPTTemplateUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_LiteMode_CustSetting_AgentCommSBSel" SpName="Acc_LiteMode_CustSetting_AgentCommSBSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB1.wsv_alp" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB2.wsv_alp" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB3.wsv_alp" Plain="0" />
 
     <Setting Key="Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
-    <Setting Key="Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
-    <Setting Key="Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
     
-    <Setting Key="Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
-    <Setting Key="Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite1_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite2_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+    <Setting Key="DBSite3_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
     <Setting Key="Acc_SuperPrefixByGroupSel" SpName="Acc_SuperPrefixByGroupSel" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" />
