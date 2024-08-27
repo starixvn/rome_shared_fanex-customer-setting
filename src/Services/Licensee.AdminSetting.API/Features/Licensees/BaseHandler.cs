@@ -13,26 +13,24 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         IDynamicRepository repository,
         ISiteDBHandler siteDBHandler,
         IUserLogHandler userLogHandler,
-        IAccountsHandler accountsHandler,
         Fanex.Logging.ILogger logger)
     {
         protected readonly IConfiguration configuration = configuration;
         protected readonly IDynamicRepository repository = repository;
         protected readonly ISiteDBHandler siteDBHandler = siteDBHandler;
         protected readonly IUserLogHandler userLogHandler = userLogHandler;
-        protected readonly IAccountsHandler accountsHandler = accountsHandler;
         protected readonly Fanex.Logging.ILogger logger = logger;
 
         protected byte SettingStatus = configuration.GetValue<byte>("SettingStatus", 0);
 
-        protected async Task<ValidateCreateLicenseeResult> ValidateRequest(string siteName, CreateCurrencyRequest request, int custDBGroupId)
+        protected async Task<ValidateCreateLicenseeResult> ValidateRequest(string siteName, byte mode, CreateCurrencyRequest request, int custDBGroupId)
         {
             var command = new SiteBuilderValidateCommand(
                 custDBGroupId,
                 JsonSerializer.Serialize(request.ProductBetSetting),
                 JsonSerializer.Serialize(request.ProductPT),
                 siteName,
-                CreateMode.NewLicensee,
+                mode,
                 SettingStatus,
                 request.IsCreateSub);
 
@@ -85,19 +83,6 @@ namespace Licensee.AdminSetting.API.Features.Licensees
 
         protected Task<int> RollbackMultiple(string custIds)
             => repository.ExecuteAsync(new RollbackCreateLicenseeCommand(custIds));
-
-        protected Task CreateDummyMembers(string ip, int[] agentIds)
-        {
-            ParallelOptions parallelOptions = new()
-            {
-                MaxDegreeOfParallelism = 3
-            };
-
-            return Parallel.ForEachAsync(
-                agentIds,
-                parallelOptions,
-                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(agentId, new CreateDummyMemberRequest(10278938, ip))));
-        }
 
         protected async Task<Result> InsertCompanyWinLimit(int licenseeId)
         {

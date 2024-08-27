@@ -17,7 +17,7 @@
             "SwaggerKey": "Deposit"
         },
         {
-            "DownstreamPathTemplate": "/main/licensees/{everything}",
+            "DownstreamPathTemplate": "/main/api/licensees/{everything}",
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -26,6 +26,22 @@
                 }
             ],
             "UpstreamPathTemplate": "/api/licensees/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ],
+            "SwaggerKey": "AdminSetting"
+        },
+        {
+            "DownstreamPathTemplate": "/main/api/accounts/{everything}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "las.nexdev.net",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/api/accounts/{everything}",
             "UpstreamHttpMethod": [
                 "POST",
                 "PUT"

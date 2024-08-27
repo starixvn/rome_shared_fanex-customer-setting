@@ -8,7 +8,7 @@ namespace Licensee.AdminSetting.API.Features.Accounts.Criteria
 
         public override string GetSettingKey() => "API_Dep_CustomerCheckOddsAdj";
 
-        public override bool IsValid() => !string.IsNullOrWhiteSpace(SiteId);
+        public override bool IsValid() => true;
 
         public int ErrCode { get; set; }
 

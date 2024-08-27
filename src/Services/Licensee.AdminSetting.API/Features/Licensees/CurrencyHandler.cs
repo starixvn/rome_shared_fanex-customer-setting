@@ -20,12 +20,14 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         IUserLogHandler userLogHandler,
         IAccountsHandler accountsHandler,
         Fanex.Logging.ILogger logger)
-        : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, accountsHandler, logger), ICurrencyHandler
+        : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, logger), ICurrencyHandler
     {
+
+        private readonly IAccountsHandler accountsHandler = accountsHandler;
         public async Task<Result> CreateCurrency(string siteName, CreateCurrencyRequest request)
         {
             var siteDBConfig = await siteDBHandler.GetBySite(siteName);
-            var validationResult = await ValidateRequest(siteName, request, siteDBConfig.CustDBGroupId);
+            var validationResult = await ValidateRequest(siteName, CreateMode.NewCurrency, request, siteDBConfig.CustDBGroupId);
             if (validationResult.IsNotOK)
             {
                 return validationResult;
@@ -100,7 +102,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
                 await RollbackMultiple(criteria.ListSuperRollBack);
             }
 
-            return (result, criteria.FailedCurrencies.Split(',').ToList());
+            return (result, criteria.FailedCurrencies?.Split(',').ToList() ?? []);
         }
 
         private async Task<Result> InsertCurrencyData(string siteName, string currencyList, decimal PT_Sportsbook, string ip)
@@ -115,6 +117,19 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             }
 
             return result;
+        }
+
+        protected Task CreateDummyMembers(string ip, int[] agentIds)
+        {
+            ParallelOptions parallelOptions = new()
+            {
+                MaxDegreeOfParallelism = 3
+            };
+
+            return Parallel.ForEachAsync(
+                agentIds,
+                parallelOptions,
+                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(agentId, new CreateDummyMemberRequest(10278938, ip))));
         }
     }
 }

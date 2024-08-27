@@ -18,14 +18,15 @@ public class LicenseesHandler(
     IDynamicRepository repository,
     ISiteDBHandler siteDBHandler,
     IUserLogHandler userLogHandler,
-    IAccountsHandler accountsHandler,
     Fanex.Logging.ILogger logger)
-    : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, accountsHandler, logger), ILicenseesHandler
+    : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, logger), ILicenseesHandler
 {
+
+
     public async Task<Result> CreateLicensee(CreateLicenseeRequest request)
     {
         var siteDBConfig = await siteDBHandler.GetBySiteDBGroupId(request.SiteDBGroupId);
-        var validationResult = await ValidateRequest(request.SiteName, request, siteDBConfig.CustDBGroupId);
+        var validationResult = await ValidateRequest(request.SiteName, CreateMode.NewLicensee, request, siteDBConfig.CustDBGroupId);
 
         if (validationResult.IsNotOK)
         {
@@ -108,11 +109,6 @@ public class LicenseesHandler(
         if (!string.IsNullOrWhiteSpace(criteria.ListSuperRollBack))
         {
             await RollbackMultiple(criteria.ListSuperRollBack);
-        }
-
-        if (!string.IsNullOrWhiteSpace(criteria.AgentList) && criteria.AgentList.Split(',').Length > 0)
-        {
-            _ = Task.Run(() => CreateDummyMembers(criteria.IP, criteria.AgentList.Split(',').Select(x => Convert.ToInt32(x)).ToArray()));
         }
 
         return (result, criteria.FailedCurrencies?.Split(',').ToList() ?? []);
