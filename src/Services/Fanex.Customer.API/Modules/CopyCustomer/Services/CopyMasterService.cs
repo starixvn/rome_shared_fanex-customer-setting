@@ -2,6 +2,7 @@ using System.Collections;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
@@ -58,7 +59,7 @@ public class CopyMasterService : CopyCustomerBaseService
             { "systemid", request.SystemId },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(ValidateSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);
@@ -106,7 +107,7 @@ public class CopyMasterService : CopyCustomerBaseService
             { "systemid", request.SystemId },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CopySPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CopySPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);

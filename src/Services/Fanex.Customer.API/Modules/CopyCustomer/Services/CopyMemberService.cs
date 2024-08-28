@@ -2,6 +2,7 @@ using System.Collections;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
@@ -62,7 +63,7 @@ public class CopyMemberService : CopyCustomerBaseService
             { "isqrcode", request.IsQrCode },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(ValidateSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);
@@ -113,7 +114,7 @@ public class CopyMemberService : CopyCustomerBaseService
             { "settingstatus", appSettings.SettingStatus },
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CopySPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CopySPName, request.CustDBGroupID));
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);
