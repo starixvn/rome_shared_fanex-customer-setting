@@ -15,7 +15,7 @@ namespace Licensee.AdminSetting.API.Features.Accounts
             return endpoints;
         }
 
-        static async Task<Results<Ok<Result>, ValidationProblem>> CreateDummyMember(int agentId, CreateDummyMemberRequest request, IAccountsHandler accountsHandler)
+        static async Task<Results<Ok<Result>, Ok<CreateDummyMemberResult>, ValidationProblem>> CreateDummyMember(int agentId, CreateDummyMemberRequest request, IAccountsHandler accountsHandler)
         {
             if (!MiniValidator.TryValidate(request, out var errors))
             {

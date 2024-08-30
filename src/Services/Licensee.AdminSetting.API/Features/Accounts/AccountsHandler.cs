@@ -38,7 +38,7 @@ namespace Licensee.AdminSetting.API.Features.Accounts
             return new Result(command.ErrCode, command.ErrMsg);
         }
 
-        private async Task<Result> CreateDummyMember(SiteDBConfig siteDBConfig, string site, int agentId, int creator, string ip)
+        private async Task<CreateDummyMemberResult> CreateDummyMember(SiteDBConfig siteDBConfig, string site, int agentId, int creator, string ip)
         {
             var generateResult = await GenerateDummyMember(siteDBConfig.CustDBGroupId, site, agentId);
             if (generateResult.IsNotOK)
@@ -46,14 +46,22 @@ namespace Licensee.AdminSetting.API.Features.Accounts
                 return generateResult;
             }
 
-            return await CreateMember(siteDBConfig, generateResult.CustId, generateResult.Username, agentId, creator, ip);
+            var createResult = await CreateMember(siteDBConfig, generateResult.CustId, generateResult.Username, agentId, creator, ip);
+            if (createResult.IsOK)
+            {
+                return generateResult;
+            }
+            else
+            {
+                return new CreateDummyMemberResult(createResult.ErrorCode, createResult.ErrorMessage, 0, string.Empty);
+            }
         }
 
-        private async Task<RegisterDummyMemberResult> GenerateDummyMember(int siteDBGroupId, string site, int agentId)
+        private async Task<CreateDummyMemberResult> GenerateDummyMember(int siteDBGroupId, string site, int agentId)
         {
             var command = new RegisterDummyMemberCommand(agentId, site, siteDBGroupId);
             await repository.ExecuteAsync(command);
-            return new RegisterDummyMemberResult(command.ErrCode, command.ErrMsg, command.CustId, command.Username);
+            return new CreateDummyMemberResult(command.ErrCode, command.ErrMsg, command.CustId, command.Username);
         }
 
         private async Task<Result> CreateMember(SiteDBConfig siteDBConfig, int custId, string username, int agentId, int creator, string ip)

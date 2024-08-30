@@ -3,7 +3,7 @@ using Licensee.AdminSetting.API.Features.Shared;
 
 namespace Licensee.AdminSetting.API.Features.Accounts;
 
-public class RegisterDummyMemberResult(int errorCode, string errorMessage, int custId, string username)
+public class CreateDummyMemberResult(int errorCode, string errorMessage, int custId, string username)
     : Result(errorCode, errorMessage)
 {
     public int CustId { get; } = custId;
