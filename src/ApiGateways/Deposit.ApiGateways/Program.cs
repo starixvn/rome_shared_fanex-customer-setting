@@ -3,8 +3,10 @@ using Deposit.ApiGateways.DelegatingHandlers;
 using Deposit.ApiGateways.Extensions;
 using Deposit.ApiGateways.Middlewares;
 using Microsoft.AspNetCore.HttpLogging;
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Polly;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -59,6 +61,8 @@ try
             options.GenerateDocsForGatewayItSelf = true;
         })
         .AddOcelot()
+        .AddPolly()
+        .AddCacheManager(x => { x.WithDictionaryHandle(); })
         .AddDelegatingHandler<ApiKeyHandler>(true)
         .AddDelegatingHandler<NoGzipDelegatingHandler>(true);
 

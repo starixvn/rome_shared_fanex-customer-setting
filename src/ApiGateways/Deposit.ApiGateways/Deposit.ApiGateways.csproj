@@ -12,6 +12,8 @@
     <PackageReference Include="Fanex.Logging.Sentry" Version="1.0.7" />
     <PackageReference Include="MMLib.SwaggerForOcelot" Version="8.3.0" />
     <PackageReference Include="Ocelot" Version="23.3.3" />
+    <PackageReference Include="Ocelot.Cache.CacheManager" Version="23.3.3" />
+    <PackageReference Include="Ocelot.Provider.Polly" Version="23.3.3" />
     <PackageReference Include="ONEbook.UM.AspNetCore" Version="3.1.1.1" />
     <PackageReference Include="ONEbook.UM.Transport" Version="3.1.2" />
     <PackageReference Include="Sentry" Version="3.15.0" />
