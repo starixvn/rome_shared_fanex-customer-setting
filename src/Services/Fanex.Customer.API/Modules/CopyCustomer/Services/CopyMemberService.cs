@@ -77,7 +77,7 @@ public class CopyMemberService : CopyCustomerBaseService
             { "username", request.UserName },
             { "sitedbgroupid", request.CustDBGroupID },
             { "site", request.Site },
-            { "roleid", CustomerLevel.Master },
+            { "roleid", CustomerLevel.Member },
             { "uplineid", request.UplineId },
             { "language", request.LanguageKey }
         };

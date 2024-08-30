@@ -74,7 +74,7 @@ public class CopyAgentService : CopyCustomerBaseService
             { "username", request.UserName },
             { "sitedbgroupid", request.CustDBGroupID },
             { "site", request.Site },
-            { "roleid", CustomerLevel.Master },
+            { "roleid", CustomerLevel.Agent },
             { "uplineid", request.UplineId },
             { "language", request.LanguageKey }
         };
