@@ -44,29 +44,20 @@ public class BaseSubAccountService
 
     protected virtual async Task<CreateCustomerResult> Register(BaseSubAccountRequest request)
     {
-        try
+        var parameters = new Hashtable
         {
-            var parameters = new Hashtable
-            {
-                { "username", request.UserName },
-                { "nickname", request.NickName },
-                { "sitedbgroupid", request.CustDBGroupID },
-                { "language", LanguageUtils.ToLanguageKey(request.Language) },
-                { "custid", request.CustId },
-            };
+            { "username", request.UserName },
+            { "nickname", request.NickName },
+            { "sitedbgroupid", request.CustDBGroupID },
+            { "language", LanguageUtils.ToLanguageKey(request.Language) },
+            { "custid", request.CustId },
+        };
 
-            using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
-            await db.ExecuteNonQueryAsync(parameters);
-            var outputParams = db.GetOutputParams();
-            
-            return new CreateCustomerResult(Convert.ToInt32(outputParams["subaccid"]), Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw ex;
-        }
+        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
         
+        return new CreateCustomerResult(Convert.ToInt32(outputParams["subaccid"]), Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
     }
 
     protected virtual Task<CreateCustomerResult> DoProcessing(BaseSubAccountRequest request, int subAccId) => throw new NotImplementedException();

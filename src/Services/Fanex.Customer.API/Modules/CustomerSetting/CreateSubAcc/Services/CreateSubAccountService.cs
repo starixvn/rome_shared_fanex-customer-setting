@@ -32,39 +32,29 @@ public class CreateSubAccService : BaseSubAccountService, ICreateSubAccountServi
 
     protected override async Task<CreateCustomerResult> DoProcessing(BaseSubAccountRequest request, int subAccId)
     {
-        try
+        var createRequest = (CreateSubAccountRequest)request;
+        var parameters = new Hashtable
         {
-            var createRequest = (CreateSubAccountRequest)request;
-            var parameters = new Hashtable
-            {
-                { "subaccid", subAccId },
-                { "custid", createRequest.CustId },
-                { "username", createRequest.UserName },
-                { "userpwd", createRequest.Password},
-                { "firstname", createRequest.FirstName },
-                { "lastname", createRequest.LastName },
-                { "pageaccess", createRequest.PageAccess },
-                { "loginsubaccid", createRequest.LoginSubAccId},
-                { "language", LanguageUtils.ToLanguageKey(createRequest.Language) },
-                { "userid", createRequest.UserId },
-                { "loginip", createRequest.IP }
-            };
+            { "subaccid", subAccId },
+            { "custid", createRequest.CustId },
+            { "username", createRequest.UserName },
+            { "userpwd", createRequest.Password},
+            { "firstname", createRequest.FirstName },
+            { "lastname", createRequest.LastName },
+            { "pageaccess", createRequest.PageAccess },
+            { "loginsubaccid", createRequest.LoginSubAccId},
+            { "language", LanguageUtils.ToLanguageKey(createRequest.Language) },
+            { "userid", createRequest.UserId },
+            { "loginip", createRequest.IP }
+        };
 
-            using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.CustDBGroupID));
-            await db.ExecuteNonQueryAsync(parameters);
-            var outputParams = db.GetOutputParams();        
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.CustDBGroupID));
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();        
 
-            Task.Run(() => { InsertUnreadMessage(createRequest.CustId, createRequest.RoleId, subAccId); });
+        Task.Run(() => { InsertUnreadMessage(createRequest.CustId, createRequest.RoleId, subAccId); });
 
-            return new CreateCustomerResult(subAccId, Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
-        }
-        catch (Exception ex)
-        {
-            await logger.InfoAsync(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.CustDBGroupID));
-            await logger.InfoAsync(ex.Message);
-            throw ex;
-        }
-        
+        return new CreateCustomerResult(subAccId, Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
     }
     
     private async Task InsertUnreadMessage(int custId, int roleId, int subAccId)
