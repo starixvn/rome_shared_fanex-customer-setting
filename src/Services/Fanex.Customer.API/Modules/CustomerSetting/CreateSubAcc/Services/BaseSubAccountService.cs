@@ -74,8 +74,7 @@ public class BaseSubAccountService
     protected virtual async void Rollback(int custId, int subAccId)
     {
         var parameters = new Hashtable
-        {
-            { "isResetNickname", IsResetNickName },
+        {            
             { "custid", custId },
             { "SubAccId", subAccId }
         };
