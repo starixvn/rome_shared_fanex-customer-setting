@@ -1,5 +1,6 @@
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
+using Fanex.Data;
 public class UpdateSubAccountNicknameLoginOnlyCommand : NonQueryCommand
 {
     public UpdateSubAccountNicknameLoginOnlyCommand(
@@ -24,6 +25,7 @@ public class UpdateSubAccountNicknameLoginOnlyCommand : NonQueryCommand
 
     public string IP { get; }
 
+    [SpParam(Ignored = true)]
     public int CustDBGroupID { get; }
 
     public string Language { get; }
