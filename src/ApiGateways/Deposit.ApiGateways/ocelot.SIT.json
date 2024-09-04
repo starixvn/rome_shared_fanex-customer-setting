@@ -14,6 +14,36 @@
                 "POST",
                 "PUT"
             ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/licensees/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "licensee_admin_setting_api_SIT",
+                    "Port": 5000
+                }
+            ],
+            "UpstreamPathTemplate": "/api/licensees/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/accounts/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "licensee_admin_setting_api_SIT",
+                    "Port": 5000
+                }
+            ],
+            "UpstreamPathTemplate": "/api/accounts/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ]
         }
     ],
     "GlobalConfiguration": {
