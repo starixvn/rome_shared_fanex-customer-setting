@@ -10,7 +10,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
 {
     public interface ICurrencyHandler
     {
-        Task<Result> CreateCurrency(string site, CreateCurrencyRequest request);
+        Task<Result> CreateCurrency(CreateCurrencyRequest request);
     }
 
     public class CurrencyHandler(
@@ -24,10 +24,10 @@ namespace Licensee.AdminSetting.API.Features.Licensees
     {
 
         private readonly IAccountsHandler accountsHandler = accountsHandler;
-        public async Task<Result> CreateCurrency(string siteName, CreateCurrencyRequest request)
+        public async Task<Result> CreateCurrency(CreateCurrencyRequest request)
         {
-            var siteDBConfig = await siteDBHandler.GetBySite(siteName);
-            var validationResult = await ValidateRequest(siteName, CreateMode.NewCurrency, request, siteDBConfig.CustDBGroupId);
+            var siteDBConfig = await siteDBHandler.GetBySite(request.SiteName);
+            var validationResult = await ValidateRequest(request.SiteName, CreateMode.NewCurrency, request, siteDBConfig.CustDBGroupId);
             if (validationResult.IsNotOK)
             {
                 return validationResult;
@@ -36,7 +36,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             var failedCurrencies = new List<string>();
             var registerResult = await RegisterCustomers(
                 validationResult.RegisterUsernames,
-                siteName,
+                request.SiteName,
                 request.ProductStakeLevel,
                 request.IP,
                 CreateMode.NewCurrency,
@@ -49,7 +49,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
 
             failedCurrencies.AddRange([.. registerResult.failedCurrencies]);
 
-            var createResult = await CreateCurrency(request, registerResult.result.Customers, registerResult.result.SiteId, siteName, siteDBConfig);
+            var createResult = await CreateCurrency(request, registerResult.result.Customers, registerResult.result.SiteId, request.SiteName, siteDBConfig);
             failedCurrencies.AddRange([.. createResult.failedCurrencies]);
 
             return createResult.result;
@@ -129,7 +129,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             return Parallel.ForEachAsync(
                 agentIds,
                 parallelOptions,
-                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(agentId, new CreateDummyMemberRequest(10278938, ip))));
+                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(new CreateDummyMemberRequest(agentId, 10278938, ip))));
         }
     }
 }

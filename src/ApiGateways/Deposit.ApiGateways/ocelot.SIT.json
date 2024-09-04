@@ -16,7 +16,7 @@
             ]
         },
         {
-            "DownstreamPathTemplate": "/api/licensees/{everything}",
+            "DownstreamPathTemplate": "/api/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
@@ -24,22 +24,7 @@
                     "Port": 5000
                 }
             ],
-            "UpstreamPathTemplate": "/api/licensees/{everything}",
-            "UpstreamHttpMethod": [
-                "POST",
-                "PUT"
-            ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/accounts/{everything}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "licensee_admin_setting_api_SIT",
-                    "Port": 5000
-                }
-            ],
-            "UpstreamPathTemplate": "/api/accounts/{everything}",
+            "UpstreamPathTemplate": "/api/site-builder/{everything}",
             "UpstreamHttpMethod": [
                 "POST",
                 "PUT"

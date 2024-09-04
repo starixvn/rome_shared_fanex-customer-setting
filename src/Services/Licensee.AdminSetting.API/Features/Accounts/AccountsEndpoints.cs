@@ -8,21 +8,19 @@ namespace Licensee.AdminSetting.API.Features.Accounts
     {
         public static IEndpointRouteBuilder RegisterAccountsEndpoints(this IEndpointRouteBuilder endpoints)
         {
-            var licensees = endpoints.MapGroup("/api/accounts");
-
-            licensees.MapPost("/{agentId}/dummy-members", CreateDummyMember);
+            endpoints.MapPost("/api/dummy-players", CreateDummyPlayer);
 
             return endpoints;
         }
 
-        static async Task<Results<Ok<Result>, Ok<CreateDummyMemberResult>, ValidationProblem>> CreateDummyMember(int agentId, CreateDummyMemberRequest request, IAccountsHandler accountsHandler)
+        static async Task<Results<Ok<Result>, Ok<CreateDummyMemberResult>, ValidationProblem>> CreateDummyPlayer(CreateDummyMemberRequest request, IAccountsHandler accountsHandler)
         {
             if (!MiniValidator.TryValidate(request, out var errors))
             {
                 return TypedResults.ValidationProblem(errors);
             }
 
-            var result = await accountsHandler.CreateDummyMember(agentId, request);
+            var result = await accountsHandler.CreateDummyMember(request);
 
             return TypedResults.Ok(result);
         }

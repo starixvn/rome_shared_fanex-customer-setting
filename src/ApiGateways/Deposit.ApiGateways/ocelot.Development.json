@@ -16,7 +16,7 @@
             ]
         },
         {
-            "DownstreamPathTemplate": "/main/licensees/{everything}",
+            "DownstreamPathTemplate": "/main/api/{everything}",
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -24,7 +24,7 @@
                     "Port": 443
                 }
             ],
-            "UpstreamPathTemplate": "/api/licensees/{everything}",
+            "UpstreamPathTemplate": "/api/site-builder/{everything}",
             "UpstreamHttpMethod": [
                 "POST",
                 "PUT"

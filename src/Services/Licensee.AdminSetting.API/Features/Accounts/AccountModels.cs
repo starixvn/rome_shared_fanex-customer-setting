@@ -11,4 +11,4 @@ public class CreateDummyMemberResult(int errorCode, string errorMessage, int cus
     public string Username { get; } = username;
 }
 
-public record CreateDummyMemberRequest([Required] int Creator, string IP);
+public record CreateDummyMemberRequest([Required] int AgentId, [Required] int Creator, string IP);

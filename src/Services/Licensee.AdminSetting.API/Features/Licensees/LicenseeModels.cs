@@ -25,6 +25,7 @@ public record StakeLevel(
 public record Commission(int ProductID, decimal Comm);
 
 public record CreateCurrencyRequest(
+    [Required] string SiteName,
     [Required] BetSetting[] ProductBetSetting,
     [Required] PositionTaking[] ProductPT,
     [Required] StakeLevel[] ProductStakeLevel,
@@ -48,6 +49,7 @@ public record CreateLicenseeRequest(
     [Required] byte SiteDBGroupId,
     [Required] byte SpecialPlatform)
     : CreateCurrencyRequest(
+        SiteName,
         ProductBetSetting,
         ProductPT,
         ProductStakeLevel,

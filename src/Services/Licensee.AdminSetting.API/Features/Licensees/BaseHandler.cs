@@ -1,6 +1,5 @@
 using System.Text.Json;
 using Fanex.Data.Repository;
-using Licensee.AdminSetting.API.Features.Accounts;
 using Licensee.AdminSetting.API.Features.Licensees.Criteria;
 using Licensee.AdminSetting.API.Features.Shared;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;

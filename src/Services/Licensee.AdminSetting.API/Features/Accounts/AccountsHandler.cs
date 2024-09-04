@@ -7,7 +7,7 @@ namespace Licensee.AdminSetting.API.Features.Accounts
 {
     public interface IAccountsHandler
     {
-        Task<Result> CreateDummyMember(int agentId, CreateDummyMemberRequest request);
+        Task<Result> CreateDummyMember(CreateDummyMemberRequest request);
     }
 
     public class AccountsHandler(IDynamicRepository repository, ISiteDBHandler siteDBHandler, Fanex.Logging.ILogger logger) : IAccountsHandler
@@ -16,9 +16,9 @@ namespace Licensee.AdminSetting.API.Features.Accounts
         private readonly ISiteDBHandler siteDBHandler = siteDBHandler;
         private readonly Fanex.Logging.ILogger logger = logger;
 
-        public async Task<Result> CreateDummyMember(int agentId, CreateDummyMemberRequest request)
+        public async Task<Result> CreateDummyMember(CreateDummyMemberRequest request)
         {
-            var siteDBConfig = await siteDBHandler.GetByCustId(agentId);
+            var siteDBConfig = await siteDBHandler.GetByCustId(request.AgentId);
             var siteId = await siteDBHandler.GetSiteId(siteDBConfig.Site);
 
             var checkOddspreadAdjustmentResult = await CheckOddspreadAdjustment(siteId);
@@ -27,7 +27,7 @@ namespace Licensee.AdminSetting.API.Features.Accounts
                 return checkOddspreadAdjustmentResult;
             }
 
-            return await CreateDummyMember(siteDBConfig, siteDBConfig.Site, agentId, request.Creator, request.IP);
+            return await CreateDummyMember(siteDBConfig, siteDBConfig.Site, request.AgentId, request.Creator, request.IP);
         }
 
         private async Task<Result> CheckOddspreadAdjustment(string siteId)

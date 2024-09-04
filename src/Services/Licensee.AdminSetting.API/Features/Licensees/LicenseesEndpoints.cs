@@ -8,10 +8,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees
     {
         public static IEndpointRouteBuilder RegisterLicenseesEndpoints(this IEndpointRouteBuilder endpoints)
         {
-            var licensees = endpoints.MapGroup("/api/licensees");
-
-            licensees.MapPost("/", CreateLicensee);
-            licensees.MapPost("/{siteName}/currencies", CreateCurrency);
+            endpoints.MapPost("/api/licensees", CreateLicensee);
+            endpoints.MapPost("/api/currencies", CreateCurrency);
 
             return endpoints;
         }
@@ -29,7 +27,6 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         }
 
         static async Task<Results<Ok<Result>, ValidationProblem>> CreateCurrency(
-            string siteName,
             CreateCurrencyRequest request,
             ICurrencyHandler currencyHandler)
         {
@@ -38,7 +35,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
                 return TypedResults.ValidationProblem(errors);
             }
 
-            var result = await currencyHandler.CreateCurrency(siteName, request);
+            var result = await currencyHandler.CreateCurrency(request);
 
             return TypedResults.Ok(result);
         }
