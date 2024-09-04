@@ -6,6 +6,7 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CreateSubAcc.Requests;
 using Fanex.Customer.API.Shared.Utils;
 
+
 namespace Fanex.Customer.API.Modules.CreateSubAcc.Services;
 public class BaseSubAccountService
 {
@@ -43,20 +44,29 @@ public class BaseSubAccountService
 
     protected virtual async Task<CreateCustomerResult> Register(BaseSubAccountRequest request)
     {
-        var parameters = new Hashtable
+        try
         {
-            { "username", request.UserName },
-            { "nickname", request.NickName },
-            { "sitedbgroupid", request.CustDBGroupID },
-            { "language", LanguageUtils.ToLanguageKey(request.Language) },
-            { "custid", request.CustId },
-        };
+            var parameters = new Hashtable
+            {
+                { "username", request.UserName },
+                { "nickname", request.NickName },
+                { "sitedbgroupid", request.CustDBGroupID },
+                { "language", LanguageUtils.ToLanguageKey(request.Language) },
+                { "custid", request.CustId },
+            };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
+            using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
+            await db.ExecuteNonQueryAsync(parameters);
+            var outputParams = db.GetOutputParams();
+            
+            return new CreateCustomerResult(Convert.ToInt32(outputParams["subaccid"]), Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw ex;
+        }
         
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["subaccid"]), Convert.ToInt32(outputParams["errcode"]), Convert.ToString(outputParams["errmsg"]));
     }
 
     protected virtual Task<CreateCustomerResult> DoProcessing(BaseSubAccountRequest request, int subAccId) => throw new NotImplementedException();
