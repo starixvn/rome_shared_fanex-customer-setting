@@ -121,7 +121,7 @@ public class CustomerService : ICustomerService
         foreach (var ptSettingInfoDto in ptSettingInfoDtos)
         {
             ptSettingInfoDto.BettypeName = cacheRefService.GetDisplayedBetTypeName(Convert.ToInt32(ptSettingInfoDto.TypeDesc), request.Language);
-            ptSettingInfoDto.DisplayTypeName = cacheRefService.GetDisplayedBetTypeName(ptSettingInfoDto.TypeId, request.Language);
+            ptSettingInfoDto.DisplayTypeName = cacheRefService.GetBetTypeName(ptSettingInfoDto.TypeId, request.Language);
         }
 
         foreach (var group in ptSettingInfoDtos.GroupBy(p => new { p.TypeDesc, p.BettypeName }))
