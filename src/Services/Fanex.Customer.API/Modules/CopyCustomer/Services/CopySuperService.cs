@@ -97,6 +97,7 @@ public class CopySuperService : CopyCustomerBaseService
             { "username", request.UserName },
             { "sitedbgroupid", request.CustDBGroupID },
             { "site", request.Site },
+            { "currency", request.Currency },
             { "roleid", CustomerLevel.Super },
             { "language", request.LanguageKey }
         };

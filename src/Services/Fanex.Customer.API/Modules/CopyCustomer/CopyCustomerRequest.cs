@@ -38,6 +38,8 @@ public class CopyCustomerRequest
 
     public string Site { get; set; }
 
+    public int Currency { get; set; }
+
     public bool IsInternal { get; set; }
 
     public string FirstName { get; set; } = string.Empty;
