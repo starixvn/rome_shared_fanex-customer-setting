@@ -1,5 +1,4 @@
 using Fanex.Data.Repository;
-using Licensee.AdminSetting.API.Features.Accounts;
 using Licensee.AdminSetting.API.Features.Licensees.Criteria;
 using Licensee.AdminSetting.API.Features.Shared;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;
@@ -89,7 +88,7 @@ public class LicenseesHandler(
 
         if (!string.IsNullOrWhiteSpace(criteria.ErrExtraInfo))
         {
-            await logger.ErrorAsync(criteria.ErrExtraInfo);
+            await logger.LogErrExtraInfo(criteria.ErrExtraInfo, criteria.GetSettingKey());
         }
 
         var result = new Result(criteria.ErrCode, criteria.ErrMsg);

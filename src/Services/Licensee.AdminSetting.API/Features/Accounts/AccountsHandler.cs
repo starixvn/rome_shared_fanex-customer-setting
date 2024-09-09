@@ -71,7 +71,7 @@ namespace Licensee.AdminSetting.API.Features.Accounts
 
             if (!string.IsNullOrWhiteSpace(command.ErrExtraInfo))
             {
-                await logger.ErrorAsync(command.ErrExtraInfo);
+                await logger.LogErrExtraInfo(command.ErrExtraInfo, command.GetSettingKey());
             }
 
             var result = new Result(command.ErrCode, command.ErrMsg);

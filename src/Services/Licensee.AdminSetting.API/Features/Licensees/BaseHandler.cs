@@ -62,7 +62,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
 
             if (!string.IsNullOrWhiteSpace(command.ErrExtraInfo))
             {
-                await logger.ErrorAsync(command.ErrExtraInfo);
+                await logger.LogErrExtraInfo(command.ErrExtraInfo, command.GetSettingKey());
             }
 
             return (new RegisterCustomersResult(command.ErrCode, command.ErrMsg, command.SiteId, command.Customers), command.FailedCurrencies?.Split(',')?.ToList() ?? []);
