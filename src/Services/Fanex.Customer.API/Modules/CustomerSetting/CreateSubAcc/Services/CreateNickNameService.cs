@@ -35,6 +35,11 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
     protected override async Task<CreateCustomerResult> Register(BaseSubAccountRequest request)
     {
         var nickNameRequest = (CreateNickNameRequest)request;
+        if(!nickNameRequest.IsEnableUpdateNickname)
+        {
+            return await UpdateLoginNickNameOnlyMode(nickNameRequest, nickNameRequest.SubAccId);
+        }
+
         var parameters = new Hashtable
         {
             { "subaccid", nickNameRequest.SubAccId },

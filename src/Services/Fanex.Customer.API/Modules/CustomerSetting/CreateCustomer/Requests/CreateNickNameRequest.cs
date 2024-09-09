@@ -9,4 +9,6 @@ public class CreateNickNameRequest
     public string Language { get; set; }
 
     public string Ip { get; set; }
+
+    public bool IsEnableUpdateNickname{ get; set; }     
 }

@@ -33,19 +33,24 @@ public class CreateNickNameService : ICreateNickNameService
 
     public async Task<CustomerSettingResult> Create(CreateNickNameRequest request)
     {
-        var result = await Register(request);
-        if (!result.IsSuccessful)
+        if(request.IsEnableUpdateNickname)
         {
+            var result = await Register(request);
+            if (!result.IsSuccessful)
+            {
+                return result;
+            }
+
+            result = await DoProcessing(request);
+            if (!result.IsSuccessful)
+            {
+                Rollback(request.CustId);
+            }
+
             return result;
         }
-
-        result = await DoProcessing(request);
-        if (!result.IsSuccessful)
-        {
-            Rollback(request.CustId);
-        }
-
-        return result;
+        
+        return await UpdateLoginNickNameOnlyMode(request);
     }
 
     private async Task<CreateCustomerResult> Register(CreateNickNameRequest request)

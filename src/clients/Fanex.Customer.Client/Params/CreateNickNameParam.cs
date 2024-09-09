@@ -6,12 +6,13 @@ namespace Fanex.Customer.Client.Params
     {
         public CreateNickNameParam(
            int custId,
-           int subAccId, 
+           int subAccId,
            string nickName,
-           string ip, 
+           string ip,
            string site,
            int custDBGroupID,
-           string language= Languages.English)
+           bool isEnableUpdateNickname,
+           string language = Languages.English)
         {
             CustId = custId;
             NickName = nickName;
@@ -20,14 +21,16 @@ namespace Fanex.Customer.Client.Params
             IP = ip;
             CustDBGroupID = custDBGroupID;
             Site = site;
+            IsEnableUpdateNickname = isEnableUpdateNickname;
         }
 
         public int CustId { get; }
-        public string NickName { get; }        
+        public string NickName { get; }
         public string Language { get; }
         public int SubAccId { get; }
         public string IP { get; }
         public int CustDBGroupID { get; }
         public string Site { get; }
+        public bool IsEnableUpdateNickname { get; }
     }
 }
