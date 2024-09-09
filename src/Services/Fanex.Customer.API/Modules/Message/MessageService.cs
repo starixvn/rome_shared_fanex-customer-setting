@@ -17,12 +17,9 @@ public class MessageService : IMessageService
 
     private readonly int TimeDiffGMT_4ToGMT8 = 12;
 
-    public MessageService() : this(null)
-    { }
-
     public MessageService(ICacheRefService cacheRefService)
     {
-        this.cacheRefService = cacheRefService ?? new CacheRefService();
+        this.cacheRefService = cacheRefService;
     }
 
     public MessageContent TranslateMessage(int messageType, string rawMessage, string language)
@@ -50,6 +47,8 @@ public class MessageService : IMessageService
                 => TranslateMessage<SBMemberCommissionViolationSubMessage>(rawMessage, language),
             MessageTypes.ParlayMaxPayoutViolation
                 => TranslateMessage<ParlayMaxPayoutViolationSubMessage>(rawMessage, language),
+            MessageTypes.SportsbookBetSettingViolation
+                => TranslateMessage<SportsbookBetSettingViolationSubMessage>(rawMessage, language),
             MessageTypes.BetSettingViolation
                 => TranslateMessage<BetSettingViolationSubMessage>(rawMessage, language),
             MessageTypes.CommissionViolation

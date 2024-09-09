@@ -22,12 +22,10 @@ public class UMService : IUMService
         private const string UMDateTimeFormat = "dd/MM/yyyy HH:mm:ss";
         public const int SuccessButDoNothingBecauseUM = 90017;
 
-        public UMService() : this(null, null, null) { }
-
         public UMService(IDynamicRepository dynamicRepository, ICacheRefService cacheRefService, IOptions<AppSettings> appSettings)
         {
-            _dynamicRepository = dynamicRepository ?? new DynamicRepository();
-            _cacheRefService= cacheRefService ?? new CacheRefService();
+            _dynamicRepository = dynamicRepository;
+            _cacheRefService= cacheRefService;
             _appSettings = appSettings.Value; 
         }
 

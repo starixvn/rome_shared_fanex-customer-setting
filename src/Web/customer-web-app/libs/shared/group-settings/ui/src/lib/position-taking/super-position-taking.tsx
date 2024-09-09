@@ -14,18 +14,21 @@ import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { PositionTakingBlockProps } from './types';
+import { CopyStatus, PositionTakingBlockProps, PTRowProps } from './types';
 import {
-  CopyStatus,
   CopyStatusPT,
   groupSportsBookPTBySportTypeId,
   isCopyingPTItem,
-  PTRowProps,
   renderNoneBlockColumn,
   usePTCopy,
 } from './utils';
 
-function SuperPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps<SuperPositionTakingGroupItem>>) {
+function SuperPositionTakingRow({
+  item,
+  label,
+  copyStatus,
+  isReadOnly,
+}: Readonly<PTRowProps<SuperPositionTakingGroupItem>>) {
   const { isMultipleMode, handleSettingItemChange, productGroupId } = useGroupSettingContext();
 
   const handlePTChange = (data: { [x: string]: number | undefined }) => {
@@ -39,6 +42,7 @@ function SuperPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps
   };
 
   const isMultipleEdit = isMultipleMode ?? false;
+  const isDisable = isReadOnly || isMultipleEdit;
   const copyRowStyle = { isCopy: copyStatus === CopyStatus.Success, 'isCopy fail': copyStatus === CopyStatus.Fail };
   return (
     <BlockRow label={label ?? item.betTypeName}>
@@ -49,7 +53,7 @@ function SuperPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps
             max={item.upline.defaultMaxPT}
             step={item.step}
             value={item.s4}
-            isDisable={isMultipleEdit}
+            isDisable={isDisable}
             onChange={(e) => {
               const newSuperMaxPT = Number(e.target.value);
               const newPTValue = {
@@ -70,7 +74,7 @@ function SuperPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps
             max={item.s4}
             value={item.m4}
             step={item.step}
-            isDisable={isMultipleEdit}
+            isDisable={isDisable}
             onChange={(e) => {
               const newMasterMaxPT = Number(e.target.value);
               const newPTValue = {
@@ -89,7 +93,7 @@ function SuperPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps
             max={item.m4}
             step={item.step}
             value={item.a4}
-            isDisable={isMultipleEdit}
+            isDisable={isDisable}
             onChange={(e) => {
               handlePTChange({ a4: Number(e.target.value) });
             }}
@@ -103,7 +107,7 @@ function SuperPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps
             max={item.s4}
             step={item.step}
             value={item.n4}
-            isDisable={isMultipleEdit}
+            isDisable={isDisable}
             onChange={(e) => handlePTChange({ n4: Number(e.target.value) })}
           />
         </div>
@@ -141,6 +145,7 @@ const copySuperPTValues = (
 };
 
 type PositionTakingRowProps = {
+  isReadOnly: boolean;
   productGroupId: number;
   ptItems: SuperPositionTakingGroupItem[];
   copyIconId: number | undefined;
@@ -153,6 +158,7 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  isReadOnly,
   productGroupId,
   ptItems,
   stateCopiedGroup,
@@ -165,6 +171,7 @@ function PositionTakingRows({
     const firstGroupItem = group[0];
     const groupPTLabel = (
       <GroupLabel
+        isReadOnly={isReadOnly}
         copyIconId={copyIconId}
         firstGroupItem={firstGroupItem}
         group={group}
@@ -187,6 +194,7 @@ function PositionTakingRows({
         {group?.map((item, index) => {
           const ptLabel = (
             <PTLabel
+              isReadOnly={isReadOnly}
               group={group}
               itemIndex={index}
               item={item}
@@ -197,6 +205,7 @@ function PositionTakingRows({
           );
           return (
             <SuperPositionTakingRow
+              isReadOnly={isReadOnly}
               key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
               item={item}
               label={ptLabel}
@@ -240,6 +249,7 @@ export default function SuperPositionTaking({ title, isReadOnly }: Readonly<Posi
         ))}
       </BlockRow>
       <PositionTakingRows
+        isReadOnly={isReadOnly}
         productGroupId={groupId}
         ptItems={superPTs}
         copyIconId={copyIconId}

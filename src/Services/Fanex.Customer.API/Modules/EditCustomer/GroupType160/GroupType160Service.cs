@@ -4,8 +4,10 @@ using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType160;
 using Fanex.Customer.API.Modules.EditCustomer;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 using Newtonsoft.Json.Linq;
 
@@ -14,7 +16,8 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
 
 public class GroupType160Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
 {
-    public GroupType160Service() : base(null, null) { }
+    public GroupType160Service(IMessageService messageService, ICacheRefService cacheRefService) 
+        : base(messageService, cacheRefService) { }
 
     public override UpdateGroupTypeResult Validate(
         EditRequestContext context,
@@ -34,7 +37,7 @@ public class GroupType160Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         byte settingStatus)
     {
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_DisableProductStatus_160_Upd");
-        var parameters = GenerateSPParams(context, groupItems, settingStatus);
+        var parameters = GenerateSPParams(context, groupItems, productGroupId, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
@@ -50,6 +53,7 @@ public class GroupType160Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     private Hashtable GenerateSPParams(
         EditRequestContext context,
         IEnumerable<GroupItemDefault> groupItems,
+        int productGroupId,
         byte settingStatus = 0)
     {
         var spParams = new Hashtable {
@@ -57,6 +61,7 @@ public class GroupType160Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             { "isdisabled", ComposeJsonSettingParam(groupItems) },
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
+            { "groupid", productGroupId },
             { "ip", context.IP },
             { "systemid", context.SystemId },
             { "settingstatus", settingStatus}

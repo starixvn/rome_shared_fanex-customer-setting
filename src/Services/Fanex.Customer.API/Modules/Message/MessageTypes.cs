@@ -32,7 +32,9 @@ public static class MessageTypes
 
     public const int MinMaxPTViolation_Edit = 4;
 
-    public const int BetSettingViolation = 71;
+    public const int SportsbookBetSettingViolation = 71;
+
+    public const int BetSettingViolation = 72;
 
     public const int UpdateTooOften = 6;
 

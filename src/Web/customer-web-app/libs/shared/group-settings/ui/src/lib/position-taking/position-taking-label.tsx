@@ -5,6 +5,7 @@ import { GroupItem } from '@customer-web-app/shared-group-settings-types';
 import { CopyPTICon, CopyStatusPT, isCopySuccess, renderPTLabel } from './utils';
 
 type PTLabel<T> = {
+  isReadOnly: boolean;
   group: T[];
   itemIndex: number;
   item: T;
@@ -14,6 +15,7 @@ type PTLabel<T> = {
 };
 
 export default function PTLabel({
+  isReadOnly,
   group,
   itemIndex,
   item,
@@ -30,7 +32,7 @@ export default function PTLabel({
     ? (item: GroupItem) => item.sportTypeId === firstGroupItem.sportTypeId
     : () => true;
 
-  const copyIcon = itemIndex === 0 && group.length > 1 && (
+  const copyIcon = itemIndex === 0 && group.length > 1 && !isReadOnly && (
     <CopyPTICon
       id={item.sportTypeId}
       isCopy={copyIconId === item.sportTypeId}

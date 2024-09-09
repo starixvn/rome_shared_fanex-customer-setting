@@ -12,12 +12,10 @@ public class EditGroupTypeBaseService: IEditGroupTypeBaseService
 
     protected readonly ICacheRefService cacheRefService;
 
-    public EditGroupTypeBaseService() : this(null, null) { }
-
     public EditGroupTypeBaseService(IMessageService messageService, ICacheRefService cacheRefService)
     {
-        this.messageService = messageService ?? new MessageService();
-        this.cacheRefService = cacheRefService ?? new CacheRefService();
+        this.messageService = messageService;
+        this.cacheRefService = cacheRefService;
     }
 
     public virtual UpdateGroupTypeResult Validate(

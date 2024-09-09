@@ -14,5 +14,5 @@ public class AgentPTOnMemberSettingItem : PTItem
     public decimal N2 { get; set; }
 
     public override bool Is3DecimalPTValue()
-        => (A1 * 10) % 10 != 0;
+        => A1 * 10 % 10 != 0;
 }

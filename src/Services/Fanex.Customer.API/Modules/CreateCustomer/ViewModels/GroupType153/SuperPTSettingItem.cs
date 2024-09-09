@@ -33,7 +33,7 @@ public class SuperPTSettingItem : PTItem
     }
 
     public override bool Is3DecimalPTValue()
-        => (S4 * 10) % 10 != 0
-            || (M4 * 10) % 10 != 0
-            || (N4 * 10) % 10 != 0;
+        => S4 * 10 % 10 != 0
+            || M4 * 10 % 10 != 0
+            || N4 * 10 % 10 != 0;
 }

@@ -7,11 +7,11 @@ import { GroupTypeIds, ProductIds, UserLevel } from '@customer-web-app/shared-co
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { BetLimitGroupItem } from '@customer-web-app/shared-group-settings-types';
-import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import { renderNoneBlockColumn } from '../position-taking/utils';
+import { scrollToBLock } from '../scroll-helper';
 import { GroupSettingBlockProps } from '../types';
 
 const MaxBetLimitColumns = 6;

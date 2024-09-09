@@ -5,6 +5,7 @@ import { GroupItem } from '@customer-web-app/shared-group-settings-types';
 import { CopyPTICon, CopyStatusPT, isCopySuccess, renderPTLabel } from './utils';
 
 type GroupPTLabel<T> = {
+  isReadOnly: boolean;
   isFirstGroup: boolean;
   firstGroupItem: T;
   ptItems: T[];
@@ -17,6 +18,7 @@ type GroupPTLabel<T> = {
 export const SportsBookCopyAllId = 0;
 
 export function GroupLabel({
+  isReadOnly,
   isFirstGroup,
   firstGroupItem,
   group,
@@ -27,7 +29,7 @@ export function GroupLabel({
 }: GroupPTLabel<GroupItem>) {
   const { isMultipleMode, handleUpdateSettingItems } = useGroupSettingContext();
 
-  const copyIcon = isFirstGroup && (
+  const copyIcon = isFirstGroup && !isReadOnly && (
     <CopyPTICon
       id={SportsBookCopyAllId}
       isCopy={copyIconId === 0}

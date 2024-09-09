@@ -66,8 +66,6 @@ export interface BetSettingsProps {
   maxPerMatch: number;
 }
 
-export interface BetSettingGroupItem extends BetSettingsProps, GroupSettingItem<BetSettingsProps> {}
-
 export interface SportsBookBetSettingProps extends BetSettingsProps {
   maxPayoutPerMatch?: number;
 }
@@ -75,6 +73,14 @@ export interface SportsBookBetSettingProps extends BetSettingsProps {
 export interface SportsBookBetSettingGroupItem
   extends SportsBookBetSettingProps,
     GroupSettingItem<SportsBookBetSettingProps> {}
+
+export interface RNGGamesBetSettingProps extends BetSettingsProps {
+  maxPerBall?: number;
+}
+
+export interface RNGGamesBetSettingGroupItem
+  extends RNGGamesBetSettingProps,
+    GroupSettingItem<RNGGamesBetSettingProps> {}
 
 export interface ParlayMaxPayoutProps {
   combo2: number;

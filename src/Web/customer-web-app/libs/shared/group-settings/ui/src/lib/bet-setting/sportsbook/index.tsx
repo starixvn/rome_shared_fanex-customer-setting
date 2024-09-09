@@ -6,11 +6,11 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { SportsBookBetSettingGroupItem } from '@customer-web-app/shared-group-settings-types';
-import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CopyIcon from '../../copy-icon';
+import { scrollToBLock } from '../../scroll-helper';
 import { GroupSettingBlockProps } from '../../types';
 import { ValidateBetSetting } from '../bet-setting-base-validator';
 import BetSettingNote from '../bet-setting-note';
@@ -251,7 +251,7 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
         );
       })}
 
-      {validationState && (
+      {validationState && !validationState.isValid && (
         <WrapperTooltip
           type="error"
           anchorSelect={`#${validationState.fieldName}`}

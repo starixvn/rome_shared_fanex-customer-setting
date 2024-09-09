@@ -214,7 +214,55 @@
 		<comment/>
 	</data>
 	<data name="Msg_10003" xml:space="preserve">
-		<value>Invalid Min bet/ Max bet/ Max per match.</value>
+		<value>Wrong Min bet/ Max bet/ Max per match</value>
+		<comment/>
+	</data>
+	<data name="Msg_10006" xml:space="preserve">
+		<value>Min Bet must be greater than or equal to Upline's Min Bet</value>
+		<comment/>
+	</data>
+	<data name="Msg_10007" xml:space="preserve">
+		<value>Max bet must be less than or equal to Upline's max bet.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10008" xml:space="preserve">
+		<value>Max Per Match must be less than or equal to Upline'sMax Per Match.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10009" xml:space="preserve">
+		<value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10010" xml:space="preserve">
+		<value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10011" xml:space="preserve">
+		<value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10016" xml:space="preserve">
+		<value>Min Bet must be greater than or equal to Upline's Min Bet</value>
+		<comment/>
+	</data>
+	<data name="Msg_10017" xml:space="preserve">
+		<value>Max bet must be less than or equal to Upline's max bet.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10018" xml:space="preserve">
+		<value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10019" xml:space="preserve">
+		<value>Min Bet must be greater than or equal to Upline's Min Bet</value>
+		<comment/>
+	</data>
+	<data name="Msg_10020" xml:space="preserve">
+		<value>Max bet must be less than or equal to Upline's max bet.</value>
+		<comment/>
+	</data>
+	<data name="Msg_10021" xml:space="preserve">
+		<value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
 		<comment/>
 	</data>
 	<data name="Msg_10022" xml:space="preserve">
@@ -439,6 +487,10 @@
 	</data>
 	<data name="UpdateSuccess_153" xml:space="preserve">
 		<value>Position taking is updated successfully.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_154" xml:space="preserve">
+		<value>Bet Setting is updated successfully.</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_155" xml:space="preserve">

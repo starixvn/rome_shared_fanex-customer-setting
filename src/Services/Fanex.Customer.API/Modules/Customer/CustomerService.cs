@@ -148,13 +148,13 @@ public class CustomerService : ICustomerService
     {
         var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
         var result = await dynamicRepository.FetchAsync<CurrentWinLossAmount>(new GetCurrentWinLossAmountCriteria(
-            request.CustId, 
-            request.SportType, 
-            request.BetType, 
-            appSettings.SettingStatus, 
+            request.CustId,
+            request.SportType,
+            request.BetType,
+            appSettings.SettingStatus,
             siteDBConfig.LinkedServerName));
 
-        foreach(var item in result)
+        foreach (var item in result)
         {
             item.SportTypeName = cacheRefService.GetSportTypeName(item.SportType, request.Language);
         }
@@ -169,28 +169,52 @@ public class CustomerService : ICustomerService
         const int BBINProductID = 47;
         const int NumberGameProductID = 3;
         const int RNGKENOProductID = 8;
-        var products = await dynamicRepository.FetchAsync<ProductCategories>(new GetProductCategoriesCriteria(appSettings.SettingStatus, request.Site, request.CustId, request.CurrencyId));
+        const int LotteryProductID = 28;
+        const int TableGameProductID = 40;
+        const int KenoLotterySportId = 9919;
+
+        var products = (await dynamicRepository.FetchAsync<ProductCategories>(new GetProductCategoriesCriteria(appSettings.SettingStatus, request.Site, request.CustId, request.CurrencyId))).ToList();
+        foreach (var product in products)
+        {
+            if (product.RealProductId == RNGKENOProductID
+            || product.RealProductId == LotteryProductID
+            || product.RealProductId == TableGameProductID)
+            {
+                product.DummySportTypeId = KenoLotterySportId;
+            }
+            else
+            {
+                product.DummySportTypeId = product.RealProductId;
+            }
+        }
+
         var groupedData = products
             .GroupBy(d => d.GroupId)
             .Select(group => new
             {
                 Id = group.Key,
                 Name = cacheRefService.GetProductGroupName(group.Key, request.Language),
-                Products = (group.GroupBy(d => d.SubGroupId)
+                Products = group.GroupBy(d => d.SubGroupId)
                     .Select(subGroup => new
                     {
                         Id = subGroup.Key,
                         Name = cacheRefService.GetSubGroupName(subGroup.Key, request.Language),
-                        Products = (subGroup.Select(d => new
-                        {
-                            Id = d.RealProductId,
-                            Name = cacheRefService.GetProductName(d.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
-                            Products = ""
-                        }).ToList())
+                        Products = subGroup
+                            .GroupBy(g => new { g.GroupId, g.SubGroupId, g.DummySportTypeId })
+                            .Select(d => new
+                            {
+                                Id = d.Key.DummySportTypeId,
+                                Name = d.Key.DummySportTypeId == KenoLotterySportId ? 
+                                    $"{cacheRefService.GetSportTypeName(d.Key.DummySportTypeId, request.Language)} ({string.Join(", ", d.Select(e => cacheRefService.GetProductName(e.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel))))})" 
+                                    : cacheRefService.GetProductName(d.Key.DummySportTypeId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
+                                Products = ""
+                            })
+                            .ToList()
                     })
-                    .ToList())
+                    .ToList()
             })
             .ToList();
+
         var jsonResponse = new
         {
             ProductSettingInfo = groupedData,

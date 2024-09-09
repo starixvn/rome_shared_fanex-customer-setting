@@ -1,6 +1,5 @@
 {
   "SportsBook": "对于体育博彩",
-  "RNGGames": "对于RNG游戏",
   "LiveRNGCasino": "现场及RNG娱乐城",
   "OtherGames": "对于其他游戏",
   "PTTemplate": "占成数模板:",
@@ -12,7 +11,7 @@
   "MemberNote": "输入所有投注设置栏位= 0防止会员進行投注。",
   "MixSportsParlayBetSetting": "混合体育过关: 它的票不只是足球的混合過關. <br> 示例：足球 - 足球 - 篮球，网球 - 网球 - 网球，棒球 - 高尔夫 - 足球 - 美式足球",
   "CommonWinLossLimitNote": "输赢限额及每日限额自动重设将从上线复制。",
-  "RNGKenoNumberGameWinLossLimitNote": "输赢限额的设置不适用于快乐彩及数字游戏",
+  "RNGKenoNumberGameWinLossLimitNote": "将输赢限额设定与每个产品的输赢进行比较。",
   "BBINBetSetting": "请知悉: [BBIN 产品] 当您更改会员的设置时，此新更改只会在会员转额进游戏后才会生效。",
   "WinLossLimitNote3": "投注限额, 输赢限额. 输限额, 及每日限额自动重设将从上线复制。",
   "CommonPTSettingNote1": "在精简模式下，您可以在创建新下线时在占成数模板功能中设置默认的占成数模板。",

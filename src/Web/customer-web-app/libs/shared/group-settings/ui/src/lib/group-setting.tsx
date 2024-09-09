@@ -6,6 +6,7 @@ import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-
 import { GroupType } from '@customer-web-app/shared-group-settings-types';
 
 import BetLimit from './bet-limit';
+import RNGGamesBetSetting from './bet-setting/rnggames';
 import SportsBookBetSetting from './bet-setting/sportsbook';
 import Commission from './commission';
 import ParlayMaxPayout from './parlay-max-payout';
@@ -13,12 +14,7 @@ import PositionTaking from './position-taking';
 import ProductStatus from './product-status';
 import WinLossLimit from './win-loss-limit';
 
-type Props = {
-  // isEditMode?: boolean;
-  // updateGroupSetting?: (groupTypeId: number) => void;
-};
-
-export const GroupSetting = forwardRef<ValidationRefType, Props>(function GroupSetting(props, ref) {
+export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(_, ref) {
   const { productGroups, productGroupId } = useGroupSettingContext();
   const productGroup = productGroups?.find((x) => x.id === productGroupId);
 
@@ -30,6 +26,7 @@ export const GroupSetting = forwardRef<ValidationRefType, Props>(function GroupS
 
   const refDetails = [
     { ref: betSettingRef, id: GroupTypeIds.SportsBookBetSetting },
+    { ref: betSettingRef, id: GroupTypeIds.RNGGamesBetSetting },
     { ref: parlayMaxPayoutRef, id: GroupTypeIds.ParlayMaxPayout },
     { ref: positionTakingRef, id: GroupTypeIds.PositionTaking },
     { ref: winLossLimitRef, id: GroupTypeIds.WinLossLimit },
@@ -96,6 +93,8 @@ export const GroupSetting = forwardRef<ValidationRefType, Props>(function GroupS
         return <Commission groupTypeId={id} isReadOnly={isReadOnly} />;
       case GroupTypeIds.SportsBookBetSetting:
         return <SportsBookBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
+      case GroupTypeIds.RNGGamesBetSetting:
+        return <RNGGamesBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
       case GroupTypeIds.ParlayMaxPayout:
         return <ParlayMaxPayout isReadOnly={isReadOnly} ref={parlayMaxPayoutRef} />;
       case GroupTypeIds.PositionTaking:

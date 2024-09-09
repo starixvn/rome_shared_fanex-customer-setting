@@ -11,22 +11,20 @@ import {
   SuperEditMemberPositionTakingGroupItem,
   SuperEditMemberPositionTakingProps,
 } from '@customer-web-app/shared-group-settings-types';
-import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
+import { scrollToBLock } from '../scroll-helper';
 import { ValidatePTResult } from './master-position-taking';
 import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { PositionTakingBlockProps } from './types';
+import { CopyStatus, PositionTakingBlockProps, PTRowProps } from './types';
 import {
-  CopyStatus,
   CopyStatusPT,
   groupSportsBookPTBySportTypeId,
   isCopyingPTItem,
-  PTRowProps,
   renderNoneBlockColumn,
   usePTCopy,
 } from './utils';
@@ -53,6 +51,7 @@ function maxUS1(item: SuperEditMemberPositionTakingProps) {
 }
 
 function SuperEditMemberPositionTakingRow({
+  isReadOnly,
   item,
   label,
   copyStatus,
@@ -80,7 +79,7 @@ function SuperEditMemberPositionTakingRow({
               max={maxUS1(item)}
               step={item.step}
               value={item.uS1}
-              isDisable={!item.isMultipleModeChecked}
+              isDisable={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 handlePTChange({ uS1: Number(e.target.value) });
               }}
@@ -93,7 +92,7 @@ function SuperEditMemberPositionTakingRow({
               max={maxS1(item)}
               step={item.step}
               value={item.s1}
-              isDisable={!item.isMultipleModeChecked || item.iS3}
+              isDisable={isReadOnly || !item.isMultipleModeChecked || item.iS3}
               onChange={(e) => {
                 handlePTChange({ s1: Number(e.target.value) });
               }}
@@ -106,7 +105,7 @@ function SuperEditMemberPositionTakingRow({
           <input
             type="checkbox"
             checked={item.iS1}
-            disabled={!item.isMultipleModeChecked}
+            disabled={isReadOnly || !item.isMultipleModeChecked}
             onChange={(e) => {
               handlePTChange({
                 iS1: e.target.checked,
@@ -168,6 +167,7 @@ const copyMasterPTValues = (
 };
 
 type PositionTakingRowProps = {
+  isReadOnly: boolean;
   productGroupId: number;
   ptItems: SuperEditMemberPositionTakingGroupItem[];
   copyIconId: number | undefined;
@@ -180,6 +180,7 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  isReadOnly,
   productGroupId,
   ptItems,
   copyIconId,
@@ -192,6 +193,7 @@ function PositionTakingRows({
     const firstGroupItem = group[0];
     const groupPTLabel = (
       <GroupLabel
+        isReadOnly={isReadOnly}
         copyIconId={copyIconId}
         firstGroupItem={firstGroupItem}
         group={group}
@@ -214,6 +216,7 @@ function PositionTakingRows({
         {group?.map((item, index) => {
           const ptLabel = (
             <PTLabel
+              isReadOnly={isReadOnly}
               group={group}
               itemIndex={index}
               item={item}
@@ -224,6 +227,7 @@ function PositionTakingRows({
           );
           return (
             <SuperEditMemberPositionTakingRow
+              isReadOnly={isReadOnly}
               key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
               item={item}
               label={ptLabel}
@@ -372,7 +376,9 @@ const SuperEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTaki
         <BlockRow
           isHeaderRow
           label={
-            isMultipleMode && (
+            isMultipleMode &&
+            superPTOnMembers.length > 1 &&
+            !props.isReadOnly && (
               <div style={{ display: 'flex', marginLeft: '2px' }}>
                 <input
                   type="checkbox"
@@ -390,6 +396,7 @@ const SuperEditMemberPositionTaking = forwardRef<ValidationRefType, PositionTaki
           ))}
         </BlockRow>
         <PositionTakingRows
+          isReadOnly={props.isReadOnly}
           productGroupId={groupId}
           ptItems={superPTOnMembers}
           copyIconId={copyIconId}

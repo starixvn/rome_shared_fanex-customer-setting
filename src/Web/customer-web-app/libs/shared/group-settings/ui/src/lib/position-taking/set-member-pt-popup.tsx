@@ -15,9 +15,9 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
 import PTSelect from './pt-select';
 import styles from './set-member-pt-popup.module.scss';
+import { CopyStatus } from './types';
 import {
   CopyPTICon,
-  CopyStatus,
   groupSportsBookPTBySportTypeId,
   isCopySuccess,
   renderNoneBlockColumn,

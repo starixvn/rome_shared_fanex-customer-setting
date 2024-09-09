@@ -149,6 +149,18 @@
 		<value>此账号来源已被禁用。</value>
 		<comment/>
 	</data>
+	<data name="Live" xml:space="preserve">
+		<value>现场</value>
+		<comment/>
+	</data>
+	<data name="Max" xml:space="preserve">
+		<value>最高</value>
+		<comment/>
+	</data>
+	<data name="Min" xml:space="preserve">
+		<value>最低</value>
+		<comment/>
+	</data>
 	<data name="InvalidParameterValue" xml:space="preserve">
 		<value>参数值无效。</value>
 		<comment/>
@@ -199,6 +211,54 @@
 	</data>
 	<data name="Msg_10003" xml:space="preserve">
 		<value>最低投注/最高投注/单场限额无效</value>
+		<comment/>
+	</data>
+	<data name="Msg_10006" xml:space="preserve">
+		<value>最低投注必须大于或相等于代理最低投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10007" xml:space="preserve">
+		<value>最高投注必须少于或相等于代理最高投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10008" xml:space="preserve">
+		<value>单场限额必须少于或相等于代理单场投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10009" xml:space="preserve">
+		<value> Per Ball must be equal to or less than Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10010" xml:space="preserve">
+		<value>Max Per Ball must be equal to or less than Super Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10011" xml:space="preserve">
+		<value> Per Ball must be equal to or less than Master Agent Max Per Ball</value>
+		<comment/>
+	</data>
+	<data name="Msg_10016" xml:space="preserve">
+		<value>最低投注大于或相等于超级总代理最低投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10017" xml:space="preserve">
+		<value>最高投注必须少于或相等于超级总代理最高投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10018" xml:space="preserve">
+		<value>单场限额必须少于或相等于超级总代理单场投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10019" xml:space="preserve">
+		<value>最低投注大于或相等于总代理最低投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10020" xml:space="preserve">
+		<value>最高投注必须少于或相等于总代理最高投注限额</value>
+		<comment/>
+	</data>
+	<data name="Msg_10021" xml:space="preserve">
+		<value>单场限额必须少于或相等于总代理单场投注限额</value>
 		<comment/>
 	</data>
 	<data name="Msg_10022" xml:space="preserve">
@@ -423,6 +483,10 @@
 	</data>
 	<data name="UpdateSuccess_153" xml:space="preserve">
 		<value>占成数设定已更新成功.</value>
+		<comment/>
+	</data>
+	<data name="UpdateSuccess_154" xml:space="preserve">
+		<value>投注设定已更新成功.</value>
 		<comment/>
 	</data>
 	<data name="UpdateSuccess_155" xml:space="preserve">

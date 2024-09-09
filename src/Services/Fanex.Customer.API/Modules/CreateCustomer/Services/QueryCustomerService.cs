@@ -227,7 +227,7 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
                     IsAllowUncheckAll = isAllowUncheckAll,
                     Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                     DisplayType = t.Key.DisplayType,
-                    IsReadOnly = request.UplineRoleId - request.RoleId > 1 && !IsPTGroupType(t.Key.GroupType),
+                    IsReadOnly = IsReadOnlyGroupType(request, t.Key.GroupType),
                     GroupItems = GetGroupItems(
                         g.Key,
                         t.Key.GroupType,
@@ -245,6 +245,21 @@ public class QueryCustomerService : BaseCustomerService, IQueryCustomerService
 
             return null;
         }).ToEnumerable().ToList(); // Must use ToList to prevent call SP 2 times because of Any method in the next action.
+    }
+
+    private bool IsReadOnlyGroupType(QueryRequest request, int groupTypeId)
+    {
+        if((request.SystemId == Systems.EXT || request.SystemId == Systems.EXTY7) && request.RoleId == CustomerLevel.Super)
+        {
+            return true;
+        }
+
+        return IsCrossline(request) && !IsPTGroupType(groupTypeId);
+    }
+
+    private static bool IsCrossline(QueryRequest request)
+    {
+        return request.UplineRoleId - request.RoleId > 1;
     }
 
     private IEnumerable<GroupItemDefault> GetGroupItems(

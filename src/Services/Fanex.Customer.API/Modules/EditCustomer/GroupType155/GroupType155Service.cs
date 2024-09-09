@@ -1,12 +1,13 @@
 using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels;
-using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType150;
 using Fanex.Customer.API.Modules.CreateCustomer.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.EditCustomer;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
+using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 using Newtonsoft.Json.Linq;
 
@@ -15,7 +16,8 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
 
 public class GroupType155Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
 {
-    public GroupType155Service() : base(null, null) { }
+    public GroupType155Service(IMessageService messageService, ICacheRefService cacheRefService) 
+        : base(messageService, cacheRefService) { }
 
     public override UpdateGroupTypeResult Validate(
         EditRequestContext context,
@@ -35,7 +37,7 @@ public class GroupType155Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         byte settingStatus)
     {
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_WinLossLimit_155_Upd");
-        var parameters = GenerateSPParams(context, groupItems, settingStatus);
+        var parameters = GenerateSPParams(context, groupItems, productGroupId, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
@@ -51,6 +53,7 @@ public class GroupType155Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     private Hashtable GenerateSPParams(
         EditRequestContext context, 
         IEnumerable<GroupItemDefault> groupItems, 
+        int productGroupId,
         byte settingStatus = 0)
     {
         var spParams = new Hashtable {
@@ -58,6 +61,7 @@ public class GroupType155Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             { "limit", ComposeJsonSettingParam(groupItems) },
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
+            { "groupid", productGroupId },
             { "ip", context.IP },
             { "settingstatus", settingStatus}
         };

@@ -1,4 +1,3 @@
-import { SportTypeIds } from '@customer-web-app/shared-constants';
 import { BetSettingsProps, GroupSettingItem } from '@customer-web-app/shared-group-settings-types';
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 
@@ -23,7 +22,7 @@ export default class BetSettingBaseValidator<T extends BetSettingsProps> {
   protected maxBet: number;
   protected maxPerMatch: number;
   protected upline: T;
-  protected $minConstraint: number;
+  protected $minConstraintBySystem: number;
   protected isSpecialSite: boolean;
 
   constructor(betSettingItem: T & GroupSettingItem<T>, isSpecialSite: boolean) {
@@ -35,16 +34,11 @@ export default class BetSettingBaseValidator<T extends BetSettingsProps> {
     this.upline = betSettingItem.upline;
     this.isSpecialSite = isSpecialSite;
 
-    const minConstraintBySystem = this.isSpecialBetTypeOfSpecialSite() ? 1 : 0;
-    this.$minConstraint = Math.max(minConstraintBySystem, this.upline?.minBet ?? 0);
+    this.$minConstraintBySystem = this.isSpecialSite ? 1 : 0;
   }
 
-  public isESportsOrMuayThai() {
-    return [SportTypeIds.ESports, SportTypeIds.MuayThai].includes(this.sportTypeId);
-  }
-
-  public isSpecialBetTypeOfSpecialSite() {
-    return this.isSpecialSite && this.isESportsOrMuayThai();
+  get $minConstraint() {
+    return Math.max(this.$minConstraintBySystem, this.upline?.minBet ?? 0);
   }
 
   public validateMinBet(): ValidateBetSetting {

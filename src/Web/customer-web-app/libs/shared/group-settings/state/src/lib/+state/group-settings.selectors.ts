@@ -10,6 +10,7 @@ import {
   ParlayMaxPayoutGroupItem,
   ProductGroup,
   ProductStatusGroupItem,
+  RNGGamesBetSettingGroupItem,
   SportsBookBetSettingGroupItem,
   SuperPositionTakingGroupItem,
   WinLossLimitGroupItem,
@@ -113,6 +114,16 @@ function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
       groupItem.maxBet !== groupItem.original.maxBet ||
       groupItem.maxPerMatch !== groupItem.original.maxPerMatch ||
       groupItem.maxPayoutPerMatch !== groupItem.original.maxPayoutPerMatch
+    );
+  }
+
+  if (groupTypeId === GroupTypeIds.RNGGamesBetSetting) {
+    const groupItem = item as RNGGamesBetSettingGroupItem;
+    return (
+      groupItem.minBet !== groupItem.original?.minBet ||
+      groupItem.maxBet !== groupItem.original.maxBet ||
+      groupItem.maxPerMatch !== groupItem.original.maxPerMatch ||
+      groupItem.maxPerBall !== groupItem.original.maxPerBall
     );
   }
 

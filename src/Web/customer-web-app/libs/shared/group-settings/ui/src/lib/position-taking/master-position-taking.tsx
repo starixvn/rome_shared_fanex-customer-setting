@@ -11,21 +11,19 @@ import {
   MasterPositionTakingGroupItem,
   MasterPositionTakingProps,
 } from '@customer-web-app/shared-group-settings-types';
-import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockColumn, BlockRefType, BlockRow } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
+import { scrollToBLock } from '../scroll-helper';
 import { GroupLabel } from './position-taking-group-label';
 import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
-import { PositionTakingBlockProps } from './types';
+import { CopyStatus, PositionTakingBlockProps, PTRowProps } from './types';
 import {
-  CopyStatus,
   CopyStatusPT,
   groupSportsBookPTBySportTypeId,
   isCopyingPTItem,
-  PTRowProps,
   renderNoneBlockColumn,
   usePTCopy,
 } from './utils';
@@ -78,7 +76,12 @@ function maxN3(m3: number) {
   return m3;
 }
 
-function MasterPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProps<MasterPositionTakingGroupItem>>) {
+function MasterPositionTakingRow({
+  item,
+  label,
+  copyStatus,
+  isReadOnly,
+}: Readonly<PTRowProps<MasterPositionTakingGroupItem>>) {
   const { isMultipleMode, handleSettingItemChange, productGroupId } = useGroupSettingContext();
 
   const handlePTChange = (data: { [x: string]: number | boolean }) => {
@@ -102,7 +105,7 @@ function MasterPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProp
               max={maxUS3(item.upline)}
               step={item.step}
               value={item.uS3}
-              isDisable={!item.isMultipleModeChecked}
+              isDisable={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 const uS3 = Number(e.target.value);
                 const masterMaxPT = maxM3Auto(item);
@@ -120,7 +123,7 @@ function MasterPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProp
               max={maxS3(item.upline)}
               step={item.step}
               value={item.s3}
-              isDisable={!item.isMultipleModeChecked}
+              isDisable={isReadOnly || !item.isMultipleModeChecked}
               onChange={(e) => {
                 const s3 = Number(e.target.value);
                 const masterMaxPT = maxM3(item, s3);
@@ -137,7 +140,7 @@ function MasterPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProp
           <input
             type="checkbox"
             checked={item.iS3}
-            disabled={!item.isMultipleModeChecked}
+            disabled={isReadOnly || !item.isMultipleModeChecked}
             onChange={(e) => {
               const isAuto = e.target.checked;
               const s3 = item.s3 > maxS3(item) ? maxS3(item) : item.s3;
@@ -161,7 +164,7 @@ function MasterPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProp
             max={item.iS3 ? maxM3Auto(item.upline) : maxM3(item.upline, item.s3)}
             step={item.step}
             value={item.m3}
-            isDisable={!item.isMultipleModeChecked}
+            isDisable={isReadOnly || !item.isMultipleModeChecked}
             onChange={(e) => {
               const m3 = Number(e.target.value);
               const n3 = item.n3 > m3 ? m3 : item.n3;
@@ -172,7 +175,7 @@ function MasterPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProp
       </BlockColumn>
       <BlockColumn>
         <div className={classNames('center', copyRowStyle, { 'is-multiple-mode': isMultipleMode })}>
-          {isMultipleMode && (
+          {isMultipleMode && !isReadOnly && (
             <div className={styles['checkbox-multiple']}>
               <input
                 type="checkbox"
@@ -187,7 +190,7 @@ function MasterPositionTakingRow({ item, label, copyStatus }: Readonly<PTRowProp
             max={maxN3(item.m3)}
             step={item.step}
             value={item.n3}
-            isDisable={!item.isMultipleModeChecked && !item.isUpdateMinPtOnly}
+            isDisable={isReadOnly || (!item.isMultipleModeChecked && !item.isUpdateMinPtOnly)}
             onChange={(e) => handlePTChange({ n3: Number(e.target.value) })}
           />
         </div>
@@ -227,6 +230,7 @@ const copyMasterPTValues = (
 };
 
 type PositionTakingRowProps = {
+  isReadOnly: boolean;
   productGroupId: number;
   ptItems: MasterPositionTakingGroupItem[];
   copyIconId: number | undefined;
@@ -239,6 +243,7 @@ type PositionTakingRowProps = {
 };
 
 function PositionTakingRows({
+  isReadOnly,
   productGroupId,
   ptItems,
   copyIconId,
@@ -251,6 +256,7 @@ function PositionTakingRows({
     const firstGroupItem = group[0];
     const groupPTLabel = (
       <GroupLabel
+        isReadOnly={isReadOnly}
         copyIconId={copyIconId}
         firstGroupItem={firstGroupItem}
         group={group}
@@ -273,6 +279,7 @@ function PositionTakingRows({
         {group?.map((item, index) => {
           const ptLabel = (
             <PTLabel
+              isReadOnly={isReadOnly}
               group={group}
               itemIndex={index}
               item={item}
@@ -283,6 +290,7 @@ function PositionTakingRows({
           );
           return (
             <MasterPositionTakingRow
+              isReadOnly={isReadOnly}
               key={`${item.sportTypeId}-${item.betTypeId}-${item.isLive}`}
               item={item}
               label={ptLabel}
@@ -437,7 +445,9 @@ const MasterPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPr
       <BlockRow
         isHeaderRow
         label={
-          isMultipleMode && (
+          isMultipleMode &&
+          masterPTs.length > 1 &&
+          !props.isReadOnly && (
             <div style={{ display: 'flex', marginLeft: '2px' }}>
               <input
                 type="checkbox"
@@ -455,6 +465,7 @@ const MasterPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPr
         ))}
       </BlockRow>
       <PositionTakingRows
+        isReadOnly={props.isReadOnly}
         productGroupId={groupId}
         ptItems={masterPTs}
         copyIconId={copyIconId}

@@ -16,6 +16,7 @@ export const UserLevelName: { [key: number]: string } = {
 
 export const ProductGroupIds = {
   SportsBook: 1,
+  RNGGames: 2,
 };
 
 export const isSportsBookProduct = (productGroupId: number | undefined) =>
