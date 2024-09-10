@@ -27,7 +27,7 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
     {
         Regex NicknameRule = new Regex(@"^[a-zA-Z0-9]{5,20}$");
 
-        return NicknameRule.IsMatch(request.NickName);
+        return String.IsNullOrEmpty(request.NickName) || NicknameRule.IsMatch(request.NickName);
     }
 
     protected override int IsResetNickName => 1;
@@ -35,7 +35,7 @@ public class CreateNickNameSubAccountService : BaseSubAccountService, ICreateNic
     protected override async Task<CreateCustomerResult> Register(BaseSubAccountRequest request)
     {
         var nickNameRequest = (CreateNickNameRequest)request;
-        if(!nickNameRequest.IsEnableUpdateNickname)
+        if (!nickNameRequest.IsEnableUpdateNickname)
         {
             return await UpdateLoginNickNameOnlyMode(nickNameRequest, nickNameRequest.SubAccId);
         }

@@ -28,7 +28,7 @@ public class CreateNickNameService : ICreateNickNameService
     {
         Regex NicknameRule = new Regex(@"^[a-zA-Z0-9]{5,20}$");
 
-        return NicknameRule.IsMatch(nickName);
+        return !string.IsNullOrEmpty(nickName) || NicknameRule.IsMatch(nickName);
     }
 
     public async Task<CustomerSettingResult> Create(CreateNickNameRequest request)
