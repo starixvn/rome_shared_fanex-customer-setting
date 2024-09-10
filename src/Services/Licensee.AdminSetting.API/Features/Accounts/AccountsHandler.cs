@@ -19,6 +19,11 @@ namespace Licensee.AdminSetting.API.Features.Accounts
         public async Task<Result> CreateDummyMember(CreateDummyMemberRequest request)
         {
             var siteDBConfig = await siteDBHandler.GetByCustId(request.AgentId);
+            if (siteDBConfig == null)
+            {
+                return new Result(911, "Create customer failed. Please try again.");
+            }
+
             var siteId = await siteDBHandler.GetSiteId(siteDBConfig.Site);
 
             var checkOddspreadAdjustmentResult = await CheckOddspreadAdjustment(siteId);

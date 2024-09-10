@@ -20,11 +20,14 @@ public class LicenseesHandler(
     Fanex.Logging.ILogger logger)
     : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, logger), ILicenseesHandler
 {
-
-
     public async Task<Result> CreateLicensee(CreateLicenseeRequest request)
     {
         var siteDBConfig = await siteDBHandler.GetBySiteDBGroupId(request.SiteDBGroupId);
+        if (siteDBConfig == null)
+        {
+            return new Result(911, "Create customer failed. Please try again.");
+        }
+
         var validationResult = await ValidateRequest(request.SiteName, CreateMode.NewLicensee, request, siteDBConfig.CustDBGroupId);
 
         if (validationResult.IsNotOK)

@@ -27,6 +27,11 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         public async Task<Result> CreateCurrency(CreateCurrencyRequest request)
         {
             var siteDBConfig = await siteDBHandler.GetBySite(request.SiteName);
+            if (siteDBConfig == null)
+            {
+                return new Result(911, "Create customer failed. Please try again.");
+            }
+
             var validationResult = await ValidateRequest(request.SiteName, CreateMode.NewCurrency, request, siteDBConfig.CustDBGroupId);
             if (validationResult.IsNotOK)
             {
