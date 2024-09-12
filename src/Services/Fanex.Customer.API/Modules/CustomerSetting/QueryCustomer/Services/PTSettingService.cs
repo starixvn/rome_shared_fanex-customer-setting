@@ -1,4 +1,3 @@
-using Fanex.Customer.API.Modules.CreateCustomer.Resources;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
@@ -43,7 +42,7 @@ public class PTSettingService : BaseQueryCustomerService, IPTSettingService
                     var groupType = new GroupType
                     {
                         Id = t.Key.GroupType,
-                        Name = Labels.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
+                        Name = Resources.Resources.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
                         DisplayType = t.Key.DisplayType,
                         GroupItems =
                         ((IEnumerable<GroupItemDefault>)groupItems).Join(
