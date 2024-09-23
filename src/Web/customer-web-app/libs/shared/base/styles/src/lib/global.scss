@@ -101,6 +101,8 @@
 
   --color-badge-live: #ededed;
   --bg-notAvailable: #ababab;
+
+  --bg-first-load: rgba(255, 255, 255, 0.5);
 }
 
 :root [data-theme='dark'] {
@@ -195,6 +197,7 @@
   --color-sub-title: #3e74a3;
   --bg-row-empty: #212121;
   --bg-block-pt: #171717;
+  --bg-first-load: rgba(69, 69, 69, .7);
 }
 
 input[type='text'],
