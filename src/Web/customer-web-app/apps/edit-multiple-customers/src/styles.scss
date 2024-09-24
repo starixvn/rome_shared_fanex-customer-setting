@@ -15,7 +15,7 @@ body {
 }
 
 .block-loading {
-  background: url('./assets/images/loading.gif') no-repeat center center;
+  background: var(--icon-first-load) no-repeat center center;
   bottom: 0;
   left: 0;
   position: fixed;

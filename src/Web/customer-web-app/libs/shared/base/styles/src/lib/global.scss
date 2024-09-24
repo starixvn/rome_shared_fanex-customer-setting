@@ -103,6 +103,7 @@
   --bg-notAvailable: #ababab;
 
   --bg-first-load: rgba(255, 255, 255, 0.5);
+  --icon-first-load: url('./assets/images/loading.gif');
 }
 
 :root [data-theme='dark'] {
@@ -197,7 +198,9 @@
   --color-sub-title: #3e74a3;
   --bg-row-empty: #212121;
   --bg-block-pt: #171717;
+
   --bg-first-load: rgba(69, 69, 69, .7);
+  --icon-first-load: url('./assets/images/loading-dark.gif');
 }
 
 input[type='text'],
