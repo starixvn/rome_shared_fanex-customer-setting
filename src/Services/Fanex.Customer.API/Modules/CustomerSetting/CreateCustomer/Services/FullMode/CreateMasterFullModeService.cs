@@ -11,9 +11,6 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
 public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
-
-    private const string CheckPermissionSPName = "Acc_GetDeniedSiteCurrencyByUser";
-
     private const string ValidateSPName = "Acc_CustomerInsMember_SAg_Validate";
 
     private const string RegisterSPName = "Acc_CustomerIns_Register";
@@ -31,13 +28,7 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
 
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
-        var result = await CheckPermission(request);
-        if (!result.IsSuccessful)
-        {
-            return result;
-        }
-        
-        result = await ValidateSetting(request);
+        var result = await ValidateSetting(request);
         if (!result.IsSuccessful)
         {
             return result;
@@ -57,28 +48,6 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
         }
 
         return result;
-    }
-
-    private async Task<CreateCustomerResult> CheckPermission(CreateRequest request)
-    {
-        if(request.Context.SystemId != Systems.NAP)
-        {
-            return new CreateCustomerResult(0);
-        }
-
-        var parameters = new Hashtable
-        {
-            { "site", request.Settings.GeneralInfo.Site },
-            { "currency", request.Settings.GeneralInfo.Currency },
-            { "creator", request.Context.CreatorId },
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CheckPermissionSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)

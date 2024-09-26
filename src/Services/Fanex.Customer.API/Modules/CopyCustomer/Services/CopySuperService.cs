@@ -9,8 +9,6 @@ namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
 
 public class CopySuperService : CopyCustomerBaseService
 {
-    private const string CheckPermissionSPName = "Acc_GetDeniedSiteCurrencyByUser";
-
     private const string ValidateSPName = "Acc_CustomerInsMember_CloneSetting_Validate";
 
     private const string RegisterSPName = "Acc_CustomerIns_Register";
@@ -27,13 +25,7 @@ public class CopySuperService : CopyCustomerBaseService
 
     public override async Task<CopyCustomerResult> Copy(CopyCustomerRequest request)
     {
-        var result = await CheckPermission(request);
-        if (!result.IsSuccessful)
-        {
-            return result;
-        }
-        
-        result = await Validate(request);
+        var result = await Validate(request);
         if (!result.IsSuccessful)
         {
             return result;
@@ -53,22 +45,6 @@ public class CopySuperService : CopyCustomerBaseService
         }
 
         return result;
-    }
-
-    private async Task<CopyCustomerResult> CheckPermission(CopyCustomerRequest request)
-    {
-        var parameters = new Hashtable
-        {
-            { "site", request.Site },
-            { "creator", request.ActorId },
-            { "language", request.LanguageKey },
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(CheckPermissionSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Language);
-        return new CopyCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), 0, msg.MainMessage);
     }
 
     private async Task<CopyCustomerResult> Validate(CopyCustomerRequest request)
