@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/icons/style.css';
 @import './assets/roboto/roboto.css';
+:root [data-theme='light'] {
+  --icon-first-load: url('./assets/images/loading.gif');
+}
 
+:root [data-theme='dark'] {
+  --icon-first-load: url('./assets/images/loading-dark.gif');
+}
 body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 400;
