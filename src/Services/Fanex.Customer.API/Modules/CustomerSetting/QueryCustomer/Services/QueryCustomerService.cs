@@ -75,7 +75,11 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         var customerSetting = new CustomerSettingModel
         {
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(request.SiteLabel))
+            ProductGroups = GetProductGroups(
+                settingProfile, 
+                request, 
+                appSettings.Belonging777Group(request.SiteLabel), 
+                generalInfo)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = 0;
@@ -96,7 +100,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         var customerSetting = new CustomerSettingModel
         {
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel))
+            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
@@ -129,7 +133,11 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         return commissions;
     }
 
-    private IEnumerable<ProductGroup> GetProductGroups(IEnumerable<SettingProfile> settingProfile, BaseQueryRequest request, bool isSiteLabel777)
+    private IEnumerable<ProductGroup> GetProductGroups(
+        IEnumerable<SettingProfile> settingProfile, 
+        BaseQueryRequest request, 
+        bool isSiteLabel777,
+        GeneralInformation generalInfo)
     {
         return settingProfile.Where(p => p.DisplayMode != 3 && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
@@ -137,7 +145,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
             GroupTypes = ((typeof(QueryRequest) == request.GetType()) ?
-            (((QueryRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryRequest)request, isSiteLabel777) : GetGroupTypes(g, (QueryRequest)request, isSiteLabel777)) :
+            (((QueryRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryRequest)request, isSiteLabel777, generalInfo) : GetGroupTypes(g, (QueryRequest)request, isSiteLabel777)) :
             GetGroupTypesForSuper(g, (QuerySuperRequest)request, isSiteLabel777)).Where(gt => gt != null)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
@@ -210,7 +218,11 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         }).ToEnumerable().ToList(); // Must use ToList to prevent call SP 2 times because of Any method in the next action.
     }
 
-    private IEnumerable<GroupType> GetGroupTypesForEdit(IGrouping<int, SettingProfile> g, QueryRequest request, bool isSiteLabel777)
+    private IEnumerable<GroupType> GetGroupTypesForEdit(
+        IGrouping<int, SettingProfile> g, 
+        QueryRequest request, 
+        bool isSiteLabel777,
+        GeneralInformation generalInfo)
     {
         return g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
         .SelectAwait(async t =>
@@ -218,7 +230,19 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
             var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevelAndUplineLevel(t.Key.GroupType, request.RoleId, request.UplineRoleId.Value) : t.Key.GroupType;
             if (groupItemMapping.TryGetValue(groupTypeWithRoleId, out dynamic value))
             {
-                var groupItems = await value.QueryForEdit(request.CustId, request.RoleId, request.UplineRoleId, g.Key, t.Key.GroupType);
+                var groupItems = await value.QueryForEdit(
+                    request.CustId, 
+                    request.RoleId, 
+                    request.UplineRoleId, 
+                    g.Key, 
+                    t.Key.GroupType, 
+                    request.IsMultipleMode,
+                    generalInfo.Currency,
+                    generalInfo.Site,
+                    request.SystemId,
+                    request.GroupName,
+                    request.IsCopy);
+              
                 var groupType = new GroupType
                 {
                     Id = t.Key.GroupType,

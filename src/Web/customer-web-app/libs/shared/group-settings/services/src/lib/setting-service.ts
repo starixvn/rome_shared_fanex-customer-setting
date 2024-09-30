@@ -54,12 +54,15 @@ export const SettingService = {
     roleId: number,
     uplineRoleId = 0,
     isGetUpLine = false,
-    siteLabel = ''
+    siteLabel = '',
+    isMultipleMode=false,
+    groupName='',
+    isCopy=false
   ): Promise<GroupSettingsResponse> => {
     const response = await axiosInstance.get<GroupSettingsResponse>(
       `Customer/GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${
         appConfig.systemId
-      }&siteLabel=${siteLabel}&productGroupId=${params.productGroupId ?? ProductGroupIds.SportsBook}`
+      }&siteLabel=${siteLabel}&productGroupId=${params.productGroupId ?? ProductGroupIds.SportsBook}&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
     );
     return response.data;
   },

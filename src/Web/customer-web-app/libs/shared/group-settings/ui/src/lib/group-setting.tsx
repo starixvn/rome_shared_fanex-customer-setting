@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
-import { GroupTypeIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { GroupType } from '@customer-web-app/shared-group-settings-types';
 
@@ -13,9 +13,10 @@ import ParlayMaxPayout from './parlay-max-payout';
 import PositionTaking from './position-taking';
 import ProductStatus from './product-status';
 import WinLossLimit from './win-loss-limit';
+import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 
 export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(_, ref) {
-  const { productGroups, productGroupId } = useGroupSettingContext();
+  const { productGroups, productGroupId, roleId } = useGroupSettingContext();
   const productGroup = productGroups?.find((x) => x.id === productGroupId);
 
   const betSettingRef = useRef<ValidationRefType>(null);
@@ -85,6 +86,25 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
   const renderGroupTypeSetting = (groupType: GroupType) => {
     const { id, isReadOnly, isAllowUncheckAll, groupItems } = groupType;
 
+    if(roleId === UserLevel.Super && AppConfigHelper.isNapSystem()) {
+      switch (id) {
+        case GroupTypeIds.SportsBookBetSetting:
+          return <SportsBookBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
+        case GroupTypeIds.RNGGamesBetSetting:
+          return <RNGGamesBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
+        case GroupTypeIds.ParlayMaxPayout:
+          return <ParlayMaxPayout isReadOnly={isReadOnly} ref={parlayMaxPayoutRef} />;
+        case GroupTypeIds.BetLimit:
+          return (
+            groupItems.length > 0 && (
+              <BetLimit isReadOnly={isReadOnly} ref={betLimitRef} isAllowUncheckAll={isAllowUncheckAll} />
+            )
+          );
+        default:
+          return null;
+      }
+    }
+    
     switch (id) {
       case GroupTypeIds.ProductStatus:
         return <ProductStatus isReadOnly={isReadOnly} />;

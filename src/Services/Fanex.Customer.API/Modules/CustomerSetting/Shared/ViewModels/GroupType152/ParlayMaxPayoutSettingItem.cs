@@ -47,6 +47,11 @@ public class ParlayMaxPayoutSettingItem : GroupItemDefault
     [JsonIgnore]
     public ParlayMaxPayoutSettingItem Upline { get; set; }
 
+    public bool SingleMatchParlayMultipleMode { get; set; }
+    public bool Combo2MultipleMode { get; set; }
+    public bool Combo35MultipleMode { get; set; }
+    public bool ComboOver6MultipleMode { get; set; }
+
     public override void MapUpline()
     {
         if(UplineSingleMatchParlay.HasValue)

@@ -33,6 +33,11 @@ public class BetSettingItem : GroupItemDefault
     [JsonIgnore]
     public BetSettingItem Upline { get; set; }
 
+    public bool MinBetMultipleMode { get; set; }
+    public bool MaxBetMultipleMode { get; set; }
+    public bool MaxPerMatchMultipleMode { get; set; }
+    public bool MaxPerBallMultipleMode { get; set; }
+
     public override void MapUpline()
     {
         Upline = new BetSettingItem

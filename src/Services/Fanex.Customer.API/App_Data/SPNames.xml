@@ -297,6 +297,7 @@
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
     </Setting>
     <Setting Key="Acc_CustSetting_BetSetting151Upd" SpName="Acc_CustSetting_BetSetting151Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_BetSetting151Upd_Multi" SpName="Acc_CustSetting_BetSetting151Upd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_MaxPayoutSelect" SpName="Acc_CustSetting_MaxPayoutSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
@@ -310,6 +311,7 @@
       <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
     </Setting>
     <Setting Key="Acc_CustSetting_MaxPayoutUpd" SpName="Acc_CustSetting_MaxPayoutUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_MaxPayoutUpd_Multi" SpName="Acc_CustSetting_MaxPayoutUpd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_LimitPTDailyCheck" SpName="Age_LimitPTDailyCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_LimitPTCheck_MultiCust" SpName="Age_LimitPTCheck_MultiCust" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_MemberPT_153_Select" SpName="Acc_CustSetting_MemberPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
@@ -347,6 +349,7 @@
       <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="SuperCommissionGroup" />
     </Setting>
     <Setting Key="Acc_CustSetting_BetSetting_154_Upd" SpName="Acc_CustSetting_BetSetting_154_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_BetSetting_154_Upd_Multi" SpName="Acc_CustSetting_BetSetting_154_Upd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_BetSetting_154_Select" SpName="Acc_CustSetting_BetSetting_154_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
@@ -382,6 +385,10 @@
     </Setting>
     <Setting Key="Acc_CustSetting_DisableProductStatus_160_Upd" SpName="Acc_CustSetting_DisableProductStatus_160_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_StakeLevel_158_Select" SpName="Acc_CustSetting_StakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+    </Setting>
+      <Setting Key="Acc_CustSetting_GlobalStakeLevel_158_Select" SpName="Acc_CustSetting_GlobalStakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
     </Setting>

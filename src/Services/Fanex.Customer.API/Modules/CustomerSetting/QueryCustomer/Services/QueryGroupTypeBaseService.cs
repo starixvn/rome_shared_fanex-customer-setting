@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Modules.CreateCustomer.Criteria.EditSettings.GroupType158;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType150;
@@ -21,7 +22,18 @@ public interface IQueryGroupTypeBaseService<T>
 
     Task<IEnumerable<T>> QuerySuperForAddNew(string site, int currency, int groupId, int groupType);
 
-    Task<IEnumerable<T>> QueryForEdit(int custId, byte roleId, byte? uplineRoleId, int groupId, int groupType);
+    Task<IEnumerable<T>> QueryForEdit(
+        int custId, 
+        byte roleId, 
+        byte? uplineRoleId,
+        int groupId, 
+        int groupType, 
+        bool isMultipleMode,
+        int currency,
+        string site,
+        byte systemId,
+        string userGroup,
+        bool isCopy);
 }
 
 public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
@@ -59,9 +71,32 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
                 groupType,
                 appSettings.SettingStatus));
 
-    public async Task<IEnumerable<T>> QueryForEdit(int custId, byte roleId, byte? uplineRoleId, int groupId, int groupType)
+    public async Task<IEnumerable<T>> QueryForEdit(
+        int custId, 
+        byte roleId, 
+        byte? uplineRoleId, 
+        int groupId, 
+        int groupType, 
+        bool isMultipleMode,
+        int currency,
+        string site,
+        byte systemId,
+        string userGroup,
+        bool isCopy)
     {
-        var criteria = GetQueryForEditCriteria(custId, roleId, uplineRoleId, groupId, groupType);
+        var criteria = GetQueryForEditCriteria(
+            custId, 
+            roleId, 
+            uplineRoleId, 
+            groupId, 
+            groupType, 
+            isMultipleMode,
+            currency,
+            site,
+            systemId,
+            userGroup,
+            isCopy);
+
         if (criteria == null)
         {
             return Enumerable.Empty<T>();
@@ -70,8 +105,26 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         return await dynamicRepository.FetchAsync<T>(criteria);
     }
 
-    private ICriteria GetQueryForEditCriteria(int custId, byte roleId, byte? uplineRoleId, int groupId, int groupType)
+    private ICriteria GetQueryForEditCriteria(
+        int custId, 
+        byte roleId, 
+        byte? uplineRoleId, 
+        int groupId, 
+        int groupType, 
+        bool isMultipleMode,
+        int currency,
+        string site,
+        byte systemId,
+        string userGroup,
+        bool isCopy)
     {
+        if(isMultipleMode 
+            && !isCopy
+            && roleId == CustomerLevel.Super 
+            && groupType == GroupTypes.StakeLevel) {
+            return new GetGlobalStakeLevelCriteria(currency, site, appSettings.SettingStatus, systemId, userGroup);
+        }
+
         return groupType switch
         {
             GroupTypes.SBCommission => new GetSBCommissionCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), appSettings.SettingStatus),

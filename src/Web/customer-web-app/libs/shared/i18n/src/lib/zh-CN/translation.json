@@ -116,6 +116,7 @@
   "CannotUpdateCredit": "You do not have permission on update credit.",
   "YouAreNotAuthorized": "您没有使用此功能的权限",
   "SelectAll": "全选",
+  "SelectAllSports": "全选",
   "MasterSetMemberPtTitle": "您已更改此总代理不再自动占成.",
   "AgentSetMemberPtTitle": "您已更改于此代理不使用自动占成",
   "UpdateAllMemberPt": "您是否要把所有会员的占成数更改为:",

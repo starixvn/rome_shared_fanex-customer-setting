@@ -49,7 +49,8 @@ export function CreateCustomerPage() {
         params.uplineRoleId,
         0,
         false,
-        params.siteLabel
+        params.siteLabel,
+        false
       );
       const newProductGroups = handleInitProducts(productGroups, params.uplineRoleId);
       if (appConfig.systemId !== SystemIds.NAP) {

@@ -9,6 +9,7 @@ export type GroupSettingsContextType = {
   productGroups: ProductGroup[];
   isMultipleMode: boolean;
   isEditMode: boolean;
+  roleId: number;
   updateGroupSetting: (groupTypeId: number) => void;
   handleSettingItemChange: (
     groupId: number,

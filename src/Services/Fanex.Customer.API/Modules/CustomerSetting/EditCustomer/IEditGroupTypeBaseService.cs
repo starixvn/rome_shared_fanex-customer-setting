@@ -18,4 +18,11 @@ public interface IEditGroupTypeBaseService
         int groupTypeId,
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus);
+
+    Task<UpdateGroupTypeResult> UpdateByColumns(
+        EditRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus);
 }

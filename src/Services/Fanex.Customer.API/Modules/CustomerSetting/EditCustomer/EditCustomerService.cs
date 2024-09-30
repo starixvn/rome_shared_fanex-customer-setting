@@ -16,6 +16,7 @@ using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
+using Fanex.Customer.API.Constants;
 
 namespace Fanex.Customer.API.Modules.EditCustomer.Services;
 
@@ -108,7 +109,8 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         var subResults = new List<UpdateGroupTypeResult>();
         CustomerSettingResult uMResult = uMService.GetUMResult(request.Context.CustId, request.Settings.ProductGroups.FirstOrDefault()?.Id ?? 0, updatedSportTypes, request.Context.Language);
 
-        if (request.Settings.GeneralInfo != null)
+        if (request.Settings.GeneralInfo != null 
+            && !(request.Context.IsMultipleMode && request.Context.RoleId == CustomerLevel.Super))
         {
             subResults.Add(await UpdateGeneralInfo(request));
         }
@@ -117,6 +119,16 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         {
             foreach (var groupType in productGroup.GroupTypes.Where(gt => !gt.IsReadOnly))
             {
+                var allowEdit = request.Context.EditFuntion == EditFuntionConstants.EditMultipleSuperWinLimit
+                    || !request.Context.IsMultipleMode
+                    || request.Context.RoleId != CustomerLevel.Super
+                    || groupType.Id == GroupTypes.BetSetting
+                    || groupType.Id == GroupTypes.BetSettingWithMaxPerBall
+                    || groupType.Id == GroupTypes.ParlayMaxPayout
+                    || groupType.Id == GroupTypes.StakeLevel;
+
+                if(!allowEdit) { continue; }
+
                 if (request.Context.RoleId == (byte)CustomerLevel.Member &&
                     helperService.IsPTGroupType(groupType.Id)
                     && groupedPTMemberIds != null
@@ -157,6 +169,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             await UpdateGroupedPTMembers(request);
         }
 
+        request.Context.IsMultipleMode = true;    
         foreach (var updatedCustomer in request.Context.UpdatedCustomerList)
         {
             request.Context.CustId = updatedCustomer.CustId;
@@ -227,6 +240,11 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
          byte settingStatus)
     {
         IEditGroupTypeBaseService editGrouptypeService = groupItemForEditMapping[groupTypeId];
+
+        if(context.IsMultipleMode && context.RoleId == CustomerLevel.Super) {
+          return await editGrouptypeService.UpdateByColumns(context, productGroupId, groupTypeId, groupItems, settingStatus);       
+        }
+
         return await editGrouptypeService.Update(context, productGroupId, groupTypeId, groupItems, settingStatus);
     }
 

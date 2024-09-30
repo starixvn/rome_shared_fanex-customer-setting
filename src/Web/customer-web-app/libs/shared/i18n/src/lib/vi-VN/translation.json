@@ -115,6 +115,7 @@
   "CannotUpdateCredit": "You do not have permission on update credit.",
   "YouAreNotAuthorized": "Bạn không được cho phép sử dụng chức năng này",
   "SelectAll": "Chọn tất cả",
+  "SelectAllSports": "Chọn tất cả",
   "MasterSetMemberPtTitle": "Bạn vừa mới ngăn Master này lấy Auto PT.",
   "AgentSetMemberPtTitle": "Bạn vừa mới ngăn Agent này lấy Auto PT.",
   "UpdateAllMemberPt": "Bạn có muốn cập nhật giá trị PTcủa tất cả các thành viên:",
