@@ -84,5 +84,9 @@
   "BBINBetSetting2": "[BBIN]: Hoa hồng không được áp dụng cho sản phẩm BBIN, kể từ ngày 11/9/2023 (dd/mm/yyyy). Ngoài ra, khi bạn chỉnh sửa cài đặt của Member, những cài đặt mới này sẽ bắt đầu có hiệu lực kể từ lần chuyển khoản tiếp theo của họ.",
   "FGGNote": "[FGG]: Hoa hồng không được áp dụng cho sản phẩm FGG",
   "WinLossLimitNote1": "Live Casino: So sánh Giới hạn Thắng/Thua với Thắng/Thua của TỪNG sản phẩm.",
-  "WinLossLimitNote2": "RNG Casino: So sánh Giới hạn Thắng/Thua với Tổng Thắng/Thua của TẤT CẢ sản phẩm."
+  "WinLossLimitNote2": "RNG Casino: So sánh Giới hạn Thắng/Thua với Tổng Thắng/Thua của TẤT CẢ sản phẩm.",
+
+  "MaxWinLoss": "Maximum Win/Loss refers to the highest amount a Member can win or lose. Bets will be denied if a Member’s total win/loss exceeds the limit.",
+  "MaxWin": "Maximum Win = Selected multiplier * Given Credit",
+  "MaxLoss": "Maximum Loss: Upline's Maximum Loss value"
 }

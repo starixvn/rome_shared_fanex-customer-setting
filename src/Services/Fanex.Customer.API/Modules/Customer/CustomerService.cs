@@ -47,6 +47,8 @@ public interface ICustomerService
     Task<List<string>> GetBackupDomains(string site, byte roleId);
 
     Task<AccountInfo> GetAccountInfo(int custId);
+
+    Task<Object> GetWinLossLimitInformation(GetProductCategoriesRequest request);
 }
 
 public class CustomerService : ICustomerService
@@ -347,5 +349,45 @@ public class CustomerService : ICustomerService
         var domains = await GetBackupDomains(accountInfo.Site, accountInfo.RoleId);
         accountInfo.Domains = domains;
         return accountInfo;
+    }
+
+    public async Task<Object> GetWinLossLimitInformation(GetProductCategoriesRequest request)
+    {
+        const int RNGGameGroupdId = 2;
+
+        var products = (await dynamicRepository.FetchAsync<ProductCategories>(new GetProductCategoriesCriteria(appSettings.SettingStatus, request.Site, request.CustId, request.CurrencyId))).ToList();
+
+        var groupedData = products
+            .Where(p => p.GroupId == RNGGameGroupdId)
+            .GroupBy(d => d.GroupId)
+            .Select(group => new
+            {
+                Id = group.Key,
+                Name = cacheRefService.GetProductGroupName(group.Key, request.Language),
+                Products = group.GroupBy(d => d.SubGroupId)
+                    .Select(subGroup => new
+                    {
+                        Id = subGroup.Key,
+                        Name = cacheRefService.GetSubGroupName(subGroup.Key, request.Language),
+                        Products = subGroup
+                            .GroupBy(g => new { g.GroupId, g.SubGroupId, g.RealProductId })
+                            .Select(d => new
+                            {
+                                Id = d.Key.RealProductId,
+                                Name = cacheRefService.GetProductName(d.Key.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
+                                Products = ""
+                            })
+                            .ToList()
+                    })
+                    .ToList()
+            })
+            .ToList();
+
+        var jsonResponse = new
+        {
+            ProductSettingInfo = groupedData
+        };
+        
+        return jsonResponse;
     }
 }

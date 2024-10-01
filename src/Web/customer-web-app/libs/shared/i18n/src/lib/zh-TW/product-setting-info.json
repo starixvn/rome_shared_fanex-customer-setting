@@ -10,8 +10,8 @@
   "Y7SMANote": "更新上線的投注設置可會減少所有下線的投注設置，以確保下線們不大於上線的投注設置。",
   "MemberNote": "輸入所有投注設置欄位= 0 防止會員進行投注。",
   "MixSportsParlayBetSetting": "混合體育過關n: 它的票不只是足球的混合過關. <br> 示例：足球 - 足球 - 籃球，網球 - 網球 - 網球，棒球 - 高爾夫 - 足球 - 美式足球",
-  "CommonWinLossLimitNote": "輸贏限額及每日限額自動重設將從上線複製。",
-  "RNGKenoNumberGameWinLossLimitNote": "將輸贏限額設定與每個產品的輸贏進行比較。",
+  "CommonWinLossLimitNote": "輸贏限額及每日限額自動重設從上線複製的。",
+  "RNGKenoNumberGameWinLossLimitNote": "將以輸贏限額與每個產品的輸贏進行比較。",
   "BBINBetSetting": "請知悉: [BBIN 產品] 當您更改會員的設置時，此新更改只會在會員轉額進遊戲後才會生效。",
   "WinLossLimitNote3": "投注限額, 輸贏限額. 輸限額, 及每日限額自動重設將從上線複製。",
   "CommonPTSettingNote1": "在精簡模式下，您可以在創建新下線時在佔成數模板功能中設置默認的佔成數模板。",
@@ -83,6 +83,10 @@
   "CustomerSettingInformation": "客戶設置信息",
   "BBINBetSetting2": "[BBIN]：不再提供佣金于BBIN产品從11/09/2023 始生效。此外，当您更改会员的设置时，此新更改只会在会员转额进游戏后才会生效。",
   "FGGNote": "[正博娛樂]: 不提供佣金於正博娛樂.",
-  "WinLossLimitNote1": "娛樂廳：將輸贏限額設定與每個產品的輸贏進行比較。",
-  "WinLossLimitNote2": "RNG娛樂城：將輸贏限額設定與所有產品的輸贏進行比較。"
+  "WinLossLimitNote1": "娛樂廳：將以輸贏限額與每個產品的輸贏進行比較。",
+  "WinLossLimitNote2": "娛樂城：將以輸贏限額與全部產品的輸贏進行比較。",
+
+  "MaxWinLoss": "最高贏輸限額是指會員可以贏取或輸的最高金額。如果會員的總贏/輸限額超過限制，則投注將被拒絕。",
+  "MaxWin": "最高贏額：選定乘數 * 信用額度",
+  "MaxLoss": "最高輸額: 輸入允許範圍內的數值"
 }
