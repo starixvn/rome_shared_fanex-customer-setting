@@ -78,6 +78,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             { "username", request.Settings.GeneralInfo.UserName },
             { "sitedbgroupid", request.Context.CustDBGroupID },
             { "site", request.Context.Site },
+            { "currency", request.Settings.GeneralInfo.Currency },
             { "roleid", CustomerLevel.Super },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
         };
