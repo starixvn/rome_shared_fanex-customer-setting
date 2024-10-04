@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AgentMinPTCannotBeGreaterThanAgentMaxPT" xml:space="preserve">
-    <value>ค่าความเสี่ยงขั้นต่ำของเอเจนท์ ต้องน้อยกว่าหรือเท่ากับ ค่าความเสี่ยงสูงสุดของเอเจนท์</value>
+    <value>ค่าความเสี่ยงต่ำสุดของเอเย่นต์ ต้องน้อยกว่าหรือเท่ากับ ค่าความเสี่ยงสูงสุดของเอเย่นต์</value>
     <comment/>
   </data>
   <data name="AllProducts" xml:space="preserve">
@@ -126,15 +126,15 @@
     <comment/>
   </data>
   <data name="Comm1" xml:space="preserve">
-    <value>คอมมิชชั่น 1 (คอมม1)</value>
+		<value>ค่าคอมฯ 1 (คอมม1)</value>
     <comment/>
   </data>
   <data name="Comm2" xml:space="preserve">
-    <value>คอมมิชชั่น 2 (คอมม2)</value>
+		<value>ค่าคอมฯ 2 (คอมม2)</value>
     <comment/>
   </data>
   <data name="Comm3" xml:space="preserve">
-    <value>ค่าคอมมิชชั่น3 (คอม3): นำไปใช้กับประเภทการเดิมพันอื่น ๆ</value>
+		<value>ค่าคอมฯ3 (คอม3): นำไปใช้กับประเภทการเดิมพันอื่น ๆ</value>
     <comment/>
   </data>
   <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
@@ -162,28 +162,28 @@
     <comment/>
   </data>
   <data name="GroupType150" xml:space="preserve">
-    <value>คอมมิชชั่น</value>
+    <value>ค่าคอมฯ</value>
   </data>
   <data name="GroupType151" xml:space="preserve">
-    <value>การกำหนดการวางเดิมพัน</value>
+    <value>การตั้งค่าเดิมพัน</value>
   </data>
   <data name="GroupType152" xml:space="preserve">
-    <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน</value>
+    <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด</value>
   </data>
   <data name="GroupType153" xml:space="preserve">
     <value>ค่าความเสี่ยง</value>
   </data>
   <data name="GroupType154" xml:space="preserve">
-    <value>การกำหนดการวางเดิมพัน</value>
+    <value>การตั้งค่าเดิมพัน</value>
   </data>
   <data name="GroupType156" xml:space="preserve">
-    <value>คอมมิชชั่น</value>
+    <value>ค่าคอมฯ</value>
   </data>
   <data name="GroupType158" xml:space="preserve">
     <value>วงเงินเดิมพัน</value>
   </data>
   <data name="GroupType159" xml:space="preserve">
-    <value>การกำหนดการวางเดิมพัน</value>
+    <value>การตั้งค่าเดิมพัน</value>
   </data>
   <data name="GroupType160" xml:space="preserve">
     <value>สถานะผลิตภันฑ์</value>
@@ -208,7 +208,7 @@
     <value/>
   </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
-    <value>ค่าความเสี่ยงขั้นต่ำของมาสเตอร์ต้องน้อยกว่าหรือเท่ากับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
+    <value>ค่าความเสี่ยงต่ำสุดของมาสเตอร์ต้องน้อยกว่าหรือเท่ากับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
     <comment/>
   </data>
   <data name="Max" xml:space="preserve">
@@ -346,19 +346,19 @@
     <comment/>
   </data>
   <data name="Msg_10071" xml:space="preserve">
-    <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของพาร์เลย์แมตช์เดี่ยวที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+    <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของพาร์เลย์แมตช์เดี่ยวที่ตั้งไว้ สูงกว่าอัพไลน์</value>
     <comment/>
   </data>
   <data name="Msg_10072" xml:space="preserve">
-    <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบ 2 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+    <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของคอมโบ 2 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
     <comment/>
   </data>
   <data name="Msg_10073" xml:space="preserve">
-    <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบ 3 - 5 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+    <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของคอมโบ 3 - 5 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
     <comment/>
   </data>
   <data name="Msg_10074" xml:space="preserve">
-    <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพัน: ค่าของคอมโบมากกว่า 6 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
+    <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของคอมโบมากกว่า 6 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
     <comment/>
   </data>
   <data name="Msg_10078" xml:space="preserve">
@@ -366,19 +366,19 @@
     <comment/>
   </data>
   <data name="Msg_20001" xml:space="preserve">
-    <value>การกำหนดไม่ถูกต้อง.</value>
+    <value>ค่าความเสี่ยงไม่ถูกต้อง.</value>
     <comment/>
   </data>
   <data name="Msg_20002" xml:space="preserve">
-    <value>การกำหนดไม่ถูกต้อง (สูงสุด หรือ ต่ำสุด อ้างอิงจากข้อมูลบริษัท).</value>
+    <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าสูงสุด/ต่ำสุด ที่กำหนดโดยบริษัท).</value>
     <comment/>
   </data>
   <data name="Msg_20005" xml:space="preserve">
-    <value>การกำหนดไม่ถูกต้อง (สูงสุด  อ้างอิงจากข้อมูลบริษัท).</value>
+    <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าสูงสุด ที่กำหนดโดยบริษัท).</value>
     <comment/>
   </data>
   <data name="Msg_20008" xml:space="preserve">
-    <value>การกำหนดตัวแทนไม่ถูกต้อง.</value>
+    <value>ค่าความเสี่ยงเอเย่นต์ไม่ถูกต้อง.</value>
     <comment/>
   </data>
   <data name="Msg_20019" xml:space="preserve">
@@ -406,47 +406,47 @@
     <comment/>
   </data>
   <data name="Msg_20025" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นต่ำ/ขั้นสูงสุดของทางต้นสาย</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงต่ำสุด/สูงสุดของทางอัพไลน์</value>
     <comment/>
   </data>
   <data name="Msg_20026" xml:space="preserve">
-    <value>การตั้งค่าเอเจนท์ต่างๆ ที่มีอยู่ก่อนแล้วเกินกว่าการตั้งค่าความเสี่ยงสูงสุดอันใหม่ของมาสเตอร์</value>
+    <value>เอเย่นต์ที่มีอยู่ มีค่าความเสี่ยงสูงกว่าค่าความเสี่ยงสูงสุดของมาสเตอร์ที่กำหนดใหม่</value>
     <comment/>
   </data>
   <data name="Msg_20027" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นสูงสุดของมาสเตอร์ ที่ทางบริษัทตั้งค่าไว้</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของมาสเตอร์ ที่กำหนดโดยบริษัท</value>
     <comment/>
   </data>
   <data name="Msg_20028" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นสูงสุดของซูเปอร์</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของซุปเปอร์</value>
     <comment/>
   </data>
   <data name="Msg_20029" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าความเสี่ยงขั้นต่ำของซูเปอร์</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงขั้นต่ำของซุปเปอร์</value>
     <comment/>
   </data>
   <data name="Msg_20030" xml:space="preserve">
-    <value>ค่าความเสี่ยงของเอเจนท์ขัดกับการตั้งค่าค่าความเสี่ยงขั้นสูงสุดของมาสเตอร์</value>
+    <value>ค่าความเสี่ยงของเอเย่นต์ขัดแย้งกับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
     <comment/>
   </data>
   <data name="Msg_20031" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นสูงสุดของมาสเตอร์</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
     <comment/>
   </data>
   <data name="Msg_20032" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าความเสี่ยงขั้นต่ำของมาสเตอร์</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงต่ำสุดของมาสเตอร์</value>
     <comment/>
   </data>
   <data name="Msg_20033" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าความเสี่ยงขั้นต่ำสุด/สูงสุดของเอเจนท์</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงต่ำสุด/สูงสุดของเอเย่นต์</value>
     <comment/>
   </data>
   <data name="Msg_20034" xml:space="preserve">
-    <value>ค่าความเสี่ยงขัดกับการตั้งค่าค่าความเสี่ยงขั้นสูงสุดของเอเจนท์</value>
+    <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของเอเย่นต์</value>
     <comment/>
   </data>
   <data name="Msg_20044" xml:space="preserve">
-    <value>คุณไม่ได้รับอนุญาตให้ใช้การตั้งค่าแบ่งสู้อัตโนมัติ โปรดติดต่ออัพไลน์ของคุณ</value>
+    <value>คุณไม่ได้รับอนุญาตให้ใช้การตั้งค่าความเสี่ยงอัตโนมัติ โปรดติดต่ออัพไลน์ของคุณ</value>
     <comment/>
   </data>
   <data name="Msg_20045" xml:space="preserve">
@@ -454,7 +454,7 @@
     <comment/>
   </data>
   <data name="Msg_20046" xml:space="preserve">
-    <value>ค่าแบ่งสู้ไม่ถูกต้อง (ค่าแบ่งสู้สูงสุดกำหนดโดยอัพไลน์)</value>
+    <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าความเสี่ยงสูงสุดกำหนดโดยอัพไลน์)</value>
     <comment/>
   </data>
   <data name="Msg_20047" xml:space="preserve">
@@ -462,7 +462,7 @@
     <comment/>
   </data>
   <data name="Msg_20048" xml:space="preserve">
-    <value>ค่าแบ่งสู้ไม่ถูกต้อง (ค่าแบ่งสู้ ต่ำสุด/สูงสุด กำหนดโดยอัพไลน์)</value>
+    <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าความเสี่ยง ต่ำสุด/สูงสุด กำหนดโดยอัพไลน์)</value>
     <comment/>
   </data>
   <data name="Msg_60033" xml:space="preserve">
@@ -488,7 +488,7 @@
     <value>ชื่อเล่นต้องไม่ซ้ำกัน ตัวอักษรหรือตัวเลขเท่านั้น ควรมีขั้นต่ำ 5 ตัวอักษร และสูงสุด 20 ตัวอักษร</value>
   </data>
   <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
-    <value>ค่าความเสี่ยงขั้นต่ำของซูเปอร์ต้องน้อยกว่าหรือเท่ากับค่าความเสี่ยงสูงสุดของซูเปอร์</value>
+    <value>ค่าความเสี่ยงต่ำสุดของซุปเปอร์ต้องน้อยกว่าหรือเท่ากับค่าความเสี่ยงสูงสุดของซุปเปอร์</value>
     <comment/>
   </data>
   <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
@@ -519,7 +519,7 @@
     <comment/>
   </data>
   <data name="UpdateSuccess_153" xml:space="preserve">
-    <value>การตั้งค่าแบ่งสู้ ได้อัพเดทเรียบร้อยแล้ว.</value>
+    <value>การตั้งค่าความเสี่ยง ได้เปลี่ยนแปลงเรียบร้อยแล้ว.</value>
     <comment/>
   </data>
   <data name="UpdateSuccess_154" xml:space="preserve">
@@ -547,7 +547,7 @@
     <comment/>
   </data>
   <data name="lbl1X2" xml:space="preserve">
-    <value>ราคาพูล</value>
+    <value>เต็มเวลา 1X2</value>
     <comment/>
   </data>
 </root>
