@@ -65,6 +65,8 @@ namespace Fanex.Customer.Client.Services
         Task<List<UpdateCustomerResult>> CopySupersWinLossLimit(CopySupersWinLossLimitParam param);
 
         Task<AccountInfo> GetAccountInfo(int custId);
+
+        Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currency, string language = "en-US");
     }
 
     public class CustomerService : ICustomerService
@@ -241,5 +243,15 @@ namespace Fanex.Customer.Client.Services
 
         public Task<AccountInfo> GetAccountInfo(int custId)
             => httpClient.GetAsJsonAsync<AccountInfo>($"account/{custId}");
+
+        public Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currencyId, string language = "en-US")
+        {
+            if (custId.HasValue)
+            {
+                return httpClient.GetStringAsync($"customer/win-loss-limit?custId={custId}&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
+            }
+            
+            return httpClient.GetStringAsync($"customer/win-loss-limit?&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
+        }
     }
 }

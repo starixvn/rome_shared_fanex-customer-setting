@@ -11,7 +11,7 @@
   "MemberNote": "Inputting all fields of bet setting = 0 to prevent members from playing the game.",
   "MixSportsParlayBetSetting": "Mix Sports Parlay: The parlay whose tickets are not just soccer. <br> Example: Soccer - Soccer - Basketball, Tennis - Tennis - Tennis, Basketball - Golf - Football.",
   "CommonWinLossLimitNote": "Win Loss Limit and Daily Auto Reset Limit are copied from the upline.",
-  "RNGKenoNumberGameWinLossLimitNote": "Compare the Win/Loss Limit settings with the Win/Loss of EACH product.",
+  "RNGKenoNumberGameWinLossLimitNote": "Compare Win/Loss Limit with Win/Loss of EACH product.",
   "BBINBetSetting": "Note that: [BBIN] when you edit member's settings, these new settings will take effect on member's next transfer.",
   "WinLossLimitNote3": "Bet Limit, Win Loss Limit, Loss Limit, and Daily Auto Reset Limit are copied from the upline.",
   "CommonPTSettingNote1": "In Lite Mode, you can set the default PT Template in the Position Taking Template function when creating new downlines.",
@@ -83,6 +83,11 @@
   "CustomerSettingInformation": "Customer Setting Information",
   "BBINBetSetting2": "[BBIN]: Commission is not applied to the BBIN product, with effective from 11/9/2023  (dd/mm/yyyy). Furthermore, when you edit member's settings, these new settings will take effect on member's next transfer.",
   "FGGNote": "[FGG] : Commission is not applied to FGG product.",
-  "WinLossLimitNote1": "Live Casino: Compare the Win/Loss Limit settings with the Win/Loss of EACH product.",
-  "WinLossLimitNote2": "RNG Casino: Compare the Win/Loss Limit settings with the total Win/Loss of ALL products."
+  "WinLossLimitNote1": "Live Casino: Compare Win/Loss Limit with Win/Loss of EACH product.",
+  "WinLossLimitNote2": "RNG Casino: Compare Win/Loss Limit with the total Win/Loss of ALL products.",
+
+  "MaxWinLoss": "Maximum Win/Loss refers to the highest amount a Member can win or lose. Bets will be denied if a Member’s total win/loss exceeds the limit.",
+  "MaxWin": "Maximum Win = Selected multiplier * Given Credit",
+  "MaxLoss": "Maximum Loss: Input value within the allowed range."
 }
+ 
