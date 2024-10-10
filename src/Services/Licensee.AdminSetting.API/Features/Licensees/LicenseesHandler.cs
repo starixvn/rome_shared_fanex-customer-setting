@@ -61,11 +61,22 @@ public class LicenseesHandler(
         return createResult.result;
     }
 
-    private async Task<Result> InsertBetRestrictionSite(int siteId, int custDBGroupId)
+    private async Task InsertBetRestrictionSite(int siteId, int custDBGroupId)
     {
-        var command = new InsertBetRestrictionSiteCommand(custDBGroupId, siteId);
-        await repository.ExecuteAsync(command);
-        return new Result(command.ErrCode, command.ErrMsg);
+        try
+        {
+            var command = new InsertBetRestrictionSiteCommand(custDBGroupId, siteId);
+            await repository.ExecuteAsync(command);
+            if (command.ErrCode > 0)
+            {
+                await logger.ErrorAsync(command.ErrMsg);
+            }
+        }
+        catch (Exception ex)
+        {
+            await logger.ErrorAsync(ex.Message, ex);
+        }
+
     }
 
     private async Task<(Result result, List<string> failedCurrencies)> CreateLicensee(CreateLicenseeRequest request, string customers, int siteId, int custDBGroupId)

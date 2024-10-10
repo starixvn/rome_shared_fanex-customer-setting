@@ -1,6 +1,5 @@
 using System.Text.Json;
 using Fanex.Data.Repository;
-using Licensee.AdminSetting.API.Features.Accounts;
 using Licensee.AdminSetting.API.Features.Licensees.Criteria;
 using Licensee.AdminSetting.API.Features.Shared;
 using Licensee.AdminSetting.API.Features.Shared.SiteDB;
@@ -18,12 +17,10 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         IDynamicRepository repository,
         ISiteDBHandler siteDBHandler,
         IUserLogHandler userLogHandler,
-        IAccountsHandler accountsHandler,
         Fanex.Logging.ILogger logger)
         : BaseHandler(configuration, repository, siteDBHandler, userLogHandler, logger), ICurrencyHandler
     {
 
-        private readonly IAccountsHandler accountsHandler = accountsHandler;
         public async Task<Result> CreateCurrency(CreateCurrencyRequest request)
         {
             var siteDBConfig = await siteDBHandler.GetBySite(request.SiteName);
@@ -97,11 +94,6 @@ namespace Licensee.AdminSetting.API.Features.Licensees
                 _ = Task.Run(() => InsertBalanceException(criteria.InsBalExceptCustList, siteDBConfig.SiteDBGroupId));
             }
 
-            if (!string.IsNullOrWhiteSpace(criteria.AgentList) && criteria.AgentList.Split(',').Length > 0)
-            {
-                _ = Task.Run(() => CreateDummyMembers(criteria.IP, criteria.AgentList.Split(',').Select(x => Convert.ToInt32(x)).ToArray()));
-            }
-
             if (!string.IsNullOrWhiteSpace(criteria.ListSuperRollBack))
             {
                 await RollbackMultiple(criteria.ListSuperRollBack);
@@ -122,19 +114,6 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             }
 
             return result;
-        }
-
-        protected Task CreateDummyMembers(string ip, int[] agentIds)
-        {
-            ParallelOptions parallelOptions = new()
-            {
-                MaxDegreeOfParallelism = 3
-            };
-
-            return Parallel.ForEachAsync(
-                agentIds,
-                parallelOptions,
-                async (agentId, _) => await Task.Run(() => accountsHandler.CreateDummyMember(new CreateDummyMemberRequest(agentId, 10278938, ip))));
         }
     }
 }

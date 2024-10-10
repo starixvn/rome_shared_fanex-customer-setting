@@ -77,8 +77,17 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             return Parallel.ForEachAsync(logParams, parallelOptions, async (param, _) => await Task.Run(() => userLogHandler.WriteLog(custDBGroupId, param), _));
         }
 
-        protected Task<int> InsertBalanceException(string insBalExceptCustList, int siteDBGroupId)
-            => repository.ExecuteAsync(new InsertBalanceExceptionCommand(insBalExceptCustList, siteDBGroupId));
+        protected async Task InsertBalanceException(string insBalExceptCustList, int siteDBGroupId)
+        {
+            try
+            {
+                await repository.ExecuteAsync(new InsertBalanceExceptionCommand(insBalExceptCustList, siteDBGroupId));
+            }
+            catch (Exception ex)
+            {
+                await logger.ErrorAsync(ex.Message, ex);
+            }
+        }
 
         protected Task<int> RollbackMultiple(string custIds)
             => repository.ExecuteAsync(new RollbackCreateLicenseeCommand(custIds));
