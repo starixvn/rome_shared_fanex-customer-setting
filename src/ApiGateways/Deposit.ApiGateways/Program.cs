@@ -34,7 +34,8 @@ try
         .Filter.ByExcluding("RequestPath like '/health%'")
         .WriteTo.Console()
         .Enrich.WithProperty("Team", "Rome")
-        .Enrich.WithProperty("Application", env.ApplicationName));
+        .Enrich.WithProperty("Application", env.ApplicationName)
+        .Enrich.WithProperty("Environment", builder.Configuration["Environment"]));
 
     builder.Services.AddHttpLogging(logging =>
     {
