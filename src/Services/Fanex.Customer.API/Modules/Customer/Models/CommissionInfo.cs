@@ -3,8 +3,6 @@ namespace Fanex.Customer.API.Modules.Customer.Models;
 public class CommissionInfo
 {
     public IEnumerable<CommissionHint> CommissionTypeList { get; set; }
-
-    public string MyanmarOddsBetTypesName { get; set; }
 }
 
 public class CommissionHint
