@@ -15,6 +15,7 @@
         <Setting Key="Acc_CustomerIns_Rollback_Multiple" SpName="Acc_CustomerIns_Rollback_Multiple" DbName="DBGLOB.GlobCustDB.asv_cust"/>
         <Setting Key="API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="DBTXN.bodb02.asv_cust"/>
         <Setting Key="SiteDB1_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB01.bodb02.asv_cust"/>
+        <Setting Key="SiteDB2_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB02.bodb02.asv_cust"/>
         <Setting Key="SiteDB3_API_SiteBuilder_InsertBalance_Exception" SpName="API_SiteBuilder_InsertBalance_Exception" DbName="SiteDB03.bodb02.asv_cust"/>
         <Setting Key="API_SiteBuilder_LicenseeDB_Ins" SpName="API_SiteBuilder_LicenseeDB_Ins" DbName="DBCust.bodb_Licensee.asv_cust"/>
         <Setting Key="API_SiteBuilder_LicenseeDB_CurrencyIns" SpName="API_SiteBuilder_LicenseeDB_CurrencyIns" DbName="DBCust.bodb_Licensee.asv_cust"/>
@@ -27,6 +28,7 @@
         <Setting Key="Acc_Dep_CustomerInsMember_Ag" SpName="Acc_Dep_CustomerInsMember_Ag" DbName="DBCust.CustDB.asv_cust"/>
         <Setting Key="Task_Cust_CheckBalance_Exception_Ins" SpName="Task_Cust_CheckBalance_Exception_Ins" DbName="DBTXN.bodb02.asv_cust"/>
         <Setting Key="SiteDB1_Task_Cust_CheckBalance_Exception_Ins" SpName="Task_Cust_CheckBalance_Exception_Ins" DbName="SiteDB01.bodb02.asv_cust"/>
+        <Setting Key="SiteDB2_Task_Cust_CheckBalance_Exception_Ins" SpName="Task_Cust_CheckBalance_Exception_Ins" DbName="SiteDB02.bodb02.asv_cust"/>
         <Setting Key="SiteDB3_Task_Cust_CheckBalance_Exception_Ins" SpName="Task_Cust_CheckBalance_Exception_Ins" DbName="SiteDB03.bodb02.asv_cust"/>
         <Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback" DbName="DBGLOB.GlobCustDB.asv_cust"/>
     </Function>
