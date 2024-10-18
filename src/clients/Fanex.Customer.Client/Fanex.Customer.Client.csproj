@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-    <Version>1.0.1.0-beta-12</Version>
-    <Authors>@Rome</Authors>
-    <Company>Nexcel</Company>
-    <Product>Fanex</Product>
-    <PackageReleaseNotes>Support Scale out CustDB (#199915) - Add Currency for copy super at NAP.</PackageReleaseNotes>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="8.0.0" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+        <Version>1.0.1.3-beta-01</Version>
+        <Authors>@Rome</Authors>
+        <Company>Nexcel</Company>
+        <Product>Fanex</Product>
+        <PackageReleaseNotes>Support Scale out CustDB (#199915) - Add Currency for copy super at NAP.</PackageReleaseNotes>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="8.0.0" />
+    </ItemGroup>
 </Project>

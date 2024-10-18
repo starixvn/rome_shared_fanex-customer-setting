@@ -26,8 +26,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees
         {
             var command = new SiteBuilderValidateCommand(
                 custDBGroupId,
-                JsonSerializer.Serialize(request.ProductBetSetting),
-                JsonSerializer.Serialize(request.ProductPT),
+                request.ProductBetSetting != null ? JsonSerializer.Serialize(request.ProductBetSetting) : null,
+                request.ProductPT != null ? JsonSerializer.Serialize(request.ProductPT) : null,
                 siteName,
                 mode,
                 SettingStatus,
@@ -53,7 +53,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees
                 siteName,
                 isChinaView,
                 specialPlatform,
-                JsonSerializer.Serialize(productStakeLevel),
+                productStakeLevel != null ? JsonSerializer.Serialize(productStakeLevel) : null,
                 ip,
                 mode,
                 siteDBGroupId);
