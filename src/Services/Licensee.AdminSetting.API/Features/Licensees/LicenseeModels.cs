@@ -36,7 +36,7 @@ public record CreateCurrencyRequest(
     [Required] string LicenseeType);
 
 public record CreateLicenseeRequest(
-    [Required] string SiteName,
+    [Required, MaxLength(10)] string SiteName,
     [Required] BetSetting[] ProductBetSetting,
     [Required] PositionTaking[] ProductPT,
     StakeLevel[] ProductStakeLevel,
