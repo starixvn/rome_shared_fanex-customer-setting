@@ -12,7 +12,7 @@ public record BetSetting(
     decimal MaxBet,
     decimal MPM,
     decimal MPB,
-    decimal MPPM);
+    decimal? MPPM = null);
 
 public record PositionTaking(int ProductID, decimal PT);
 
