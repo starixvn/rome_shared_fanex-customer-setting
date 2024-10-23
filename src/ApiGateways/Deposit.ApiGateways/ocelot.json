@@ -1,0 +1,11 @@
+{
+    "DelegatingHandlers": [
+        "ApiKeyHandler",
+        "NoGzipDelegatingHandler"
+    ],
+    "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+    }
+}

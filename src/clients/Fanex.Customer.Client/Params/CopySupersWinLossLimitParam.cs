@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Fanex.Customer.Client.Constants;
-using Fanex.Customer.Client.Models;
 
 namespace Fanex.Customer.Client.Params
 {
@@ -14,6 +13,7 @@ namespace Fanex.Customer.Client.Params
            int actorId,
            byte systemId,
            string ip,
+           int custDBGroupID,
            IEnumerable<int> sportTypeIds,
            string language = Languages.English)
         {
@@ -24,6 +24,7 @@ namespace Fanex.Customer.Client.Params
             ActorId = actorId;
             SystemId = systemId;
             IP = ip;
+            CustDBGroupID = custDBGroupID;
             SportTypeIds = sportTypeIds;
             Language = language;
         }
@@ -42,6 +43,8 @@ namespace Fanex.Customer.Client.Params
         public byte SystemId { get; set; }
 
         public string IP { get; set; }
+
+        public int CustDBGroupID { get; set; }
 
         public IEnumerable<int> SportTypeIds { get; set; }
 

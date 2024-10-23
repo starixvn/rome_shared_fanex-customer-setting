@@ -1,5 +1,4 @@
 using System.Xml.Serialization;
-using EasyNetQ.MessageVersioning;
 using Fanex.Customer.API.Modules.Message.Models;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Services;
@@ -63,7 +62,7 @@ public class MessageService : IMessageService
                 => TranslateStakeLevelMaxChoiceViolationSubMessages(rawMessage, language),
             MessageTypes.UpdateTooOften
                 => TranslateUpdateTooOftenMessage(rawMessage, language),
-            _ => new MessageContent($"MsgType={messageType} MainMsg={rawMessage}")
+            _ => new MessageContent(rawMessage)
         };
 
     private static MessageContent TranslateSimpleMessage(string rawMessage, string language)

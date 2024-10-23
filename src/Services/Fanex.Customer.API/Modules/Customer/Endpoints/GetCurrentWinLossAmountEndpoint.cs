@@ -1,9 +1,5 @@
-using Fanex.Customer.API.Modules.Customer.Criteria;
 using Fanex.Customer.API.Modules.Customer.Models;
 using Fanex.Customer.API.Modules.Customer.Requests;
-using Fanex.Customer.API.Shared.Services;
-using Fanex.Data.Repository;
-using Microsoft.AspNetCore.Http.Features;
 using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.Customer.Endpoints;

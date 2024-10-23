@@ -1,6 +1,7 @@
 using Fanex.Customer.API.Modules.Balance;
 using Fanex.Customer.API.Modules.CopyCustomer.Command;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
+using Fanex.Customer.API.Modules.CopyCustomer.Services;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Modules.Message;
@@ -9,7 +10,6 @@ using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
-using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 
@@ -51,7 +51,7 @@ public class CopyCustomerService : ICopyCustomerService
     {
         var isSourceAccountEnable = request.SourceCustId > 0 && await customerService.IsEnableCustomer(request.SourceCustId);
         var domains = await customerService.GetBackupDomains(request.Site, request.CustLevel);
-        
+
         if (!isSourceAccountEnable)
         {
             return new CopyMultipleCustomerResult(
@@ -116,106 +116,37 @@ public class CopyCustomerService : ICopyCustomerService
 
     public async Task<CopyCustomerResult> CopyCustomer(CopyCustomerRequest request)
     {
-        var criteria = BuildCriteria(request);
+        var copyService = this.CreateCopyCustomerService(request.CustLevel);
+        var result = await copyService.Copy(request);
 
-        using var objDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey());
-
-        //await objDb.ExecuteNonQueryAsync(criteria);
-        await dynamicRepository.ExecuteAsync(criteria);
-
-        if (criteria.CustId > 0)
+        if (result.CustId > 0)
         {
             if (request.CustLevel == CustomerLevel.Member)
             {
-                await balanceService.InitBalance(request.Site, criteria.CustId);
+                await balanceService.InitBalance(request.Site, result.CustId);
             }
 
-            Task.Run(() => InsertUnreadMessage(criteria.CustId, request.CustLevel));
-        }
-
-        if (criteria.GetType() == typeof(CopyMemberCommand))
-        {
-            var copyMemberCriteria = (CopyMemberCommand)criteria;
-            return new CopyCustomerResult(
-                criteria.CustId,
-                criteria.ErrCode,
-                copyMemberCriteria.MsgType,
-                messageService.TranslateMessage(copyMemberCriteria.MsgType, criteria.ErrMsg, request.Language));
-
+            _ = Task.Run(() => InsertUnreadMessage(result.CustId, request.CustLevel));
         }
 
         return new CopyCustomerResult(
-            criteria.CustId,
-            criteria.ErrCode,
-            mainMessage: criteria.ErrMsg);
+                result.CustId,
+                result.Code,
+                result.MsgType,
+                result.MessageContent);
     }
 
-    private CopyCustomerCommand BuildCriteria(CopyCustomerRequest request)
+    private CopyCustomerBaseService CreateCopyCustomerService(int roleId)
     {
-        CopyCustomerCommand criteria = request.CustLevel switch
+        return roleId switch
         {
-            CustomerLevel.Super => new CopySuperCommand(
-                                        request.Site,
-                                        request.IsInternal,
-                                        request.UserName,
-                                        request.Password,
-                                        request.Credit,
-                                        request.ActorId,
-                                        request.SourceCustId,
-                                        request.LanguageKey,
-                                        request.IP,
-                                        request.SystemId,
-                                        appSettings.SettingStatus),
-            CustomerLevel.Master => new CopyMasterCommand(
-                                        request.UserName,
-                                        request.Password,
-                                        request.Credit,
-                                        request.ActorId,
-                                        request.UplineId,
-                                        request.SourceCustId,
-                                        request.ActorSubAccId,
-                                        request.LanguageKey,
-                                        request.IP,
-                                        request.SystemId,
-                                        appSettings.SettingStatus),
-            CustomerLevel.Agent => new CopyAgentCommand(
-                                        request.UserName,
-                                        request.Password,
-                                        request.Credit,
-                                        request.MaxCredit,
-                                        request.ActorId,
-                                        request.UplineId,
-                                        request.SourceCustId,
-                                        request.ActorSubAccId,
-                                        request.LanguageKey,
-                                        request.IP,
-                                        request.SystemId,
-                                        appSettings.SettingStatus),
-            CustomerLevel.Member => new CopyMemberCommand(
-                                        request.UserName,
-                                        request.Password,
-                                        request.Credit,
-                                        request.IsQrCode,
-                                        request.ActorId,
-                                        request.UplineId,
-                                        request.SourceCustId,
-                                        request.ActorSubAccId,
-                                        request.LanguageKey,
-                                        request.IP,
-                                        request.SystemId,
-                                        appSettings.SettingStatus),
-            _ => throw new ArgumentOutOfRangeException("CustLevel", $"Not expected CustLevel value: {request.CustLevel}")
+            CustomerLevel.Super => new CopySuperService(messageService, appSettings),
+            CustomerLevel.Master => new CopyMasterService(messageService, appSettings),
+            CustomerLevel.Agent => new CopyAgentService(messageService, appSettings),
+            CustomerLevel.Member => new CopyMemberService(messageService, appSettings),
+            _ => throw new ArgumentOutOfRangeException(nameof(roleId))
         };
-
-        criteria.FirstName = request.FirstName ?? string.Empty;
-        criteria.LastName = request.LastName ?? string.Empty;
-        criteria.Phone = request.Phone ?? string.Empty;
-        criteria.MobilePhone = request.MobilePhone ?? string.Empty;
-        criteria.Fax = request.Fax ?? string.Empty;
-
-        return criteria;
     }
-
 
     private async Task<Result> GetAvailableDownlineUserName(CopyCustomerRequest request)
     {

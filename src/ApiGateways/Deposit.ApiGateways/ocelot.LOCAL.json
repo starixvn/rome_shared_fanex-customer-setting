@@ -1,0 +1,63 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "licensee_deposit_player_api_LOCAL",
+                    "Port": 5000
+                }
+            ],
+            "UpstreamPathTemplate": "/api/deposit/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ],
+            "SwaggerKey": "Deposit"
+        },
+        {
+            "DownstreamPathTemplate": "/main/api/{everything}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "las.nexdev.net",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/api/site-builder/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ],
+            "SwaggerKey": "AdminSetting"
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://dep-api-gw.nexdev.net/main"
+    },
+    "SwaggerEndPoints": [
+        {
+            "Key": "Deposit",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "Deposit API",
+                    "Version": "v1",
+                    "Url": "https://deposit-api.nexdev.net/swagger/v1/swagger.json"
+                }
+            ]
+        },
+        {
+            "Key": "AdminSetting",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "Licensee Admin Setting API",
+                    "Version": "v1",
+                    "Url": "https://las.nexdev.net/main/swagger/v1/swagger.json"
+                }
+            ]
+        }
+    ]
+}

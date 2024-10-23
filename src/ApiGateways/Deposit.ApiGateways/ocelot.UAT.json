@@ -1,0 +1,37 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "licensee_deposit_player_api_UAT",
+                    "Port": 5000
+                }
+            ],
+            "UpstreamPathTemplate": "/api/deposit/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "licensee_admin_setting_api_UAT",
+                    "Port": 5000
+                }
+            ],
+            "UpstreamPathTemplate": "/api/site-builder/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT"
+            ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://dep-api-gw.starixuat.com/main"
+    }
+}

@@ -13,6 +13,7 @@ namespace Fanex.Customer.Client.Params
             string ip,
             string site,
             string siteLabel,
+            int custDBGroupID,
             CreationModes mode = CreationModes.LiteMode,
             string language = Languages.English,
             string uiBehavior = null)
@@ -26,6 +27,7 @@ namespace Fanex.Customer.Client.Params
             IP = ip;
             Site = site;
             SiteLabel = siteLabel;
+            CustDBGroupID = custDBGroupID;
             Mode = (byte)mode;
         }
 
@@ -42,6 +44,8 @@ namespace Fanex.Customer.Client.Params
         public string Language { get; }
 
         public string IP { get; }
+
+        public int CustDBGroupID { get; }
 
         public byte Mode { get; }
 

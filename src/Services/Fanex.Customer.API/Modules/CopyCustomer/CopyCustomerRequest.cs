@@ -34,7 +34,11 @@ public class CopyCustomerRequest
 
     public byte SystemId { get; set; }
 
+    public int CustDBGroupID { get; set; }
+
     public string Site { get; set; }
+
+    public int Currency { get; set; }
 
     public bool IsInternal { get; set; }
 

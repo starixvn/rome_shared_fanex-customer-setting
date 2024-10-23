@@ -1,4 +1,3 @@
-using System.Xml.Serialization;
 using Fanex.Customer.API.Shared.Services;
 
 namespace Fanex.Customer.API.Modules.Message.Models;

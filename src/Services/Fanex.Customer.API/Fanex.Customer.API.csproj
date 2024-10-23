@@ -26,7 +26,7 @@
     <Compile Update="Resources\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
+      <AutoGen>False</AutoGen>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +39,7 @@
     <Compile Update="Modules\CreateCustomer\Resources\Labels.Designer.cs">
       <DependentUpon>Labels.resx</DependentUpon>
       <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
+      <AutoGen>False</AutoGen>
     </Compile>
   </ItemGroup>
   <ItemGroup>

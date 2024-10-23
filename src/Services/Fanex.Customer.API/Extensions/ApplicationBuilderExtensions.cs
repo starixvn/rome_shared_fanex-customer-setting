@@ -15,7 +15,7 @@ public static class ApplicationBuilderExtensions
                 connection => new ConnectionConfiguration(connection.Key, connection.Value),
                 StringComparer.OrdinalIgnoreCase);
 
-        var resourcePath = Path.Combine(env.ContentRootPath, "App_Data", "SPNames.xml");
+        var resourcePath = Path.Combine(env.ContentRootPath, "App_Data");
         DbSettingProviderManager
             .StartNewSession()
             .WithSqlServer(resourcePath)
