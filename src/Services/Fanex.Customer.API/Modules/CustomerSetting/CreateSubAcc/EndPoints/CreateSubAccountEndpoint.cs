@@ -20,7 +20,7 @@ public class CreateSubAccountEndpoint : IEndpoint<IResult, CreateSubAccountReque
     {
         if (!service.ValidateRequest(request))
         {
-            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("InvalidParameterValue", request.Language ?? LanguageUtils.DefaultLanguage)));
+            return Results.Ok(Shared.Models.Result.Create(StaticResources.Get("InvalidParameterValue", request.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
         return Results.Ok(await service.Create(request));

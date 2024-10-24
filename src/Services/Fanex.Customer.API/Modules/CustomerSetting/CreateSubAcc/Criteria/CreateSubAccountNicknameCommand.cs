@@ -2,6 +2,8 @@ using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Data.Repository;
 
+namespace Fanex.Customer.API.Modules.CustomerSetting.CreateSubAcc.Criteria;
+
 public class CreateSubAccountNicknameCommand: NonQueryCommand
 {
     public CreateSubAccountNicknameCommand(

@@ -7,6 +7,7 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Customer.API.Resources;
 using System.Text.RegularExpressions;
+using Fanex.Customer.API.Modules.CustomerSetting.CreateSubAcc.Criteria;
 
 namespace Fanex.Customer.API.Modules.CreateSubAcc.Services;
 public interface ICreateNickNameSubAccountService

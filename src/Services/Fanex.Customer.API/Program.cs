@@ -22,6 +22,7 @@ using Fanex.Customer.API.Modules.Password.Service;
 using Fanex.Customer.API.Modules.EditCustomer;
 using Fanex.Customer.API.Modules.Otp;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration);

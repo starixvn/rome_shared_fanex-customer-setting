@@ -11,7 +11,7 @@ public class CreateNickNameEndpoint : IEndpoint<IResult, CreateNickNameRequest, 
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/customer/nickname", (CreateNickNameRequest request, ICreateNickNameService service)
+        app.MapPost("/api/customer/nickname2", (CreateNickNameRequest request, ICreateNickNameService service)
             => HandleAsync(request, service))
             .Produces<CustomerSettingResult>().WithTags("Customer Settings");
     }
@@ -21,7 +21,7 @@ public class CreateNickNameEndpoint : IEndpoint<IResult, CreateNickNameRequest, 
         Console.WriteLine("nickname: " + request.NickName);
         if (!service.ValidateRequest(request.NickName))
         {
-            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("NicknameRule", request.Language ?? LanguageUtils.DefaultLanguage)));
+            return Results.Ok(Shared.Models.Result.Create(StaticResources.Get("NicknameRule", request.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
         return Results.Ok(await service.Create(request));

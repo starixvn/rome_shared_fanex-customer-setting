@@ -1,6 +1,9 @@
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using Fanex.Data;
+
+namespace Fanex.Customer.API.Modules.CustomerSetting.CreateSubAcc.Criteria;
+
 public class UpdateSubAccountNicknameLoginOnlyCommand : NonQueryCommand
 {
     public UpdateSubAccountNicknameLoginOnlyCommand(

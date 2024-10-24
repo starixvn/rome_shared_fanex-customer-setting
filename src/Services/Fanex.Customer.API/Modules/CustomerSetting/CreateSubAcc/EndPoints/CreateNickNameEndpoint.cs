@@ -21,7 +21,7 @@ public class CreateNickNameEndpoint : IEndpoint<IResult, CreateNickNameRequest, 
         Console.WriteLine("nickname: " + request.NickName);
         if (!service.ValidateRequest(request))
         {
-            return Results.Ok(Shared.Models.Result.CreateErrorResult(StaticResources.Get("NicknameRule", request.Language ?? LanguageUtils.DefaultLanguage)));
+            return Results.Ok(Shared.Models.Result.Create(StaticResources.Get("NicknameRule", request.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
         return Results.Ok(await service.Create(request));
