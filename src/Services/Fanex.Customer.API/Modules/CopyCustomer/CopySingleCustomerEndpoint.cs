@@ -14,6 +14,11 @@ public class CopySingleCustomerEndpoint : IEndpoint<IResult, CopyCustomerRequest
 
     public async Task<IResult> HandleAsync(CopyCustomerRequest request, ICopyCustomerService copyCustomerService)
     {
+        if (request.CustLevel == 4)
+        {
+            await Logging.LogService.InfoAsync(System.Text.Json.JsonSerializer.Serialize(request));
+        }
+        
         if (request.IsValid())
         {
             return Results.Ok(await copyCustomerService.CopyCustomer(request));

@@ -14,6 +14,11 @@ public class CopyMultipleCustomersEndpoint : IEndpoint<IResult, CopyMultipleCust
 
     public async Task<IResult> HandleAsync(CopyMultipleCustomersRequest request, ICopyCustomerService copyCustomerService)
     {
+        if (request.CustLevel == 4)
+        {
+            await Logging.LogService.InfoAsync(System.Text.Json.JsonSerializer.Serialize(request));
+        }
+
         if (request.IsValid())
         {
             return Results.Ok(await copyCustomerService.CopyCustomers(request));
