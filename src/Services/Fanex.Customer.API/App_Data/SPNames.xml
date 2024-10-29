@@ -25,22 +25,22 @@
     <Setting Key="Age_UpdateSubAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_GetMainAccountSecurityCode" SpName="Age_CustomerSelSecurityCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_GetSubAccountSecurityCode" SpName="Age_CustomerSelSecurityCode_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_UpdateMainAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_UpdateSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_ResetSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustomerUpdSecurityFunctionInfo" SpName="Age_CustomerUpdSecurityFunctionInfo" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_UpdateMainAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_UpdateSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_ResetSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustomerUpdSecurityFunctionInfo" SpName="Age_CustomerUpdSecurityFunctionInfo" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
   </Function>
   <Function Name="Otp">
     <Setting Key="Age_OTP_CustomerOTPSel" SpName="Age_OTP_CustomerOTPSel" DbName="DBCUST.CustDB.wsv_alp" />
     <Setting Key="Age_OTP_CustomerCheckEnableOTP" SpName="Age_OTP_CustomerCheckEnableOTP" DbName="DBCUST.CustDB.wsv_alp" />
     <Setting Key="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" SpName="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" DbName="DBCUST.CustDB.wsv_alp" />
-        <Setting Key="Age_OTP_CustomerOTPIns" SpName="Age_OTP_CustomerOTPIns" DbName="DBCUST.CustDB.wsv_alp" />
-        <Setting Key="Age_OTP_CustomerOTPStatusUpd" SpName="Age_OTP_CustomerOTPStatusUpd" DbName="DBCUST.CustDB.wsv_alp" />
-        <Setting Key="Age_OTP_CustomerOTPDel" SpName="Age_OTP_CustomerOTPDel" DbName="DBCUST.CustDB.wsv_alp" />
-        <Setting Key="Age_OTP_CustomerOTPDeviceInfoIns" SpName="Age_OTP_CustomerOTPDeviceInfoIns" DbName="DBCUST.CustDB.wsv_alp" />
-        <Setting Key="Age_OTP_CustomerOTPDeviceInfoSel" SpName="Age_OTP_CustomerOTPDeviceInfoSel" DbName="DBCUST.CustDB.wsv_alp">
-        <Mapping DataField="DeviceId" ObjectProperty="Id" />
-        </Setting>
+    <Setting Key="Age_OTP_CustomerOTPIns" SpName="Age_OTP_CustomerOTPIns" DbName="DBCUST.CustDB.wsv_alp" />
+    <Setting Key="Age_OTP_CustomerOTPStatusUpd" SpName="Age_OTP_CustomerOTPStatusUpd" DbName="DBCUST.CustDB.wsv_alp" />
+    <Setting Key="Age_OTP_CustomerOTPDel" SpName="Age_OTP_CustomerOTPDel" DbName="DBCUST.CustDB.wsv_alp" />
+    <Setting Key="Age_OTP_CustomerOTPDeviceInfoIns" SpName="Age_OTP_CustomerOTPDeviceInfoIns" DbName="DBCUST.CustDB.wsv_alp" />
+    <Setting Key="Age_OTP_CustomerOTPDeviceInfoSel" SpName="Age_OTP_CustomerOTPDeviceInfoSel" DbName="DBCUST.CustDB.wsv_alp">
+      <Mapping DataField="DeviceId" ObjectProperty="Id" />
+    </Setting>
   </Function>
   <Function Name="Sub Account">
     <Setting Key="Age_CustSubIns_Register" SpName="Age_CustSubIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" />
@@ -53,7 +53,7 @@
     <Setting Key="DBSite1_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST1.CustDB.wsv_alp" />
     <Setting Key="DBSite2_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST2.CustDB.wsv_alp" />
     <Setting Key="DBSite3_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST3.CustDB.wsv_alp" />
-    
+
     <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
     <Setting Key="DBSite1_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST1.CustDB.wsv_alp" Plain="0" />
     <Setting Key="DBSite2_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST2.CustDB.wsv_alp" Plain="0" />
@@ -154,6 +154,8 @@
     <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
   </Function>
   <Function Name="Create Customer">
+    <Setting Key="Acc_CustomerIns_Register" SpName="Acc_CustomerIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
+    <Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_CustSetting_SiteCurrencySettingInfoSel" SpName="Acc_CustSetting_SiteCurrencySettingInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
@@ -199,7 +201,7 @@
     <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    
+
     <Setting Key="Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
@@ -250,7 +252,7 @@
     <Setting Key="DBSite1_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite2_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite3_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    
+
     <Setting Key="Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite1_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite2_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
@@ -416,25 +418,25 @@
   <Function Name="Available Domains">
     <Setting Key="Age_DomainListSel" SpName="Age_DomainListSel" DbName="DBACC.bodb02.wsv_alp" Plain="0" />
   </Function>
-    <Function Name="Sub Account">
-        <Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustSubSelInfo" SpName="Age_CustSubSelInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustSubUpdInfo" SpName="Age_CustSubUpdInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustSubUpdPageAccess" SpName="Age_CustSubUpdPageAccess" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_On_UserKickedout" SpName="Age_On_UserKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
-        <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
-    </Function>
-    <Function Name="Password">
-        <Setting Key="ResetMainAccountPassword" SpName="Age_CustomerUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="UpdateMainAccountPassword" SpName="Age_CustomerPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="ResetSubAccountPassword" SpName="Age_CustSubPwdUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="UpdateSubAccountPassword" SpName="Age_CustSubPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustomerSkipForceUpdPwd" SpName="Age_CustomerSkipForceUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-        <Setting Key="Age_OnUser_ForceKickedout" SpName="Age_OnUser_ForceKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
-        <Setting Key="Age_CustomerIndirectLoginAccountUpd" SpName="Age_CustomerIndirectLoginAccountUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+  <Function Name="Sub Account">
+    <Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustSubSelInfo" SpName="Age_CustSubSelInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustSubUpdInfo" SpName="Age_CustSubUpdInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustSubUpdPageAccess" SpName="Age_CustSubUpdPageAccess" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_On_UserKickedout" SpName="Age_On_UserKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
+    <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
+  </Function>
+  <Function Name="Password">
+    <Setting Key="ResetMainAccountPassword" SpName="Age_CustomerUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="UpdateMainAccountPassword" SpName="Age_CustomerPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="ResetSubAccountPassword" SpName="Age_CustSubPwdUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="UpdateSubAccountPassword" SpName="Age_CustSubPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustomerSkipForceUpdPwd" SpName="Age_CustomerSkipForceUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Age_OnUser_ForceKickedout" SpName="Age_OnUser_ForceKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustomerIndirectLoginAccountUpd" SpName="Age_CustomerIndirectLoginAccountUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
   </Function>
   <Function Name="Nickname">
     <Setting Key="Age_CustomerInsNickName" SpName="Age_CustomerInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
@@ -454,10 +456,10 @@
     <Setting Key="Age_CustLanguageUsageUpd" SpName="Age_CustLanguageUsageUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
   </Function>
   <Function Name="View Position Taking">
-      <Setting Key="ViewPT_GetSportsbookPT_Super" SpName="Age_CustomerSelPositionTakingByProductID_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-      <Setting Key="ViewPT_GetSportsbookPT_Master" SpName="Age_CustomerSelPositionTakingByProductID_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-      <Setting Key="ViewPT_GetSportsbookPT_Agent" SpName="Age_CustomerSelPositionTakingByProductID_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    </Function>
+    <Setting Key="ViewPT_GetSportsbookPT_Super" SpName="Age_CustomerSelPositionTakingByProductID_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="ViewPT_GetSportsbookPT_Master" SpName="Age_CustomerSelPositionTakingByProductID_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="ViewPT_GetSportsbookPT_Agent" SpName="Age_CustomerSelPositionTakingByProductID_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+  </Function>
   <Function Name="Update User Search">
     <Setting Key="Acc_CustomerUpdUserSearch" SpName="Acc_CustomerUpdUserSearch" DbName="DBCust.CustDB.wsv_alp" />
   </Function>
