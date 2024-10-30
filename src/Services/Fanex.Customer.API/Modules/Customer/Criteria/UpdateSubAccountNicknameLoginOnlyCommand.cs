@@ -1,6 +1,8 @@
 ﻿namespace Fanex.Customer.API.Modules.Customer.Criteria
 {
     using Fanex.Customer.API.Modules.Customer.Requests;
+    using Fanex.Customer.API.Shared.Utils;
+    using Fanex.Data;
 
     public class UpdateSubAccountNicknameLoginOnlyCommand : UpdateNicknameLoginOnlyCommand
     {
@@ -12,10 +14,10 @@
 
         public int SubAccId { get; }
 
-        public override string GetSettingKey()
-            => "Age_CustSubUpdNicknameLoginOnly";
+        [SpParam(Ignored = true)]
+        public int CustDBGroupID { get; set; }
 
-        public override bool IsValid()
-            => base.IsValid() && SubAccId > 0;
+        public override string GetSettingKey()
+            => SPNameUtils.GetSPNameWithPrefix("Age_CustSubUpdNicknameLoginOnly", CustDBGroupID);
     }
 }

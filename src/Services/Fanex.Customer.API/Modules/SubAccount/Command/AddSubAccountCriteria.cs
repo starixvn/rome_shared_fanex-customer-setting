@@ -1,3 +1,5 @@
+using Fanex.Customer.API.Shared.Utils;
+using Fanex.Data;
 using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.SubAccount.Command
@@ -28,9 +30,12 @@ namespace Fanex.Customer.API.Modules.SubAccount.Command
 
         public string ErrMsg { get; set; }
 
+        [SpParam(Ignored = true)]
+        public int CustDBGroupID { get; set; }
+
         public override string GetSettingKey()
         {
-            return "Age_CustSubIns";
+            return SPNameUtils.GetSPNameWithPrefix("Age_CustSubIns", CustDBGroupID);
         }
 
         public override bool IsValid()

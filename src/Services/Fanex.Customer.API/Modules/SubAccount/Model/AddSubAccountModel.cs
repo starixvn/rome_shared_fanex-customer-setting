@@ -19,5 +19,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Model
         public string Language { get; set; }
 
         public int RoleId { get; set; }
+
+        public int CustDBGroupID { get; set; }
     }
 }

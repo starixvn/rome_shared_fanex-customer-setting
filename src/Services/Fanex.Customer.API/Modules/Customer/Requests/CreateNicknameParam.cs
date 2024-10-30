@@ -8,7 +8,8 @@
             string nickname,
             string ip,
             string languageKey,
-            bool isEnableUpdateNickname)
+            bool isEnableUpdateNickname,
+            int custDBGroupID)
         {
             CustId = custId;
             SubAccountId = subAccountId;
@@ -16,6 +17,7 @@
             IP = ip;
             LanguageKey = languageKey;
             IsEnableUpdateNickname = isEnableUpdateNickname;
+            CustDBGroupID = custDBGroupID;
         }
 
         public int CustId { get; }
@@ -31,5 +33,7 @@
         public bool IsEnableUpdateNickname { get; }
 
         public bool IsSubAccount => SubAccountId > 0;
+
+        public int CustDBGroupID { get; }
     }
 }

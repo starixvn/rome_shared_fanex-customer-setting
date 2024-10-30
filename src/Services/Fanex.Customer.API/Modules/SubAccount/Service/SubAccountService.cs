@@ -39,7 +39,8 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 Lastname = subAccountModel.Lastname,
                 PageAccess = subAccountModel.PageAccess ?? string.Empty,
                 LoginIP = subAccountModel.IP,
-                Language = subAccountModel.Language
+                Language = subAccountModel.Language,
+                CustDBGroupID = subAccountModel.CustDBGroupID
             };
 
             await dynamicRepository.ExecuteAsync(command);
