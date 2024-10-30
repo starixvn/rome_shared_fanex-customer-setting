@@ -29,6 +29,15 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
         public async Task<Result> AddSubAccount(AddSubAccountModel subAccountModel)
         {
+            var register = new RegisterSubAccountCriteria(subAccountModel.CustId, subAccountModel.Username, string.Empty, subAccountModel.Language, subAccountModel.CustDBGroupID);
+
+            await dynamicRepository.ExecuteAsync(register);
+
+            if (register.ErrCode != 0)
+            {
+                return Result.Create(register.ErrMsg);
+            }
+
             var command = new AddSubAccountCriteria
             {
                 CustId = subAccountModel.CustId,
@@ -47,7 +56,11 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
             if (command.SubAccId > 0 && command.ErrCode == 0)
             {
-                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(subAccountModel.CustId, command.SubAccId, subAccountModel.RoleId));
+                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(subAccountModel.CustId, register.SubAccId, subAccountModel.RoleId));
+            }
+            else
+            {
+                await dynamicRepository.ExecuteAsync(new RollbackSubAccountCriteria(subAccountModel.CustId, register.SubAccId));
             }
 
             return new Result(command.ErrCode, command.ErrMsg, command.SubAccId.ToString());
