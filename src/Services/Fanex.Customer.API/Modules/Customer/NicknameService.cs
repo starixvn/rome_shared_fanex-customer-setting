@@ -44,18 +44,46 @@ namespace Fanex.Customer.API.Modules.Customer
         private static bool IsValidNickName(string nickName)
             => NicknameRule.IsMatch(nickName);
 
-        private Task<Result> ValidateAndCreateNickname(CreateNicknameParam param)
+        private async Task<Result> ValidateAndCreateNickname(CreateNicknameParam param)
         {
             if (IsValidNickName(param.Nickname))
             {
-                NicknameNonQueryCommand command = param.IsSubAccount
-                    ? new CreateSubAccountNicknameCommand(param)
-                    : new CreateNicknameCommand(param);
+                Result result;
 
-                return Execute(command);
+                if (param.IsSubAccount)
+                {
+                    var registerSubAccNicknameCommand = new RegisterSubAccNicknameCommand(param.CustId, param.SubAccountId, param.Nickname, param.LanguageKey, param.CustDBGroupID);
+                    await dynamicRepository.ExecuteAsync(registerSubAccNicknameCommand);
+                    result = new Result(registerSubAccNicknameCommand.ErrCode, registerSubAccNicknameCommand.ErrMsg);
+                }
+                else
+                {
+                    var registerMainAccNicknameCommand = new RegisterNicknameCommand(param.CustId, param.Nickname, param.LanguageKey);
+                    await dynamicRepository.ExecuteAsync(registerMainAccNicknameCommand);
+                    result = new Result(registerMainAccNicknameCommand.ErrCode, registerMainAccNicknameCommand.ErrMsg);
+                }                
+
+                if (result.IsSuccessful)
+                {
+                    NicknameNonQueryCommand command = param.IsSubAccount
+                        ? new CreateSubAccountNicknameCommand(param)
+                        : new CreateNicknameCommand(param);
+
+                    var processResult = await Execute(command);
+
+                    if (!processResult.IsSuccessful)
+                    {
+                        var rollbackNicknameCommand = new RollbackNicknameCommand(param.CustId, param.SubAccountId);
+                        await dynamicRepository.ExecuteAsync(rollbackNicknameCommand);
+                    }
+
+                    return processResult;
+                }
+
+                return result;
             }
 
-            return Task.FromResult(Result.Create(NicknameResource.ResourceManager.GetString("NicknameRule", new CultureInfo(LanguageUtils.ToLanguage(param.LanguageKey))), Code));
+            return Result.Create(NicknameResource.ResourceManager.GetString("NicknameRule", new CultureInfo(LanguageUtils.ToLanguage(param.LanguageKey))), Code);
         }
 
         private Task<Result> UpdateNicknameLoginOnly(UpdateNicknameLoginOnlyParam param)

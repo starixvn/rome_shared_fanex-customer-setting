@@ -67,11 +67,7 @@ namespace Fanex.Customer.Client.Services
         Task<List<UpdateCustomerResult>> CopySupersWinLossLimit(CopySupersWinLossLimitParam param);
 
         Task<AccountInfo> GetAccountInfo(int custId);
-        Task<Result> CreateSubAcc(CreateSubAcParam param);
         Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currency, string language = "en-US");
-        Task<Result> CreateNickNameOfSubAcc(CreateNickNameParam param);
-
-        Task<Result> CreateNickName(CreateNickNameParam param);
     }
 
     public class CustomerService : ICustomerService
@@ -89,15 +85,6 @@ namespace Fanex.Customer.Client.Services
                 Timeout = TimeSpan.FromMinutes(DefaultTimeOut)
             };
         }
-
-        public Task<Result> CreateNickName(CreateNickNameParam param)
-        => httpClient.PostAsJsonAsync<Result>("customer/nickname", param);
-
-        public Task<Result> CreateNickNameOfSubAcc(CreateNickNameParam param)
-        => httpClient.PostAsJsonAsync<Result>("customer/nick-subaccount", param);
-
-        public Task<Result> CreateSubAcc(CreateSubAcParam param)
-        => httpClient.PostAsJsonAsync<Result>("customer/subaccount", param);
 
         public Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, string language = Languages.English)
             => httpClient.PostAsJsonAsync<Result>("rules/CheckAllLimitedRules", new { custId, custLevel, actorUsername, language });

@@ -108,7 +108,9 @@ namespace Fanex.Customer.API.Modules.Password.Service
 
                 if (!param.CustLevel.IsMemberLevel())
                 {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     Task.Run(() => telegramBotService.NotifyChangePassword(param.CustId, 0));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
             }
 
@@ -168,7 +170,9 @@ namespace Fanex.Customer.API.Modules.Password.Service
 
                 if (!param.CustLevel.IsMemberLevel())
                 {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     Task.Run(() => telegramBotService.NotifyChangePassword(param.CustId, param.SubAccountId));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
             }
 
@@ -209,6 +213,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
 
             if (updateResult.IsSuccessful)
             {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 Task.Run(async () =>
                 {
                     await kickoutCustomerService.Kickout(new KickoutCustomerParam(
@@ -222,6 +227,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                         telegramBotService.NotifyChangePassword(param.CustId, 0);
                     }
                 });
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
 
             return updateResult;
@@ -242,12 +248,6 @@ namespace Fanex.Customer.API.Modules.Password.Service
 
         public async Task<Result> ResetSubAccountPassword(ResetSubAccountPasswordParam param)
         {
-            // TODO
-            // if (netThrottlingService.IsBlacklist())
-            // {
-            //     return Result.CreateErrorResult("Too many requests");
-            // }
-
             var rawNewPassword = aes.Decrypt(param.NewPassword, param.HashKey);
             var validateResult = Validate(
                 true,
@@ -281,6 +281,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
             {
                 // netThrottlingService.Throttle();
 
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 Task.Run(async () =>
                 {
                     await kickoutCustomerService.Kickout(new KickoutCustomerParam(
@@ -295,6 +296,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                         telegramBotService.NotifyChangePassword(param.CustId, param.SubAccountId);
                     }
                 });
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
 
             return updateResult;

@@ -56,7 +56,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
             if (command.SubAccId > 0 && command.ErrCode == 0)
             {
-                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(subAccountModel.CustId, register.SubAccId, subAccountModel.RoleId));
+                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(subAccountModel.CustId, command.SubAccId, subAccountModel.RoleId));
             }
             else
             {

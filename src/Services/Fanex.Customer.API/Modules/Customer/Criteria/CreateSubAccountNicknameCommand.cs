@@ -2,7 +2,6 @@
 {
     using Fanex.Customer.API.Modules.Customer.Requests;
     using Fanex.Customer.API.Shared.Utils;
-    using Fanex.Data;
 
     public class CreateSubAccountNicknameCommand : CreateNicknameCommand
     {

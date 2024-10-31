@@ -131,7 +131,9 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
 
         if (result != null && result.IsSuccessful && !param.IsMemberLevel)
         {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Task.Run(() => notificationService.NotifyChangeSecurityCode(param.CustId, 0));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         return result;
@@ -158,7 +160,9 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
 
         if (result != null && result.IsSuccessful && !param.IsMemberLevel)
         {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Task.Run(() => notificationService.NotifyChangeSecurityCode(param.CustId, param.SubAccId));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         return result;
@@ -166,12 +170,6 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
 
     public async Task<Result> ResetSubAccountSecurityCode(ResetSubAccountSecurityCodeParam param)
     {
-        // TODO
-        // if (netThrottlingService.IsBlacklist())
-        // {
-        //     return Result.CreateErrorResult("Too many requests");
-        // }
-
         var validateResult = await Validate(param.NewSecurityCode);
         if (!validateResult.IsSuccessful)
         {
@@ -192,10 +190,9 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
 
         if (result != null && result.IsSuccessful && !param.IsMemberLevel)
         {
-            // TODO
-            // netThrottlingService.Throttle();
-
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Task.Run(() => notificationService.NotifyChangeSecurityCode(param.CustId, param.SubAccId));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         return result;
