@@ -52,7 +52,7 @@ namespace Fanex.Customer.API.Modules.Customer
 
                 if (param.IsSubAccount)
                 {
-                    var registerSubAccNicknameCommand = new RegisterSubAccNicknameCommand(param.CustId, param.SubAccountId, param.Nickname, param.LanguageKey, param.CustDBGroupID);
+                    var registerSubAccNicknameCommand = new RegisterSubAccNicknameCommand(param.CustId, param.Nickname, param.LanguageKey, param.CustDBGroupID);
                     await dynamicRepository.ExecuteAsync(registerSubAccNicknameCommand);
                     result = new Result(registerSubAccNicknameCommand.ErrCode, registerSubAccNicknameCommand.ErrMsg);
                 }
