@@ -11,11 +11,11 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
         public Task<SubAccountModel> GetSubAccount(int custId, int subAccId);
 
-        public Task<Result> UpdateSubAccountInfo(UpdateSubAccountInfoModel subAccountModel);
+        public Task<Result> UpdateSubAccountInfo(int custId, UpdateSubAccountInfoModel subAccountModel);
         
-        public Task<Result> UpdateSubAccountPageAccess(UpdateSubAccountPageAccessModel subAccountModel);
+        public Task<Result> UpdateSubAccountPageAccess(int custId, UpdateSubAccountPageAccessModel subAccountModel);
 
-        public Task<Result> AddSubAccount(AddSubAccountModel subAccountModel);
+        public Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel);
     }
 
     public class SubAccountService : ISubAccountService
@@ -27,9 +27,9 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             this.dynamicRepository = dynamicRepository;
         }
 
-        public async Task<Result> AddSubAccount(AddSubAccountModel subAccountModel)
+        public async Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel)
         {
-            var register = new RegisterSubAccountCriteria(subAccountModel.CustId, subAccountModel.Username, string.Empty, subAccountModel.Language, subAccountModel.CustDBGroupID);
+            var register = new RegisterSubAccountCriteria(custId, subAccountModel.Username, string.Empty, subAccountModel.Language, subAccountModel.CustDBGroupID);
 
             await dynamicRepository.ExecuteAsync(register);
 
@@ -40,8 +40,8 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
             var command = new AddSubAccountCriteria
             {
-                CustId = subAccountModel.CustId,
-                UserId = subAccountModel.CustId,
+                CustId = custId,
+                UserId = custId,
                 Username = subAccountModel.Username,
                 UserPwd = subAccountModel.Password,
                 Firstname = subAccountModel.Firstname,
@@ -56,11 +56,11 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
             if (command.SubAccId > 0 && command.ErrCode == 0)
             {
-                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(subAccountModel.CustId, command.SubAccId, subAccountModel.RoleId));
+                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(custId, command.SubAccId, subAccountModel.RoleId));
             }
             else
             {
-                await dynamicRepository.ExecuteAsync(new RollbackSubAccountCriteria(subAccountModel.CustId, register.SubAccId));
+                await dynamicRepository.ExecuteAsync(new RollbackSubAccountCriteria(custId, register.SubAccId));
             }
 
             return new Result(command.ErrCode, command.ErrMsg, command.SubAccId.ToString());
@@ -78,13 +78,13 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             return result ?? Enumerable.Empty<SubAccountModel>();
         }
 
-        public async Task<Result> UpdateSubAccountInfo(UpdateSubAccountInfoModel subAccountModel)
+        public async Task<Result> UpdateSubAccountInfo(int custId, UpdateSubAccountInfoModel subAccountModel)
         {
             var command = new UpdateSubAccountInfoCriteria
             {
                 Closed = subAccountModel.Closed,
-                CustId = subAccountModel.CustId,
-                UserId = subAccountModel.CustId,
+                CustId = custId,
+                UserId = custId,
                 Firstname = subAccountModel.Firstname,
                 Lastname = subAccountModel.Lastname,
                 Language = subAccountModel.Language,
@@ -97,23 +97,23 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             return new Result(command.ErrCode, command.ErrMsg);
         }
 
-        public async Task<Result> UpdateSubAccountPageAccess(UpdateSubAccountPageAccessModel subAccountModel)
+        public async Task<Result> UpdateSubAccountPageAccess(int custId, UpdateSubAccountPageAccessModel subAccountModel)
         {
             var command = new UpdateSubAccountPageAccessCriteria
             {
-                CustId = subAccountModel.CustId,
+                CustId = custId,
                 Language = subAccountModel.Language,
                 LoginIP = subAccountModel.IP,
                 SubAccId = subAccountModel.SubAccId,
                 UpdPageAccess = subAccountModel.PageAccess ?? string.Empty,
-                UserId = subAccountModel.CustId
+                UserId = custId
             };
 
             await dynamicRepository.ExecuteAsync(command);
 
             if (command.ErrCode == 0)
             {
-                await dynamicRepository.ExecuteAsync(new KickoutSubAccountCriteria(subAccountModel.CustId, subAccountModel.SubAccId));
+                await dynamicRepository.ExecuteAsync(new KickoutSubAccountCriteria(custId, subAccountModel.SubAccId));
             }
 
             return new Result(command.ErrCode, command.ErrMsg);

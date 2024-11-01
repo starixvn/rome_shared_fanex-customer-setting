@@ -2,8 +2,6 @@ namespace Fanex.Customer.API.Modules.SubAccount.Model
 {
     public class AddSubAccountModel
     {
-        public int CustId { get; set; }
-
         public string Username { get; set; }
 
         public string Password { get; set; }

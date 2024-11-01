@@ -8,33 +8,33 @@ namespace Fanex.Customer.API.Modules.SubAccount.Endpoint
     public class SubAccountEndpoint :
         IEndpoint<IResult, int, ISubAccountService>,
         IEndpoint<IResult, int, int, ISubAccountService>,
-        IEndpoint<IResult, AddSubAccountModel, ISubAccountService>,
-        IEndpoint<IResult, UpdateSubAccountInfoModel, ISubAccountService>,
-        IEndpoint<IResult, UpdateSubAccountPageAccessModel, ISubAccountService>
+        IEndpoint<IResult, int, AddSubAccountModel, ISubAccountService>,
+        IEndpoint<IResult, int, UpdateSubAccountInfoModel, ISubAccountService>,
+        IEndpoint<IResult, int, UpdateSubAccountPageAccessModel, ISubAccountService>
     {
         public void AddRoute(IEndpointRouteBuilder app)
         {
-            var subAcc = app.MapGroup("/api/sub-account")
+            var subAcc = app.MapGroup("/api/customers")
                 .WithTags(EndpointTags.SubAccount);
 
-            subAcc.MapGet("/index", (int custId, ISubAccountService service)
+            subAcc.MapGet("/{custId}/sub-accounts", (int custId, ISubAccountService service)
             => HandleAsync(custId, service))
             .Produces<Result>();
 
-            subAcc.MapGet("/get", (int custId, int subAccId, ISubAccountService service)
+            subAcc.MapGet("/{custId}/sub-accounts/{subAccId}", (int custId, int subAccId, ISubAccountService service)
             => HandleAsync(custId, subAccId, service))
             .Produces<Result>();
 
-            subAcc.MapPost("/add", (AddSubAccountModel model, ISubAccountService service)
-            => HandleAsync(model, service))
+            subAcc.MapPost("/{custId}/sub-accounts/add", (int custId, AddSubAccountModel model, ISubAccountService service)
+            => HandleAsync(custId, model, service))
             .Produces<Result>();
 
-            subAcc.MapPost("/update-info", (UpdateSubAccountInfoModel model, ISubAccountService service)
-            => HandleAsync(model, service))
+            subAcc.MapPost("/{custId}/sub-accounts/update-info", (int custId, UpdateSubAccountInfoModel model, ISubAccountService service)
+            => HandleAsync(custId, model, service))
             .Produces<Result>();
 
-            subAcc.MapPost("/update-pageaccess", (UpdateSubAccountPageAccessModel model, ISubAccountService service)
-            => HandleAsync(model, service))
+            subAcc.MapPost("/{custId}/sub-accounts/update-pageaccess", (int custId, UpdateSubAccountPageAccessModel model, ISubAccountService service)
+            => HandleAsync(custId, model, service))
             .Produces<Result>();
         }
 
@@ -56,37 +56,37 @@ namespace Fanex.Customer.API.Modules.SubAccount.Endpoint
                 var response = await service.GetSubAccount(custId, subAccId);
                 return Results.Ok(response);
             }
-            
+
             return Results.BadRequest();
         }
 
-        public async Task<IResult> HandleAsync(AddSubAccountModel model, ISubAccountService service)
+        public async Task<IResult> HandleAsync(int custId, AddSubAccountModel model, ISubAccountService service)
         {
-            if (model.CustId > 0)
+            if (custId > 0)
             {
-                var response = await service.AddSubAccount(model);
+                var response = await service.AddSubAccount(custId, model);
                 return Results.Ok(response);
             }
 
             return Results.BadRequest();
         }
 
-        public async Task<IResult> HandleAsync(UpdateSubAccountInfoModel model, ISubAccountService service)
+        public async Task<IResult> HandleAsync(int custId, UpdateSubAccountInfoModel model, ISubAccountService service)
         {
-            if (model.CustId > 0 && model.SubAccId > 0)
+            if (custId > 0 && model.SubAccId > 0)
             {
-                var response = await service.UpdateSubAccountInfo(model);
+                var response = await service.UpdateSubAccountInfo(custId, model);
                 return Results.Ok(response);
             }
 
             return Results.BadRequest();
         }
 
-        public async Task<IResult> HandleAsync(UpdateSubAccountPageAccessModel model, ISubAccountService service)
+        public async Task<IResult> HandleAsync(int custId, UpdateSubAccountPageAccessModel model, ISubAccountService service)
         {
-            if (model.CustId > 0 && model.SubAccId > 0)
+            if (custId > 0 && model.SubAccId > 0)
             {
-                var response = await service.UpdateSubAccountPageAccess(model);
+                var response = await service.UpdateSubAccountPageAccess(custId, model);
                 return Results.Ok(response);
             }
 
