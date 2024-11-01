@@ -29,7 +29,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
         public async Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel)
         {
-            var register = new RegisterSubAccountCriteria(custId, subAccountModel.Username, string.Empty, subAccountModel.Language, subAccountModel.CustDBGroupID);
+            var register = new RegisterSubAccountCriteria(custId, subAccountModel.Username, subAccountModel.Language, subAccountModel.CustDBGroupID);
 
             await dynamicRepository.ExecuteAsync(register);
 
@@ -41,7 +41,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             var command = new AddSubAccountCriteria
             {
                 CustId = custId,
-                UserId = custId,
+                UserId = subAccountModel.UserId,
                 Username = subAccountModel.Username,
                 UserPwd = subAccountModel.Password,
                 Firstname = subAccountModel.Firstname,
@@ -49,14 +49,15 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 PageAccess = subAccountModel.PageAccess ?? string.Empty,
                 LoginIP = subAccountModel.IP,
                 Language = subAccountModel.Language,
-                CustDBGroupID = subAccountModel.CustDBGroupID
+                CustDBGroupID = subAccountModel.CustDBGroupID,
+                SubAccId = register.SubAccId
             };
 
             await dynamicRepository.ExecuteAsync(command);
 
             if (command.SubAccId > 0 && command.ErrCode == 0)
             {
-                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(custId, command.SubAccId, subAccountModel.RoleId));
+                await dynamicRepository.ExecuteAsync(new AddMsgAfterCreateNewSMACriteria(custId, register.SubAccId, subAccountModel.RoleId));
             }
             else
             {
@@ -84,7 +85,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
             {
                 Closed = subAccountModel.Closed,
                 CustId = custId,
-                UserId = custId,
+                UserId = subAccountModel.UserId,
                 Firstname = subAccountModel.Firstname,
                 Lastname = subAccountModel.Lastname,
                 Language = subAccountModel.Language,
@@ -106,7 +107,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 LoginIP = subAccountModel.IP,
                 SubAccId = subAccountModel.SubAccId,
                 UpdPageAccess = subAccountModel.PageAccess ?? string.Empty,
-                UserId = custId
+                UserId = subAccountModel.UserId
             };
 
             await dynamicRepository.ExecuteAsync(command);

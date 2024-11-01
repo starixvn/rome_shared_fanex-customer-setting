@@ -2,14 +2,12 @@ using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.SubAccount.Command;
 
-public class RegisterSubAccountCriteria(int custId, string username, string nickname, string language, int custDBGroupID)
+public class RegisterSubAccountCriteria(int custId, string username, string language, int custDBGroupID)
     : NonQueryCommand
 {
     public int CustId => custId;
 
     public string Username => username;
-
-    public string Nickname => nickname;
 
     public string Language => language;
 

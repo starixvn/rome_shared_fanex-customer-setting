@@ -40,7 +40,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Command
 
         public override bool IsValid()
         {
-            return CustId > 0 && SubAccId <= 0;
+            return CustId > 0 && SubAccId > 0;
         }
     }
 }
