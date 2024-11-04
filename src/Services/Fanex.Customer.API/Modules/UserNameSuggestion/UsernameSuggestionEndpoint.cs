@@ -9,15 +9,15 @@ public class UserNameSuggestionEndpoint :
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/username-suggestion", ([AsParameters] UserNameSuggestionQuery request1, UsernameSuggestionService request2) => HandleAsync(request1, request2))
+        app.MapPost("/api/customer/username-suggestion", (UserNameSuggestionQuery request1, UsernameSuggestionService request2) => HandleAsync(request1, request2))
             .WithTags(EndpointTags.CustomerInfos)
             .Produces<IResult>();
 
-        app.MapPost("/api/customer/username-suggestion", (UpdateUserSearchQuery request1, UsernameSuggestionService request2) => HandleAsync(request1, request2))
+        app.MapPut("/api/customer/username-suggestion", (UpdateUserSearchQuery request1, UsernameSuggestionService request2) => HandleAsync(request1, request2))
             .WithTags(EndpointTags.CustomerInfos)
             .Produces<IResult>();
 
-        app.MapGet("/api/customer/username-suggestion-by-role", ([AsParameters] UsernameSuggestionByRoleQuery request1, UsernameSuggestionService request2) => HandleAsync(request1, request2))
+        app.MapPost("/api/customer/username-suggestion-by-role", (UsernameSuggestionByRoleQuery request1, UsernameSuggestionService request2) => HandleAsync(request1, request2))
             .WithTags(EndpointTags.CustomerInfos)
             .Produces<IResult>();
     }
