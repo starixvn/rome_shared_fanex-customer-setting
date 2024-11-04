@@ -19,6 +19,8 @@ namespace Fanex.Customer.API.Modules.UserNameSuggestion
             string lastName, 
             string nickname
         );
+
+        Task<IEnumerable<UsernameSuggestion>> GetUsernameSuggestionByRole(int custId, string username, byte roleId);
     }
 
     public class UsernameSuggestionServiceImpl(IDynamicRepository dynamicRepository) : UsernameSuggestionService
@@ -38,6 +40,13 @@ namespace Fanex.Customer.API.Modules.UserNameSuggestion
                   isInternal,
                   directDownline,
                   isAccInfo))).OrderBy(item => item.UserName);
+
+        public async Task<IEnumerable<UsernameSuggestion>> GetUsernameSuggestionByRole(int custId, string username, byte roleId)
+            => (await dynamicRepository.FetchAsync<UsernameSuggestion>(
+              new UsernameSuggestionByRoleCriteria(
+                  custId,
+                  username,
+                  roleId))).OrderBy(item => item.UserName);
 
         public async Task<bool> UpdateUserSearch(int userId, string search, string firstName, string lastName, string nickname)
         {

@@ -126,6 +126,7 @@
       <Mapping ObjectProperty="YesterdayCustomerCash" DataField="yesterday_Cash" Class="MemberBalanceDTO" />
     </Setting>
     <Setting Key="Age_CustomerSelUserSearch" SpName="Age_CustomerSelUserSearch" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
+    <Setting Key="Age_CustomerSelUserSearch_ByRole" SpName="Age_CustomerSelUserSearch_ByRole" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerCheckExists" SpName="Acc_CustomerCheckExists" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
     <Setting Key="Acc_CustomerCreditInfoSel" SpName="Acc_CustomerCreditInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" Class="CreditInfo"/>
