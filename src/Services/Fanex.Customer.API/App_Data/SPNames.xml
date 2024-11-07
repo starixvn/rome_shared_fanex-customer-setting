@@ -133,6 +133,7 @@
       <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CreditInfo" />
     </Setting>
     <Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
+    <Setting Key="Age_CustomerSelSuggestUsername_DirectMember" SpName="Age_CustomerSelSuggestUsername_DirectMember_UAT2" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
     <Setting Key="Age_CustomerSelCheckBelonging_ByUsername" SpName="Age_CustomerSelCheckBelonging_ByUsername" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustomerSelCheckEnable" SpName="Acc_CustomerSelCheckEnable" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Age_Chatbot_CustomerStatusSel" SpName="Age_Chatbot_CustomerStatusSel" DbName="DBCust.CustDB.wsv_alp" />

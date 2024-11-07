@@ -21,6 +21,8 @@ public interface ICustomerService
 
     Task<Result> GetSuggestUsername(GetSuggestUsernameRequest request);
 
+    Task<Result> GetSuggestDirectMemberUsername(GetSuggestDirectMemberUsernameRequest request);
+
     Task<bool> CheckExistedCustomer(string username);
 
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
@@ -81,6 +83,13 @@ public class CustomerService : ICustomerService
     public async Task<Result> GetSuggestUsername(GetSuggestUsernameRequest request)
     {
         var command = new GetSuggestUsernameCommand(request.ActorName, request.RoleId);
+        await dynamicRepository.ExecuteAsync(command);
+        return new Result(command.ErrCode, command.ErrMsg, command.SeqName);
+    }
+
+    public async Task<Result> GetSuggestDirectMemberUsername(GetSuggestDirectMemberUsernameRequest request)
+    {
+        var command = new GetSuggestDirectMemberUsernameCommand(request.UplineUsername);
         await dynamicRepository.ExecuteAsync(command);
         return new Result(command.ErrCode, command.ErrMsg, command.SeqName);
     }
