@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.block-loading {
+  background: url('./assets/images/loading.gif') no-repeat center center;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 101;
+}
