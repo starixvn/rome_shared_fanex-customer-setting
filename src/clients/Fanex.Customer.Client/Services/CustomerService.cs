@@ -22,6 +22,8 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> GetSuggestUsername(string actorName, byte roleId);
 
+        Task<string> GetSuggestDirectMemberUsername(string uplineUsername);
+
         Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
 
         Task<CopyCustomerResult> CopyCustomer(CopyCustomerParam param);
@@ -244,6 +246,9 @@ namespace Fanex.Customer.Client.Services
 
         public Task<string> GetSuggestUsername(string actorName, byte roleId)
             => httpClient.PostAsJsonAsync<string>("customer/suggest-username", new { actorName, roleId });
+
+        public Task<string> GetSuggestDirectMemberUsername(string uplineUsername)
+            => httpClient.PostAsJsonAsync<string>("customer/suggest-direct-member-username", new { uplineUsername });
 
         public Task<bool> IsCustomerEnabled(int custId)
             => httpClient.GetAsJsonAsync<bool>($"customer/{custId}/IsEnabled");
