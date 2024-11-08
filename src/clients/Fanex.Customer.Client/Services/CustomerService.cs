@@ -248,7 +248,7 @@ namespace Fanex.Customer.Client.Services
             => httpClient.PostAsJsonAsync<string>("customer/suggest-username", new { actorName, roleId });
 
         public Task<string> GetSuggestDirectMemberUsername(string uplineUsername)
-            => httpClient.PostAsJsonAsync<string>("customer/suggest-direct-member-username", new { uplineUsername });
+            => httpClient.GetAsJsonAsync<string>($"customer/{uplineUsername}/suggest-direct-member-username");
 
         public Task<bool> IsCustomerEnabled(int custId)
             => httpClient.GetAsJsonAsync<bool>($"customer/{custId}/IsEnabled");

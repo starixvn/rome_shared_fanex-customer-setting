@@ -7,7 +7,7 @@ public class GetSuggestDirectMemberUsernameEndpoint : IEndpoint<IResult, GetSugg
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/suggest-direct-member-username", ([AsParameters] GetSuggestDirectMemberUsernameRequest request, ICustomerService customerService)
+        app.MapGet("/api/customer/{UplineUsername}/suggest-direct-member-username", ([AsParameters] GetSuggestDirectMemberUsernameRequest request, ICustomerService customerService)
             => HandleAsync(request, customerService))
             .Produces<string>();
     }
