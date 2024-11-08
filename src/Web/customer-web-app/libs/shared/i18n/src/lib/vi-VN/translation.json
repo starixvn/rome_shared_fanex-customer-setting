@@ -174,5 +174,6 @@
   "Member": "Thành viên",
   "Master": "Master",
   "Agent": "Agent",
-  "Super": "Super"
+  "Super": "Super",
+  "GivenCreditPerAccount": "Hạn mức cho mỗi tài khoản"
 }

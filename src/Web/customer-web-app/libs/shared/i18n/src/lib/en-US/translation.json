@@ -176,5 +176,6 @@
   "Member": "Member",
   "Master": "Master",
   "Agent": "Agent",
-  "Super": "Super"
+  "Super": "Super",
+  "GivenCreditPerAccount": "Given Credit per Account"
 }

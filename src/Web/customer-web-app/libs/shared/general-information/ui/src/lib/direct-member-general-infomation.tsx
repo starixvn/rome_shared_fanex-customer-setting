@@ -189,14 +189,10 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Gene
                 )}
               </div>
             </BlockItem>
-            {/* SMAM max credit*/}
+          </div>
+          <div className={styles['row']}>
             <div className={styles['col-max-credit']}>
-              <BlockItem
-                label={
-                  roleId === UserLevel.Member ? t('GivenCredit') : t(`${UserLevelName[roleId].toLowerCase()}MaxCredit`)
-                }
-                isRequired
-              >
+              <BlockItem label={t('GivenCreditPerAccount')} isRequired>
                 <div>
                   <NumericFormat
                     className={classNames({
@@ -255,80 +251,20 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Gene
                 )}
               </BlockItem>
             </div>
-            {roleId === UserLevel.Agent && (
-              <BlockItem label={t(`memberMaxCredit`)} isRequired>
-                <div>
-                  <NumericFormat
-                    maxLength={MaxNumberInputLength}
-                    value={memberMaxCredit}
-                    className={classNames({
-                      error: getErrorByField('memberMaxCredit'),
-                    })}
-                    onChange={async (e) => {
-                      const data = { memberMaxCredit: NumberHelper.parseNumber(e.target.value) };
-
-                      onGeneralInfoChange?.(data);
-                      const validateMemberMaxCreditResult = await validateGeneralInfo('memberMaxCredit', data);
-                      setValidationResults({ ...validationResults, memberMaxCredit: validateMemberMaxCreditResult });
-                    }}
-                    allowNegative={false}
-                    decimalScale={2}
-                    thousandSeparator=","
-                    valueIsNumericString
-                    id="memberMaxCredit"
-                    onFocus={() => {
-                      setLocationTooltip('memberMaxCredit');
-                    }}
-                    onBlur={() => setLocationTooltip('')}
-                    data-tooltip-id="not-edit-member-max-credit"
-                    disabled={napCanNotEditCredit}
-                  />
-                  {napCanNotEditCredit && (
-                    <WrapperTooltip type="warning" id="not-edit-member-max-credit" content={t('CannotUpdateCredit')} />
-                  )}
-                  {!napCanNotEditCredit && (
-                    <span>{getErrorByField('memberMaxCredit') ? <IconWrong /> : <IconCorrect />}</span>
-                  )}
-                </div>
-                <div className={styles['max-credit']}>
-                  <CreditRange min={0} max={maxCredit || 0} />
-                </div>
-              </BlockItem>
-            )}
             {/*   CommissionGroup */}
-            {generalInfo.roleId === UserLevel.Member && (
-              <div className={styles['col-group']}>
-                <BlockItem label={t('Group')}>
-                  <CommissionGroup
-                    site={generalInfo.site}
-                    currency={generalInfo.currency.toString()}
-                    value={generalInfo.group}
-                    onChange={(e) => {
-                      const data = { group: e.target.value };
-                      onGeneralInfoChange?.(data);
-                    }}
-                  />
-                </BlockItem>
-              </div>
-            )}
-            {generalInfo.roleId === UserLevel.Master && (
-              <div className={styles['col-allowpt']}>
-                <BlockItem label={'\u00A0'}>
-                  <label className={classNames(styles.checkbox, { [styles.left]: true })} htmlFor="checkbox">
-                    <input
-                      type="checkbox"
-                      id="checkbox"
-                      checked={!disableAutoMPT}
-                      onChange={() => {
-                        const data = { disableAutoMPT: !disableAutoMPT };
-                        onGeneralInfoChange?.(data);
-                      }}
-                    />
-                    <span>{t('allowAutoPt')}</span>
-                  </label>
-                </BlockItem>
-              </div>
-            )}
+            <div className={styles['col-group']}>
+              <BlockItem label={t('Group')}>
+                <CommissionGroup
+                  site={generalInfo.site}
+                  currency={generalInfo.currency.toString()}
+                  value={generalInfo.group}
+                  onChange={(e) => {
+                    const data = { group: e.target.value };
+                    onGeneralInfoChange?.(data);
+                  }}
+                />
+              </BlockItem>
+            </div>
           </div>
           <UserInfo
             generalInfo={generalInfo}

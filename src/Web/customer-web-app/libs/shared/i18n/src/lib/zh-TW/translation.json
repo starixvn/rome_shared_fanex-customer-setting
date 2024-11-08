@@ -175,5 +175,6 @@
   "Member": "會員",
   "Master": "總代理",
   "Agent": "代理",
-  "Super": "超級"
+  "Super": "超級",
+  "GivenCreditPerAccount": "每個賬號的信用額度"
 }
