@@ -1,3 +1,10 @@
+export interface UsernameSuggestion {
+  UserName: string;
+  FirstName: string;
+  LastName: string;
+  UserName2: string;
+}
+
 export class Result {
   public code: number;
   public message: string;

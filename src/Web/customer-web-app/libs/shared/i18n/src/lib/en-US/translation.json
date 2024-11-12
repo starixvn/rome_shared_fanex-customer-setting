@@ -177,5 +177,9 @@
   "Master": "Master",
   "Agent": "Agent",
   "Super": "Super",
-  "GivenCreditPerAccount": "Given Credit per Account"
+  "GivenCreditPerAccount": "Given Credit per Account",
+  "NoOfAccounts": "No. of Accounts",
+  "CopySettingFrom": "Copy setting from",
+  "UsernamePlaceHolder": "Username or First/Last Name",
+  "CopySettingFromNote": "Only support copying setting values from an existing direct member."
 }

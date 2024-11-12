@@ -176,5 +176,7 @@
   "Master": "มาสเตอร์",
   "Agent": "เอเย่นต์",
   "Super": "ซุปเปอร์",
-  "GivenCreditPerAccount": "เครดิตที่ให้แต่ละบัญชี"
+  "GivenCreditPerAccount": "เครดิตที่ให้แต่ละบัญชี",
+  "NoOfAccounts": "จำนวนบัญชี",
+  "UsernamePlaceHolder": "ยูเซอร์เนม หรือ ชื่อ/นามสุกล"
 }

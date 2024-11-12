@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { NumericFormat } from 'react-number-format';
 
 import { ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
-import {
-    MaxNumberInputLength, SystemIds, UserLevel, UserLevelName
-} from '@customer-web-app/shared-constants';
+import { MaxNumberInputLength, SystemIds, UserLevel } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper, NumberHelper } from '@customer-web-app/shared-helpers';
@@ -16,6 +14,7 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import CommissionGroup from './commission-group';
 import { errorTooltip } from './common';
+import CopySettingFromNote from './copy-setting-from-note';
 import CreditNote from './credit-note';
 import CreditRange from './credit-range';
 import { GeneralInformationProps } from './general-information';
@@ -23,10 +22,12 @@ import GeneralInformationValidator, {
     generalInformationValidatorFields, validateMaxCredit
 } from './general-information-validator';
 import styles from './general-information.module.scss';
+import NoOfAccounts from './no-of-accounts';
 import { PasswordField } from './password-field';
 import PasswordRule from './password-rule';
 import UserInfo from './user-info';
 import Username from './username-field';
+import UsernameSuggestionSelect from './username-suggestion-select';
 
 function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
   const maxCredits: Record<UserLevel, validateMaxCredit> = {
@@ -46,7 +47,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Gene
     const blockRef = useRef<BlockRefType>(null);
     const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
     const [locationTooltip, setLocationTooltip] = useState<string>('');
-    const { roleId, uplineMaxCredit, maxCredit, disableAutoMPT, memberMaxCredit, uplineMemberMaxCredit } = generalInfo;
+    const { roleId, uplineMaxCredit, uplineMemberMaxCredit } = generalInfo;
     const isNotNAP = appConfig.systemId !== SystemIds.NAP;
 
     useImperativeHandle(ref, () => {
@@ -191,6 +192,19 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Gene
             </BlockItem>
           </div>
           <div className={styles['row']}>
+            <BlockItem
+              label={
+                <>
+                  {t('CopySettingFrom')}
+                  {<CopySettingFromNote />}
+                </>
+              }
+            >
+              <UsernameSuggestionSelect />
+            </BlockItem>
+            <BlockItem label={t('NoOfAccounts')}>
+              <NoOfAccounts />
+            </BlockItem>
             <div className={styles['col-max-credit']}>
               <BlockItem label={t('GivenCreditPerAccount')} isRequired>
                 <div>

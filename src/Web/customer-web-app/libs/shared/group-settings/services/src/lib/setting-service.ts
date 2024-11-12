@@ -1,4 +1,4 @@
-import { CreateCustomerResult, Result, UpdateCustomerResult } from '@customer-web-app/share-models';
+import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
@@ -240,6 +240,12 @@ export const SettingService = {
   GetCustomerCurrentWinLossAmount: async (custId: number, sportType: number, betType: number) => {
     const response = await axiosInstance.get<CurrentWinLossAmount[]>(
       `Customer/GetCurrentWinLossAmount?custId=${custId}&sportType=${sportType}&betType=${betType}`
+    );
+    return response.data;
+  },
+  GetUserNameSuggestion: async (query: string) => {
+    const response = await axiosInstance.get<UsernameSuggestion[]>(
+      `UserNameSuggestion/GetUsernamesSuggestion?suggestionQuery=${query}`
     );
     return response.data;
   },

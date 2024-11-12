@@ -176,5 +176,7 @@
   "Master": "總代理",
   "Agent": "代理",
   "Super": "超級",
-  "GivenCreditPerAccount": "每個賬號的信用額度"
+  "GivenCreditPerAccount": "每個賬號的信用額度",
+  "NoOfAccounts": "賬號數量",
+  "UsernamePlaceHolder": "用戶名或名/姓"
 }

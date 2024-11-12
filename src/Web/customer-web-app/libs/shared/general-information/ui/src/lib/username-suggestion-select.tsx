@@ -1,0 +1,140 @@
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { components, InputProps, OptionProps, SingleValue, StylesConfig } from 'react-select';
+import AsyncSelect from 'react-select/async';
+
+import { UsernameSuggestion } from '@customer-web-app/share-models';
+import { SettingService } from '@customer-web-app/shared-group-settings-services';
+
+interface UsernameSuggestionOption extends UsernameSuggestion {
+  value: string;
+}
+
+const promiseOptions = async (inputValue: string): Promise<UsernameSuggestionOption[]> => {
+  const usernames = await SettingService.GetUserNameSuggestion(inputValue);
+  return usernames.map((x) => ({ ...x, value: x.UserName }));
+};
+
+const Option = (props: OptionProps<UsernameSuggestionOption, false>) => {
+  return (
+    <components.Option {...props}>
+      {props.data.UserName ? (
+        <div>
+          <div>
+            {props.data.UserName} {props.data.UserName2 && `(${props.data.UserName2})`}
+          </div>
+          <div>
+            {props.data.FirstName} {props.data.LastName}
+          </div>
+        </div>
+      ) : (
+        <span>{props.data.value}</span>
+      )}
+    </components.Option>
+  );
+};
+
+const Input = (props: InputProps<UsernameSuggestionOption, false>) => (
+  <components.Input
+    {...props}
+    isHidden={false}
+    placeholder={props.selectProps.placeholder as string}
+    style={{ minWidth: '250px', height: '26px', marginBottom: '2px', border: 'none' }}
+  />
+);
+
+const customStyles: StylesConfig<UsernameSuggestionOption> = {
+  valueContainer: (provided) => ({
+    ...provided,
+    height: '28px',
+    padding: 0,
+    minWidth: '100%',
+  }),
+  container: (provided) => ({
+    ...provided,
+    display: 'inline-block',
+    width: '250px',
+    height: '28px',
+    fontSize: 'var(--font-size)',
+    fontWeight: '400',
+    lineHeight: '22px',
+  }),
+
+  control: (baseStyles) => ({
+    ...baseStyles,
+    borderRadius: '3px',
+    minHeight: '28px',
+    height: '28px',
+    width: '100%',
+    display: 'inline-block',
+    border: '1px solid var(--border-input)',
+    boxShadow: 'none',
+    '&:hover': {
+      outline: 'none',
+    },
+  }),
+
+  menu: (provided) => ({
+    ...provided,
+    zIndex: 2,
+    borderRadius: 'none',
+    marginTop: '1px',
+  }),
+
+  input: (provided) => ({
+    ...provided,
+    padding: 0,
+    margin: 0,
+    paddingLeft: '5px',
+  }),
+
+  singleValue: (provided) => ({
+    ...provided,
+    padding: 0,
+    paddingLeft: '5px',
+    margin: 0,
+  }),
+
+  placeholder: (provided) => ({
+    ...provided,
+    padding: 0,
+    paddingLeft: '5px',
+    margin: 0,
+  }),
+
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+
+  indicatorsContainer: (provided) => ({
+    ...provided,
+    display: 'none',
+  }),
+};
+
+export default function UsernameSuggestionSelect() {
+  const { t } = useTranslation();
+  const [value, setValue] = useState('');
+
+  const handlerChange = (newValue: SingleValue<UsernameSuggestionOption>) => {
+    newValue && setValue(newValue.value);
+  };
+
+  const handleInputChange = (newValue: string) => {
+    setValue(newValue);
+  };
+
+  return (
+    <AsyncSelect
+      inputValue={value}
+      loadOptions={promiseOptions}
+      components={{ Option, Input, SingleValue: () => null, Placeholder: () => null }}
+      styles={customStyles}
+      placeholder={t('UsernamePlaceHolder')}
+      noOptionsMessage={() => null}
+      controlShouldRenderValue={false}
+      onChange={handlerChange}
+      onInputChange={handleInputChange}
+    />
+  );
+}

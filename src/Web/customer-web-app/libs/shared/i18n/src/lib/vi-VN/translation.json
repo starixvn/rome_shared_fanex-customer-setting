@@ -175,5 +175,7 @@
   "Master": "Master",
   "Agent": "Agent",
   "Super": "Super",
-  "GivenCreditPerAccount": "Hạn mức cho mỗi tài khoản"
+  "GivenCreditPerAccount": "Hạn mức cho mỗi tài khoản",
+  "NoOfAccounts": "Số tài khoản",
+  "UsernamePlaceHolder": "Tên đăng nhập hoặc Tên/Họ"
 }
