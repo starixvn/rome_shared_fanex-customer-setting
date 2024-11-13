@@ -19,7 +19,8 @@ public class SettingProfileService : ISettingProfileService
     public enum ProfileMode
     {
         AddNew = 1,
-        Edit = 2
+        Edit = 2,
+        DirectMember = 2
     }
 
     public SettingProfileService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService)

@@ -3,20 +3,21 @@ using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.Customer.Endpoints;
 
-public class GetSuggestDirectMemberUsernameEndpoint : IEndpoint<IResult, GetSuggestDirectMemberUsernameRequest, ICustomerService>
+public class GetSuggestDirectMemberUsernameEndpoint : IEndpoint<IResult, string, ICustomerService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/{UplineUsername}/suggest-direct-member-username", ([AsParameters] GetSuggestDirectMemberUsernameRequest request, ICustomerService customerService)
-            => HandleAsync(request, customerService))
-            .Produces<string>();
+        app.MapGet("/api/customer/{UplineUsername}/suggest-direct-member-username", (string uplineUserName, ICustomerService customerService)
+            => HandleAsync(uplineUserName, customerService))
+            .Produces<string>()
+            .WithTags("Direct Member");
     }
 
-    public async Task<IResult> HandleAsync(GetSuggestDirectMemberUsernameRequest request, ICustomerService customerService)
+    public async Task<IResult> HandleAsync(string uplineUserName, ICustomerService customerService)
     {
-        if (request.IsValid())
+        if (!string.IsNullOrWhiteSpace(uplineUserName))
         {
-            var result = await customerService.GetSuggestDirectMemberUsername(request).ConfigureAwait(false);
+            var result = await customerService.GetSuggestDirectMemberUsername(uplineUserName);
             return Results.Ok(result.CustomData);
         }
 

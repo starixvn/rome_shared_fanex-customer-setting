@@ -12,6 +12,7 @@ using Fanex.Customer.API.Shared.Services;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
+using Fanex.Customer.API.Shared.Constants;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
@@ -55,4 +56,7 @@ public class BaseQueryCustomerService : BaseCustomerService
         };
 
     }
+
+    protected bool IsHideGroupType(int displayMode)
+        => displayMode == DisplayMode.Hidden;
 }

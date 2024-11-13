@@ -21,8 +21,11 @@ public interface ICustomerService
 
     Task<Result> GetSuggestUsername(GetSuggestUsernameRequest request);
 
-    Task<Result> GetSuggestDirectMemberUsername(GetSuggestDirectMemberUsernameRequest request);
+    Task<Result> GetSuggestDirectMemberUsername(string uplineUserName);
 
+    Task<IEnumerable<SuggestDirectMember>> SearchSuggestionDirectMember(int uplineCustId, string searchUserName);
+    Task<int> CheckExistDirectMember(int uplineCustId, string userName);
+    
     Task<bool> CheckExistedCustomer(string username);
 
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
@@ -87,11 +90,29 @@ public class CustomerService : ICustomerService
         return new Result(command.ErrCode, command.ErrMsg, command.SeqName);
     }
 
-    public async Task<Result> GetSuggestDirectMemberUsername(GetSuggestDirectMemberUsernameRequest request)
+    public async Task<Result> GetSuggestDirectMemberUsername(string uplineUserName)
     {
-        var command = new GetSuggestDirectMemberUsernameCommand(request.UplineUsername);
+        var command = new GetSuggestDirectMemberUsernameCommand(uplineUserName);
         await dynamicRepository.ExecuteAsync(command);
         return new Result(command.ErrCode, command.ErrMsg, command.SeqName);
+    }
+
+    public async Task<IEnumerable<SuggestDirectMember>> SearchSuggestionDirectMember(int uplineCustId, string searchUserName)
+    {
+        var command = new SearchSuggestionDirectMemberCriteria(uplineCustId, searchUserName);
+        return await dynamicRepository.FetchAsync<SuggestDirectMember>(command);
+    }
+
+    public async Task<int> CheckExistDirectMember(int uplineCustId, string userName)
+    {
+        var command = new CheckExistDirectMemberUsernameCommand(uplineCustId, userName);
+        var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
+        if(!result.Any())
+        {
+            return 0;
+        }
+
+        return result.First().IsEnabled ? result.First().CustId : -1;
     }
 
     public async Task<bool> CheckExistedCustomer(string username)

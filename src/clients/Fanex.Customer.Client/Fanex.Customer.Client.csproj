@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-        <Version>1.0.1.5-directmem-02</Version>
-        <Authors>@Rome</Authors>
-        <Company>Nexcel</Company>
-        <Product>Fanex</Product>
-        <PackageReleaseNotes>216405 - Allow Change Member Group Comm</PackageReleaseNotes>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="8.0.0" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <Version>1.0.1.5-directmem-05</Version>
+    <Authors>@Rome</Authors>
+    <Company>Nexcel</Company>
+    <Product>Fanex</Product>
+    <PackageReleaseNotes>Support Scale out CustDB (#199915) - Add Currency for copy super at NAP.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+  </ItemGroup>
 </Project>

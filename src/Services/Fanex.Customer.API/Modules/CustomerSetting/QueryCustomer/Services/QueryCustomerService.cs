@@ -142,7 +142,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         bool isSiteLabel777,
         GeneralInformation generalInfo)
     {
-        return settingProfile.Where(p => p.DisplayMode != 3 && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
+        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
             Id = g.Key,
