@@ -108,17 +108,17 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
     switch (id) {
       case GroupTypeIds.ProductStatus:
         return <ProductStatus isReadOnly={isReadOnly} />;
-      case GroupTypeIds.SportsBookCommission:
-      case GroupTypeIds.Commission:
-        return <Commission groupTypeId={id} isReadOnly={isReadOnly} />;
+      // case GroupTypeIds.SportsBookCommission:
+      // case GroupTypeIds.Commission:
+      //   return <Commission groupTypeId={id} isReadOnly={isReadOnly} />;
       case GroupTypeIds.SportsBookBetSetting:
         return <SportsBookBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
       case GroupTypeIds.RNGGamesBetSetting:
         return <RNGGamesBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
       case GroupTypeIds.ParlayMaxPayout:
         return <ParlayMaxPayout isReadOnly={isReadOnly} ref={parlayMaxPayoutRef} />;
-      case GroupTypeIds.PositionTaking:
-        return <PositionTaking isReadOnly={isReadOnly} ref={positionTakingRef} />;
+      // case GroupTypeIds.PositionTaking:
+      //   return <PositionTaking isReadOnly={isReadOnly} ref={positionTakingRef} />;
       case GroupTypeIds.BetLimit:
         return (
           groupItems.length > 0 && (

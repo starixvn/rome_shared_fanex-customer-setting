@@ -24,9 +24,7 @@ export const SettingService = {
             ...item,
             isMultipleModeChecked: true,
             upline: { ...item },
-            original: {
-              ...item,
-            },
+            original: { ...item },
             isAllowUnlimitCombo2: item.combo2 === 0,
             isAllowUnlimitCombo35: item.combo35 === 0,
             isAllowUnlimitComboOver6: item.comboOver6 === 0,
