@@ -48,7 +48,8 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
         params.uplineRoleId,
         0,
         false,
-        params.siteLabel
+        params.siteLabel,
+        true
       );
       if (appConfig.systemId !== SystemIds.NAP) {
         generalInfo.newUserName = params.suggestUsername;

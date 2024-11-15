@@ -1,4 +1,6 @@
-import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
+import {
+    CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion
+} from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
@@ -54,6 +56,7 @@ export const SettingService = {
     uplineRoleId = 0,
     isGetUpLine = false,
     siteLabel = '',
+    isDirectMember = false,
     isMultipleMode = false,
     groupName = '',
     isCopy = false
@@ -61,8 +64,8 @@ export const SettingService = {
     const response = await axiosInstance.get<GroupSettingsResponse>(
       `Customer/GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${
         appConfig.systemId
-      }&siteLabel=${siteLabel}&productGroupId=${
-        params.productGroupId ?? ProductGroupIds.SportsBook
+      }&siteLabel=${siteLabel}&productGroupId=${params.productGroupId ?? ProductGroupIds.SportsBook}&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}
+      &isDirectMember=${isDirectMember}`
       }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
     );
     return response.data;
@@ -243,8 +246,12 @@ export const SettingService = {
   },
   GetUserNameSuggestion: async (query: string) => {
     const response = await axiosInstance.get<UsernameSuggestion[]>(
-      `UserNameSuggestion/GetUsernamesSuggestion?suggestionQuery=${query}`
+      `Customer/SearchSuggestDirectMembers?searchUsername=${query}`
     );
+    return response.data;
+  },
+  GetDirectMember: async (username: string) => {
+    const response = await axiosInstance.get(`Customer/CheckDirectMemberUserName?searchUsername=${username}`);
     return response.data;
   },
 };

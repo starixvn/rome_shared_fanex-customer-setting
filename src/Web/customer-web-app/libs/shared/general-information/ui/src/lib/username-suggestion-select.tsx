@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { components, InputProps, OptionProps, SingleValue, StylesConfig } from 'react-select';
+import {
+    components, InputActionMeta, InputProps, OptionProps, SingleValue, StylesConfig
+} from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import { UsernameSuggestion } from '@customer-web-app/share-models';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
+import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
+
+import styles from './username-suggestion-select.module.scss';
 
 interface UsernameSuggestionOption extends UsernameSuggestion {
   value: string;
@@ -115,26 +120,45 @@ const customStyles: StylesConfig<UsernameSuggestionOption> = {
 export default function UsernameSuggestionSelect() {
   const { t } = useTranslation();
   const [value, setValue] = useState('');
+  const [validateResult, setValidateResult] = useState<{ [key: string]: boolean }>({});
 
   const handlerChange = (newValue: SingleValue<UsernameSuggestionOption>) => {
+    console.log(newValue);
     newValue && setValue(newValue.value);
   };
 
-  const handleInputChange = (newValue: string) => {
-    setValue(newValue);
+  const handleInputChange = (newValue: string, { action }: InputActionMeta) => {
+    if (action === 'input-change') {
+      setValue(newValue);
+    }
+  };
+
+  const handleBlur = async () => {
+    if (value) {
+      const custId = await SettingService.GetDirectMember(value);
+      setValidateResult({ username: custId > 0 });
+    } else {
+      setValidateResult({});
+    }
   };
 
   return (
-    <AsyncSelect
-      inputValue={value}
-      loadOptions={promiseOptions}
-      components={{ Option, Input, SingleValue: () => null, Placeholder: () => null }}
-      styles={customStyles}
-      placeholder={t('UsernamePlaceHolder')}
-      noOptionsMessage={() => null}
-      controlShouldRenderValue={false}
-      onChange={handlerChange}
-      onInputChange={handleInputChange}
-    />
+    <div className={styles.search}>
+      <AsyncSelect
+        inputValue={value}
+        loadOptions={promiseOptions}
+        components={{ Option, Input, SingleValue: () => null, Placeholder: () => null }}
+        styles={customStyles}
+        placeholder={t('UsernamePlaceHolder')}
+        noOptionsMessage={() => null}
+        controlShouldRenderValue={false}
+        onChange={handlerChange}
+        onInputChange={handleInputChange}
+        onBlur={handleBlur}
+      />
+      {validateResult['username'] !== undefined && (
+        <div>{validateResult['username'] ? <IconCorrect /> : <IconWrong />}</div>
+      )}
+    </div>
   );
 }
