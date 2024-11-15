@@ -93,7 +93,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         var uGroup  = generalInfoDto.Group;
         ptStep = appSettings.IsSupportPT3Decimal(IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel) ? 0.5M : 1M;
         isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, appSettings);
-        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
+        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsDirectMember ? ProfileMode.DirectMember : request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
         if ((!request.IsGetUpline && request.RoleId == CustomerLevel.Agent) || (request.IsGetUpline && request.RoleId == CustomerLevel.Member)) 
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
