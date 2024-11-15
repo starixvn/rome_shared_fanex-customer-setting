@@ -255,10 +255,10 @@ namespace Fanex.Customer.Client.Services
             => httpClient.GetAsJsonAsync<string>($"customer/{uplineUsername}/suggest-direct-member-username");
 
         public Task<IEnumerable<SuggestDirectMember>> SearchSuggestDirectMembers(int uplineCustId, string searchUserName)
-            => httpClient.GetAsJsonAsync<IEnumerable<SuggestDirectMember>>($"api/customer/{uplineCustId}/suggest-direct-members/{searchUserName}");
+            => httpClient.GetAsJsonAsync<IEnumerable<SuggestDirectMember>>($"customer/{uplineCustId}/suggest-direct-members/{searchUserName}");
 
         public Task<int> CheckDirectMemberUserName(int uplineCustId, string userName)
-            => httpClient.GetAsJsonAsync<int>($"api/customer/{uplineCustId}/check-exist-direct-member/{userName}");
+            => httpClient.GetAsJsonAsync<int>($"customer/{uplineCustId}/check-exist-direct-member/{userName}");
 
         public Task<bool> IsCustomerEnabled(int custId)
             => httpClient.GetAsJsonAsync<bool>($"customer/{custId}/IsEnabled");
