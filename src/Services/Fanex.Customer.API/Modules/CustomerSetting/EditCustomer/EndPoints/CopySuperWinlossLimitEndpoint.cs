@@ -30,8 +30,8 @@ public class CopySuperWinlossLimitEndpoint : IEndpoint<IResult, CopySuperWinloss
             return Results.BadRequest("SportTypeIds cannot be empty.");
         }
 
-        var currentLiveCSWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 3, GroupTypes.WinlossLimit, false, 0, "", request.SystemId, "", true)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
-        var currentRNGGamesWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 2, GroupTypes.WinlossLimit, false, 0, "", request.SystemId, "", true)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
+        var currentLiveCSWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 3, GroupTypes.WinlossLimit, false, 0, "", request.SystemId, "", true, false)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
+        var currentRNGGamesWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 2, GroupTypes.WinlossLimit, false, 0, "", request.SystemId, "", true, false)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
         if (!currentLiveCSWLLimit.Any() && !currentRNGGamesWLLimit.Any())
         { 
             return Results.BadRequest("There is no GroupItems existed.");

@@ -10,7 +10,7 @@ public interface ICustomerSettingHelper
 
     string ObjectToXml(object o);
 
-    int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId);
+    int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId, bool? isDirectMember);
 
     int GetGroupTypeByCustomerLevel(int groupType, byte roleId);
 
@@ -41,20 +41,22 @@ public class CustomerSettingHelper : ICustomerSettingHelper
         {
             return string.Empty;
         }
-        
+
         var jsonObj = JsonConvert.SerializeObject(o);
         var wrappedDocument = string.Format("{{ item: {0} }}", jsonObj);
         return JsonConvert.DeserializeXmlNode(wrappedDocument)?.OuterXml.Replace("<item>", string.Empty).Replace("</item>", string.Empty);
     }
-    
-    public int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId)
+
+    public int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId, bool? isDirectMember)
     {
-        if (groupType == 153 && IsCrossLevel(roleId, uplineRoleId))
+        var result = GetGroupTypeByCustomerLevel(groupType, roleId);
+        if (IsCrossLevel(roleId, uplineRoleId))
         {
-            return GetGroupTypeByCustomerLevel(groupType, roleId) * 10 + uplineRoleId;
+            result = result * 10 + uplineRoleId;
+            return isDirectMember.GetValueOrDefault() ? result * 10 + 1 : result;
         }
 
-        return GetGroupTypeByCustomerLevel(groupType, roleId);
+        return isDirectMember.GetValueOrDefault() ? result * 10 + 1 : result;
     }
 
     public int GetGroupTypeByCustomerLevel(int groupType, byte roleId)
@@ -62,7 +64,7 @@ public class CustomerSettingHelper : ICustomerSettingHelper
 
     public bool IsGroupTypeByLevel(int groupType)
     => groupType == 153 || groupType == 150 || groupType == 156;
-    
+
     public bool IsPTGroupType(int groupType)
     => groupType == 153;
 

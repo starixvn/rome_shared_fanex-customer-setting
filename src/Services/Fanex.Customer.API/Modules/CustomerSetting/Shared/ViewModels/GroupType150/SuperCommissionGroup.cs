@@ -15,3 +15,11 @@ public class AgentCommissionGroup : CommissionGroup
 public class MemberCommissionGroup : CommissionGroup
 {
 }
+
+public class SuperDirectMemberCommissionGroup : CommissionGroup
+{
+}
+
+public class MasterDirectMemberCommissionGroup : CommissionGroup
+{
+}

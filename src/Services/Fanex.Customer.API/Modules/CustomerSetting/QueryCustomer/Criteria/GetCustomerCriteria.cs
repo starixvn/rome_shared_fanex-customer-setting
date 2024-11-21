@@ -6,13 +6,14 @@ namespace Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 
 public class GetCustomerCriteria : CriteriaBase
 {
-    public GetCustomerCriteria(int custId, byte settingStatus, int roleId, int groupId = 0, int groupType = 0)
+    public GetCustomerCriteria(int custId, byte settingStatus, bool? isDirectMember, int roleId, int groupId = 0, int groupType = 0)
     {
         CustId = custId;
         GroupId = groupId;
         GroupType = groupType;
         SettingStatus = settingStatus;
         RoleId = roleId;
+        IsDirectMember = isDirectMember;
     }
 
     public int CustId { get; }
@@ -25,6 +26,8 @@ public class GetCustomerCriteria : CriteriaBase
 
     [SpParam(Ignored = true)]
     public int RoleId { get; }
+
+    public bool? IsDirectMember { get; }
 
     public override string GetSettingKey()
         => RoleId switch

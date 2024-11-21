@@ -292,6 +292,20 @@
       <Mapping DataField="PlayerDiscount" ObjectProperty="Discount" Class="MemberCommissionGroup" />
       <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="MemberCommissionGroup" />
     </Setting>
+    <Setting Key="Acc_CustSetting_Discount150Sel_SuperDirectMember" SpName="Acc_CustSetting_Discount150Sel_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" Class="SuperDirectMemberCommissionGroup" />
+      <Mapping DataField="Bettype" ObjectProperty="BettypeId" Class="SuperDirectMemberCommissionGroup" />
+      <Mapping DataField="SuperDiscount" ObjectProperty="UplineDiscount" Class="SuperDirectMemberCommissionGroup" />
+      <Mapping DataField="PlayerDiscount" ObjectProperty="Discount" Class="SuperDirectMemberCommissionGroup" />
+      <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="SuperDirectMemberCommissionGroup" />
+    </Setting>
+    <Setting Key="Acc_CustSetting_Discount150Sel_MasterDirectMember" SpName="Acc_CustSetting_Discount150Sel_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" Class="MasterDirectMemberCommissionGroup" />
+      <Mapping DataField="Bettype" ObjectProperty="BettypeId" Class="MasterDirectMemberCommissionGroup" />
+      <Mapping DataField="MasterDiscount" ObjectProperty="UplineDiscount" Class="MasterDirectMemberCommissionGroup" />
+      <Mapping DataField="PlayerDiscount" ObjectProperty="Discount" Class="MasterDirectMemberCommissionGroup" />
+      <Mapping DataField="IntervalComm" ObjectProperty="Step" Class="MasterDirectMemberCommissionGroup" />
+    </Setting>
     <Setting Key="Acc_CustSetting_Discount150Upd" SpName="Acc_CustSetting_Discount150Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_BetSetting151Sel" SpName="Acc_CustSetting_BetSetting151Sel_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />

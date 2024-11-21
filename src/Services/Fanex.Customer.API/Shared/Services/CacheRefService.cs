@@ -31,6 +31,7 @@ public interface ICacheRefService
         int groupTypeId,
         int displayType,
         int roleId,
+        bool? isDirectMember = null,
         string language = "en-US",
         bool isSiteLabel777 = false);
 
@@ -161,12 +162,13 @@ public class CacheRefService : ICacheRefService
         int groupTypeId,
         int displayType,
         int roleId,
+        bool? isDirectMember = null,
         string language = "en-US",
         bool isSiteLabel777 = false)
     {
         if (displayType == DisplayType.CommSB)
         {
-            if (roleId == CustomerLevel.Member)
+            if (roleId == CustomerLevel.Member || isDirectMember.GetValueOrDefault())
             {
                 return GetSportsbookCommMemberName(
                     productGroupId,

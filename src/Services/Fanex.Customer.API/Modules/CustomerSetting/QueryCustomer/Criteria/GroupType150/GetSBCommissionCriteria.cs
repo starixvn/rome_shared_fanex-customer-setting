@@ -10,15 +10,18 @@ public class GetSBCommissionCriteria : CriteriaBase
         {1, "Acc_CustSetting_Discount150Sel_Member"},
         {2, "Acc_CustSetting_Discount150Sel_Agent"},
         {3, "Acc_CustSetting_Discount150Sel_Master"},
-        {4, "Acc_CustSetting_Discount150Sel_Super"}
+        {4, "Acc_CustSetting_Discount150Sel_Super"},
+        {1_4, "Acc_CustSetting_Discount150Sel_SuperDirectMember"},
+        {1_3, "Acc_CustSetting_Discount150Sel_MasterDirectMember"},
     };
 
-    public GetSBCommissionCriteria(int custId, byte roleId, int uplineRoleId, byte settingStatus)
+    public GetSBCommissionCriteria(int custId, byte roleId, int uplineRoleId, bool? isDirectMember, byte settingStatus)
     {
         CustId = custId;
         RoleId = roleId;
         UplineRoleId = uplineRoleId;
         SettingStatus = settingStatus;
+        IsDirectMember = isDirectMember;
     }
 
     public int CustId { get; }
@@ -30,7 +33,10 @@ public class GetSBCommissionCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public byte RoleId { get; }
 
-    public override string GetSettingKey() => SPNamesMapping[RoleId];
+    [SpParam(Ignored = true)]
+    public bool? IsDirectMember { get; }
+
+    public override string GetSettingKey() => SPNamesMapping[IsDirectMember.GetValueOrDefault() ? RoleId * 10 + UplineRoleId : RoleId];
 
     public override bool IsValid() => CustId > 0;
 }

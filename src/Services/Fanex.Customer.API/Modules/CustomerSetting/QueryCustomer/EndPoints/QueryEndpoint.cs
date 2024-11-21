@@ -35,6 +35,8 @@ public class QueryCustomerSettingsEndpoint : IEndpoint<IResult, QuerySuperReques
             request.UplineRoleId = (byte?)(request.RoleId + 1);
         }
 
+        request.IsDirectMember = request.IsDirectMember.GetValueOrDefault() ? true : null;
+
         return Results.Ok(await service.Query(request));
     }
 }

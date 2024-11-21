@@ -18,7 +18,7 @@ namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
 public interface IQueryGroupTypeBaseService<T>
 {
-    Task<IEnumerable<T>> QueryForAddNew(int uplineCustId, int uplineRoleId, int productGroupId, int groupType);
+    Task<IEnumerable<T>> QueryForAddNew(int uplineCustId, int uplineRoleId, int productGroupId, int groupType, bool? isDirectMember);
 
     Task<IEnumerable<T>> QuerySuperForAddNew(string site, int currency, int groupId, int groupType);
 
@@ -33,7 +33,8 @@ public interface IQueryGroupTypeBaseService<T>
         string site,
         byte systemId,
         string userGroup,
-        bool isCopy);
+        bool isCopy,
+        bool? isDirectMember);
 }
 
 public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
@@ -46,7 +47,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
 
     protected readonly ICustomerSettingHelper helperService;
 
-    public QueryGroupTypeBaseService(IDynamicRepository dynamicRepository, 
+    public QueryGroupTypeBaseService(IDynamicRepository dynamicRepository,
         IOptions<AppSettings> appSettings, ICustomerSettingHelper helperService)
     {
         this.dynamicRepository = dynamicRepository;
@@ -54,10 +55,11 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         this.helperService = helperService;
     }
 
-    public async Task<IEnumerable<T>> QueryForAddNew(int uplineCustId, int uplineRoleId, int productGroupId, int groupType)
+    public async Task<IEnumerable<T>> QueryForAddNew(int uplineCustId, int uplineRoleId, int productGroupId, int groupType, bool? isDirectMember)
         => await dynamicRepository.FetchAsync<T>(new GetCustomerCriteria(
             uplineCustId,
             appSettings.SettingStatus,
+            isDirectMember,
             uplineRoleId,
             productGroupId,
             groupType));
@@ -82,7 +84,8 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         string site,
         byte systemId,
         string userGroup,
-        bool isCopy)
+        bool isCopy,
+        bool? isDirectMember)
     {
         var criteria = GetQueryForEditCriteria(
             custId, 
@@ -95,7 +98,8 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
             site,
             systemId,
             userGroup,
-            isCopy);
+            isCopy,
+            isDirectMember);
 
         if (criteria == null)
         {
@@ -116,7 +120,8 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         string site,
         byte systemId,
         string userGroup,
-        bool isCopy)
+        bool isCopy,
+        bool? isDirectMember)
     {
         if(isMultipleMode 
             && !isCopy
@@ -127,7 +132,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
 
         return groupType switch
         {
-            GroupTypes.SBCommission => new GetSBCommissionCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), appSettings.SettingStatus),
+            GroupTypes.SBCommission => new GetSBCommissionCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), isDirectMember, appSettings.SettingStatus),
             GroupTypes.Commission => new GetCommissionCriteria(custId, groupId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), appSettings.SettingStatus),
             GroupTypes.BetSetting => new GetBetSettingCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.ParlayMaxPayout => new GetMaxPayoutCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
@@ -140,7 +145,8 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         };
     }
 
-    private static ICriteria GetPositionTakingCriteria(int custId, byte roleId, int uplineRoleId, int groupId, byte settingStatus) => roleId switch
+    private static ICriteria GetPositionTakingCriteria(int custId, byte roleId, int uplineRoleId, int groupId, byte settingStatus)
+    => roleId switch
     {
         CustomerLevel.Super => new GetSuperPTCriteria(custId, groupId, settingStatus),
         CustomerLevel.Master => new GetMasterPTCriteria(custId, groupId, settingStatus),
