@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { useEffect, useReducer, useRef, useState } from 'react';
 
 import {
@@ -5,7 +6,9 @@ import {
 } from '@customer-web-app/edit-customer-page';
 import { ValidationRefType } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import { Currencies, ProductGroupIds, SystemIds } from '@customer-web-app/shared-constants';
+import {
+    Currencies, ProductGroupIds, SystemIds, UserLevel
+} from '@customer-web-app/shared-constants';
 import {
     GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
@@ -107,6 +110,20 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
     productGroupsDispatch({ type: ProductGroupsActionTypes.Update, payload: newProductGroups });
   };
 
+  const handleSelectDirectMember = async (custId: number) => {
+    const { productGroups: selectedProductGroups } = await SettingService.GetCustomerSetting(
+      custId,
+      UserLevel.Member,
+      params.uplineRoleId,
+      true,
+      params.siteLabel,
+      true
+    );
+
+    const newProductGroups = _.merge(productGroups, selectedProductGroups);
+    console.log(newProductGroups);
+  };
+
   return (
     <>
       {isLoading && <BlockUI />}
@@ -116,6 +133,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
           ref={generalInfoRef}
           generalInfo={generalInfo}
           onGeneralInfoChange={handleGeneralInfoChange}
+          onSelectDirectMember={handleSelectDirectMember}
         />
         <GroupSettingsContextProvider
           value={{

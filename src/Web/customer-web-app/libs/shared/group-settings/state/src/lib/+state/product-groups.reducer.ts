@@ -1,6 +1,7 @@
-import { GroupTypeIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    ParlayMaxPayoutGroupItem, ProductGroup, ProductStatusGroupItem
+    ParlayMaxPayoutGroupItem, ProductGroup, ProductStatusGroupItem,
+    SuperDirectMemberPositionTakingGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 import { ProductGroupsAction, ProductGroupsActionTypes } from './product-groups.actions';
@@ -46,6 +47,25 @@ const initProductGroups = (productGroups: ProductGroup[]) => {
 
               return { ...item, isMultipleModeChecked: true, original: { ...item } };
             });
+
+            return { ...type, groupItems };
+          }
+          case GroupTypeIds.PositionTaking: {
+            if (params.uplineRoleId === UserLevel.Super) {
+              const groupItems = (type.groupItems as SuperDirectMemberPositionTakingGroupItem[]).map((item) => ({
+                ...item,
+                isMultipleModeChecked: true,
+                s1: item.s4,
+                upline: { ...item },
+              }));
+              return { ...type, groupItems };
+            }
+
+            const groupItems = type.groupItems.map((item) => ({
+              ...item,
+              isMultipleModeChecked: true,
+              upline: { ...item },
+            }));
 
             return { ...type, groupItems };
           }

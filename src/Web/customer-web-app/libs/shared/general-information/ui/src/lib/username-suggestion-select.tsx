@@ -117,19 +117,29 @@ const customStyles: StylesConfig<UsernameSuggestionOption> = {
   }),
 };
 
-export default function UsernameSuggestionSelect() {
+interface Props {
+  onSelectDirectMember: (custId: number) => void;
+}
+
+export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props) {
   const { t } = useTranslation();
   const [value, setValue] = useState('');
   const [validateResult, setValidateResult] = useState<{ [key: string]: boolean }>({});
 
   const handlerChange = (newValue: SingleValue<UsernameSuggestionOption>) => {
-    console.log(newValue);
-    newValue && setValue(newValue.value);
+    if (newValue) {
+      setValue(newValue.value);
+    }
   };
 
-  const handleInputChange = (newValue: string, { action }: InputActionMeta) => {
+  const handleInputChange = async (newValue: string, { action }: InputActionMeta) => {
     if (action === 'input-change') {
       setValue(newValue);
+      const custId = await SettingService.GetDirectMember(value);
+      setValidateResult({ username: custId > 0 });
+      if (custId) {
+        onSelectDirectMember(custId);
+      }
     }
   };
 
@@ -137,6 +147,9 @@ export default function UsernameSuggestionSelect() {
     if (value) {
       const custId = await SettingService.GetDirectMember(value);
       setValidateResult({ username: custId > 0 });
+      if (custId) {
+        onSelectDirectMember(custId);
+      }
     } else {
       setValidateResult({});
     }

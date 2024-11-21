@@ -86,6 +86,7 @@
   "success": "Success!",
   "copied": "Copied",
   "Group": "Group",
+  "lblCommissionForSuper": "Comm for Super",
   "lblCommissionForMaster": "Comm for Master",
   "lblCommissionForAgent": "Comm for Agent",
   "lblCommissionForMember": "Comm for Member",

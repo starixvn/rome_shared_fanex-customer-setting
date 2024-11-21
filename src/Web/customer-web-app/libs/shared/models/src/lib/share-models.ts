@@ -93,6 +93,7 @@ export interface Params {
   noPermissionEditCredit: boolean;
   productGroupId: number;
   groupName: string;
+  isDirectMember: boolean;
 }
 
 export interface Note {

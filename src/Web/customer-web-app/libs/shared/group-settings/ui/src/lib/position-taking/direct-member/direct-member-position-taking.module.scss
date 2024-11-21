@@ -1,0 +1,15 @@
+.block-pt {
+  .row-empty {
+    > div {
+      background: var(--bg-row-empty);
+      border-radius: 0 !important;
+    }
+  }
+  [class^='_block-row_'],
+  [class*=' _block-row_'] {
+    background: var(--bg-block-pt);
+  }
+}
+.short-block {
+  width: 480px;
+}

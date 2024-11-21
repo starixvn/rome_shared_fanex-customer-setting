@@ -9,6 +9,7 @@ import { Block } from '@customer-web-app/shared/base/block';
 import { GroupSettingBlockProps } from '../types';
 import DefaultCommission from './default';
 import { MemberSportsBookCommission } from './sportsbook';
+import DirectMemberCommission from './sportsbook/direct-member';
 
 type CommissionBlockProps = {
   groupTypeId: number;
@@ -44,17 +45,25 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
 
   const props = { commissions, handleCommissionChange, isReadOnly, handleSelectAll };
 
+
+  const renderContent = () => {
+    if (isIndirectUpdate || isMemberSportsBookComm) {
+      return <MemberSportsBookCommission {...props} />;
+    }
+
+    if (params.isDirectMember) {
+      return <DirectMemberCommission {...props} />;
+    }
+
+    return <DefaultCommission {...props} />;
+  };
   return (
     <Block
       title={t('Commission')}
       isPartialUpdate={isEditMode === true && !isReadOnly}
       onSaveClick={() => updateGroupSetting?.(groupTypeId)}
     >
-      {isIndirectUpdate || isMemberSportsBookComm ? (
-        <MemberSportsBookCommission {...props} />
-      ) : (
-        <DefaultCommission {...props} />
-      )}
+      {renderContent()}
     </Block>
   );
 }
