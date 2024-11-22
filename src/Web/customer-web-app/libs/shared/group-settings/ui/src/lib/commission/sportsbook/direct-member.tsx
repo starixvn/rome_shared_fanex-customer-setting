@@ -35,7 +35,9 @@ export default function DirectMemberCommission({
           )
         }
       >
-        {params.uplineRoleId === UserLevel.Super && <BlockColumn>{t('lblCommissionForSuper')}</BlockColumn>}
+        <BlockColumn>
+          {params.uplineRoleId === UserLevel.Super ? t('lblCommissionForSuper') : t('lblCommissionForMaster')}
+        </BlockColumn>
         <BlockColumn>{t('lblCommissionForMember')}</BlockColumn>
       </BlockRow>
       {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked }) => {
@@ -54,11 +56,9 @@ export default function DirectMemberCommission({
               />
             }
           >
-            {params.uplineRoleId === UserLevel.Super && (
-              <BlockColumn>
-                <div className="show-value">{upline.discount}</div>
-              </BlockColumn>
-            )}
+            <BlockColumn>
+              <div className="show-value">{upline.discount}</div>
+            </BlockColumn>
             <BlockColumn>
               {isReadOnly ? (
                 <div className="show-value">{discount}</div>
