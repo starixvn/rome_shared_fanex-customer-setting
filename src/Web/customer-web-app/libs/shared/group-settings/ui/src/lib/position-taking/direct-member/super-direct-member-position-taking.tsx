@@ -87,11 +87,13 @@ export default function SuperDirectMemberPositionTaking({ ptItems, isReadOnly, o
         );
         return (
           <div className={styles['block-pt']} key={index}>
-            <div className={styles['row-empty']}>
-              <BlockRow label={groupPTLabel}>
-                <BlockColumn>{''}</BlockColumn>
-              </BlockRow>
-            </div>
+            {productGroupId === ProductGroupIds.SportsBook && (
+              <div className={styles['row-empty']}>
+                <BlockRow label={groupPTLabel}>
+                  <BlockColumn>{''}</BlockColumn>
+                </BlockRow>
+              </div>
+            )}
             {group.map((item, index) => {
               const ptLabel = (
                 <PTLabel

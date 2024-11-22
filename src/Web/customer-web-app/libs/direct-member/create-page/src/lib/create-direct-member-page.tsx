@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { useEffect, useReducer, useRef, useState } from 'react';
 
 import {
@@ -111,7 +110,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
   };
 
   const handleSelectDirectMember = async (custId: number) => {
-    const { productGroups: selectedProductGroups } = await SettingService.GetCustomerSetting(
+    const { productGroups } = await SettingService.GetCustomerSetting(
       custId,
       UserLevel.Member,
       params.uplineRoleId,
@@ -120,8 +119,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
       true
     );
 
-    const newProductGroups = _.merge(productGroups, selectedProductGroups);
-    console.log(newProductGroups);
+    productGroupsDispatch({ type: ProductGroupsActionTypes.Update, payload: productGroups });
   };
 
   return (
