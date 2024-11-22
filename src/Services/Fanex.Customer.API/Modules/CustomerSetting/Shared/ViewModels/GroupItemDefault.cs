@@ -26,14 +26,15 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 [JsonDerivedType(typeof(AgentPTSettingItem), typeDiscriminator: 12)]
 [JsonDerivedType(typeof(AgentPTOnMemberSettingItem), typeDiscriminator: 13)]
 [JsonDerivedType(typeof(MasterPTOnMemberSettingItem), typeDiscriminator: 14)]
-[JsonDerivedType(typeof(SuperPTOnMemberSettingItem), typeDiscriminator: 15)]
-[JsonDerivedType(typeof(SuperPTOnDirectMemberSettingItem), typeDiscriminator: 16)]
-[JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 17)]
-[JsonDerivedType(typeof(WinLossLimitItem), typeDiscriminator: 18)]
-//[JsonDerivedType(typeof(CommissionSettingItem), typeDiscriminator: 19)]
-[JsonDerivedType(typeof(GroupType157.BetSettingItem), typeDiscriminator: 20)]
-[JsonDerivedType(typeof(StakeLevelItem), typeDiscriminator: 21)]
-[JsonDerivedType(typeof(ProductStatusItem), typeDiscriminator: 22)]
+[JsonDerivedType(typeof(MasterPTOnDirectMemberSettingItem), typeDiscriminator: 15)]
+[JsonDerivedType(typeof(SuperPTOnMemberSettingItem), typeDiscriminator: 16)]
+[JsonDerivedType(typeof(SuperPTOnDirectMemberSettingItem), typeDiscriminator: 17)]
+[JsonDerivedType(typeof(GroupType154.BetSettingItem), typeDiscriminator: 18)]
+[JsonDerivedType(typeof(WinLossLimitItem), typeDiscriminator: 19)]
+//[JsonDerivedType(typeof(CommissionSettingItem), typeDiscriminator: 20)]
+[JsonDerivedType(typeof(GroupType157.BetSettingItem), typeDiscriminator: 21)]
+[JsonDerivedType(typeof(StakeLevelItem), typeDiscriminator: 22)]
+[JsonDerivedType(typeof(ProductStatusItem), typeDiscriminator: 23)]
 public class GroupItemDefault
 {
     public int ProductId { get; set; }

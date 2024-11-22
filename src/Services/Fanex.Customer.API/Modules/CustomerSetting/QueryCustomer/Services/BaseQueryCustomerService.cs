@@ -49,6 +49,7 @@ public class BaseQueryCustomerService : BaseCustomerService
             {153_1_4, new QueryGroupTypeBaseService<SuperPTOnMemberSettingItem>(dynamicRepository, appSettings, helperService)},
             {153_1_4_1, new QueryGroupTypeBaseService<SuperPTOnDirectMemberSettingItem>(dynamicRepository, appSettings, helperService)},
             {153_1_3, new QueryGroupTypeBaseService<MasterPTOnMemberSettingItem>(dynamicRepository, appSettings, helperService)},
+            {153_1_3_1, new QueryGroupTypeBaseService<MasterPTOnDirectMemberSettingItem>(dynamicRepository, appSettings, helperService)},
             {154, new QueryGroupTypeBaseService<CustomerSetting.Shared.ViewModels.GroupType154.BetSettingItem>(dynamicRepository, appSettings, helperService)},
             {155, new QueryGroupTypeBaseService<WinLossLimitItem>(dynamicRepository, appSettings, helperService)},
             {156_4, new QueryGroupTypeBaseService<SuperCommissionGroup>(dynamicRepository, appSettings, helperService)},

@@ -19,6 +19,7 @@ namespace Fanex.Customer.Client.Params
             string site,
             string siteLabel,
             string group,
+            bool? isDirectMemner,
             string language = Languages.English)
         {
             GeneralInfo = generalInfo;
@@ -35,6 +36,7 @@ namespace Fanex.Customer.Client.Params
             SiteLabel = siteLabel;
             Group = group;
             Language = language;
+            IsDirectMember = isDirectMemner;
         }
 
         public GeneralInfo GeneralInfo { get; }
@@ -64,5 +66,7 @@ namespace Fanex.Customer.Client.Params
         public string SiteLabel { get; }
 
         public string Group { get; }
+        
+        public bool? IsDirectMember { get; }
     }
 }

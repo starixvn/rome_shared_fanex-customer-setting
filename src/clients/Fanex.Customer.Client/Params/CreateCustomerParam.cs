@@ -15,6 +15,7 @@ namespace Fanex.Customer.Client.Params
             string siteLabel,
             int custDBGroupID,
             string group,
+            bool? isDirectMemner,
             CreationModes mode = CreationModes.LiteMode,
             string language = Languages.English,
             string uiBehavior = null)
@@ -31,6 +32,7 @@ namespace Fanex.Customer.Client.Params
             CustDBGroupID = custDBGroupID;
             Group = group;
             Mode = (byte)mode;
+            IsDirectMember = isDirectMemner;
         }
 
         public GeneralInfo GeneralInfo { get; }
@@ -56,5 +58,7 @@ namespace Fanex.Customer.Client.Params
         public string SiteLabel { get; }
 
         public string Group { get; }
+        
+        public bool? IsDirectMember { get; }
     }
 }
