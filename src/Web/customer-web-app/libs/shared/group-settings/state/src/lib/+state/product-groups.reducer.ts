@@ -1,7 +1,7 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    ParlayMaxPayoutGroupItem, ProductGroup, ProductStatusGroupItem,
-    SuperDirectMemberPositionTakingGroupItem
+    MasterDirectMemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup,
+    ProductStatusGroupItem, SuperDirectMemberPositionTakingGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 import { ProductGroupsAction, ProductGroupsActionTypes } from './product-groups.actions';
@@ -61,9 +61,10 @@ const initProductGroups = (productGroups: ProductGroup[]) => {
               return { ...type, groupItems };
             }
 
-            const groupItems = type.groupItems.map((item) => ({
+            const groupItems = (type.groupItems as MasterDirectMemberPositionTakingGroupItem[]).map((item) => ({
               ...item,
               isMultipleModeChecked: true,
+              m1: item.m3,
               upline: { ...item },
             }));
 

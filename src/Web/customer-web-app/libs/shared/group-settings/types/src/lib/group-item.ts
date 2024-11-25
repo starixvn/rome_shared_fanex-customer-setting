@@ -146,6 +146,16 @@ export interface PositionTakingProps {
   step: number;
 }
 
+export interface MasterDirectMemberPositionTakingProps extends PositionTakingProps {
+  m3: number;
+  n3: number;
+  m1: number;
+}
+
+export interface MasterDirectMemberPositionTakingGroupItem
+  extends MasterDirectMemberPositionTakingProps,
+    GroupSettingItem<MasterDirectMemberPositionTakingProps> {}
+
 export interface SuperDirectMemberPositionTakingProps extends PositionTakingProps {
   s4: number;
   n4: number;

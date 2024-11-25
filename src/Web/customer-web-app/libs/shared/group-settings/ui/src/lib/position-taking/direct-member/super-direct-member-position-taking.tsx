@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
+import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
     GroupItem, SuperDirectMemberPositionTakingGroupItem, SuperDirectMemberPositionTakingProps
 } from '@customer-web-app/shared-group-settings-types';
@@ -16,7 +17,6 @@ import { groupSportsBookPTBySportTypeId, isCopyingPTItem, usePTCopy } from '../u
 import styles from './direct-member-position-taking.module.scss';
 
 type Props = {
-  ptItems: SuperDirectMemberPositionTakingGroupItem[];
   isReadOnly: boolean;
   onPTChange: (sportTypeId: number, betTypeId: number, data: { [x: string]: number | undefined }) => void;
 };
@@ -31,9 +31,14 @@ const validateSuperPT = (
   return Math.max(0, n4) <= s1 && s1 <= s4;
 };
 
-export default function SuperDirectMemberPositionTaking({ ptItems, isReadOnly, onPTChange }: Props) {
+export default function SuperDirectMemberPositionTaking({ isReadOnly, onPTChange }: Props) {
   const { t } = useTranslation();
-  const { isMultipleMode, handleUpdateSettingItems, productGroupId } = useGroupSettingContext();
+  const { isMultipleMode, handleUpdateSettingItems, productGroupId, productGroups } = useGroupSettingContext();
+  const ptItems = getSettingItems<SuperDirectMemberPositionTakingGroupItem>(
+    productGroups,
+    Number(productGroupId),
+    GroupTypeIds.PositionTaking
+  );
 
   const groups = (
     productGroupId === ProductGroupIds.SportsBook ? Object.values(groupSportsBookPTBySportTypeId(ptItems)) : [ptItems]
