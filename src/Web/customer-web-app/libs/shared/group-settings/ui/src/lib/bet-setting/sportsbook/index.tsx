@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
-import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { SportsBookBetSettingGroupItem } from '@customer-web-app/shared-group-settings-types';
@@ -18,6 +18,7 @@ import SportsBookBetSettingMaxPayoutNote from './sportsbook-bet-setting-max-payo
 import SportsBookBetSettingMixSportParlayNote from './sportsbook-bet-setting-mix-sports-parlay-note';
 import { SportsBookBetSettingRow } from './sportsbook-bet-setting-row';
 import SportsBookBetSettingValidator from './sportsbook-bet-setting-validator';
+import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 
 const SoccerKey = '1-1';
 const BasketballKey = '2-1';
@@ -39,6 +40,7 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
     generalInfo,
     isEditMode,
     updateGroupSetting,
+    roleId
   } = useGroupSettingContext();
   const [validationState, setValidationState] = useState<ValidateBetSetting>();
   const blockRef = useRef<BlockRefType>(null);
@@ -130,6 +132,26 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
     handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.SportsBookBetSetting, newBetSettings);
   };
 
+  const handleSelectMinBet = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, minBetMultipleMode: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.SportsBookBetSetting, newBetSettings);
+  };
+
+  const handleSelectMaxBet = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, maxBetMultipleMode: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.SportsBookBetSetting, newBetSettings);
+  };
+
+  const handleSelectMaxPerMatch = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, maxPerMatchMultipleMode: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.SportsBookBetSetting, newBetSettings);
+  };
+
+  const handleSelectMaxPayoutPerMatch = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, maxPayoutPerMatchMultipleMode: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.SportsBookBetSetting, newBetSettings);
+  };
+
   const renderLabel = (
     betSetting: SportsBookBetSettingGroupItem,
     index: number,
@@ -209,17 +231,71 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
                 onChange={(e) => handleSelectAll(e.target.checked)}
                 checked={betSettings.every((item) => item.isMultipleModeChecked === true)}
               />
-              <div>{t('SelectAll')}</div>
+              <div>{t('SelectAllSports')}</div>
             </div>
           )
         }
       >
-        <BlockColumn>{t('minBet')}</BlockColumn>
-        <BlockColumn>{t('maxBet')}</BlockColumn>
-        <BlockColumn>{t('maxPerMatch')}</BlockColumn>
         <BlockColumn>
           {
             <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    style={{ top: '0', margin: '0 4px' }}
+                    defaultChecked={true}
+                    onChange={(e) => handleSelectMinBet(e.target.checked)}
+                    checked={betSettings.every((item) => item.minBetMultipleMode === true)}
+                  />
+              )}
+              {t('minBet')}
+            </>
+          }
+        </BlockColumn>
+        <BlockColumn>
+          {
+            <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    style={{ top: '0', margin: '0 4px' }}
+                    onChange={(e) => handleSelectMaxBet(e.target.checked)}
+                    checked={betSettings.every((item) => item.maxBetMultipleMode === true)}
+                  />
+              )}
+              {t('maxBet')}
+            </>
+          }
+        </BlockColumn>
+        <BlockColumn>
+          {
+            <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    style={{ top: '0', margin: '0 4px' }}
+                    onChange={(e) => handleSelectMaxPerMatch(e.target.checked)}
+                    checked={betSettings.every((item) => item.maxPerMatchMultipleMode === true)}
+                  />
+              )}
+              {t('maxPerMatch')}
+              </>
+          }
+          </BlockColumn>
+        <BlockColumn>
+          {
+            <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    style={{ top: '0', margin: '0 4px' }}
+                    onChange={(e) => handleSelectMaxPayoutPerMatch(e.target.checked)}
+                    checked={betSettings.every((item) => item.maxPayoutPerMatchMultipleMode === true)}
+                  />
+              )}
               {t('maxPayoutPerMatch')}
               <SportsBookBetSettingMaxPayoutNote />
             </>

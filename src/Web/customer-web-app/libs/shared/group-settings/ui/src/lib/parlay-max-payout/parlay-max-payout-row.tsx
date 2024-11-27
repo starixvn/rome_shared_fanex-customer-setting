@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ValidationResult } from '@customer-web-app/share-models';
-import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import {
     ColumnsParlayMaxPayout, ParlayMaxPayoutGroupItem, ParlayMaxPayoutKey
@@ -30,7 +30,7 @@ const ParlayMaxPayoutRow = (props: ParlayMaxPayoutRowProps) => {
   const { t } = useTranslation();
   const { parlayMaxPayoutItem, uplineRoleId, setErrorTooltip } = props;
   const { sportTypeId, betTypeId, displayName, upline, isMultipleModeChecked } = parlayMaxPayoutItem;
-  const { handleSettingItemChange, isMultipleMode } = useGroupSettingContext();
+  const { handleSettingItemChange, isMultipleMode, roleId } = useGroupSettingContext();
   const { setValidationState } = useContext(ValidationContext);
   const [itemValidateResult, setItemValidateResult] = useState<{ [key: string]: ValidationResult | boolean }>({});
   const [cacheValues, setCacheValues] = useState<ParlayMaxPayoutGroupItem[]>([parlayMaxPayoutItem]);
@@ -104,7 +104,10 @@ const ParlayMaxPayoutRow = (props: ParlayMaxPayoutRowProps) => {
               ) : (
                 <ParlayMaxPayoutCell
                   key={id}
-                  isDisable={!parlayMaxPayoutItem.isMultipleModeChecked}
+                  isDisable={
+                    !parlayMaxPayoutItem.isMultipleModeChecked
+                    || (roleId===UserLevel.Super && !(parlayMaxPayoutItem as any)[inputFieldName + 'MultipleMode'])
+                  }
                   // maxValue of downline is flow upline
                   maxValue={upline ? upline[inputFieldName] : 0}
                   currentValue={parlayMaxPayoutItem[inputFieldName]}

@@ -11,4 +11,10 @@ public class QueryRequest : BaseQueryRequest
     public byte? UplineRoleId { get; set; }
 
     public string SiteLabel { get; set; }
+
+    public string GroupName { get; set; }
+
+    public bool IsMultipleMode { get; set; }
+
+    public bool IsCopy { get; set; }
 }

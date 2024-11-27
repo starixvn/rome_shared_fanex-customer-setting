@@ -10,4 +10,8 @@ public class BetSettingItem : GroupItemDefault
 
     [JsonProperty(PropertyName = "MPM")]
     public decimal MaxPerMatch { get; set; }
+    
+    public bool MinBetMultipleMode { get; set; }
+    public bool MaxBetMultipleMode { get; set; }
+    public bool MaxPerMatchMultipleMode { get; set; }
 }

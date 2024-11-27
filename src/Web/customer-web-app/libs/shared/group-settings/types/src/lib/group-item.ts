@@ -8,8 +8,18 @@ export interface GroupItem {
   subGroupName?: string;
   isLive: boolean;
   isMultipleModeChecked: boolean;
-}
 
+  minBetMultipleMode: boolean;
+  maxBetMultipleMode: boolean;
+  maxPerMatchMultipleMode: boolean;
+  maxPayoutPerMatchMultipleMode: boolean;
+  singleMatchParlayMultipleMode: boolean;
+  combo2MultipleMode: boolean;
+  combo35MultipleMode: boolean;
+  comboOver6MultipleMode: boolean;
+  maxPerBallMultipleMode: boolean;
+}
+ 
 export interface GroupSettingItem<T> extends GroupItem {
   upline: T;
   original: T;

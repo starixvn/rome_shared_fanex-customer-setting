@@ -15,6 +15,7 @@ import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
 import { CopyStatus, PositionTakingBlockProps, PTRowProps } from './types';
+import { useTranslation } from 'react-i18next';
 import {
   CopyStatusPT,
   groupSportsBookPTBySportTypeId,
@@ -219,7 +220,10 @@ function PositionTakingRows({
 }
 
 export default function SuperPositionTaking({ title, isReadOnly }: Readonly<PositionTakingBlockProps>) {
-  const { productGroups, handleUpdateSettingItems, productGroupId, isEditMode, updateGroupSetting } =
+  const { 
+    productGroups, handleUpdateSettingItems, productGroupId, isEditMode, updateGroupSetting,
+    isMultipleMode
+  } =
     useGroupSettingContext();
   const groupId = Number(productGroupId);
   const superPTs = getSettingItems<SuperPositionTakingGroupItem>(productGroups, groupId, GroupTypeIds.PositionTaking);
@@ -237,13 +241,41 @@ export default function SuperPositionTaking({ title, isReadOnly }: Readonly<Posi
     }
   };
 
+  const { t } = useTranslation();
+
+  const handleSelectAll = (isChecked: boolean) => {
+    const newPTs = superPTs.map((item) => ({
+      ...item,
+      isMultipleModeChecked: isChecked,
+      isUpdateMinPtOnly: false,
+    }));
+    handleUpdateSettingItems?.(groupId, GroupTypeIds.PositionTaking, newPTs);
+  };
+
   return (
     <Block
       title={title}
       isPartialUpdate={isEditMode === true && !isReadOnly}
       onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
     >
-      <BlockRow isHeaderRow>
+      <BlockRow 
+        isHeaderRow
+        label={
+          isMultipleMode &&
+          superPTs.length > 1 &&
+          !isReadOnly && (
+            <div style={{ display: 'flex', marginLeft: '2px' }}>
+              <input
+                type="checkbox"
+                style={{ top: '0' }}
+                onChange={(e) => handleSelectAll(e.target.checked)}
+                checked={superPTs.every((item) => item.isMultipleModeChecked === true)}
+              />
+              <div>{t('SelectAll')}</div>
+            </div>
+          )
+        }
+      >
         {['Super Max PT', 'Master Max PT', 'Agent Max PT', 'Super Min PT'].map((name) => (
           <BlockColumn key={name}>{name}</BlockColumn>
         ))}

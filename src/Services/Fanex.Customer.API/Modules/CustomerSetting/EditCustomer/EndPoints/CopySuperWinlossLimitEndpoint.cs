@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Constants;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
@@ -29,8 +30,8 @@ public class CopySuperWinlossLimitEndpoint : IEndpoint<IResult, CopySuperWinloss
             return Results.BadRequest("SportTypeIds cannot be empty.");
         }
 
-        var currentLiveCSWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 3, GroupTypes.WinlossLimit)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
-        var currentRNGGamesWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 2, GroupTypes.WinlossLimit)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
+        var currentLiveCSWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 3, GroupTypes.WinlossLimit, false, 0, "", request.SystemId, "", true)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
+        var currentRNGGamesWLLimit = (await groupTypeBaseService.QueryForEdit(request.SourceSuperId, CustomerLevel.Super, null, 2, GroupTypes.WinlossLimit, false, 0, "", request.SystemId, "", true)).Where(item => request.SportTypeIds.Contains(item.SportTypeId));
         if (!currentLiveCSWLLimit.Any() && !currentRNGGamesWLLimit.Any())
         { 
             return Results.BadRequest("There is no GroupItems existed.");
@@ -79,7 +80,8 @@ public class CopySuperWinlossLimitEndpoint : IEndpoint<IResult, CopySuperWinloss
                 UserName = request.SourceUserName,
                 RoleId = CustomerLevel.Super,
                 CustomerIds = request.CopiedSuperIds,
-                CustomerNames = request.CopiedUserNames
+                CustomerNames = request.CopiedUserNames,
+                EditFuntion = EditFuntionConstants.EditMultipleSuperWinLimit
             },
             Settings = new CustomerSettingModel()
             {

@@ -1,0 +1,102 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  &:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    z-index: 1;
+  }
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    position: relative;
+  }
+  .content {
+    background: var(--bg-popup);
+    width: 450px;
+    min-height: 250px;
+    padding: 10px;
+    border-radius: 3px;
+    color: var(--color-label);
+    border: 1px solid var(--border-color);
+    .title {
+      font-weight: 500;
+      font-size: 110%;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      padding-right: 25px;
+      position: relative;
+      color: var(--color-label);
+      .close {
+        position: absolute;
+        top: -3px;
+        right: 0;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.85;
+        }
+        svg {
+          display: block;
+        }
+      }
+    }
+    .tableHead {
+      background: var(--bg-head-tab);
+      padding: 5px 7px 3px;
+      border-radius: 3px 3px 0 0;
+      font-weight: 500;
+    }
+    .table {
+      border: 1px solid var(--border-color);
+      border-top: 0;
+      border-radius: 0 0 3px 3px;
+    }
+  }
+  .button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    button {
+      color: var(--color-btn);
+      font-weight: bold;
+      padding: 7px 15px 5px;
+      min-width: 100px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 100%;
+      line-height: 1.15;
+      margin-left: 10px;
+      &:hover {
+        opacity: 0.85;
+      }
+      &.btn-confirm {
+        background-color: var(--bg-btn-create);
+      }
+      &.btn-cancel {
+        background-color: var(--bg-btn-cancel);
+      }
+    }
+  }
+}
+
+.note {
+  font-weight: bold;
+  color: #ff0000;
+}

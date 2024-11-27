@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-import { GroupTypeIds, MaxNumberInputLength, ProductGroupIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, MaxNumberInputLength, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import {
   SportsBookBetSettingGroupItem,
@@ -38,7 +38,7 @@ export function SportsBookBetSettingRow({
   validationState,
   setErrorTooltip,
 }: Readonly<SportsBookBetSettingRowProps>) {
-  const { handleSettingItemChange, generalInfo } = useGroupSettingContext();
+  const { handleSettingItemChange, generalInfo, roleId } = useGroupSettingContext();
   const [itemValidateResult, setItemValidateResult] = useState<{ [key: string]: ValidateBetSetting }>({});
   const isSpecialSite = generalInfo?.isSpecialSite ?? false;
   const { sportTypeId, betTypeId, upline } = settingItem;
@@ -80,7 +80,7 @@ export function SportsBookBetSettingRow({
     betSettingItem: SportsBookBetSettingGroupItem,
     fieldName: keyof SportsBookBetSettingProps
   ) => {
-    if (betSettingItem[fieldName] === null) return null;
+    if ((betSettingItem.original || betSettingItem)[fieldName] === null) return null;
 
     const id = `${fieldName}-${sportTypeId}-${betTypeId}`;
     return isReadOnly ? (
@@ -90,7 +90,10 @@ export function SportsBookBetSettingRow({
         key={id}
         id={id}
         value={settingItem[fieldName]}
-        isDisable={!settingItem.isMultipleModeChecked}
+        isDisable={
+          !settingItem.isMultipleModeChecked 
+          || (roleId===UserLevel.Super && !(settingItem as any)[fieldName + 'MultipleMode'])
+        }
         operator={fieldName === 'minBet' ? Operator['>='] : Operator['<=']}
         limit={upline[fieldName]}
         isError={itemValidateResult[id] && !itemValidateResult[id].isValid}

@@ -48,6 +48,39 @@ public class GroupType152Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         return result;
     }
 
+    public override async Task<UpdateGroupTypeResult> UpdateByColumns(
+        EditRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
+    {
+        var firstBetSettingItem = groupItems.FirstOrDefault() as ParlayMaxPayoutSettingItem;
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_MaxPayoutUpd_Multi");
+        var parameters = new Hashtable {
+            { "custid", context.CustId },
+            { "MaxPayoutLimit", ComposeJsonSettingParam(groupItems) },
+            { "userid", context.ActorId },
+            { "ip", context.IP },
+            { "settingstatus", settingStatus},
+            { "updsinglemp", firstBetSettingItem.SingleMatchParlayMultipleMode},
+            { "updcombo2", firstBetSettingItem.Combo2MultipleMode},
+            { "updcombo35", firstBetSettingItem.Combo35MultipleMode},
+            { "updcombo6", firstBetSettingItem.ComboOver6MultipleMode}
+        };
+
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
+        var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        if (result.IsSuccessful)
+        {
+            result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
+        }
+
+        return result;
+    }
+
     private Hashtable GenerateSPParams(
         int groupTypeId,
         EditRequestContext context,

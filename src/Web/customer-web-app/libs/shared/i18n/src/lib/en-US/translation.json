@@ -117,6 +117,7 @@
   "CannotUpdateCredit": "You do not have permission on update credit.",
   "YouAreNotAuthorized": "You are not authorized on this function!",
   "SelectAll": "Select All",
+  "SelectAllSports": "Select All Sports",
   "MasterSetMemberPtTitle": "You have changed this master not to take auto position taking.",
   "AgentSetMemberPtTitle": "You have changed this agent not to take auto position taking.",
   "UpdateAllMemberPt": "Do you want to update all member's position taking to:",

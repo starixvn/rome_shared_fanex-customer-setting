@@ -41,6 +41,10 @@ public class EditRequestContext
     public byte SystemId { get; set; }
 
     public string Language { get; set; }
+
+    public bool IsMultipleMode { get; set; }
+
+    public byte EditFuntion { get; set; }
 }
 
 public class EditRequest

@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
-import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
+import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { RNGGamesBetSettingGroupItem } from '@customer-web-app/shared-group-settings-types';
@@ -16,6 +16,7 @@ import { ValidateBetSetting } from '../bet-setting-base-validator';
 import BetSettingNote from '../bet-setting-note';
 import RNGGamesBetSettingRow from './rnggames-bet-setting-row';
 import RNGGamesBetSettingValidator from './rnggames-bet-setting-validator';
+import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 
 const BetSettingBlockId = 'bet-setting';
 const SportsLotteryKey = '169-3611';
@@ -34,6 +35,7 @@ const RNGGamesBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProps>
     generalInfo,
     isEditMode,
     updateGroupSetting,
+    roleId,
   } = useGroupSettingContext();
   const [sourceItemIndex, setSourceItemIndex] = useState<number | undefined>(undefined);
   const [validationState, setValidationState] = useState<ValidateBetSetting>();
@@ -84,6 +86,26 @@ const RNGGamesBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProps>
 
   const handleSelectAll = (isChecked: boolean) => {
     const newBetSettings = betSettings.map((item) => ({ ...item, isMultipleModeChecked: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.RNGGames, GroupTypeIds.RNGGamesBetSetting, newBetSettings);
+  };
+
+  const handleSelectMinBet = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, minBetMultipleMode: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.RNGGames, GroupTypeIds.RNGGamesBetSetting, newBetSettings);
+  };
+
+  const handleSelectMaxBet = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, maxBetMultipleMode: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.RNGGames, GroupTypeIds.RNGGamesBetSetting, newBetSettings);
+  };
+
+  const handleSelectMaxPerMatch = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, maxPerMatchMultipleMode: isChecked }));
+    handleUpdateSettingItems?.(ProductGroupIds.RNGGames, GroupTypeIds.RNGGamesBetSetting, newBetSettings);
+  };
+
+  const handleSelectMaxPerBall = (isChecked: boolean) => {
+    const newBetSettings = betSettings.map((item) => ({ ...item, maxPerBallMultipleMode: isChecked }));
     handleUpdateSettingItems?.(ProductGroupIds.RNGGames, GroupTypeIds.RNGGamesBetSetting, newBetSettings);
   };
 
@@ -195,15 +217,75 @@ const RNGGamesBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProps>
                 onChange={(e) => handleSelectAll(e.target.checked)}
                 checked={betSettings.every((item) => item.isMultipleModeChecked === true)}
               />
-              <div>{t('SelectAll')}</div>
+              <div>{t('SelectAllSports')}</div>
             </div>
           )
         }
       >
-        <BlockColumn>{t('minBet')}</BlockColumn>
-        <BlockColumn>{t('maxBet')}</BlockColumn>
-        <BlockColumn>{t('maxPerMatch')}</BlockColumn>
-        <BlockColumn>{t('maxPerBall')}</BlockColumn>
+        <BlockColumn>
+          {
+            <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    style={{ top: '0', margin: '0 4px' }}
+                    onChange={(e) => handleSelectMinBet(e.target.checked)}
+                    checked={betSettings.every((item) => item.minBetMultipleMode === true)}
+                  />
+              )}
+              {t('minBet')}
+            </>
+          }
+        </BlockColumn>
+        <BlockColumn>
+          {
+            <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    style={{ top: '0', margin: '0 4px' }}
+                    onChange={(e) => handleSelectMaxBet(e.target.checked)}
+                    checked={betSettings.every((item) => item.maxBetMultipleMode === true)}
+                  />
+              )}
+              {t('maxBet')}
+            </>
+          }
+        </BlockColumn>
+        <BlockColumn>
+          {
+            <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    style={{ top: '0', margin: '0 4px' }}
+                    onChange={(e) => handleSelectMaxPerMatch(e.target.checked)}
+                    checked={betSettings.every((item) => item.maxPerMatchMultipleMode === true)}
+                  />
+              )}
+              {t('maxPerMatch')}
+              </>
+          }
+        </BlockColumn>
+        <BlockColumn>
+          {
+            <>
+              {!isReadOnly && roleId === UserLevel.Super && !AppConfigHelper.isEditBetSettingOnly() && (
+                <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    style={{ top: '0', margin: '0 4px' }}
+                    onChange={(e) => handleSelectMaxPerBall(e.target.checked)}
+                    checked={betSettings.every((item) => item.maxPerBallMultipleMode === true)}
+                  />
+              )}
+              {t('maxPerBall')}
+            </>
+          }
+        </BlockColumn>
       </BlockRow>
       {betSettings?.map((betSetting, index) => {
         const key = `${betSetting.sportTypeId}-${betSetting.betTypeId}`;

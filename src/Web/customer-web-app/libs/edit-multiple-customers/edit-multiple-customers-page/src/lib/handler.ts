@@ -8,6 +8,7 @@ import {
   ProductGroup,
   SportsBookBetSettingGroupItem,
   WinLossLimitGroupItem,
+  RNGGamesBetSettingGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export function getNewMultipleEditCustomerSettings(
@@ -104,6 +105,33 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
               ...item,
               original: { ...item },
               isMultipleModeChecked: false,
+              minBetMultipleMode: true,
+              maxBetMultipleMode: true,
+              maxPerMatchMultipleMode: true,
+              maxPayoutPerMatchMultipleMode: true,
+            };
+          });
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.RNGGamesBetSetting) {
+          const groupItems = (type.groupItems as RNGGamesBetSettingGroupItem[]).map((item) => {
+            if (params.isCopyBetSetting !== undefined && !params.isCopyBetSetting) {
+              item.minBet = 0;
+              item.maxBet = 0;
+              item.maxPerMatch = 0;
+              item.maxPerBall = item.maxPerBall==null ? item.maxPerBall : 0;
+            }
+
+            return {
+              ...item,
+              original: { ...item },
+              isMultipleModeChecked: false,
+              minBetMultipleMode: true,
+              maxBetMultipleMode: true,
+              maxPerMatchMultipleMode: true,
+              maxPerBallMultipleMode: true,
             };
           });
 
@@ -126,6 +154,10 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
               isAllowUnlimitCombo35: item.combo35 === 0,
               isAllowUnlimitComboOver6: item.comboOver6 === 0,
               isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
+              singleMatchParlayMultipleMode: true,
+              combo2MultipleMode: true,
+              combo35MultipleMode: true,
+              comboOver6MultipleMode: true,
             };
           });
 

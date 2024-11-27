@@ -48,6 +48,40 @@ public class GroupType154Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         return result;
     }
 
+    public override async Task<UpdateGroupTypeResult> UpdateByColumns(
+        EditRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
+    {
+        var firstBetSettingItem = groupItems.FirstOrDefault() as BetSettingItem;
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_BetSetting_154_Upd_Multi");
+        var parameters = new Hashtable {
+            { "custid", context.CustId },
+            { "betlimit", ComposeJsonSettingParam(groupItems) },
+            { "userid", context.ActorId },
+            { "ip", context.IP },
+            { "systemid", context.SystemId},
+            { "settingstatus", settingStatus},
+            { "updminbet", firstBetSettingItem.MinBetMultipleMode},
+            { "updmaxbet", firstBetSettingItem.MaxBetMultipleMode},
+            { "updmpm", firstBetSettingItem.MaxPerMatchMultipleMode},
+            { "updmpnumber", firstBetSettingItem.MaxPerBallMultipleMode}
+        };
+
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
+        var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        if (result.IsSuccessful)
+        {
+            result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
+        }
+
+        return result;
+    }
+
     private Hashtable GenerateSPParams(
         int groupTypeId,
         EditRequestContext context,

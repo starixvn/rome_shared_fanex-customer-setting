@@ -75,6 +75,7 @@ function BetLimitRow({
     isAllowUncheckAll &&
     !firstItem.isMultipleChoice &&
     firstItem.productId === ProductIds.LiveCasino;
+
   const numberEmptyBlockColumn = MaxBetLimitColumns - item.length - (isShowNoneInput ? 1 : 0);
   return (
     <BlockRow

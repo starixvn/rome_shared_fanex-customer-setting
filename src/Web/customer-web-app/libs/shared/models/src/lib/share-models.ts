@@ -85,6 +85,7 @@ export interface Params {
   custId: number;
   noPermissionEditCredit: boolean;
   productGroupId: number;
+  groupName: string;
 }
 
 export interface Note {
