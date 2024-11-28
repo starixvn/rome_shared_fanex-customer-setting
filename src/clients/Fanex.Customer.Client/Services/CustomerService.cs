@@ -73,7 +73,10 @@ namespace Fanex.Customer.Client.Services
         Task<List<UpdateCustomerResult>> CopySupersWinLossLimit(CopySupersWinLossLimitParam param);
 
         Task<AccountInfo> GetAccountInfo(int custId);
+
+
         Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currency, string language = "en-US");
+        
     }
 
     public class CustomerService : ICustomerService
@@ -124,6 +127,8 @@ namespace Fanex.Customer.Client.Services
                     custDBGroupId = param.CustDBGroupID,
                     site = param.Site,
                     siteLabel = param.SiteLabel,
+                    isDirectMember = param.IsDirectMember,
+                    noOfCreateAccount = param.NoOfCreateAccount,
                     uiBehavior = !string.IsNullOrWhiteSpace(param.UiBehavior) ? JsonNode.Parse(param.UiBehavior) : null
                 },
                 settings = new

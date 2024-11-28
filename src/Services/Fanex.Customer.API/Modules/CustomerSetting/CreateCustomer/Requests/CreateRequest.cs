@@ -30,6 +30,8 @@ public class RequestContext
 
     public bool? IsDirectMember { get; set; }
 
+    public int? NoOfCreateAccount { get; set; }
+
     public bool IsFullMode() => Mode == 1;
 }
 

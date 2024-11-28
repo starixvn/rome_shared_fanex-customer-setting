@@ -16,6 +16,7 @@ namespace Fanex.Customer.Client.Params
             int custDBGroupID,
             string group,
             bool? isDirectMemner,
+            int? noOfCreateAccount,
             CreationModes mode = CreationModes.LiteMode,
             string language = Languages.English,
             string uiBehavior = null)
@@ -33,6 +34,7 @@ namespace Fanex.Customer.Client.Params
             Group = group;
             Mode = (byte)mode;
             IsDirectMember = isDirectMemner;
+            NoOfCreateAccount = noOfCreateAccount;
         }
 
         public GeneralInfo GeneralInfo { get; }
@@ -60,5 +62,7 @@ namespace Fanex.Customer.Client.Params
         public string Group { get; }
         
         public bool? IsDirectMember { get; }
+
+        public int? NoOfCreateAccount { get; }
     }
 }

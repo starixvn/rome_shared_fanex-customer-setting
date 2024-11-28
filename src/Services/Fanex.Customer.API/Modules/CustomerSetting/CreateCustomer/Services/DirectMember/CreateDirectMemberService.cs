@@ -6,11 +6,14 @@ using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Modules.Customer;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
-public class CreateSuperDirectMemberService : CreateCustomerBaseService, ICreateCustomerBaseService
+public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
+    private readonly ICustomerService _customerService;
+
     private const string ValidateSPName = "Acc_CustomerInsMember_DirectMember_Validate";
 
     private const string RegisterSPName = "Acc_CustomerIns_Register";
@@ -19,11 +22,15 @@ public class CreateSuperDirectMemberService : CreateCustomerBaseService, ICreate
 
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
-    public CreateSuperDirectMemberService(IMessageService messageService,
+    private List<string> newUserNames = new List<string>();
+
+    public CreateDirectMemberService(IMessageService messageService,
         AppSettings appSettings,
-        ICustomerSettingHelper helperService)
+        ICustomerSettingHelper helperService,
+        ICustomerService customerService)
         : base(messageService, appSettings, helperService)
     {
+        this._customerService = customerService;
     }
 
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
@@ -34,20 +41,60 @@ public class CreateSuperDirectMemberService : CreateCustomerBaseService, ICreate
             return result;
         }
 
-        result = await Register(request);
-        if (!result.IsSuccessful)
+        int retryCount = 0;
+        for (var i = 0; i < request.Context.NoOfCreateAccount.GetValueOrDefault(); i++)
         {
-            return result;
+            if (i > 0 || retryCount > 0)
+            {
+                var suggestNewUserNameResult = await _customerService.GetSuggestDirectMemberUsername(request.Settings.GeneralInfo.UplineUserName);
+                if (!suggestNewUserNameResult.IsSuccessful)
+                {
+                    return new CreateCustomerResult(0,
+                        code: suggestNewUserNameResult.Code,
+                        message: suggestNewUserNameResult.Message,
+                        newUserNames: newUserNames);
+                }
+                else
+                {
+                    request.Settings.GeneralInfo.UserName = request.Settings.GeneralInfo.UplineUserName + suggestNewUserNameResult.CustomData;
+                }
+            }
+
+            result = await Register(request);
+            if (!result.IsSuccessful)
+            {
+                if (result.Code == 201 && retryCount <= 5)
+                {
+                    retryCount++;
+                    i--;
+                    continue;
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            else
+            {
+                retryCount = 0;
+            }
+
+            int newCustId = result.NewCustId;
+            result = await CreateMember(request, newCustId);
+            if (!result.IsSuccessful)
+            {
+                Rollback(newCustId);
+                return result;
+            }
+            else
+            {
+                newUserNames.Add(request.Settings.GeneralInfo.UserName);
+            }
         }
 
-        int newCustId = result.NewCustId;
-        result = await CreateMember(request, newCustId);
-        if (!result.IsSuccessful)
-        {
-            Rollback(newCustId);
-        }
-
-        return result;
+        return new CreateCustomerResult(
+            newCustId: 0,
+            newUserNames: newUserNames);
     }
 
     private async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)
@@ -57,9 +104,9 @@ public class CreateSuperDirectMemberService : CreateCustomerBaseService, ICreate
             { "creator", request.Context.CreatorId },
             { "username", request.Settings.GeneralInfo.UserName },
             { "credit", request.Settings.GeneralInfo.MaxCredit },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
+            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false) },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-            { "recommend", request.Settings.GeneralInfo.UplineCustId },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
             { "ugroup", request.Settings.GeneralInfo.Group },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
@@ -69,7 +116,7 @@ public class CreateSuperDirectMemberService : CreateCustomerBaseService, ICreate
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages, newUserNames);
     }
 
     private async Task<CreateCustomerResult> Register(CreateRequest request)
@@ -105,10 +152,10 @@ public class CreateSuperDirectMemberService : CreateCustomerBaseService, ICreate
             { "mobilephone", request.Settings.GeneralInfo.MobilePhone ?? string.Empty},
             { "fax", request.Settings.GeneralInfo.Fax ?? string.Empty},
             { "credit", request.Settings.GeneralInfo.MaxCredit },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
+            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false) },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "subaccid", request.Context.SubAccId },
-            { "recommend", request.Settings.GeneralInfo.UplineCustId },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
             { "ugroup", request.Settings.GeneralInfo.Group},
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
