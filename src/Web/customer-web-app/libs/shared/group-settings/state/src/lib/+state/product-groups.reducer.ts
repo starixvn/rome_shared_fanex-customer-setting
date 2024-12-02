@@ -21,15 +21,28 @@ const initProductGroups = (productGroups: ProductGroup[]) => {
       .map((type) => {
         switch (type.id) {
           case GroupTypeIds.ParlayMaxPayout: {
-            const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => ({
-              ...item,
-              isMultipleModeChecked: true,
-              original: { ...item },
-              isAllowUnlimitCombo2: item.combo2 === 0,
-              isAllowUnlimitCombo35: item.combo35 === 0,
-              isAllowUnlimitComboOver6: item.comboOver6 === 0,
-              isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
-            }));
+            const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => {
+              const upline = { ...item };
+              upline.isAllowUnlimitSingleMatchParlay = false;
+              upline.singleMatchParlay = 0;
+              item.isAllowUnlimitSingleMatchParlay = false;
+              upline.isAllowUnlimitCombo2 = false;
+              upline.combo2 = 0;
+              item.isAllowUnlimitCombo2 = false;
+              upline.isAllowUnlimitCombo35 = false;
+              upline.combo35 = 0;
+              item.isAllowUnlimitCombo35 = false;
+              upline.isAllowUnlimitComboOver6 = false;
+              upline.comboOver6 = 0;
+              item.isAllowUnlimitComboOver6 = false;
+
+              return {
+                ...item,
+                isMultipleModeChecked: true,
+                upline,
+                original: { ...item },
+              };
+            });
 
             return { ...type, groupItems };
           }

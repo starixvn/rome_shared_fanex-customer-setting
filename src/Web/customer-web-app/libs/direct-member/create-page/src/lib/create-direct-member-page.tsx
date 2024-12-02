@@ -1,13 +1,17 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
     handleChangeGroupSettingValue, handleChangeItemValue
 } from '@customer-web-app/edit-customer-page';
-import { ValidationRefType } from '@customer-web-app/share-models';
+import {
+    CreateCustomerResult, ValidateRefResult, ValidationRefType
+} from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import {
     Currencies, ProductGroupIds, SystemIds, UserLevel
 } from '@customer-web-app/shared-constants';
+import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
     GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
@@ -18,7 +22,8 @@ import {
     initialState as initialProductGroupsState, ProductGroupsActionTypes, productGroupsReducer
 } from '@customer-web-app/shared-group-settings-state';
 import { GroupSettingItem } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, ProductTab } from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, ProductTab, scrollToTop } from '@customer-web-app/shared-group-settings-ui';
+import { encrypt } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
@@ -28,9 +33,12 @@ import styles from './create-direct-member-page.module.scss';
 export interface CreateDirectMemberPageProps {}
 
 export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const theme = useTheme();
   const [currentProductGroupId, setCurrentProductGroupId] = useState(ProductGroupIds.SportsBook);
+  const [createCustomerResult, setCreateCustomerResult] = useState<CreateCustomerResult | null>();
+  const [numberOfAccounts, setNumberOfAccounts] = useState(1);
 
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const [productGroupsState, productGroupsDispatch] = useReducer(productGroupsReducer, initialProductGroupsState);
@@ -122,16 +130,74 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
     productGroupsDispatch({ type: ProductGroupsActionTypes.Update, payload: productGroups });
   };
 
+  const scrollToInvalidGroup = (isValidGeneralInfo: boolean, validateGroupSettingResult: ValidateRefResult) => {
+    if (!isValidGeneralInfo) {
+      generalInfoRef?.current?.scrollToBlock && generalInfoRef.current.scrollToBlock();
+      return;
+    }
+
+    if (!validateGroupSettingResult.isValid) {
+      groupSettingRef?.current?.scrollToBlock &&
+        groupSettingRef.current.scrollToBlock(validateGroupSettingResult.groupTypeId);
+    }
+  };
+
+  const validateGroupTypes = async () => groupSettingRef.current && (await groupSettingRef.current.validate());
+
+  const handleCreateDirectMember = async () => {
+    setIsLoading(true);
+    const isValidGeneralInfo = generalInfoRef.current ? ((await generalInfoRef.current.validate()) as boolean) : true;
+    const validateGroupSettingResult = (await validateGroupTypes()) as ValidateRefResult;
+
+    if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
+      const secretKey = (document.getElementById('SecretKey') as HTMLInputElement).value;
+      const encryptedPassword = encrypt(generalInfo.password, secretKey);
+      const result = await SettingService.CreateCustomer(
+        { ...generalInfo, password: encryptedPassword },
+        productGroups,
+        true,
+        numberOfAccounts
+      );
+      if (result.isSuccessful) {
+        setIsLoading(true);
+        const createResult = result as CreateCustomerResult;
+        setTimeout(() => {
+          window.redirectToSettingPage({ username: generalInfo.userName, custId: createResult.newCustId });
+        }, 3000);
+        return;
+      } else {
+        setCreateCustomerResult(result);
+        scrollToTop();
+      }
+    }
+    scrollToInvalidGroup(isValidGeneralInfo, validateGroupSettingResult);
+    setIsLoading(false);
+  };
+
+  const renderCreateButton = () => {
+    return (
+      <div className={styles.btn}>
+        <button type="button" onClick={handleCreateDirectMember}>
+          {t('CreateAccount')}
+        </button>
+      </div>
+    );
+  };
+
   return (
     <>
       {isLoading && <BlockUI />}
       <WrapperTooltip id="global-tooltip" className={styles['global-tooltip']} />
       <Layout theme={theme}>
+        {renderCreateButton()}
+        {createCustomerResult && <ErrorBlock error={createCustomerResult} />}
         <DirectMemberGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
           onGeneralInfoChange={handleGeneralInfoChange}
           onSelectDirectMember={handleSelectDirectMember}
+          numberOfAccounts={numberOfAccounts}
+          setNumberOfAccounts={setNumberOfAccounts}
         />
         <GroupSettingsContextProvider
           value={{
@@ -148,6 +214,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
           <ProductTab />
           <GroupSetting ref={groupSettingRef} />
         </GroupSettingsContextProvider>
+        {renderCreateButton()}
       </Layout>
     </>
   );

@@ -1,9 +1,21 @@
+import { ChangeEvent } from 'react';
+
 import styles from './no-of-accounts.module.scss';
 
-export default function NoOfAccounts() {
+type Props = {
+  value: number;
+  onChange: (value: number) => void;
+};
+
+export default function NoOfAccounts({ value, onChange }: Props) {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = Number(event.target.value);
+    onChange(value);
+  };
+
   return (
-    <select className={styles.dropdown}>
-      {[...Array(15)].map((value, index) => (
+    <select className={styles.dropdown} value={value} onChange={handleChange}>
+      {[...Array(15)].map((_, index) => (
         <option key={index} value={index + 1}>
           {index + 1}
         </option>

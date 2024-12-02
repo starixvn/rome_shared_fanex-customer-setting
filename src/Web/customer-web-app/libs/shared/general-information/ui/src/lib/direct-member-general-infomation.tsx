@@ -19,8 +19,7 @@ import CreditNote from './credit-note';
 import CreditRange from './credit-range';
 import { GeneralInformationProps } from './general-information';
 import GeneralInformationValidator, {
-  generalInformationValidatorFields,
-  validateMaxCredit,
+    generalInformationValidatorFields, validateMaxCredit
 } from './general-information-validator';
 import styles from './general-information.module.scss';
 import NoOfAccounts from './no-of-accounts';
@@ -43,10 +42,15 @@ function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
 
 export interface DirectMemberGeneralInformationProps extends GeneralInformationProps {
   onSelectDirectMember: (custId: number) => void;
+  numberOfAccounts: number;
+  setNumberOfAccounts: (value: number) => void;
 }
 
 export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, DirectMemberGeneralInformationProps>(
-  function DirectMemberGeneralInformation({ generalInfo, onGeneralInfoChange, children, onSelectDirectMember }, ref) {
+  function DirectMemberGeneralInformation(
+    { generalInfo, onGeneralInfoChange, children, onSelectDirectMember, numberOfAccounts, setNumberOfAccounts },
+    ref
+  ) {
     const [collapse, setCollapse] = useState(true);
     const { t } = useTranslation();
     const blockRef = useRef<BlockRefType>(null);
@@ -208,7 +212,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
               <UsernameSuggestionSelect onSelectDirectMember={onSelectDirectMember} />
             </BlockItem>
             <BlockItem label={t('NoOfAccounts')}>
-              <NoOfAccounts />
+              <NoOfAccounts value={numberOfAccounts} onChange={setNumberOfAccounts} />
             </BlockItem>
             <div className={styles['col-max-credit']}>
               <BlockItem label={t('GivenCreditPerAccount')} isRequired>

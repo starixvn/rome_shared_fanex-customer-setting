@@ -1,6 +1,4 @@
-import {
-    CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion
-} from '@customer-web-app/share-models';
+import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
@@ -64,13 +62,21 @@ export const SettingService = {
     const response = await axiosInstance.get<GroupSettingsResponse>(
       `Customer/GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${
         appConfig.systemId
-      }&siteLabel=${siteLabel}&productGroupId=${params.productGroupId ?? ProductGroupIds.SportsBook}&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}
+      }&siteLabel=${siteLabel}&productGroupId=${
+        params.productGroupId ?? ProductGroupIds.SportsBook
+      }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}
       &isDirectMember=${isDirectMember}`
       }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
     );
     return response.data;
   },
-  CreateCustomer: async (generalInfo: GeneralInfo, group: string, productGroups: ProductGroup[]) => {
+  CreateCustomer: async (
+    generalInfo: GeneralInfo,
+    group: string,
+    productGroups: ProductGroup[],
+    isDirectMember = false,
+    numberOfAccounts = 1
+  ) => {
     const { custId, ...otherInfo } = generalInfo;
     return await axiosInstance
       .post<CreateCustomerResult>(
@@ -79,6 +85,8 @@ export const SettingService = {
           generalInfo: { ...otherInfo },
           group,
           productGroups: JSON.stringify(productGroups),
+          isDirectMember,
+          numberOfAccounts,
         },
         {
           headers: getHeadersForPostRequest(),

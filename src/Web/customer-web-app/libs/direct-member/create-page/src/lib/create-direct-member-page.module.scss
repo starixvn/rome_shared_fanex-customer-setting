@@ -1,7 +1,22 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.btn {
+  padding: 5px 0;
+
+  button {
+    color: var(--color-btn);
+    font-weight: bold;
+    padding: 5px 15px;
+    min-width: 100px;
+    background-color: var(--bg-btn-create);
+    border: none;
+    border-radius: 3px;
+    font-size: var(--font-size);
+    cursor: pointer;
+    &:hover {
+      background-color: var(--bg-btn-create-hover);
+    }
+  }
+}
+
+.global-tooltip {
+  max-width: 605px;
+}
