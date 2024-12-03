@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-        <Version>1.0.1.9</Version>
+        <Version>1.0.1.8-AlphaPlus-01</Version>
         <Authors>@Rome</Authors>
         <Company>Nexcel</Company>
         <Product>Fanex</Product>
-        <PackageReleaseNotes>216405 - Allow Change Member Group Comm</PackageReleaseNotes>
+        <PackageReleaseNotes>Alpha Plus</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     <ItemGroup>
