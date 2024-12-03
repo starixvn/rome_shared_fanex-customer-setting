@@ -1,4 +1,3 @@
-using Fanex.Customer.API.Modules.Customer.Constants;
 using Fanex.Customer.API.Modules.Customer.Criteria;
 using Fanex.Customer.API.Modules.Customer.Models;
 using Fanex.Customer.API.Modules.Customer.Requests;
@@ -204,8 +203,8 @@ public class CustomerService : ICustomerService
                             .Select(d => new
                             {
                                 Id = d.Key.DummySportTypeId,
-                                Name = d.Key.DummySportTypeId == KenoLotterySportId ? 
-                                    $"{cacheRefService.GetSportTypeName(d.Key.DummySportTypeId, request.Language)} ({string.Join(", ", d.Select(e => cacheRefService.GetProductName(e.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel))))})" 
+                                Name = d.Key.DummySportTypeId == KenoLotterySportId ?
+                                    $"{cacheRefService.GetSportTypeName(d.Key.DummySportTypeId, request.Language)} ({string.Join(", ", d.Select(e => cacheRefService.GetProductName(e.RealProductId, request.Language, appSettings.Belonging777Group(request.SiteLabel))))})"
                                     : cacheRefService.GetProductName(d.Key.DummySportTypeId, request.Language, appSettings.Belonging777Group(request.SiteLabel)),
                                 Products = ""
                             })
@@ -230,18 +229,7 @@ public class CustomerService : ICustomerService
 
     public async Task<CommissionInfo> GetCommissionInfo(GetCommissionHintRequest request)
     {
-        CommissionInfo commissionInfo = new CommissionInfo();
-        var myanmarOddsBetTypes = new List<int>
-            {
-                MyanmarOddsBettypes.MyanmarOddsHandicap,
-                MyanmarOddsBettypes.MyanmarOddsOU,
-                MyanmarOddsBettypes.MyanmarOdds1stHandicap,
-                MyanmarOddsBettypes.MyanmarOdds1stOU
-            };
-
-        commissionInfo.MyanmarOddsBetTypesName = string.Format(StaticResources.Get("MyanmarOddsComm", request.Language),
-            string.Join(", ", myanmarOddsBetTypes.Select(s => cacheRefService.GetBetTypeName(s))));
-
+        CommissionInfo commissionInfo = new();
         var commInfoDtos = await dynamicRepository.FetchAsync<CommissionInfoDto>(new GetCommissionHintCriteria(request.CustId, request.Site));
         var commissionTypeList = new List<CommissionHint>();
         foreach (var commInfoDto in commInfoDtos)
@@ -319,7 +307,7 @@ public class CustomerService : ICustomerService
             NetPosition = memberBalanceCriteria.NetPosition
         };
     }
-    
+
     public async Task<List<string>> GetBackupDomains(string site, byte roleId)
     {
         var backupDomainsResult = await dynamicRepository.FetchAsync<BackupDomain>(new GetGetBackupDomainsCriteria(site));
@@ -340,7 +328,7 @@ public class CustomerService : ICustomerService
         var domains = roleId == CustomerLevel.Member ? memberDomains : agencyDomains;
         return domains;
     }
-    
+
     public async Task<AccountInfo> GetAccountInfo(int custId)
     {
         var accountInfo = await dynamicRepository.GetAsync<AccountInfo>(new GetCustomerInfoCriteria { CustId = custId });
@@ -385,7 +373,7 @@ public class CustomerService : ICustomerService
         {
             ProductSettingInfo = groupedData
         };
-        
+
         return jsonResponse;
     }
 }

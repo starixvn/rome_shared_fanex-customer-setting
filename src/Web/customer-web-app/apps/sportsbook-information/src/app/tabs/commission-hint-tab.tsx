@@ -5,12 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { BlockV2 } from '@customer-web-app/shared/base/block';
 
 import styles from '../app.module.scss';
-import { HighlightFrame } from '../highlight-frame';
 
 // naming by api response
 type CommissionHintData = {
   commissionTypeList: { commissionName: string; commissionId: number; bettypes: { name: string; id: number }[] }[];
-  myanmarOddsBetTypesName: string;
 };
 
 export const CommissionHintTab = ({ url }: { url: string }) => {
@@ -36,7 +34,6 @@ export const CommissionHintTab = ({ url }: { url: string }) => {
   return (
     <div>
       <div className={styles.info}>
-
         <div>
           <b>{t('OtherProductsCommissionInformation')}</b>
         </div>

@@ -59,7 +59,10 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xsd:schema id="root"
+		xmlns=""
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -144,6 +147,10 @@
     <value>客户设定</value>
     <comment/>
   </data>
+  <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
+		<value>此账号来源已被禁用。</value>
+		<comment/>
+	</data>
 	<data name="Live" xml:space="preserve">
 		<value>现场</value>
 		<comment/>

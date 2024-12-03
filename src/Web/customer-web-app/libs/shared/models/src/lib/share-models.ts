@@ -107,7 +107,6 @@ export interface InformationPageParams {
 
   site?: string;
   siteLabel?: string;
-  isShowMyanmarOdds?: boolean;
 }
 
 declare global {
