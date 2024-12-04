@@ -17,6 +17,7 @@ export type validateUsername = 'userName' | 'newUserName';
 export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername;
 
 export default class GeneralInformationValidator {
+  private readonly numberOfAccounts: number = 1;
   private readonly generalInfo: GeneralInfo;
   public validationState: ValidationResult;
 
@@ -28,8 +29,11 @@ export default class GeneralInformationValidator {
     [UserLevel.Member]: 'givenCreditInvalid',
   };
 
-  constructor(generalInfo: GeneralInfo) {
+  constructor(generalInfo: GeneralInfo, numberOfAccounts?: number) {
     this.generalInfo = generalInfo;
+    if (numberOfAccounts) {
+      this.numberOfAccounts = numberOfAccounts;
+    }
     this.validationState = ValidationResult.CreateSuccessfulResult() as ValidationResult;
   }
 
@@ -168,7 +172,9 @@ export default class GeneralInformationValidator {
     }
 
     if (uplineMaxCredit !== undefined && !isNaN(uplineMaxCredit) && !isEditMode) {
-      const max = uplineMemberMaxCredit ? Math.min(uplineMaxCredit, uplineMemberMaxCredit) : uplineMaxCredit;
+      const max =
+        (uplineMemberMaxCredit ? Math.min(uplineMaxCredit, uplineMemberMaxCredit) : uplineMaxCredit) /
+        this.numberOfAccounts;
       if (maxCredit > max) {
         return (this.validationState = new ValidationResult(
           `maxCredit`,

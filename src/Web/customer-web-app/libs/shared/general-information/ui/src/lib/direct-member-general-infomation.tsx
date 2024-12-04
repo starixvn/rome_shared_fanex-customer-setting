@@ -15,11 +15,11 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import CommissionGroup from './commission-group';
 import { errorTooltip } from './common';
 import CopySettingFromNote from './copy-setting-from-note';
-import CreditNote from './credit-note';
 import CreditRange from './credit-range';
 import { GeneralInformationProps } from './general-information';
 import GeneralInformationValidator, {
-    generalInformationValidatorFields, validateMaxCredit
+  generalInformationValidatorFields,
+  validateMaxCredit,
 } from './general-information-validator';
 import styles from './general-information.module.scss';
 import NoOfAccounts from './no-of-accounts';
@@ -56,7 +56,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     const blockRef = useRef<BlockRefType>(null);
     const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
     const [locationTooltip, setLocationTooltip] = useState<string>('');
-    const { roleId, uplineMaxCredit, uplineMemberMaxCredit } = generalInfo;
+    const { roleId, uplineMaxCredit } = generalInfo;
     const isNotNAP = appConfig.systemId !== SystemIds.NAP;
 
     useImperativeHandle(ref, () => {
@@ -91,16 +91,9 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     });
 
     const validateGeneralInfo = async (property: generalInformationValidatorFields, data?: Partial<GeneralInfo>) => {
-      const validator = new GeneralInformationValidator({ ...generalInfo, ...data });
+      const validator = new GeneralInformationValidator({ ...generalInfo, ...data }, numberOfAccounts);
       const result = await validator.validateField(property);
       return result;
-    };
-
-    const renderCreditHint = () => {
-      if (roleId === UserLevel.Member && uplineMemberMaxCredit) {
-        return <CreditNote availableCredit={uplineMaxCredit || 0} memberMaxCredit={uplineMemberMaxCredit || 0} />;
-      }
-      return null;
     };
 
     const getErrorByField = (fieldName: string) =>
@@ -259,19 +252,9 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                     </span>
                   )}
                 </div>
-                {roleId < UserLevel.Super && (
-                  <div className={styles['max-credit']}>
-                    <CreditRange
-                      min={0}
-                      max={
-                        uplineMemberMaxCredit
-                          ? Math.min(uplineMaxCredit || 0, uplineMemberMaxCredit)
-                          : uplineMaxCredit || 0
-                      }
-                    />
-                    {renderCreditHint()}
-                  </div>
-                )}
+                <div className={styles['max-credit']}>
+                  <CreditRange min={0} max={uplineMaxCredit ? uplineMaxCredit / numberOfAccounts : 0} />
+                </div>
               </BlockItem>
             </div>
             {/*   CommissionGroup */}

@@ -1,17 +1,20 @@
 import classNames from 'classnames';
 
-import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
+import { ProductGroup } from '@customer-web-app/shared-group-settings-types';
 
 import styles from './product-tab.module.scss';
 
 const cx = classNames.bind(styles);
 
-export function ProductTab() {
-  const { productGroups, productGroupId, handleChangeProductGroupId } = useGroupSettingContext();
-  const currentProductGroupId = Number(productGroupId) || 1;
+type Props = {
+  selectedProductGroupId: number;
+  productGroups: ProductGroup[];
+  handleChangeProductGroupId: (groupId: number) => void;
+};
 
+export function ProductTab({ selectedProductGroupId, productGroups, handleChangeProductGroupId }: Props) {
   const handleClick = (groupId: number) => {
-    handleChangeProductGroupId && handleChangeProductGroupId(groupId);
+    handleChangeProductGroupId(groupId);
   };
 
   return (
@@ -20,7 +23,7 @@ export function ProductTab() {
         productGroups.map((group) => (
           <div
             key={group.id}
-            className={cx(styles.item, { [styles.active]: group.id === currentProductGroupId })}
+            className={cx(styles.item, { [styles.active]: group.id === selectedProductGroupId })}
             aria-hidden="true"
             onClick={() => handleClick(group.id)}
           >

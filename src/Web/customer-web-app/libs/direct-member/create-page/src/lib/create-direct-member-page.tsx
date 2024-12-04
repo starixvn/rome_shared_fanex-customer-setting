@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -28,6 +29,7 @@ import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import styles from './create-direct-member-page.module.scss';
+import SuccessPopup from './success-popup';
 
 /* eslint-disable-next-line */
 export interface CreateDirectMemberPageProps {}
@@ -45,7 +47,24 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
   const { generalInfo } = generalInformationState;
   const { productGroups } = productGroupsState;
   const generalInfoRef = useRef<ValidationRefType>(null);
-  const groupSettingRef = useRef<ValidationRefType>(null);
+  const sportsBookRef = useRef<ValidationRefType>(null);
+  const rngGamesRef = useRef<ValidationRefType>(null);
+  const liveAndRNGCasinoRef = useRef<ValidationRefType>(null);
+
+  const groupSettingRefs = [
+    {
+      id: ProductGroupIds.SportsBook,
+      ref: sportsBookRef,
+    },
+    {
+      id: ProductGroupIds.RNGGames,
+      ref: rngGamesRef,
+    },
+    {
+      id: ProductGroupIds.LiveAndRNGCasino,
+      ref: liveAndRNGCasinoRef,
+    },
+  ];
 
   const handleGeneralInfoChange = (payload: Partial<GeneralInfo>) => {
     generalInfoDispatch({ type: GeneralInfoActionTypes.Update, payload });
@@ -137,12 +156,25 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
     }
 
     if (!validateGroupSettingResult.isValid) {
-      groupSettingRef?.current?.scrollToBlock &&
-        groupSettingRef.current.scrollToBlock(validateGroupSettingResult.groupTypeId);
+      const groupSettingRef = groupSettingRefs.find((x) => x.id === currentProductGroupId);
+      groupSettingRef?.ref?.current?.scrollToBlock &&
+        groupSettingRef.ref.current.scrollToBlock(validateGroupSettingResult.groupTypeId);
     }
   };
 
-  const validateGroupTypes = async () => groupSettingRef.current && (await groupSettingRef.current.validate());
+  const validateGroupTypes = async () => {
+    for (const settingRef of groupSettingRefs) {
+      if (settingRef.ref.current) {
+        const validateRefResult = settingRef.ref.current.validate() as ValidateRefResult;
+        if (!validateRefResult.isValid) {
+          setCurrentProductGroupId(settingRef.id);
+          return validateRefResult;
+        }
+      }
+    }
+
+    return { isValid: true };
+  };
 
   const handleCreateDirectMember = async () => {
     setIsLoading(true);
@@ -158,15 +190,10 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
         true,
         numberOfAccounts
       );
-      if (result.isSuccessful) {
-        setIsLoading(true);
-        const createResult = result as CreateCustomerResult;
-        setTimeout(() => {
-          window.redirectToSettingPage({ username: generalInfo.userName, custId: createResult.newCustId });
-        }, 3000);
-        return;
-      } else {
-        setCreateCustomerResult(result);
+
+      setCreateCustomerResult(result);
+
+      if (!result.isSuccessful) {
         scrollToTop();
       }
     }
@@ -190,7 +217,19 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
       <WrapperTooltip id="global-tooltip" className={styles['global-tooltip']} />
       <Layout theme={theme}>
         {renderCreateButton()}
-        {createCustomerResult && <ErrorBlock error={createCustomerResult} />}
+        {createCustomerResult &&
+          (createCustomerResult.isSuccessful ? (
+            <SuccessPopup
+              usernames={createCustomerResult.newUserNames ?? []}
+              domains={createCustomerResult.availableAlphaDomain ?? []}
+              credit={generalInfo.maxCredit}
+              handleOk={() => {
+                window.location.reload();
+              }}
+            />
+          ) : (
+            <ErrorBlock error={createCustomerResult} />
+          ))}
         <DirectMemberGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
@@ -199,21 +238,35 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
           numberOfAccounts={numberOfAccounts}
           setNumberOfAccounts={setNumberOfAccounts}
         />
-        <GroupSettingsContextProvider
-          value={{
-            generalInfo,
-            productGroups,
-            isMultipleMode: false,
-            mode: 'createCustomer',
-            handleSettingItemChange: handleSettingItemChange,
-            handleUpdateSettingItems: handleUpdateSettingItems,
-            productGroupId: currentProductGroupId,
-            handleChangeProductGroupId: setCurrentProductGroupId,
-          }}
-        >
-          <ProductTab />
-          <GroupSetting ref={groupSettingRef} />
-        </GroupSettingsContextProvider>
+        <ProductTab
+          selectedProductGroupId={currentProductGroupId}
+          productGroups={productGroups}
+          handleChangeProductGroupId={setCurrentProductGroupId}
+        />
+        {productGroups.map((group) => {
+          const ref = groupSettingRefs.find((x) => x.id === group.id);
+          return (
+            <div
+              key={group.id}
+              className={classNames(styles['product-tab'], { [styles.active]: group.id === currentProductGroupId })}
+            >
+              <GroupSettingsContextProvider
+                value={{
+                  generalInfo,
+                  productGroups,
+                  isMultipleMode: false,
+                  mode: 'createCustomer',
+                  handleSettingItemChange: handleSettingItemChange,
+                  handleUpdateSettingItems: handleUpdateSettingItems,
+                  productGroupId: group.id,
+                }}
+              >
+                <GroupSetting ref={ref?.ref} />
+              </GroupSettingsContextProvider>
+            </div>
+          );
+        })}
+
         {renderCreateButton()}
       </Layout>
     </>

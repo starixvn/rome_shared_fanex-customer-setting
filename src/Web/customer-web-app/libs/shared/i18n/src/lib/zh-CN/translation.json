@@ -178,5 +178,7 @@
   "Super": "超级",
   "GivenCreditPerAccount": "每个账号的信用额度",
   "NoOfAccounts": "账号数量",
-  "UsernamePlaceHolder": "用户名或名/姓"
+  "UsernamePlaceHolder": "用户名或名/姓",
+  "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
+  "introCopyNote": "点击“复制”即可复制并分享账号详情"
 }

@@ -20,3 +20,11 @@
 .global-tooltip {
   max-width: 605px;
 }
+
+.product-tab {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}

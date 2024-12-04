@@ -28,7 +28,6 @@ export type GroupSettingsContextType = {
     groupItems: GroupSettingItem<unknown>[]
   ) => void;
   mode: 'createSuper' | 'createCustomer' | 'edit' | 'editMultipleCustomers';
-  handleChangeProductGroupId?: (productGroupId: number) => void;
 };
 
 export const GroupSettingsContext = React.createContext<Partial<GroupSettingsContextType>>({});

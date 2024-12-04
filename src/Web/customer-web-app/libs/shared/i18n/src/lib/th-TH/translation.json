@@ -178,5 +178,7 @@
   "Super": "ซุปเปอร์",
   "GivenCreditPerAccount": "เครดิตที่ให้แต่ละบัญชี",
   "NoOfAccounts": "จำนวนบัญชี",
-  "UsernamePlaceHolder": "ยูเซอร์เนม หรือ ชื่อ/นามสุกล"
+  "UsernamePlaceHolder": "ยูเซอร์เนม หรือ ชื่อ/นามสุกล",
+  "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
+  "introCopyNote": "คลิก 'คัดลอก' เพื่อคัดลอกและแบ่งปันรายละเอียดบัญชี"
 }

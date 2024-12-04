@@ -126,30 +126,33 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
   const [value, setValue] = useState('');
   const [validateResult, setValidateResult] = useState<{ [key: string]: boolean }>({});
 
-  const handlerChange = (newValue: SingleValue<UsernameSuggestionOption>) => {
+  const handleCheckIsDirectMember = async (username: string) => {
+    const custId = await SettingService.GetDirectMember(username);
+    setValidateResult({ username: custId > 0 });
+    if (custId) {
+      onSelectDirectMember(custId);
+    }
+  };
+
+  const handlerChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
     if (newValue) {
       setValue(newValue.value);
+      await handleCheckIsDirectMember(newValue.value);
+    } else {
+      setValidateResult({});
     }
   };
 
   const handleInputChange = async (newValue: string, { action }: InputActionMeta) => {
     if (action === 'input-change') {
       setValue(newValue);
-      const custId = await SettingService.GetDirectMember(value);
-      setValidateResult({ username: custId > 0 });
-      if (custId) {
-        onSelectDirectMember(custId);
-      }
+      await handleCheckIsDirectMember(newValue);
     }
   };
 
   const handleBlur = async () => {
     if (value) {
-      const custId = await SettingService.GetDirectMember(value);
-      setValidateResult({ username: custId > 0 });
-      if (custId) {
-        onSelectDirectMember(custId);
-      }
+      await handleCheckIsDirectMember(value);
     } else {
       setValidateResult({});
     }
