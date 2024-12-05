@@ -8,6 +8,8 @@ namespace Fanex.Customer.Client.Models
 
         public int UplineCustId { get; set; }
 
+        public string UplineUserName { get; set; }
+
         public string Password { get; set; }
 
         public string FirstName { get; set; }
