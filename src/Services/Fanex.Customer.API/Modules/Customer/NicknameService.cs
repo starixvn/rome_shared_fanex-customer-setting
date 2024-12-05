@@ -49,7 +49,6 @@ namespace Fanex.Customer.API.Modules.Customer
             if (IsValidNickName(param.Nickname))
             {
                 Result result;
-
                 if (param.IsSubAccount)
                 {
                     var registerSubAccNicknameCommand = new RegisterSubAccNicknameCommand(param.CustId, param.Nickname, param.LanguageKey, param.CustDBGroupID);
@@ -65,12 +64,10 @@ namespace Fanex.Customer.API.Modules.Customer
 
                 if (result.IsSuccessful)
                 {
-                    NicknameNonQueryCommand command = param.IsSubAccount
+                    var command = param.IsSubAccount
                         ? new CreateSubAccountNicknameCommand(param)
                         : new CreateNicknameCommand(param);
-
                     var processResult = await Execute(command);
-
                     if (!processResult.IsSuccessful)
                     {
                         var rollbackNicknameCommand = new RollbackNicknameCommand(param.CustId, param.SubAccountId);
@@ -98,7 +95,6 @@ namespace Fanex.Customer.API.Modules.Customer
         private async Task<Result> Execute(NicknameNonQueryCommand command)
         {
             await dynamicRepository.ExecuteAsync(command);
-
             return Result.Create(
                 command.ErrCode == 0 ? NicknameResource.ResourceManager.GetString("ConfiguredNicknameSuccessfully", new CultureInfo(LanguageUtils.ToLanguage(command.Language))) : command.ErrMsg,
                 command.ErrCode);
