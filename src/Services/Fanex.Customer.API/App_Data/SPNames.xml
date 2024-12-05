@@ -175,6 +175,8 @@
       <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
       <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
       <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+      <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+      <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
     </Setting>
     <Setting Key="Acc_LiteMode_CustSetting_MasterAllInfoSel" SpName="Acc_LiteMode_CustSetting_MasterAllInfoSel_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
@@ -185,6 +187,8 @@
       <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
       <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
       <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+      <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+      <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
     </Setting>
     <Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" />
@@ -196,6 +200,8 @@
       <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
       <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
       <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+      <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+      <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
     </Setting>
     <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
