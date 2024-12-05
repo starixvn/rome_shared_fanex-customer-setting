@@ -51,7 +51,7 @@ namespace Fanex.Customer.API.Modules.Customer
                 Result result;
                 if (param.IsSubAccount)
                 {
-                    var registerSubAccNicknameCommand = new RegisterSubAccNicknameCommand(param.CustId, param.Nickname, param.LanguageKey, param.CustDBGroupID);
+                    var registerSubAccNicknameCommand = new RegisterSubAccNicknameCommand(param.CustId, param.Nickname, param.SubAccountId, param.LanguageKey, param.CustDBGroupID);
                     await dynamicRepository.ExecuteAsync(registerSubAccNicknameCommand);
                     result = new Result(registerSubAccNicknameCommand.ErrCode, registerSubAccNicknameCommand.ErrMsg);
                 }
@@ -60,7 +60,7 @@ namespace Fanex.Customer.API.Modules.Customer
                     var registerMainAccNicknameCommand = new RegisterNicknameCommand(param.CustId, param.Nickname, param.LanguageKey);
                     await dynamicRepository.ExecuteAsync(registerMainAccNicknameCommand);
                     result = new Result(registerMainAccNicknameCommand.ErrCode, registerMainAccNicknameCommand.ErrMsg);
-                }                
+                }
 
                 if (result.IsSuccessful)
                 {
