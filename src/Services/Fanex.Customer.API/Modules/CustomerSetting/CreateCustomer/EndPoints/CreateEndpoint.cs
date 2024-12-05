@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CreateCustomer.Services;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
@@ -18,6 +19,7 @@ public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerS
 
     public async Task<IResult> HandleAsync(CreateRequest request, ICreateCustomerService service)
     {
+        Fanex.Logging.LogService.Info(JsonSerializer.Serialize(request));
         if (!service.ValidateRequest(request))
         {
             return Results.Ok(Shared.Models.Result.CreateError(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
