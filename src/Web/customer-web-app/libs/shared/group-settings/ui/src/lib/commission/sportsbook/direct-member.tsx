@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { BetTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -8,6 +9,7 @@ import CommissionLabel from '../commission-label';
 import CommissionSelect from '../commission-select';
 import SelectAllCommissionCheckbox from '../select-all-commission-checkbox';
 import { Props } from '../types';
+import styles from './sportsbook-commission.module.scss';
 
 export default function DirectMemberCommission({
   commissions,
@@ -19,6 +21,14 @@ export default function DirectMemberCommission({
   const { generalInfo, isMultipleMode } = useGroupSettingContext();
   const commissionGroup = generalInfo?.group;
   const asianHDPCommValue = generalInfo?.commissions?.find((c) => commissionGroup?.includes(c.name))?.discount ?? 0;
+
+  useEffect(() => {
+    if (generalInfo?.commissions) {
+      handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: asianHDPCommValue });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asianHDPCommValue]);
+
   return (
     <>
       <BlockRow
@@ -57,7 +67,17 @@ export default function DirectMemberCommission({
             }
           >
             <BlockColumn>
-              <div className="show-value">{upline.discount}</div>
+              {isReadOnly ? (
+                <div className="show-value">{upline.discount}</div>
+              ) : (
+                <div className={styles.blockCenter}>
+                  <input
+                    type="text"
+                    value={isAsianHDP && generalInfo?.commissions !== null ? asianHDPCommValue : upline.discount}
+                    disabled
+                  />
+                </div>
+              )}
             </BlockColumn>
             <BlockColumn>
               {isReadOnly ? (

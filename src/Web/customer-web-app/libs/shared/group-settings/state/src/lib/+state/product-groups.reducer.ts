@@ -1,7 +1,11 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    MasterDirectMemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup,
-    ProductStatusGroupItem, SuperDirectMemberPositionTakingGroupItem
+  MasterDirectMemberPositionTakingGroupItem,
+  ParlayMaxPayoutGroupItem,
+  ProductGroup,
+  ProductStatusGroupItem,
+  SuperDirectMemberPositionTakingGroupItem,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 import { ProductGroupsAction, ProductGroupsActionTypes } from './product-groups.actions';
@@ -60,6 +64,16 @@ const initProductGroups = (productGroups: ProductGroup[]) => {
 
               return { ...item, isMultipleModeChecked: true, original: { ...item } };
             });
+
+            return { ...type, groupItems };
+          }
+          case GroupTypeIds.WinLossLimit: {
+            const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item) => ({
+              ...item,
+              isMultipleModeChecked: true,
+              original: { ...item },
+              lossLimitValue: item.lossLimit !== 0 ? item.lossLimit : undefined,
+            }));
 
             return { ...type, groupItems };
           }

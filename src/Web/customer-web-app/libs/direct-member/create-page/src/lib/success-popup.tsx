@@ -14,12 +14,15 @@ type Props = {
   handleOk: () => void;
 };
 
-export default function SuccessPopup({ credit, domains, usernames, handleOk }: Props) {
+export default function SuccessPopup(props: Props) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
-  const accountInfo = `${t('username')}: ${usernames?.join(', ')}\n${t('credit')}: ${credit}\n${t('domain')}: ${domains
-    ?.slice(0, 3)
-    .join(', ')}`;
+  const { usernames, handleOk } = props;
+  const credit = props.credit.toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2 });
+  const domains = props.domains.slice(0, 3).join(', ');
+  const accountInfo = `${t('username')}: ${usernames?.join(', ')}\n${t('credit')}: ${credit}\n${t(
+    'domain'
+  )}: ${domains}`;
   const handleCopyAccountInfo = () => {
     setCopied(true);
     setTimeout(() => {
@@ -57,16 +60,11 @@ export default function SuccessPopup({ credit, domains, usernames, handleOk }: P
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('credit')}</div>
-              <div className={styles['row-value']}>
-                {credit.toLocaleString('en-US', {
-                  style: 'decimal',
-                  maximumFractionDigits: 2,
-                }) || '0'}
-              </div>
+              <div className={styles['row-value']}>{credit}</div>
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('domain')}</div>
-              <div className={styles['row-value']}>{domains?.slice(0, 3).join(', ')}</div>
+              <div className={styles['row-value']}>{domains}</div>
             </div>
             <button className={styles.buttonSuccess} type="button" onClick={handleOk}>
               {t('okay')}
