@@ -28,7 +28,7 @@ public class PositionTakingService : IPositionTakingService
 
     private const int Voidbridge = 4001;
 
-    private readonly int[] NewSettingProductGroups = [ProductGroupConstants.Sportsbook, ProductGroupConstants.LiveAndRNGCasino];
+    private readonly int[] NewSettingProductGroups = [ProductGroupConstants.Sportsbook, ProductGroupConstants.LiveAndRNGCasino, ProductGroupConstants.RNGGames];
 
     public PositionTakingService(IOptions<AppSettings> appSettingOptions, IDynamicRepository dynamicRepository, IRemotingRefService remotingRefService)
     {
