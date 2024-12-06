@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Modules.Password.Service;
 using Fanex.Customer.API.Modules.SubAccount.Command;
 using Fanex.Customer.API.Modules.SubAccount.Model;
 using Fanex.Customer.API.Shared.Models;
@@ -21,10 +22,12 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
     public class SubAccountService : ISubAccountService
     {
         private readonly IDynamicRepository dynamicRepository;
+        private readonly IEncryption encryption;
 
-        public SubAccountService(IDynamicRepository dynamicRepository)
+        public SubAccountService(IDynamicRepository dynamicRepository, IEncryption encryption)
         {
             this.dynamicRepository = dynamicRepository;
+            this.encryption = encryption;
         }
 
         public async Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel)
@@ -43,7 +46,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 CustId = custId,
                 UserId = subAccountModel.UserId,
                 Username = subAccountModel.Username,
-                UserPwd = subAccountModel.Password,
+                UserPwd = encryption.CfsEnCode(subAccountModel.Password),
                 Firstname = subAccountModel.Firstname,
                 Lastname = subAccountModel.Lastname,
                 PageAccess = subAccountModel.PageAccess ?? string.Empty,
