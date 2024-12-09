@@ -181,7 +181,7 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
         type="error"
         anchorSelect={`#sourceUsername`}
         isOpen={validateResult['username'] !== undefined && validateResult['username'] === false}
-        content={t('')}
+        content={t('UserNotExist')}
       />
     </div>
   );
