@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+
 import { UserLevel } from '@customer-web-app/shared-constants';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
@@ -15,6 +16,6 @@ export default function PasswordRule({ roleId }: Readonly<{ roleId: UserLevel }>
         data-tooltip-html={passwordRule}
       />
       <WrapperTooltip className="global-tooltip" id="password-rule" />
-      </>
+    </>
   );
 }

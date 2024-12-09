@@ -18,8 +18,7 @@ import CopySettingFromNote from './copy-setting-from-note';
 import CreditRange from './credit-range';
 import { GeneralInformationProps } from './general-information';
 import GeneralInformationValidator, {
-  generalInformationValidatorFields,
-  validateMaxCredit,
+    generalInformationValidatorFields, validateMaxCredit
 } from './general-information-validator';
 import styles from './general-information.module.scss';
 import NoOfAccounts from './no-of-accounts';
@@ -105,6 +104,18 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
         <div className={styles['container']}>
           <div className={styles['subheader']}>{t('AccountDetails')}</div>
           {children}
+          <div className={styles['row']}>
+            <BlockItem
+              label={
+                <>
+                  {t('CopySettingFrom')}
+                  {<CopySettingFromNote />}
+                </>
+              }
+            >
+              <UsernameSuggestionSelect onSelectDirectMember={onSelectDirectMember} />
+            </BlockItem>
+          </div>
           <div className={styles['row']}>
             {/*   username  */}
             <BlockItem label={t('username')} isRequired>
@@ -192,21 +203,11 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                 )}
               </div>
             </BlockItem>
-          </div>
-          <div className={styles['row']}>
-            <BlockItem
-              label={
-                <>
-                  {t('CopySettingFrom')}
-                  {<CopySettingFromNote />}
-                </>
-              }
-            >
-              <UsernameSuggestionSelect onSelectDirectMember={onSelectDirectMember} />
-            </BlockItem>
-            <BlockItem label={t('NoOfAccounts')}>
-              <NoOfAccounts value={numberOfAccounts} onChange={setNumberOfAccounts} />
-            </BlockItem>
+            {isNotNAP && (
+              <BlockItem label={t('NoOfAccounts')}>
+                <NoOfAccounts value={numberOfAccounts} onChange={setNumberOfAccounts} />
+              </BlockItem>
+            )}
             <div className={styles['col-max-credit']}>
               <BlockItem label={t('GivenCreditPerAccount')} isRequired>
                 <div>
