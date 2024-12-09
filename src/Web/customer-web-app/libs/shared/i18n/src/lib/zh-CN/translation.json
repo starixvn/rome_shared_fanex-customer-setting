@@ -180,5 +180,6 @@
   "NoOfAccounts": "账号数量",
   "UsernamePlaceHolder": "用户名或名/姓",
   "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
-  "introCopyNote": "点击“复制”即可复制并分享账号详情"
+  "introCopyNote": "点击“复制”即可复制并分享账号详情",
+  "UserNotExist": "此账号不存在"
 }
