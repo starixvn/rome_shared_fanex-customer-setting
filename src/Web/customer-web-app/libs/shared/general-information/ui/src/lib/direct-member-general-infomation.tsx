@@ -205,7 +205,19 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
             </BlockItem>
             {isNotNAP && (
               <BlockItem label={t('NoOfAccounts')}>
-                <NoOfAccounts value={numberOfAccounts} onChange={setNumberOfAccounts} />
+                <NoOfAccounts
+                  value={numberOfAccounts}
+                  onChange={async (e) => {
+                    const value = Number(e.target.value);
+                    setNumberOfAccounts(value);
+                    const validator = new GeneralInformationValidator({ ...generalInfo }, value);
+                    const result = await validator.validateField(maxCreditValidateFiled(generalInfo));
+                    setValidationResults({
+                      ...validationResults,
+                      [maxCreditValidateFiled(generalInfo)]: result,
+                    });
+                  }}
+                />
               </BlockItem>
             )}
             <div className={styles['col-max-credit']}>
