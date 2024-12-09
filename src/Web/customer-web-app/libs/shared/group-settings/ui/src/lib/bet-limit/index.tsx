@@ -81,7 +81,7 @@ function BetLimitRow({
     <BlockRow
       key={firstItem.sportTypeId}
       label={
-        params.roleId !== UserLevel.Member ? (
+        (params.roleId !== UserLevel.Member && !params.isDirectMember) ? (
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
             <div>{firstItem.sportTypeName}</div>
             <input
@@ -275,7 +275,7 @@ const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
             </button>
           ))}
         </div>
-        {params.roleId !== UserLevel.Member && (
+        {params.roleId !== UserLevel.Member && !params.isDirectMember && (
           <BlockRow
             label={
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
