@@ -40,7 +40,7 @@ const UpdateSettingConfirmationPopup = NiceModal.create(
   ({ productGroups, sportChangedCount, settingChangedCount, custCount, isCopyBetSetting }: any) => {
     const modal = useModal();
     const theme = useTheme();
-    const [confirmTimer, setConfirmTimer] = useState(10);
+    const [confirmTimer, setConfirmTimer] = useState(1);
    
     useEffect(() => {
       if(confirmTimer === 0) {
