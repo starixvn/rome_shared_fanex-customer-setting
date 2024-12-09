@@ -8,6 +8,7 @@ import AsyncSelect from 'react-select/async';
 import { UsernameSuggestion } from '@customer-web-app/share-models';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
+import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import styles from './username-suggestion-select.module.scss';
 
@@ -161,6 +162,7 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
   return (
     <div className={styles.search}>
       <AsyncSelect
+        id="sourceUsername"
         inputValue={value}
         loadOptions={promiseOptions}
         components={{ Option, Input, SingleValue: () => null, Placeholder: () => null }}
@@ -175,6 +177,12 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
       {validateResult['username'] !== undefined && (
         <div>{validateResult['username'] ? <IconCorrect /> : <IconWrong />}</div>
       )}
+      <WrapperTooltip
+        type="error"
+        anchorSelect={`#sourceUsername`}
+        isOpen={validateResult['username'] !== undefined && validateResult['username'] === false}
+        content={t('')}
+      />
     </div>
   );
 }
