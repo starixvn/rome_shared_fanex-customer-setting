@@ -129,7 +129,7 @@ function BetLimitRow({
               id={`name-${stakeLevel.productId}-${stakeLevel.sportTypeId}-${stakeLevel.stakeLevelId}`}
               className="blockLeft"
             >
-              {params.roleId === UserLevel.Member && !stakeLevel.isMultipleChoice ? (
+              {(params.isDirectMember || params.roleId === UserLevel.Member) && !stakeLevel.isMultipleChoice ? (
                 <input
                   type="radio"
                   checked={stakeLevel.isChecked}
@@ -144,7 +144,7 @@ function BetLimitRow({
                   onChange={(e) => handleOnBetLimitChange(stakeLevel, e.target.checked)}
                   disabled={
                     (!stakeLevel.isChecked &&
-                      params.roleId === UserLevel.Member &&
+                      (params.isDirectMember || params.roleId === UserLevel.Member) &&
                       item.filter((i) => i.isChecked).length === stakeLevel.maxChoice &&
                       stakeLevel.maxChoice !== 0) ||
                     isReadOnly
@@ -226,7 +226,7 @@ const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
           return { ...i, isChecked };
         }
 
-        if (params.roleId === UserLevel.Member && !item.isMultipleChoice && i.stakeLevelId !== item.stakeLevelId) {
+        if ((params.isDirectMember || params.roleId === UserLevel.Member) && !item.isMultipleChoice && i.stakeLevelId !== item.stakeLevelId) {
           return { ...i, isChecked: false };
         }
       }
