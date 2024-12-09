@@ -71,7 +71,7 @@ function BetLimitRow({
 
   const firstItem = item[0];
   const isShowNoneInput =
-    params.roleId === UserLevel.Member &&
+    (params.isDirectMember || params.roleId === UserLevel.Member) &&
     isAllowUncheckAll &&
     !firstItem.isMultipleChoice &&
     firstItem.productId === ProductIds.LiveCasino;

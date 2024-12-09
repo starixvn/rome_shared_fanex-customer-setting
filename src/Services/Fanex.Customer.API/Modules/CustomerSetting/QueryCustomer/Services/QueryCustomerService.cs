@@ -54,14 +54,14 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
 
     private bool isAllowUncheckAll = false;
 
-    private bool IsAllowUncheckAll(int roleId, string site, string siteLabel, AppSettings appSettings)
+    private bool IsAllowUncheckAll(int roleId, string site, string siteLabel, bool? isDirectMember, AppSettings appSettings)
     {
         var isY7 = appSettings.IsSpecialSites(siteLabel);
         var IsAllowUncheckStakeLevelOnMemberSite = appSettings.IsAllowUncheckStakeLevelOnMember(site);
-        if (roleId != CustomerLevel.Member && !isY7)
+        if (roleId != CustomerLevel.Member && !isDirectMember.GetValueOrDefault() && !isY7)
             return true;
 
-        if (roleId == CustomerLevel.Member && IsAllowUncheckStakeLevelOnMemberSite)
+        if ((roleId == CustomerLevel.Member || isDirectMember.GetValueOrDefault()) && IsAllowUncheckStakeLevelOnMemberSite)
             return true;
 
         return false;
@@ -92,7 +92,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         var generalInfo = new GeneralInformation(generalInfoDto);
         var uGroup  = generalInfoDto.Group;
         ptStep = appSettings.IsSupportPT3Decimal(IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel) ? 0.5M : 1M;
-        isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, appSettings);
+        isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, request.IsDirectMember, appSettings);
         var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsDirectMember.GetValueOrDefault() ? ProfileMode.DirectMember : request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
         if ((!request.IsGetUpline && (request.RoleId == CustomerLevel.Agent || request.IsDirectMember.GetValueOrDefault())) 
         	|| (request.IsGetUpline && request.RoleId == CustomerLevel.Member)) 
