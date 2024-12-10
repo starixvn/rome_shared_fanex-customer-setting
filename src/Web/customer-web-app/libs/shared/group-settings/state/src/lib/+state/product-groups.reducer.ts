@@ -26,25 +26,26 @@ const initProductGroups = (productGroups: ProductGroup[]) => {
         switch (type.id) {
           case GroupTypeIds.ParlayMaxPayout: {
             const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => {
+              const original = { ...item };
               const upline = { ...item };
-              upline.isAllowUnlimitSingleMatchParlay = false;
-              upline.singleMatchParlay = 0;
-              item.isAllowUnlimitSingleMatchParlay = false;
-              upline.isAllowUnlimitCombo2 = false;
-              upline.combo2 = 0;
-              item.isAllowUnlimitCombo2 = false;
-              upline.isAllowUnlimitCombo35 = false;
-              upline.combo35 = 0;
-              item.isAllowUnlimitCombo35 = false;
-              upline.isAllowUnlimitComboOver6 = false;
-              upline.comboOver6 = 0;
-              item.isAllowUnlimitComboOver6 = false;
-
+              const currentItem = { ...item };
+              original.isAllowUnlimitSingleMatchParlay = false;
+              original.isAllowUnlimitCombo2 = false;
+              original.isAllowUnlimitCombo35 = false;
+              original.isAllowUnlimitComboOver6 = false;
+              upline.combo2 = item.isAllowUnlimitCombo2 ? 0 : upline.combo2;
+              upline.singleMatchParlay = item.isAllowUnlimitSingleMatchParlay ? 0 : upline.singleMatchParlay;
+              upline.combo35 = item.isAllowUnlimitCombo35 ? 0 : upline.combo35;
+              upline.comboOver6 = item.isAllowUnlimitComboOver6 ? 0 : upline.comboOver6;
+              currentItem.isAllowUnlimitSingleMatchParlay = false;
+              currentItem.isAllowUnlimitCombo2 = false;
+              currentItem.isAllowUnlimitCombo35 = false;
+              currentItem.isAllowUnlimitComboOver6 = false;
               return {
-                ...item,
+                ...currentItem,
                 isMultipleModeChecked: true,
                 upline,
-                original: { ...item },
+                original,
               };
             });
 
