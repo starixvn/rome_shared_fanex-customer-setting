@@ -227,7 +227,7 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
                 return Result.Create(SecurityCodeResource.ResourceManager.GetString("alertOldSecCodeEmpty", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
             }
 
-            var verifyResult = await VerifySecurityCode(new CheckSecurityCodeRequest
+            var verifyResult = await CheckSecurityCode(new CheckSecurityCodeRequest
             {
                 CustId = param.CustId,
                 SecurityCode = param.CurrentSecurityCode,
