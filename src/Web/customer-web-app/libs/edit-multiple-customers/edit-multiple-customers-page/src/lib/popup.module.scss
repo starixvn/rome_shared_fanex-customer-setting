@@ -24,6 +24,10 @@
     align-items: center;
     z-index: 100;
     position: relative;
+    &.wrappermultiple{
+      align-items: flex-start;
+      margin-top: 30px;
+    }
   }
   .content {
     background: var(--bg-popup);
