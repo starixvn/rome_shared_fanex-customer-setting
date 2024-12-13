@@ -167,7 +167,7 @@
   "MaximumLossValueShouldBeInRange": "Maximum Loss value should be in the range of ({{min}} - {{max}}).",
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - Assign maximum {{value}} bet limits to member level.",
   "ClickToViewCurrentWinLossAmount": "Click to view Current Win Loss Amount",
-  "CurrentWinLossAmount": "Current Win/Loss Amount",
+  "CurrentWinLossAmount": "Current Win Loss Amount",
   "Product": "Product",
   "Winning": "Winning",
   "Losing": "Losing",

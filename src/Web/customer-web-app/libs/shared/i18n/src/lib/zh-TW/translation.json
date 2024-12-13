@@ -159,7 +159,7 @@
   "ProductStatus": "產品狀態",
   "BetLimit": "投注限額",
   "WinLossLimit": "輸贏限額",
-  "DailyAutoResetLimitAt": "每日限額自動重設 (于 中午12 時正 GMT +8)",
+  "DailyAutoResetLimitAt": "每日限額自動重設. (GMT+8中午12時正)",
   "MaximumWin": "最高赢額",
   "MaximumLoss": "最高輸額",
   "StakeLevelRequired": "每種投注類型至少需要選擇一個投注限額。",

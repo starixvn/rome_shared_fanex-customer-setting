@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -119,47 +119,46 @@
   </resheader>
   <data name="AgentMinPTCannotBeGreaterThanAgentMaxPT" xml:space="preserve">
     <value>ค่าความเสี่ยงต่ำสุดของเอเย่นต์ ต้องน้อยกว่าหรือเท่ากับ ค่าความเสี่ยงสูงสุดของเอเย่นต์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="AllProducts" xml:space="preserve">
     <value>โปรดักส์ทั้งหมด</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Comm1" xml:space="preserve">
 		<value>ค่าคอมฯ 1 (คอมม1)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Comm2" xml:space="preserve">
 		<value>ค่าคอมฯ 2 (คอมม2)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Comm3" xml:space="preserve">
 		<value>ค่าคอมฯ3 (คอม3): นำไปใช้กับประเภทการเดิมพันอื่น ๆ</value>
-    <comment/>
+    <comment />
   </data>
   <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
     <value>ชื่อเล่นของคุณได้กำหนดเรียบร้อยแล้ว</value>
   </data>
-	<data name="Live" xml:space="preserve">
+  <data name="Live" xml:space="preserve">
 		<value>สด</value>
-			<comment/>
+			<comment />
 	</data>
   <data name="CustomerSettings" xml:space="preserve">
     <value>การตั้งค่าของลูกค้า</value>
-		<comment/>
+		<comment />
 	</data>
-	<data name="Max" xml:space="preserve">
+  <data name="Max" xml:space="preserve">
 		<value>สูงสุด</value>
-		<comment/>
+		<comment />
 	</data>
-	<data name="Min" xml:space="preserve">
+  <data name="Min" xml:space="preserve">
 		<value>ต่ำสุด</value>
-		<comment/>
+		<comment />
 	</data>
-
   <data name="GeneralInfo" xml:space="preserve">
     <value>ข้อมูลทั่วไป</value>
-    <comment/>
+    <comment />
   </data>
   <data name="GroupType150" xml:space="preserve">
     <value>ค่าคอมฯ</value>
@@ -190,31 +189,31 @@
   </data>
   <data name="InvalidParameterValue" xml:space="preserve">
     <value>ค่าพารามิเตอร์ไม่ถูกต้อง</value>
-    <comment/>
+    <comment />
   </data>
   <data name="LimitAgentNewDownlineError" xml:space="preserve">
     <value>ขออภัย คุณสามารถสร้างบัญชีสมาชิกได้เพียง 5 บัญชีต่อวัน โปรดลองอีกครั้งในวันพรุ่งนี้</value>
-    <comment/>
+    <comment />
   </data>
   <data name="LimitMasterNewDownlineError" xml:space="preserve">
     <value>ขออภัย คุณสามารถสร้างบัญชีเอเจ่นต์ได้เพียง 3 บัญชีต่อวัน โปรดลองอีกครั้งในวันพรุ่งนี้</value>
-    <comment/>
+    <comment />
   </data>
   <data name="LimitSuperNewDownlineError" xml:space="preserve">
     <value>ขออภัย คุณสามารถสร้างบัญชีมาสเตอร์ได้เพียง 3 บัญชีต่อวัน โปรดลองอีกครั้งในวันพรุ่งนี้</value>
-    <comment/>
+    <comment />
   </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
     <value>ค่าความเสี่ยงต่ำสุดของมาสเตอร์ต้องน้อยกว่าหรือเท่ากับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
     <value>กีฬาทั้งหมด ยกเว้น {0} และ {1}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_1" xml:space="preserve">
     <value>การให้ส่วนลดไม่ถูกต้อง</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_12" xml:space="preserve">
     <value>ไม่สามารถกำหนดกลุ่มคอมมิชชั่นนี้ให้กับสมาชิกได้</value>
@@ -222,321 +221,321 @@
   </data>
   <data name="Msg_10002" xml:space="preserve">
     <value>ค่าการเดิมพันสูงสุดต่อบอลผิดพลาด .</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10003" xml:space="preserve">
     <value>ค่า เดิมพันขั้นต่ำ/ เดิมพันขั้นสูดสุด/ เดิมพันต่อเกมสูงสุด ไม่ถูกต้อง</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10006" xml:space="preserve">
     <value>ค่าวางเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับ ค่าการเดิมพันต่ำสุดของเอเจนท์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10007" xml:space="preserve">
     <value>ค่าวางเดิมพันขั้นสุงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันสูงสุดของเอเจนท์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10008" xml:space="preserve">
     <value>ค่าวางเดิมพันต่อแมทซ์สูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันสูงสุดต่อแมทซ์ของเอเจนท์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10009" xml:space="preserve">
     <value> Per Ball must be equal to or less than Agent Max Per Ball</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10010" xml:space="preserve">
     <value>Max Per Ball must be equal to or less than Super Agent Max Per Ball</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10011" xml:space="preserve">
     <value> Per Ball must be equal to or less than Master Agent Max Per Ball</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10016" xml:space="preserve">
     <value>ค่าวางเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับ ค่าการเดิมพันขั้นต่ำของซูเปอร์เอเจนท์ </value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10017" xml:space="preserve">
     <value>ค่าวางเดิมพันขั้นสูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดของซูเปอร์เอเจนท์ </value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10018" xml:space="preserve">
     <value>ค่าวางเดิมพันขั้นสูงสุดต่อแมทซ์ต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดของซูเปอร์เอเจนท์ต่อแมทซ์ </value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10019" xml:space="preserve">
     <value>ค่าวางเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับ ค่าการเดิมพันขั้นต่ำของมาสเตอร์เอเจนท์ </value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10020" xml:space="preserve">
     <value>ค่าวางเดิมพันขั้นสูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดของมาสเตอร์เอเจนท์ </value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10021" xml:space="preserve">
     <value>ค่าวางเดิมพันต่อแมทซ์สูงสุดต้องน้อยกว่าหรือเท่ากับ ค่าการเดิมพันขั้นสูงสุดต่อแมทซ์ของมาสเตอร์เอเจนท์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10022" xml:space="preserve">
     <value>ไม่อนุญาตให้เปลี่ยนแปลงวงเงินการตั้งค่าใหม่อัตโนมัติรายวัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10024" xml:space="preserve">
     <value>ชนะสูงสุดควรน้อยกว่าหรือเท่ากับชนะสูงสุดของอัปไลน์โดยตรง</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10033" xml:space="preserve">
     <value>แพ้สูงสุดควรน้อยกว่าหรือเท่ากับแพ้สูงสุดของอัปไลน์โดยตรง</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10034" xml:space="preserve">
     <value>อัปไลน์ของผู้ใช้รายนี้ไม่มีระดับเงินเดิมพัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10035" xml:space="preserve">
     <value>การเดิมพันแต่ละประเภทจะต้องเลือกอย่างน้อยหนึ่งวงเงินเดิมพัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10036" xml:space="preserve">
     <value>คุณสามารถกำหนดวงเงินเดิมพันสูงสุด {0} เฉพาะระดับสมาชิกสำหรับ {1}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10059" xml:space="preserve">
     <value>ข้อผิดพลาดในการจ่ายเงินสูงสุดต่อคู่การแข่งขัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10060" xml:space="preserve">
     <value>ค่าเดิมพันสูงสุดต่อคู่การแข่งขันต้องน้อยกว่าหรือเท่ากับการจ่ายสูงสุดต่อคู่คู่การแข่งขัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10061" xml:space="preserve">
     <value>ค่าเดิมพันสูงสุดต่อบอลต้องมากกว่าหรือเท่ากับค่าเดิมพันสูงสุดและน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อคู่การแข่งขัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10062" xml:space="preserve">
     <value>ค่าเดิมพันขั้นต่ำต้องมากกว่าหรือเท่ากับค่าเดิมพันขั้นต่ำของอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10063" xml:space="preserve">
     <value>ค่าเดิมพันสูงสุดต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดของอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10064" xml:space="preserve">
     <value>ค่าเดิมพันสูงสุดต่อคู่การแข่งขันต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อคู่การแข่งขันของอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10065" xml:space="preserve">
     <value>การจ่ายเงินสูงสุดต่อคู่การแข่งขันจะต้องน้อยกว่าหรือเท่ากับการจ่ายสูงสุดของอัพไลน์ต่อคู่การแข่งขัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10066" xml:space="preserve">
     <value>ค่าเดิมพันสูงสุดต่อบอลต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อบอลของอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10067" xml:space="preserve">
     <value>ค่าเดิมพันขั้นต่ำต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดและค่าเดิมพันสูงสุดต้องน้อยกว่าหรือเท่ากับค่าเดิมพันสูงสุดต่อคู่การแข่งขัน</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10070" xml:space="preserve">
     <value>การจ่ายเงินพาร์เลย์สูงสุดต่อเดิมพันต้องเป็นจำนวนบวก</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10071" xml:space="preserve">
     <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของพาร์เลย์แมตช์เดี่ยวที่ตั้งไว้ สูงกว่าอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10072" xml:space="preserve">
     <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของคอมโบ 2 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10073" xml:space="preserve">
     <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของคอมโบ 3 - 5 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10074" xml:space="preserve">
     <value>การจ่ายเงินสูงสุดต่อเดิมพันชุด: ค่าของคอมโบมากกว่า 6 ที่ตั้งไว้ สูงกว่าอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10078" xml:space="preserve">
     <value>RNG Casino: การอัปเดตการตั้งค่าความเสี่ยงของคุณถึงขีดจำกัดสูงสุดต่อเดือนแล้ว (1 ครั้ง) โปรดลองอีกครั้งหลังจาก {0} 12:00 PM GMT+8</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20001" xml:space="preserve">
     <value>ค่าความเสี่ยงไม่ถูกต้อง.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20002" xml:space="preserve">
     <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าสูงสุด/ต่ำสุด ที่กำหนดโดยบริษัท).</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20005" xml:space="preserve">
     <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าสูงสุด ที่กำหนดโดยบริษัท).</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20008" xml:space="preserve">
     <value>ค่าความเสี่ยงเอเย่นต์ไม่ถูกต้อง.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20019" xml:space="preserve">
     <value>การตั้งค่ามาสเตอร์ต่างๆ ที่มีอยู่ก่อนแล้วเกินกว่าการตั้งค่าความเสี่ยงสูงสุดอันใหม่ของซูเปอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20020" xml:space="preserve">
     <value>การตั้งค่าเมมเบอร์ต่างๆ ที่มีอยู่ก่อนแล้วเกินกว่าการตั้งค่าความเสี่ยงสูงสุดอันใหม่ของซูเปอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20021" xml:space="preserve">
     <value>การตั้งค่ามาสเตอร์ต่างๆ ที่มีอยู่ก่อนแล้วเกินกว่าการตั้งค่าความเสี่ยงสูงสุดอันใหม่ของมาสเตอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20022" xml:space="preserve">
     <value>การตั้งค่าเมมเบอร์ต่างๆ ที่มีอยู่ก่อนแล้วเกินกว่าการตั้งค่าความเสี่ยงสูงสุดอันใหม่ของมาสเตอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20023" xml:space="preserve">
     <value>การตั้งค่าเอเจนท์ต่างๆ ที่มีอยู่ก่อนแล้วเกินกว่าการตั้งค่าความเสี่ยงสูงสุดอันใหม่ของเอเจนท์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20024" xml:space="preserve">
     <value>การตั้งค่าเมมเบอร์ต่างๆ ที่มีอยู่ก่อนแล้วเกินกว่าการตั้งค่าความเสี่ยงสูงสุดอันใหม่ของเอเจนท์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20025" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงต่ำสุด/สูงสุดของทางอัพไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20026" xml:space="preserve">
     <value>เอเย่นต์ที่มีอยู่ มีค่าความเสี่ยงสูงกว่าค่าความเสี่ยงสูงสุดของมาสเตอร์ที่กำหนดใหม่</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20027" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของมาสเตอร์ ที่กำหนดโดยบริษัท</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20028" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของซุปเปอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20029" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงขั้นต่ำของซุปเปอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20030" xml:space="preserve">
     <value>ค่าความเสี่ยงของเอเย่นต์ขัดแย้งกับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20031" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20032" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงต่ำสุดของมาสเตอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20033" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงต่ำสุด/สูงสุดของเอเย่นต์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20034" xml:space="preserve">
     <value>ค่าความเสี่ยงขัดแย้งกับค่าความเสี่ยงสูงสุดของเอเย่นต์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20044" xml:space="preserve">
     <value>คุณไม่ได้รับอนุญาตให้ใช้การตั้งค่าความเสี่ยงอัตโนมัติ โปรดติดต่ออัพไลน์ของคุณ</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20045" xml:space="preserve">
     <value>This Template Name already exists.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20046" xml:space="preserve">
     <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าความเสี่ยงสูงสุดกำหนดโดยอัพไลน์)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20047" xml:space="preserve">
     <value>ไม่มีเทมเพลตนี้</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20048" xml:space="preserve">
     <value>ค่าความเสี่ยงไม่ถูกต้อง (ค่าความเสี่ยง ต่ำสุด/สูงสุด กำหนดโดยอัพไลน์)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_60033" xml:space="preserve">
     <value>ไม่สามารถแก้ไขสถานะผลิตภัณฑ์ของดาวน์ไลน์ได้ เนื่องจากไม่ได้เปิดการใช้งานผลิตภัณฑ์นี้</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_60035" xml:space="preserve">
     <value>คุณไม่สามารถปิดการใช้งานสินค้าให้กับดาวไลน์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_60037" xml:space="preserve">
     <value>ไม่สามารถเปิดใช้งาน {0} เมื่อ {1} ปิดอยู่</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_90012" xml:space="preserve">
     <value>คุณไม่สามารถดำเนินการนี้</value>
-    <comment/>
+    <comment />
   </data>
   <data name="NicknameRule" xml:space="preserve">
     <value>ชื่อเล่นต้องไม่ซ้ำกัน ตัวอักษรหรือตัวเลขเท่านั้น ควรมีขั้นต่ำ 5 ตัวอักษร และสูงสุด 20 ตัวอักษร</value>
   </data>
   <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
     <value>ค่าความเสี่ยงต่ำสุดของซุปเปอร์ต้องน้อยกว่าหรือเท่ากับค่าความเสี่ยงสูงสุดของซุปเปอร์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
     <value>บัญชีต้นทางนี้ถูกปิดการใช้งานอยู่</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UMMainMsg" xml:space="preserve">
     <value>เนื่องจากอยู่ในระหว่างการปรับปรุง ดังนั้นในช่วงเวลาดังกล่าวจึงไม่สามารถอัพเดทได้ (GMT+8):</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UMSubMsg" xml:space="preserve">
     <value>{0}: {1} ({2} ถึง {3})</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_150" xml:space="preserve">
     <value>ค่าคอมมิชชั่น ได้อัพเดทเรียบร้อยแล้ว</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_151" xml:space="preserve">
     <value>การตั้งค่าเดิมพัน ได้อัพเดทเรียบร้อยแล้ว.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_152" xml:space="preserve">
     <value>การจ่ายเงินพาร์เลย์สูงสุดต่อการเดิมพันอัพเดทเสร็จสมบูรณ์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_153" xml:space="preserve">
     <value>การตั้งค่าความเสี่ยง ได้เปลี่ยนแปลงเรียบร้อยแล้ว.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_154" xml:space="preserve">
     <value>การตั้งค่าเดิมพัน ได้อัพเดทเรียบร้อยแล้ว.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_155" xml:space="preserve">
     <value>ปรับข้อมูลวงเงินแพ้ชนะเรียบร้อยแล้ว</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_156" xml:space="preserve">
     <value>ค่าคอมมิชชั่น ได้อัพเดทเรียบร้อยแล้ว</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_158" xml:space="preserve">
     <value>ปรับข้อมูลวงเงินเดิมพันเรียบร้อยแล้ว</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_160" xml:space="preserve">
     <value>สถานะผลิตภันฑ์ อัพเดทสำเร็จแล้ว</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
     <value>ข้อมูลทั่วไปอัพเดทเสร็จสมบูรณ์</value>
-    <comment/>
+    <comment />
   </data>
   <data name="lbl1X2" xml:space="preserve">
     <value>เต็มเวลา 1X2</value>
-    <comment/>
+    <comment />
   </data>
 </root>

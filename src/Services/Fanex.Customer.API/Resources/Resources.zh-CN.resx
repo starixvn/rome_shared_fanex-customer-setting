@@ -59,49 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root"
-		xmlns=""
-		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-		xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -122,51 +119,51 @@
   </resheader>
   <data name="AgentMinPTCannotBeGreaterThanAgentMaxPT" xml:space="preserve">
     <value>代理最低占成必须少于或相等于代理最高占成</value>
-    <comment/>
+    <comment />
   </data>
   <data name="AllProducts" xml:space="preserve">
     <value>所有产品</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Comm1" xml:space="preserve">
     <value>佣金 1(%)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Comm2" xml:space="preserve">
     <value>佣金2</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Comm3" xml:space="preserve">
     <value>佣金3: 应用于其他投注类别.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
     <value>您的昵称创建成功</value>
   </data>
   <data name="CustomerSettings" xml:space="preserve">
     <value>客户设定</value>
-    <comment/>
+    <comment />
   </data>
   <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
 		<value>此账号来源已被禁用。</value>
-		<comment/>
+		<comment />
 	</data>
-	<data name="Live" xml:space="preserve">
+  <data name="Live" xml:space="preserve">
 		<value>现场</value>
-		<comment/>
+		<comment />
 	</data>
   <data name="GeneralInfo" xml:space="preserve">
     <value>基本信息</value>
-		<comment/>
+		<comment />
 	</data>
-	<data name="Max" xml:space="preserve">
+  <data name="Max" xml:space="preserve">
 		<value>最高</value>
-		<comment/>
+		<comment />
 	</data>
-	<data name="Min" xml:space="preserve">
+  <data name="Min" xml:space="preserve">
 		<value>最低</value>
-		<comment/>
-	</data>    
+		<comment />
+	</data>
   <data name="GroupType150" xml:space="preserve">
     <value>佣金</value>
   </data>
@@ -196,31 +193,31 @@
   </data>
   <data name="InvalidParameterValue" xml:space="preserve">
     <value>参数值无效。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="LimitAgentNewDownlineError" xml:space="preserve">
     <value>抱歉，您每天只能创建五个会员账号，请您明天再次尝试。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="LimitMasterNewDownlineError" xml:space="preserve">
     <value>抱歉，您每天只能创建三个代理账号，请您明天再次尝试。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="LimitSuperNewDownlineError" xml:space="preserve">
     <value>抱歉，您每天只能创建三个总代理账号，请您明天再次尝试。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
     <value>总代理最低占成必须少于或相等于总代理最高占成</value>
-    <comment/>
+    <comment />
   </data>
   <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
     <value>所有体育除了{0}和{1}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_1" xml:space="preserve">
     <value>折扣不正确</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_12" xml:space="preserve">
     <value>无法将此佣金组别分配给会员。</value>
@@ -228,321 +225,321 @@
   </data>
   <data name="Msg_10002" xml:space="preserve">
     <value>单粒球最高投注设置错误</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10003" xml:space="preserve">
     <value>最低投注/最高投注/单场限额无效</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10006" xml:space="preserve">
     <value>最低投注必须大于或相等于代理最低投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10007" xml:space="preserve">
     <value>最高投注必须少于或相等于代理最高投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10008" xml:space="preserve">
     <value>单场限额必须少于或相等于代理单场投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10009" xml:space="preserve">
     <value> Per Ball must be equal to or less than Agent Max Per Ball</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10010" xml:space="preserve">
     <value>Max Per Ball must be equal to or less than Super Agent Max Per Ball</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10011" xml:space="preserve">
     <value> Per Ball must be equal to or less than Master Agent Max Per Ball</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10016" xml:space="preserve">
     <value>最低投注大于或相等于超级总代理最低投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10017" xml:space="preserve">
     <value>最高投注必须少于或相等于超级总代理最高投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10018" xml:space="preserve">
     <value>单场限额必须少于或相等于超级总代理单场投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10019" xml:space="preserve">
     <value>最低投注大于或相等于总代理最低投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10020" xml:space="preserve">
     <value>最高投注必须少于或相等于总代理最高投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10021" xml:space="preserve">
     <value>单场限额必须少于或相等于总代理单场投注限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10022" xml:space="preserve">
     <value>您不允许修改每日限额自动重设.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10024" xml:space="preserve">
     <value>最高赢额应低于或相等于直系上线的最高赢额.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10033" xml:space="preserve">
     <value>最高输额应低于或相等于直系上线的最高输额.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10034" xml:space="preserve">
     <value>这帐号的上线无投注本金级别.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10035" xml:space="preserve">
     <value>每种投注类型至少需要选择一个投注限额。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10036" xml:space="preserve">
     <value>对于{1} 您只能将最大{0} 投注限额分配给会员。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10059" xml:space="preserve">
     <value>单场最高派彩错误</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10060" xml:space="preserve">
     <value>单场限额必须少于或等于单场最高派彩限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10061" xml:space="preserve">
     <value>单粒球最高投注必须大于或等于最高投注且少于或等于单场限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10062" xml:space="preserve">
     <value>最低投注必须大于或等于上线的最低投注</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10063" xml:space="preserve">
     <value>最高投注必须少于或等于上线的最高投注</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10064" xml:space="preserve">
     <value>单场限额必须少于或等于上线的单场限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10065" xml:space="preserve">
     <value>单场最高派彩必须少于或等于上线的单场最高派彩</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10066" xml:space="preserve">
     <value>单粒球最高投注必须少于或等于上线的单粒球最高投注</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10067" xml:space="preserve">
     <value>最低投注必须少于或等于 最高投注，最高投注必须少于或等于单场限额</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10070" xml:space="preserve">
     <value>每注串关最高派彩的设定值必须为正数</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10071" xml:space="preserve">
     <value>每注串关最高派彩: 单场串关的设置比上线的要高。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10072" xml:space="preserve">
     <value>每注串关最高派彩: 复选2的设置比上线的要高。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10073" xml:space="preserve">
     <value>每注串关最高派彩: 复选3-5的设置比上线的要高。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10074" xml:space="preserve">
     <value>每注串关最高派彩: 复选6的设置比上线的要高。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_10078" xml:space="preserve">
     <value>RNG娱乐城: 您已达到每月更新占成的最高允许次数（1 次）。请在 {0} 下午 12:00 GMT+8 之后重试。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20001" xml:space="preserve">
     <value>占成数不正确</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20002" xml:space="preserve">
     <value>占成数不正确(公司设给最低/高占成).</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20005" xml:space="preserve">
     <value>占成数不正确(公司设给最高占成).</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20008" xml:space="preserve">
     <value>代理占成数不正确.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20019" xml:space="preserve">
     <value>現有总代理超過新增超级总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20020" xml:space="preserve">
     <value>現有会员超過新增超级总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20021" xml:space="preserve">
     <value>現有总代理超過新增总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20022" xml:space="preserve">
     <value>現有会员超過新增总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20023" xml:space="preserve">
     <value>現有代理超過新增代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20024" xml:space="preserve">
     <value>現有会员超過新增代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20025" xml:space="preserve">
     <value>此占成违反上线的最低/最高占成.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20026" xml:space="preserve">
     <value>現有代理超過新增总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20027" xml:space="preserve">
     <value>此占成违反公司设置于总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20028" xml:space="preserve">
     <value>此占成违反超级总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20029" xml:space="preserve">
     <value>此占成违反超级总代理的最低占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20030" xml:space="preserve">
     <value>此代理最低占成违反总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20031" xml:space="preserve">
     <value>此占成违反总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20032" xml:space="preserve">
     <value>此占成违反总代理的最低占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20033" xml:space="preserve">
     <value>此占成违反代理的最低/最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20034" xml:space="preserve">
     <value>此占成违反代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20044" xml:space="preserve">
     <value>您不被允许使用自动占成, 请您联系您的上线。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20045" xml:space="preserve">
     <value>模板名称已存在。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20046" xml:space="preserve">
     <value>无效占成数（上线设置的最高占成数）。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20047" xml:space="preserve">
     <value>该模板不存在。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_20048" xml:space="preserve">
     <value>无效占成数（上线设置的最低/最高占成数）</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_60033" xml:space="preserve">
     <value>由于账号的此产品已关闭导致无法更改下线产品状态。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_60035" xml:space="preserve">
     <value>您不能禁用下线的产品。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_60037" xml:space="preserve">
     <value>您必须先启用 {1}，才能启用 {0}。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="Msg_90012" xml:space="preserve">
     <value>您不能执行此操作。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="MyanmarOddsComm" xml:space="preserve">
     <value>缅甸盘：仅适用于以下投注类型{0}，以缅甸盘赔率开出。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="NicknameRule" xml:space="preserve">
     <value>昵称必须是独特的，只含有字母或数字，至少五个字符，最多二十个字符</value>
   </data>
   <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
     <value>超级总代理的最低占成必须少于或相等于超级总代理的最高占成。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UMMainMsg" xml:space="preserve">
     <value>由於以下設定正在維護中，因此無法更新 (GMT+8):</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UMSubMsg" xml:space="preserve">
     <value>{0}: {1} ({2} 至 {3})</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_150" xml:space="preserve">
     <value>佣金已更新成功</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_151" xml:space="preserve">
     <value>投注设定已更新成功.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_152" xml:space="preserve">
     <value>每注串关最高派彩已成功更新。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_153" xml:space="preserve">
     <value>占成数设定已更新成功.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_154" xml:space="preserve">
     <value>投注设定已更新成功.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_155" xml:space="preserve">
     <value>输赢限额已成功更新.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_156" xml:space="preserve">
     <value>佣金已更新成功</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_158" xml:space="preserve">
     <value>投注限额已成功更新.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_160" xml:space="preserve">
     <value>产品状态更新成功</value>
-    <comment/>
+    <comment />
   </data>
   <data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
     <value>基本信息已成功更新。</value>
-    <comment/>
+    <comment />
   </data>
   <data name="lbl1X2" xml:space="preserve">
     <value>独赢盘</value>
-    <comment/>
+    <comment />
   </data>
 </root>

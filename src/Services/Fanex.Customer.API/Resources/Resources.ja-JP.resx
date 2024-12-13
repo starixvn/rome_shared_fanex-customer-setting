@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,82 +26,79 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root"
-		xmlns=""
-		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-		xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -121,432 +118,330 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AgentMinPTCannotBeGreaterThanAgentMaxPT" xml:space="preserve">
-    <value>Agent Min PT must be less than or equal to Agent Max PT.</value>
-    <comment/>
+    <value>エージェント最小保有ポジションは、エージェント最大保有ポジション以下でなければなりません。</value>
   </data>
   <data name="AllProducts" xml:space="preserve">
-    <value>All Products</value>
-    <comment/>
+    <value>全ての製品</value>
   </data>
   <data name="Comm1" xml:space="preserve">
-    <value>Commission 1 (Comm 1)</value>
-    <comment/>
+    <value>コミッション1（Comm 1）</value>
   </data>
   <data name="Comm2" xml:space="preserve">
-    <value>Commission 2 (Comm 2)</value>
-    <comment/>
+    <value>コミッション2（Comm 2）</value>
   </data>
   <data name="Comm3" xml:space="preserve">
-    <value>Commission 3 (Comm 3): Applies to other bettypes.</value>
-    <comment/>
+    <value>コミッション3（Comm 3）：他のベットタイプに適用されます。</value>
   </data>
   <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
-    <value>Your nickname was configured successfully</value>
+    <value>あなたのニックネームが無事に設定されました。</value>
   </data>
   <data name="CustomerSettings" xml:space="preserve">
-    <value>Customer Settings</value>
-    <comment/>
+    <value>顧客設定</value>
   </data>
   <data name="GeneralInfo" xml:space="preserve">
-    <value>General Information</value>
-    <comment/>
+    <value>一般情報</value>
   </data>
   <data name="GroupType150" xml:space="preserve">
-    <value>Commission</value>
+    <value>コミッション</value>
   </data>
   <data name="GroupType151" xml:space="preserve">
-    <value>Bet Setting</value>
+    <value>ベット設定</value>
   </data>
   <data name="GroupType152" xml:space="preserve">
-    <value>Parlay Max Payout per Bet</value>
+    <value>パーレイ1ベットごとの最大ペイアウト</value>
   </data>
   <data name="GroupType153" xml:space="preserve">
-    <value>Position Taking</value>
+    <value>保有ポジション</value>
   </data>
   <data name="GroupType154" xml:space="preserve">
-    <value>Bet Setting</value>
+    <value>ベット設定</value>
   </data>
   <data name="GroupType156" xml:space="preserve">
-    <value>Commission</value>
+    <value>コミッション</value>
   </data>
   <data name="GroupType158" xml:space="preserve">
-    <value>Bet Limit</value>
+    <value>ベットリミット</value>
   </data>
   <data name="GroupType159" xml:space="preserve">
-    <value>Bet Setting</value>
+    <value>ベット設定</value>
   </data>
   <data name="GroupType160" xml:space="preserve">
-    <value>Product Status</value>
+    <value>製品ステータス</value>
   </data>
   <data name="InvalidParameterValue" xml:space="preserve">
-    <value>Invalid parameter value.</value>
-    <comment/>
+    <value>無効なパラメータ値です。</value>
   </data>
   <data name="LimitAgentNewDownlineError" xml:space="preserve">
-    <value>Sorry, you can only create 5 members per day, please try again tomorrow.</value>
-    <comment/>
+    <value>申し訳ありませんが、1日に作成できるメンバーは5件までです。明日再度お試しください。</value>
   </data>
   <data name="LimitMasterNewDownlineError" xml:space="preserve">
-    <value>Sorry, you can only create 3 agents per day, please try again tomorrow.</value>
-    <comment/>
+    <value>申し訳ありませんが、1日に作成できるエージェントは3件までです。明日再度お試しください。</value>
   </data>
   <data name="LimitSuperNewDownlineError" xml:space="preserve">
-    <value>Sorry, you can only create 3 masters per day, please try again tomorrow.</value>
-    <comment/>
+    <value>申し訳ありませんが、1日に作成できるマスターは3件までです。明日再度お試しください。</value>
   </data>
   <data name="Live" xml:space="preserve">
-    <value>Live</value>
-    <comment/>
+    <value>ライブ</value>
   </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
-    <value>Master Min PT must be less than or equal to Master Max PT.</value>
-    <comment/>
+    <value>マスター最小保有ポジションはマスター最大保有ポジション以下でなければなりません。</value>
   </data>
   <data name="Max" xml:space="preserve">
-    <value>Max</value>
-    <comment/>
+    <value>最大</value>
   </data>
   <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
-    <value>All Sports except &lt;br&gt; {0} and {1}</value>
-    <comment/>
+    <value>{0}と{1}を除くすべてのスポーツ</value>
   </data>
   <data name="Min" xml:space="preserve">
-    <value>Min</value>
-    <comment/>
+    <value>最小</value>
   </data>
   <data name="Msg_1" xml:space="preserve">
-    <value>Invalid commission rate.</value>
-    <comment/>
-  </data>
-  <data name="Msg_12" xml:space="preserve">
-    <value>このコミッショングループをメンバーに割り当てることができません。</value>
-    <comment/>
+    <value>無効なコミッション率です。</value>
   </data>
   <data name="Msg_10002" xml:space="preserve">
-    <value>Wrong Max Per Ball</value>
-    <comment/>
+    <value>1球あたりの最大値が誤っています。</value>
   </data>
   <data name="Msg_10003" xml:space="preserve">
-    <value>Wrong Min bet/ Max bet/ Max per match</value>
-    <comment/>
+    <value>最小ベット/最大ベット/1試合あたりの最大値が誤っています。</value>
   </data>
   <data name="Msg_10006" xml:space="preserve">
-    <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
-    <comment/>
+    <value>最小ベットは上層ラインの最小ベット以上でなければなりません。</value>
   </data>
   <data name="Msg_10007" xml:space="preserve">
-    <value>Max bet must be less than or equal to Upline's max bet.</value>
-    <comment/>
+    <value>最大ベットは上層ラインの最大ベット以下でなければなりません。</value>
   </data>
   <data name="Msg_10008" xml:space="preserve">
-    <value>Max Per Match must be less than or equal to Upline'sMax Per Match.</value>
-    <comment/>
+    <value>1試合あたりの最大値は上層ラインの1試合あたりの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10009" xml:space="preserve">
-    <value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
-    <comment/>
+    <value>1球あたりの最大値は上層ラインの1球ごとの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10010" xml:space="preserve">
-    <value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
-    <comment/>
+    <value>1球あたりの最大値は上層ラインの1球ごとの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10011" xml:space="preserve">
-    <value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
-    <comment/>
+    <value>1球あたりの最大値は上層ラインの1球ごとの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10016" xml:space="preserve">
-    <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
-    <comment/>
+    <value>最小ベットは上層ラインの最小ベット以上でなければなりません。</value>
   </data>
   <data name="Msg_10017" xml:space="preserve">
-    <value>Max bet must be less than or equal to Upline's max bet.</value>
-    <comment/>
+    <value>最大ベットは上層ラインの最大ベット以下でなければなりません。</value>
   </data>
   <data name="Msg_10018" xml:space="preserve">
-    <value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
-    <comment/>
+    <value>1試合あたりの最大値は上層ラインの1試合あたりの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10019" xml:space="preserve">
-    <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
-    <comment/>
+    <value>最小ベットは上層ラインの最小ベット以上でなければなりません。</value>
   </data>
   <data name="Msg_10020" xml:space="preserve">
-    <value>Max bet must be less than or equal to Upline's max bet.</value>
-    <comment/>
+    <value>最大ベットは上層ラインの最大ベット以下でなければなりません。</value>
   </data>
   <data name="Msg_10021" xml:space="preserve">
-    <value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
-    <comment/>
+    <value>1試合あたりの最大値は上層ラインの1試合あたりの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10022" xml:space="preserve">
-    <value>You are not allowed to change Daily auto reset limit.</value>
-    <comment/>
+    <value>あなたは日次自動リセット制限を変更することは許可されていません。</value>
   </data>
   <data name="Msg_10024" xml:space="preserve">
-    <value>Maximum Win should be less than or equal to Maximum Win of the direct upline.</value>
-    <comment/>
+    <value>最大勝ち額は、直接の上層ラインの最大勝利額以下でなければなりません。</value>
   </data>
   <data name="Msg_10033" xml:space="preserve">
-    <value>Maximum Loss should be less than or equal to Maximum Loss of the direct upline.</value>
-    <comment/>
+    <value>最大負け額は、直接の上層ラインの最大損失以下でなければなりません。</value>
   </data>
   <data name="Msg_10034" xml:space="preserve">
-    <value>This user's upline does not have Stake Level.</value>
-    <comment/>
+    <value>このユーザーの上層ラインはステークレベルを持っていません。</value>
   </data>
   <data name="Msg_10035" xml:space="preserve">
-    <value>Each bet type must have at least one Bet Limit value to be selected</value>
-    <comment/>
+    <value>各ベットタイプごとに、最低1つのベットリミット値を選択する必要があります。</value>
   </data>
   <data name="Msg_10036" xml:space="preserve">
-    <value>You can only assign maximum {0} bet limits to member level for {1}.</value>
-    <comment/>
+    <value>あなたは{1}に対してメンバーレベルに最大{0}のベットリミットしか割り当てることができません。</value>
   </data>
   <data name="Msg_10059" xml:space="preserve">
-    <value>Wrong Max Payout Per Match.</value>
-    <comment/>
+    <value>1試合あたりの最大ペイアウトが誤っています。</value>
   </data>
   <data name="Msg_10060" xml:space="preserve">
-    <value>Max Per Match must be less than or equal to Max Payout Per Match</value>
-    <comment/>
+    <value>1試合あたりの最大値は1試合あたりの最大ペイアウト以下でなければなりません。</value>
   </data>
   <data name="Msg_10061" xml:space="preserve">
-    <value>Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match</value>
-    <comment/>
+    <value>1球あたりの最大値は最大ベット以上であり、1試合あたりの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10062" xml:space="preserve">
-    <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
-    <comment/>
+    <value>最小ベットは上層ラインの最小ベット以下でなければなりません。</value>
   </data>
   <data name="Msg_10063" xml:space="preserve">
-    <value>Max Bet must be less than or equal to Upline's Max Bet</value>
-    <comment/>
+    <value>最大ベットは上層ラインの最大ベット以下でなければなりません。</value>
   </data>
   <data name="Msg_10064" xml:space="preserve">
-    <value>Max Per Match must be less than or equal to Upline's Max Per Match</value>
-    <comment/>
+    <value>1試合あたりの最大値は上層ラインの1試合あたりの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10065" xml:space="preserve">
-    <value>Max Payout Per Match must be less than or equal to Upline's Max Payout Per Match</value>
-    <comment/>
+    <value>1試合あたりの最大ペイアウトは上層ラインの1試合あたりの最大ペイアウト以下でなければなりません。</value>
   </data>
   <data name="Msg_10066" xml:space="preserve">
-    <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>
-    <comment/>
+    <value>1球あたりの最大値は上層ラインの1球ごとの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10067" xml:space="preserve">
-    <value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
-    <comment/>
+    <value>最小ベットは最大ベット以下でなければならず、最大ベットは試合ごとの最大値以下でなければなりません。</value>
   </data>
   <data name="Msg_10070" xml:space="preserve">
-    <value>The Parlay Max Payout value must be a positive amount.</value>
-    <comment/>
+    <value>パーレイ最大ペイアウトの設定値は正数でなければなりません。</value>
   </data>
   <data name="Msg_10071" xml:space="preserve">
-    <value>Parlay Max Payout per Bet: The setting of Single Match Parlay is higher than the upline's.</value>
-    <comment/>
+    <value>パーレイ1ベットごとの最大ペイアウト: シングルマッチパーレイの設定が上層ラインの設定を上回っています。</value>
   </data>
   <data name="Msg_10072" xml:space="preserve">
-    <value>Parlay Max Payout per Bet: The setting of Combo 2 is higher than the upline's.</value>
-    <comment/>
+    <value>パーレイ1ベットごとの最大ペイアウト: コンボ2の設定が上層ラインの設定を上回っています。</value>
   </data>
   <data name="Msg_10073" xml:space="preserve">
-    <value>Parlay Max Payout per Bet: The setting of Combo 3 - 5 is higher than the upline's.</value>
-    <comment/>
+    <value>パーレイ1ベットごとの最大ペイアウト: コンボ3～5の設定が上層ラインの設定を上回っています。</value>
   </data>
   <data name="Msg_10074" xml:space="preserve">
-    <value>Parlay Max Payout per Bet: The setting of Combo Over 6 is higher than the upline's.</value>
-    <comment/>
+    <value>パーレイ1ベットごとの最大ペイアウト: コンボ6以上の設定が上層ラインの設定を上回っています。</value>
   </data>
   <data name="Msg_10078" xml:space="preserve">
-    <value>RNG Casino:  You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8.</value>
-    <comment/>
+    <value>乱数生成器カジノ: 保有ポジションを更新できる月間許容量（1回）に達しました。{0}の午後12時（GMT+8）以降に再度お試しください。</value>
   </data>
   <data name="Msg_20001" xml:space="preserve">
-    <value>Wrong position taking.</value>
-    <comment/>
+    <value>保有ポジションが誤っています。</value>
   </data>
   <data name="Msg_20002" xml:space="preserve">
-    <value>Wrong position taking (min/max set by company).</value>
-    <comment/>
+    <value>保有ポジションが誤っています（最小/最大値は弊社が設定）。</value>
   </data>
   <data name="Msg_20005" xml:space="preserve">
-    <value>Wrong position taking (max set by company).</value>
-    <comment/>
+    <value>保有ポジションが誤っています（最大値は弊社が設定）。</value>
   </data>
   <data name="Msg_20008" xml:space="preserve">
-    <value>Wrong agent position taking.</value>
-    <comment/>
+    <value>エージェントの保有ポジションが誤っています。</value>
   </data>
   <data name="Msg_20019" xml:space="preserve">
-    <value>Existing masters exceed new Super Max PT.</value>
-    <comment/>
+    <value>既存のマスターが新しいスーパー最大保有ポジションを超過しています。</value>
   </data>
   <data name="Msg_20020" xml:space="preserve">
-    <value>Existing members exceed new Super Max PT.</value>
-    <comment/>
+    <value>既存のメンバーが新しいスーパー最大保有ポジションを超過しています。</value>
   </data>
   <data name="Msg_20021" xml:space="preserve">
-    <value>Existing masters exceed new Master Max PT.</value>
-    <comment/>
+    <value>既存のマスターが新しいマスター最大保有ポジションを超過しています。</value>
   </data>
   <data name="Msg_20022" xml:space="preserve">
-    <value>Existing members exceed new Master Max PT.</value>
-    <comment/>
+    <value>既存のメンバーが新しいマスター最大保有ポジションを超過しています。</value>
   </data>
   <data name="Msg_20023" xml:space="preserve">
-    <value>Existing agents exceed new Agent Max PT.</value>
-    <comment/>
+    <value>既存のエージェントが新しいエージェント最大保有ポジションを超過しています。</value>
   </data>
   <data name="Msg_20024" xml:space="preserve">
-    <value>Existing members exceed new Agent Max PT.</value>
-    <comment/>
+    <value>既存のメンバーが新しいエージェント最大保有ポジションを超過しています。</value>
   </data>
   <data name="Msg_20025" xml:space="preserve">
-    <value>The position taking violates Upline Min/Max PT.</value>
-    <comment/>
+    <value>保有ポジションが上層ラインの最小/最大保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20026" xml:space="preserve">
-    <value>Existing agents exceed new Master Max PT.</value>
-    <comment/>
+    <value>既存のエージェントが新しいマスター最大保有ポジションを超過しています。</value>
   </data>
   <data name="Msg_20027" xml:space="preserve">
-    <value>The position taking violates Master Max PT set by company</value>
-    <comment/>
+    <value>保有ポジションが弊社が設定したマスター最大保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20028" xml:space="preserve">
-    <value>The position taking violates Super Max PT.</value>
-    <comment/>
+    <value>保有ポジションがスーパー最大保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20029" xml:space="preserve">
-    <value>The position taking violates Super Min PT.</value>
-    <comment/>
+    <value>保有ポジションがスーパー最小保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20030" xml:space="preserve">
-    <value>The Agent Min PT violates Master Max PT.</value>
-    <comment/>
+    <value>エージェント最小保有ポジションがマスター最大保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20031" xml:space="preserve">
-    <value>The position taking violates Master Max PT.</value>
-    <comment/>
+    <value>保有ポジションがマスター最大保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20032" xml:space="preserve">
-    <value>The position taking violates Master Min PT.</value>
-    <comment/>
+    <value>保有ポジションがマスター最小保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20033" xml:space="preserve">
-    <value>The position taking violates Agent Min/Max PT.</value>
-    <comment/>
+    <value>保有ポジションがエージェント最小/最大保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20034" xml:space="preserve">
-    <value>The position taking violates Agent Max PT.</value>
-    <comment/>
+    <value>保有ポジションがエージェント最大保有ポジションに違反しています。</value>
   </data>
   <data name="Msg_20044" xml:space="preserve">
-    <value>You are not allowed to have Auto PT, please contact your upline.</value>
-    <comment/>
+    <value>自動保有ポジションを持つことは許可されていません。上層ラインに連絡してください。</value>
   </data>
   <data name="Msg_20045" xml:space="preserve">
-    <value>This Template Name already exists.</value>
-    <comment/>
+    <value>このテンプレート名はすでに存在しています。</value>
   </data>
   <data name="Msg_20046" xml:space="preserve">
-    <value>Invalid Position Taking(max set by upline).</value>
-    <comment/>
+    <value>無効な保有ポジション（上層ラインによる最小/最大設定）。</value>
   </data>
   <data name="Msg_20047" xml:space="preserve">
-    <value>This Template does not exist.</value>
-    <comment/>
+    <value>このテンプレートは存在しません。</value>
   </data>
   <data name="Msg_20048" xml:space="preserve">
-    <value>Invalid Position Taking(min/max set by upline).</value>
-    <comment/>
+    <value>無効な保有ポジション（上層ラインによる最小/最大設定）。</value>
   </data>
   <data name="Msg_60033" xml:space="preserve">
-    <value>Unable to edit downline's Product Status because the account disabled for this product.</value>
-    <comment/>
+    <value>アカウントがこの製品に対して無効化されているため、下層ラインの製品ステータスを編集できません。</value>
   </data>
   <data name="Msg_60035" xml:space="preserve">
-    <value>You are not allowed to disable downline's product.</value>
-    <comment/>
+    <value>あなたは下層ラインの製品を無効化することは許可されていません。</value>
   </data>
   <data name="Msg_60037" xml:space="preserve">
-    <value>You cannot Enable {0} when {1} is Disabled.</value>
-    <comment/>
+    <value>{1}が無効化中の場合、{0}を有効化することはできません。</value>
   </data>
   <data name="Msg_90012" xml:space="preserve">
-    <value>You are not allowed to perform this action.</value>
-    <comment/>
+    <value>このアクションを実行する権限がありません。</value>
   </data>
   <data name="MyanmarOddsComm" xml:space="preserve">
-    <value>Myanmar Odds: Applies to {0} bettypes with Myanmar Odds Type.</value>
-    <comment/>
+    <value>ミャンマーオッズ: ミャンマーオッズタイプが適用される{0}のベットタイプに適用されます。</value>
   </data>
   <data name="NicknameRule" xml:space="preserve">
-    <value>Nickname must be unique, only alphabet or numeric and should have at least a minimum of 5 characters and maximum of 20 characters.</value>
+    <value>ニックネームは唯一無二で、英数字のみで構成し、最低5文字から最大20文字までの範囲で設定してください。</value>
   </data>
   <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
-    <value>Super Min PT must be less than or equal to Super Max PT.</value>
-    <comment/>
+    <value>スーパー最小保有ポジションは、スーパー最大保有ポジション以下でなければなりません。</value>
   </data>
   <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
-    <value>This Source Account was disabled.</value>
-    <comment/>
+    <value>このソースアカウントは無効化されました。</value>
   </data>
   <data name="UM" xml:space="preserve">
-    <value>Under maintenance ({0} - {1}). [5003]</value>
-    <comment/>
+    <value>メンテナンス中（{0} - {1}）。[5003]</value>
   </data>
   <data name="UMMainMsg" xml:space="preserve">
-    <value>Unable to Update because of the maintenance of the settings below (GMT+8):</value>
-    <comment/>
+    <value>以下の設定がメンテナンス中のため、更新できません（GMT+8）：</value>
   </data>
   <data name="UMSubMsg" xml:space="preserve">
-    <value>{0}: {1} ({2} to {3})</value>
-    <comment/>
+    <value>{0}: {1} ({2} から {3})</value>
   </data>
   <data name="UpdateSuccess_150" xml:space="preserve">
-    <value>Updated commission setting successfully.</value>
-    <comment/>
+    <value>コミッション設定の更新が成功。</value>
   </data>
   <data name="UpdateSuccess_151" xml:space="preserve">
-    <value>Bet Setting is updated successfully.</value>
-    <comment/>
+    <value>ベット設定の更新が成功。</value>
   </data>
   <data name="UpdateSuccess_152" xml:space="preserve">
-    <value>Parlay Max Payout Per Bet is updated successfully.</value>
-    <comment/>
+    <value>パーレイ1ベットごとの最大ペイアウトの更新が成功。</value>
   </data>
   <data name="UpdateSuccess_153" xml:space="preserve">
-    <value>Position taking is updated successfully.</value>
-    <comment/>
+    <value>保有ポジションの更新に成功。</value>
   </data>
   <data name="UpdateSuccess_154" xml:space="preserve">
-    <value>Bet Setting is updated successfully.</value>
-    <comment/>
+    <value>ベット設定の更新が成功。</value>
   </data>
   <data name="UpdateSuccess_155" xml:space="preserve">
-    <value>Updated Win Loss Limit successfully.</value>
-    <comment/>
+    <value>勝ち負け制限の更新に成功。</value>
   </data>
   <data name="UpdateSuccess_156" xml:space="preserve">
-    <value>Updated commission setting successfully.</value>
-    <comment/>
+    <value>コミッション設定の更新が成功。</value>
   </data>
   <data name="UpdateSuccess_158" xml:space="preserve">
-    <value>Updated Bet Limit successfully.</value>
-    <comment/>
+    <value>ベットリミットの更新が成功。</value>
   </data>
   <data name="UpdateSuccess_160" xml:space="preserve">
-    <value>Product Status is updated successfully.</value>
-    <comment/>
+    <value>製品ステータスの更新が成功。</value>
   </data>
   <data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
-    <value>General Info is updated successfully.</value>
-    <comment/>
+    <value>一般情報の更新が成功。</value>
   </data>
   <data name="lbl1X2" xml:space="preserve">
-    <value>1 X 2</value>
-    <comment/>
+    <value>1X2</value>
   </data>
 </root>

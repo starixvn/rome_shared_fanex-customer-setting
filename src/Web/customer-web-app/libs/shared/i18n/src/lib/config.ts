@@ -13,6 +13,8 @@ import productSettingInfoCN from './zh-CN/product-setting-info.json';
 import zhCN from './zh-CN/translation.json';
 import productSettingInfoTW from './zh-TW/product-setting-info.json';
 import zhTW from './zh-TW/translation.json';
+import productSettingInfoJP from './ja-JP/product-setting-info.json';
+import jaJP from './ja-JP/translation.json';
 
 export const defaultNS = 'translation';
 
@@ -22,6 +24,7 @@ export const resources = {
   'vi-VN': { translation: { ...viVN, ...productSettingInfoVi } },
   'zh-CN': { translation: { ...zhCN, ...productSettingInfoCN } },
   'zh-TW': { translation: { ...zhTW, ...productSettingInfoTW } },
+  'ja-JP': { translation: { ...jaJP, ...productSettingInfoJP } },
 };
 
 i18next
