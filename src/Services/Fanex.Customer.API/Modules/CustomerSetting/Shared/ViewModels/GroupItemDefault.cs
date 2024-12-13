@@ -18,7 +18,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 [JsonDerivedType(typeof(MemberCommissionGroup), typeDiscriminator: 4)]
 [JsonDerivedType(typeof(SuperDirectMemberCommissionGroup), typeDiscriminator: 5)]
 [JsonDerivedType(typeof(MasterDirectMemberCommissionGroup), typeDiscriminator: 6)]
-//[JsonDerivedType(typeof(CommissionGroup), typeDiscriminator: 7)]
+[JsonDerivedType(typeof(SuperPTOnDirectMasterMemberSettingItem), typeDiscriminator: 7)]
 [JsonDerivedType(typeof(BetSettingItem), typeDiscriminator: 8)]
 [JsonDerivedType(typeof(ParlayMaxPayoutSettingItem), typeDiscriminator: 9)]
 [JsonDerivedType(typeof(SuperPTSettingItem), typeDiscriminator: 10)]

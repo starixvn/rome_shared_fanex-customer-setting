@@ -13,7 +13,7 @@ public interface ICustomerSettingHelper
 
     string ObjectToXml(object o);
 
-    int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId, bool? isDirectMember);
+    int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId, int? agentId);
 
     int GetGroupTypeByCustomerLevel(int groupType, byte roleId);
 
@@ -24,6 +24,10 @@ public interface ICustomerSettingHelper
     bool IsSBCommGroupType(int groupType);
 
     bool IsCrossLevel(byte roleId, byte uplineRoleId);
+
+    bool IsDirectMember(byte roleId, byte uplineRoleId, int? agentId);
+
+    bool IsCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId);
 }
 
 public class CustomerSettingHelper : ICustomerSettingHelper
@@ -33,7 +37,7 @@ public class CustomerSettingHelper : ICustomerSettingHelper
         var groupItems = productGroups.Where(p => !isFullMode || p.Id == 1)
         .SelectMany(p => p.GroupTypes.SelectMany(gi => gi.GroupItems.Select(i => new { GroupTypeId = gi.Id, GroupItem = i })));
         var items = groupItems.GroupBy(g => g.GroupTypeId)
-        .Select(t => new JProperty(t.Key.ToString(), IsGroupStakeLevelGroupType(t.Key)? ComposeGroupType158JsonSettingParam(t.Select(i => i.GroupItem)) : JArray.FromObject(t.Select(i => i.GroupItem))));
+        .Select(t => new JProperty(t.Key.ToString(), IsGroupStakeLevelGroupType(t.Key) ? ComposeGroupType158JsonSettingParam(t.Select(i => i.GroupItem)) : JArray.FromObject(t.Select(i => i.GroupItem))));
         var settingJSON = new JObject(items);
         return settingJSON.ToString();
     }
@@ -50,16 +54,17 @@ public class CustomerSettingHelper : ICustomerSettingHelper
         return JsonConvert.DeserializeXmlNode(wrappedDocument)?.OuterXml.Replace("<item>", string.Empty).Replace("</item>", string.Empty);
     }
 
-    public int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId, bool? isDirectMember)
+    public int GetGroupTypeByCustomerLevelAndUplineLevel(int groupType, byte roleId, byte uplineRoleId, int? agentId)
     {
         var result = GetGroupTypeByCustomerLevel(groupType, roleId);
         if (IsCrossLevel(roleId, uplineRoleId))
         {
             result = result * 10 + uplineRoleId;
-            return isDirectMember.GetValueOrDefault() ? result * 10 + 1 : result;
         }
 
-        return isDirectMember.GetValueOrDefault() ? result * 10 + 1 : result;
+        result = IsDirectMember(roleId, uplineRoleId, agentId) ? result * 10 + 1 : result;
+        result = IsDirectMember(roleId, uplineRoleId, agentId) && IsCrosslineDirectMember(roleId, uplineRoleId, agentId) ? result * 10 + -agentId.GetValueOrDefault() : result;
+        return result;
     }
 
     public int GetGroupTypeByCustomerLevel(int groupType, byte roleId)
@@ -80,7 +85,29 @@ public class CustomerSettingHelper : ICustomerSettingHelper
     public bool IsGroupStakeLevelGroupType(int groupType)
     => groupType == GroupTypes.StakeLevel;
 
-    public JArray ComposeGroupType158JsonSettingParam(IEnumerable<GroupItemDefault> groupItems)
+    public bool IsDirectMember(byte roleId, byte uplineRoleId, int? agentId)
+    {
+        if(roleId != CustomerLevel.Member
+            || uplineRoleId == CustomerLevel.Agent
+            || agentId.GetValueOrDefault() >= 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool IsCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId)
+    {
+        if(roleId == CustomerLevel.Member && uplineRoleId == CustomerLevel.Super && agentId.GetValueOrDefault() == -CustomerLevel.Master)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private JArray ComposeGroupType158JsonSettingParam(IEnumerable<GroupItemDefault> groupItems)
     {
         if (!groupItems.Any())
         {
