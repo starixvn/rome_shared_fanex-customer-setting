@@ -126,6 +126,7 @@ export const SettingService = {
           site,
           siteLabel,
           group,
+          agentId: params.agentId,
         },
         {
           headers: getHeadersForPostRequest(),

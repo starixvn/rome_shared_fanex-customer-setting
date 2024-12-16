@@ -115,9 +115,6 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
             >
               <UsernameSuggestionSelect onSelectDirectMember={onSelectDirectMember} />
             </BlockItem>
-          </div>
-          <div className={styles['row']}>
-            {/*   username  */}
             <BlockItem label={t('username')} isRequired>
               <div>
                 {AppConfigHelper.isNapSystem() ? (
@@ -203,6 +200,8 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                 )}
               </div>
             </BlockItem>
+          </div>
+          <div className={styles['row']}>
             {isNotNAP && (
               <BlockItem label={t('NoOfAccounts')}>
                 <NoOfAccounts
