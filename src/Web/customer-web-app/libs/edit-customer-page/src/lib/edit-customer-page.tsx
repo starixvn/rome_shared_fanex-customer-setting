@@ -497,6 +497,7 @@ export function EditCustomerPage() {
             isEditMode:
               !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
               AppConfigHelper.isEditBetSettingOnly(),
+            isDirectMember: params.agentId === -4 || params.agentId === -3,
           }}
         >
           <GroupSetting ref={groupSettingRef} />
