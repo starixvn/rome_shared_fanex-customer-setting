@@ -61,7 +61,8 @@ export function EditCustomerPage() {
         params.custId,
         params.roleId,
         params.uplineRoleId,
-        params.agentId
+        params.agentId,
+        true
       );
 
       const newProductGroups = handleInitProducts(productGroups);
