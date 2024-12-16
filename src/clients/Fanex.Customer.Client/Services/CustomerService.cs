@@ -127,7 +127,6 @@ namespace Fanex.Customer.Client.Services
                     custDBGroupId = param.CustDBGroupID,
                     site = param.Site,
                     siteLabel = param.SiteLabel,
-                    isDirectMember = param.IsDirectMember,
                     noOfCreateAccount = param.NoOfCreateAccount,
                     uiBehavior = !string.IsNullOrWhiteSpace(param.UiBehavior) ? JsonNode.Parse(param.UiBehavior) : null
                 },
@@ -155,6 +154,7 @@ namespace Fanex.Customer.Client.Services
                     site = param.Site,
                     siteLabel = param.SiteLabel,
                     systemId = configuration.SystemId,
+                    agentId = param.AgentId,
                     language = param.Language
                 },
                 settings = new
@@ -183,7 +183,8 @@ namespace Fanex.Customer.Client.Services
                     systemId = configuration.SystemId,
                     language = param.Language,
                     customerIds = param.CustomerIds,
-                    customerNames = param.CustomerNames
+                    customerNames = param.CustomerNames,
+                    agentId = param.AgentId
                 },
                 settings = new
                 {

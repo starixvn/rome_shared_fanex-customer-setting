@@ -33,7 +33,6 @@ namespace Fanex.Customer.Client.Params
             CustDBGroupID = custDBGroupID;
             Group = group;
             Mode = (byte)mode;
-            IsDirectMember = isDirectMemner;
             NoOfCreateAccount = noOfCreateAccount;
         }
 
@@ -61,8 +60,6 @@ namespace Fanex.Customer.Client.Params
 
         public string Group { get; }
         
-        public bool? IsDirectMember { get; }
-
         public int? NoOfCreateAccount { get; }
     }
 }

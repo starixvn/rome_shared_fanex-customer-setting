@@ -25,8 +25,6 @@ public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerS
             return Results.Ok(Shared.Models.Result.CreateError(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
         }
 
-        request.Context.IsDirectMember = request.Context.IsDirectMember.GetValueOrDefault() ? true : null;
-
         return Results.Ok(await service.Create(request));
     }
 }

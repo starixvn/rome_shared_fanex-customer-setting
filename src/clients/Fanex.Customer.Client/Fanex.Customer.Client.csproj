@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-    <Version>1.0.1.7-directmem-03</Version>
+    <Version>1.0.1.7-directmem-04</Version>
     <Authors>@Rome</Authors>
     <Company>Nexcel</Company>
     <Product>Fanex</Product>
-    <PackageReleaseNotes>211969 - Direct Member - Change Input IsDirectMember into AgentId</PackageReleaseNotes>
+    <PackageReleaseNotes>211969 - Direct Member - Remove unnecessary IsDirectMember when submit create new</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

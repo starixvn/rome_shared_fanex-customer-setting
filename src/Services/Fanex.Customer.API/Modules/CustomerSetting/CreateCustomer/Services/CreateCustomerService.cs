@@ -79,10 +79,11 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         CreateCustomerResult result;
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
         request.Settings.GeneralInfo.Password = await HashPassword(request.Settings.GeneralInfo.Password);
-        var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId, request.Context.IsDirectMember);
+        var isDirectMember = helperService.IsDirectMember(request.Settings.GeneralInfo.RoleId, request.Settings.GeneralInfo.UplineRoleId, -request.Settings.GeneralInfo.UplineRoleId);
+        var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId, isDirectMember);
         result = await createCustomerService.Create(request);
 
-        if (result.IsSuccessful && (Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel() || request.Context.IsDirectMember.GetValueOrDefault()))
+        if (result.IsSuccessful && (Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel() || isDirectMember))
         {
             await balanceService.InitBalance(request.Settings.GeneralInfo.Site, result.NewCustId);
         }
@@ -104,7 +105,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         {
             result.AvailableAlphaDomain = await customerService.GetBackupDomains(
                 request.Settings.GeneralInfo.Site,
-                request.Context.IsDirectMember.GetValueOrDefault() ? CustomerLevel.Member : (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
+                isDirectMember ? CustomerLevel.Member : (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
         }
 
         return result;

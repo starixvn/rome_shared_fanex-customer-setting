@@ -28,8 +28,6 @@ public class RequestContext
 
     public UIBehavior UIBehavior { get; set; }
 
-    public bool? IsDirectMember { get; set; }
-
     public int? NoOfCreateAccount { get; set; }
 
     public bool IsFullMode() => Mode == 1;
