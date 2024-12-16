@@ -66,8 +66,7 @@ export const SettingService = {
         appConfig.systemId
       }&siteLabel=${siteLabel}&productGroupId=${
         params.productGroupId ?? ProductGroupIds.SportsBook
-      }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}
-      &agentId=${agentId}`
+      }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}&agentId=${agentId}`
       }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
     );
     return response.data;
