@@ -296,8 +296,13 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         return IsCrossline(request) && !helperService.IsPTGroupType(groupTypeId);
     }
 
-    private static bool IsCrossline(QueryRequest request)
+    private bool IsCrossline(QueryRequest request)
     {
+        if(helperService.IsDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId))
+        {
+            return helperService.IsCrosslineDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId);
+        }
+        
         return request.UplineRoleId - request.RoleId > 1;
     }
 

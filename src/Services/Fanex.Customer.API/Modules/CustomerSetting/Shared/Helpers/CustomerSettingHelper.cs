@@ -99,7 +99,9 @@ public class CustomerSettingHelper : ICustomerSettingHelper
 
     public bool IsCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId)
     {
-        if(roleId == CustomerLevel.Member && uplineRoleId == CustomerLevel.Super && agentId.GetValueOrDefault() == -CustomerLevel.Master)
+        if(roleId == CustomerLevel.Member 
+            && uplineRoleId == CustomerLevel.Super 
+            && agentId.GetValueOrDefault() == -CustomerLevel.Master)
         {
             return true;
         }
