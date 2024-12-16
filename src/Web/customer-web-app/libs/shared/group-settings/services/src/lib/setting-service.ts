@@ -1,4 +1,6 @@
-import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
+import {
+    CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion
+} from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
@@ -52,9 +54,9 @@ export const SettingService = {
     custId: number,
     roleId: number,
     uplineRoleId = 0,
+    agentId = 0,
     isGetUpLine = false,
     siteLabel = '',
-    isDirectMember = false,
     isMultipleMode = false,
     groupName = '',
     isCopy = false
@@ -65,7 +67,7 @@ export const SettingService = {
       }&siteLabel=${siteLabel}&productGroupId=${
         params.productGroupId ?? ProductGroupIds.SportsBook
       }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}
-      &isDirectMember=${isDirectMember}`
+      &agentId=${agentId}`
       }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
     );
     return response.data;

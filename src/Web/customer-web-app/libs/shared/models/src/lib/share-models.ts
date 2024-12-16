@@ -95,7 +95,7 @@ export interface Params {
   noPermissionEditCredit: boolean;
   productGroupId: number;
   groupName: string;
-  isDirectMember: boolean;
+  agentId: number;
 }
 
 export interface Note {

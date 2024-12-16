@@ -19,7 +19,7 @@ import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-set
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { getChanges, getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-    CommissionGroupItem, GroupItem, GroupSettingItem, ProductGroup
+    GroupItem, GroupSettingItem, ProductGroup
 } from '@customer-web-app/shared-group-settings-types';
 import {
     GroupSetting, scrollToTop, SetMemberPtPopup
@@ -61,7 +61,7 @@ export function EditCustomerPage() {
         params.custId,
         params.roleId,
         params.uplineRoleId,
-        true
+        params.agentId
       );
 
       const newProductGroups = handleInitProducts(productGroups);

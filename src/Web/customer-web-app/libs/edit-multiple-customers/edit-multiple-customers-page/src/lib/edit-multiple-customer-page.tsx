@@ -62,9 +62,9 @@ export function EditMultipleCustomerPage() {
         firstCustomerId,
         params.roleId,
         params.uplineRoleId,
+        0,
         true,
         '',
-        false,
         true,
         params.groupName,
         params.isCopyBetSetting
