@@ -28,6 +28,7 @@ export type GroupSettingsContextType = {
     groupItems: GroupSettingItem<unknown>[]
   ) => void;
   mode: 'createSuper' | 'createCustomer' | 'edit' | 'editMultipleCustomers';
+  isDirectMember?: boolean;
 };
 
 export const GroupSettingsContext = React.createContext<Partial<GroupSettingsContextType>>({});

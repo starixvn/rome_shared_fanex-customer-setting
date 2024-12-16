@@ -260,6 +260,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
                   handleSettingItemChange: handleSettingItemChange,
                   handleUpdateSettingItems: handleUpdateSettingItems,
                   productGroupId: group.id,
+                  isDirectMember: true,
                 }}
               >
                 <GroupSetting ref={ref?.ref} />

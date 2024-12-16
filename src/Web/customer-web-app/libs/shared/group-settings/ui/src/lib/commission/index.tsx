@@ -25,6 +25,7 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
     isEditMode,
     updateGroupSetting,
     handleSelectCommGroup,
+    isDirectMember,
   } = useGroupSettingContext();
   const groupId = Number(productGroupId);
   const commissions = getSettingItems<CommissionGroupItem>(productGroups, groupId, groupTypeId);
@@ -51,7 +52,7 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
       return <MemberSportsBookCommission {...props} />;
     }
 
-    if (params.isDirectMember) {
+    if (isDirectMember) {
       return <DirectMemberCommission {...props} />;
     }
 

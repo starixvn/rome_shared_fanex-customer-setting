@@ -4,6 +4,7 @@ import { ValidationRefType } from '@customer-web-app/share-models';
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { GroupType } from '@customer-web-app/shared-group-settings-types';
+import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 
 import BetLimit from './bet-limit';
 import RNGGamesBetSetting from './bet-setting/rnggames';
@@ -14,10 +15,9 @@ import PositionTaking from './position-taking';
 import DirectMemberPositionTaking from './position-taking/direct-member';
 import ProductStatus from './product-status';
 import WinLossLimit from './win-loss-limit';
-import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 
 export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(_, ref) {
-  const { productGroups, productGroupId, roleId } = useGroupSettingContext();
+  const { productGroups, productGroupId, roleId, isDirectMember } = useGroupSettingContext();
   const productGroup = productGroups?.find((x) => x.id === productGroupId);
 
   const betSettingRef = useRef<ValidationRefType>(null);
@@ -87,7 +87,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
   const renderGroupTypeSetting = (groupType: GroupType) => {
     const { id, isReadOnly, isAllowUncheckAll, groupItems } = groupType;
 
-    if(roleId === UserLevel.Super && AppConfigHelper.isNapSystem()) {
+    if (roleId === UserLevel.Super && AppConfigHelper.isNapSystem()) {
       switch (id) {
         case GroupTypeIds.SportsBookBetSetting:
           return <SportsBookBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
@@ -105,7 +105,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
           return null;
       }
     }
-    
+
     switch (id) {
       case GroupTypeIds.ProductStatus:
         return <ProductStatus isReadOnly={isReadOnly} />;
@@ -119,7 +119,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
       case GroupTypeIds.ParlayMaxPayout:
         return <ParlayMaxPayout isReadOnly={isReadOnly} ref={parlayMaxPayoutRef} />;
       case GroupTypeIds.PositionTaking:
-        return params.isDirectMember ? (
+        return isDirectMember ? (
           <DirectMemberPositionTaking isReadOnly={isReadOnly} ref={positionTakingRef} />
         ) : (
           <PositionTaking isReadOnly={isReadOnly} ref={positionTakingRef} />
