@@ -39,6 +39,7 @@ export const CommissionHintTab = ({ url }: { url: string }) => {
         </div>
         <div>{t('BBINBetSetting2')}</div>
         <div>{t('FGGNote')}</div>
+        <div>{t('GPILiveCasinoNote')}</div>
 
         <div>
           <b>{t('SportsBookCommissionInformation')}</b>
