@@ -6,6 +6,7 @@ using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Modules.Message.Models;
+using Fanex.Customer.API.Modules.Password.Service;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
@@ -22,9 +23,8 @@ public interface ICopyCustomerService
     Task<CopyCustomerResult> CopyCustomer(CopyCustomerRequest request);
 }
 
-public class CopyCustomerService : ICopyCustomerService
+public class CopyCustomerService : PasswordServiceBase, ICopyCustomerService
 {
-    private readonly IDynamicRepository dynamicRepository;
     private readonly AppSettings appSettings;
     private readonly ICustomerService customerService;
     private readonly Logging.ILogger logger;
@@ -37,9 +37,11 @@ public class CopyCustomerService : ICopyCustomerService
         ICustomerService customerService,
         Logging.ILogger logger,
         IBalanceService balanceService,
-        IMessageService messageService)
+        IEncryption encryption,
+        IMessageService messageService,
+        HttpClient httpClient)
+        : base(dynamicRepository, encryption, appSettings.Value, httpClient)
     {
-        this.dynamicRepository = dynamicRepository;
         this.appSettings = appSettings.Value;
         this.customerService = customerService;
         this.logger = logger;
@@ -116,6 +118,7 @@ public class CopyCustomerService : ICopyCustomerService
 
     public async Task<CopyCustomerResult> CopyCustomer(CopyCustomerRequest request)
     {
+        request.Password = await HashPassword(request.Password);
         var copyService = this.CreateCopyCustomerService(request.CustLevel);
         var result = await copyService.Copy(request);
 

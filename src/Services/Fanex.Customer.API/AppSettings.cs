@@ -1,3 +1,5 @@
+using Fanex.Customer.API.Modules.Password.Model;
+
 namespace Fanex.Customer.API;
 
 public class AppSettings
@@ -29,4 +31,6 @@ public class AppSettings
         => string.IsNullOrWhiteSpace(SitesAllowUncheckStakeLevelOnMember) ?
         false :
         SitesAllowUncheckStakeLevelOnMember.Split(',').Select(site => site.Trim()).Any(site => site.Equals(siteName, System.StringComparison.CurrentCultureIgnoreCase));
+
+    public PasswordService PasswordService { get; set; }
 }

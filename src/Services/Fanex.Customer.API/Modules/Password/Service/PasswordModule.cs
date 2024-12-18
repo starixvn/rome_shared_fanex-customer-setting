@@ -5,15 +5,17 @@ namespace Fanex.Customer.API.Modules.Password.Service
 {
     public static class PasswordModule
     {
-        public static void RegisterPasswordService(this IServiceCollection services)
+        public static void RegisterPasswordService(this IServiceCollection services, ConfigurationManager configurationManager)
         {
             services
                 .AddSingleton<IAesService, AesService>()
                 .AddSingleton<IEncryption, Encryption>()
-                .AddSingleton<INotificationService, NotificationService>()
-                .AddSingleton<IPasswordService, PasswordService>()
                 .AddSingleton<ITelegramBotService, TelegramBotService>()
-                .AddSingleton<IKickoutCustomerService, KickoutCustomerService>();
+                .AddSingleton<IKickoutCustomerService, KickoutCustomerService>()
+                .AddHttpClient<INotificationService, NotificationService>(httpClient => httpClient.BaseAddress = new Uri(configurationManager["TelegramClientUrl"]));
+                
+            services
+                .AddHttpClient<IPasswordService, PasswordService>();
         }
     }
 }

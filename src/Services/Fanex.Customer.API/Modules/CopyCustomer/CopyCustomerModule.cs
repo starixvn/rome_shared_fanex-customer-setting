@@ -4,7 +4,7 @@ public static class CopyCustomerCodeModule
 {
     public static IServiceCollection RegisterCopyCustomerModule(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<ICopyCustomerService, CopyCustomerService>();
+        services.AddHttpClient<ICopyCustomerService, CopyCustomerService>();
 
         return services;
     }

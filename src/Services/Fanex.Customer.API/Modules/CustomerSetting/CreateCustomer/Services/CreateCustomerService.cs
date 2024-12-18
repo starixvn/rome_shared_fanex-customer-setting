@@ -15,6 +15,7 @@ using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Services.LiteMode;
 using Fanex.Customer.API.Modules.Customer;
+using Fanex.Customer.API.Modules.Password.Service;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -25,7 +26,7 @@ public interface ICreateCustomerService
     Task<CustomerSettingResult> Create(CreateRequest request);
 }
 
-public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
+public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerService
 {
     private readonly IBalanceService balanceService;
     private readonly ICustomerService customerService;
@@ -38,8 +39,10 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
         ICacheRefService cacheRefService,
         IMessageService messageService,
         ICustomerSettingHelper helperService,
-        ICustomerService customerService)
-        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService)
+        ICustomerService customerService,
+        IEncryption encryption,
+        HttpClient httpClient)
+        : base(dynamicRepository, appSettings, sharedService, cacheRefService, messageService, null, helperService, encryption, httpClient)
     {
         this.balanceService = balanceService;
         this.customerService = customerService;
@@ -74,6 +77,7 @@ public class CreateCustomerService : BaseCustomerService, ICreateCustomerService
     {
         CreateCustomerResult result;
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
+        request.Settings.GeneralInfo.Password = await HashPassword(request.Settings.GeneralInfo.Password);
         var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId);
         result = await createCustomerService.Create(request);
 

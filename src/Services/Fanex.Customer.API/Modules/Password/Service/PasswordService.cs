@@ -6,6 +6,8 @@ using Fanex.Customer.API.Modules.Password.Model;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
+using Microsoft.Extensions.Options;
+using TelegramBot.Client.Extensions;
 using PasswordSecurity = Fanex.Customer.API.Modules.AppResources.Security;
 
 namespace Fanex.Customer.API.Modules.Password.Service
@@ -25,7 +27,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
         Task<int> UpdateLastChangePasswordIndirectAccount(UpdateLastChangePasswordIndirectAccountParam param);
     }
 
-    public class PasswordService : BaseService, IPasswordService
+    public class PasswordService : PasswordServiceBase, IPasswordService
     {
         private const int V = 3;
         private static readonly Regex PasswordRule1 = new Regex(@"^(?=.*\d).{8,100}$");
@@ -46,8 +48,10 @@ namespace Fanex.Customer.API.Modules.Password.Service
             IAesService aes,
             IKickoutCustomerService kickoutCustomerService,
             IDynamicRepository dynamicRepository,
-            ITelegramBotService telegramBotService)
-            : base(dynamicRepository)
+            ITelegramBotService telegramBotService,
+            IOptions<AppSettings> appSettings,
+            HttpClient httpClient)
+            : base(dynamicRepository, encryption, appSettings.Value, httpClient)
         {
             this.encryption = encryption;
             this.aes = aes;
@@ -76,13 +80,13 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 return validateResult;
             }
 
-            var encodedPassword = encryption.CfsEnCode(rawNewPassword);
+            var encodedPassword = await HashPassword(rawNewPassword);
             var criteria = new UpdateMainAccountPasswordCriteria
             {
                 CustId = param.CustId,
                 Language = param.LanguageKey,
                 LoginIP = param.IP,
-                OldPwd = encryption.CfsEnCode(rawCurrentPassword),
+                OldPwd = await HashPassword(rawCurrentPassword),
                 UserPwd = encodedPassword,
                 UserId = param.ActorId
             };
@@ -144,8 +148,8 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 CustId = param.CustId,
                 Language = param.LanguageKey,
                 LoginIP = param.IP,
-                OldPwd = encryption.CfsEnCode(rawCurrentPassword),
-                UserPwd = encryption.CfsEnCode(rawNewPassword),
+                OldPwd = await HashPassword(rawCurrentPassword),
+                UserPwd = await HashPassword(rawNewPassword),
                 SubAccId = param.SubAccountId
             };
 
@@ -198,7 +202,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 return validateResult;
             }
 
-            var encodedPassword = encryption.CfsEnCode(rawPassword);
+            var encodedPassword = await HashPassword(rawPassword);
             var criteria = new ResetMainAccountPasswordCriteria
             {
                 CustId = param.CustId,
@@ -270,7 +274,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 CustId = param.CustId,
                 Language = param.LanguageKey,
                 LoginIP = param.IP,
-                UserPwd = encryption.CfsEnCode(rawNewPassword),
+                UserPwd = await HashPassword(rawNewPassword),
                 SubAccId = param.SubAccountId,
                 UserId = param.ActorId
             };

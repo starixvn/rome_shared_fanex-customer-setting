@@ -3,6 +3,7 @@ using Fanex.Customer.API.Modules.SubAccount.Command;
 using Fanex.Customer.API.Modules.SubAccount.Model;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Data.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Fanex.Customer.API.Modules.SubAccount.Service
 {
@@ -13,21 +14,18 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
         public Task<SubAccountModel> GetSubAccount(int custId, int subAccId);
 
         public Task<Result> UpdateSubAccountInfo(int custId, UpdateSubAccountInfoModel subAccountModel);
-        
+
         public Task<Result> UpdateSubAccountPageAccess(int custId, UpdateSubAccountPageAccessModel subAccountModel);
 
         public Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel);
     }
 
-    public class SubAccountService : ISubAccountService
+    public class SubAccountService : PasswordServiceBase, ISubAccountService
     {
-        private readonly IDynamicRepository dynamicRepository;
-        private readonly IEncryption encryption;
 
-        public SubAccountService(IDynamicRepository dynamicRepository, IEncryption encryption)
+        public SubAccountService(IDynamicRepository dynamicRepository, IEncryption encryption, IOptions<AppSettings> appSettings, HttpClient httpClient)
+            : base(dynamicRepository, encryption, appSettings.Value, httpClient)
         {
-            this.dynamicRepository = dynamicRepository;
-            this.encryption = encryption;
         }
 
         public async Task<Result> AddSubAccount(int custId, AddSubAccountModel subAccountModel)
@@ -46,7 +44,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
                 CustId = custId,
                 UserId = subAccountModel.UserId,
                 Username = subAccountModel.Username,
-                UserPwd = encryption.CfsEnCode(subAccountModel.Password),
+                UserPwd = await HashPassword(subAccountModel.Password),
                 Firstname = subAccountModel.Firstname,
                 Lastname = subAccountModel.Lastname,
                 PageAccess = subAccountModel.PageAccess ?? string.Empty,

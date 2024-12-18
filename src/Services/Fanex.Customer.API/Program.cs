@@ -58,7 +58,7 @@ builder.Services.RegisterCopyCustomerModule(builder.Configuration);
 builder.Services.RegisterRulesServiceModule();
 builder.Services.RegisterCreateCustomerModule();
 builder.Services.RegisterSubAccountService();
-builder.Services.RegisterPasswordService();
+builder.Services.RegisterPasswordService(builder.Configuration);
 builder.Services.RegisterCustomerOtpService();
 builder.Services.AddEndpoints();
 builder.Services.AddHealthChecks();
