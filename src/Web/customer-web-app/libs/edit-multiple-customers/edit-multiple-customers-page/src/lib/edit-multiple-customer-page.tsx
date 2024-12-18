@@ -25,7 +25,7 @@ import {
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, scrollToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, scrollPageToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -58,7 +58,7 @@ const UpdateSettingConfirmationPopup = NiceModal.create(
 
     return (
       <div className={popUpStyles.overlay} data-theme={theme}>
-        <div className={popUpStyles.wrapper}>
+        <div className={`${popUpStyles.wrapper} ${popUpStyles.wrappermultiple}`}>
           <div className={popUpStyles.content}>
             <div className={popUpStyles.title}>
               {isCopyBetSetting ? 'Copy' : 'Edit'} {productGroups[0].name} Bet Setting Confirmation
@@ -206,6 +206,15 @@ export function EditMultipleCustomerPage() {
     scrollToTop();
   };
 
+  const scrollToTop = () => {
+    scrollPageToTop(window);
+
+    const parentWindow = window.parent as any;
+    if(parentWindow.scrollPageToTop) {
+      parentWindow.scrollPageToTop();
+    }
+  };
+
   const validateGroupTypes = async (groupTypeId?: number | undefined) =>
     groupSettingRef.current && (await groupSettingRef.current.validate(groupTypeId));
 
@@ -282,6 +291,7 @@ export function EditMultipleCustomerPage() {
             return;
           }
 
+          scrollToTop();
           const confirmation: { isCancel: boolean; } = await NiceModal.show(UpdateSettingConfirmationPopup, {
             productGroups,
             sportChangedCount: countSportChangedOfSetting(id),
