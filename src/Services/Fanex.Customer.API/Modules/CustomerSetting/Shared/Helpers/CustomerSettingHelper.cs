@@ -25,9 +25,11 @@ public interface ICustomerSettingHelper
 
     bool IsCrossLevel(byte roleId, byte uplineRoleId);
 
-    bool IsDirectMember(byte roleId, byte uplineRoleId, int? agentId);
+    bool IsEditDirectMember(byte roleId, byte uplineRoleId, int? agentId);
 
-    bool IsCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId);
+    bool IsCreateNewDirectMember(byte roleId, int? agentId);
+
+    bool IsEditCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId);
 }
 
 public class CustomerSettingHelper : ICustomerSettingHelper
@@ -62,8 +64,8 @@ public class CustomerSettingHelper : ICustomerSettingHelper
             result = result * 10 + uplineRoleId;
         }
 
-        result = IsDirectMember(roleId, uplineRoleId, agentId) ? result * 10 + 1 : result;
-        result = IsDirectMember(roleId, uplineRoleId, agentId) && IsCrosslineDirectMember(roleId, uplineRoleId, agentId) ? result * 10 + -agentId.GetValueOrDefault() : result;
+        result = IsEditDirectMember(roleId, uplineRoleId, agentId) ? result * 10 + 1 : result;
+        result = IsEditDirectMember(roleId, uplineRoleId, agentId) && IsEditCrosslineDirectMember(roleId, uplineRoleId, agentId) ? result * 10 + -agentId.GetValueOrDefault() : result;
         return result;
     }
 
@@ -85,7 +87,17 @@ public class CustomerSettingHelper : ICustomerSettingHelper
     public bool IsGroupStakeLevelGroupType(int groupType)
     => groupType == GroupTypes.StakeLevel;
 
-    public bool IsDirectMember(byte roleId, byte uplineRoleId, int? agentId)
+    public bool IsCreateNewDirectMember(byte roleId, int? agentId)
+    {
+        if (agentId < 0 && (roleId == CustomerLevel.Super || roleId == CustomerLevel.Master))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsEditDirectMember(byte roleId, byte uplineRoleId, int? agentId)
     {
         if(roleId != CustomerLevel.Member
             || uplineRoleId == CustomerLevel.Agent
@@ -97,7 +109,7 @@ public class CustomerSettingHelper : ICustomerSettingHelper
         return true;
     }
 
-    public bool IsCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId)
+    public bool IsEditCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId)
     {
         if(roleId == CustomerLevel.Member 
             && uplineRoleId == CustomerLevel.Super 

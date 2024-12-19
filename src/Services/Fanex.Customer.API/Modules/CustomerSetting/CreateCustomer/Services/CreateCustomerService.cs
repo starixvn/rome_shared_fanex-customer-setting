@@ -79,7 +79,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         CreateCustomerResult result;
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
         request.Settings.GeneralInfo.Password = await HashPassword(request.Settings.GeneralInfo.Password);
-        var isDirectMember = helperService.IsDirectMember(request.Settings.GeneralInfo.RoleId, request.Settings.GeneralInfo.UplineRoleId, -request.Settings.GeneralInfo.UplineRoleId);
+        var isDirectMember = helperService.IsCreateNewDirectMember(uplineRoleId, -uplineRoleId);
         var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId, isDirectMember);
         result = await createCustomerService.Create(request);
 

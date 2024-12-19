@@ -90,7 +90,9 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
 
     public async Task<CustomerSettingModel> Query(QueryRequest request)
     {
-        var isDirectMember = helperService.IsDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId);
+        var isDirectMember = request.IsGetUpline ? 
+            helperService.IsEditDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId) :
+            helperService.IsCreateNewDirectMember(request.RoleId, request.AgentId);
         var generalInfoDto = await GetGeneralInfo(request, isDirectMember);
         var generalInfo = new GeneralInformation(generalInfoDto);
         var uGroup  = generalInfoDto.Group;
@@ -298,9 +300,9 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
 
     private bool IsCrossline(QueryRequest request)
     {
-        if(helperService.IsDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId))
+        if(helperService.IsEditDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId))
         {
-            return helperService.IsCrosslineDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId);
+            return helperService.IsEditCrosslineDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId);
         }
         
         return request.UplineRoleId - request.RoleId > 1;
