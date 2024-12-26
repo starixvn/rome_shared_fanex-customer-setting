@@ -1,6 +1,4 @@
-import {
-    CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion
-} from '@customer-web-app/share-models';
+import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
@@ -256,12 +254,14 @@ export const SettingService = {
   },
   GetUserNameSuggestion: async (query: string) => {
     const response = await axiosInstance.get<UsernameSuggestion[]>(
-      `Customer/SearchSuggestDirectMembers?searchUsername=${query}`
+      `Customer/SearchSuggestDirectMembers?searchUsername=${query}&uplineCustId=${params.uplineId}`
     );
     return response.data;
   },
   GetDirectMember: async (username: string) => {
-    const response = await axiosInstance.get(`Customer/CheckDirectMemberUserName?searchUsername=${username}`);
+    const response = await axiosInstance.get(
+      `Customer/CheckDirectMemberUserName?searchUsername=${username}&uplineCustId=${params.uplineId}`
+    );
     return response.data;
   },
 };

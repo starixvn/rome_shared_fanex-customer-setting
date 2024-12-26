@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    components, InputActionMeta, InputProps, OptionProps, SingleValue, StylesConfig
-} from 'react-select';
+import { components, InputActionMeta, InputProps, OptionProps, SingleValue, StylesConfig } from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import { UsernameSuggestion } from '@customer-web-app/share-models';
