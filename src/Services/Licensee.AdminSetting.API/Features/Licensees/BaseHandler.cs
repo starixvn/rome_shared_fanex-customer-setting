@@ -46,13 +46,15 @@ namespace Licensee.AdminSetting.API.Features.Licensees
             byte mode,
             int siteDBGroupId,
             bool isChinaView = false,
-            byte specialPlatform = 0)
+            byte specialPlatform = 0,
+            byte siteType = 0)
         {
             var command = new RegisterCustomersCommand(
                 registerUsernames,
                 siteName,
                 isChinaView,
                 specialPlatform,
+                siteType,
                 productStakeLevel != null ? JsonSerializer.Serialize(productStakeLevel) : null,
                 ip,
                 mode,
