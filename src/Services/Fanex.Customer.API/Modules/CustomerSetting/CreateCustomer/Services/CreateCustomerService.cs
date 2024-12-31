@@ -51,6 +51,11 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
 
     public bool ValidateRequest(CreateRequest request)
     {
+        if(request.Settings.GeneralInfo == null || request.Settings.GeneralInfo.RoleId == 0 || request.Settings.GeneralInfo.UplineRoleId == 0)
+        {
+            return false;
+        }
+
         if ((!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.FirstName) && request.Settings.GeneralInfo.FirstName.ContainsHTML())
         || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.LastName) && request.Settings.GeneralInfo.LastName.ContainsHTML())
         || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Phone) && request.Settings.GeneralInfo.Phone.ContainsHTML())
@@ -77,9 +82,10 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
     public async Task<CustomerSettingResult> Create(CreateRequest request)
     {
         CreateCustomerResult result;
+        var roleId = request.Settings.GeneralInfo.RoleId;
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
         request.Settings.GeneralInfo.Password = await HashPassword(request.Settings.GeneralInfo.Password);
-        var isDirectMember = helperService.IsCreateNewDirectMember(uplineRoleId, -uplineRoleId);
+        var isDirectMember = helperService.IsCreateNewDirectMember(roleId, uplineRoleId, null);
         var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId, isDirectMember);
         result = await createCustomerService.Create(request);
 

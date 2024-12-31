@@ -27,7 +27,7 @@ public interface ICustomerSettingHelper
 
     bool IsEditDirectMember(byte roleId, byte uplineRoleId, int? agentId);
 
-    bool IsCreateNewDirectMember(byte roleId, int? agentId);
+    bool IsCreateNewDirectMember(byte roleId, byte uplineRoleId, int? agentId);
 
     bool IsEditCrosslineDirectMember(byte roleId, byte uplineRoleId, int? agentId);
 }
@@ -87,9 +87,15 @@ public class CustomerSettingHelper : ICustomerSettingHelper
     public bool IsGroupStakeLevelGroupType(int groupType)
     => groupType == GroupTypes.StakeLevel;
 
-    public bool IsCreateNewDirectMember(byte roleId, int? agentId)
+    public bool IsCreateNewDirectMember(byte roleId, byte uplineRoleId, int? agentId)
     {
-        if (agentId < 0 && (roleId == CustomerLevel.Super || roleId == CustomerLevel.Master))
+        if(agentId.GetValueOrDefault() < 0)
+        {
+            return true;
+        }
+
+        if (roleId == CustomerLevel.Member
+            && (uplineRoleId == CustomerLevel.Super || uplineRoleId == CustomerLevel.Master))
         {
             return true;
         }

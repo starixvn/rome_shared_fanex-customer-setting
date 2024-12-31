@@ -65,7 +65,7 @@ export function EditCustomerPage() {
         true
       );
 
-      const newProductGroups = handleInitProducts(productGroups);
+      const newProductGroups = handleInitProducts(productGroups, params.roleId == UserLevel.Member);
       setProductGroups(newProductGroups);
 
       setOriginalGeneralInfo(generalInfo);

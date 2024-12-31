@@ -92,7 +92,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
     {
         var isDirectMember = request.IsGetUpline ? 
             helperService.IsEditDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId) :
-            helperService.IsCreateNewDirectMember(request.RoleId, request.AgentId);
+            helperService.IsCreateNewDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId);
         var generalInfoDto = await GetGeneralInfo(request, isDirectMember);
         var generalInfo = new GeneralInformation(generalInfoDto);
         var uGroup  = generalInfoDto.Group;

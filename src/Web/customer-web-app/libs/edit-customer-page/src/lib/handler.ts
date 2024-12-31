@@ -74,7 +74,7 @@ export const initProductStatusGroup = (groupType: GroupType) => {
   return { ...groupType, groupItems };
 };
 
-export const handleInitProducts = (productGroups: ProductGroup[]) => {
+export const handleInitProducts = (productGroups: ProductGroup[], isMemberLevel: boolean) => {
   return productGroups?.map((group) => {
     const groupTypes = group.groupTypes
       .filter((t) => t != null)
@@ -106,7 +106,16 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
           const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => ({
             ...item,
             isMultipleModeChecked: true,
-            original: { ...item }
+            original: { ...item ,
+              isAllowUnlimitCombo2: isMemberLevel ? false : item.isAllowUnlimitCombo2,
+              isAllowUnlimitCombo35: isMemberLevel ? false : item.isAllowUnlimitCombo35,
+              isAllowUnlimitComboOver6: isMemberLevel ? false : item.isAllowUnlimitComboOver6,
+              isAllowUnlimitSingleMatchParlay: isMemberLevel ? false : item.isAllowUnlimitSingleMatchParlay,
+            },
+            isAllowUnlimitCombo2: item.combo2 === 0,
+            isAllowUnlimitCombo35: item.combo35 === 0,
+            isAllowUnlimitComboOver6: item.comboOver6 === 0,
+            isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
           }));
 
           return { ...type, groupItems };
