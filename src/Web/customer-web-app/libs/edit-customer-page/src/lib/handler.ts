@@ -106,11 +106,7 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
           const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => ({
             ...item,
             isMultipleModeChecked: true,
-            original: { ...item },
-            isAllowUnlimitCombo2: item.combo2 === 0,
-            isAllowUnlimitCombo35: item.combo35 === 0,
-            isAllowUnlimitComboOver6: item.comboOver6 === 0,
-            isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
+            original: { ...item }
           }));
 
           return { ...type, groupItems };
