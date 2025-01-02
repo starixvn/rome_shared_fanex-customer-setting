@@ -1,5 +1,6 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
+  GroupType,
   MasterDirectMemberPositionTakingGroupItem,
   ParlayMaxPayoutGroupItem,
   ProductGroup,
@@ -18,7 +19,25 @@ export const initialState: GroupSettingsState = {
   productGroups: [],
 };
 
-const initProductGroups = (productGroups: ProductGroup[]) => {
+export const initProductStatusGroup = (groupType: GroupType) => {
+  const groupItems = (groupType.groupItems as ProductStatusGroupItem[]).map((item) => {
+    if (item.parentSportType && item.parentBetType) {
+      const parentItem = groupType.groupItems.find(
+        (x) => x.sportTypeId === item.parentSportType && x.betTypeId === item.parentBetType
+      ) as ProductStatusGroupItem;
+
+      if (parentItem.isDisabled) {
+        return { ...item, isMultipleModeChecked: true, original: { ...item }, readonly: true };
+      }
+    }
+
+    return { ...item, isMultipleModeChecked: true, original: { ...item } };
+  });
+
+  return { ...groupType, groupItems };
+};
+
+const initProductGroupsForCreate = (productGroups: ProductGroup[]) => {
   return productGroups.map((group) => {
     const groupTypes = group.groupTypes
       ?.filter((t) => t !== null)
@@ -52,21 +71,7 @@ const initProductGroups = (productGroups: ProductGroup[]) => {
             return { ...type, groupItems };
           }
           case GroupTypeIds.ProductStatus: {
-            const groupItems = (type.groupItems as ProductStatusGroupItem[]).map((item) => {
-              if (item.parentSportType && item.parentBetType) {
-                const parentItem = type.groupItems.find(
-                  (x) => x.sportTypeId === item.parentSportType && x.betTypeId === item.parentBetType
-                ) as ProductStatusGroupItem;
-
-                if (parentItem.isDisabled) {
-                  return { ...item, isMultipleModeChecked: true, original: { ...item }, readonly: true };
-                }
-              }
-
-              return { ...item, isMultipleModeChecked: true, original: { ...item } };
-            });
-
-            return { ...type, groupItems };
+            return initProductStatusGroup({ ...type });
           }
           case GroupTypeIds.WinLossLimit: {
             const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item) => ({
@@ -114,18 +119,85 @@ const initProductGroups = (productGroups: ProductGroup[]) => {
   });
 };
 
+const handleInitProductsForEdit = (productGroups: ProductGroup[], isMemberLevel: boolean) => {
+  return productGroups?.map((group) => {
+    const groupTypes = group.groupTypes
+      .filter((t) => t != null)
+      .map((type) => {
+        if (type.id === GroupTypeIds.PositionTaking) {
+          return {
+            ...type,
+            groupItems: type.groupItems.map((item) => ({
+              ...item,
+              isMultipleModeChecked: true,
+              upline: { ...item },
+              original: { ...item },
+            })),
+          };
+        }
+
+        if (type.id === GroupTypeIds.WinLossLimit) {
+          const groupItems = (type.groupItems as WinLossLimitGroupItem[]).map((item) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+            lossLimitValue: item.lossLimit !== 0 ? item.lossLimit : undefined,
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.ParlayMaxPayout) {
+          const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: {
+              ...item,
+              isAllowUnlimitCombo2: isMemberLevel ? false : item.isAllowUnlimitCombo2,
+              isAllowUnlimitCombo35: isMemberLevel ? false : item.isAllowUnlimitCombo35,
+              isAllowUnlimitComboOver6: isMemberLevel ? false : item.isAllowUnlimitComboOver6,
+              isAllowUnlimitSingleMatchParlay: isMemberLevel ? false : item.isAllowUnlimitSingleMatchParlay,
+            },
+            isAllowUnlimitCombo2: item.combo2 === 0,
+            isAllowUnlimitCombo35: item.combo35 === 0,
+            isAllowUnlimitComboOver6: item.comboOver6 === 0,
+            isAllowUnlimitSingleMatchParlay: item.singleMatchParlay === 0,
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.ProductStatus) {
+          return initProductStatusGroup({ ...type });
+        }
+
+        return {
+          ...type,
+          groupItems: type.groupItems.map((item) => ({
+            ...item,
+            original: { ...item },
+            isMultipleModeChecked: true,
+          })),
+        };
+      });
+
+    return { ...group, groupTypes };
+  });
+};
+
 export function productGroupsReducer(
   state: GroupSettingsState = initialState,
   action: ProductGroupsAction
 ): GroupSettingsState {
   switch (action.type) {
     case ProductGroupsActionTypes.Init: {
-      const productGroups = initProductGroups(action.payload);
+      const productGroups = initProductGroupsForCreate(action.payload);
 
       return { ...state, productGroups };
     }
     case ProductGroupsActionTypes.Update: {
-      return { ...state, productGroups: action.payload };
+      const productGroups = handleInitProductsForEdit(action.payload, true);
+      return { ...state, productGroups };
     }
     default: {
       return state;
