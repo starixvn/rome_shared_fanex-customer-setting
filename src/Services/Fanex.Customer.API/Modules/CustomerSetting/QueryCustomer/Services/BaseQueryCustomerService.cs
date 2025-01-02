@@ -67,7 +67,6 @@ public class BaseQueryCustomerService : BaseCustomerService
             {158, new QueryGroupTypeBaseService<StakeLevelItem>(dynamicRepository, appSettings, helperService)},
             {160, new QueryGroupTypeBaseService<ProductStatusItem>(dynamicRepository, appSettings, helperService)},
         };
-
     }
 
     protected bool IsHideGroupType(int displayMode)

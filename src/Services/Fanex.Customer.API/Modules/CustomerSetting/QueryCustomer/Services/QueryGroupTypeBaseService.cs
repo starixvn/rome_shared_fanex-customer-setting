@@ -56,7 +56,14 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
     }
 
     public async Task<IEnumerable<T>> QueryForAddNew(int uplineCustId, int uplineRoleId, int productGroupId, int groupType, bool? isDirectMember)
-        => await dynamicRepository.FetchAsync<T>(new GetCustomerCriteria(
+        => await dynamicRepository.FetchAsync<T>(uplineRoleId == CustomerLevel.Agent 
+        ? new GetAgentCriteria(
+            uplineCustId,
+            appSettings.SettingStatus,
+            uplineRoleId,
+            productGroupId,
+            groupType)
+        : new GetSuperMasterCriteria(
             uplineCustId,
             appSettings.SettingStatus,
             isDirectMember,

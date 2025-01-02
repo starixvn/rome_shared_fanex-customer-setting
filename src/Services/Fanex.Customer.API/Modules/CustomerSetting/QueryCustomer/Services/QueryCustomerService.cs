@@ -120,7 +120,9 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
     {
         var generalInfo = await dynamicRepository.GetAsync<GeneralInformationDTO>(request.IsGetUpline
             ? new GetGeneralInfoForEditCriteria(request.CustId, request.SystemId)
-            : new GetCustomerCriteria(request.CustId, appSettings.SettingStatus, isDirectMember, request.RoleId));
+            : request.RoleId == CustomerLevel.Agent 
+                ? new GetAgentCriteria(request.CustId, appSettings.SettingStatus, request.RoleId) 
+                : new GetSuperMasterCriteria(request.CustId, appSettings.SettingStatus, isDirectMember, request.RoleId));
 
         if (generalInfo != null && generalInfo.RoleId == CustomerLevel.Member)
         {
