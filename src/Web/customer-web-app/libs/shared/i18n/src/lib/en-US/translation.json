@@ -184,5 +184,9 @@
   "UsernamePlaceHolder": "Username or First/Last Name",
   "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
   "introCopyNote": "Click 'Copy' to copy and share the account details",
-  "UserNotExist": "This user does not exist"
+  "UserNotExist": "This user does not exist",
+  "Credit": "Credit",
+  "Domain": "Domain",
+  "CompactCopy": "Compact Copy",
+  "IndividualCopy": "Individual Copy"
 }

@@ -20,10 +20,16 @@ export default function SuccessPopup(props: Props) {
   const { usernames, handleOk } = props;
   const credit = props.credit.toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2 });
   const domains = props.domains.slice(0, 3).join(', ');
-  const accountInfo = `${t('username')}: ${usernames?.join(', ')}\n${t('credit')}: ${credit}\n${t(
-    'domain'
-  )}: ${domains}`;
-  const handleCopyAccountInfo = () => {
+
+  const formatUserInfo = (usernameText: string, creditText: string, domainText: string) => {
+    return `${t('username')}: ${usernameText}\n${t('credit')}: ${creditText}\n${t('domain')}: ${domainText}`;
+  };
+
+  const compactText = formatUserInfo(usernames?.join(', '), credit, domains);
+
+  const individualText = usernames.map((username) => formatUserInfo(username, credit, domains)).join('\n');
+
+  const handleCopy = () => {
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -42,15 +48,25 @@ export default function SuccessPopup(props: Props) {
               <span style={{ color: 'red' }}>* </span>
               <span style={{ fontStyle: 'italic', opacity: 0.8 }}>{t('introCopyNote')}</span>
             </div>
-            <div>
-              <CopyToClipboard text={accountInfo} options={{ format: 'text/plain' }}>
+            <div className={styles['buttons']}>
+              <CopyToClipboard text={compactText} options={{ format: 'text/plain' }}>
                 <button
                   type="button"
                   className={styles['copy-btn']}
                   data-tooltip-id="copy-username-id"
-                  onClick={handleCopyAccountInfo}
+                  onClick={handleCopy}
                 >
-                  {t('copy')}
+                  {t('CompactCopy')}
+                </button>
+              </CopyToClipboard>
+              <CopyToClipboard text={individualText} options={{ format: 'text/plain' }}>
+                <button
+                  type="button"
+                  className={styles['copy-btn']}
+                  data-tooltip-id="copy-username-id"
+                  onClick={handleCopy}
+                >
+                  {t('IndividualCopy')}
                 </button>
               </CopyToClipboard>
             </div>
@@ -59,11 +75,11 @@ export default function SuccessPopup(props: Props) {
               <div className={styles['row-value']}>{usernames?.join(', ')}</div>
             </div>
             <div className={styles['info-copy']}>
-              <div className={styles['label']}>{t('credit')}</div>
+              <div className={styles['label']}>{t('Credit')}</div>
               <div className={styles['row-value']}>{credit}</div>
             </div>
             <div className={styles['info-copy']}>
-              <div className={styles['label']}>{t('domain')}</div>
+              <div className={styles['label']}>{t('Domain')}</div>
               <div className={styles['row-value']}>{domains}</div>
             </div>
             <button className={styles.buttonSuccess} type="button" onClick={handleOk}>

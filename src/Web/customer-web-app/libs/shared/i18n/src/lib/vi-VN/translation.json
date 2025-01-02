@@ -180,5 +180,9 @@
   "UsernamePlaceHolder": "Tên đăng nhập hoặc Tên/Họ",
   "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
   "introCopyNote": "Nhấn 'Sao chép' để sao chép và chia sẻ thông tin tài khoản",
-  "UserNotExist": "Người chơi này không có thực"
+  "UserNotExist": "Người chơi này không có thực",
+  "Credit": "Hạn mức tín dụng",
+  "Domain": "Tên Miền",
+  "CompactCopy": "Sao chép gộp",
+  "IndividualCopy": "Sao chép lẻ"
 }

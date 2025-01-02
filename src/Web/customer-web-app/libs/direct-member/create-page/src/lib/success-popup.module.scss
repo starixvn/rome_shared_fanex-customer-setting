@@ -121,3 +121,9 @@
     background-color: var(--bg-btn-create-hover);
   }
 }
+
+.buttons {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}

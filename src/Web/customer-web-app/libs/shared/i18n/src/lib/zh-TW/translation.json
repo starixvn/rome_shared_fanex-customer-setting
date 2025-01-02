@@ -181,5 +181,9 @@
   "UsernamePlaceHolder": "用戶名或名/姓",
   "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
   "introCopyNote": "點擊“複製”即可複製並分享賬號詳情",
-  "UserNotExist": "此賬號不存在"
+  "UserNotExist": "此賬號不存在",
+  "Credit": "信用額度",
+  "Domain": "域名",
+  "CompactCopy": "簡潔複製",
+  "IndividualCopy": "单一複製"
 }
