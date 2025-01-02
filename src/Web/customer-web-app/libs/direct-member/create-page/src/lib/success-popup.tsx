@@ -27,7 +27,7 @@ export default function SuccessPopup(props: Props) {
 
   const compactText = formatUserInfo(usernames?.join(', '), credit, domains);
 
-  const individualText = usernames.map((username) => formatUserInfo(username, credit, domains)).join('\n');
+  const individualText = usernames.map((username) => formatUserInfo(username, credit, domains)).join('\n\n');
 
   const handleCopy = () => {
     setCopied(true);
