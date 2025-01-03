@@ -15,7 +15,7 @@ interface UsernameSuggestionOption extends UsernameSuggestion {
 }
 
 const promiseOptions = async (inputValue: string): Promise<UsernameSuggestionOption[]> => {
-  if (inputValue.length > 3) {
+  if (inputValue.length >= 3) {
     const usernames = await SettingService.GetUserNameSuggestion(inputValue);
     return usernames.map((x) => ({ ...x, value: x.UserName }));
   }
@@ -140,7 +140,7 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
   const handlerChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
     if (newValue) {
       setValue(newValue.value);
-      newValue.value.length > 3 && (await handleCheckIsDirectMember(newValue.value));
+      newValue.value.length >= 3 && (await handleCheckIsDirectMember(newValue.value));
     } else {
       setValidateResult({});
     }
@@ -149,7 +149,7 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
   const handleInputChange = async (newValue: string, { action }: InputActionMeta) => {
     if (action === 'input-change') {
       setValue(newValue);
-      newValue.length > 3 && (await handleCheckIsDirectMember(newValue));
+      newValue.length >= 3 && (await handleCheckIsDirectMember(newValue));
     }
   };
 
