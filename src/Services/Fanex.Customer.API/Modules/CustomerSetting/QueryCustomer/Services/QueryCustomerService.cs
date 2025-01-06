@@ -206,7 +206,12 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         return g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
         .SelectAwait(async t =>
         {
-            var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevel(t.Key.GroupType, (byte)(request.RoleId - 1)) : t.Key.GroupType;
+            var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? 
+                helperService.GetGroupTypeByCustomerLevelAndUplineLevel(t.Key.GroupType, 
+                    request.AgentId < 0 ? CustomerLevel.Member : (byte)(request.RoleId - 1), 
+                    request.RoleId, 
+                    request.AgentId)
+                : t.Key.GroupType;
             if (groupItemMapping.TryGetValue(groupTypeWithRoleId, out dynamic value))
             {
                 var groupItems = await value.QueryForAddNew(request.CustId, request.RoleId, g.Key, t.Key.GroupType, isDirectMember);
