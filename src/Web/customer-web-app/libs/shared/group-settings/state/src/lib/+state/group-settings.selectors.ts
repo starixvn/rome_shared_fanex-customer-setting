@@ -1,9 +1,19 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    AgentPositionTakingGroupItem, BetLimitGroupItem, CommissionGroupItem, GroupItem, GroupType,
-    MasterPositionTakingGroupItem, MemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem,
-    ProductGroup, ProductStatusGroupItem, RNGGamesBetSettingGroupItem,
-    SportsBookBetSettingGroupItem, SuperPositionTakingGroupItem, WinLossLimitGroupItem
+  AgentPositionTakingGroupItem,
+  BetLimitGroupItem,
+  CommissionGroupItem,
+  GroupItem,
+  GroupType,
+  MasterPositionTakingGroupItem,
+  MemberPositionTakingGroupItem,
+  ParlayMaxPayoutGroupItem,
+  ProductGroup,
+  ProductStatusGroupItem,
+  RNGGamesBetSettingGroupItem,
+  SportsBookBetSettingGroupItem,
+  SuperPositionTakingGroupItem,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export const getGroupTypes = (productGroups: ProductGroup[] | undefined, groupId: number) =>
