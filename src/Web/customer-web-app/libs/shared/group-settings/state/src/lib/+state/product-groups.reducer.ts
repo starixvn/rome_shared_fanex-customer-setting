@@ -1,12 +1,7 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-  GroupType,
-  MasterDirectMemberPositionTakingGroupItem,
-  ParlayMaxPayoutGroupItem,
-  ProductGroup,
-  ProductStatusGroupItem,
-  SuperDirectMemberPositionTakingGroupItem,
-  WinLossLimitGroupItem,
+    GroupType, MasterDirectMemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup,
+    ProductStatusGroupItem, SuperDirectMemberPositionTakingGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 import { ProductGroupsAction, ProductGroupsActionTypes } from './product-groups.actions';
@@ -190,14 +185,17 @@ export function productGroupsReducer(
   action: ProductGroupsAction
 ): GroupSettingsState {
   switch (action.type) {
-    case ProductGroupsActionTypes.Init: {
+    case ProductGroupsActionTypes.InitCreate: {
       const productGroups = initProductGroupsForCreate(action.payload);
 
       return { ...state, productGroups };
     }
-    case ProductGroupsActionTypes.Update: {
+    case ProductGroupsActionTypes.InitEdit: {
       const productGroups = handleInitProductsForEdit(action.payload, true);
       return { ...state, productGroups };
+    }
+    case ProductGroupsActionTypes.Update: {
+      return { ...state, productGroups: action.payload };
     }
     default: {
       return state;

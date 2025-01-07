@@ -83,7 +83,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
       if (appConfig.systemId !== SystemIds.NAP) {
         generalInfo.newUserName = params.suggestUsername;
       }
-      productGroupsDispatch({ type: ProductGroupsActionTypes.Init, payload: productGroups });
+      productGroupsDispatch({ type: ProductGroupsActionTypes.InitCreate, payload: productGroups });
 
       generalInfoDispatch({
         type: GeneralInfoActionTypes.Update,
@@ -147,7 +147,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
       true
     );
 
-    productGroupsDispatch({ type: ProductGroupsActionTypes.Update, payload: productGroups });
+    productGroupsDispatch({ type: ProductGroupsActionTypes.InitEdit, payload: productGroups });
   };
 
   const scrollToInvalidGroup = (isValidGeneralInfo: boolean, validateGroupSettingResult: ValidateRefResult) => {

@@ -1,7 +1,8 @@
 import { ProductGroup } from '@customer-web-app/shared-group-settings-types';
 
 export enum ProductGroupsActionTypes {
-  Init = '[ProductGroups] Init',
+  InitCreate = '[ProductGroups] InitCreate',
+  InitEdit = '[ProductGroups] IntEdit',
   Update = '[ProductGroups] Update',
 }
 
