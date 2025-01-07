@@ -1,19 +1,10 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-  AgentPositionTakingGroupItem,
-  BetLimitGroupItem,
-  CommissionGroupItem,
-  GroupItem,
-  GroupType,
-  MasterPositionTakingGroupItem,
-  MemberPositionTakingGroupItem,
-  ParlayMaxPayoutGroupItem,
-  ProductGroup,
-  ProductStatusGroupItem,
-  RNGGamesBetSettingGroupItem,
-  SportsBookBetSettingGroupItem,
-  SuperPositionTakingGroupItem,
-  WinLossLimitGroupItem,
+    AgentPositionTakingGroupItem, BetLimitGroupItem, CommissionGroupItem, GroupItem, GroupType,
+    MasterDirectMemberPositionTakingGroupItem, MasterPositionTakingGroupItem,
+    MemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup, ProductStatusGroupItem,
+    RNGGamesBetSettingGroupItem, SportsBookBetSettingGroupItem,
+    SuperDirectMemberPositionTakingGroupItem, SuperPositionTakingGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 export const getGroupTypes = (productGroups: ProductGroup[] | undefined, groupId: number) =>
@@ -81,6 +72,16 @@ function isChangePositionTaking(item: GroupItem, roleId: number) {
   }
 
   if (roleId === UserLevel.Member) {
+    if (params.agentId === -4) {
+      const groupItem = item as SuperDirectMemberPositionTakingGroupItem;
+      return groupItem.s1 !== groupItem.original?.s1;
+    }
+
+    if (params.agentId === -3) {
+      const groupItem = item as MasterDirectMemberPositionTakingGroupItem;
+      return groupItem.m1 !== groupItem.original?.m1;
+    }
+
     const groupItem = item as MemberPositionTakingGroupItem;
     return groupItem.a1 !== groupItem.original?.a1;
   }
