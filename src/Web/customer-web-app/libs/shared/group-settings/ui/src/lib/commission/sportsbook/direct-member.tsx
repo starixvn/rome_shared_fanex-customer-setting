@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BetTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
+import { BetTypeIds, ProductGroupIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -18,12 +18,12 @@ export default function DirectMemberCommission({
   handleSelectAll,
 }: Readonly<Props>) {
   const { t } = useTranslation();
-  const { generalInfo, isMultipleMode } = useGroupSettingContext();
+  const { generalInfo, isMultipleMode, productGroupId } = useGroupSettingContext();
   const commissionGroup = generalInfo?.group;
   const asianHDPCommValue = generalInfo?.commissions?.find((c) => commissionGroup?.includes(c.name))?.discount ?? 0;
 
   useEffect(() => {
-    if (generalInfo?.commissions) {
+    if (generalInfo?.commissions && productGroupId === ProductGroupIds.SportsBook) {
       handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: asianHDPCommValue });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

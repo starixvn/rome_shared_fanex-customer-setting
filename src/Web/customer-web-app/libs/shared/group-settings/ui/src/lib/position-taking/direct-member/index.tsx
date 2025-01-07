@@ -18,7 +18,7 @@ const DirectMemberPositionTaking = forwardRef<ValidationRefType, GroupSettingBlo
   function DirectMemberPositionTaking(props, ref) {
     const blockRef = useRef<BlockRefType>(null);
     const { t } = useTranslation();
-    const { productGroupId, isEditMode, handleSettingItemChange } = useGroupSettingContext();
+    const { productGroupId, isEditMode, handleSettingItemChange, updateGroupSetting } = useGroupSettingContext();
 
     const handlePTChange = (sportTypeId: number, betTypeId: number, data: { [x: string]: number | undefined }) => {
       handleSettingItemChange?.(Number(productGroupId), GroupTypeIds.PositionTaking, sportTypeId, betTypeId, data);
@@ -44,6 +44,7 @@ const DirectMemberPositionTaking = forwardRef<ValidationRefType, GroupSettingBlo
           }
           id={PositionTakingBlockId}
           isPartialUpdate={isEditMode === true && !props.isReadOnly}
+          onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
         >
           {renderContent()}
         </Block>
