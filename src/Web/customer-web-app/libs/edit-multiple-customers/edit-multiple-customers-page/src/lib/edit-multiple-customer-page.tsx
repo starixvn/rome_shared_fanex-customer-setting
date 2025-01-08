@@ -62,7 +62,7 @@ export function EditMultipleCustomerPage() {
         firstCustomerId,
         params.roleId,
         params.uplineRoleId,
-        0,
+        params.agentId,
         true,
         '',
         true,
@@ -536,6 +536,7 @@ export function EditMultipleCustomerPage() {
               !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
               AppConfigHelper.isEditBetSettingOnly(),
             roleId: params.roleId,
+            isDirectMember: params.agentId === -3 || params.agentId === -4,
           }}
         >
           <GroupSetting ref={groupSettingRef} />
