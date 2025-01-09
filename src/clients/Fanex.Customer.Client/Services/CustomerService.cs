@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
@@ -133,6 +134,7 @@ namespace Fanex.Customer.Client.Services
                 },
                 settings = new
                 {
+                    group = param.Group,
                     generalInfo = param.GeneralInfo,
                     productGroups = JsonNode.Parse(param.ProductGroups)
                 }
@@ -158,6 +160,7 @@ namespace Fanex.Customer.Client.Services
                 },
                 settings = new
                 {
+                    group = param.Group,
                     generalInfo = param.GeneralInfo,
                     productGroups = JsonNode.Parse(param.ProductGroups)
                 }
@@ -185,6 +188,7 @@ namespace Fanex.Customer.Client.Services
                 },
                 settings = new
                 {
+                    group = param.Group,
                     productGroups = JsonNode.Parse(param.ProductGroups)
                 }
             });

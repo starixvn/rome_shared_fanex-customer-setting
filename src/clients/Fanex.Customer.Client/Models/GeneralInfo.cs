@@ -36,8 +36,6 @@ namespace Fanex.Customer.Client.Models
 
         public int Currency { get; set; }
 
-        public string Group { get; set; }
-
         public string TemplateName { get; set; }
 
         public bool IsInternal { get; set; }
