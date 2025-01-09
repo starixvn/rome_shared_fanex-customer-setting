@@ -9,6 +9,7 @@ import CommissionLabel from '../commission-label';
 import CommissionSelect from '../commission-select';
 import SelectAllCommissionCheckbox from '../select-all-commission-checkbox';
 import { Props } from '../types';
+import CommissionGroup from './commission-group';
 import styles from './sportsbook-commission.module.scss';
 
 export function MemberSportsBookCommission({
@@ -31,6 +32,23 @@ export function MemberSportsBookCommission({
 
   return (
     <>
+      <BlockRow label={t('Group')}>
+        <BlockColumn>
+          {generalInfo && (
+            <CommissionGroup
+              site={generalInfo.site}
+              currency={generalInfo.currency.toString()}
+              value={generalInfo.group}
+              onChange={(e) => {
+                const data = { group: e.target.value };
+                // onGeneralInfoChange?.(data);
+              }}
+              isReadOnly={isReadOnly}
+            />
+          )}
+        </BlockColumn>
+        <BlockColumn>{''}</BlockColumn>
+      </BlockRow>
       <BlockRow
         isHeaderRow
         label={

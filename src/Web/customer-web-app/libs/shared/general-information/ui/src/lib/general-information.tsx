@@ -12,7 +12,6 @@ import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/bl
 import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import CommissionGroup from './commission-group';
 import { errorTooltip } from './common';
 import CreditNote from './credit-note';
 import CreditRange from './credit-range';
@@ -297,22 +296,6 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
                 <CreditRange min={0} max={maxCredit || 0} />
               </div>
             </BlockItem>
-          )}
-          {/*   CommissionGroup */}
-          {generalInfo.roleId === UserLevel.Member && (
-            <div className={styles['col-group']}>
-              <BlockItem label={t('Group')}>
-                <CommissionGroup
-                  site={generalInfo.site}
-                  currency={generalInfo.currency.toString()}
-                  value={generalInfo.group}
-                  onChange={(e) => {
-                    const data = { group: e.target.value };
-                    onGeneralInfoChange?.(data);
-                  }}
-                />
-              </BlockItem>
-            </div>
           )}
           {generalInfo.roleId === UserLevel.Master && (
             <div className={styles['col-allowpt']}>
