@@ -37,6 +37,7 @@ export function CreateCustomerPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [createCustomerResult, setCreateCustomerResult] = useState<CreateCustomerResult | null>();
   const [productGroups, setProductGroups] = useState<ProductGroup[]>([]);
+  const [group, setGroup] = useState<string>('');
 
   const generalInfoRef = useRef<ValidationRefType>(null);
   const groupSettingRef = useRef<ValidationRefType>(null);
@@ -76,9 +77,9 @@ export function CreateCustomerPage() {
           uplineCustId: params.uplineId,
           uplineRoleId: params.uplineRoleId,
           displayTransferCondition: generalInfo.transferOption === TransferOptions.Daily,
-          group: generalInfo.currency.toString() === Currencies.Won.toString() ? 'dea' : 'a',
         },
       });
+      setGroup(generalInfo.currency.toString() === Currencies.Won.toString() ? 'dea' : 'a');
       setIsLoading(false);
     };
 
@@ -190,6 +191,8 @@ export function CreateCustomerPage() {
         <GroupSettingsContextProvider
           value={{
             generalInfo,
+            group,
+            handleMemberCommGroupChange: setGroup,
             productGroups,
             isMultipleMode: false,
             mode: 'createCustomer',

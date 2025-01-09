@@ -56,6 +56,7 @@ export function EditCustomerPage() {
   const [originalGeneralInfo, setOriginalGeneralInfo] = useState<GeneralInfo>();
   const [productGroups, setProductGroups] = useState<ProductGroup[]>([]);
   const [updateCustomerResult, setUpdateCustomerResult] = useState<UpdateCustomerResult | null>();
+  const [group, setGroup] = useState('');
 
   const generalInfoRef = useRef<ValidationRefType>(null);
   const groupSettingRef = useRef<ValidationRefType>(null);
@@ -63,7 +64,7 @@ export function EditCustomerPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { generalInfo, productGroups } = await SettingService.GetCustomerSetting(
+      const { generalInfo, group, productGroups } = await SettingService.GetCustomerSetting(
         params.custId,
         params.roleId,
         params.uplineRoleId,
@@ -82,6 +83,7 @@ export function EditCustomerPage() {
           displayTransferCondition: generalInfo.transferOption === TransferOptions.Daily,
         },
       });
+      setGroup(group);
       validateGeneralInfo();
       setIsLoading(false);
     };
@@ -383,6 +385,8 @@ export function EditCustomerPage() {
         <GroupSettingsContextProvider
           value={{
             generalInfo,
+            group,
+            handleMemberCommGroupChange: setGroup,
             productGroups,
             isMultipleMode: false,
             mode: 'edit',

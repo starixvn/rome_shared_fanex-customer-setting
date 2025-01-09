@@ -19,9 +19,8 @@ export function MemberSportsBookCommission({
   handleSelectAll,
 }: Readonly<Props>) {
   const { t } = useTranslation();
-  const { generalInfo, isMultipleMode } = useGroupSettingContext();
-  const commissionGroup = generalInfo?.group;
-  const asianHDPCommValue = generalInfo?.commissions?.find((c) => commissionGroup?.includes(c.name))?.discount ?? 0;
+  const { generalInfo, isMultipleMode, group, handleMemberCommGroupChange } = useGroupSettingContext();
+  const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
 
   useEffect(() => {
     if (generalInfo?.commissions) {
@@ -34,14 +33,13 @@ export function MemberSportsBookCommission({
     <>
       <BlockRow label={t('Group')}>
         <BlockColumn>
-          {generalInfo && (
+          {generalInfo && group && (
             <CommissionGroup
               site={generalInfo.site}
               currency={generalInfo.currency.toString()}
-              value={generalInfo.group}
+              value={group}
               onChange={(e) => {
-                const data = { group: e.target.value };
-                // onGeneralInfoChange?.(data);
+                handleMemberCommGroupChange?.(e.target.value);
               }}
               isReadOnly={isReadOnly}
             />
