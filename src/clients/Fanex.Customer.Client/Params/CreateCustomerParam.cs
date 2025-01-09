@@ -55,6 +55,6 @@ namespace Fanex.Customer.Client.Params
 
         public string SiteLabel { get; }
 
-        public string Group { get; set; }
+        public string Group { get; }
     }
 }
