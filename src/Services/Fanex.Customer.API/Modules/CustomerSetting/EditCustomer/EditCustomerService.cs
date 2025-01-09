@@ -109,7 +109,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         var subResults = new List<UpdateGroupTypeResult>();
         CustomerSettingResult uMResult = uMService.GetUMResult(request.Context.CustId, request.Settings.ProductGroups.FirstOrDefault()?.Id ?? 0, updatedSportTypes, request.Context.Language);
 
-        if (request.Settings.GeneralInfo != null 
+        if (request.Settings.GeneralInfo != null
             && !(request.Context.IsMultipleMode && request.Context.RoleId == CustomerLevel.Super))
         {
             subResults.Add(await UpdateGeneralInfo(request));
@@ -127,7 +127,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                     || groupType.Id == GroupTypes.ParlayMaxPayout
                     || groupType.Id == GroupTypes.StakeLevel;
 
-                if(!allowEdit) { continue; }
+                if (!allowEdit) { continue; }
 
                 if (request.Context.RoleId == (byte)CustomerLevel.Member &&
                     helperService.IsPTGroupType(groupType.Id)
@@ -141,7 +141,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
                 }
                 else
                 {
-                    var subResult = await UpdateGroupType(request.Context, productGroup.Id, groupType.Id, groupType.GroupItems, appSettings.SettingStatus);
+                    var subResult = await UpdateGroupType(request.Context, productGroup.Id, groupType.Id, request.Settings.Group, groupType.GroupItems, appSettings.SettingStatus);
                     if (subResult.ExtraResult != null)
                     {
                         subResults.Add(subResult.ExtraResult);
@@ -169,7 +169,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             await UpdateGroupedPTMembers(request);
         }
 
-        request.Context.IsMultipleMode = true;    
+        request.Context.IsMultipleMode = true;
         foreach (var updatedCustomer in request.Context.UpdatedCustomerList)
         {
             request.Context.CustId = updatedCustomer.CustId;
@@ -236,16 +236,20 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         EditRequestContext context,
         int productGroupId,
         int groupTypeId,
-         IEnumerable<GroupItemDefault> groupItems,
-         byte settingStatus)
+        string uGroup,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
     {
         IEditGroupTypeBaseService editGrouptypeService = groupItemForEditMapping[groupTypeId];
 
-        if(context.IsMultipleMode && context.RoleId == CustomerLevel.Super) {
-          return await editGrouptypeService.UpdateByColumns(context, productGroupId, groupTypeId, groupItems, settingStatus);       
+        if (context.IsMultipleMode && context.RoleId == CustomerLevel.Super)
+        {
+            return await editGrouptypeService.UpdateByColumns(context, productGroupId, groupTypeId, groupItems, settingStatus);
         }
 
-        return await editGrouptypeService.Update(context, productGroupId, groupTypeId, groupItems, settingStatus);
+        return helperService.IsSBCommGroupType(groupTypeId)
+            ? await editGrouptypeService.UpdateSBComm(context, productGroupId, groupTypeId, uGroup, groupItems, settingStatus)
+            : await editGrouptypeService.Update(context, productGroupId, groupTypeId, groupItems, settingStatus);
     }
 
     private async Task<IEnumerable<int>> GetGroupedMemberIds(string memberIds)

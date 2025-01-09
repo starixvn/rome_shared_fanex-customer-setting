@@ -29,15 +29,16 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         return (UpdateGroupTypeResult)Result.CreateSuccessfulResult();
     }
 
-    public override async Task<UpdateGroupTypeResult> Update(
+    public override async Task<UpdateGroupTypeResult> UpdateSBComm(
         EditRequestContext context,
         int productGroupId,
         int groupTypeId,
+        string group,
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus)
     {
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_Discount150Upd");
-        var parameters = GenerateSPParams(context, groupItems, settingStatus);
+        var parameters = GenerateSPParams(context, groupItems, group, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
@@ -53,6 +54,7 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     private Hashtable GenerateSPParams(
         EditRequestContext context, 
         IEnumerable<GroupItemDefault> groupItems, 
+        string group,
         byte settingStatus = 0)
     {
         var spParams = new Hashtable {
@@ -61,6 +63,7 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
             { "ip", context.IP },
+            { "ugroup", group },
             { "settingstatus", settingStatus}
         };
 

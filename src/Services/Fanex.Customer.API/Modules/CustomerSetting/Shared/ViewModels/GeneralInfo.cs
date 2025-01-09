@@ -2,6 +2,39 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 
 public class GeneralInformation
 {
+    public GeneralInformation()
+    { }
+
+    public GeneralInformation(GeneralInformationDTO dto)
+    {
+        CustId = dto.CustId;
+        UserName = dto.UserName;
+        RoleId = dto.RoleId;
+        UplineRoleId = dto.UplineRoleId;
+        UplineCustId = dto.UplineCustId;
+        UplineUserName = dto.UplineUserName;
+        NewUserName = dto.NewUserName;
+        Password = dto.Password;
+        FirstName = dto.FirstName;
+        LastName = dto.LastName;
+        Phone = dto.Phone;
+        MobilePhone = dto.MobilePhone;
+        MaxCredit = dto.MaxCredit;
+        MaxCreditMin = dto.MaxCreditMin;
+        MaxCreditMax = dto.MaxCreditMax;
+        MemberMaxCredit = dto.MemberMaxCredit;
+        MemberMaxCreditMin = dto.MemberMaxCreditMin;
+        Fax = dto.Fax;
+        DisableAutoMPT = dto.DisableAutoMPT;
+        TransferOption = dto.TransferOption;
+        IsAutomateTransfer = dto.IsAutomateTransfer;
+        Site = dto.Site;
+        SiteLabel = dto.SiteLabel;
+        Currency = dto.Currency;
+        TemplateName = dto.TemplateName;
+        IsInternal = dto.IsInternal;
+    }
+
     public int CustId { get; set; }
 
     public string UserName { get; set; }
@@ -39,8 +72,6 @@ public class GeneralInformation
     public string Fax { get; set; }
 
     public bool DisableAutoMPT { get; set; }
-
-    public string Group { get; set; }
 
     public string TransferOption { get; set; }
 

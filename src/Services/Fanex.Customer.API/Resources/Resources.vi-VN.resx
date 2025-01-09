@@ -204,22 +204,13 @@
     <value>Xin lỗi, bạn chỉ có thể tạo mới 3 Master mỗi ngày, vui lòng thử lại vào ngày mai.</value>
     <comment/>
   </data>
-  <data name="Live" xml:space="preserve">
-    <value/>
-  </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
     <value>Master Min PT must be less than or equal to Master Max PT.</value>
     <comment/>
   </data>
-  <data name="Max" xml:space="preserve">
-    <value/>
-  </data>
   <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
     <value>Tất cả các môn thể thao trừ {0} và {1}</value>
     <comment/>
-  </data>
-  <data name="Min" xml:space="preserve">
-    <value/>
   </data>
   <data name="Msg_1" xml:space="preserve">
     <value>Tỷ lệ hoa hồng không hợp lệ</value>
@@ -481,9 +472,6 @@
     <value>Bạn không thể thực thi hành động này.</value>
     <comment/>
   </data>
-  <data name="MyanmarOddsComm" xml:space="preserve">
-    <value/>
-  </data>
   <data name="NicknameRule" xml:space="preserve">
     <value>Biệt Danh không được giống nhau và chỉ chứa ký tự chữ cái và số đếm. Phải có ít nhất từ 5 đến 20 ký tự</value>
   </data>
@@ -494,9 +482,6 @@
   <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
     <value>Tài khoản sao chép này đã bị vô hiệu hóa.</value>
     <comment/>
-  </data>
-  <data name="UM" xml:space="preserve">
-    <value/>
   </data>
   <data name="UMMainMsg" xml:space="preserve">
     <value>Không thể cập nhật do hệ thống đang bảo trì các thiết lập sau (GMT+8):</value>

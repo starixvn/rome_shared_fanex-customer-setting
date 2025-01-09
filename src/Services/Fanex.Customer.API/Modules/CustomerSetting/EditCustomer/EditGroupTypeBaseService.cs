@@ -38,6 +38,17 @@ public class EditGroupTypeBaseService: IEditGroupTypeBaseService
         throw new NotImplementedException();
     }
 
+    public virtual Task<UpdateGroupTypeResult> UpdateSBComm(
+        EditRequestContext context,
+        int productGroupId,
+        int groupTypeId,
+        string group,
+        IEnumerable<GroupItemDefault> groupItems,
+        byte settingStatus)
+    {
+        throw new NotImplementedException();
+    }
+
     public virtual Task<UpdateGroupTypeResult> UpdateByColumns(
         EditRequestContext context,
         int productGroupId,

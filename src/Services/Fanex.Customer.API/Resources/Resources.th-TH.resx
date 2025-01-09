@@ -204,22 +204,13 @@
     <value>ขออภัย คุณสามารถสร้างบัญชีมาสเตอร์ได้เพียง 3 บัญชีต่อวัน โปรดลองอีกครั้งในวันพรุ่งนี้</value>
     <comment/>
   </data>
-  <data name="Live" xml:space="preserve">
-    <value/>
-  </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
     <value>ค่าความเสี่ยงต่ำสุดของมาสเตอร์ต้องน้อยกว่าหรือเท่ากับค่าความเสี่ยงสูงสุดของมาสเตอร์</value>
     <comment/>
   </data>
-  <data name="Max" xml:space="preserve">
-    <value/>
-  </data>
   <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
     <value>กีฬาทั้งหมด ยกเว้น {0} และ {1}</value>
     <comment/>
-  </data>
-  <data name="Min" xml:space="preserve">
-    <value/>
   </data>
   <data name="Msg_1" xml:space="preserve">
     <value>การให้ส่วนลดไม่ถูกต้อง</value>
@@ -481,9 +472,6 @@
     <value>คุณไม่สามารถดำเนินการนี้</value>
     <comment/>
   </data>
-  <data name="MyanmarOddsComm" xml:space="preserve">
-    <value/>
-  </data>
   <data name="NicknameRule" xml:space="preserve">
     <value>ชื่อเล่นต้องไม่ซ้ำกัน ตัวอักษรหรือตัวเลขเท่านั้น ควรมีขั้นต่ำ 5 ตัวอักษร และสูงสุด 20 ตัวอักษร</value>
   </data>
@@ -494,9 +482,6 @@
   <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
     <value>บัญชีต้นทางนี้ถูกปิดการใช้งานอยู่</value>
     <comment/>
-  </data>
-  <data name="UM" xml:space="preserve">
-    <value/>
   </data>
   <data name="UMMainMsg" xml:space="preserve">
     <value>เนื่องจากอยู่ในระหว่างการปรับปรุง ดังนั้นในช่วงเวลาดังกล่าวจึงไม่สามารถอัพเดทได้ (GMT+8):</value>

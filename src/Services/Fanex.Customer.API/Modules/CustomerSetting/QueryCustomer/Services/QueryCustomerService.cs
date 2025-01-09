@@ -88,17 +88,20 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
 
     public async Task<CustomerSettingModel> Query(QueryRequest request)
     {
-        var generalInfo = await GetGeneralInfo(request);
+        var generalInfoDto = await GetGeneralInfo(request);
+        var generalInfo = new GeneralInformation(generalInfoDto);
+        var uGroup  = generalInfoDto.Group;
         ptStep = appSettings.IsSupportPT3Decimal(IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel) ? 0.5M : 1M;
         isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, appSettings);
         var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
-        if (request.RoleId == CustomerLevel.Agent)
+        if ((!request.IsGetUpline && request.RoleId == CustomerLevel.Agent) || (request.IsGetUpline && request.RoleId == CustomerLevel.Member)) 
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
         }
 
         var customerSetting = new CustomerSettingModel
         {
+            Group = uGroup,
             GeneralInfo = generalInfo,
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo)
         };
@@ -107,9 +110,9 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         return customerSetting;
     }
 
-    private async Task<GeneralInformation> GetGeneralInfo(QueryRequest request)
+    private async Task<GeneralInformationDTO> GetGeneralInfo(QueryRequest request)
     {
-        var generalInfo = await dynamicRepository.GetAsync<GeneralInformation>(request.IsGetUpline
+        var generalInfo = await dynamicRepository.GetAsync<GeneralInformationDTO>(request.IsGetUpline
             ? new GetGeneralInfoForEditCriteria(request.CustId, request.SystemId)
             : new GetCustomerCriteria(request.CustId, appSettings.SettingStatus, request.RoleId));
 
