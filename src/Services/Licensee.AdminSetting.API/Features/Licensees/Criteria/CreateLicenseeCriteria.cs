@@ -13,6 +13,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         string licenseeType,
         bool isChinaView,
         byte specialPlatform,
+        byte siteType,
         int siteId,
         string siteName,
         byte settingStatus)
@@ -34,6 +35,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         public bool IsChinaView { get; } = isChinaView;
 
         public byte SpecialPlatform { get; } = specialPlatform;
+
+        public byte SiteType { get; } = siteType;
 
         public string ProductList { get; set; }
 

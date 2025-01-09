@@ -8,6 +8,7 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         string siteName,
         bool isChinaView,
         byte specialPlatform,
+        byte siteType,
         string productStakeLevel,
         string ip,
         byte mode,
@@ -21,6 +22,8 @@ namespace Licensee.AdminSetting.API.Features.Licensees.Criteria
         public bool IsChinaView { get; } = isChinaView;
 
         public byte SpecialPlatform { get; } = specialPlatform;
+
+        public byte SiteType { get; } = siteType;
 
         public string ProductStakeLevel { get; } = productStakeLevel;
 

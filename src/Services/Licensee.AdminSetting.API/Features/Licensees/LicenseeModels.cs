@@ -47,7 +47,8 @@ public record CreateLicenseeRequest(
     [Required] string LicenseeType,
     [Required] bool IsChinaView,
     [Required] byte SiteDBGroupId,
-    [Required] byte SpecialPlatform)
+    [Required] byte SpecialPlatform,
+    [Required] byte SiteType)
     : CreateCurrencyRequest(
         SiteName,
         ProductBetSetting,

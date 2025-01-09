@@ -44,7 +44,8 @@ public class LicenseesHandler(
             CreateMode.NewLicensee,
             siteDBConfig.SiteDBGroupId,
             request.IsChinaView,
-            request.SpecialPlatform);
+            request.SpecialPlatform,
+            request.SiteType);
 
         if (registerResult.result.IsNotOK)
         {
@@ -94,6 +95,7 @@ public class LicenseesHandler(
             request.LicenseeType,
             request.IsChinaView,
             request.SpecialPlatform,
+            request.SiteType,
             siteId,
             request.SiteName,
             SettingStatus);
