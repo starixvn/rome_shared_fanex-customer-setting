@@ -69,13 +69,14 @@ export const SettingService = {
     );
     return response.data;
   },
-  CreateCustomer: async (generalInfo: GeneralInfo, productGroups: ProductGroup[]) => {
+  CreateCustomer: async (generalInfo: GeneralInfo, group: string, productGroups: ProductGroup[]) => {
     const { custId, ...otherInfo } = generalInfo;
     return await axiosInstance
       .post<CreateCustomerResult>(
         'Customer/Create',
         {
           generalInfo: { ...otherInfo },
+          group,
           productGroups: JSON.stringify(productGroups),
         },
         {
@@ -99,7 +100,8 @@ export const SettingService = {
     roleId?: number,
     upLineRoleId?: number,
     site?: string,
-    siteLabel?: string
+    siteLabel?: string,
+    group?: string
   ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
@@ -113,6 +115,7 @@ export const SettingService = {
           productGroupId: params.productGroupId,
           site,
           siteLabel,
+          group,
         },
         {
           headers: getHeadersForPostRequest(),

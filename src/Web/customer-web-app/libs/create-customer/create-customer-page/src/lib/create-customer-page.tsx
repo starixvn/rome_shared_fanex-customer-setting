@@ -148,6 +148,7 @@ export function CreateCustomerPage() {
       const encryptedPassword = encrypt(generalInfo.password, secretKey);
       const result = await SettingService.CreateCustomer(
         { ...generalInfo, password: encryptedPassword },
+        group,
         productGroups
       );
       if (result.isSuccessful) {
