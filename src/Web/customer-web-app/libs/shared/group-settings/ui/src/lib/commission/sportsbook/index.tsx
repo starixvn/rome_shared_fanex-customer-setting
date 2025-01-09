@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { BetTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -31,7 +31,23 @@ export function MemberSportsBookCommission({
 
   return (
     <>
-      <BlockRow label={t('Group')}>
+      <BlockRow
+        label={
+          <>
+            {isMultipleMode && !isReadOnly && (
+              <input
+                type="checkbox"
+                onChange={(e) =>
+                  handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {
+                    isMultipleModeChecked: e.target.checked,
+                  })
+                }
+              />
+            )}
+            {t('Group')}
+          </>
+        }
+      >
         <BlockColumn>
           {generalInfo && group && (
             <CommissionGroup

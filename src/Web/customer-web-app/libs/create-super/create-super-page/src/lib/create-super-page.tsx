@@ -145,6 +145,7 @@ export function CreateSuperPage() {
       const encryptedPassword = encrypt(generalInfo.password, secretKey);
       const result = await SettingService.CreateCustomer(
         { ...generalInfo, password: encryptedPassword },
+        '',
         productGroups
       );
       if (result.isSuccessful) {
