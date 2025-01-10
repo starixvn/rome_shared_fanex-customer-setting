@@ -61,7 +61,7 @@ export function MemberSportsBookCommission({
               onChange={(e) => {
                 handleMemberCommGroupChange?.(e.target.value);
               }}
-              isReadOnly={isReadOnly}
+              isReadOnly={isReadOnly || (isMultipleMode && !selectedCommGroup)}
             />
           )}
         </BlockColumn>
