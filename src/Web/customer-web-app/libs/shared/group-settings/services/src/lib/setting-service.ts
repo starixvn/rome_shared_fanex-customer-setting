@@ -137,7 +137,8 @@ export const SettingService = {
     roleId: number,
     uplineRoleId: number,
     site: string,
-    siteLabel: string
+    siteLabel: string,
+    group?: string
   ) => {
     const bodyFormData = new FormData();
     bodyFormData.append('roleId', roleId.toString());
@@ -148,6 +149,9 @@ export const SettingService = {
     bodyFormData.append('productGroupId', params.productGroupId.toString());
     bodyFormData.append('site', site);
     bodyFormData.append('siteLabel', siteLabel);
+    if (group) {
+      bodyFormData.append('group', siteLabel);
+    }
 
     return axiosInstance
       .post<UpdateCustomerResult[]>('Customer/UpdateMultipleCustomers', bodyFormData, {

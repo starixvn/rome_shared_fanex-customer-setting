@@ -7,6 +7,7 @@ export type GroupSettingsContextType = {
   generalInfo: GeneralInfo;
   group: string;
   handleMemberCommGroupChange: (group: string) => void;
+  handleSelectCommGroup: (selected: boolean) => void;
   productGroupId: number;
   productGroups: ProductGroup[];
   isMultipleMode: boolean;

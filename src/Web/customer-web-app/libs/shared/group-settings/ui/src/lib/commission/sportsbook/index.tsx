@@ -19,7 +19,8 @@ export function MemberSportsBookCommission({
   handleSelectAll,
 }: Readonly<Props>) {
   const { t } = useTranslation();
-  const { generalInfo, isMultipleMode, group, handleMemberCommGroupChange } = useGroupSettingContext();
+  const { generalInfo, isMultipleMode, group, handleMemberCommGroupChange, handleSelectCommGroup } =
+    useGroupSettingContext();
   const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
 
   useEffect(() => {
@@ -37,11 +38,13 @@ export function MemberSportsBookCommission({
             {isMultipleMode && !isReadOnly && (
               <input
                 type="checkbox"
-                onChange={(e) =>
+                onChange={(e) => {
+                  const selected = e.target.checked;
                   handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {
-                    isMultipleModeChecked: e.target.checked,
-                  })
-                }
+                    isMultipleModeChecked: selected,
+                  });
+                  handleSelectCommGroup?.(selected);
+                }}
               />
             )}
             {t('Group')}

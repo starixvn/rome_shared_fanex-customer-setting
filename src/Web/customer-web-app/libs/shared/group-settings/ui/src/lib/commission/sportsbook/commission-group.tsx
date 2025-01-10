@@ -14,6 +14,8 @@ export default function CommissionGroup({ site, currency, value, onChange, isRea
   let groups: string[];
   if (site === '76666B') {
     groups = ['a'];
+  } else if (site === 'INDO') {
+    groups = ['a', 'b', 'c', 'd'];
   } else if (currency === Currencies.Won) {
     groups = ['dea', 'deb', 'dec', 'ded'];
   } else {

@@ -2,30 +2,26 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-  getUnCheckAutoPtItems,
-  handleChangeGroupSettingValue,
-  handleChangeItemValue,
-  renderUpdateCustomerResult,
+    getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue,
+    renderUpdateCustomerResult
 } from '@customer-web-app/edit-customer-page';
 import {
-  Result,
-  SubMessagesResult,
-  UpdateCustomerResult,
-  ValidateRefResult,
-  ValidationRefType,
+    Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-  GeneralInfoActionTypes,
-  generalInformationReducer,
-  initialState,
+    GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, scrollPageToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
+import {
+    GroupItem, GroupSettingItem, ProductGroup
+} from '@customer-web-app/shared-group-settings-types';
+import {
+    GroupSetting, scrollPageToTop, SetMemberPtPopup
+} from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -41,6 +37,7 @@ export function EditMultipleCustomerPage() {
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;
   const [group, setGroup] = useState('');
+  const [selectedGroupComm, setSelectedGroupComm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshData, setRefreshData] = useState(true);
   const [isShowNoChangeMessage, setIsShowNoChangeMessage] = useState(false);
@@ -256,7 +253,8 @@ export function EditMultipleCustomerPage() {
           params.roleId,
           params.uplineRoleId,
           generalInfo.site,
-          generalInfo.siteLabel
+          generalInfo.siteLabel,
+          selectedGroupComm ? group : undefined
         );
     setTimeout(() => {
       showUpdateCustomerResult(result);
@@ -514,6 +512,7 @@ export function EditMultipleCustomerPage() {
             generalInfo,
             group,
             handleMemberCommGroupChange: setGroup,
+            handleSelectCommGroup: setSelectedGroupComm,
             productGroups,
             isMultipleMode: true,
             productGroupId: params.productGroupId,
