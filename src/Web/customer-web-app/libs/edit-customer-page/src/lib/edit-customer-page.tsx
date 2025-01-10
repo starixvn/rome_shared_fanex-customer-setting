@@ -17,7 +17,7 @@ import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-set
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { getChanges } from '@customer-web-app/shared-group-settings-state';
 import {
-    GroupItem, GroupSettingItem, ProductGroup
+    GroupItem, GroupSettingItem, GroupType, ProductGroup
 } from '@customer-web-app/shared-group-settings-types';
 import {
     GroupSetting, scrollToTop, SetMemberPtPopup
@@ -227,10 +227,29 @@ export function EditCustomerPage() {
     resetStateBeforeUpdate();
     const validateGroupSettingResult = (await validateGroupTypes(groupTypeId)) as ValidateRefResult;
     if (validateGroupSettingResult.isValid) {
-      const newProductGroups = getCustomerSettingChange(groupTypeId);
-      const isChanged = newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0));
+      let newProductGroups = getCustomerSettingChange(groupTypeId);
       const isGroupChanged = groupTypeId === GroupTypeIds.SportsBookCommission && group !== originGroup;
-      console.log(isGroupChanged);
+      if (isGroupChanged) {
+        newProductGroups = newProductGroups.map((group) => {
+          if (
+            group.id === ProductGroupIds.SportsBook &&
+            !group.groupTypes.some((x) => x.id === GroupTypeIds.SportsBookCommission)
+          ) {
+            const groupTypes = group.groupTypes;
+            groupTypes.push({
+              id: GroupTypeIds.SportsBookCommission,
+              groupItems: [] as GroupItem[],
+              isReadOnly: false,
+              isAllowUncheckAll: true,
+            });
+            return { ...group, groupTypes };
+          }
+
+          return group;
+        });
+      }
+      const isChanged = newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0));
+
       if (isChanged || isGroupChanged) {
         setIsLoading(false);
         const productGroupWithPTOnMembers = await getProductGroupWithPTOnMembers(newProductGroups);
