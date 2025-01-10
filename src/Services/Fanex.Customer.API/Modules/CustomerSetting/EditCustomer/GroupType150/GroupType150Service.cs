@@ -16,7 +16,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
 
 public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
 {
-    public GroupType150Service(IMessageService messageService, ICacheRefService cacheRefService) 
+    public GroupType150Service(IMessageService messageService, ICacheRefService cacheRefService)
         : base(messageService, cacheRefService) { }
 
     public override UpdateGroupTypeResult Validate(
@@ -52,14 +52,14 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     }
 
     private Hashtable GenerateSPParams(
-        EditRequestContext context, 
-        IEnumerable<GroupItemDefault> groupItems, 
+        EditRequestContext context,
+        IEnumerable<GroupItemDefault> groupItems,
         string group,
         byte settingStatus = 0)
     {
         var spParams = new Hashtable {
             { "custid", context.CustId },
-            { "commission", ComposeJsonSettingParam(groupItems) },
+            { "commission", ComposeJsonSettingParam(groupItems, group) },
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
             { "ip", context.IP },
@@ -70,9 +70,9 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         return spParams;
     }
 
-    private string ComposeJsonSettingParam(IEnumerable<GroupItemDefault> groupItems)
+    private string ComposeJsonSettingParam(IEnumerable<GroupItemDefault> groupItems, string group)
     {
-        if(!groupItems.Any())
+        if (!groupItems.Any() && string.IsNullOrWhiteSpace(group))
         {
             throw new InvalidOperationException("Group Items cannot be empty");
         }
