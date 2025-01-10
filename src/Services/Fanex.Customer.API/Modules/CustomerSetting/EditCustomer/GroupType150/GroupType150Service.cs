@@ -77,7 +77,8 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             throw new InvalidOperationException("Group Items cannot be empty");
         }
 
-        if (groupItems.First().GetType() != typeof(CommissionGroup)
+        if (groupItems.Any()
+            && groupItems.First().GetType() != typeof(CommissionGroup)
             && groupItems.First().GetType() != typeof(SuperCommissionGroup)
             && groupItems.First().GetType() != typeof(MasterCommissionGroup)
             && groupItems.First().GetType() != typeof(AgentCommissionGroup)
