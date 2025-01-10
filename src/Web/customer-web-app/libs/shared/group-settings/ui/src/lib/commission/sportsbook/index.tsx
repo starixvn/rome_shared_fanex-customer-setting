@@ -19,7 +19,7 @@ export function MemberSportsBookCommission({
   handleSelectAll,
 }: Readonly<Props>) {
   const { t } = useTranslation();
-  const { generalInfo, isMultipleMode, group, handleMemberCommGroupChange, handleSelectCommGroup } =
+  const { generalInfo, isMultipleMode, group, handleMemberCommGroupChange, handleSelectCommGroup, selectedCommGroup } =
     useGroupSettingContext();
   const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
 
@@ -38,6 +38,7 @@ export function MemberSportsBookCommission({
             {isMultipleMode && !isReadOnly && (
               <input
                 type="checkbox"
+                checked={selectedCommGroup}
                 onChange={(e) => {
                   const selected = e.target.checked;
                   handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {

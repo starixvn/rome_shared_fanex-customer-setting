@@ -37,7 +37,7 @@ export function EditMultipleCustomerPage() {
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;
   const [group, setGroup] = useState('');
-  const [selectedGroupComm, setSelectedGroupComm] = useState(false);
+  const [selectedCommGroup, setSelectedCommGroup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshData, setRefreshData] = useState(true);
   const [isShowNoChangeMessage, setIsShowNoChangeMessage] = useState(false);
@@ -64,6 +64,7 @@ export function EditMultipleCustomerPage() {
 
       const newProductGroups = handleInitProducts(productGroups);
       setProductGroups(newProductGroups);
+      setSelectedCommGroup(false);
 
       generalInfoDispatch({
         type: GeneralInfoActionTypes.Update,
@@ -254,7 +255,7 @@ export function EditMultipleCustomerPage() {
           params.uplineRoleId,
           generalInfo.site,
           generalInfo.siteLabel,
-          selectedGroupComm ? group : undefined
+          selectedCommGroup ? group : undefined
         );
     setTimeout(() => {
       showUpdateCustomerResult(result);
@@ -512,7 +513,8 @@ export function EditMultipleCustomerPage() {
             generalInfo,
             group,
             handleMemberCommGroupChange: setGroup,
-            handleSelectCommGroup: setSelectedGroupComm,
+            selectedCommGroup,
+            handleSelectCommGroup: setSelectedCommGroup,
             productGroups,
             isMultipleMode: true,
             productGroupId: params.productGroupId,

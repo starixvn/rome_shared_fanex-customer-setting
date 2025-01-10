@@ -150,7 +150,7 @@ export const SettingService = {
     bodyFormData.append('site', site);
     bodyFormData.append('siteLabel', siteLabel);
     if (group) {
-      bodyFormData.append('group', siteLabel);
+      bodyFormData.append('group', group);
     }
 
     return axiosInstance

@@ -46,6 +46,7 @@ export function EditCustomerPage() {
   const [originalGeneralInfo, setOriginalGeneralInfo] = useState<GeneralInfo>();
   const [productGroups, setProductGroups] = useState<ProductGroup[]>([]);
   const [updateCustomerResult, setUpdateCustomerResult] = useState<UpdateCustomerResult | null>();
+  const [originGroup, setOriginGroup] = useState('');
   const [group, setGroup] = useState('');
 
   const generalInfoRef = useRef<ValidationRefType>(null);
@@ -73,7 +74,10 @@ export function EditCustomerPage() {
           displayTransferCondition: generalInfo.transferOption === TransferOptions.Daily,
         },
       });
-      setGroup(group);
+      if (group) {
+        setOriginGroup(group);
+        setGroup(group);
+      }
       validateGeneralInfo();
       setIsLoading(false);
     };
@@ -225,7 +229,9 @@ export function EditCustomerPage() {
     if (validateGroupSettingResult.isValid) {
       const newProductGroups = getCustomerSettingChange(groupTypeId);
       const isChanged = newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0));
-      if (isChanged) {
+      const isGroupChanged = groupTypeId === GroupTypeIds.SportsBookCommission && group !== originGroup;
+      console.log(isGroupChanged);
+      if (isChanged || isGroupChanged) {
         setIsLoading(false);
         const productGroupWithPTOnMembers = await getProductGroupWithPTOnMembers(newProductGroups);
         if (productGroupWithPTOnMembers.length === 0) {
@@ -287,7 +293,12 @@ export function EditCustomerPage() {
     if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
       const newProductGroups = getCustomerSettingChange();
       const isGeneralInfoDataChanged = isGeneralInfoChanged(generalInfo, originalGeneralInfo);
-      if (isGeneralInfoDataChanged || newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0))) {
+      const isGroupChange = originGroup !== group;
+      if (
+        isGeneralInfoDataChanged ||
+        isGroupChange ||
+        newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0))
+      ) {
         const newGeneralInfo = !isEditBetSetting && isGeneralInfoDataChanged ? generalInfo : null;
         setIsLoading(false);
         const productGroupWithPTOnMembers = await getProductGroupWithPTOnMembers(newProductGroups);
