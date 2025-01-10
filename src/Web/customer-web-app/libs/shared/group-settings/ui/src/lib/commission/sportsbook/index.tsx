@@ -19,12 +19,19 @@ export function MemberSportsBookCommission({
   handleSelectAll,
 }: Readonly<Props>) {
   const { t } = useTranslation();
-  const { generalInfo, isMultipleMode, group, handleMemberCommGroupChange, handleSelectCommGroup, selectedCommGroup } =
-    useGroupSettingContext();
+  const {
+    generalInfo,
+    isMultipleMode,
+    group,
+    handleMemberCommGroupChange,
+    handleSelectCommGroup,
+    selectedCommGroup,
+    mode,
+  } = useGroupSettingContext();
   const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
 
   useEffect(() => {
-    if (generalInfo?.commissions) {
+    if (mode === 'createCustomer' && generalInfo?.commissions) {
       handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: asianHDPCommValue });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
