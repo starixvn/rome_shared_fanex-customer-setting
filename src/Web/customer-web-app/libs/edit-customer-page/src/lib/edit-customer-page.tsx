@@ -5,7 +5,9 @@ import {
     Params, Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
+import {
+    BetTypeIds, GroupTypeIds, ProductGroupIds, SportTypeIds, UserLevel
+} from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
     GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
@@ -15,9 +17,9 @@ import {
 } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { getChanges } from '@customer-web-app/shared-group-settings-state';
+import { getChanges, getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-    GroupItem, GroupSettingItem, GroupType, ProductGroup
+    CommissionGroupItem, GroupItem, GroupSettingItem, GroupType, ProductGroup
 } from '@customer-web-app/shared-group-settings-types';
 import {
     GroupSetting, scrollToTop, SetMemberPtPopup
@@ -235,10 +237,17 @@ export function EditCustomerPage() {
             group.id === ProductGroupIds.SportsBook &&
             !group.groupTypes.some((x) => x.id === GroupTypeIds.SportsBookCommission)
           ) {
+            const groupItems = getSettingItems<CommissionGroupItem>(
+              productGroups,
+              ProductGroupIds.SportsBook,
+              GroupTypeIds.SportsBookCommission
+            );
             const groupTypes = group.groupTypes;
             groupTypes.push({
               id: GroupTypeIds.SportsBookCommission,
-              groupItems: [] as GroupItem[],
+              groupItems: groupItems.filter(
+                (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
+              ),
               isReadOnly: false,
               isAllowUncheckAll: true,
             });
@@ -310,9 +319,35 @@ export function EditCustomerPage() {
       !isEditBetSetting && params.productGroupId === ProductGroupIds.SportsBook ? await validateGeneralInfo() : true;
     const validateGroupSettingResult = (await validateGroupTypes()) as ValidateRefResult;
     if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
-      const newProductGroups = getCustomerSettingChange();
+      let newProductGroups = getCustomerSettingChange();
       const isGeneralInfoDataChanged = isGeneralInfoChanged(generalInfo, originalGeneralInfo);
       const isGroupChange = originGroup !== group;
+      if (isGroupChange) {
+        newProductGroups = newProductGroups.map((group) => {
+          if (
+            group.id === ProductGroupIds.SportsBook &&
+            !group.groupTypes.some((x) => x.id === GroupTypeIds.SportsBookCommission)
+          ) {
+            const groupItems = getSettingItems<CommissionGroupItem>(
+              productGroups,
+              ProductGroupIds.SportsBook,
+              GroupTypeIds.SportsBookCommission
+            );
+            const groupTypes = group.groupTypes;
+            groupTypes.push({
+              id: GroupTypeIds.SportsBookCommission,
+              groupItems: groupItems.filter(
+                (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
+              ),
+              isReadOnly: false,
+              isAllowUncheckAll: true,
+            });
+            return { ...group, groupTypes };
+          }
+
+          return group;
+        });
+      }
       if (
         isGeneralInfoDataChanged ||
         isGroupChange ||
