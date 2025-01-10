@@ -5,7 +5,7 @@
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "licensee_deposit_api_LOCAL_1",
+                    "Host": "licensee_deposit_player_api_LOCAL_1",
                     "Port": 5000
                 }
             ],
