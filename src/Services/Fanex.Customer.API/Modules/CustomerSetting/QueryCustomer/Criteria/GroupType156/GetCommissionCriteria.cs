@@ -1,3 +1,4 @@
+using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data;
 using Fanex.Data.Repository;
 
@@ -8,6 +9,8 @@ public class GetCommissionCriteria : CriteriaBase
     private readonly Dictionary<int, string> SPNamesMapping = new()
     {
         {1, "Acc_CustSetting_Discount156_Sel_Member"},
+        {1_3, "Acc_CustSetting_Discount156_Sel_MasterDirectMember"},
+        {1_4, "Acc_CustSetting_Discount156_Sel_SuperDirectMember"},
         {2, "Acc_CustSetting_Discount156_Sel_Agent"},
         {3, "Acc_CustSetting_Discount156_Sel_Master"},
         {4, "Acc_CustSetting_Discount156_Sel_Super"}
@@ -33,7 +36,7 @@ public class GetCommissionCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public byte RoleId { get; }
 
-    public override string GetSettingKey() => SPNamesMapping[RoleId];
+    public override string GetSettingKey() => SPNamesMapping[(RoleId == CustomerLevel.Member && UplineRoleId > RoleId + 1) ? RoleId * 10 + UplineRoleId : RoleId];
 
     public override bool IsValid() => CustId > 0;
 }
