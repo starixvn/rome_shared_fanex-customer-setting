@@ -19,16 +19,23 @@ export function MemberSportsBookCommission({
   handleSelectAll,
 }: Readonly<Props>) {
   const { t } = useTranslation();
-  const { generalInfo, isMultipleMode, group, handleMemberCommGroupChange, handleSelectCommGroup, selectedCommGroup } =
-    useGroupSettingContext();
-  const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
+  const {
+    generalInfo,
+    isMultipleMode,
+    group,
+    handleMemberCommGroupChange,
+    handleSelectCommGroup,
+    selectedCommGroup,
+    mode,
+  } = useGroupSettingContext();
 
   useEffect(() => {
-    if (generalInfo?.commissions) {
+    if (mode === 'createCustomer' && generalInfo?.commissions) {
+      const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
       handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: asianHDPCommValue });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [group]);
+  }, []);
 
   return (
     <>
@@ -59,7 +66,10 @@ export function MemberSportsBookCommission({
               currency={generalInfo.currency.toString()}
               value={group}
               onChange={(e) => {
-                handleMemberCommGroupChange?.(e.target.value);
+                const uGroup = e.target.value;
+                const commValue = generalInfo?.commissions?.find((c) => uGroup?.includes(c.name))?.discount ?? 0;
+                handleMemberCommGroupChange?.(uGroup);
+                handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: commValue });
               }}
               isReadOnly={isReadOnly || (isMultipleMode && !selectedCommGroup)}
             />
@@ -87,6 +97,7 @@ export function MemberSportsBookCommission({
       </BlockRow>
       {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked }) => {
         const isAsianHDP = sportTypeId === SportTypeIds.Soccer && betTypeId === BetTypeIds.Handicap;
+        const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
         return (
           <BlockRow
             key={`${sportTypeId}-${betTypeId}`}
