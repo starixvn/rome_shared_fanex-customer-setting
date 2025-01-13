@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { BetTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -48,10 +48,12 @@ export function MemberSportsBookCommission({
                 checked={selectedCommGroup}
                 onChange={(e) => {
                   const selected = e.target.checked;
-                  handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {
-                    isMultipleModeChecked: selected,
-                  });
                   handleSelectCommGroup?.(selected);
+                  if (selected) {
+                    handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {
+                      isMultipleModeChecked: selected,
+                    });
+                  }
                 }}
               />
             )}
@@ -106,9 +108,12 @@ export function MemberSportsBookCommission({
                 displayName={displayName as string}
                 isSelected={isMultipleModeChecked}
                 isReadOnly={isReadOnly}
-                handleSelectCommission={(isChecked) =>
-                  handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked })
-                }
+                handleSelectCommission={(isChecked) => {
+                  if (isAsianHDP && !isChecked) {
+                    handleSelectCommGroup?.(false);
+                  }
+                  handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked });
+                }}
               />
             }
           >
