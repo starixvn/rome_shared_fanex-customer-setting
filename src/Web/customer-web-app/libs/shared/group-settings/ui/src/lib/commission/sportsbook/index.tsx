@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BetTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
+import { BetTypeIds, ProductGroupIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -27,6 +27,7 @@ export function MemberSportsBookCommission({
     handleSelectCommGroup,
     selectedCommGroup,
     mode,
+    productGroupId,
   } = useGroupSettingContext();
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export function MemberSportsBookCommission({
         }
       >
         <BlockColumn>
-          {generalInfo && group && (
+          {productGroupId === ProductGroupIds.SportsBook && generalInfo && group && (
             <CommissionGroup
               site={generalInfo.site}
               currency={generalInfo.currency.toString()}
