@@ -216,6 +216,10 @@
     <value>Tỷ lệ hoa hồng không hợp lệ</value>
     <comment/>
   </data>
+  <data name="Msg_12" xml:space="preserve">
+    <value>Không thể gán nhóm hoa hồng này cho Member.</value>
+    <comment/>
+  </data>
   <data name="Msg_10002" xml:space="preserve">
     <value>Sai giá trị : Tiền cược lớn nhất cho mỗi banh</value>
     <comment/>

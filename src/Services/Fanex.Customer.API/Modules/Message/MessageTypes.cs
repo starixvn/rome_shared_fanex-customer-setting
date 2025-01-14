@@ -4,6 +4,8 @@ public static class MessageTypes
 {
     public const int PlainMessage = 0;
 
+    public const int SimpleMessage = 100;
+
     public const int ParlayMaxPayoutViolation = 31;
 
     public const int WinLossLimitViolation = 41;

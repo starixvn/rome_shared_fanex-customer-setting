@@ -216,6 +216,10 @@
     <value>การให้ส่วนลดไม่ถูกต้อง</value>
     <comment/>
   </data>
+  <data name="Msg_12" xml:space="preserve">
+    <value>ไม่สามารถกำหนดกลุ่มคอมมิชชั่นนี้ให้กับสมาชิกได้</value>
+    <comment/>
+  </data>
   <data name="Msg_10002" xml:space="preserve">
     <value>ค่าการเดิมพันสูงสุดต่อบอลผิดพลาด .</value>
     <comment/>

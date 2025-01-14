@@ -222,6 +222,10 @@
     <value>折扣不正确</value>
     <comment/>
   </data>
+  <data name="Msg_12" xml:space="preserve">
+    <value>无法将此佣金组别分配给会员。</value>
+    <comment/>
+  </data>
   <data name="Msg_10002" xml:space="preserve">
     <value>单粒球最高投注设置错误</value>
     <comment/>
