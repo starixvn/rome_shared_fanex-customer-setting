@@ -23,23 +23,14 @@ import {
     GroupSetting, scrollPageToTop, SetMemberPtPopup
 } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
-import { IconClose } from '@customer-web-app/shared/base/common-icon';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import NiceModal from '@ebay/nice-modal-react';
 
 import styles from './edit-multiple-customer-page.module.scss';
 import { getNewMultipleEditCustomerSettings, handleInitProducts } from './handler';
-import popUpStyles from './popup.module.scss';
+import UpdateSettingConfirmationPopup from './update-setting-confirmation-popup';
 
-
-      if (confirmTimer === 0) {
-
-
-                    isCancel: true,
-                    isCancel: true,
-                  if (confirmTimer == 0) {
-                      isCancel: false,
 export function EditMultipleCustomerPage() {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -300,7 +291,7 @@ export function EditMultipleCustomerPage() {
         continue;
       }
 
-      if (settingTypes.some((s) => s == g.id) && (!id || id === g.id)) {
+      if (settingTypes.some((s) => s === g.id) && (!id || id === g.id)) {
         result += countSportChangedOfGroupType(g, id);
       }
     }

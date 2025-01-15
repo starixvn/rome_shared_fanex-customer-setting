@@ -12,7 +12,6 @@ import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/bl
 import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import CommissionGroup from './commission-group';
 import { errorTooltip } from './common';
 import CopySettingFromNote from './copy-setting-from-note';
 import CreditRange from './credit-range';
@@ -267,20 +266,6 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                 <div className={styles['max-credit']}>
                   <CreditRange min={0} max={uplineMaxCredit ? uplineMaxCredit / numberOfAccounts : 0} />
                 </div>
-              </BlockItem>
-            </div>
-            {/*   CommissionGroup */}
-            <div className={styles['col-group']}>
-              <BlockItem label={t('Group')}>
-                <CommissionGroup
-                  site={generalInfo.site}
-                  currency={generalInfo.currency.toString()}
-                  value={generalInfo.group}
-                  onChange={(e) => {
-                    const data = { group: e.target.value };
-                    onGeneralInfoChange?.(data);
-                  }}
-                />
               </BlockItem>
             </div>
           </div>
