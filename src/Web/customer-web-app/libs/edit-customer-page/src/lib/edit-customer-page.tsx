@@ -2,32 +2,28 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-  Params,
-  Result,
-  SubMessagesResult,
-  UpdateCustomerResult,
-  ValidateRefResult,
-  ValidationRefType,
+    Params, Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
+import {
+    BetTypeIds, GroupTypeIds, ProductGroupIds, SportTypeIds, UserLevel
+} from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-  GeneralInfo,
-  GeneralInfoActionTypes,
-  generalInformationReducer,
-  initialState,
+    GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
 import {
-  EditGeneralInformation,
-  TransferCondition,
-  TransferOptions,
+    EditGeneralInformation, TransferCondition, TransferOptions
 } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { getChanges } from '@customer-web-app/shared-group-settings-state';
-import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, scrollToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
+import { getChanges, getSettingItems } from '@customer-web-app/shared-group-settings-state';
+import {
+    CommissionGroupItem, GroupItem, GroupSettingItem, ProductGroup
+} from '@customer-web-app/shared-group-settings-types';
+import {
+    GroupSetting, scrollToTop, SetMemberPtPopup
+} from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -35,12 +31,8 @@ import NiceModal from '@ebay/nice-modal-react';
 
 import styles from './edit-customer-page.module.scss';
 import {
-  getNewIndirectEditCustomerSettings,
-  getUnCheckAutoPtItems,
-  handleChangeGroupSettingValue,
-  handleChangeItemValue,
-  handleInitProducts,
-  isGeneralInfoChanged,
+    getNewIndirectEditCustomerSettings, getUnCheckAutoPtItems, handleChangeGroupSettingValue,
+    handleChangeItemValue, handleInitProducts, isGeneralInfoChanged
 } from './handler';
 import { renderUpdateCustomerResult } from './update-customer-result';
 
@@ -56,6 +48,8 @@ export function EditCustomerPage() {
   const [originalGeneralInfo, setOriginalGeneralInfo] = useState<GeneralInfo>();
   const [productGroups, setProductGroups] = useState<ProductGroup[]>([]);
   const [updateCustomerResult, setUpdateCustomerResult] = useState<UpdateCustomerResult | null>();
+  const [originGroup, setOriginGroup] = useState('');
+  const [group, setGroup] = useState('');
 
   const generalInfoRef = useRef<ValidationRefType>(null);
   const groupSettingRef = useRef<ValidationRefType>(null);
@@ -63,7 +57,7 @@ export function EditCustomerPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { generalInfo, productGroups } = await SettingService.GetCustomerSetting(
+      const { generalInfo, group, productGroups } = await SettingService.GetCustomerSetting(
         params.custId,
         params.roleId,
         params.uplineRoleId,
@@ -82,6 +76,10 @@ export function EditCustomerPage() {
           displayTransferCondition: generalInfo.transferOption === TransferOptions.Daily,
         },
       });
+      if (group) {
+        setOriginGroup(group);
+        setGroup(group);
+      }
       validateGeneralInfo();
       setIsLoading(false);
     };
@@ -231,9 +229,37 @@ export function EditCustomerPage() {
     resetStateBeforeUpdate();
     const validateGroupSettingResult = (await validateGroupTypes(groupTypeId)) as ValidateRefResult;
     if (validateGroupSettingResult.isValid) {
-      const newProductGroups = getCustomerSettingChange(groupTypeId);
+      let newProductGroups = getCustomerSettingChange(groupTypeId);
+      const isGroupChanged = groupTypeId === GroupTypeIds.SportsBookCommission && group !== originGroup;
+      if (isGroupChanged) {
+        newProductGroups = newProductGroups.map((group) => {
+          if (
+            group.id === ProductGroupIds.SportsBook &&
+            !group.groupTypes.some((x) => x.id === GroupTypeIds.SportsBookCommission)
+          ) {
+            const groupItems = getSettingItems<CommissionGroupItem>(
+              productGroups,
+              ProductGroupIds.SportsBook,
+              GroupTypeIds.SportsBookCommission
+            );
+            const groupTypes = group.groupTypes;
+            groupTypes.push({
+              id: GroupTypeIds.SportsBookCommission,
+              groupItems: groupItems.filter(
+                (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
+              ),
+              isReadOnly: false,
+              isAllowUncheckAll: true,
+            });
+            return { ...group, groupTypes };
+          }
+
+          return group;
+        });
+      }
       const isChanged = newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0));
-      if (isChanged) {
+
+      if (isChanged || isGroupChanged) {
         setIsLoading(false);
         const productGroupWithPTOnMembers = await getProductGroupWithPTOnMembers(newProductGroups);
         if (productGroupWithPTOnMembers.length === 0) {
@@ -257,7 +283,8 @@ export function EditCustomerPage() {
               params.roleId,
               params.uplineRoleId,
               generalInfo.site,
-              generalInfo.siteLabel
+              generalInfo.siteLabel,
+              groupTypeId === GroupTypeIds.SportsBookCommission ? group : undefined
             );
         setTimeout(() => {
           setRefreshData(!refreshData);
@@ -292,9 +319,40 @@ export function EditCustomerPage() {
       !isEditBetSetting && params.productGroupId === ProductGroupIds.SportsBook ? await validateGeneralInfo() : true;
     const validateGroupSettingResult = (await validateGroupTypes()) as ValidateRefResult;
     if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
-      const newProductGroups = getCustomerSettingChange();
+      let newProductGroups = getCustomerSettingChange();
       const isGeneralInfoDataChanged = isGeneralInfoChanged(generalInfo, originalGeneralInfo);
-      if (isGeneralInfoDataChanged || newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0))) {
+      const isGroupChange = originGroup !== group;
+      if (isGroupChange) {
+        newProductGroups = newProductGroups.map((group) => {
+          if (
+            group.id === ProductGroupIds.SportsBook &&
+            !group.groupTypes.some((x) => x.id === GroupTypeIds.SportsBookCommission)
+          ) {
+            const groupItems = getSettingItems<CommissionGroupItem>(
+              productGroups,
+              ProductGroupIds.SportsBook,
+              GroupTypeIds.SportsBookCommission
+            );
+            const groupTypes = group.groupTypes;
+            groupTypes.push({
+              id: GroupTypeIds.SportsBookCommission,
+              groupItems: groupItems.filter(
+                (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
+              ),
+              isReadOnly: false,
+              isAllowUncheckAll: true,
+            });
+            return { ...group, groupTypes };
+          }
+
+          return group;
+        });
+      }
+      if (
+        isGeneralInfoDataChanged ||
+        isGroupChange ||
+        newProductGroups.some((x) => x.groupTypes.some((t) => t.groupItems.length > 0))
+      ) {
         const newGeneralInfo = !isEditBetSetting && isGeneralInfoDataChanged ? generalInfo : null;
         setIsLoading(false);
         const productGroupWithPTOnMembers = await getProductGroupWithPTOnMembers(newProductGroups);
@@ -319,7 +377,8 @@ export function EditCustomerPage() {
               params.roleId,
               params.uplineRoleId,
               generalInfo.site,
-              generalInfo.siteLabel
+              generalInfo.siteLabel,
+              group
             );
         setTimeout(() => {
           setRefreshData(!refreshData);
@@ -383,6 +442,8 @@ export function EditCustomerPage() {
         <GroupSettingsContextProvider
           value={{
             generalInfo,
+            group,
+            handleMemberCommGroupChange: setGroup,
             productGroups,
             isMultipleMode: false,
             mode: 'edit',

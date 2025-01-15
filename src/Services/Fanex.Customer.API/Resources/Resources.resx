@@ -218,6 +218,10 @@
     <value>Invalid commission rate.</value>
     <comment/>
   </data>
+  <data name="Msg_12" xml:space="preserve">
+    <value>Unable to assign this commission group to the member.</value>
+    <comment/>
+  </data>
   <data name="Msg_10002" xml:space="preserve">
     <value>Wrong Max Per Ball</value>
     <comment/>

@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY src/Web/customer-web-app/package.json ./
 COPY src/Web/customer-web-app/package-lock.json ./
-RUN --mount=type=cache,target=/root/.npm npm install
+RUN npm install
 
 # Register TRANSFORM_CONFIG argument for transforming by environment
 ARG TRANSFORM_CONFIG=production

@@ -23,9 +23,12 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
     productGroupId,
     isEditMode,
     updateGroupSetting,
+    handleSelectCommGroup,
   } = useGroupSettingContext();
   const groupId = Number(productGroupId);
   const commissions = getSettingItems<CommissionGroupItem>(productGroups, groupId, groupTypeId);
+  const isIndirectUpdate = params.roleId === UserLevel.Member && params.uplineRoleId !== UserLevel.Agent;
+  const isMemberSportsBookComm = params.uplineRoleId === UserLevel.Agent && isSportsBookProduct(groupId);
 
   const handleCommissionChange = (sportTypeId: number, betTypeId: number, data: Partial<CommissionGroupItem>) => {
     handleSettingItemChange?.(groupId, groupTypeId, sportTypeId, betTypeId, data);
@@ -34,12 +37,13 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
   const handleSelectAll = (isChecked: boolean) => {
     const newCommissions = commissions.map((item) => ({ ...item, isMultipleModeChecked: isChecked }));
     handleUpdateSettingItems?.(groupId, groupTypeId, newCommissions);
+    if (isMemberSportsBookComm && !isChecked) {
+      handleSelectCommGroup?.(false);
+    }
   };
 
   const props = { commissions, handleCommissionChange, isReadOnly, handleSelectAll };
 
-  const isIndirectUpdate = params.roleId === UserLevel.Member && params.uplineRoleId !== UserLevel.Agent;
-  const isMemberSportsBookComm = params.uplineRoleId === UserLevel.Agent && isSportsBookProduct(groupId);
   return (
     <Block
       title={t('Commission')}

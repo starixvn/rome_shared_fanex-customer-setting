@@ -26,7 +26,8 @@ public class MessageService : IMessageService
         { 
             MessageTypes.PlainMessage
                 => new MessageContent(rawMessage),
-            MessageTypes.WrongAutoPT
+            MessageTypes.SimpleMessage    
+            or MessageTypes.WrongAutoPT
                 => TranslateSimpleMessage(rawMessage, language),
             MessageTypes.ProductStatusDependencyViolation
                 => TranslateProductStatusDependencyViolationSubMessages(rawMessage, language),

@@ -19,6 +19,7 @@ namespace Fanex.Customer.Client.Params
             string customerNames,
             string site,
             string siteLabel,
+            string group,
             string language = Languages.English)
         {
             ProductGroups = productGroups;
@@ -32,6 +33,7 @@ namespace Fanex.Customer.Client.Params
             CustDBGroupID = custDBGroupID;
             Site = site;
             SiteLabel = siteLabel;
+            Group = group;
             CustomerIds = customerIds;
             CustomerNames = customerNames;
             Language = language;
@@ -66,5 +68,7 @@ namespace Fanex.Customer.Client.Params
         public string Site { get; }
 
         public string SiteLabel { get; }
+
+        public string Group { get; }
     }
 }

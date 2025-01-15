@@ -28,7 +28,6 @@ export interface GeneralInfo {
   transferOption?: string;
   displayTransferCondition: boolean;
   disableAutoMPT: boolean;
-  group: string;
   commissions: {
     discount: number;
     name: string;

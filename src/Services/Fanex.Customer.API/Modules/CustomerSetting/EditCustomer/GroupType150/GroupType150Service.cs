@@ -16,7 +16,7 @@ namespace Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
 
 public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
 {
-    public GroupType150Service(IMessageService messageService, ICacheRefService cacheRefService) 
+    public GroupType150Service(IMessageService messageService, ICacheRefService cacheRefService)
         : base(messageService, cacheRefService) { }
 
     public override UpdateGroupTypeResult Validate(
@@ -29,15 +29,16 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         return (UpdateGroupTypeResult)Result.CreateSuccessfulResult();
     }
 
-    public override async Task<UpdateGroupTypeResult> Update(
+    public override async Task<UpdateGroupTypeResult> UpdateSBComm(
         EditRequestContext context,
         int productGroupId,
         int groupTypeId,
+        string group,
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus)
     {
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_Discount150Upd");
-        var parameters = GenerateSPParams(context, groupItems, settingStatus);
+        var parameters = GenerateSPParams(context, groupItems, group, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
@@ -51,30 +52,33 @@ public class GroupType150Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
     }
 
     private Hashtable GenerateSPParams(
-        EditRequestContext context, 
-        IEnumerable<GroupItemDefault> groupItems, 
+        EditRequestContext context,
+        IEnumerable<GroupItemDefault> groupItems,
+        string group,
         byte settingStatus = 0)
     {
         var spParams = new Hashtable {
             { "custid", context.CustId },
-            { "commission", ComposeJsonSettingParam(groupItems) },
+            { "commission", ComposeJsonSettingParam(groupItems, group) },
             { "subaccid", context.SubAccId },
             { "userid", context.ActorId },
             { "ip", context.IP },
+            { "ugroup", group },
             { "settingstatus", settingStatus}
         };
 
         return spParams;
     }
 
-    private string ComposeJsonSettingParam(IEnumerable<GroupItemDefault> groupItems)
+    private string ComposeJsonSettingParam(IEnumerable<GroupItemDefault> groupItems, string group)
     {
-        if(!groupItems.Any())
+        if (!groupItems.Any() && string.IsNullOrWhiteSpace(group))
         {
             throw new InvalidOperationException("Group Items cannot be empty");
         }
 
-        if (groupItems.First().GetType() != typeof(CommissionGroup)
+        if (groupItems.Any()
+            && groupItems.First().GetType() != typeof(CommissionGroup)
             && groupItems.First().GetType() != typeof(SuperCommissionGroup)
             && groupItems.First().GetType() != typeof(MasterCommissionGroup)
             && groupItems.First().GetType() != typeof(AgentCommissionGroup)

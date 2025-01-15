@@ -17,7 +17,7 @@ WORKDIR /src/Services/Licensee.AdminSetting.API/
 
 RUN dotnet publish --use-current-runtime --self-contained false -o /app  
 
-FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine-25h1 AS base
+FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine AS base
 
 # Don’t run as root
 RUN adduser --disabled-password \

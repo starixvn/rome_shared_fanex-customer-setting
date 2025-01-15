@@ -54,8 +54,8 @@
       <Mapping DataField="Currency" ObjectProperty="CurrencyId" Class="CustomerInfo" />
       <Mapping DataField="MaxCredit" ObjectProperty="Credit" Class="CustomerInfo" />
       <Mapping DataField="MaxCreditMax" ObjectProperty="MaxCredit" Class="CustomerInfo" />
-      <Mapping DataField="uGroup" ObjectProperty="Group" Class="GeneralInformation" />
-      <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="GeneralInformation" />
+      <Mapping DataField="uGroup" ObjectProperty="Group" Class="GeneralInformationDTO" />
+      <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="GeneralInformationDTO" />
       <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CustomerInfo" />
     </Setting>
   </Function>

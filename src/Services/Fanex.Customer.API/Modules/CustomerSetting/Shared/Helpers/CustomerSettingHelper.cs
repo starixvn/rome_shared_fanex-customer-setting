@@ -18,6 +18,8 @@ public interface ICustomerSettingHelper
 
     bool IsPTGroupType(int groupType);
 
+    bool IsSBCommGroupType(int groupType);
+
     bool IsCrossLevel(byte roleId, byte uplineRoleId);
 }
 
@@ -63,6 +65,9 @@ public class CustomerSettingHelper : ICustomerSettingHelper
     
     public bool IsPTGroupType(int groupType)
     => groupType == 153;
+
+    public bool IsSBCommGroupType(int groupType)
+    => groupType == 150;
 
     public bool IsCrossLevel(byte roleId, byte uplineRoleId)
     => uplineRoleId - roleId > 1;

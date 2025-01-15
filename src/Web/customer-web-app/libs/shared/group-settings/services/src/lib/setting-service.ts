@@ -6,6 +6,7 @@ import { CurrentWinLossAmount, ProductGroup } from '@customer-web-app/shared-gro
 
 export interface GroupSettingsResponse {
   generalInfo: GeneralInfo;
+  group: string;
   productGroups: ProductGroup[];
 }
 
@@ -43,7 +44,7 @@ export const SettingService = {
       return { ...group, groupTypes };
     });
 
-    return { generalInfo, productGroups: newProductGroups };
+    return { generalInfo, group: '', productGroups: newProductGroups };
   },
   CheckExistedCustomer: async (userName: string): Promise<boolean> => {
     const response = await axiosInstance.get<boolean>(`Customer/CheckExistedCustomer?userName=${userName}`);
@@ -55,24 +56,27 @@ export const SettingService = {
     uplineRoleId = 0,
     isGetUpLine = false,
     siteLabel = '',
-    isMultipleMode=false,
-    groupName='',
-    isCopy=false
+    isMultipleMode = false,
+    groupName = '',
+    isCopy = false
   ): Promise<GroupSettingsResponse> => {
     const response = await axiosInstance.get<GroupSettingsResponse>(
       `Customer/GetCustomerSetting?custId=${custId}&roleId=${roleId}&uplineRoleId=${uplineRoleId}&isGetUpline=${isGetUpLine}&systemId=${
         appConfig.systemId
-      }&siteLabel=${siteLabel}&productGroupId=${params.productGroupId ?? ProductGroupIds.SportsBook}&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
+      }&siteLabel=${siteLabel}&productGroupId=${
+        params.productGroupId ?? ProductGroupIds.SportsBook
+      }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
     );
     return response.data;
   },
-  CreateCustomer: async (generalInfo: GeneralInfo, productGroups: ProductGroup[]) => {
+  CreateCustomer: async (generalInfo: GeneralInfo, group: string, productGroups: ProductGroup[]) => {
     const { custId, ...otherInfo } = generalInfo;
     return await axiosInstance
       .post<CreateCustomerResult>(
         'Customer/Create',
         {
           generalInfo: { ...otherInfo },
+          group,
           productGroups: JSON.stringify(productGroups),
         },
         {
@@ -96,7 +100,8 @@ export const SettingService = {
     roleId?: number,
     upLineRoleId?: number,
     site?: string,
-    siteLabel?: string
+    siteLabel?: string,
+    group?: string
   ) =>
     axiosInstance
       .post<UpdateCustomerResult>(
@@ -110,6 +115,7 @@ export const SettingService = {
           productGroupId: params.productGroupId,
           site,
           siteLabel,
+          group,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -131,7 +137,8 @@ export const SettingService = {
     roleId: number,
     uplineRoleId: number,
     site: string,
-    siteLabel: string
+    siteLabel: string,
+    group?: string
   ) => {
     const bodyFormData = new FormData();
     bodyFormData.append('roleId', roleId.toString());
@@ -142,6 +149,9 @@ export const SettingService = {
     bodyFormData.append('productGroupId', params.productGroupId.toString());
     bodyFormData.append('site', site);
     bodyFormData.append('siteLabel', siteLabel);
+    if (group) {
+      bodyFormData.append('group', group);
+    }
 
     return axiosInstance
       .post<UpdateCustomerResult[]>('Customer/UpdateMultipleCustomers', bodyFormData, {

@@ -60,7 +60,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "recommend", request.Settings.GeneralInfo.UplineCustId },
-            { "ugroup", request.Settings.GeneralInfo.Group },
+            { "ugroup", request.Settings.Group },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
         };
@@ -109,7 +109,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "subaccid", request.Context.SubAccId },
             { "recommend", request.Settings.GeneralInfo.UplineCustId },
-            { "ugroup", request.Settings.GeneralInfo.Group},
+            { "ugroup", request.Settings.Group},
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
             { "settingstatus", appSettings.SettingStatus },

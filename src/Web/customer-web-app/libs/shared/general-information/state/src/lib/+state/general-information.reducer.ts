@@ -22,7 +22,6 @@ export const initialState: GeneralInformationState = {
     isAutomateTransfer: false,
     transferOption: '',
     displayTransferCondition: false,
-    group: 'a',
     commissions: [],
     uplineUserName: '',
     newUserName: '',

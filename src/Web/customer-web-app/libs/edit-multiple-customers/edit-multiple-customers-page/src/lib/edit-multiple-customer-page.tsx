@@ -2,129 +2,42 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-  getUnCheckAutoPtItems,
-  handleChangeGroupSettingValue,
-  handleChangeItemValue,
-  renderUpdateCustomerResult,
+    getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue,
+    renderUpdateCustomerResult
 } from '@customer-web-app/edit-customer-page';
 import {
-  Result,
-  SubMessagesResult,
-  UpdateCustomerResult,
-  ValidateRefResult,
-  ValidationRefType,
+    Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-  GeneralInfoActionTypes,
-  generalInformationReducer,
-  initialState,
+    GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { GroupItem, GroupSettingItem, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import { GroupSetting, scrollPageToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
+import {
+    GroupItem, GroupSettingItem, ProductGroup
+} from '@customer-web-app/shared-group-settings-types';
+import {
+    GroupSetting, scrollPageToTop, SetMemberPtPopup
+} from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import popUpStyles from './popup.module.scss';
-import { IconClose } from '@customer-web-app/shared/base/common-icon';
+import NiceModal from '@ebay/nice-modal-react';
 
 import styles from './edit-multiple-customer-page.module.scss';
 import { getNewMultipleEditCustomerSettings, handleInitProducts } from './handler';
-
-const UpdateSettingConfirmationPopup = NiceModal.create(
-  ({ productGroups, sportChangedCount, settingChangedCount, custCount, isCopyBetSetting }: any) => {
-    const modal = useModal();
-    const theme = useTheme();
-    const [confirmTimer, setConfirmTimer] = useState(1);
-   
-    useEffect(() => {
-      if(confirmTimer === 0) {
-        return;
-      }
-  
-      const timer = setTimeout(() => {
-        setConfirmTimer(confirmTimer - 1);
-      }, 1000);
-  
-      return () => {
-        clearTimeout(timer);
-      };
-    }, [confirmTimer]);
-
-    return (
-      <div className={popUpStyles.overlay} data-theme={theme}>
-        <div className={`${popUpStyles.wrapper} ${popUpStyles.wrappermultiple}`}>
-          <div className={popUpStyles.content}>
-            <div className={popUpStyles.title}>
-              {isCopyBetSetting ? 'Copy' : 'Edit'} {productGroups[0].name} Bet Setting Confirmation
-              <span
-                onClick={() => {
-                  modal.resolve({
-                    isCancel: true
-                  });
-                  modal.remove();
-                }}
-                className={popUpStyles.close}
-                aria-hidden
-              >
-                {IconClose}
-              </span>
-            </div>
-            <p>Please review and confirm your changes in the summary below:</p>
-            <ul className="ul-changes">
-              <li>Sports to be updated: {sportChangedCount}</li>
-              <li>Settings Values to be updated: {settingChangedCount}</li>
-              <li>Supers to be updated: {custCount}</li>
-            </ul>
-            <p className={popUpStyles.note}>Note: Decreasing the bet setting may adjust the downline's bet setting.</p>
-            <p>Proceed with these updates?</p>
-            <div className={popUpStyles.button}>
-              <button
-                className={popUpStyles['btn-cancel']}
-                style={{ display: 'block' }}
-                onClick={() => {
-                  modal.resolve({
-                    isCancel: true
-                  });
-                  modal.remove();
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                className={popUpStyles['btn-confirm']}
-                style={{ display: 'block' }}
-                onClick={() => {
-                  if(confirmTimer == 0) {
-                    modal.resolve({
-                      isCancel: false
-                    });
-                    modal.remove();
-                  }
-                }}
-              >
-                Confirm({confirmTimer})
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-);
-
+import UpdateSettingConfirmationPopup from './update-setting-confirmation-popup';
 
 export function EditMultipleCustomerPage() {
   const { t } = useTranslation();
   const theme = useTheme();
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;
-
+  const [group, setGroup] = useState('');
+  const [selectedCommGroup, setSelectedCommGroup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshData, setRefreshData] = useState(true);
   const [isShowNoChangeMessage, setIsShowNoChangeMessage] = useState(false);
@@ -136,7 +49,7 @@ export function EditMultipleCustomerPage() {
   useEffect(() => {
     const fetchData = async () => {
       const firstCustomerId = params.isCopyBetSetting ? params.custId : parseInt(params.custIds.split(',')[0]);
-      const { generalInfo, productGroups } = await SettingService.GetCustomerSetting(
+      const { generalInfo, group, productGroups } = await SettingService.GetCustomerSetting(
         firstCustomerId,
         params.roleId,
         params.uplineRoleId,
@@ -147,8 +60,11 @@ export function EditMultipleCustomerPage() {
         params.isCopyBetSetting
       );
 
+      setGroup(group);
+
       const newProductGroups = handleInitProducts(productGroups);
       setProductGroups(newProductGroups);
+      setSelectedCommGroup(false);
 
       generalInfoDispatch({
         type: GeneralInfoActionTypes.Update,
@@ -210,7 +126,7 @@ export function EditMultipleCustomerPage() {
     scrollPageToTop(window);
 
     const parentWindow = window.parent as any;
-    if(parentWindow.scrollPageToTop) {
+    if (parentWindow.scrollPageToTop) {
       parentWindow.scrollPageToTop();
     }
   };
@@ -284,22 +200,22 @@ export function EditMultipleCustomerPage() {
           return;
         }
 
-        if(params.roleId === UserLevel.Super) {
+        if (params.roleId === UserLevel.Super) {
           const settingChangedCount = countSettingChanged(id);
-          if(settingChangedCount === 0) {
+          if (settingChangedCount === 0) {
             setIsShowNoChangeMessage(true);
             return;
           }
 
           scrollToTop();
-          const confirmation: { isCancel: boolean; } = await NiceModal.show(UpdateSettingConfirmationPopup, {
+          const confirmation: { isCancel: boolean } = await NiceModal.show(UpdateSettingConfirmationPopup, {
             productGroups,
             sportChangedCount: countSportChangedOfSetting(id),
             settingChangedCount: settingChangedCount,
             custCount: params.custIds.split(',').length,
-            isCopyBetSetting: params.isCopyBetSetting
+            isCopyBetSetting: params.isCopyBetSetting,
           });
-      
+
           if (confirmation.isCancel) {
             return;
           }
@@ -338,7 +254,8 @@ export function EditMultipleCustomerPage() {
           params.roleId,
           params.uplineRoleId,
           generalInfo.site,
-          generalInfo.siteLabel
+          generalInfo.siteLabel,
+          selectedCommGroup ? group : undefined
         );
     setTimeout(() => {
       showUpdateCustomerResult(result);
@@ -349,8 +266,8 @@ export function EditMultipleCustomerPage() {
 
   const countSportChangedOfSetting = (id?: number) => {
     let result = 0;
-    for(let i=0; i<productGroups.length; i++) {
-      var group = productGroups[i];
+    for (let i = 0; i < productGroups.length; i++) {
+      const group = productGroups[i];
       result += countSportChangedOfProduct(group, id);
     }
 
@@ -360,19 +277,20 @@ export function EditMultipleCustomerPage() {
   const countSportChangedOfProduct = (group: any, id?: number) => {
     let result = 0;
     const settingTypes = [
-      GroupTypeIds.SportsBookBetSetting, 
-      GroupTypeIds.RNGGamesBetSetting, 
-      GroupTypeIds.OtherGamesBetSetting, 
-      GroupTypeIds.ParlayMaxPayout, 
-      GroupTypeIds.BetLimit];
+      GroupTypeIds.SportsBookBetSetting,
+      GroupTypeIds.RNGGamesBetSetting,
+      GroupTypeIds.OtherGamesBetSetting,
+      GroupTypeIds.ParlayMaxPayout,
+      GroupTypeIds.BetLimit,
+    ];
 
-    for(let i=0; i<group.groupTypes.length; i++) {
-      var g = group.groupTypes[i];
-      if(id && id !== g.id) {
+    for (let i = 0; i < group.groupTypes.length; i++) {
+      const g = group.groupTypes[i];
+      if (id && id !== g.id) {
         continue;
       }
 
-      if(settingTypes.some(s => s==g.id) && (!id || id === g.id)) {
+      if (settingTypes.some((s) => s == g.id) && (!id || id === g.id)) {
         result += countSportChangedOfGroupType(g, id);
       }
     }
@@ -382,68 +300,68 @@ export function EditMultipleCustomerPage() {
 
   const countSportChangedOfGroupType = (group: any, id?: number) => {
     let result = 0;
-    let checkedSports: any = {};
-    const isExtBetSetting = AppConfigHelper.isEditBetSettingOnly() ;
+    const checkedSports: any = {};
+    const isExtBetSetting = AppConfigHelper.isEditBetSettingOnly();
 
-    for(let i=0; i<group.groupItems.length; i++) {
-      var gi = group.groupItems[i];
+    for (let i = 0; i < group.groupItems.length; i++) {
+      const gi = group.groupItems[i];
 
-      let sportTypeId = gi.sportTypeId.toString();
-      if(group.id === GroupTypeIds.BetLimit && !checkedSports[sportTypeId]) {
+      const sportTypeId = gi.sportTypeId.toString();
+      if (group.id === GroupTypeIds.BetLimit && !checkedSports[sportTypeId]) {
         result++;
         checkedSports[sportTypeId] = true;
         continue;
       }
 
-      if(!gi.isMultipleModeChecked) {
+      if (!gi.isMultipleModeChecked) {
         continue;
       }
 
-      if(group.id === GroupTypeIds.ParlayMaxPayout) {
-        if((isExtBetSetting || gi.singleMatchParlayMultipleMode) && gi.singleMatchParlay != null) {
-          result++;
-          continue;
-        }
-      
-        if((isExtBetSetting || gi.combo2MultipleMode) && gi.combo2 != null) {
-          result++;
-          continue;
-        }
-      
-        if((isExtBetSetting || gi.combo35MultipleMode) && gi.combo35 != null) {
-          result++;
-          continue;
-        }
-      
-        if((isExtBetSetting || gi.comboOver6MultipleMode) && gi.comboOver6 != null) {
+      if (group.id === GroupTypeIds.ParlayMaxPayout) {
+        if ((isExtBetSetting || gi.singleMatchParlayMultipleMode) && gi.singleMatchParlay != null) {
           result++;
           continue;
         }
 
+        if ((isExtBetSetting || gi.combo2MultipleMode) && gi.combo2 != null) {
+          result++;
+          continue;
+        }
+
+        if ((isExtBetSetting || gi.combo35MultipleMode) && gi.combo35 != null) {
+          result++;
+          continue;
+        }
+
+        if ((isExtBetSetting || gi.comboOver6MultipleMode) && gi.comboOver6 != null) {
+          result++;
+          continue;
+        }
+
         continue;
       }
 
-      if((isExtBetSetting || gi.minBetMultipleMode) && gi.minBet != null) {
+      if ((isExtBetSetting || gi.minBetMultipleMode) && gi.minBet != null) {
         result++;
         continue;
       }
 
-      if((isExtBetSetting || gi.maxBetMultipleMode) && gi.maxBet != null) {
+      if ((isExtBetSetting || gi.maxBetMultipleMode) && gi.maxBet != null) {
         result++;
         continue;
       }
 
-      if((isExtBetSetting || gi.maxPerMatchMultipleMode) && gi.maxPerMatch != null) {
+      if ((isExtBetSetting || gi.maxPerMatchMultipleMode) && gi.maxPerMatch != null) {
         result++;
         continue;
       }
 
-      if((isExtBetSetting || gi.maxPayoutPerMatchMultipleMode) && gi.maxPayoutPerMatch != null) {
+      if ((isExtBetSetting || gi.maxPayoutPerMatchMultipleMode) && gi.maxPayoutPerMatch != null) {
         result++;
         continue;
       }
 
-      if((isExtBetSetting || gi.maxPerBallMultipleMode) && gi.maxPerBall != null) {
+      if ((isExtBetSetting || gi.maxPerBallMultipleMode) && gi.maxPerBall != null) {
         result++;
         continue;
       }
@@ -454,11 +372,10 @@ export function EditMultipleCustomerPage() {
     return result;
   };
 
-
   const countSettingChanged = (id?: number) => {
     let result = 0;
-    for(let i=0; i<productGroups.length; i++) {
-      var group = productGroups[i];
+    for (let i = 0; i < productGroups.length; i++) {
+      const group = productGroups[i];
       result += countSettingChangedOfProduct(group, id);
     }
 
@@ -467,9 +384,9 @@ export function EditMultipleCustomerPage() {
 
   const countSettingChangedOfProduct = (group: any, id?: number) => {
     let result = 0;
-    for(let i=0; i<group.groupTypes.length; i++) {
-      var g = group.groupTypes[i];
-      if(id && id !== g.id) {
+    for (let i = 0; i < group.groupTypes.length; i++) {
+      const g = group.groupTypes[i];
+      if (id && id !== g.id) {
         continue;
       }
 
@@ -479,65 +396,64 @@ export function EditMultipleCustomerPage() {
     return result;
   };
 
-
   const countSettingChangedOfGroupType = (group: any, id?: number) => {
     let result = 0;
 
-    for(let i=0; i<group.groupItems.length; i++) {
-      var gi = group.groupItems[i];
-     
-      if(!gi.isMultipleModeChecked) {
-        continue;  
+    for (let i = 0; i < group.groupItems.length; i++) {
+      const gi = group.groupItems[i];
+
+      if (!gi.isMultipleModeChecked) {
+        continue;
       }
 
-      var isExtBetSetting = AppConfigHelper.isEditBetSettingOnly();
+      const isExtBetSetting = AppConfigHelper.isEditBetSettingOnly();
 
-      switch(group.id) {
+      switch (group.id) {
         case GroupTypeIds.SportsBookBetSetting:
-        case GroupTypeIds.RNGGamesBetSetting:    
-        case GroupTypeIds.OtherGamesBetSetting:    
-          if((isExtBetSetting || gi.minBetMultipleMode) && gi.minBet != null) {
+        case GroupTypeIds.RNGGamesBetSetting:
+        case GroupTypeIds.OtherGamesBetSetting:
+          if ((isExtBetSetting || gi.minBetMultipleMode) && gi.minBet != null) {
             result++;
           }
 
-          if((isExtBetSetting || gi.maxBetMultipleMode) && gi.maxBet != null) {
+          if ((isExtBetSetting || gi.maxBetMultipleMode) && gi.maxBet != null) {
             result++;
           }
 
-          if((isExtBetSetting || gi.maxPerMatchMultipleMode) && gi.maxPerMatch != null) {
+          if ((isExtBetSetting || gi.maxPerMatchMultipleMode) && gi.maxPerMatch != null) {
             result++;
           }
 
-          if((isExtBetSetting || gi.maxPayoutPerMatchMultipleMode) && gi.maxPayoutPerMatch != null) {
+          if ((isExtBetSetting || gi.maxPayoutPerMatchMultipleMode) && gi.maxPayoutPerMatch != null) {
             result++;
           }
 
-          if((isExtBetSetting || gi.maxPerBallMultipleMode) && gi.maxPerBall != null) {
+          if ((isExtBetSetting || gi.maxPerBallMultipleMode) && gi.maxPerBall != null) {
             result++;
           }
 
-          break;     
+          break;
         case GroupTypeIds.ParlayMaxPayout:
-          if((isExtBetSetting || gi.singleMatchParlayMultipleMode) && gi.singleMatchParlay != null) {
-            result++;
-          }
-        
-          if((isExtBetSetting || gi.combo2MultipleMode) && gi.combo2 != null) {
-            result++;
-          }
-        
-          if((isExtBetSetting || gi.combo35MultipleMode) && gi.combo35 != null) {
-            result++;
-          }
-        
-          if((isExtBetSetting || gi.comboOver6MultipleMode) && gi.comboOver6 != null) {
+          if ((isExtBetSetting || gi.singleMatchParlayMultipleMode) && gi.singleMatchParlay != null) {
             result++;
           }
 
-          break;  
-        case GroupTypeIds.BetLimit:
+          if ((isExtBetSetting || gi.combo2MultipleMode) && gi.combo2 != null) {
             result++;
-            break;  
+          }
+
+          if ((isExtBetSetting || gi.combo35MultipleMode) && gi.combo35 != null) {
+            result++;
+          }
+
+          if ((isExtBetSetting || gi.comboOver6MultipleMode) && gi.comboOver6 != null) {
+            result++;
+          }
+
+          break;
+        case GroupTypeIds.BetLimit:
+          result++;
+          break;
         default:
           break;
       }
@@ -545,7 +461,6 @@ export function EditMultipleCustomerPage() {
 
     return result;
   };
-
 
   const renderUpdateButton = () => {
     return (
@@ -582,7 +497,7 @@ export function EditMultipleCustomerPage() {
 
     return null;
   };
- 
+
   return (
     <>
       {isLoading && <BlockUI />}
@@ -596,6 +511,10 @@ export function EditMultipleCustomerPage() {
         <GroupSettingsContextProvider
           value={{
             generalInfo,
+            group,
+            handleMemberCommGroupChange: setGroup,
+            selectedCommGroup,
+            handleSelectCommGroup: setSelectedCommGroup,
             productGroups,
             isMultipleMode: true,
             productGroupId: params.productGroupId,

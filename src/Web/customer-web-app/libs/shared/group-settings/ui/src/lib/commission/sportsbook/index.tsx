@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BetTypeIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
+import { BetTypeIds, ProductGroupIds, SportTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -9,6 +9,7 @@ import CommissionLabel from '../commission-label';
 import CommissionSelect from '../commission-select';
 import SelectAllCommissionCheckbox from '../select-all-commission-checkbox';
 import { Props } from '../types';
+import CommissionGroup from './commission-group';
 import styles from './sportsbook-commission.module.scss';
 
 export function MemberSportsBookCommission({
@@ -18,19 +19,67 @@ export function MemberSportsBookCommission({
   handleSelectAll,
 }: Readonly<Props>) {
   const { t } = useTranslation();
-  const { generalInfo, isMultipleMode } = useGroupSettingContext();
-  const commissionGroup = generalInfo?.group;
-  const asianHDPCommValue = generalInfo?.commissions?.find((c) => commissionGroup?.includes(c.name))?.discount ?? 0;
+  const {
+    generalInfo,
+    isMultipleMode,
+    group,
+    handleMemberCommGroupChange,
+    handleSelectCommGroup,
+    selectedCommGroup,
+    mode,
+    productGroupId,
+  } = useGroupSettingContext();
 
   useEffect(() => {
-    if (generalInfo?.commissions) {
+    if (mode === 'createCustomer' && generalInfo?.commissions) {
+      const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
       handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: asianHDPCommValue });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [asianHDPCommValue]);
+  }, []);
 
   return (
     <>
+      <BlockRow
+        label={
+          <>
+            {isMultipleMode && !isReadOnly && (
+              <input
+                type="checkbox"
+                checked={selectedCommGroup}
+                onChange={(e) => {
+                  const selected = e.target.checked;
+                  handleSelectCommGroup?.(selected);
+                  if (selected) {
+                    handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {
+                      isMultipleModeChecked: selected,
+                    });
+                  }
+                }}
+              />
+            )}
+            {t('Group')}
+          </>
+        }
+      >
+        <BlockColumn>
+          {productGroupId === ProductGroupIds.SportsBook && generalInfo && group && (
+            <CommissionGroup
+              site={generalInfo.site}
+              currency={generalInfo.currency.toString()}
+              value={group}
+              onChange={(e) => {
+                const uGroup = e.target.value;
+                const commValue = generalInfo?.commissions?.find((c) => uGroup?.includes(c.name))?.discount ?? 0;
+                handleMemberCommGroupChange?.(uGroup);
+                handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: commValue });
+              }}
+              isReadOnly={isReadOnly || (isMultipleMode && !selectedCommGroup)}
+            />
+          )}
+        </BlockColumn>
+        <BlockColumn>{''}</BlockColumn>
+      </BlockRow>
       <BlockRow
         isHeaderRow
         label={
@@ -51,6 +100,7 @@ export function MemberSportsBookCommission({
       </BlockRow>
       {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked }) => {
         const isAsianHDP = sportTypeId === SportTypeIds.Soccer && betTypeId === BetTypeIds.Handicap;
+        const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
         return (
           <BlockRow
             key={`${sportTypeId}-${betTypeId}`}
@@ -59,9 +109,12 @@ export function MemberSportsBookCommission({
                 displayName={displayName as string}
                 isSelected={isMultipleModeChecked}
                 isReadOnly={isReadOnly}
-                handleSelectCommission={(isChecked) =>
-                  handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked })
-                }
+                handleSelectCommission={(isChecked) => {
+                  if (isAsianHDP && !isChecked) {
+                    handleSelectCommGroup?.(false);
+                  }
+                  handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked });
+                }}
               />
             }
           >

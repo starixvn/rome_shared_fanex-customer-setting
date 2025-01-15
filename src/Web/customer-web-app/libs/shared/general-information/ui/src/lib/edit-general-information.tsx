@@ -16,7 +16,6 @@ import { NumberHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/block';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import CommissionGroup from './commission-group';
 import { errorTooltip, iconTrueFalse, maxCreditValidateFiled } from './common';
 import CreditNote from './credit-note';
 import CreditRange from './credit-range';
@@ -143,7 +142,7 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
                       name="maxCredit"
                       maxLength={MaxNumberInputLength}
                       allowNegative={false}
-                    decimalScale={2}
+                      decimalScale={2}
                       thousandSeparator=","
                       valueIsNumericString
                       value={generalInfo.maxCredit}
@@ -174,10 +173,10 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
                       <span>{iconTrueFalse(getErrorByField(maxCreditValidateFiled(generalInfo)))}</span>
                     )}
                   </div>
-                <div className={styles['max-credit']}>
-                  <CreditRange min={generalInfo.maxCreditMin ?? 0} max={maxCreditMax} />
-                  {renderCreditHint()}
-                </div>
+                  <div className={styles['max-credit']}>
+                    <CreditRange min={generalInfo.maxCreditMin ?? 0} max={maxCreditMax} />
+                    {renderCreditHint()}
+                  </div>
                 </BlockItem>
               </div>
             )}
@@ -215,21 +214,6 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
                 <div className={styles['max-credit']}>
                   <CreditRange min={generalInfo.memberMaxCreditMin ?? 0} max={generalInfo.maxCredit ?? 0} />
                 </div>
-              </BlockItem>
-            )}
-            {/*   CommissionGroup */}
-            {generalInfo.group && isSportsBookProduct(productGroupId) && (
-              <BlockItem label={t('Group')}>
-                <CommissionGroup
-                  site={generalInfo.site}
-                  currency={generalInfo.currency.toString()}
-                  value={generalInfo.group}
-                  onChange={(e) => {
-                    const data = { group: e.target.value };
-                    onGeneralInfoChange?.(data);
-                  }}
-                  isReadOnly={true}
-                />
               </BlockItem>
             )}
           </div>

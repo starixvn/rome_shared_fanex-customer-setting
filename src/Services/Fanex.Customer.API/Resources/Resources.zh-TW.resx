@@ -210,25 +210,20 @@
     <value>抱歉，您每天只能創建三個總代理賬號，請您明天再次嘗試。</value>
     <comment/>
   </data>
-  <data name="Live" xml:space="preserve">
-    <value/>
-  </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
     <value>總代理最低占成必須少於或相等於總代理最高占成</value>
     <comment/>
-  </data>
-  <data name="Max" xml:space="preserve">
-    <value/>
   </data>
   <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
     <value>所有體育除了{0}和{1}</value>
     <comment/>
   </data>
-  <data name="Min" xml:space="preserve">
-    <value/>
-  </data>
   <data name="Msg_1" xml:space="preserve">
     <value>折扣不正確</value>
+    <comment/>
+  </data>
+  <data name="Msg_12" xml:space="preserve">
+    <value>無法將此佣金組別分配給會員。</value>
     <comment/>
   </data>
   <data name="Msg_10002" xml:space="preserve">
@@ -497,13 +492,6 @@
   <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
     <value>超級總代理的最低占成必須少於或相等於超級總代理的最高占成。</value>
     <comment/>
-  </data>
-  <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
-    <value>此賬號來源已被禁用。</value>
-    <comment/>
-  </data>
-  <data name="UM" xml:space="preserve">
-    <value/>
   </data>
   <data name="UMMainMsg" xml:space="preserve">
     <value>由于以下设定正在维护中，因此无法更新 (GMT+8):</value>
