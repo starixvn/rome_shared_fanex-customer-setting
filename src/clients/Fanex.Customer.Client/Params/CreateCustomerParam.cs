@@ -15,7 +15,6 @@ namespace Fanex.Customer.Client.Params
             string siteLabel,
             int custDBGroupID,
             string group,
-            bool? isDirectMemner,
             int? noOfCreateAccount,
             CreationModes mode = CreationModes.LiteMode,
             string language = Languages.English,

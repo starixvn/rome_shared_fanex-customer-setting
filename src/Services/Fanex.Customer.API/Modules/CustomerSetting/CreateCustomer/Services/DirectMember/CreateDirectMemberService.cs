@@ -107,7 +107,7 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false) },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "uplineid", request.Settings.GeneralInfo.UplineCustId },
-            { "ugroup", request.Settings.GeneralInfo.Group },
+            { "ugroup", request.Settings.Group },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
         };
@@ -156,7 +156,7 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
             { "subaccid", request.Context.SubAccId },
             { "uplineid", request.Settings.GeneralInfo.UplineCustId },
-            { "ugroup", request.Settings.GeneralInfo.Group},
+            { "ugroup", request.Settings.Group},
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
             { "settingstatus", appSettings.SettingStatus },
