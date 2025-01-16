@@ -19,7 +19,7 @@ import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-set
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { getChanges, getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-    GroupItem, GroupSettingItem, ProductGroup
+    CommissionGroupItem, GroupItem, GroupSettingItem, ProductGroup
 } from '@customer-web-app/shared-group-settings-types';
 import {
     GroupSetting, scrollToTop, SetMemberPtPopup
