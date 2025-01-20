@@ -139,7 +139,8 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
   };
 
   const handleSelectDirectMember = async (custId: number) => {
-    const { productGroups } = await SettingService.GetCustomerSetting(
+    setIsLoading(true);
+    const { productGroups, group } = await SettingService.GetCustomerSetting(
       custId,
       UserLevel.Member,
       params.uplineRoleId,
@@ -149,7 +150,10 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
       true
     );
 
+    setGroup(group);
+
     productGroupsDispatch({ type: ProductGroupsActionTypes.InitEdit, payload: productGroups });
+    setIsLoading(false);
   };
 
   const scrollToInvalidGroup = (isValidGeneralInfo: boolean, validateGroupSettingResult: ValidateRefResult) => {
