@@ -161,15 +161,14 @@ export function EditCustomerPage() {
 
   const isIndirectUpdate = (params: Params) => {
     const isDirectMember = params.agentId === -4 || params.agentId === -3;
-    if (
-      (params.uplineRoleId === UserLevel.Super || params.uplineRoleId === UserLevel.Master) &&
-      params.roleId === UserLevel.Member &&
-      !isDirectMember
-    ) {
-      return true;
+    if (isDirectMember) {
+      return params.uplineRoleId === UserLevel.Super && params.agentId === -3;
+    } else {
+      return (
+        (params.uplineRoleId === UserLevel.Super || params.uplineRoleId === UserLevel.Master) &&
+        params.roleId === UserLevel.Member
+      );
     }
-
-    return false;
   };
 
   const getCustomerSettingChange = (groupTypeId?: number) => {
