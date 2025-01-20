@@ -19,7 +19,7 @@ export interface GroupItem {
   comboOver6MultipleMode: boolean;
   maxPerBallMultipleMode: boolean;
 }
- 
+
 export interface GroupSettingItem<T> extends GroupItem {
   upline: T;
   original: T;
@@ -145,6 +145,23 @@ export interface ParlayMaxPayoutGroupItem extends ParlayMaxPayoutProps, GroupSet
 export interface PositionTakingProps {
   step: number;
 }
+
+export interface SuperEditDirectMemberPositionTakingProps extends PositionTakingProps {
+  s4: number;
+  n4: number;
+  iS3: boolean;
+  s3: number;
+  uS3: number;
+  m3: number;
+  iS1: boolean;
+  uS1: number;
+  s1: number;
+  m1: number;
+}
+
+export interface SuperEditDirectMemberPositionTakingGroupItem
+  extends SuperEditDirectMemberPositionTakingProps,
+    GroupSettingItem<SuperEditDirectMemberPositionTakingProps> {}
 
 export interface MasterDirectMemberPositionTakingProps extends PositionTakingProps {
   m3: number;

@@ -15,11 +15,7 @@ import PTSelect from '../pt-select';
 import { CopyStatus } from '../types';
 import { groupSportsBookPTBySportTypeId, isCopyingPTItem, usePTCopy } from '../utils';
 import styles from './direct-member-position-taking.module.scss';
-
-type Props = {
-  isReadOnly: boolean;
-  onPTChange: (sportTypeId: number, betTypeId: number, data: { [x: string]: number | undefined }) => void;
-};
+import { Props } from './types';
 
 const validateSuperPT = (
   currentPT: MasterDirectMemberPositionTakingGroupItem,

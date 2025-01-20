@@ -11,6 +11,7 @@ import PositionTakingNote from '../position-taking-note';
 import styles from './direct-member-position-taking.module.scss';
 import MasterDirectMemberPositionTaking from './master-direct-member-position-taking';
 import SuperDirectMemberPositionTaking from './super-direct-member-position-taking';
+import SuperEditDirectMemberPositionTaking from './super-edit-direct-member-position-taking';
 
 const PositionTakingBlockId = 'position-taking';
 
@@ -20,9 +21,32 @@ const DirectMemberPositionTaking = forwardRef<ValidationRefType, GroupSettingBlo
     const { t } = useTranslation();
     const { productGroupId, isEditMode, handleSettingItemChange, updateGroupSetting } = useGroupSettingContext();
 
-    const handlePTChange = (sportTypeId: number, betTypeId: number, data: { [x: string]: number | undefined }) => {
+    const handlePTChange = (
+      sportTypeId: number,
+      betTypeId: number,
+      data: { [x: string]: number | boolean | undefined }
+    ) => {
       handleSettingItemChange?.(Number(productGroupId), GroupTypeIds.PositionTaking, sportTypeId, betTypeId, data);
     };
+
+    if (params.uplineRoleId === UserLevel.Super && params.agentId === -3) {
+      return (
+        <Block
+          ref={blockRef}
+          title={
+            <>
+              {t('PositionTaking')}
+              {productGroupId === ProductGroupIds.SportsBook && <PositionTakingNote />}
+            </>
+          }
+          id={PositionTakingBlockId}
+          isPartialUpdate={isEditMode === true && !props.isReadOnly}
+          onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PositionTaking)}
+        >
+          <SuperEditDirectMemberPositionTaking isReadOnly={props.isReadOnly} onPTChange={handlePTChange} />
+        </Block>
+      );
+    }
 
     const renderContent = () => {
       if (params.uplineRoleId === UserLevel.Super) {
