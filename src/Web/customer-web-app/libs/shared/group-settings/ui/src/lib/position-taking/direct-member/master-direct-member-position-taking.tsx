@@ -29,7 +29,7 @@ const validateSuperPT = (
 
 export default function MasterDirectMemberPositionTaking({ isReadOnly, onPTChange }: Props) {
   const { t } = useTranslation();
-  const { isMultipleMode, handleUpdateSettingItems, productGroupId, productGroups } = useGroupSettingContext();
+  const { handleUpdateSettingItems, productGroupId, productGroups } = useGroupSettingContext();
   const ptItems = getSettingItems<MasterDirectMemberPositionTakingGroupItem>(
     productGroups,
     Number(productGroupId),
@@ -39,9 +39,6 @@ export default function MasterDirectMemberPositionTaking({ isReadOnly, onPTChang
   const groups = (
     productGroupId === ProductGroupIds.SportsBook ? Object.values(groupSportsBookPTBySportTypeId(ptItems)) : [ptItems]
   ) as MasterDirectMemberPositionTakingGroupItem[][];
-
-  const isMultipleEdit = isMultipleMode ?? false;
-  const isDisable = isReadOnly || isMultipleEdit;
 
   const { stateCopiedGroup, copyIconId, handleCopy } = usePTCopy();
 
@@ -123,7 +120,7 @@ export default function MasterDirectMemberPositionTaking({ isReadOnly, onPTChang
                         max={item.m3}
                         value={item.m1}
                         step={item.step}
-                        isDisable={isDisable}
+                        isDisable={isReadOnly || !item.isMultipleModeChecked}
                         onChange={(e) => {
                           const m1 = Number(e.target.value);
                           onPTChange(item.sportTypeId, item.betTypeId, { m1 });

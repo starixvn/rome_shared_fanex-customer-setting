@@ -33,7 +33,7 @@ const validateSuperPT = (
 
 export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTChange }: Props) {
   const { t } = useTranslation();
-  const { productGroupId, productGroups, isMultipleMode, handleUpdateSettingItems } = useGroupSettingContext();
+  const { productGroupId, productGroups, handleUpdateSettingItems } = useGroupSettingContext();
   const ptItems = getSettingItems<SuperEditDirectMemberPositionTakingGroupItem>(
     productGroups,
     Number(productGroupId),
@@ -43,9 +43,6 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
   const groups = (
     productGroupId === ProductGroupIds.SportsBook ? Object.values(groupSportsBookPTBySportTypeId(ptItems)) : [ptItems]
   ) as SuperEditDirectMemberPositionTakingGroupItem[][];
-
-  const isMultipleEdit = isMultipleMode ?? false;
-  const isDisable = isReadOnly || isMultipleEdit;
 
   const { stateCopiedGroup, copyIconId, handleCopy } = usePTCopy();
 
@@ -137,7 +134,7 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
                           max={Math.max(item.n4 - item.m1, item.s4 - item.m3)}
                           value={item.uS1}
                           step={item.step}
-                          isDisable={isDisable}
+                          isDisable={isReadOnly || !item.isMultipleModeChecked}
                           onChange={(e) => {
                             const s1 = Number(e.target.value);
                             onPTChange(item.sportTypeId, item.betTypeId, { s1 });
@@ -149,7 +146,7 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
                           max={item.s4}
                           value={item.s1}
                           step={item.step}
-                          isDisable={isDisable || item.iS3}
+                          isDisable={isReadOnly || item.iS3 || !item.isMultipleModeChecked}
                           onChange={(e) => {
                             const s1 = Number(e.target.value);
                             onPTChange(item.sportTypeId, item.betTypeId, { s1 });
