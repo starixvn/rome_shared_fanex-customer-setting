@@ -35,15 +35,16 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
 
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
-        var result = await ValidateSetting(request);
-        if (!result.IsSuccessful)
-        {
-            return result;
-        }
-
         int retryCount = 0;
         for (var i = 0; i < request.Context.NoOfCreateAccount.GetValueOrDefault(); i++)
         {
+            var result = await ValidateSetting(request);
+            if (!result.IsSuccessful)
+            {
+                result.NewUserNames = newUserNames;
+                return result;
+            }
+
             if (i > 0 || retryCount > 0)
             {
                 var suggestNewUserNameResult = await _customerService.GetSuggestDirectMemberUsername(request.Settings.GeneralInfo.UplineUserName);
