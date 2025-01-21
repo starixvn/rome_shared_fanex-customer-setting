@@ -73,12 +73,15 @@ public class GroupType156Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         {
             throw new InvalidOperationException("Group Items cannot be empty");
         }
-
-        if (groupItems.First().GetType() != typeof(CommissionGroup)
-            && groupItems.First().GetType() != typeof(SuperCommissionGroup)
-            && groupItems.First().GetType() != typeof(MasterCommissionGroup)
-            && groupItems.First().GetType() != typeof(AgentCommissionGroup)
-            && groupItems.First().GetType() != typeof(MemberCommissionGroup))
+        
+        var groupItemType = groupItems.First().GetType();
+        if (groupItemType != typeof(CommissionGroup)
+            && groupItemType != typeof(SuperCommissionGroup)
+            && groupItemType != typeof(MasterCommissionGroup)
+            && groupItemType != typeof(AgentCommissionGroup)
+            && groupItemType != typeof(MemberCommissionGroup)
+            && groupItemType != typeof(SuperDirectMemberCommissionGroup)
+            && groupItemType != typeof(MasterDirectMemberCommissionGroup))
         {
             throw new InvalidOperationException("Item's type is not correct.");
         }
