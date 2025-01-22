@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     components, InputActionMeta, InputProps, OptionProps, SingleValue, StylesConfig
@@ -7,12 +6,8 @@ import AsyncSelect from 'react-select/async';
 
 import { UsernameSuggestion } from '@customer-web-app/share-models';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
-import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import styles from './username-suggestion-select.module.scss';
-
-interface UsernameSuggestionOption extends UsernameSuggestion {
+export interface UsernameSuggestionOption extends UsernameSuggestion {
   value: string;
 }
 
@@ -123,71 +118,27 @@ const customStyles: StylesConfig<UsernameSuggestionOption> = {
 };
 
 interface Props {
-  onSelectDirectMember: (custId: number) => void;
+  value: string;
+  onChange: (newValue: SingleValue<UsernameSuggestionOption>) => void;
+  onInputChange: (newValue: string, actionMeta: InputActionMeta) => void;
+  onBlur: () => void;
 }
 
-export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props) {
+export default function UsernameSuggestionSelect({ value, onChange, onInputChange, onBlur }: Props) {
   const { t } = useTranslation();
-  const [value, setValue] = useState('');
-  const [validateResult, setValidateResult] = useState<{ [key: string]: boolean }>({});
-  const [selectedDirectMember, setSelectedDirectMember] = useState('');
-
-  const handleCheckIsDirectMember = async (username: string) => {
-    const custId = await SettingService.GetDirectMember(username);
-    setValidateResult({ username: custId > 0 });
-    if (custId) {
-      setSelectedDirectMember(username);
-      onSelectDirectMember(custId);
-    } else {
-      setSelectedDirectMember('');
-    }
-  };
-
-  const handlerChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
-    if (newValue) {
-      setValue(newValue.value);
-      await handleCheckIsDirectMember(newValue.value);
-    } else {
-      setValidateResult({});
-    }
-  };
-
-  const handleInputChange = async (newValue: string, { action }: InputActionMeta) => {
-    if (action === 'input-change') {
-      setValue(newValue);
-    }
-  };
-
-  const handleBlur = async () => {
-    if (value !== selectedDirectMember) {
-      await handleCheckIsDirectMember(value);
-    }
-  };
-
   return (
-    <div className={styles.search}>
-      <AsyncSelect
-        id="sourceUsername"
-        inputValue={value}
-        loadOptions={promiseOptions}
-        components={{ Option, Input, SingleValue: () => null, Placeholder: () => null }}
-        styles={customStyles}
-        placeholder={t('UsernamePlaceHolder')}
-        noOptionsMessage={() => null}
-        controlShouldRenderValue={false}
-        onChange={handlerChange}
-        onInputChange={handleInputChange}
-        onBlur={handleBlur}
-      />
-      {validateResult['username'] !== undefined && (
-        <div>{validateResult['username'] ? <IconCorrect /> : <IconWrong />}</div>
-      )}
-      <WrapperTooltip
-        type="error"
-        anchorSelect={`#sourceUsername`}
-        isOpen={validateResult['username'] !== undefined && validateResult['username'] === false}
-        content={t('UserNotExist')}
-      />
-    </div>
+    <AsyncSelect
+      id="selectedDirectMember"
+      inputValue={value}
+      loadOptions={promiseOptions}
+      components={{ Option, Input, SingleValue: () => null, Placeholder: () => null }}
+      styles={customStyles}
+      placeholder={t('UsernamePlaceHolder')}
+      noOptionsMessage={() => null}
+      controlShouldRenderValue={false}
+      onChange={onChange}
+      onInputChange={onInputChange}
+      onBlur={onBlur}
+    />
   );
 }

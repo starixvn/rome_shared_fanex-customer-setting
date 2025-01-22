@@ -2,10 +2,12 @@ import classNames from 'classnames';
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NumericFormat } from 'react-number-format';
+import { InputActionMeta, SingleValue } from 'react-select';
 
 import { ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
 import { MaxNumberInputLength, SystemIds, UserLevel } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
+import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper, NumberHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/block';
@@ -15,8 +17,9 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import { errorTooltip } from './common';
 import CopySettingFromNote from './copy-setting-from-note';
 import CreditRange from './credit-range';
+import DirectMemberGeneralInformationValidator from './direct-member-general-information-validator';
 import { GeneralInformationProps } from './general-information';
-import GeneralInformationValidator, {
+import {
     generalInformationValidatorFields, validateMaxCredit
 } from './general-information-validator';
 import styles from './general-information.module.scss';
@@ -25,7 +28,7 @@ import { PasswordField } from './password-field';
 import PasswordRule from './password-rule';
 import UserInfo from './user-info';
 import Username from './username-field';
-import UsernameSuggestionSelect from './username-suggestion-select';
+import UsernameSuggestionSelect, { UsernameSuggestionOption } from './username-suggestion-select';
 
 function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
   const maxCredits: Record<UserLevel, validateMaxCredit> = {
@@ -56,10 +59,15 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     const [locationTooltip, setLocationTooltip] = useState<string>('');
     const { roleId, uplineMaxCredit } = generalInfo;
     const isNotNAP = appConfig.systemId !== SystemIds.NAP;
+    const [selectedDirectMember, setSelectedDirectMember] = useState('');
 
     useImperativeHandle(ref, () => {
       const validate = async () => {
-        const validator = new GeneralInformationValidator(generalInfo);
+        const validator = new DirectMemberGeneralInformationValidator(
+          generalInfo,
+          numberOfAccounts,
+          selectedDirectMember
+        );
         let validateResult = true;
         const validateItemResult = await validator.validateAll();
         const isErrorField = Object.values(validateItemResult).find((item) => item !== true) as ValidationResult;
@@ -89,7 +97,11 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     });
 
     const validateGeneralInfo = async (property: generalInformationValidatorFields, data?: Partial<GeneralInfo>) => {
-      const validator = new GeneralInformationValidator({ ...generalInfo, ...data }, numberOfAccounts);
+      const validator = new DirectMemberGeneralInformationValidator(
+        { ...generalInfo, ...data },
+        numberOfAccounts,
+        selectedDirectMember
+      );
       const result = await validator.validateField(property);
       return result;
     };
@@ -97,6 +109,49 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     const getErrorByField = (fieldName: string) =>
       validationResults[fieldName] && validationResults[fieldName] !== true;
     const napCanNotEditCredit = params.noPermissionEditCredit;
+
+    const [value, setValue] = useState('');
+
+    const handleCheckIsDirectMember = async (username: string) => {
+      setSelectedDirectMember(username);
+      const custId = await SettingService.GetDirectMember(username);
+      if (custId > 0) {
+        onSelectDirectMember(custId);
+        setValidationResults({
+          ...validationResults,
+          selectedDirectMember: true,
+        });
+      } else {
+        setValidationResults({
+          ...validationResults,
+          selectedDirectMember: new ValidationResult('selectedDirectMember', 'UserNotExist'),
+        });
+      }
+    };
+
+    const handlerChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
+      if (newValue) {
+        setLocationTooltip('selectedDirectMember');
+        setValue(newValue.value);
+        await handleCheckIsDirectMember(newValue.value);
+      }
+    };
+
+    const handleInputChange = async (newValue: string, { action }: InputActionMeta) => {
+      if (action === 'input-change') {
+        setLocationTooltip('selectedDirectMember');
+        setValue(newValue);
+        if (!newValue) {
+          setValidationResults({ ...validationResults, selectedDirectMember: true });
+        }
+      }
+    };
+
+    const handleBlur = async () => {
+      if (value !== selectedDirectMember) {
+        await handleCheckIsDirectMember(value);
+      }
+    };
 
     return (
       <Block id="general-information" title={t('general-information')} ref={blockRef} isPartialUpdate={false}>
@@ -112,7 +167,17 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                 </>
               }
             >
-              <UsernameSuggestionSelect onSelectDirectMember={onSelectDirectMember} />
+              <div>
+                <UsernameSuggestionSelect
+                  value={value}
+                  onChange={handlerChange}
+                  onInputChange={handleInputChange}
+                  onBlur={handleBlur}
+                />
+                {validationResults['selectedDirectMember'] !== undefined && (
+                  <span>{getErrorByField('selectedDirectMember') ? <IconWrong /> : <IconCorrect />}</span>
+                )}
+              </div>
             </BlockItem>
             <BlockItem label={t('username')} isRequired>
               <div>
@@ -208,7 +273,11 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                   onChange={async (e) => {
                     const value = Number(e.target.value);
                     setNumberOfAccounts(value);
-                    const validator = new GeneralInformationValidator({ ...generalInfo }, value);
+                    const validator = new DirectMemberGeneralInformationValidator(
+                      { ...generalInfo },
+                      value,
+                      selectedDirectMember
+                    );
                     const result = await validator.validateField(maxCreditValidateFiled(generalInfo));
                     setValidationResults({
                       ...validationResults,
