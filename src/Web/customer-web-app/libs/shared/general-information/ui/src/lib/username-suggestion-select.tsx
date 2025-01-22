@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { components, InputActionMeta, InputProps, OptionProps, SingleValue, StylesConfig } from 'react-select';
+import {
+    components, InputActionMeta, InputProps, OptionProps, SingleValue, StylesConfig
+} from 'react-select';
 import AsyncSelect from 'react-select/async';
 
 import { UsernameSuggestion } from '@customer-web-app/share-models';
@@ -128,19 +130,23 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
   const { t } = useTranslation();
   const [value, setValue] = useState('');
   const [validateResult, setValidateResult] = useState<{ [key: string]: boolean }>({});
+  const [selectedDirectMember, setSelectedDirectMember] = useState('');
 
   const handleCheckIsDirectMember = async (username: string) => {
     const custId = await SettingService.GetDirectMember(username);
     setValidateResult({ username: custId > 0 });
     if (custId) {
+      setSelectedDirectMember(username);
       onSelectDirectMember(custId);
+    } else {
+      setSelectedDirectMember('');
     }
   };
 
   const handlerChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
     if (newValue) {
       setValue(newValue.value);
-      newValue.value.length >= 3 && (await handleCheckIsDirectMember(newValue.value));
+      await handleCheckIsDirectMember(newValue.value);
     } else {
       setValidateResult({});
     }
@@ -149,15 +155,12 @@ export default function UsernameSuggestionSelect({ onSelectDirectMember }: Props
   const handleInputChange = async (newValue: string, { action }: InputActionMeta) => {
     if (action === 'input-change') {
       setValue(newValue);
-      newValue.length >= 3 && (await handleCheckIsDirectMember(newValue));
     }
   };
 
   const handleBlur = async () => {
-    if (value) {
+    if (value !== selectedDirectMember) {
       await handleCheckIsDirectMember(value);
-    } else {
-      setValidateResult({});
     }
   };
 
