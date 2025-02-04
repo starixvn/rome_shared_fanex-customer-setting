@@ -5,7 +5,6 @@ export const axiosInstance = axios.create({
 });
 
 export const getHeadersForPostRequest = () => ({
-  __RequestVerificationToken: (document.getElementsByName('__RequestVerificationToken')[0] as HTMLInputElement).value,
   RequestVerificationToken: (document.getElementsByName('__RequestVerificationToken')[0] as HTMLInputElement).value,
   'X-Requested-With': 'XMLHttpRequest',
 });
