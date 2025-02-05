@@ -177,12 +177,15 @@
   "Super": "Super",
   "GivenCreditPerAccount": "Hạn mức cho mỗi tài khoản",
   "NoOfAccounts": "Số tài khoản",
+  "CopySettingFrom": "Sao chép cài đặt từ",
   "UsernamePlaceHolder": "Tên đăng nhập hoặc Tên/Họ",
-  "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
+  "CopySettingFromNote": "Chỉ hỗ trợ sao chép giá trị cài đặt từ Member trực tiếp có sẵn.",
   "introCopyNote": "Nhấn 'Sao chép' để sao chép và chia sẻ thông tin tài khoản",
   "UserNotExist": "Người chơi này không có thực",
   "Credit": "Hạn mức tín dụng",
   "Domain": "Tên Miền",
   "CompactCopy": "Sao chép gộp",
-  "IndividualCopy": "Sao chép lẻ"
+  "IndividualCopy": "Sao chép lẻ",
+  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} tài khoản tạo không thành công",
+  "FailureReason": "Lý do thất bại"
 }

@@ -178,12 +178,15 @@
   "Super": "超级",
   "GivenCreditPerAccount": "每个账号的信用额度",
   "NoOfAccounts": "账号数量",
+  "CopySettingFrom": "复制设置自",
   "UsernamePlaceHolder": "用户名或名/姓",
-  "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
+  "CopySettingFromNote": "仅支持从现有直系会员复制设置值。",
   "introCopyNote": "点击“复制”即可复制并分享账号详情",
   "UserNotExist": "此账号不存在",
   "Credit": "信用额度",
   "Domain": "域名",
   "CompactCopy": "简洁复制",
-  "IndividualCopy": "單一复制"
+  "IndividualCopy": "單一复制",
+  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} 账号创建失败",
+  "FailureReason": "失败原因"
 }
