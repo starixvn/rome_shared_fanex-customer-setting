@@ -46,16 +46,13 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
     private const int WrongSecurityCode = 9009;
 
     private readonly IEncryption encryption;
-    // private readonly INetThrottlingService netThrottlingService;
     private readonly INotificationService notificationService;
 
     public SecurityCodeService(IDynamicRepository dynamicRepository,
         IEncryption encryption,
-        // INetThrottlingService netThrottlingService,
         INotificationService notificationService) : base(dynamicRepository)
     {
         this.encryption = encryption;
-        // this.netThrottlingService = netThrottlingService;
         this.notificationService = notificationService;
     }
 

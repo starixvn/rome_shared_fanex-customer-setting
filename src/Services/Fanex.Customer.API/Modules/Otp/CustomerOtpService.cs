@@ -44,20 +44,17 @@ namespace Fanex.Customer.API.Modules.Otp
         private readonly IDynamicRepository dynamicRepository;
         private readonly OtpService otpService;
         private readonly IJsonHelper jsonHelper;
-        // private readonly INetThrottlingService netThrottlingService;Service;
         private readonly Logging.ILogger logger;
 
         public CustomerOtpService(
             IDynamicRepository dynamicRepository,
             OtpService otpService,
             IJsonHelper jsonHelper,
-            // INetThrottlingService netThrottlingService,
             Logging.ILogger logger)
         {
             this.dynamicRepository = dynamicRepository;
             this.otpService = otpService;
             this.jsonHelper = jsonHelper;
-            // this.netThrottlingService = netThrottlingService;
             this.logger = logger;
         }
 
@@ -67,11 +64,6 @@ namespace Fanex.Customer.API.Modules.Otp
             {
                 throw new ArgumentNullException(nameof(param), "Change Otp Status Parameters cannot be null");
             }
-
-            // if (netThrottlingService.IsBlacklist())
-            // {
-            //     return CustomResult.CreateErrorResult("Too many requests");
-            // }
 
             var command = new UpdateCustomerOtpStatusCommand
             {
@@ -86,11 +78,6 @@ namespace Fanex.Customer.API.Modules.Otp
             };
 
             await dynamicRepository.ExecuteAsync(command);
-
-            if (command.ErrCode == 0)
-            {
-                // netThrottlingService.Throttle();
-            }
 
             return new CustomResult
             {
