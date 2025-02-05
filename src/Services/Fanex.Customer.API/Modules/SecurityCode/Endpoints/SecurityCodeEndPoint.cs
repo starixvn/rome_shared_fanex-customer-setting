@@ -68,44 +68,44 @@ public class SecurityCodeEndPoint :
         return Results.Ok(await securityCodeService.GetSecurityCode(custId, subAccId));
     }
 
-    public async Task<IResult> HandleAsync(ResetSubAccountSecurityCodeParam request1, ISecurityCodeService request2)
+    public async Task<IResult> HandleAsync(ResetSubAccountSecurityCodeParam request, ISecurityCodeService service)
     {
-        if (request1.SubAccId < 0)
+        if (request.SubAccId < 0)
         {
             return Results.BadRequest();
         }
 
-        return Results.Ok(await request2.ResetSubAccountSecurityCode(request1));
+        return Results.Ok(await service.ResetSubAccountSecurityCode(request));
     }
 
-    public async Task<IResult> HandleAsync(ChangeMainAccountSecurityCodeParam request1, ISecurityCodeService request2)
+    public async Task<IResult> HandleAsync(ChangeMainAccountSecurityCodeParam request, ISecurityCodeService service)
     {
-        if (request1.CustId < 0)
+        if (request.CustId < 0)
         {
             return Results.BadRequest();
         }
 
-        return Results.Ok(await request2.ChangeMainAccountSecurityCode(request1));
+        return Results.Ok(await service.ChangeMainAccountSecurityCode(request));
     }
 
-    public async Task<IResult> HandleAsync(ChangeSubAccountSecurityCodeParam request1, ISecurityCodeService request2)
+    public async Task<IResult> HandleAsync(ChangeSubAccountSecurityCodeParam request, ISecurityCodeService service)
     {
-        if (request1.SubAccId < 0)
+        if (request.SubAccId < 0)
         {
             return Results.BadRequest();
         }
 
-        return Results.Ok(await request2.ChangeSubAccountSecurityCode(request1));
+        return Results.Ok(await service.ChangeSubAccountSecurityCode(request));
     }
 
-    public async Task<IResult> HandleAsync(UpdateSecurityCodeFunctionParam request1, ISecurityCodeService request2)
+    public async Task<IResult> HandleAsync(UpdateSecurityCodeFunctionParam request, ISecurityCodeService service)
     {
-        if (request1.CustId < 0)
+        if (request.CustId < 0)
         {
             return Results.BadRequest();
         }
 
-        return Results.Ok(await request2.UpdateSecurityCodeFunction(request1));
+        return Results.Ok(await service.UpdateSecurityCodeFunction(request));
     }
 
     public async Task<IResult> HandleAsync(CheckSecurityCodeRequest request, ISecurityCodeService securityCodeService)

@@ -22,13 +22,13 @@ public class ProfilePictureEndpoint :
             .Produces<Result>();
     }
 
-    public async Task<ActorProfilePictureModel> HandleAsync(int request1, IProfilePictureService request2)
+    public async Task<ActorProfilePictureModel> HandleAsync(int request, IProfilePictureService service)
     {
-        return await request2.GetActorProfilePicture(request1);
+        return await service.GetActorProfilePicture(request);
     }
 
-    public async Task<Result> HandleAsync(UpdateActorProfilePictureParam request1, IProfilePictureService request2)
+    public async Task<Result> HandleAsync(UpdateActorProfilePictureParam request, IProfilePictureService service)
     {
-        return await request2.UpdateActorProfilePicture(request1);
+        return await service.UpdateActorProfilePicture(request);
     }
 }

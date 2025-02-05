@@ -14,8 +14,8 @@ public class NicknameEndpoint : IEndpoint<Result, CreateNicknameParam, INickname
             .WithTags(EndpointTags.CustomerSettings);
     }
 
-    public async Task<Result> HandleAsync(CreateNicknameParam request1, INicknameService request2)
+    public async Task<Result> HandleAsync(CreateNicknameParam request, INicknameService service)
     {
-        return await request2.CreateNickname(request1, nickNameLoginOnly: true);
+        return await service.CreateNickname(request, nickNameLoginOnly: true);
     }
 }

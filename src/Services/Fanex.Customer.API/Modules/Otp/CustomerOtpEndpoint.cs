@@ -18,61 +18,61 @@ namespace Fanex.Customer.API.Modules.Otp
             var otp = app.MapGroup("/api/customer/otp")
                 .WithTags(EndpointTags.OTP);
 
-            otp.MapPost("/change-status", (ChangeOtpStatusParam request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
+            otp.MapPost("/change-status", (ChangeOtpStatusParam request, ICustomerOtpService service) => HandleAsync(request, service))
                 .Produces<Result>();
 
-            otp.MapPost("/generate", (CustomerOtpParam request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
+            otp.MapPost("/generate", (CustomerOtpParam request, ICustomerOtpService service) => HandleAsync(request, service))
                 .Produces<CustomerOtp>();
 
-            otp.MapPost("/isenabled", (CustomerOtpParamBase request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
+            otp.MapPost("/isenabled", (CustomerOtpParamBase request, ICustomerOtpService service) => HandleAsync(request, service))
                 .Produces<bool>();
 
-            otp.MapPost("/setup", (CustomerOtp request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
+            otp.MapPost("/setup", (CustomerOtp request, ICustomerOtpService service) => HandleAsync(request, service))
                 .Produces<Result>();
 
-            otp.MapPost("/isdifferent-device", (CustomerOtpDevice request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
+            otp.MapPost("/isdifferent-device", (CustomerOtpDevice request, ICustomerOtpService service) => HandleAsync(request, service))
                 .Produces<bool>();
 
-            otp.MapPost("/remove", (RemoveSecretKeyParam request1, ICustomerOtpService request2) => HandleAsync(request1, request2))
+            otp.MapPost("/remove", (RemoveSecretKeyParam request, ICustomerOtpService service) => HandleAsync(request, service))
                 .Produces<Result>();
             
-            otp.MapGet("/", (int custId, int subAccId, ICustomerOtpService request2) => HandleAsync(custId, subAccId, request2))
+            otp.MapGet("/", (int custId, int subAccId, ICustomerOtpService service) => HandleAsync(custId, subAccId, service))
                 .Produces<CustomerOtp>();
         }
 
-        public async Task<Result> HandleAsync(ChangeOtpStatusParam request1, ICustomerOtpService request2)
+        public async Task<Result> HandleAsync(ChangeOtpStatusParam request, ICustomerOtpService service)
         {
-            return await request2.ChangeOtpStatus(request1);
+            return await service.ChangeOtpStatus(request);
         }
 
-        public async Task<CustomerOtp> HandleAsync(CustomerOtpParam request1, ICustomerOtpService request2)
+        public async Task<CustomerOtp> HandleAsync(CustomerOtpParam request, ICustomerOtpService service)
         {
-            return await Task.FromResult(request2.GenerateCustomerOtp(request1.CustId, request1.Username, request1.SubAccId));
+            return await Task.FromResult(service.GenerateCustomerOtp(request.CustId, request.Username, request.SubAccId));
         }
 
-        public async Task<bool> HandleAsync(CustomerOtpParamBase request1, ICustomerOtpService request2)
+        public async Task<bool> HandleAsync(CustomerOtpParamBase request, ICustomerOtpService service)
         {
-            return await request2.IsEnabledOtp(request1.CustId, request1.SubAccId);
+            return await service.IsEnabledOtp(request.CustId, request.SubAccId);
         }
 
-        public async Task<Result> HandleAsync(CustomerOtp request1, ICustomerOtpService request2)
+        public async Task<Result> HandleAsync(CustomerOtp request, ICustomerOtpService service)
         {
-            return await request2.SetUpOtp(request1);
+            return await service.SetUpOtp(request);
         }
 
-        public async Task<bool> HandleAsync(CustomerOtpDevice request1, ICustomerOtpService request2)
+        public async Task<bool> HandleAsync(CustomerOtpDevice request, ICustomerOtpService service)
         {
-            return await request2.IsDifferenceDevice(request1.CustId, request1.DeviceId, request1.SubAccId);
+            return await service.IsDifferenceDevice(request.CustId, request.DeviceId, request.SubAccId);
         }
 
-        public async Task<Result> HandleAsync(RemoveSecretKeyParam request1, ICustomerOtpService request2)
+        public async Task<Result> HandleAsync(RemoveSecretKeyParam request, ICustomerOtpService service)
         {
-            return await request2.RemoveSecretKey(request1);
+            return await service.RemoveSecretKey(request);
         }
 
-        public async Task<CustomerOtp> HandleAsync(int custId, int subAccId, ICustomerOtpService request3)
+        public async Task<CustomerOtp> HandleAsync(int custId, int subAccId, ICustomerOtpService service)
         {
-            return await request3.GetCustomerOtp(custId, subAccId);
+            return await service.GetCustomerOtp(custId, subAccId);
         }
     }
 }

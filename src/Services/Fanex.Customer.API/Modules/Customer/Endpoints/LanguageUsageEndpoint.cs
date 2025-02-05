@@ -14,8 +14,8 @@ public class LanguageUsageEndpoint : IEndpoint<Result, UsageLanguageRequest, ILa
             .WithTags(EndpointTags.CustomerSettings);
     }
 
-    public async Task<Result> HandleAsync(UsageLanguageRequest request1, ILanguageService request2)
+    public async Task<Result> HandleAsync(UsageLanguageRequest request, ILanguageService service)
     {
-        return await request2.UpdateUsageLanguage(request1);
+        return await service.UpdateUsageLanguage(request);
     }
 }

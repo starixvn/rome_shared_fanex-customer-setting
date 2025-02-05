@@ -6,19 +6,19 @@ public class PositionTakingEndpoint : IEndpoint<IResult, PositionTakingRequest, 
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/position-taking", ([AsParameters] PositionTakingRequest request1, IPositionTakingService request2)
-            => HandleAsync(request1, request2))
+        app.MapGet("/api/customer/position-taking", ([AsParameters] PositionTakingRequest request, IPositionTakingService service)
+            => HandleAsync(request, service))
             .Produces<IResult>().WithTags(EndpointTags.CustomerSettings);
     }
 
-    public async Task<IResult> HandleAsync(PositionTakingRequest request1, IPositionTakingService request2)
+    public async Task<IResult> HandleAsync(PositionTakingRequest request, IPositionTakingService service)
     {
-        if (!request1.IsValid())
+        if (!request.IsValid())
         {
             return Results.BadRequest();    
         }
 
-        var result = await request2.GetPT(request1);
+        var result = await service.GetPT(request);
         return Results.Ok(result);
     }
 }

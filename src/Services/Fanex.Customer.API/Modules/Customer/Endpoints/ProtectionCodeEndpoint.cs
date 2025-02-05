@@ -26,8 +26,8 @@ public class ProtectionCodeEndpoint :
         return await protectionCodeService.GetAsync(custId, subAccId);
     }
 
-    public async Task<Result> HandleAsync(UpdateProtectionCodeParam request1, IProtectionCodeService request2)
+    public async Task<Result> HandleAsync(UpdateProtectionCodeParam request, IProtectionCodeService service)
     {
-        return await request2.UpdateAsync(request1);
+        return await service.UpdateAsync(request);
     }
 }
