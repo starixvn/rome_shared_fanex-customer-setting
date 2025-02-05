@@ -95,7 +95,7 @@ export const SettingService = {
       .then((response) => response.data)
       .catch((error) => {
         if (error.response?.status === 401 || error.response?.status === 403) {
-          return Result.UnAuthorizedResult;
+          return CreateCustomerResult.UnAuthorizedResult;
         }
 
         // Something unexpected

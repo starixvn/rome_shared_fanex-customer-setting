@@ -188,5 +188,7 @@
   "Credit": "Credit",
   "Domain": "Domain",
   "CompactCopy": "Compact Copy",
-  "IndividualCopy": "Individual Copy"
+  "IndividualCopy": "Individual Copy",
+  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} accounts failed to be created.",
+  "FailureReason": "Failure Reason"
 }

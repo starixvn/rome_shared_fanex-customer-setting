@@ -191,17 +191,17 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
     if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
       const secretKey = (document.getElementById('SecretKey') as HTMLInputElement).value;
       const encryptedPassword = encrypt(generalInfo.password, secretKey);
-      const result = await SettingService.CreateCustomer(
+      const result = (await SettingService.CreateCustomer(
         { ...generalInfo, password: encryptedPassword },
         group,
         productGroups,
         true,
         numberOfAccounts
-      );
+      )) as CreateCustomerResult;
 
       setCreateCustomerResult(result);
 
-      if (!result.isSuccessful) {
+      if (!result.newUserNames || (result.newUserNames && result.newUserNames.length === 0)) {
         scrollToTop();
       }
     }
@@ -226,10 +226,11 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
       <Layout theme={theme}>
         {renderCreateButton()}
         {createCustomerResult &&
-          (createCustomerResult.isSuccessful ? (
+          (createCustomerResult.newUserNames?.length ? (
             <SuccessPopup
-              usernames={createCustomerResult.newUserNames ?? []}
-              domains={createCustomerResult.availableAlphaDomain ?? []}
+              {...createCustomerResult}
+              numberOfAccounts={numberOfAccounts}
+              isSuccessful={createCustomerResult.isSuccessful}
               credit={generalInfo.maxCredit}
               handleOk={() => {
                 window.location.reload();

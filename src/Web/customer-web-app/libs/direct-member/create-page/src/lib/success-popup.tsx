@@ -2,32 +2,35 @@ import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useTranslation } from 'react-i18next';
 
+import { CreateCustomerResult } from '@customer-web-app/share-models';
 import { IconThumbsUp } from '@customer-web-app/shared/base/common-icon';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import styles from './success-popup.module.scss';
 
 type Props = {
-  usernames: string[];
-  domains: string[];
   credit: number;
+  numberOfAccounts: number;
   handleOk: () => void;
-};
+} & CreateCustomerResult;
 
 export default function SuccessPopup(props: Props) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
-  const { usernames, handleOk } = props;
+  const { newUserNames, handleOk, numberOfAccounts, message, subMessages } = props;
   const credit = props.credit.toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2 });
-  const domains = props.domains.slice(0, 3).join(', ');
+  const domains = props.availableAlphaDomain?.slice(0, 3).join(', ');
+
+  const noOfFailedAccounts = numberOfAccounts - (newUserNames?.length ?? 0);
 
   const formatUserInfo = (usernameText: string, creditText: string, domainText: string) => {
     return `${t('username')}: ${usernameText}\n${t('credit')}: ${creditText}\n${t('domain')}: ${domainText}`;
   };
 
-  const compactText = formatUserInfo(usernames?.join(', '), credit, domains);
+  const compactText = formatUserInfo(newUserNames?.join(', ') ?? '', credit, domains ?? '');
 
-  const individualText = usernames.map((username) => formatUserInfo(username, credit, domains)).join('\n\n');
+  const individualText =
+    newUserNames?.map((username) => formatUserInfo(username, credit, domains ?? '')).join('\n\n') ?? '';
 
   const handleCopy = () => {
     setCopied(true);
@@ -72,7 +75,7 @@ export default function SuccessPopup(props: Props) {
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('username')}</div>
-              <div className={styles['row-value']}>{usernames?.join(', ')}</div>
+              <div className={styles['row-value']}>{newUserNames?.join(', ')}</div>
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('Credit')}</div>
@@ -82,6 +85,27 @@ export default function SuccessPopup(props: Props) {
               <div className={styles['label']}>{t('Domain')}</div>
               <div className={styles['row-value']}>{domains}</div>
             </div>
+            {noOfFailedAccounts > 0 && (
+              <div className={styles['failed-account-created']}>
+                <p className={`msg msg-error ${styles['result-text']}`}>
+                  {t('NoOfAccountCreatedFailed', { noOfFailedAccounts })}
+                </p>
+
+                <p className="result-text">
+                  <span>{t('FailureReason')}: </span>
+                  <div className="msg msg-error">
+                    <div className="main-message">{message}</div>
+                    {subMessages?.map((subMessage) => (
+                      <div className={styles['sub-message']}>
+                        {subMessage.isLive && <span className={styles['live-badge']}>{t('Live')}</span>}
+                        {subMessage.message}
+                      </div>
+                    ))}
+                  </div>
+                </p>
+              </div>
+            )}
+
             <button className={styles.buttonSuccess} type="button" onClick={handleOk}>
               {t('okay')}
             </button>
