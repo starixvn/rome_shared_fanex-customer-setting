@@ -215,7 +215,7 @@ namespace Fanex.Customer.Client.Services
         public Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US")
             => httpClient.GetStringAsync($"customer/current-winloss-amount?custId={custId}&sportType={sportType}&betType={betType}&language={language}");
 
-        public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName="", bool isCopy = false, int? agentId = null)
+        public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName="", bool isCopy = false, int? agentId = 0)
             => httpClient.GetStringAsync($"customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}&IsMultipleMode={isMultipleMode}&GroupName={groupName}&IsCopy={isCopy}&AgentId={agentId}");
 
         public Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username)
