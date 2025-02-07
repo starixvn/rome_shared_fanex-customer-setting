@@ -89,6 +89,7 @@ public class PositionTakingService : IPositionTakingService
 
         var result = new PositionTakingViewModel
         {
+            LevelType = request.LevelType,
             PageSizeList = GetPageSizeList(),
             PageIndex = criteria.PageIndex,
             PageSize = criteria.PageSize,

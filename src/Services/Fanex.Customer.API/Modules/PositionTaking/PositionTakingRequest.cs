@@ -20,7 +20,9 @@ public class PositionTakingRequest
 
     public string Language { get; set; }
 
-    public bool IsDirectMember { get; set; }
+    public int LevelType { get; set; }
+
+    public bool IsDirectMember => LevelType == 2;
 
     public int ProductGroupId { get; set; } = ProductGroupConstants.Sportsbook;
 
