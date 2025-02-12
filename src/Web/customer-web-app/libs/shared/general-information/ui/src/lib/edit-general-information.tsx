@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 import { NumericFormat } from 'react-number-format';
 
 import { ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
@@ -38,7 +38,7 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
     ref
   ) {
     const [collapse, setCollapse] = useState(true);
-    const { t } = useTranslation();
+    const { t } = useTranslate();
     const blockRef = useRef<BlockRefType>(null);
     const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
     const [locationTooltip, setLocationTooltip] = useState<string>('');
@@ -111,7 +111,7 @@ export const EditGeneralInformation = forwardRef<ValidationRefType, EditGeneralI
     return (
       <Block
         id="edit-general-info"
-        title={t('general-information')}
+        title={t('generalInformation')}
         ref={blockRef}
         isPartialUpdate={!isReadOnly}
         onSaveClick={() => onUpdate?.()}

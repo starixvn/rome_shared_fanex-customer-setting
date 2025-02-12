@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
 import { ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -48,7 +48,7 @@ const PositionTaking = forwardRef<ValidationRefType, GroupSettingBlockProps>(fun
 });
 
 const Title = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { productGroupId } = useGroupSettingContext();
   return (
     <>

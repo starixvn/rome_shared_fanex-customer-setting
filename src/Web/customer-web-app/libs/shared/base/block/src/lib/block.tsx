@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { forwardRef, ReactNode, useImperativeHandle, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { IconSaveSingle } from '@customer-web-app/shared/base/common-icon';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -34,7 +34,7 @@ export interface BlockRefType {
 }
 
 export const Block = forwardRef<BlockRefType, BlockProps>(function Block(props, ref) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const [collapse, setCollapse] = useState(false);
 
   useImperativeHandle(ref, () => ({

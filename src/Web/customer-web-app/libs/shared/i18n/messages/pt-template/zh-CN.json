@@ -1,0 +1,18 @@
+{
+  "Action": "动作",
+  "DeletePTTemplateConfirmMessage": "您确定要删除该模板吗？",
+  "PT_Level_2": "代理占成数",
+  "PT_Level_3": "总代理占成数",
+  "PT_Level_4": "超级总代理占成数",
+  "PTTemplate": "占成数模板",
+  "SelectByDefault": "选择默认",
+  "TemplateName": "模板名称",
+  "TemplateNameExistedMessage": "模板名称已存在。",
+  "TemplateNameRequireMessage": "模板名称为必填项。",
+  "TemplateNote1_Level_2": "占成数模板仅适用于在精简模式下创建的新会员",
+  "TemplateNote1_Level_3": "占成数模板仅适用于在精简模式下创建的新代理",
+  "TemplateNote1_Level_4": "占成数模板仅适用于在精简模式下创建的新总代理",
+  "TemplateNote2_Level_2": "所选的占成数模板数值将用作所有产品默认的代理预定占成。",
+  "TemplateNote2_Level_3": "所选的占成数模板数值将用作所有产品默认的总代理预定占成（不受自动占成影响）。",
+  "TemplateNote2_Level_4": "所选的占成数模板数值将用作所有产品默认的超级总代理预定占成（不受自动占成影响）。"
+}

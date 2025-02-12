@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { SystemIds, UserLevel, UserLevelName } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export function ProductStatusItem(props: Readonly<Props>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { generalInfo } = useGroupSettingContext();
   const userLevel = t(UserLevelName[Number(generalInfo?.roleId)]);
 

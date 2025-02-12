@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 import { NumericFormat } from 'react-number-format';
 
 import { ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
@@ -47,7 +47,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
   ref
 ) {
   const [collapse, setCollapse] = useState(true);
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const blockRef = useRef<BlockRefType>(null);
   const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
   const [locationTooltip, setLocationTooltip] = useState<string>('');
@@ -102,7 +102,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
   const napCanNotEditCredit = params.noPermissionEditCredit;
 
   return (
-    <Block id="general-information" title={t('general-information')} ref={blockRef} isPartialUpdate={false}>
+    <Block id="general-information" title={t('generalInformation')} ref={blockRef} isPartialUpdate={false}>
       <div className={styles['container']}>
         <div className={styles['subheader']}>{t('AccountDetails')}</div>
         {children}

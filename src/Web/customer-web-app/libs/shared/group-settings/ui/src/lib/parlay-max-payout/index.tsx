@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { Result, ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
 import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -19,7 +19,7 @@ import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 const ParlayMaxPayoutBlockId = 'parlay-max-payout';
 
 const ParlayMaxPayout = forwardRef<ValidationRefType, GroupSettingBlockProps>(function ParlayMaxPayout(props, ref) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const blockRef = useRef<BlockRefType>(null);
   const { productGroups, generalInfo, 
     isMultipleMode, handleUpdateSettingItems, 

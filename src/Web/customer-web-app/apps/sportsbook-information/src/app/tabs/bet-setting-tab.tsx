@@ -1,4 +1,4 @@
-import { Trans } from 'react-i18next';
+import { T } from '@tolgee/react';
 
 import {i7Markets, i7Sites} from "@customer-web-app/shared-constants";
 
@@ -9,13 +9,13 @@ const MBCMarketBetSetting = () => {
       <>
         <ul>
           <li>
-            <Trans i18nKey="DoNotSetLimitBetSetting" />
+            <T keyName="DoNotSetLimitBetSetting" />
           </li>
           <li>
-            <Trans i18nKey="PreventMembersPlayGame" />
+            <T keyName="PreventMembersPlayGame" />
           </li>
           <li>
-            <Trans i18nKey="UpdateUplineBetSettingNote" />
+            <T keyName="UpdateUplineBetSettingNote" />
           </li>
         </ul>
       </>
@@ -26,7 +26,7 @@ const MBCMarketBetSetting = () => {
       <>
         <ul>
           <li>
-            <Trans i18nKey="MemberNote" />
+            <T keyName="MemberNote" />
           </li>
         </ul>
       </>
@@ -41,20 +41,20 @@ const I7MarketBetSetting = () => {
     return (
       <>
         <div>
-          <Trans i18nKey="UpdateUplineBetSettingNote" />
+          <T keyName="UpdateUplineBetSettingNote" />
         </div>
         <div>
-          <Trans i18nKey="ForSportsBookOnly" />:
+          <T keyName="ForSportsBookOnly" />:
         </div>
         <ul>
           <li>
-            <Trans i18nKey="DoNotSetLimitBetSetting" />
+            <T keyName="DoNotSetLimitBetSetting" />
           </li>
           <li>
-            <Trans i18nKey="PreventMembersPlayGame" />
+            <T keyName="PreventMembersPlayGame" />
           </li>
           <li>
-            <Trans i18nKey="ESportMuayThaiBetSetting" />
+            <T keyName="ESportMuayThaiBetSetting" />
           </li>
         </ul>
       </>
@@ -64,14 +64,14 @@ const I7MarketBetSetting = () => {
     return (
       <>
         <div>
-          <Trans i18nKey="ForSportsBookOnly" />:
+          <T keyName="ForSportsBookOnly" />:
         </div>
         <ul>
           <li>
-            <Trans i18nKey="ESportMuayThaiBetSetting" />
+            <T keyName="ESportMuayThaiBetSetting" />
           </li>
           <li>
-            <Trans i18nKey="MemberNote" />
+            <T keyName="MemberNote" />
           </li>
         </ul>
       </>

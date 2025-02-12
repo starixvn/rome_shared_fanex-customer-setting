@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { isSportsBookProduct, UserLevel, UserLevelName } from '@customer-web-app/shared-constants';
 import {
@@ -34,7 +34,7 @@ interface SetMemberPtPopupProps<T> {
 
 export const SetMemberPtPopup = NiceModal.create(
   ({ roleId, productGroupId, groupItems }: SetMemberPtPopupProps<GroupItem>) => {
-    const { t } = useTranslation();
+    const { t } = useTranslate();
     const modal = useModal();
     const theme = useTheme();
     const [newGroupItems, setNewGroupItems] = useState(groupItems);

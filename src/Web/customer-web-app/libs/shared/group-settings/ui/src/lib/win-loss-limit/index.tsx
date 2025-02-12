@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { forwardRef, MouseEvent, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 import { NumericFormat } from 'react-number-format';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
@@ -83,7 +83,7 @@ function MaximumLossColumn({
   handleWinLossLimitChange,
   setTooltipError,
 }: Readonly<MaximumLossColumnProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   const [validateWinLossLimit, setValidateWinLossLimit] = useState<ValidateWinLossLimitResult>({
     id: '',
@@ -175,7 +175,7 @@ const getValidMaximumWinOptions = (winLossLimit: WinLossLimitGroupItem) => {
 const winLossLimitBlockId = 'WinLossLimitBlockId';
 
 const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function WinLossLimit(props, ref) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { isReadOnly } = props;
   const { productGroups, productGroupId, isEditMode, handleSettingItemChange, updateGroupSetting } =
     useGroupSettingContext();
@@ -365,7 +365,7 @@ const WinLossLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(funct
 });
 
 function Note() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { url } = CustomerSettingInformationPageUrl({ tab: 5 });
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {

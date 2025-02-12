@@ -1,8 +1,8 @@
 import { renderToStaticMarkup } from 'react-dom/server';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 export default function SportsBookBetSettingMixSportParlayNote() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const tooltipContent = () => (
     <>
       <div>

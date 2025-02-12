@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Trans } from 'react-i18next';
+import { T } from '@tolgee/react';
 
 
 interface ProductSetting {
@@ -45,13 +45,13 @@ export const WinLossLimitTab = ({ url }: { url: string }) => {
 
   return (
     <ul>
-      <li><Trans i18nKey="MaxWinLoss"/></li>
-      <li><Trans i18nKey="MaxWin"/></li>
-      <li><Trans i18nKey="MaxLoss"/></li>
-      <li><Trans i18nKey="CommonWinLossLimitNote"/></li>
-      <li><Trans i18nKey="RNGGames"/>{getRNGProductNames()}: <Trans i18nKey="RNGKenoNumberGameWinLossLimitNote"/></li>
-      <li><Trans i18nKey="WinLossLimitNote1"/></li>
-      <li><Trans i18nKey="WinLossLimitNote2"/></li>
+      <li><T keyName="MaxWinLoss"/></li>
+      <li><T keyName="MaxWin"/></li>
+      <li><T keyName="MaxLoss"/></li>
+      <li><T keyName="CommonWinLossLimitNote"/></li>
+      <li><T keyName="RNGGames"/>{getRNGProductNames()}: <T keyName="RNGKenoNumberGameWinLossLimitNote"/></li>
+      <li><T keyName="WinLossLimitNote1"/></li>
+      <li><T keyName="WinLossLimitNote2"/></li>
     </ul>
   );
 };

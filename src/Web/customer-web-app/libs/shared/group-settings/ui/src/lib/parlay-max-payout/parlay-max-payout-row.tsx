@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { ValidationResult } from '@customer-web-app/share-models';
 import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -27,7 +27,7 @@ type CacheParlayMaxPayoutItem = {
 };
 
 const ParlayMaxPayoutRow = (props: ParlayMaxPayoutRowProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { parlayMaxPayoutItem, uplineRoleId, setErrorTooltip } = props;
   const { sportTypeId, betTypeId, displayName, upline, isMultipleModeChecked } = parlayMaxPayoutItem;
   const { handleSettingItemChange, isMultipleMode, roleId } = useGroupSettingContext();

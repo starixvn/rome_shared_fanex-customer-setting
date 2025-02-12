@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { DirectMemberAgentIds, isSportsBookProduct, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
@@ -16,7 +16,7 @@ type CommissionBlockProps = {
 } & GroupSettingBlockProps;
 
 export default function Commission({ isReadOnly, groupTypeId }: Readonly<CommissionBlockProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const {
     productGroups,
     handleSettingItemChange,

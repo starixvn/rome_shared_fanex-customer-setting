@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { BlockV2 } from '@customer-web-app/shared/base/block';
 
 import styles from '../app.module.scss';
-import { HighlightFrame } from '../highlight-frame';
 
 // naming by api response
 type PtSettingData = {
@@ -14,7 +13,7 @@ type PtSettingData = {
 }[];
 
 export const PtSettingTab = ({ url}: { url: string}) => {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const [data, setData] = useState<PtSettingData>([]);
   const [loading, setLoading] = useState(true);
 

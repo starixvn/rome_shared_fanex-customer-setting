@@ -6,7 +6,7 @@ import styles from './site-currency-section.module.scss';
 import { Currency, Site } from './site-currency-service';
 import { ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
 import SiteCurrencySectionValidator from './site-currency-section-validator';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import classNames from 'classnames';
 import CustomDropdown from './custom-dropdown';
@@ -30,7 +30,7 @@ export const SiteCurrencySection = forwardRef<ValidationRefType, SiteCurrencySec
 ) {
   const { sites, currencies, extraRef } = props;
   const [isInternalUser, setIsInternalUser] = useState(props.isInternalUser);
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const blockRef = useRef<BlockRefType>(null);
   const [validationResults, setValidateResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
   const [locationTooltip, setLocationTooltip] = useState<string>('');

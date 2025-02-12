@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { GroupTypeIds } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
@@ -10,7 +10,7 @@ import { GroupSettingBlockProps } from '../types';
 import { ProductStatusItem } from './product-status-item';
 
 export default function ProductStatus({ isReadOnly }: Readonly<GroupSettingBlockProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { productGroups, productGroupId, handleUpdateSettingItems, updateGroupSetting, isEditMode } =
     useGroupSettingContext();
   const groupId = Number(productGroupId);

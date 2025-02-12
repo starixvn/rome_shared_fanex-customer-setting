@@ -1,0 +1,18 @@
+{
+  "Action": "Thao Tác",
+  "DeletePTTemplateConfirmMessage": "Bạn có chắc chắn muốn xóa mẫu này không?",
+  "PT_Level_2": "PT của Agent",
+  "PT_Level_3": "PT của Master",
+  "PT_Level_4": "PT của Super",
+  "PTTemplate": "Mẫu Position Taking",
+  "SelectByDefault": "Chọn Mặc Định",
+  "TemplateName": "Tên Mẫu",
+  "TemplateNameExistedMessage": "Tên Mẫu đã tồn tại.",
+  "TemplateNameRequireMessage": "Tên Mẫu là bắt buộc.",
+  "TemplateNote1_Level_2": "Mẫu Position Taking chỉ được áp dụng đối với tài khoản Member được tạo mới bằng Thiết Lập Rút Gọn.",
+  "TemplateNote1_Level_3": "Mẫu Position Taking chỉ được áp dụng đối với tài khoản Agent được tạo mới bằng Thiết Lập Rút Gọn.",
+  "TemplateNote1_Level_4": "Mẫu Position Taking chỉ được áp dụng đối với tài khoản Master được tạo mới bằng Thiết Lập Rút Gọn.",
+  "TemplateNote2_Level_2": "Giá trị của Mẫu Position Taking đã chọn sẽ được sử dụng làm Agent PT mặc định, và được thiết lập sẵn cho tất cả sản phẩm.",
+  "TemplateNote2_Level_3": "Giá trị của Mẫu Position Taking đã chọn sẽ được sử dụng làm Master PT mặc định, và được thiết lập sẵn cho tất cả sản phẩm (không bị ảnh hưởng bởi Auto-PT).",
+  "TemplateNote2_Level_4": "Giá trị của Mẫu Position Taking đã chọn sẽ được sử dụng làm Super PT mặc định, và được thiết lập sẵn cho tất cả sản phẩm (không bị ảnh hưởng bởi Auto-PT)."
+}

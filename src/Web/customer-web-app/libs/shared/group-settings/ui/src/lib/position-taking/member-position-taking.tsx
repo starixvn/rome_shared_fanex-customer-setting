@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
@@ -190,7 +190,7 @@ const MemberPositionTaking = forwardRef<ValidationRefType, PositionTakingBlockPr
   props,
   ref
 ) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { title } = props;
   const { productGroups, isMultipleMode, handleUpdateSettingItems, productGroupId, isEditMode, updateGroupSetting } =
     useGroupSettingContext();

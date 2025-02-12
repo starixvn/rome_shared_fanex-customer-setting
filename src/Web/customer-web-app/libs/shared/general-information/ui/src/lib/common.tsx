@@ -1,4 +1,4 @@
-import { TFunction } from 'i18next';
+import { TFnType } from '@tolgee/react';
 
 import { ValidationResult } from '@customer-web-app/share-models';
 import { UserLevel } from '@customer-web-app/shared-constants';
@@ -22,7 +22,7 @@ export function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
 export const errorTooltip = (
   locationTooltip: string,
   validationResults: { [key: string]: boolean | ValidationResult },
-  t: TFunction
+  t: TFnType
 ) => {
   if (!locationTooltip) {
     return null;

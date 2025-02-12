@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { BlockV2 } from '@customer-web-app/shared/base/block';
 
@@ -21,7 +21,7 @@ type ProductSettingInfoResponse = {
 
 export function ProductCategorySettingTab({ url }: { url: string }) {
   const [data, setData] = useState<ProductSettingInfoResponse>({} as ProductSettingInfoResponse);
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

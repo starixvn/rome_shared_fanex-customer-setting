@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import {
   CreateSuperNotes,
@@ -32,7 +32,7 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import styles from './create-super-page.module.scss';
 
 export function CreateSuperPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const theme = useTheme();
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;

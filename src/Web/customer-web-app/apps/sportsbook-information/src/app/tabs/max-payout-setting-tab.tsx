@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Trans } from 'react-i18next';
+import { T } from '@tolgee/react';
 
 import styles from '../app.module.scss';
 
@@ -44,102 +44,102 @@ export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
       <div>
         <div>
           <strong>
-            <Trans i18nKey={'MPSInformation'} />{' '}
+            <T keyName={'MPSInformation'} />{' '}
           </strong>
         </div>
         <div>
-          <Trans i18nKey={'MPS1'} />
+          <T keyName={'MPS1'} />
         </div>
         <div>
-          <Trans i18nKey={'MPS2'} />
+          <T keyName={'MPS2'} />
         </div>
         <div>
           <div>
-            <Trans i18nKey={'MPS3'} />
+            <T keyName={'MPS3'} />
           </div>
           <div>
-            <Trans i18nKey={'MPS4'} />
+            <T keyName={'MPS4'} />
             <div>
-              <Trans i18nKey={'MPS5'} />
+              <T keyName={'MPS5'} />
             </div>
             <div>
-              <Trans i18nKey={'MPS6'} />
+              <T keyName={'MPS6'} />
             </div>
           </div>
           <div>
-            <Trans i18nKey={'MPS7'} />
+            <T keyName={'MPS7'} />
             <div>
-              <Trans i18nKey={'MPS8'} />
+              <T keyName={'MPS8'} />
             </div>
           </div>
         </div>
         <br />
         <div>
-          <Trans i18nKey={'MPS9'} />
+          <T keyName={'MPS9'} />
         </div>
         <br />
         <div>
           <strong>
-            <Trans i18nKey={data.isSpecialPlatform ? 'MPS_VSCaption' : 'MPS_SabaCaption'} />
+            <T keyName={data.isSpecialPlatform ? 'MPS_VSCaption' : 'MPS_SabaCaption'} />
           </strong>
           <div>
-            <Trans i18nKey={data.isSpecialPlatform ? 'MPS_VSDetails' : 'MPS_SabaDetails'} />
+            <T keyName={data.isSpecialPlatform ? 'MPS_VSDetails' : 'MPS_SabaDetails'} />
           </div>
           <FistTable data={data.sabaSport} isSpecialPlatform={data.isSpecialPlatform}  />
         </div>
         <br />
         <div>
-          <Trans i18nKey={'MPS10'} />
+          <T keyName={'MPS10'} />
           <SecondTable data={data.maxPayoutSport} />
         </div>
         <br />
         <div>
           <strong>
-            <Trans i18nKey={'MPS18'} />
+            <T keyName={'MPS18'} />
           </strong>
         </div>
         <div>
-          <Trans i18nKey={'MPS19'} />
+          <T keyName={'MPS19'} />
         </div>
         <div>
-          <Trans i18nKey={'MPS2'} />
+          <T keyName={'MPS2'} />
         </div>
         <div>
-          <Trans i18nKey={'MPS20'} />
+          <T keyName={'MPS20'} />
         </div>
         <div>
-          <Trans i18nKey={'MPS21'} />
+          <T keyName={'MPS21'} />
         </div>
 
         <div>
-          <Trans i18nKey={'MPS22'} />
+          <T keyName={'MPS22'} />
         </div>
         <div>
-          <Trans i18nKey={'MPS23'} />
+          <T keyName={'MPS23'} />
         </div>
         <div>
-          <Trans i18nKey={'MPS24'} />
+          <T keyName={'MPS24'} />
         </div>
         <br />
 
         <div>
-          <Trans i18nKey={'MPS25'} />
+          <T keyName={'MPS25'} />
         </div>
         <br />
         <div>
-          <Trans i18nKey={'MPS26'} />
+          <T keyName={'MPS26'} />
         </div>
         <br />
         <div>
-          <Trans i18nKey={'MPS27'} />
+          <T keyName={'MPS27'} />
         </div>
         <br />
         <div>
-          <Trans i18nKey={'MPS17'} />
+          <T keyName={'MPS17'} />
         </div>
         <div>
           <strong>
-            <Trans i18nKey={'MPS28'} />
+            <T keyName={'MPS28'} />
           </strong>
         </div>
       </div>
@@ -166,10 +166,10 @@ const FistTable = ({ data, isSpecialPlatform }: { data: SabaSport[], isSpecialPl
       <thead>
         <tr>
           <th>
-            <Trans i18nKey={'BetSettingsFollowed'} />
+            <T keyName={'BetSettingsFollowed'} />
           </th>
           <th>
-            <Trans i18nKey={isSpecialPlatform ? 'VS_Header' : 'SabaTable_Header1'} />
+            <T keyName={isSpecialPlatform ? 'VS_Header' : 'SabaTable_Header1'} />
           </th>
         </tr>
       </thead>
@@ -194,10 +194,10 @@ const SecondTable = ({ data }: { data: MaxPayoutSport }) => {
       <thead>
         <tr>
           <th>
-            <Trans i18nKey={'MPS11'} />
+            <T keyName={'MPS11'} />
           </th>
           <th>
-            <Trans i18nKey={'MPS12'} />
+            <T keyName={'MPS12'} />
           </th>
         </tr>
       </thead>
@@ -207,7 +207,7 @@ const SecondTable = ({ data }: { data: MaxPayoutSport }) => {
             <tr key={`${betType}-${index}`}>
               {index === 0 && (
                 <td rowSpan={data?.bettypeName.length} className="text-left bgGrey">
-                  <Trans i18nKey={`${data?.sportName}`} />
+                  <T keyName={`${data?.sportName}`} />
                 </td>
               )}
               <td className="text-left">{betType}</td>

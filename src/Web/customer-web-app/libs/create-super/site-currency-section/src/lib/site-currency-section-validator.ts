@@ -1,5 +1,5 @@
 import { Result, ValidationResult } from '@customer-web-app/share-models';
-import { TFunction } from 'i18next';
+import { TFnType } from '@tolgee/react';
 
 export interface SiteCurrencySectionValidatorProps {
   site?: string;
@@ -7,12 +7,12 @@ export interface SiteCurrencySectionValidatorProps {
 }
 
 export default class SiteCurrencySectionValidator {
-  protected translate: TFunction;
+  protected translate: TFnType;
   public validationState: ValidationResult;
   protected site?: string;
   protected currency?: string;
 
-  constructor(props: SiteCurrencySectionValidatorProps, t: TFunction) {
+  constructor(props: SiteCurrencySectionValidatorProps, t: TFnType) {
     this.validationState = Result.CreateSuccessfulResult() as ValidationResult;
     this.site = props.site;
     this.currency = props.currency;

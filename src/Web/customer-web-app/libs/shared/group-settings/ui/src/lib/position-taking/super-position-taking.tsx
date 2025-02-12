@@ -15,7 +15,7 @@ import PTLabel from './position-taking-label';
 import PTSelect from './pt-select';
 import styles from './pt-select.module.scss';
 import { CopyStatus, PositionTakingBlockProps, PTRowProps } from './types';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 import {
   CopyStatusPT,
   groupSportsBookPTBySportTypeId,
@@ -241,7 +241,7 @@ export default function SuperPositionTaking({ title, isReadOnly }: Readonly<Posi
     }
   };
 
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   const handleSelectAll = (isChecked: boolean) => {
     const newPTs = superPTs.map((item) => ({

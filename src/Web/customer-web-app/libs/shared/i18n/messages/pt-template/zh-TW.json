@@ -1,0 +1,18 @@
+{
+  "Action": "動作",
+  "DeletePTTemplateConfirmMessage": "您確定要刪除該模板嗎？",
+  "PT_Level_2": "代理占成数",
+  "PT_Level_3": "总代理占成数",
+  "PT_Level_4": "超级总代理占成数",
+  "PTTemplate": "佔成數模板",
+  "SelectByDefault": "選擇默認",
+  "TemplateName": "模板名稱",
+  "TemplateNameExistedMessage": "模板名稱已存在。",
+  "TemplateNameRequireMessage": "模板名稱為必填項。",
+  "TemplateNote1_Level_2": "佔成數模板僅適用於在精簡模式下創建的新會員",
+  "TemplateNote1_Level_3": "佔成數模板僅適用於在精簡模式下創建的新代理",
+  "TemplateNote1_Level_4": "佔成數模板僅適用於在精簡模式下創建的新總代理",
+  "TemplateNote2_Level_2": "所選的占成數模板數值將用作所有產品默認的代理預定佔成。",
+  "TemplateNote2_Level_3": "所選的占成數模板數值將用作所有產品默認的總代理預定佔成（不受自動占成影響）。",
+  "TemplateNote2_Level_4": "所選的占成數模板數值將用作所有產品默認的超級總代理預定佔成（不受自動占成影響）。"
+}

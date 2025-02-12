@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { GroupItem } from '@customer-web-app/shared-group-settings-types';
 import { BlockColumn } from '@customer-web-app/shared/base/block';
@@ -22,7 +22,7 @@ type CopyPtIconProp = {
 };
 
 export function CopyPTICon({ id, isCopy, isCopySuccess, handleCopyClick }: Readonly<CopyPtIconProp>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   return (
     <span>

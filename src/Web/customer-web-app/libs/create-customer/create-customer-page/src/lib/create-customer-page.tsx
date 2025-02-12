@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import {
     handleChangeGroupSettingValue, handleChangeItemValue
@@ -28,7 +28,7 @@ import styles from './create-customer-page.module.scss';
 import { handleInitProducts } from './handler';
 
 export function CreateCustomerPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const theme = useTheme();
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;

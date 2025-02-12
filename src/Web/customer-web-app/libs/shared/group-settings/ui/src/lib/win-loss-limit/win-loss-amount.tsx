@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { SportTypeIds } from '@customer-web-app/shared-constants';
@@ -14,7 +14,7 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import styles from './win-loss-amount.module.scss';
 
 const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: number; betType: number }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const modal = useModal();
   const theme = useTheme();
 

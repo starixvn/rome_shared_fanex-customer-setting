@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
 import { GroupTypeIds, ProductGroupIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -31,7 +31,7 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
   props,
   ref
 ) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const {
     productGroups,
     isMultipleMode,

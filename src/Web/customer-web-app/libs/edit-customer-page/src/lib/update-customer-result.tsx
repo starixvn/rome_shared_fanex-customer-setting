@@ -1,11 +1,11 @@
-import { TFunction } from 'i18next';
+import { TFnType } from '@tolgee/react';
 
 import { UpdateCustomerResult } from '@customer-web-app/share-models';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 
 import styles from './update-customer-result.module.scss';
 
-export const renderUpdateCustomerResult = (result: UpdateCustomerResult, t: TFunction) => {
+export const renderUpdateCustomerResult = (result: UpdateCustomerResult, t: TFnType) => {
   if (result.subResults) {
     return result.subResults.map((groupType) => {
       return (

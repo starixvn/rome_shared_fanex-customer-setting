@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ChangeEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
 import { UserLevel } from '@customer-web-app/shared-constants';
@@ -58,7 +58,7 @@ export const TransferCondition = forwardRef<ValidationRefType, TransferCondition
   { generalInfo, onGeneralInfoChange, children },
   ref
 ) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   const disabled = generalInfo.isAutomateTransfer;
   const [weekly, setWeekly] = useState<boolean>(false);

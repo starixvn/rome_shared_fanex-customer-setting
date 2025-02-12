@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import {
     getUnCheckAutoPtItems, handleChangeGroupSettingValue, handleChangeItemValue,
@@ -32,7 +32,7 @@ import { getNewMultipleEditCustomerSettings, handleInitProducts } from './handle
 import UpdateSettingConfirmationPopup from './update-setting-confirmation-popup';
 
 export function EditMultipleCustomerPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const theme = useTheme();
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 type Props = {
   checked: boolean;
@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function SelectAllCommissionCheckbox({ checked, handleChange }: Readonly<Props>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   return (
     <>
       <input type="checkbox" style={{ top: '0' }} onChange={(e) => handleChange(e.target.checked)} checked={checked} />

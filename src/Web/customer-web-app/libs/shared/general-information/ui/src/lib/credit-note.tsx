@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 import { IconCredit } from '@customer-web-app/shared/base/common-icon';
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function CreditNote({ availableCredit, memberMaxCredit }: Props) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const note = t('creditNote', {
     availableCredit: NumberHelper.roundDownNumber(availableCredit),
     memberMaxCredit: NumberHelper.roundDownNumber(memberMaxCredit),

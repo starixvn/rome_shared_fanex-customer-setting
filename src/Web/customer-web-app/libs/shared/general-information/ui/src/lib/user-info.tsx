@@ -1,5 +1,5 @@
+import { useTranslate } from '@tolgee/react';
 import {GeneralInfo, UserInformation} from "@customer-web-app/shared-general-information-state";
-import {useTranslation} from "react-i18next";
 import styles from "./general-information.module.scss";
 import classNames from "classnames";
 import {BlockItem} from "@customer-web-app/shared/base/block";
@@ -24,7 +24,7 @@ const UserInformationFields: ReadonlyArray<keyof UserInformation> = [
 ];
 
 function UserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collapse, isReadOnly=false}: UserInfoProps) {
-  const {t} = useTranslation();
+  const {t} = useTranslate();
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
 
   return (

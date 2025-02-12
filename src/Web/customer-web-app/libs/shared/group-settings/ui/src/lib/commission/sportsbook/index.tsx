@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import {
     BetTypeIds, ProductGroupIds, SportTypeIds, UserLevel
@@ -20,7 +20,7 @@ export function MemberSportsBookCommission({
   isReadOnly,
   handleSelectAll,
 }: Readonly<Props>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const {
     generalInfo,
     isMultipleMode,

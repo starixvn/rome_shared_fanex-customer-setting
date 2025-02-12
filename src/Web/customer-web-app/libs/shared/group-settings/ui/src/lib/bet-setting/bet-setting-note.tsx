@@ -1,12 +1,12 @@
 import { MouseEvent } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { IconInfo } from '@customer-web-app/shared/base/common-icon';
 
 import { CustomerSettingInformationPageUrl } from '../customer-setting-information-page-url';
 
 export default function BetSettingNote() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { url } = CustomerSettingInformationPageUrl({ tab: 0 });
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();

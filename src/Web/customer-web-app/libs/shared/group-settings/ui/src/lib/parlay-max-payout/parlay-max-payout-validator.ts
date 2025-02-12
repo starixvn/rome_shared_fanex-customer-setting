@@ -1,4 +1,4 @@
-import { TFunction } from 'i18next';
+import { TFnType } from '@tolgee/react';
 
 import { Result, ValidationResult } from '@customer-web-app/share-models';
 import { UserLevel } from '@customer-web-app/shared-constants';
@@ -24,12 +24,12 @@ export default class ParlayMaxPayoutValidator {
   protected upline: ParlayMaxPayoutProps;
   protected original: ParlayMaxPayoutProps;
 
-  protected translate: TFunction;
+  protected translate: TFnType;
   public validationState: ValidationResult;
   public uplineRoleId: number | undefined;
   public uplineIsCompany: boolean;
 
-  constructor(props: ParlayMaxPayoutGroupItem, t: TFunction, uplineRoleId: number | undefined) {
+  constructor(props: ParlayMaxPayoutGroupItem, t: TFnType, uplineRoleId: number | undefined) {
     this.validationState = Result.CreateSuccessfulResult() as ValidationResult;
     this.combo2 = props.combo2;
     this.combo35 = props.combo35;

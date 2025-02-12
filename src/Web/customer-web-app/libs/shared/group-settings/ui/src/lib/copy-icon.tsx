@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
@@ -10,7 +10,7 @@ interface CopyIconProps {
 }
 
 export default function CopyIcon({ id, isCopied = false, onClick }: Readonly<CopyIconProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   const iconClass = isCopied ? 'ic-copied' : 'ic-copy';
   return (

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function CreditRange({ min, max }: Props) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   return (
     <>

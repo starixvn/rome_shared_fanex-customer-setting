@@ -10,11 +10,11 @@ import { CommissionHintTab } from './tabs/commission-hint-tab';
 import { MaxPayoutSettingTab } from './tabs/max-payout-setting-tab';
 import { ProductCategorySettingTab } from './tabs/product-category-setting-tab';
 import { PtSettingTab } from './tabs/pt-setting-tab';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 import { WinLossLimitTab } from './tabs/win-loss-limit-tab';
 
 export function App() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const [tabs, setTabs] = useState<TabOptions[]>([]);
   const [selectedTab, setSelectedTab] = useState<TabOptions>({} as TabOptions);
 

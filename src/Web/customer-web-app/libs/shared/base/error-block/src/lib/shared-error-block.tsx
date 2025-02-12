@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { Result, SubMessagesResult } from '@customer-web-app/share-models';
 
@@ -9,7 +9,7 @@ export interface SharedErrorBlockProps {
 }
 
 export function ErrorBlock({ error }: SharedErrorBlockProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
 
   return (
     <div className={styles.container}>

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ChangeEvent, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 import { NumericFormat } from 'react-number-format';
 
 import { MaxNumberInputLength } from '@customer-web-app/shared-constants';
@@ -25,7 +25,7 @@ interface Props {
 }
 
 export function ParlayMaxPayoutCell(props: Readonly<Props>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const unlimitedText = t('unlimited');
   const {
     onChange,

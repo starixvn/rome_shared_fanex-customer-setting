@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { IconInfo } from '@customer-web-app/shared/base/common-icon';
 
@@ -6,7 +6,7 @@ import { CustomerSettingInformationPageUrl } from '../../customer-setting-inform
 
 export default function SportsBookBetSettingMaxPayoutNote() {
   const { url } = CustomerSettingInformationPageUrl({ tab: 1 });
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const tooltipContent = t('MaxPayoutInfoTitle');
 
   return (

@@ -6,13 +6,23 @@ WORKDIR /app
 
 COPY src/Web/customer-web-app/package.json ./
 COPY src/Web/customer-web-app/package-lock.json ./
+
 RUN npm install
 
 # Register TRANSFORM_CONFIG argument for transforming by environment
 ARG TRANSFORM_CONFIG=production
+ARG DEPLOY_ENV=PROD
+
 RUN echo $TRANSFORM_CONFIG
+RUN echo $DEPLOY_ENV
 
 COPY src/Web/customer-web-app .
+COPY src/Web/customer-web-app/.env.$DEPLOY_ENV ./apps/create-super/.env.production
+COPY src/Web/customer-web-app/.env.$DEPLOY_ENV ./apps/create-customer/.env.production
+COPY src/Web/customer-web-app/.env.$DEPLOY_ENV ./apps/edit-customer/.env.production
+COPY src/Web/customer-web-app/.env.$DEPLOY_ENV ./apps/edit-multiple-customers/.env.production
+COPY src/Web/customer-web-app/.env.$DEPLOY_ENV ./apps/sportsbook-information/.env.production
+
 RUN npx nx run-many -t build --mode $TRANSFORM_CONFIG
 
 # 2. Nginx

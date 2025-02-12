@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { UserLevel } from '@customer-web-app/shared-constants';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 export default function PasswordRule({ roleId }: Readonly<{ roleId: UserLevel }>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const passwordRule = roleId === UserLevel.Member ? t('lblPasswordMemberRequire') : t('lblPasswordRequire');
 
   return (

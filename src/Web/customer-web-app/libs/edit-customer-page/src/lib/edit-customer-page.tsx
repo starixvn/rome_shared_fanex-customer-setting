@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import {
     Params, Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
@@ -37,7 +37,7 @@ import {
 import { renderUpdateCustomerResult } from './update-customer-result';
 
 export function EditCustomerPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const theme = useTheme();
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;

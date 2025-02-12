@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslate } from '@tolgee/react';
 
 import { ValidationRefType } from '@customer-web-app/share-models';
 import { GroupTypeIds, ProductIds, UserLevel } from '@customer-web-app/shared-constants';
@@ -65,7 +65,7 @@ function BetLimitRow({
   handleOnBetLimitChange,
   handleCheckAllItem,
 }: Readonly<BetLimitRowProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { isDirectMember } = useGroupSettingContext();
 
   if (item.length < 1) return null;
@@ -166,7 +166,7 @@ function BetLimitRow({
 const BetLimitBlockId = 'BetLimitBlockId';
 
 const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function BetLimit(props, ref) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const { isReadOnly, isAllowUncheckAll } = props;
   const { productGroups, productGroupId, isEditMode, handleUpdateSettingItems, updateGroupSetting, isDirectMember } =
     useGroupSettingContext();
