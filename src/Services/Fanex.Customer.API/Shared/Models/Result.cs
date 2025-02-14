@@ -23,7 +23,7 @@ public class Result
 
     public bool IsSuccessful => Code == 0;
 
-    public static Result Create(string message, int? code = null, string customData = null)
+    public static Result CreateError(string message, int? code = null, string customData = null)
         => new(code ?? ErrorCode, message, customData);
 
     public static Result CreateSuccess(string message = "")

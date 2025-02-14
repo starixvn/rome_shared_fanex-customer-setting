@@ -209,19 +209,19 @@ public class SecurityCodeService : BaseService, ISecurityCodeService
     {
         if (string.IsNullOrWhiteSpace(securityCode))
         {
-            return Result.Create(SecurityCodeResource.ResourceManager.GetString("alertSecCodeEmpty", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
+            return Result.CreateError(SecurityCodeResource.ResourceManager.GetString("alertSecCodeEmpty", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
         }
 
         if (!IsMatchedRules(securityCode))
         {
-            return Result.Create(SecurityCodeResource.ResourceManager.GetString("lblSecCodeWrongRule", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
+            return Result.CreateError(SecurityCodeResource.ResourceManager.GetString("lblSecCodeWrongRule", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
         }
 
         if (param != null && param.MustVerifyCurrentSecurityCode)
         {
             if (string.IsNullOrWhiteSpace(param.CurrentSecurityCode))
             {
-                return Result.Create(SecurityCodeResource.ResourceManager.GetString("alertOldSecCodeEmpty", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
+                return Result.CreateError(SecurityCodeResource.ResourceManager.GetString("alertOldSecCodeEmpty", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
             }
 
             var verifyResult = await CheckSecurityCode(new CheckSecurityCodeRequest

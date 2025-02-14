@@ -80,7 +80,7 @@ namespace Fanex.Customer.API.Modules.Customer
                 return result;
             }
 
-            return Result.Create(NicknameResource.ResourceManager.GetString("NicknameRule", new CultureInfo(LanguageUtils.ToLanguage(param.LanguageKey))), Code);
+            return Result.CreateError(NicknameResource.ResourceManager.GetString("NicknameRule", new CultureInfo(LanguageUtils.ToLanguage(param.LanguageKey))), Code);
         }
 
         private Task<Result> UpdateNicknameLoginOnly(UpdateNicknameLoginOnlyParam param)
@@ -95,9 +95,8 @@ namespace Fanex.Customer.API.Modules.Customer
         private async Task<Result> Execute(NicknameNonQueryCommand command)
         {
             await dynamicRepository.ExecuteAsync(command);
-            return Result.Create(
-                command.ErrCode == 0 ? NicknameResource.ResourceManager.GetString("ConfiguredNicknameSuccessfully", new CultureInfo(LanguageUtils.ToLanguage(command.Language))) : command.ErrMsg,
-                command.ErrCode);
+            return new(command.ErrCode,
+                command.ErrCode == 0 ? NicknameResource.ResourceManager.GetString("ConfiguredNicknameSuccessfully", new CultureInfo(LanguageUtils.ToLanguage(command.Language))) : command.ErrMsg);
         }
     }
 }

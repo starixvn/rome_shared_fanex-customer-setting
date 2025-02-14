@@ -36,7 +36,7 @@ namespace Fanex.Customer.API.Modules.SubAccount.Service
 
             if (register.ErrCode != 0)
             {
-                return Result.Create(register.ErrMsg);
+                return Result.CreateError(register.ErrMsg);
             }
 
             var command = new AddSubAccountCriteria

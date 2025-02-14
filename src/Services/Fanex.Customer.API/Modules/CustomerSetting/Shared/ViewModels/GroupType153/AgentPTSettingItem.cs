@@ -55,7 +55,7 @@ public class AgentPTSettingItem : PTItem
     {
         if (N2 > A2)
         {
-            return Result.Create(StaticResources.Get("AgentMinPTCannotBeGreaterThanAgentMaxPT", language), ErrorCodes.AgentMinPTIsGreaterThanAgentMaxPT);
+            return Result.CreateError(StaticResources.Get("AgentMinPTCannotBeGreaterThanAgentMaxPT", language), ErrorCodes.AgentMinPTIsGreaterThanAgentMaxPT);
         }
 
         return Result.CreateSuccess();

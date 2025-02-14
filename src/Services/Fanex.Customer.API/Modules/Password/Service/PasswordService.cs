@@ -315,23 +315,23 @@ namespace Fanex.Customer.API.Modules.Password.Service
             if ((!isResetPassword && string.IsNullOrWhiteSpace(currentPassword))
                 || string.IsNullOrWhiteSpace(newPassword))
             {
-                return Result.Create(PasswordSecurity.ResourceManager.GetString("NotAuthorized", new CultureInfo(language)));
+                return Result.CreateError(PasswordSecurity.ResourceManager.GetString("NotAuthorized", new CultureInfo(language)));
             }
 
             if (!IsMatchedRules(newPassword, isResetMemberPassword))
             {
-                return Result.Create(PasswordSecurity.ResourceManager.GetString("lblPasswordRequire", new CultureInfo(language)));
+                return Result.CreateError(PasswordSecurity.ResourceManager.GetString("lblPasswordRequire", new CultureInfo(language)));
             }
 
             if (!isResetPassword && string.Compare(newPassword, currentPassword, StringComparison.OrdinalIgnoreCase) == 0)
             {
-                return Result.Create(PasswordSecurity.ResourceManager.GetString("lblPasswordDOldOne", new CultureInfo(language))); //// will update resource later
+                return Result.CreateError(PasswordSecurity.ResourceManager.GetString("lblPasswordDOldOne", new CultureInfo(language))); //// will update resource later
             }
 
             if (string.Compare(newPassword, "59D7!4$h", StringComparison.OrdinalIgnoreCase) == 0
                 || string.Compare(newPassword, "493abcDE", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                return Result.Create(PasswordSecurity.ResourceManager.GetString("lblPasswordWrongRule", new CultureInfo(language)));
+                return Result.CreateError(PasswordSecurity.ResourceManager.GetString("lblPasswordWrongRule", new CultureInfo(language)));
             }
 
             foreach (var invalidPassword in invalidPasswords)
@@ -339,7 +339,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                 if (!string.IsNullOrWhiteSpace(invalidPassword)
                     && newPassword.Contains(invalidPassword, StringComparison.OrdinalIgnoreCase))
                 {
-                    return Result.Create(PasswordSecurity.ResourceManager.GetString("lblPasswordDAccountName", new CultureInfo(language)));
+                    return Result.CreateError(PasswordSecurity.ResourceManager.GetString("lblPasswordDAccountName", new CultureInfo(language)));
                 }
             }
 

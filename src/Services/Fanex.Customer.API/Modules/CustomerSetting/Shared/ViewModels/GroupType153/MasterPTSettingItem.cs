@@ -55,7 +55,7 @@ public class MasterPTSettingItem : PTItem
     {
         if (N3 > M3)
         {
-            return Result.Create(StaticResources.Get("MasterMinPTCannotBeGreaterThanMasterMaxPT", language), ErrorCodes.MasterMinPTIsGreaterThanMasterMaxPT);
+            return Result.CreateError(StaticResources.Get("MasterMinPTCannotBeGreaterThanMasterMaxPT", language), ErrorCodes.MasterMinPTIsGreaterThanMasterMaxPT);
         }
 
         return Result.CreateSuccess();

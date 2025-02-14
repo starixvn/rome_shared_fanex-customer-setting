@@ -46,7 +46,7 @@ namespace Fanex.Customer.API.Modules.Customer
         {
             if (string.IsNullOrWhiteSpace(param.ProtectionCode))
             {
-                return Result.Create(ProtectionCodeResource.RequiredNewProtectionCode);
+                return Result.CreateError(ProtectionCodeResource.RequiredNewProtectionCode);
             }
 
             var rawProtectionCode = aes.Decrypt(param.ProtectionCode, param.HashKey);
@@ -78,7 +78,7 @@ namespace Fanex.Customer.API.Modules.Customer
         {
             if (protectionCode.Length < 6)
             {
-                return Result.Create(ProtectionCodeResource.ResourceManager.GetString("MinLengthNewProtectionCodeError", new CultureInfo(language)));
+                return Result.CreateError(ProtectionCodeResource.ResourceManager.GetString("MinLengthNewProtectionCodeError", new CultureInfo(language)));
             }
 
             const int Space = 32;
@@ -86,7 +86,7 @@ namespace Fanex.Customer.API.Modules.Customer
 
             if (protectionCode.Any(c => c == Space || c > MaxAnsiCode))
             {
-                return Result.Create(ProtectionCodeResource.ResourceManager.GetString("ContainsSpaceOrUnicodeCharacterError", new CultureInfo(language)));
+                return Result.CreateError(ProtectionCodeResource.ResourceManager.GetString("ContainsSpaceOrUnicodeCharacterError", new CultureInfo(language)));
             }
 
             return new Result();

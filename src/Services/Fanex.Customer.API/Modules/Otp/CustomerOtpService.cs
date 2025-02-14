@@ -121,7 +121,7 @@ namespace Fanex.Customer.API.Modules.Otp
 
             if (!isCorrect)
             {
-                return CustomResult.Create(OtpSecurity.ResourceManager.GetString("OtpIsInvalidOrExpired", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
+                return CustomResult.CreateError(OtpSecurity.ResourceManager.GetString("OtpIsInvalidOrExpired", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
             }
 
             var deviceInfoSerialized = jsonHelper.Serialize(param.Device.Info);

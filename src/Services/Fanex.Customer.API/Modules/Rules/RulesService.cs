@@ -43,7 +43,7 @@ namespace Fanex.Customer.API.Modules.Rules
 
             return command.ErrCode == 0
                 ? Result.CreateSuccess()
-                : Result.Create(command.ErrMsg);
+                : Result.CreateError(command.ErrMsg);
         }
 
         public async Task<Result> CheckMaxNewMemberBySuper(CheckAllLimitedRulesRequest request)
@@ -53,7 +53,7 @@ namespace Fanex.Customer.API.Modules.Rules
 
             return command.ErrCode == 0
                 ? Result.CreateSuccess()
-                : Result.Create(command.ErrMsg);
+                : Result.CreateError(command.ErrMsg);
         }
 
         public async Task<Result> CheckAllLimitedRules(CheckAllLimitedRulesRequest request)

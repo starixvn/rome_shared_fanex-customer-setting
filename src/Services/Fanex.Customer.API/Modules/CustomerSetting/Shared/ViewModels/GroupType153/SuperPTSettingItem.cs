@@ -26,7 +26,7 @@ public class SuperPTSettingItem : PTItem
     {
         if (N4 > S4)
         {
-            return Result.Create(StaticResources.Get("SuperMinPTCannotBeGreaterThanSuperMaxPT", language), ErrorCodes.SuperMinPTIsGreaterThanSuperMaxPTErrorCode);
+            return Result.CreateError(StaticResources.Get("SuperMinPTCannotBeGreaterThanSuperMaxPT", language), ErrorCodes.SuperMinPTIsGreaterThanSuperMaxPTErrorCode);
         }
 
         return Result.CreateSuccess();
