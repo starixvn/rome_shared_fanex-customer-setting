@@ -34,11 +34,11 @@ namespace Fanex.Customer.Client.Services
 
         Task<CopyMultipleCustomersResult> CopyMultipleCustomers(CopyMultipleCustomersParam param);
 
-        Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, string language = Languages.English);
+        Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, bool isDirectMember = false, string language = Languages.English);
 
         Task<string> GetGlobalSetting(string siteLabel, string site, int currency, int systemId, int productGroupId = 1, string language = Languages.English);
 
-        Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName="", bool isCopy=false, int? agentId = null);
+        Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName = "", bool isCopy = false, int? agentId = null);
 
         Task<string> CreateCustomer(CreateCustomerParam param);
 
@@ -76,7 +76,7 @@ namespace Fanex.Customer.Client.Services
 
 
         Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currency, string language = "en-US");
-        
+
     }
 
     public class CustomerService : ICustomerService
@@ -95,8 +95,8 @@ namespace Fanex.Customer.Client.Services
             };
         }
 
-        public Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, string language = Languages.English)
-            => httpClient.PostAsJsonAsync<Result>("rules/CheckAllLimitedRules", new { custId, custLevel, actorUsername, language });
+        public Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, bool isDirectMember = false, string language = Languages.English)
+            => httpClient.PostAsJsonAsync<Result>("rules/CheckAllLimitedRules", new { custId, custLevel, actorUsername, isDirectMember, language });
 
         public Task<bool> CheckExistedCustomer(string username)
             => httpClient.GetAsJsonAsync<bool>($"customer/{username}/exist");
@@ -215,7 +215,7 @@ namespace Fanex.Customer.Client.Services
         public Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US")
             => httpClient.GetStringAsync($"customer/current-winloss-amount?custId={custId}&sportType={sportType}&betType={betType}&language={language}");
 
-        public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName="", bool isCopy = false, int? agentId = 0)
+        public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName = "", bool isCopy = false, int? agentId = 0)
             => httpClient.GetStringAsync($"customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}&IsMultipleMode={isMultipleMode}&GroupName={groupName}&IsCopy={isCopy}&AgentId={agentId}");
 
         public Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username)
@@ -281,7 +281,7 @@ namespace Fanex.Customer.Client.Services
             {
                 return httpClient.GetStringAsync($"customer/win-loss-limit?custId={custId}&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
             }
-            
+
             return httpClient.GetStringAsync($"customer/win-loss-limit?&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
         }
     }

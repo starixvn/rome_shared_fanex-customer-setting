@@ -12,6 +12,8 @@ public class CheckAllLimitedRulesRequest
 
     public string Language { get; set; }
 
+    public bool IsDirectMember { get; set; }
+
     public bool IsValid()
         => CustId > 0
         && CustLevel > UserLevel.Member.Value
