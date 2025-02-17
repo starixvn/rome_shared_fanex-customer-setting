@@ -10,7 +10,7 @@ public class GetWinLossLimitInformationEndpoint:IEndpoint<IResult, GetProductCat
     {
         app.MapGet("/api/customer/win-loss-limit", ([AsParameters]GetProductCategoriesRequest request, ICustomerService customerService)
                 => HandleAsync(request, customerService))
-            .Produces<CreditInfo>();
+            .Produces<CreditInfo>().WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(GetProductCategoriesRequest request, ICustomerService customerService)

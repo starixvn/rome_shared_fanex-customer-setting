@@ -9,7 +9,7 @@ public class CheckAllLimitedRulesEndpoint : IEndpoint<IResult, CheckAllLimitedRu
     {
         app.MapPost("/api/rules/CheckAllLimitedRules", (CheckAllLimitedRulesRequest request, IRulesService rulesService)
             => HandleAsync(request, rulesService))
-            .Produces<Result>();
+            .Produces<Result>().WithTags(EndpointTags.CustomerSettings);
     }
 
     public async Task<IResult> HandleAsync(CheckAllLimitedRulesRequest request, IRulesService rulesService)
