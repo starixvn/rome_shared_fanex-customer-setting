@@ -41,7 +41,7 @@ public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCus
             return result;
         }
 
-        int newCustId = result.NewCustId;
+        int newCustId = result.NewCustIds[0];
         result = await CreateMaster(request, newCustId);
         if (!result.IsSuccessful)
         {

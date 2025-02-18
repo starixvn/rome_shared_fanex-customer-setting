@@ -40,7 +40,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             return result;
         }
 
-        int newCustId = result.NewCustId;
+        int newCustId = result.NewCustIds[0];
         result = await CreateMember(request, newCustId);
         if (!result.IsSuccessful)
         {

@@ -19,10 +19,10 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
 
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
-    public CreateMasterFullModeService(IMessageService messageService, 
-        AppSettings appSettings, 
+    public CreateMasterFullModeService(IMessageService messageService,
+        AppSettings appSettings,
         ICustomerSettingHelper helperService)
-        : base( messageService, appSettings, helperService)
+        : base(messageService, appSettings, helperService)
     {
     }
 
@@ -33,14 +33,14 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
         {
             return result;
         }
-        
+
         result = await Register(request);
         if (!result.IsSuccessful)
         {
             return result;
         }
 
-        int newCustId = result.NewCustId;
+        int newCustId = result.NewCustIds[0];
         result = await CreateMaster(request, newCustId);
         if (!result.IsSuccessful)
         {
@@ -89,7 +89,7 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        return new CreateCustomerResult(new List<int> { Convert.ToInt32(outputParams["custid"]) }, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<CreateCustomerResult> CreateMaster(CreateRequest request, int newCustId)
@@ -122,7 +122,7 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        return new CreateCustomerResult(new List<int> { newCustId }, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
     private async void Rollback(int newCustId)

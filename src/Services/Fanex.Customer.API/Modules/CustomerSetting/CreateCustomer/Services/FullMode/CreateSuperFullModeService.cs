@@ -40,7 +40,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             return result;
         }
 
-        int newCustId = result.NewCustId;
+        int newCustId = result.NewCustIds[0];
         result = await CreateSuper(request, newCustId);
         if (!result.IsSuccessful)
         {

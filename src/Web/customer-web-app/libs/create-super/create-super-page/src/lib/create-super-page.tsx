@@ -152,7 +152,7 @@ export function CreateSuperPage() {
         const createResult = result as CreateCustomerResult;
         setIsLoading(true);
         setTimeout(() => {
-          const redirectUrl = `${appConfig.applicationPath}Customer/V2/UpdatePT.aspx?custid=${createResult?.newCustId}&insert=true&roleid=4&uplineid=0&exchangeId=${generalInfo.currency}`;
+          const redirectUrl = `${appConfig.applicationPath}Customer/V2/UpdatePT.aspx?custid=${createResult?.newCustIds}&insert=true&roleid=4&uplineid=0&exchangeId=${generalInfo.currency}`;
           window.location.replace(redirectUrl);
         }, 3000);
         return;

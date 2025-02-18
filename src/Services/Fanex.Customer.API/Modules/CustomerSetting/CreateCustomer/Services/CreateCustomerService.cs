@@ -51,7 +51,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
 
     public bool ValidateRequest(CreateRequest request)
     {
-        if(request.Settings.GeneralInfo == null || request.Settings.GeneralInfo.RoleId == 0 || request.Settings.GeneralInfo.UplineRoleId == 0)
+        if (request.Settings.GeneralInfo == null || request.Settings.GeneralInfo.RoleId == 0 || request.Settings.GeneralInfo.UplineRoleId == 0)
         {
             return false;
         }
@@ -89,15 +89,20 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId, isDirectMember);
         result = await createCustomerService.Create(request);
 
-        if (result.IsSuccessful && (Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel() || isDirectMember))
+        if (result.NewCustIds.Any() && (Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel() || isDirectMember))
         {
-            await balanceService.InitBalance(request.Settings.GeneralInfo.Site, result.NewCustId);
+            foreach (var newCustId in result.NewCustIds)
+            {
+                await balanceService.InitBalance(request.Settings.GeneralInfo.Site, newCustId);
+            }
         }
 
-        if (result.IsSuccessful)
+        if (result.NewCustIds.Any())
         {
-            AfterCreateCustomerProcess(
-                result.NewCustId,
+            foreach (var newCustId in result.NewCustIds)
+            {
+                AfterCreateCustomerProcess(
+                newCustId,
                 request.Context.SubAccId,
                 (byte)(uplineRoleId - 1),
                 request.Settings.GeneralInfo.SiteLabel,
@@ -105,10 +110,8 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
                 request.Settings.GeneralInfo.UserName,
                 request.Context.CreatorId,
                 request.Context.IP);
-        }
+            }
 
-        if (result.IsSuccessful)
-        {
             result.AvailableAlphaDomain = await customerService.GetBackupDomains(
                 request.Settings.GeneralInfo.Site,
                 isDirectMember ? CustomerLevel.Member : (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
@@ -119,13 +122,13 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
 
     private CreateCustomerBaseService GetCreateCustomerService(bool isFullMode, int uplineRoleId, bool? isDirectMember)
     {
-        if(isDirectMember.GetValueOrDefault())
+        if (isDirectMember.GetValueOrDefault())
         {
             return uplineRoleId switch
             {
                 CustomerLevel.Super => new CreateDirectMemberService(messageService, appSettings, helperService, customerService),
                 CustomerLevel.Master => new CreateDirectMemberService(messageService, appSettings, helperService, customerService),
-                _=> null
+                _ => null
             };
         }
 

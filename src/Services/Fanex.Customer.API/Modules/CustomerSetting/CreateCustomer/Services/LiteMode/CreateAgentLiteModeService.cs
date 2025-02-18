@@ -42,7 +42,7 @@ public class CreateAgentLiteModeService : CreateCustomerBaseService, ICreateCust
             return result;
         }
 
-        int newCustId = result.NewCustId;
+        int newCustId = result.NewCustIds[0];
         result = await CreateAgent(request, newCustId);
         if (!result.IsSuccessful)
         {

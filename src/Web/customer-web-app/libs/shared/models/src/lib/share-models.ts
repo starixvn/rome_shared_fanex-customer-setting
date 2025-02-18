@@ -44,7 +44,7 @@ export class SubMessagesResult extends Result {
 }
 
 export class CreateCustomerResult extends SubMessagesResult {
-  newCustId?: number;
+  newCustIds?: number[];
   newUserNames?: string[];
   availableAlphaDomain?: string[];
 }

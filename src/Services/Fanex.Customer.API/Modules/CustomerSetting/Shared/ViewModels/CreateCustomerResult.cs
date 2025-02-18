@@ -8,23 +8,45 @@ public class CreateCustomerResult : CustomerSettingResult
     public CreateCustomerResult(int newCustId, int code = 0, string message = "")
         : base(code, message, null)
     {
-        NewCustId = newCustId;
+        NewCustIds = new List<int> { newCustId };
     }
+
+    public CreateCustomerResult(List<int> newCustIds, int code = 0, string message = "")
+        : base(code, message, null)
+    {
+        NewCustIds = newCustIds ?? new List<int>();
+    }
+
     public CreateCustomerResult(int newCustId, int code = 0, string message = "", IEnumerable<SubMessageContent> subMessages = null)
         : base(code, message, subMessages)
     {
-        NewCustId = newCustId;
+        NewCustIds = new List<int> { newCustId };
+    }
+
+
+    public CreateCustomerResult(List<int> newCustIds, int code = 0, string message = "", IEnumerable<SubMessageContent> subMessages = null)
+        : base(code, message, subMessages)
+    {
+        NewCustIds = newCustIds ?? new List<int>();
     }
 
     public CreateCustomerResult(int newCustId, int code = 0, string message = "", IEnumerable<SubMessageContent> subMessages = null, List<string> newUserNames = null, List<string> availableDomains = null)
         : base(code, message, subMessages)
     {
-        NewCustId = newCustId;
+        NewCustIds = new List<int> { newCustId };
         NewUserNames = newUserNames;
         AvailableAlphaDomain = availableDomains;
     }
 
-    public int NewCustId { get; }
+    public CreateCustomerResult(List<int> newCustIds, int code = 0, string message = "", IEnumerable<SubMessageContent> subMessages = null, List<string> newUserNames = null, List<string> availableDomains = null)
+        : base(code, message, subMessages)
+    {
+        NewCustIds = newCustIds ?? new List<int>();
+        NewUserNames = newUserNames;
+        AvailableAlphaDomain = availableDomains;
+    }
+
+    public List<int> NewCustIds { get; }
 
     public List<string> NewUserNames { get; set; }
 

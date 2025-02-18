@@ -22,6 +22,8 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
 
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
+    private List<int> newCustIds = new List<int>();
+
     private List<string> newUserNames = new List<string>();
 
     public CreateDirectMemberService(IMessageService messageService,
@@ -80,7 +82,7 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
                 retryCount = 0;
             }
 
-            int newCustId = result.NewCustId;
+            int newCustId = result.NewCustIds[0];
             result = await CreateMember(request, newCustId);
             if (!result.IsSuccessful)
             {
@@ -90,11 +92,12 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
             else
             {
                 newUserNames.Add(request.Settings.GeneralInfo.UserName);
+                newCustIds.Add(newCustId);
             }
         }
 
         return new CreateCustomerResult(
-            newCustId: 0,
+            newCustIds: newCustIds,
             newUserNames: newUserNames);
     }
 

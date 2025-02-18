@@ -154,7 +154,9 @@ export function CreateCustomerPage() {
         setIsLoading(true);
         const createResult = result as CreateCustomerResult;
         setTimeout(() => {
-          window.redirectToSettingPage({ username: generalInfo.userName, custId: createResult.newCustId });
+          if (createResult.newCustIds && createResult.newCustIds.length > 0) {
+            window.redirectToSettingPage({ username: generalInfo.userName, custId: createResult.newCustIds[0] });
+          }
         }, 3000);
         return;
       } else {
