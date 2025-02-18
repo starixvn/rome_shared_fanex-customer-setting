@@ -10,7 +10,8 @@ public class SelectAutoSuggestionCriteria : CriteriaBase
         string suggestionQuery,
         bool isInternal,
         bool directDownline,
-        bool isAccInfo)
+        bool isAccInfo,
+        bool excludeMember)
     {
         ActorId = actorId;
         SuggestionQuery = suggestionQuery;
@@ -18,6 +19,7 @@ public class SelectAutoSuggestionCriteria : CriteriaBase
 
         IsAccInfo = isAccInfo;
         DirectDownline = directDownline;
+        ExcludeMember = excludeMember;
     }
 
     public int UserId => ActorId;
@@ -34,6 +36,8 @@ public class SelectAutoSuggestionCriteria : CriteriaBase
     public bool DirectDownline { get; }
 
     public bool IsAccInfo { get; }
+
+    public bool ExcludeMember { get; }
 
     public override string GetSettingKey() => "Age_CustomerSelUserSearch";
 

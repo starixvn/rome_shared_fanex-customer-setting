@@ -2,7 +2,7 @@ using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.UserNameSuggestion;
 
-public class UserNameSuggestionEndpoint : 
+public class UserNameSuggestionEndpoint :
     IEndpoint<IResult, UserNameSuggestionQuery, UsernameSuggestionService>,
     IEndpoint<IResult, UsernameSuggestionByRoleQuery, UsernameSuggestionService>,
     IEndpoint<IResult, UpdateUserSearchQuery, UsernameSuggestionService>
@@ -29,7 +29,7 @@ public class UserNameSuggestionEndpoint :
             return Results.BadRequest();
         }
 
-        return Results.Ok(await service.GetUsernamesSuggestion(request.ActorId, request.Query, request.IsInternal, request.DirectDownlines, request.IsAccInfo));
+        return Results.Ok(await service.GetUsernamesSuggestion(request.ActorId, request.Query, request.IsInternal, request.DirectDownlines, request.IsAccInfo, request.ExcludeMember));
     }
 
     public async Task<IResult> HandleAsync(UsernameSuggestionByRoleQuery request, UsernameSuggestionService service)
