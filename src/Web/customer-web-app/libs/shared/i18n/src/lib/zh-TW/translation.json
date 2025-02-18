@@ -187,6 +187,6 @@
   "Domain": "域名",
   "CompactCopy": "簡潔複製",
   "IndividualCopy": "单一複製",
-  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} accounts failed to be created.",
-  "FailureReason": "Failure Reason"
+  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} 賬號創建失敗",
+  "FailureReason": "失敗原因"
 }
