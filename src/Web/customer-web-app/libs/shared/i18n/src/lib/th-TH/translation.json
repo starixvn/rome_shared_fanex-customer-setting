@@ -85,6 +85,7 @@
   "success": "สำเร็จ!",
   "copied": "คัดลอกเรียบร้อยแล้ว",
   "Group": "กลุ่ม",
+  "lblCommissionForSuper": "ค่าคอมมิชชั่นจากซุปเปอร์",
   "lblCommissionForMaster": "ค่าคอมมิชชั่น จากตัวแทนหลัก",
   "lblCommissionForAgent": "ค่าคอมมิชชั่น จาก ตัวแทน",
   "lblCommissionForMember": "ค่าคอมมิชชั่นสำหรับสมาชิก",

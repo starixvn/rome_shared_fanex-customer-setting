@@ -85,6 +85,7 @@
   "success": "成功！",
   "copied": "复制！",
   "Group": "组别",
+  "lblCommissionForSuper": "超级佣金",
   "lblCommissionForMaster": "总代理佣金",
   "lblCommissionForAgent": "代理佣金",
   "lblCommissionForMember": "会员的佣金",
