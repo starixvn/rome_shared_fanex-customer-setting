@@ -90,3 +90,8 @@ export const i7Sites = ['yUT', 'y789', 'y889', 'yOther', '789y'];
 export const Currencies = {
   Won: '45',
 };
+
+export const DirectMemberAgentIds = {
+  Super: -4,
+  Master: -4,
+};

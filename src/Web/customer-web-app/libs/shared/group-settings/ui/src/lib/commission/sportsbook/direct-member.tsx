@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-    BetTypeIds, ProductGroupIds, SportTypeIds, UserLevel
-} from '@customer-web-app/shared-constants';
+import { BetTypeIds, DirectMemberAgentIds, ProductGroupIds, SportTypeIds } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -99,7 +97,7 @@ export default function DirectMemberCommission({
         }
       >
         <BlockColumn>
-          {params.uplineRoleId === UserLevel.Super ? t('lblCommissionForSuper') : t('lblCommissionForMaster')}
+          {params.agentId === DirectMemberAgentIds.Super ? t('lblCommissionForSuper') : t('lblCommissionForMaster')}
         </BlockColumn>
         <BlockColumn>{t('lblCommissionForMember')}</BlockColumn>
       </BlockRow>
