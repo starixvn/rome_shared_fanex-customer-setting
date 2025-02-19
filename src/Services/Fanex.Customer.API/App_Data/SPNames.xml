@@ -254,7 +254,7 @@
     <Setting Key="Acc_SuperPrefixByGroupSel" SpName="Acc_SuperPrefixByGroupSel" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
     <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" />
     <Setting Key="EAS_CustomerDateLimitMultipleUpd" SpName="EAS_CustomerDateLimitMultipleUpd" DbName="DBCust.CustDB.wsv_nap" />
-    <Setting Key="Acc_CustomerInsAutoTransferAgent" SpName="Acc_CustomerInsAutoTransferAgent" DbName="DBGLOB.GlobCustDB.wsv_nap" />
+    <Setting Key="Acc_CustomerInsAutoTransferAgent" SpName="Acc_CustomerInsAutoTransferAgent" DbName="DBCust.CustDB.wsv_nap" />
     <Setting Key="Age_CustomerInsNickName_Register" SpName="Age_CustomerInsNickName_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" />
     <Setting Key="Age_CustomerInsNickName" SpName="Age_CustomerInsNickName" DbName="DBCust.CustDB.wsv_alp" />
     <Setting Key="Age_CustomerInsNickName_Rollback" SpName="Age_CustomerInsNickName_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap" />
