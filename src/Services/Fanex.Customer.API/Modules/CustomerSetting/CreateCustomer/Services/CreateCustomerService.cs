@@ -51,7 +51,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
 
     public bool ValidateRequest(CreateRequest request)
     {
-        if (request.Settings.GeneralInfo == null || request.Settings.GeneralInfo.RoleId == 0 || request.Settings.GeneralInfo.UplineRoleId == 0)
+        if (request.Settings.GeneralInfo == null ||  request.Settings.GeneralInfo.UplineRoleId == 0)
         {
             return false;
         }
