@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BetTypeIds, DirectMemberAgentIds, ProductGroupIds, SportTypeIds } from '@customer-web-app/shared-constants';
+import {
+    BetTypeIds, DirectMemberAgentIds, ProductGroupIds, SportTypeIds
+} from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -27,11 +29,11 @@ export default function DirectMemberCommission({
     handleMemberCommGroupChange,
     handleSelectCommGroup,
     selectedCommGroup,
+    mode,
   } = useGroupSettingContext();
-  const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
 
   useEffect(() => {
-    if (generalInfo?.commissions) {
+    if (mode === 'createCustomer' && generalInfo?.commissions) {
       const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
       handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: asianHDPCommValue });
     }
@@ -103,6 +105,7 @@ export default function DirectMemberCommission({
       </BlockRow>
       {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked }) => {
         const isAsianHDP = sportTypeId === SportTypeIds.Soccer && betTypeId === BetTypeIds.Handicap;
+        const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
         return (
           <BlockRow
             key={`${sportTypeId}-${betTypeId}`}
