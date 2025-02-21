@@ -29,7 +29,7 @@ const validateSuperPT = (
 
 export default function MasterDirectMemberPositionTaking({ isReadOnly, onPTChange }: Props) {
   const { t } = useTranslation();
-  const { handleUpdateSettingItems, productGroupId, productGroups } = useGroupSettingContext();
+  const { handleUpdateSettingItems, productGroupId, productGroups, isMultipleMode } = useGroupSettingContext();
   const ptItems = getSettingItems<MasterDirectMemberPositionTakingGroupItem>(
     productGroups,
     Number(productGroupId),
@@ -47,6 +47,7 @@ export default function MasterDirectMemberPositionTaking({ isReadOnly, onPTChang
     iconId: number | undefined,
     isBelongCopiedGroup?: (item: GroupItem) => boolean
   ) => {
+    if (!itemCopied.isMultipleModeChecked) return;
     const newItemCopied = itemCopied as MasterDirectMemberPositionTakingGroupItem;
     const { m1 } = newItemCopied;
     const newPTs = ptItems.map((item) => {
@@ -64,9 +65,35 @@ export default function MasterDirectMemberPositionTaking({ isReadOnly, onPTChang
     }
   };
 
+  const handleSelectAll = (isChecked: boolean) => {
+    const newMasterPTs = ptItems.map((item) => ({
+      ...item,
+      isMultipleModeChecked: isChecked,
+      isUpdateMinPtOnly: false,
+    }));
+    handleUpdateSettingItems?.(Number(productGroupId), GroupTypeIds.PositionTaking, newMasterPTs);
+  };
+
   return (
     <>
-      <BlockRow isHeaderRow>
+      <BlockRow
+        isHeaderRow
+        label={
+          isMultipleMode &&
+          ptItems.length > 1 &&
+          !isReadOnly && (
+            <div style={{ display: 'flex', marginLeft: '2px' }}>
+              <input
+                type="checkbox"
+                style={{ top: '0' }}
+                onChange={(e) => handleSelectAll(e.target.checked)}
+                checked={ptItems.every((item) => item.isMultipleModeChecked === true)}
+              />
+              <div>{t('SelectAll')}</div>
+            </div>
+          )
+        }
+      >
         <BlockColumn>{t('MasterPT')}</BlockColumn>
       </BlockRow>
       {groups.map((group, index) => {

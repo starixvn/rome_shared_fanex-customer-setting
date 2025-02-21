@@ -131,7 +131,7 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
                       {item.iS1 ? (
                         <PTSelect
                           min={Math.max(0, item.n4 - item.m1)}
-                          max={Math.max(item.n4 - item.m1, item.s4 - item.m3)}
+                          max={item.s4}
                           value={item.uS1}
                           step={item.step}
                           isDisable={isReadOnly || !item.isMultipleModeChecked}
@@ -143,7 +143,7 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
                       ) : (
                         <PTSelect
                           min={Math.max(0, item.n4 - item.m1)}
-                          max={item.s4}
+                          max={Math.max(item.n4 - item.m1, item.s4 - item.m3)}
                           value={item.s1}
                           step={item.step}
                           isDisable={isReadOnly || item.iS3 || !item.isMultipleModeChecked}
