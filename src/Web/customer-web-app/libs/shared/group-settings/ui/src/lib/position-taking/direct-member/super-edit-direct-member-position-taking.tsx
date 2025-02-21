@@ -5,9 +5,8 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-  GroupItem,
-  SuperEditDirectMemberPositionTakingGroupItem,
-  SuperEditDirectMemberPositionTakingProps,
+    GroupItem, SuperEditDirectMemberPositionTakingGroupItem,
+    SuperEditDirectMemberPositionTakingProps
 } from '@customer-web-app/shared-group-settings-types';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -171,7 +170,7 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
                     </div>
                   </BlockColumn>
                   <BlockColumn>
-                    <div className="center">{item.m1}</div>
+                    <div className="center">{item.m1 / 100}</div>
                   </BlockColumn>
                 </BlockRow>
               );
