@@ -17,4 +17,6 @@ public class VerifyOtpRequest
     public string Language { get; set; }
 
     public bool IsEnabledTelegramOTP { get; set; }
+
+    public Device Device { get; set; }
 }

@@ -6,6 +6,8 @@ using SophosOtp = ONEbook.OTP.Services.OtpService;
 using OtpSecurityResource = Fanex.Customer.API.Modules.AppResources.Security;
 using System.Globalization;
 using Fanex.Customer.API.Shared.Utils;
+using Fanex.Customer.API.Modules.Otp.Commands;
+using Newtonsoft.Json;
 
 namespace Fanex.Customer.API.Modules.Otp;
 
@@ -55,8 +57,23 @@ public class VerifyOtpEndPoint : IEndpoint<IResult, VerifyOtpRequest, IDynamicRe
             var customerOtp = await GetCustomerOtp(param.CustId, param.SubAccId);
             if (customerOtp != null && customerOtp.Enabled)
             {
-                isCorrect = sophosOtp.VerifyOtp(customerOtp.SecretKey, param.Otp, TimePeriod, OtpSize);
+                isCorrect = sophosOtp.VerifyOtp(customerOtp.SecretKey, param.Otp, TimePeriod, OtpSize);                
             }
+        }
+
+        if (isCorrect)
+        {
+            var command = new InsertCustomerDeviceInfoCommand
+            {
+                CustId = param.CustId,
+                DeviceId = param.Device.Id,
+                DeviceInfo = JsonConvert.SerializeObject(param.Device.Info),
+                IP = param.Device.Info.IP,
+                Language = param.Language,
+                SubAccId = param.SubAccId
+            };
+
+            await dynamicRepository.ExecuteAsync(command);
         }
 
         var changeStatusCommand = new UpdateCustomerStatusAfterVerifyOtpCommand
@@ -72,7 +89,7 @@ public class VerifyOtpEndPoint : IEndpoint<IResult, VerifyOtpRequest, IDynamicRe
 
         await dynamicRepository.ExecuteAsync(changeStatusCommand);
 
-        var result = new Result(changeStatusCommand.ErrCode, isCorrect ? changeStatusCommand.ErrMsg : 
+        var result = new Result(changeStatusCommand.ErrCode, isCorrect ? changeStatusCommand.ErrMsg :
             OtpSecurityResource.ResourceManager.GetString("OtpInvalidOrExpiredAndContactUpline", new CultureInfo(LanguageUtils.ToLanguage(param.Language))));
 
         if (!isCorrect && result.Code == DisabledAccountErrorCode)
