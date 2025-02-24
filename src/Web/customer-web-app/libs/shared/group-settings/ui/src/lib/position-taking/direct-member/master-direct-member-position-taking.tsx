@@ -49,12 +49,12 @@ export default function MasterDirectMemberPositionTaking({ isReadOnly, onPTChang
   ) => {
     if (!itemCopied.isMultipleModeChecked) return;
     const newItemCopied = itemCopied as MasterDirectMemberPositionTakingGroupItem;
-    const { m1 } = newItemCopied;
+    const { m1, isMultipleModeChecked } = newItemCopied;
     const newPTs = ptItems.map((item) => {
       if (isBelongCopiedGroup?.(item)) {
         return validateSuperPT(item, newItemCopied)
-          ? { ...item, m1, copyStatus: CopyStatus.Success }
-          : { ...item, copyStatus: CopyStatus.Fail };
+          ? { ...item, m1, isMultipleModeChecked, copyStatus: CopyStatus.Success }
+          : { ...item, isMultipleModeChecked, copyStatus: CopyStatus.Fail };
       }
 
       return { ...item, copyStatus: CopyStatus.NotCopy };
