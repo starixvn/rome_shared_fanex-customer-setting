@@ -52,4 +52,9 @@ app.UseMiddleware<ApiKeyMiddleware>();
 
 app.RegisterMaxBetControlEndpoints();
 
+if (!app.Environment.IsDevelopment())
+{
+    builder.WebHost.UseUrls("http://0.0.0.0:5000");
+}
+
 app.Run();
