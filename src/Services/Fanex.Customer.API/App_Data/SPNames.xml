@@ -16,7 +16,7 @@
     <Setting Key="DBTXN_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="DBTXN.bodb02.wsv_alp" />
     <Setting Key="DBTXN_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="DBTXN.bodb02.wsv_alp" />
     <Setting Key="DBTXN_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CustDB.wsv_nap" />
-    <Setting Key="DBSite03_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CustDB.wsv_nap" />
+    <Setting Key="DBSite03_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBSite03.CustDB.wsv_nap" />
     <Setting Key="DBSite03_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="SiteDB03.bodb02.wsv_alp" Plain="0" />
     <Setting Key="DBTXN_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="DBTXN.bodb02.wsv_alp" Plain="0" />
   </Function>
