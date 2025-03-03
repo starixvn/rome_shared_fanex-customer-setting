@@ -7,7 +7,7 @@ namespace BetLimitControl.API.Features.MaxBetControl
         public static void RegisterMaxBetControlEndpoints(this WebApplication app)
         {
             app.MapGet("/api/sites", GetAllSites)
-                .Produces<IEnumerable<string>>()
+                .Produces<IEnumerable<int>>()
                 .WithTags("Get Sites");
 
             app.MapGet("/api/sites/{siteId}", GetCustomerMultiplierBySite)

@@ -6,7 +6,7 @@ namespace BetLimitControl.API.Features.MaxBetControl
 {
     public interface IMaxBetControlService
     {
-        Task<IEnumerable<string>> GetSites();
+        Task<IEnumerable<int>> GetSites();
 
         Task<IEnumerable<CustomerMultiplier>> GetCustomerMultipliersBySite(int siteId);
     }
@@ -18,7 +18,7 @@ namespace BetLimitControl.API.Features.MaxBetControl
         public Task<IEnumerable<CustomerMultiplier>> GetCustomerMultipliersBySite(int siteId)
             => dynamicRepository.FetchAsync<CustomerMultiplier>(new GetCustomerMultipliersBySiteCriteria(siteId));
 
-        public Task<IEnumerable<string>> GetSites()
-            => dynamicRepository.FetchAsync<string>(new GetMaxBetPlayerSitesCriteria());
+        public Task<IEnumerable<int>> GetSites()
+            => dynamicRepository.FetchAsync<int>(new GetMaxBetPlayerSitesCriteria());
     }
 }
