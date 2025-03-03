@@ -1,13 +1,18 @@
+using BetLimitControl.API.Features.MaxBetControl.Models;
+
 namespace BetLimitControl.API.Features.MaxBetControl
 {
     public static class MaxBetControlEndpoints
     {
         public static void RegisterMaxBetControlEndpoints(this WebApplication app)
         {
-            var maxBetControl = app.MapGroup("/api/maxbetcontrol");
+            app.MapGet("/api/sites", GetAllSites)
+                .Produces<IEnumerable<string>>()
+                .WithTags("Get Sites");
 
-            maxBetControl.MapGet("/sites", GetAllSites);
-            maxBetControl.MapGet("/sites/{siteId}", GetTodoById);
+            app.MapGet("/api/sites/{siteId}", GetCustomerMultiplierBySite)
+                .Produces<IEnumerable<CustomerMultiplier>>()
+                .WithTags("Get Customer Multiplier By Site");
         }
 
         static async Task<IResult> GetAllSites(IMaxBetControlService maxBetControlService)
@@ -15,7 +20,7 @@ namespace BetLimitControl.API.Features.MaxBetControl
             return Results.Ok(await maxBetControlService.GetSites());
         }
 
-        static async Task<IResult> GetTodoById(int siteId, IMaxBetControlService maxBetControlService)
+        static async Task<IResult> GetCustomerMultiplierBySite(int siteId, IMaxBetControlService maxBetControlService)
         {
             return Results.Ok(await maxBetControlService.GetCustomerMultipliersBySite(siteId));
         }

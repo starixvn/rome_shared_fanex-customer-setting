@@ -1,4 +1,5 @@
 using BetLimitControl.API;
+using BetLimitControl.API.Authentication;
 using BetLimitControl.API.Extensions;
 using BetLimitControl.API.Features.MaxBetControl;
 using Fanex.Data.Repository;
@@ -8,11 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddFanexSql(builder.Configuration);
+builder.Services.AddFanexLogging(builder.Configuration);
+
 builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
 builder.Services.AddSingleton<IMaxBetControlService, MaxBetControlService>();
-builder.Services.AddFanexLogging(builder.Configuration);
-builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddTransient<IApiKeyValidation, ApiKeyValidation>();
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument(document =>
 {
@@ -22,6 +26,7 @@ builder.Services.AddOpenApiDocument(document =>
 });
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,6 +45,10 @@ if (app.Environment.IsDevelopment())
         options.Path = "/redoc";
     });
 }
+
+app.MapHealthChecks("/healthz").AllowAnonymous();
+
+app.UseMiddleware<ApiKeyMiddleware>();
 
 app.RegisterMaxBetControlEndpoints();
 
