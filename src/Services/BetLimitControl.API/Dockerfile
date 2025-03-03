@@ -11,7 +11,6 @@ COPY ./src/Services/BetLimitControl.API/ ./Services/BetLimitControl.API/
 
 ARG TRANSFORM_CONFIG
 RUN echo $TRANSFORM_CONFIG
-COPY "./src/Services/BetLimitControl.API/appsettings.$TRANSFORM_CONFIG.json" ./Services/BetLimitControl.API/appsettings.Production.json
 
 WORKDIR /src/Services/BetLimitControl.API/
 
