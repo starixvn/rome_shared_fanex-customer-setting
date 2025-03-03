@@ -6,7 +6,7 @@ namespace BetLimitControl.API.Features.MaxBetControl.Criteria
     {
         public int SiteId { get; } = siteId;
 
-        public override string GetSettingKey() => "API_SVIPMaxBetPlayer_GetListCust";
+        public override string GetSettingKey() => "API_BetLimitIncrease_GetListCust";
 
         public override bool IsValid() => SiteId > 0;
     }
