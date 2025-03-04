@@ -11,14 +11,15 @@ namespace BetLimitControl.API.Features.MaxBetControl
         Task<IEnumerable<CustomerMultiplier>> GetCustomerMultipliersBySite(int siteId);
     }
 
-    public class MaxBetControlService(IDynamicRepository dynamicRepository) : IMaxBetControlService
+    public class MaxBetControlService(IDynamicRepository dynamicRepository, IConfiguration configuration) : IMaxBetControlService
     {
         private readonly IDynamicRepository dynamicRepository = dynamicRepository;
+        private readonly bool IsTest = configuration.GetValue<bool>("IsTest");
 
         public Task<IEnumerable<CustomerMultiplier>> GetCustomerMultipliersBySite(int siteId)
-            => dynamicRepository.FetchAsync<CustomerMultiplier>(new GetCustomerMultipliersBySiteCriteria(siteId));
+            => dynamicRepository.FetchAsync<CustomerMultiplier>(new GetCustomerMultipliersBySiteCriteria(siteId, IsTest));
 
         public Task<IEnumerable<int>> GetSites()
-            => dynamicRepository.FetchAsync<int>(new GetMaxBetPlayerSitesCriteria());
+            => dynamicRepository.FetchAsync<int>(new GetMaxBetPlayerSitesCriteria(IsTest));
     }
 }
