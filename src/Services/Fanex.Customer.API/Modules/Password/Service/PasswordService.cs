@@ -40,7 +40,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
         private readonly IEncryption encryption;
         private readonly IAesService aes;
         private readonly IKickoutCustomerService kickoutCustomerService;
-        
+
         private readonly ITelegramBotService telegramBotService;
 
         public PasswordService(

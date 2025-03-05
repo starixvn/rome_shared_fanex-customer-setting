@@ -20,10 +20,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
 
         public async Task Kickout(KickoutCustomerParam param)
         {
-            if (true)
-            {
-                await dynamicRepository.ExecuteAsync(new KickoutCustomerCriteria(param));
-            }
+            await dynamicRepository.ExecuteAsync(new KickoutCustomerCriteria(param));
         }
     }
 }

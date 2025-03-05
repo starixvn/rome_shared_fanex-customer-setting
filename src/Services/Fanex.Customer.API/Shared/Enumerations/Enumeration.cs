@@ -6,8 +6,8 @@ namespace Fanex.Customer.API.Shared.Enumerations;
 [Serializable]
 public abstract class Enumeration : IComparable
 {
-    private readonly string _displayName;
-    private readonly byte _value;
+    private string _displayName;
+    private byte _value;
 
     protected Enumeration()
     {
@@ -22,11 +22,13 @@ public abstract class Enumeration : IComparable
     public string DisplayName
     {
         get { return _displayName; }
+        set { _displayName = value; }
     }
 
     public byte Value
     {
         get { return _value; }
+        set { _value = value; }
     }
 
     public static byte AbsoluteDifference(Enumeration firstValue, Enumeration secondValue)
