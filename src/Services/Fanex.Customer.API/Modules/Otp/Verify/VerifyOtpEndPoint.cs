@@ -1,13 +1,13 @@
+using System.Globalization;
+using Fanex.Customer.API.Modules.Otp.Commands;
 using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using MinimalApi.Endpoint;
-using TelegramBot.Client.Services;
-using SophosOtp = ONEbook.OTP.Services.OtpService;
-using OtpSecurityResource = Fanex.Customer.API.Modules.AppResources.Security;
-using System.Globalization;
-using Fanex.Customer.API.Shared.Utils;
-using Fanex.Customer.API.Modules.Otp.Commands;
 using Newtonsoft.Json;
+using TelegramBot.Client.Services;
+using OtpSecurityResource = Fanex.Customer.API.Modules.AppResources.Security;
+using SophosOtp = ONEbook.OTP.Services.OtpService;
 
 namespace Fanex.Customer.API.Modules.Otp;
 
@@ -57,11 +57,11 @@ public class VerifyOtpEndPoint : IEndpoint<IResult, VerifyOtpRequest, IDynamicRe
             var customerOtp = await GetCustomerOtp(param.CustId, param.SubAccId);
             if (customerOtp != null && customerOtp.Enabled)
             {
-                isCorrect = sophosOtp.VerifyOtp(customerOtp.SecretKey, param.Otp, TimePeriod, OtpSize);                
+                isCorrect = sophosOtp.VerifyOtp(customerOtp.SecretKey, param.Otp, TimePeriod, OtpSize);
             }
         }
 
-        if (isCorrect)
+        if (isCorrect && param.Device != null)
         {
             var command = new InsertCustomerDeviceInfoCommand
             {
