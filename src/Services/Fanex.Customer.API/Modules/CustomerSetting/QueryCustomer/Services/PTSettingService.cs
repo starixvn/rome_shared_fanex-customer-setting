@@ -38,7 +38,7 @@ public class PTSettingService : BaseQueryCustomerService, IPTSettingService
                 GroupTypes = g.GroupBy(t => new { t.GroupType, t.DisplayType }).Select(t => t).ToAsyncEnumerable().SelectAwait(async t =>
                 {
                     var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevel(t.Key.GroupType, (byte)(request.RoleId - 1)) : t.Key.GroupType;
-                    var groupItems = await groupItemMapping[groupTypeWithRoleId].QueryForAddNew(request.CustId, request.RoleId, g.Key, t.Key.GroupType);
+                    var groupItems = await groupItemMapping[groupTypeWithRoleId].QueryForAddNew(request.CustId, request.RoleId, g.Key, t.Key.GroupType, false);
                     var groupType = new GroupType
                     {
                         Id = t.Key.GroupType,
