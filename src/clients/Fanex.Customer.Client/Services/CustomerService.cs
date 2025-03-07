@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using System.Web;
 using Fanex.Customer.Client.Configurations;
 using Fanex.Customer.Client.Constants;
 using Fanex.Customer.Client.Extensions;
@@ -222,10 +223,10 @@ namespace Fanex.Customer.Client.Services
             => httpClient.GetAsJsonAsync<Downline>($"customer/{custId}/{subAccountId}/downlines/{username}");
 
         public Task<string> GetGlobalSetting(string siteLabel, string site, int currency, int systemId, int productGroupId = 0, string language = "en-US")
-            => httpClient.GetStringAsync($"customer/globalsetting?siteLabel={siteLabel}&site={site}&systemId={systemId}&currency={currency}&productGroupId={productGroupId}&language={language}");
+            => httpClient.GetStringAsync($"customer/globalsetting?currency={currency}&siteLabel={siteLabel}&site={site}&systemId={systemId}&productGroupId={productGroupId}&language={language}");
 
         public Task<string> GetPTSettings(int custId, byte roleId, string site, int currency, int systemId, string language = Languages.English)
-            => httpClient.GetStringAsync($"customer/pt-settings?custId={custId}&roleId={roleId}&site={site}&systemId={systemId}&currency={currency}&language={language}");
+            => httpClient.GetStringAsync($"customer/pt-settings?currency={currency}&custId={custId}&roleId={roleId}&site={site}&systemId={systemId}&language={language}");
 
         public Task<string> GetPTTemplates(int custId)
             => httpClient.GetStringAsync($"customer/{custId}/pt-templates");
@@ -243,9 +244,9 @@ namespace Fanex.Customer.Client.Services
         {
             if (custId.HasValue)
             {
-                return httpClient.GetStringAsync($"customer/product-categories?custId={custId}&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
+                return httpClient.GetStringAsync($"customer/product-categories?currencyId={currencyId}&custId={custId}&site={site}&sitelabel={siteLabel}&language={language}");
             }
-            return httpClient.GetStringAsync($"customer/product-categories?&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
+            return httpClient.GetStringAsync($"customer/product-categories?currencyId={currencyId}&site={site}&sitelabel={siteLabel}&&language={language}");
         }
 
         public Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US")
@@ -279,10 +280,10 @@ namespace Fanex.Customer.Client.Services
         {
             if (custId.HasValue)
             {
-                return httpClient.GetStringAsync($"customer/win-loss-limit?custId={custId}&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
+                return httpClient.GetStringAsync($"customer/win-loss-limit?currencyId={currencyId}&custId={custId}&site={site}&sitelabel={siteLabel}&language={language}");
             }
 
-            return httpClient.GetStringAsync($"customer/win-loss-limit?&site={site}&sitelabel={siteLabel}&currencyId={currencyId}&language={language}");
+            return httpClient.GetStringAsync($"customer/win-loss-limit?currencyId={currencyId}&site={site}&sitelabel={siteLabel}&language={language}");
         }
     }
 }
