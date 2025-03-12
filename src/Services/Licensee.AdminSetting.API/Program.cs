@@ -43,7 +43,8 @@ try
     builder.Services
         .AddFanexLogging(builder.Configuration)
         .AddFanexSql(builder.Configuration)
-        .AddExceptionHandler<GlobalExceptionHandler>();
+        .AddExceptionHandler<GlobalExceptionHandler>()
+        .AddProblemDetails();
 
     builder.Services.AddSingleton<IDynamicRepository, DynamicRepository>();
     builder.Services.AddSingleton<IUserLogHandler, UserLogHandler>();
@@ -61,8 +62,9 @@ try
     });
 
     var app = builder.Build();
-    app.UseSerilogRequestLogging();
+    app.UseExceptionHandler();
 
+    app.UseSerilogRequestLogging();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -74,6 +76,7 @@ try
     app.MapHealthChecks("/healthz");
     app.RegisterLicenseesEndpoints();
     app.RegisterAccountsEndpoints();
+
 
     if (!app.Environment.IsDevelopment())
     {

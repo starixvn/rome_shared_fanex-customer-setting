@@ -14,6 +14,7 @@ namespace BetLimitControl.API
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
+            httpContext.Request.EnableBuffering();
             await logger.ErrorAsync(await BuildError(httpContext.Request, exception));
 
             httpContext.Response.ContentType = "application/json";
