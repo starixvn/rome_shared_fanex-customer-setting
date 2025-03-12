@@ -1,3 +1,5 @@
+using Fanex.Customer.API.Shared.Extensions;
+
 namespace Fanex.Customer.API.Modules.Customer.Requests;
 
 public record UpdateCustomerInfoRequest(
@@ -13,5 +15,20 @@ public record UpdateCustomerInfoRequest(
     string IP,
     string Language)
 {
-    public bool IsValid() => CustId > 0 && UserId > 0 && SubAccId >= 0;
+    public bool IsValid() => CustId > 0 && UserId > 0 && SubAccId >= 0 && ValidateUpdateCustomerInfoRequest();
+
+    private bool ValidateUpdateCustomerInfoRequest()
+    {
+        if ((!string.IsNullOrWhiteSpace(FirstName) && FirstName.ContainsHTML())
+        || (!string.IsNullOrWhiteSpace(LastName) && LastName.ContainsHTML())
+        || (!string.IsNullOrWhiteSpace(Phone) && Phone.ContainsHTML())
+        || (!string.IsNullOrWhiteSpace(MobilePhone) && MobilePhone.ContainsHTML())
+        || (!string.IsNullOrWhiteSpace(Fax) && Fax.ContainsHTML())
+        || (!string.IsNullOrWhiteSpace(Email) && Email.ContainsHTML()))
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

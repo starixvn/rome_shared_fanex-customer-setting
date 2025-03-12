@@ -1,9 +1,12 @@
 using Fanex.Customer.API.Modules.Customer.Criteria;
 using Fanex.Customer.API.Modules.Customer.Models;
 using Fanex.Customer.API.Modules.Customer.Requests;
+using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Models;
+using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using MinimalApi.Endpoint;
+using RabbitMQ.Client.Impl;
 
 namespace Fanex.Customer.API.Modules.Customer.Endpoints;
 
@@ -55,6 +58,8 @@ public class GetCustomerInfoEndpoint :
             return Results.Ok(new Result(command.ErrorCode, command.ErrorMsg));
         }
 
-        return Results.BadRequest();
+        var currentLanguage = LanguageUtils.ToLanguage(request.Language);
+
+        return Results.Ok(Result.CreateError(StaticResources.Get("InvalidParameterValue", currentLanguage)));
     }
 }
