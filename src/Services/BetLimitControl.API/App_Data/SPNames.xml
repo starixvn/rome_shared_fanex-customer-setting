@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+    <Function Name="Max Bet Player">
+        <Setting Key="API_BetLimitIncrease_GetListCust" SpName="API_BetLimitIncrease_GetListCust" DbName="DBCUST.CustDB.asv_cust" />
+        <Setting Key="API_BetLimitIncrease_GetSite" SpName="API_BetLimitIncrease_GetSite" DbName="DBCUST.CustDB.asv_cust" />
+    </Function>
+</Functions>
