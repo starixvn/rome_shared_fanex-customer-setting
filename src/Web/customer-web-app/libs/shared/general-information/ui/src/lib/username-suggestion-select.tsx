@@ -7,6 +7,7 @@ import AsyncSelect from 'react-select/async';
 import { UsernameSuggestion } from '@customer-web-app/share-models';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 
+import styles from './username-suggestion-select.module.scss';
 export interface UsernameSuggestionOption extends UsernameSuggestion {
   value: string;
 }
@@ -24,11 +25,11 @@ const Option = (props: OptionProps<UsernameSuggestionOption, false>) => {
   return (
     <components.Option {...props}>
       {props.data.UserName ? (
-        <div>
-          <div>
+        <div className={styles['line']}>
+          <div className='username'>
             {props.data.UserName} {props.data.UserName2 && `(${props.data.UserName2})`}
           </div>
-          <div>
+          <div className='fullname'>
             {props.data.FirstName} {props.data.LastName}
           </div>
         </div>
@@ -40,12 +41,12 @@ const Option = (props: OptionProps<UsernameSuggestionOption, false>) => {
 };
 
 const Input = (props: InputProps<UsernameSuggestionOption, false>) => (
-  <components.Input
-    {...props}
-    isHidden={false}
-    placeholder={props.selectProps.placeholder as string}
-    style={{ minWidth: '250px', height: '26px', marginBottom: '2px', border: 'none' }}
-  />
+    <components.Input
+      {...props}
+      isHidden={false}
+      placeholder={props.selectProps.placeholder as string}
+      style={{ minWidth: '250px', height: '26px', marginBottom: '2px', border: 'none',paddingLeft: '5px' }}
+    />
 );
 
 const customStyles: StylesConfig<UsernameSuggestionOption> = {
@@ -74,6 +75,7 @@ const customStyles: StylesConfig<UsernameSuggestionOption> = {
     display: 'inline-block',
     border: '1px solid var(--border-input)',
     boxShadow: 'none',
+    background: 'none',
     '&:hover': {
       outline: 'none',
     },
@@ -81,16 +83,26 @@ const customStyles: StylesConfig<UsernameSuggestionOption> = {
 
   menu: (provided) => ({
     ...provided,
-    zIndex: 2,
+    zIndex: 100,
     borderRadius: 'none',
     marginTop: '1px',
+    background: 'var(--suggetion-bg)',
+    border: 'var(--suggetion-border)',
+    boxShadow: 'var(--suggetion-shadown)',
+    color: 'var(--suggetion-color)',
+     
+
+  }),
+  option: ()=>({
+    
+    background: "none",
   }),
 
   input: (provided) => ({
     ...provided,
     padding: 0,
     margin: 0,
-    paddingLeft: '5px',
+  
   }),
 
   singleValue: (provided) => ({
