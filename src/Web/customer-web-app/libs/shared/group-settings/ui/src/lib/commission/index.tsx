@@ -47,12 +47,12 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
   const props = { commissions, handleCommissionChange, isReadOnly, handleSelectAll };
 
   const renderContent = () => {
-    if (isDirectMember && isSportsBookProduct(groupId)) {
-      return <DirectMemberCommission {...props} />;
-    }
-
     if (isIndirectUpdate || isMemberSportsBookComm) {
-      return <MemberSportsBookCommission {...props} />;
+      if (isDirectMember) {
+        return <DirectMemberCommission {...props} />;
+      } else {
+        return <MemberSportsBookCommission {...props} />;
+      }
     }
 
     return <DefaultCommission {...props} />;

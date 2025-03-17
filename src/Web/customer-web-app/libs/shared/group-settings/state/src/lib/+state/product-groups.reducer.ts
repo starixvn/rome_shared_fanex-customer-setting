@@ -1,12 +1,7 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-  GroupType,
-  MasterDirectMemberPositionTakingGroupItem,
-  ParlayMaxPayoutGroupItem,
-  ProductGroup,
-  ProductStatusGroupItem,
-  SuperDirectMemberPositionTakingGroupItem,
-  WinLossLimitGroupItem,
+    GroupType, MasterDirectMemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup,
+    ProductStatusGroupItem, SuperDirectMemberPositionTakingGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 import { ProductGroupsAction, ProductGroupsActionTypes } from './product-groups.actions';
@@ -31,7 +26,7 @@ export const initProductStatusGroup = (groupType: GroupType) => {
       }
     }
 
-    return { ...item, isMultipleModeChecked: true, original: { ...item } };
+    return { ...item, isMultipleModeChecked: true, isDisabledUpline: item.isDisabled, original: { ...item } };
   });
 
   return { ...groupType, groupItems };
