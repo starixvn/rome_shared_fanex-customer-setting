@@ -233,25 +233,46 @@ export function EditCustomerPage() {
       const isGroupChanged = groupTypeId === GroupTypeIds.SportsBookCommission && group !== originGroup;
       if (isGroupChanged) {
         newProductGroups = newProductGroups.map((group) => {
-          if (
-            group.id === ProductGroupIds.SportsBook &&
-            !group.groupTypes.some((x) => x.id === GroupTypeIds.SportsBookCommission)
-          ) {
-            const groupItems = getSettingItems<CommissionGroupItem>(
-              productGroups,
-              ProductGroupIds.SportsBook,
-              GroupTypeIds.SportsBookCommission
-            );
-            const groupTypes = group.groupTypes;
-            groupTypes.push({
-              id: GroupTypeIds.SportsBookCommission,
-              groupItems: groupItems.filter(
-                (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
-              ),
-              isReadOnly: false,
-              isAllowUncheckAll: true,
-            });
-            return { ...group, groupTypes };
+          if (group.id === ProductGroupIds.SportsBook) {
+            if (!group.groupTypes.some((x) => x.id === GroupTypeIds.SportsBookCommission)) {
+              const groupItems = getSettingItems<CommissionGroupItem>(
+                productGroups,
+                ProductGroupIds.SportsBook,
+                GroupTypeIds.SportsBookCommission
+              );
+              const groupTypes = group.groupTypes;
+              groupTypes.push({
+                id: GroupTypeIds.SportsBookCommission,
+                groupItems: groupItems.filter(
+                  (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
+                ),
+                isReadOnly: false,
+                isAllowUncheckAll: true,
+              });
+              return { ...group, groupTypes };
+            } else {
+              const groupTypes = group.groupTypes;
+              const sbCommission = groupTypes.find((x) => x.id === GroupTypeIds.SportsBookCommission);
+              if (
+                sbCommission &&
+                !sbCommission.groupItems.some(
+                  (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
+                )
+              ) {
+                const groupItems = getSettingItems<CommissionGroupItem>(
+                  productGroups,
+                  ProductGroupIds.SportsBook,
+                  GroupTypeIds.SportsBookCommission
+                );
+                const asianHDP = groupItems.find(
+                  (x) => x.sportTypeId === SportTypeIds.Soccer && x.betTypeId === BetTypeIds.Handicap
+                );
+                if (asianHDP) {
+                  sbCommission.groupItems.push(asianHDP);
+                }
+                return { ...group, groupTypes };
+              }
+            }
           }
 
           return group;
