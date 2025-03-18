@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BetTypeIds, DirectMemberAgentIds, SportTypeIds } from '@customer-web-app/shared-constants';
+import {
+    BetTypeIds, DirectMemberAgentIds, ProductGroupIds, SportTypeIds
+} from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -23,6 +25,7 @@ export default function DirectMemberCommission({
     generalInfo,
     isMultipleMode,
     group,
+    productGroupId,
     handleMemberCommGroupChange,
     handleSelectCommGroup,
     selectedCommGroup,
@@ -39,46 +42,48 @@ export default function DirectMemberCommission({
 
   return (
     <>
-      <BlockRow
-        label={
-          <>
-            {isMultipleMode && !isReadOnly && (
-              <input
-                type="checkbox"
-                checked={selectedCommGroup}
+      {productGroupId === ProductGroupIds.SportsBook && (
+        <BlockRow
+          label={
+            <>
+              {isMultipleMode && !isReadOnly && (
+                <input
+                  type="checkbox"
+                  checked={selectedCommGroup}
+                  onChange={(e) => {
+                    const selected = e.target.checked;
+                    handleSelectCommGroup?.(selected);
+                    if (selected) {
+                      handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {
+                        isMultipleModeChecked: selected,
+                      });
+                    }
+                  }}
+                />
+              )}
+              {t('Group')}
+            </>
+          }
+        >
+          <BlockColumn>
+            {generalInfo && group && (
+              <CommissionGroup
+                site={generalInfo.site}
+                currency={generalInfo.currency.toString()}
+                value={group}
                 onChange={(e) => {
-                  const selected = e.target.checked;
-                  handleSelectCommGroup?.(selected);
-                  if (selected) {
-                    handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, {
-                      isMultipleModeChecked: selected,
-                    });
-                  }
+                  const uGroup = e.target.value;
+                  const commValue = generalInfo?.commissions?.find((c) => uGroup?.includes(c.name))?.discount ?? 0;
+                  handleMemberCommGroupChange?.(uGroup);
+                  handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: commValue });
                 }}
+                isReadOnly={isReadOnly || (isMultipleMode && !selectedCommGroup)}
               />
             )}
-            {t('Group')}
-          </>
-        }
-      >
-        <BlockColumn>
-          {generalInfo && group && (
-            <CommissionGroup
-              site={generalInfo.site}
-              currency={generalInfo.currency.toString()}
-              value={group}
-              onChange={(e) => {
-                const uGroup = e.target.value;
-                const commValue = generalInfo?.commissions?.find((c) => uGroup?.includes(c.name))?.discount ?? 0;
-                handleMemberCommGroupChange?.(uGroup);
-                handleCommissionChange(SportTypeIds.Soccer, BetTypeIds.Handicap, { discount: commValue });
-              }}
-              isReadOnly={isReadOnly || (isMultipleMode && !selectedCommGroup)}
-            />
-          )}
-        </BlockColumn>
-        <BlockColumn>{''}</BlockColumn>
-      </BlockRow>
+          </BlockColumn>
+          <BlockColumn>{''}</BlockColumn>
+        </BlockRow>
+      )}
       <BlockRow
         isHeaderRow
         label={
