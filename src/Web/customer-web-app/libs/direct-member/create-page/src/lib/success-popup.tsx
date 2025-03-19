@@ -75,7 +75,7 @@ export default function SuccessPopup(props: Props) {
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('username')}</div>
-              <div className={styles['row-value']}>{newUserNames?.join(', ')}</div>
+              <div className={styles['row-value-username']}><div>{newUserNames?.join(', ')}</div></div>
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('Credit')}</div>
