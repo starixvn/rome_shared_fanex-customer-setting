@@ -5,8 +5,9 @@ import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constant
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-    GroupItem, SuperEditDirectMemberPositionTakingGroupItem,
-    SuperEditDirectMemberPositionTakingProps
+  GroupItem,
+  SuperEditDirectMemberPositionTakingGroupItem,
+  SuperEditDirectMemberPositionTakingProps,
 } from '@customer-web-app/shared-group-settings-types';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 
@@ -52,11 +53,11 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
     isBelongCopiedGroup?: (item: GroupItem) => boolean
   ) => {
     const newItemCopied = itemCopied as SuperEditDirectMemberPositionTakingGroupItem;
-    const { s1 } = newItemCopied;
+    const { s1, uS1, iS1 } = newItemCopied;
     const newPTs = ptItems.map((item) => {
       if (isBelongCopiedGroup?.(item)) {
         return validateSuperPT(item, newItemCopied)
-          ? { ...item, s1, copyStatus: CopyStatus.Success }
+          ? { ...item, s1, uS1, iS1, copyStatus: CopyStatus.Success }
           : { ...item, copyStatus: CopyStatus.Fail };
       }
 
