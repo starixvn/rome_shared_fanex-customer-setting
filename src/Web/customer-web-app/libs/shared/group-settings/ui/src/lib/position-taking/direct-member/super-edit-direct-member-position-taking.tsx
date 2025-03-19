@@ -34,7 +34,7 @@ const validateSuperPT = (
 
 export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTChange }: Props) {
   const { t } = useTranslation();
-  const { productGroupId, productGroups, handleUpdateSettingItems } = useGroupSettingContext();
+  const { productGroupId, productGroups, handleUpdateSettingItems, isMultipleMode } = useGroupSettingContext();
   const ptItems = getSettingItems<SuperEditDirectMemberPositionTakingGroupItem>(
     productGroups,
     Number(productGroupId),
@@ -53,11 +53,11 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
     isBelongCopiedGroup?: (item: GroupItem) => boolean
   ) => {
     const newItemCopied = itemCopied as SuperEditDirectMemberPositionTakingGroupItem;
-    const { s1, uS1, iS1 } = newItemCopied;
+    const { s1, uS1, iS1, isMultipleModeChecked } = newItemCopied;
     const newPTs = ptItems.map((item) => {
       if (isBelongCopiedGroup?.(item)) {
         return validateSuperPT(item, newItemCopied)
-          ? { ...item, s1, uS1, iS1, copyStatus: CopyStatus.Success }
+          ? { ...item, s1, uS1, iS1, isMultipleModeChecked, copyStatus: CopyStatus.Success }
           : { ...item, copyStatus: CopyStatus.Fail };
       }
 
@@ -69,9 +69,31 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
     }
   };
 
+  const handleSelectAll = (isChecked: boolean) => {
+    const newSuperPTs = ptItems.map((item) => ({ ...item, isMultipleModeChecked: isChecked }));
+    handleUpdateSettingItems?.(Number(productGroupId), GroupTypeIds.PositionTaking, newSuperPTs);
+  };
+
   return (
     <>
-      <BlockRow isHeaderRow>
+      <BlockRow
+        isHeaderRow
+        label={
+          isMultipleMode &&
+          ptItems.length > 1 &&
+          !isReadOnly && (
+            <div style={{ display: 'flex', marginLeft: '2px' }}>
+              <input
+                type="checkbox"
+                style={{ top: '0' }}
+                onChange={(e) => handleSelectAll(e.target.checked)}
+                checked={ptItems.every((item) => item.isMultipleModeChecked === true)}
+              />
+              <div>{t('SelectAll')}</div>
+            </div>
+          )
+        }
+      >
         <BlockColumn>{t('SuperPT')}</BlockColumn>
         <BlockColumn>{t('IsAuto')}</BlockColumn>
         <BlockColumn>{t('MasterPT')}</BlockColumn>
