@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import {
-    DirectMemberAgentIds, isSportsBookProduct, UserLevel
-} from '@customer-web-app/shared-constants';
+import { DirectMemberAgentIds, isSportsBookProduct, UserLevel } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import { CommissionGroupItem } from '@customer-web-app/shared-group-settings-types';
@@ -32,7 +30,7 @@ export default function Commission({ isReadOnly, groupTypeId }: Readonly<Commiss
   const groupId = Number(productGroupId);
   const commissions = getSettingItems<CommissionGroupItem>(productGroups, groupId, groupTypeId);
   const isIndirectUpdate = isDirectMember
-    ? params.uplineRoleId === UserLevel.Super && DirectMemberAgentIds.Master
+    ? params.uplineRoleId === UserLevel.Super && params.agentId === DirectMemberAgentIds.Master
     : params.roleId === UserLevel.Member && params.uplineRoleId !== UserLevel.Agent;
   const isMemberSportsBookComm =
     (isDirectMember || params.uplineRoleId === UserLevel.Agent) && isSportsBookProduct(groupId);

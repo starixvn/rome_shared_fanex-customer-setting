@@ -93,5 +93,5 @@ export const Currencies = {
 
 export const DirectMemberAgentIds = {
   Super: -4,
-  Master: -4,
+  Master: -3,
 };
