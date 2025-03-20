@@ -52,6 +52,7 @@ export default function SuperEditDirectMemberPositionTaking({ isReadOnly, onPTCh
     iconId: number | undefined,
     isBelongCopiedGroup?: (item: GroupItem) => boolean
   ) => {
+    if (!itemCopied.isMultipleModeChecked) return;
     const newItemCopied = itemCopied as SuperEditDirectMemberPositionTakingGroupItem;
     const { s1, uS1, iS1, isMultipleModeChecked } = newItemCopied;
     const newPTs = ptItems.map((item) => {
