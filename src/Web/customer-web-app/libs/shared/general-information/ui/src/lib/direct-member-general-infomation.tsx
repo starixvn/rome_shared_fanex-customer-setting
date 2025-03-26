@@ -11,9 +11,10 @@ import { SettingService } from '@customer-web-app/shared-group-settings-services
 import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper, NumberHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/block';
-import { IconCorrect, IconCredit, IconWrong } from '@customer-web-app/shared/base/common-icon';
+import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
+import AvailableCreditNote from './available-credit-note';
 import { errorTooltip } from './common';
 import CopySettingFromNote from './copy-setting-from-note';
 import CreditRange from './credit-range';
@@ -337,14 +338,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                 </div>
                 <div className={styles['max-credit']}>
                   <CreditRange min={0} max={uplineMaxCredit ? uplineMaxCredit / numberOfAccounts : 0} />
-                  <span
-                    data-tooltip-id="global-tooltip"
-                    data-tooltip-content={t('AvailableCredit', {
-                      availableCredit: NumberHelper.roundDownNumber(uplineMaxCredit || 0),
-                    })}
-                  >
-                    <IconCredit />
-                  </span>
+                  <AvailableCreditNote availableCredit={uplineMaxCredit || 0} />
                 </div>
               </BlockItem>
             </div>
