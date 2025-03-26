@@ -157,6 +157,7 @@
   "Min": "Nhỏ nhất",
   "Max": "Lớn nhất",
   "creditNote": "Hạn mức khả dụng: {{availableCredit}}<br>Hạn Mức Tín Dụng Tối Đa Của Member Cấp Bởi Cấp Trên: {{memberMaxCredit}}",
+  "AvailableCredit": "Hạn mức khả dụng: {{availableCredit}}",
   "ProductStatus": "Trạng thái trò chơi",
   "BetLimit": "Giới hạn cược",
   "WinLossLimit": "Giới hạn thắng thua",

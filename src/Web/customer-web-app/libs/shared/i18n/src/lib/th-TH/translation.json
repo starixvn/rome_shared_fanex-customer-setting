@@ -158,6 +158,7 @@
   "Min": "ต่ำสุด",
   "Max": "สูงสุด",
   "creditNote": "เครดิตที่มีอยู่: {{availableCredit}}<br>เครดิตสมาชิกสูงสุดที่กำหนดโดยอัพไลน์ของคุณ: {{memberMaxCredit}}",
+  "AvailableCredit": "เครดิตที่มีอยู่: {{availableCredit}}",
   "ProductStatus": "สถานะผลิตภันฑ์",
   "BetLimit": "วงเงินเดิมพัน",
   "WinLossLimit": "วงเงินแพ้ชนะ",

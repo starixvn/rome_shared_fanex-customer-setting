@@ -158,6 +158,7 @@
   "Min": "最低",
   "Max": "最高",
   "creditNote": "可用信用額: {{availableCredit}}<br>您的上線已設置會員最高信用: {{memberMaxCredit}}",
+  "AvailableCredit": "可用信用額: {{availableCredit}}",
   "ProductStatus": "產品狀態",
   "BetLimit": "投注限額",
   "WinLossLimit": "輸贏限額",
