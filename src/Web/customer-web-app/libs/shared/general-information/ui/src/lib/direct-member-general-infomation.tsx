@@ -339,7 +339,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                   <CreditRange min={0} max={uplineMaxCredit ? uplineMaxCredit / numberOfAccounts : 0} />
                   <span
                     data-tooltip-id="global-tooltip"
-                    data-tooltip-html={t('AvailableCredit', {
+                    data-tooltip-content={t('AvailableCredit', {
                       availableCredit: NumberHelper.roundDownNumber(uplineMaxCredit || 0),
                     })}
                   >
