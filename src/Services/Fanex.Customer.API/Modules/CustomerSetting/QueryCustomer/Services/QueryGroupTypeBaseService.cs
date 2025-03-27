@@ -34,7 +34,7 @@ public interface IQueryGroupTypeBaseService<T>
         byte systemId,
         string userGroup,
         bool isCopy,
-        bool? isDirectMember);
+        int? agentId);
 }
 
 public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
@@ -92,7 +92,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         byte systemId,
         string userGroup,
         bool isCopy,
-        bool? isDirectMember)
+        int? agentId)
     {
         var criteria = GetQueryForEditCriteria(
             custId, 
@@ -106,7 +106,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
             systemId,
             userGroup,
             isCopy,
-            isDirectMember);
+            agentId);
 
         if (criteria == null)
         {
@@ -128,7 +128,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         byte systemId,
         string userGroup,
         bool isCopy,
-        bool? isDirectMember)
+        int? agentId)
     {
         if(isMultipleMode 
             && !isCopy
@@ -139,8 +139,8 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
 
         return groupType switch
         {
-            GroupTypes.SBCommission => new GetSBCommissionCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), isDirectMember, appSettings.SettingStatus),
-            GroupTypes.Commission => new GetCommissionCriteria(custId, groupId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), appSettings.SettingStatus),
+            GroupTypes.SBCommission => new GetSBCommissionCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), agentId, appSettings.SettingStatus),
+            GroupTypes.Commission => new GetCommissionCriteria(custId, groupId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), agentId, appSettings.SettingStatus),
             GroupTypes.BetSetting => new GetBetSettingCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.ParlayMaxPayout => new GetMaxPayoutCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.PositionTaking => GetPositionTakingCriteria(custId, roleId, uplineRoleId.HasValue ? uplineRoleId.Value : (roleId + 1), groupId, appSettings.SettingStatus),

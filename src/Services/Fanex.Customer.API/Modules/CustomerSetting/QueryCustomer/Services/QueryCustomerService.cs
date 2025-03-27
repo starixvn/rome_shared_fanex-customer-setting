@@ -266,7 +266,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                     request.SystemId,
                     request.GroupName,
                     request.IsCopy,
-                    isDirectMember);
+                    request.AgentId);
 
                 var groupType = new GroupType
                 {

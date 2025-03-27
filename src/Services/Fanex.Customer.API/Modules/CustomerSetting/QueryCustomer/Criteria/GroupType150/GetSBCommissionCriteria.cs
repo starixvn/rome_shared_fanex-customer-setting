@@ -5,6 +5,8 @@ namespace Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType150;
 
 public class GetSBCommissionCriteria : CriteriaBase
 {
+
+
     private readonly Dictionary<int, string> SPNamesMapping = new()
     {
         {1, "Acc_CustSetting_Discount150Sel_Member"},
@@ -15,13 +17,13 @@ public class GetSBCommissionCriteria : CriteriaBase
         {1_3, "Acc_CustSetting_Discount150Sel_MasterDirectMember"},
     };
 
-    public GetSBCommissionCriteria(int custId, byte roleId, int uplineRoleId, bool? isDirectMember, byte settingStatus)
+    public GetSBCommissionCriteria(int custId, byte roleId, int uplineRoleId, int? agentId, byte settingStatus)
     {
         CustId = custId;
         RoleId = roleId;
         UplineRoleId = uplineRoleId;
         SettingStatus = settingStatus;
-        IsDirectMember = isDirectMember;
+        AgentId = agentId ?? 0;
     }
 
     public int CustId { get; }
@@ -34,9 +36,9 @@ public class GetSBCommissionCriteria : CriteriaBase
     public byte RoleId { get; }
 
     [SpParam(Ignored = true)]
-    public bool? IsDirectMember { get; }
+    public int AgentId { get; }
 
-    public override string GetSettingKey() => SPNamesMapping[IsDirectMember.GetValueOrDefault() ? RoleId * 10 + UplineRoleId : RoleId];
+    public override string GetSettingKey() => SPNamesMapping[AgentId < 0 ? RoleId * 10 + (-AgentId) : RoleId];
 
     public override bool IsValid() => CustId > 0;
 }

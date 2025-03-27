@@ -9,20 +9,21 @@ public class GetCommissionCriteria : CriteriaBase
     private readonly Dictionary<int, string> SPNamesMapping = new()
     {
         {1, "Acc_CustSetting_Discount156_Sel_Member"},
-        {1_3, "Acc_CustSetting_Discount156_Sel_MasterDirectMember"},
-        {1_4, "Acc_CustSetting_Discount156_Sel_SuperDirectMember"},
         {2, "Acc_CustSetting_Discount156_Sel_Agent"},
         {3, "Acc_CustSetting_Discount156_Sel_Master"},
-        {4, "Acc_CustSetting_Discount156_Sel_Super"}
+        {4, "Acc_CustSetting_Discount156_Sel_Super"},
+        {1_4, "Acc_CustSetting_Discount156_Sel_SuperDirectMember"},
+        {1_3, "Acc_CustSetting_Discount156_Sel_MasterDirectMember"}
     };
 
-    public GetCommissionCriteria(int custId, int groupId, byte roleId, int uplineRoleId, byte settingStatus)
+    public GetCommissionCriteria(int custId, int groupId, byte roleId, int uplineRoleId, int? agentId, byte settingStatus)
     {
         CustId = custId;
         GroupId = groupId;
         RoleId = roleId;
         UplineRoleId = uplineRoleId;
         SettingStatus = settingStatus;
+        AgentId = agentId ?? 0;
     }
 
     public int CustId { get; }
@@ -36,7 +37,10 @@ public class GetCommissionCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public byte RoleId { get; }
 
-    public override string GetSettingKey() => SPNamesMapping[(RoleId == CustomerLevel.Member && UplineRoleId > RoleId + 1) ? RoleId * 10 + UplineRoleId : RoleId];
+    [SpParam(Ignored = true)]
+    public int AgentId { get; }
+
+    public override string GetSettingKey() => SPNamesMapping[AgentId < 0 ? RoleId * 10 + (-AgentId) : RoleId];
 
     public override bool IsValid() => CustId > 0;
 }
