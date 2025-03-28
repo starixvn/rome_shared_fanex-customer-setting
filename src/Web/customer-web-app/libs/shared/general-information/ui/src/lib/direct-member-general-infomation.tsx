@@ -127,7 +127,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
           ...validationResults,
           selectedDirectMember: new ValidationResult(
             'selectedDirectMember',
-            custId === -1 ? 'ThisAccountWasDisabled' : 'UserNotExist'
+            custId === -1 ? 'ThisAccountWasDisabled' : 'ThisUserIsNotYourDirectMember'
           ),
         });
       }
@@ -138,8 +138,6 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
         setLocationTooltip('selectedDirectMember');
         setValue(newValue.value);
         await handleCheckIsDirectMember(newValue.value);
-      } else {
-        setValidationResults({ ...validationResults, selectedDirectMember: true });
       }
     };
 
@@ -154,7 +152,9 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     };
 
     const handleBlur = async () => {
-      if (value !== selectedDirectMember) {
+      console.log('value', value);
+      console.log('selectedDirectMember', selectedDirectMember);
+      if (value && value !== selectedDirectMember) {
         await handleCheckIsDirectMember(value);
       }
     };
