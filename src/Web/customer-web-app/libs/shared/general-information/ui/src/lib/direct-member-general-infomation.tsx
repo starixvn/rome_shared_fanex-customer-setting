@@ -20,9 +20,7 @@ import CopySettingFromNote from './copy-setting-from-note';
 import CreditRange from './credit-range';
 import DirectMemberGeneralInformationValidator from './direct-member-general-information-validator';
 import { GeneralInformationProps } from './general-information';
-import {
-    generalInformationValidatorFields, validateMaxCredit
-} from './general-information-validator';
+import { generalInformationValidatorFields, validateMaxCredit } from './general-information-validator';
 import styles from './general-information.module.scss';
 import NoOfAccounts from './no-of-accounts';
 import { PasswordField } from './password-field';
@@ -133,7 +131,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
       }
     };
 
-    const handlerChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
+    const handleUserSuggestionInputChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
       if (newValue) {
         setLocationTooltip('selectedDirectMember');
         setValue(newValue.value);
@@ -152,8 +150,6 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     };
 
     const handleBlur = async () => {
-      console.log('value', value);
-      console.log('selectedDirectMember', selectedDirectMember);
       if (value && value !== selectedDirectMember) {
         await handleCheckIsDirectMember(value);
       }
@@ -176,7 +172,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
               <div>
                 <UsernameSuggestionSelect
                   value={value}
-                  onChange={handlerChange}
+                  onChange={handleUserSuggestionInputChange}
                   onInputChange={handleInputChange}
                   onBlur={handleBlur}
                 />
