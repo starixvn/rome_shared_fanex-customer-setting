@@ -138,6 +138,8 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
         setLocationTooltip('selectedDirectMember');
         setValue(newValue.value);
         await handleCheckIsDirectMember(newValue.value);
+      } else {
+        setValidationResults({ ...validationResults, selectedDirectMember: true });
       }
     };
 
