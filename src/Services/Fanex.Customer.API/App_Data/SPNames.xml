@@ -296,7 +296,7 @@
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
     </Setting>
-    <Setting Key="Acc_CustSetting_BetSetting151Upd" SpName="Acc_CustSetting_BetSetting151Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    <Setting Key="Acc_CustSetting_BetSetting151Upd" SpName="Acc_CustSetting_BetSetting151Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" TimeOut="600" />
     <Setting Key="Acc_CustSetting_BetSetting151Upd_Multi" SpName="Acc_CustSetting_BetSetting151Upd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_MaxPayoutSelect" SpName="Acc_CustSetting_MaxPayoutSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
