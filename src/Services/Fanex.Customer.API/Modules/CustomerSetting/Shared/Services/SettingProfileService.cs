@@ -31,9 +31,7 @@ public class SettingProfileService : ISettingProfileService
     }
 
     public async Task<IEnumerable<SettingProfile>> GetSettingProfiles(byte systemId, string site, int currency, ProfileMode mode)
-        => await cacheService.GetOrSetAsync($"CreateCustomerSettingProfile_{systemId}_{site}_{currency}_{mode}",
-          () => this.GetSettingProfile(systemId, site, currency, mode),
-           new CacheItemOptions() { RelativeExpiration = new TimeSpan(CacheDurationInHour, 0, 0) });
+        => await this.GetSettingProfile(systemId, site, currency, mode);
 
     public async Task<int?> GetSettingTypeByGroupType(byte systemId, string site, int currency, int groupTypeId, ProfileMode mode)
             => (await GetSettingProfiles(systemId, site, currency, mode)).FirstOrDefault(g => g.GroupType == groupTypeId)?.SettingType;

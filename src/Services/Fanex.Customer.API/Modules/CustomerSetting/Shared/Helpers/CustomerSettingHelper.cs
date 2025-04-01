@@ -73,13 +73,13 @@ public class CustomerSettingHelper : ICustomerSettingHelper
     => groupType * 10 + roleId;
 
     public bool IsGroupTypeByLevel(int groupType)
-    => groupType == GroupTypes.PositionTaking || groupType == GroupTypes.SBCommission || groupType == GroupTypes.Commission;
+    => groupType == GroupTypes.PositionTaking;
 
     public bool IsPTGroupType(int groupType)
     => groupType == GroupTypes.PositionTaking;
 
     public bool IsSBCommGroupType(int groupType)
-    => groupType == 150;
+    => groupType == GroupTypes.SBCommission;
 
     public bool IsCrossLevel(byte roleId, byte uplineRoleId)
     => uplineRoleId - roleId > 1;

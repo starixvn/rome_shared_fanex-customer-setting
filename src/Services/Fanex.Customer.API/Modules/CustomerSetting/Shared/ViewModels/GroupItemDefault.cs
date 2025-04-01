@@ -12,12 +12,12 @@ using Newtonsoft.Json;
 
 namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 
-[JsonDerivedType(typeof(SuperCommissionGroup), typeDiscriminator: 1)]
-[JsonDerivedType(typeof(MasterCommissionGroup), typeDiscriminator: 2)]
-[JsonDerivedType(typeof(AgentCommissionGroup), typeDiscriminator: 3)]
-[JsonDerivedType(typeof(MemberCommissionGroup), typeDiscriminator: 4)]
-[JsonDerivedType(typeof(SuperDirectMemberCommissionGroup), typeDiscriminator: 5)]
-[JsonDerivedType(typeof(MasterDirectMemberCommissionGroup), typeDiscriminator: 6)]
+[JsonDerivedType(typeof(CommissionGroup), typeDiscriminator: 1)]
+//[JsonDerivedType(typeof(MasterCommissionGroup), typeDiscriminator: 2)]
+//[JsonDerivedType(typeof(AgentCommissionGroup), typeDiscriminator: 3)]
+//[JsonDerivedType(typeof(MemberCommissionGroup), typeDiscriminator: 4)]
+//[JsonDerivedType(typeof(SuperDirectMemberCommissionGroup), typeDiscriminator: 5)]
+//[JsonDerivedType(typeof(MasterDirectMemberCommissionGroup), typeDiscriminator: 6)]
 [JsonDerivedType(typeof(SuperPTOnDirectMasterMemberSettingItem), typeDiscriminator: 7)]
 [JsonDerivedType(typeof(BetSettingItem), typeDiscriminator: 8)]
 [JsonDerivedType(typeof(ParlayMaxPayoutSettingItem), typeDiscriminator: 9)]

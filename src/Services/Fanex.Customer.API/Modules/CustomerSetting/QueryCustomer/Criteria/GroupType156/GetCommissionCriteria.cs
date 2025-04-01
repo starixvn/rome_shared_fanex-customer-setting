@@ -1,3 +1,4 @@
+using System.Collections;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data;
 using Fanex.Data.Repository;
@@ -6,16 +7,6 @@ namespace Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType156;
 
 public class GetCommissionCriteria : CriteriaBase
 {
-    private readonly Dictionary<int, string> SPNamesMapping = new()
-    {
-        {1, "Acc_CustSetting_Discount156_Sel_Member"},
-        {2, "Acc_CustSetting_Discount156_Sel_Agent"},
-        {3, "Acc_CustSetting_Discount156_Sel_Master"},
-        {4, "Acc_CustSetting_Discount156_Sel_Super"},
-        {1_4, "Acc_CustSetting_Discount156_Sel_SuperDirectMember"},
-        {1_3, "Acc_CustSetting_Discount156_Sel_MasterDirectMember"}
-    };
-
     public GetCommissionCriteria(int custId, int groupId, byte roleId, int uplineRoleId, int? agentId, byte settingStatus)
     {
         CustId = custId;
@@ -40,7 +31,16 @@ public class GetCommissionCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public int AgentId { get; }
 
-    public override string GetSettingKey() => SPNamesMapping[AgentId < 0 ? RoleId * 10 + (-AgentId) : RoleId];
+    public override string GetSettingKey() => "Acc_CustSetting_Discount_156_Select";
 
     public override bool IsValid() => CustId > 0;
+
+    public Hashtable GetParameters()
+        => new Hashtable
+        {
+            { "CustId", CustId },
+            { "UplineRoleId", UplineRoleId },
+            { "SettingStatus", SettingStatus },
+            { "GroupId", GroupId }
+        };
 }
