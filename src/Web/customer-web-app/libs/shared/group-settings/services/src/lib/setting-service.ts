@@ -1,6 +1,4 @@
-import {
-    CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion
-} from '@customer-web-app/share-models';
+import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
@@ -159,7 +157,7 @@ export const SettingService = {
     bodyFormData.append('productGroupId', params.productGroupId.toString());
     bodyFormData.append('site', site);
     bodyFormData.append('siteLabel', siteLabel);
-    bodyFormData.append('agentId', params.agentId.toString());
+    bodyFormData.append('agentId', (params.agentId ?? 0).toString());
     if (group) {
       bodyFormData.append('group', group);
     }
