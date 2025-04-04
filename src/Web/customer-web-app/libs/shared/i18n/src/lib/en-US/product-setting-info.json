@@ -84,6 +84,7 @@
   "BBINBetSetting2": "[BBIN]: Commission is not applied to the BBIN product, with effective from 11/9/2023  (dd/mm/yyyy). Furthermore, when you edit member's settings, these new settings will take effect on member's next transfer.",
   "FGGNote": "[FGG] : Commission is not applied to FGG product.",
   "GPILiveCasinoNote": "[GPI Live Casino] : Commission is not applied to virtual table games.",
+  "MicrogamingLiveNote": "[Microgaming Live] : Commission is not applied to Casino Hold'em game.",
   "WinLossLimitNote1": "Live Casino: Compare Win/Loss Limit with Win/Loss of EACH product.",
   "WinLossLimitNote2": "RNG Casino: Compare Win/Loss Limit with the total Win/Loss of ALL products.",
 
