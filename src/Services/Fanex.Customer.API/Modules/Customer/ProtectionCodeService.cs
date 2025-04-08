@@ -46,7 +46,7 @@ namespace Fanex.Customer.API.Modules.Customer
         {
             if (string.IsNullOrWhiteSpace(param.ProtectionCode))
             {
-                return Result.CreateError(ProtectionCodeResource.ResourceManager.GetString("RequiredNewProtectionCode", new CultureInfo(param.LangKey)));
+                return Result.CreateError(ProtectionCodeResource.ResourceManager.GetString("RequiredNewProtectionCode", new CultureInfo(LanguageUtils.ToLanguage(param.LangKey))));
             }
 
             var rawProtectionCode = aes.Decrypt(param.ProtectionCode, param.HashKey);
@@ -68,7 +68,7 @@ namespace Fanex.Customer.API.Modules.Customer
 
             if (result.IsSuccessful)
             {
-                result.Message = ProtectionCodeResource.ResourceManager.GetString("UpdateProtectionCodeSuccessfully", new CultureInfo(param.LangKey));
+                result.Message = ProtectionCodeResource.ResourceManager.GetString("UpdateProtectionCodeSuccessfully", new CultureInfo(LanguageUtils.ToLanguage(param.LangKey)));
             }
 
             return result;
