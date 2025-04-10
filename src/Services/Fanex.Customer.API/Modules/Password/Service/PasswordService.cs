@@ -163,7 +163,7 @@ namespace Fanex.Customer.API.Modules.Password.Service
                     {
                         CustId = param.IndirectCustId,
                         CustIdIndirect = param.CustId,
-                        DownlineUsername = param.ActorName,
+                        DownlineUsername = param.SubAccountId > 0 ? param.SubUsername : param.Username,
                         IP = param.IP,
                         Language = param.LanguageKey,
                         SubAccId = param.IndirectSubAccId,
