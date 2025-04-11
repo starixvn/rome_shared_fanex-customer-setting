@@ -112,7 +112,6 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     const [value, setValue] = useState('');
 
     const handleCheckIsDirectMember = async (username: string) => {
-      setSelectedDirectMember(username);
       const custId = await SettingService.GetDirectMember(username);
       if (custId > 0) {
         onSelectDirectMember(custId);
@@ -135,6 +134,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
       if (newValue) {
         setLocationTooltip('selectedDirectMember');
         setValue(newValue.value);
+        setSelectedDirectMember(newValue.value);
         await handleCheckIsDirectMember(newValue.value);
       }
     };
@@ -144,6 +144,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
         setLocationTooltip('selectedDirectMember');
         setValue(newValue);
         if (!newValue) {
+          setSelectedDirectMember('');
           setValidationResults({ ...validationResults, selectedDirectMember: true });
         }
       }
@@ -151,6 +152,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
 
     const handleBlur = async () => {
       if (value && value !== selectedDirectMember) {
+        setSelectedDirectMember(value);
         await handleCheckIsDirectMember(value);
       }
     };
