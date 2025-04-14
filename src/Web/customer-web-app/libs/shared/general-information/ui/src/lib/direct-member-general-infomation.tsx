@@ -46,6 +46,9 @@ export interface DirectMemberGeneralInformationProps extends GeneralInformationP
   setNumberOfAccounts: (value: number) => void;
 }
 
+let selectedDirectMember = '';
+let selectedValue = '';
+
 export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, DirectMemberGeneralInformationProps>(
   function DirectMemberGeneralInformation(
     { generalInfo, onGeneralInfoChange, children, onSelectDirectMember, numberOfAccounts, setNumberOfAccounts },
@@ -57,8 +60,8 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
     const [locationTooltip, setLocationTooltip] = useState<string>('');
     const { roleId, uplineMaxCredit } = generalInfo;
+    const [value, setValue] = useState('');
     const isNotNAP = appConfig.systemId !== SystemIds.NAP;
-    const [selectedDirectMember, setSelectedDirectMember] = useState('');
 
     useImperativeHandle(ref, () => {
       const validate = async () => {
@@ -109,8 +112,6 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
       validationResults[fieldName] && validationResults[fieldName] !== true;
     const napCanNotEditCredit = params.noPermissionEditCredit;
 
-    const [value, setValue] = useState('');
-
     const handleCheckIsDirectMember = async (username: string) => {
       const custId = await SettingService.GetDirectMember(username);
       if (custId > 0) {
@@ -133,9 +134,11 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
     const handleUserSuggestionInputChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
       if (newValue) {
         setLocationTooltip('selectedDirectMember');
-        setValue(newValue.value);
-        setSelectedDirectMember(newValue.value);
-        await handleCheckIsDirectMember(newValue.value);
+        const selectedUsername = newValue.value;
+        setValue(selectedUsername);
+        selectedValue = selectedUsername;
+        selectedDirectMember = selectedUsername;
+        await handleCheckIsDirectMember(selectedUsername);
       }
     };
 
@@ -143,17 +146,18 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
       if (action === 'input-change') {
         setLocationTooltip('selectedDirectMember');
         setValue(newValue);
+        selectedValue = newValue;
         if (!newValue) {
-          setSelectedDirectMember('');
+          selectedDirectMember = '';
           setValidationResults({ ...validationResults, selectedDirectMember: true });
         }
       }
-    };
 
-    const handleBlur = async () => {
-      if (value && value !== selectedDirectMember) {
-        setSelectedDirectMember(value);
-        await handleCheckIsDirectMember(value);
+      if (action === 'input-blur') {
+        if (selectedValue && selectedValue !== selectedDirectMember) {
+          selectedDirectMember = selectedValue;
+          await handleCheckIsDirectMember(selectedValue);
+        }
       }
     };
 
@@ -176,7 +180,6 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                   value={value}
                   onChange={handleUserSuggestionInputChange}
                   onInputChange={handleInputChange}
-                  onBlur={handleBlur}
                 />
                 {validationResults['selectedDirectMember'] !== undefined && (
                   <span>{getErrorByField('selectedDirectMember') ? <IconWrong /> : <IconCorrect />}</span>

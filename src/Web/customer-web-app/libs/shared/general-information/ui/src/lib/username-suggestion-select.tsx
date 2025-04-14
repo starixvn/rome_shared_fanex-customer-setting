@@ -128,10 +128,9 @@ interface Props {
   value: string;
   onChange: (newValue: SingleValue<UsernameSuggestionOption>) => void;
   onInputChange: (newValue: string, actionMeta: InputActionMeta) => void;
-  onBlur: () => void;
 }
 
-export default function UsernameSuggestionSelect({ value, onChange, onInputChange, onBlur }: Props) {
+export default function UsernameSuggestionSelect({ value, onChange, onInputChange }: Props) {
   const { t } = useTranslation();
   return (
     <AsyncSelect
@@ -145,7 +144,6 @@ export default function UsernameSuggestionSelect({ value, onChange, onInputChang
       controlShouldRenderValue={false}
       onChange={onChange}
       onInputChange={onInputChange}
-      onBlur={onBlur}
     />
   );
 }
