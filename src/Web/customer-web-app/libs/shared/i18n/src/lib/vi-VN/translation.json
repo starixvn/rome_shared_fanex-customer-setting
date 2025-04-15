@@ -1,4 +1,6 @@
 {
+  "ThisUserIsNotYourDirectMember": "Người dùng này không phải là Member trực tiếp của bạn",
+  "ThisAccountWasDisabled": "Tài khoản bị vô hiệu hóa.",
   "general-information": "Thông tin Chung",
   "username": "Tên đăng nhập",
   "password": "Mật khẩu",
@@ -84,6 +86,7 @@
   "success": "Thành Công!",
   "copied": "Đã lưu!",
   "Group": "Nhóm",
+  "lblCommissionForSuper": "Hoa hồng cho Super",
   "lblCommissionForMaster": "Hoa hồng Master",
   "lblCommissionForAgent": "Hoa hồng cho Agent",
   "lblCommissionForMember": "Hoa hồng cho Member",
@@ -155,6 +158,7 @@
   "Min": "Nhỏ nhất",
   "Max": "Lớn nhất",
   "creditNote": "Hạn mức khả dụng: {{availableCredit}}<br>Hạn Mức Tín Dụng Tối Đa Của Member Cấp Bởi Cấp Trên: {{memberMaxCredit}}",
+  "AvailableCredit": "Hạn mức khả dụng: {{availableCredit}}",
   "ProductStatus": "Trạng thái trò chơi",
   "BetLimit": "Giới hạn cược",
   "WinLossLimit": "Giới hạn thắng thua",
@@ -174,5 +178,18 @@
   "Member": "Thành viên",
   "Master": "Master",
   "Agent": "Agent",
-  "Super": "Super"
+  "Super": "Super",
+  "GivenCreditPerAccount": "Hạn mức cho mỗi tài khoản",
+  "NoOfAccounts": "Số tài khoản",
+  "CopySettingFrom": "Sao chép cài đặt từ",
+  "UsernamePlaceHolder": "Tên đăng nhập hoặc Tên/Họ",
+  "CopySettingFromNote": "Chỉ hỗ trợ sao chép giá trị cài đặt từ Member trực tiếp có sẵn.",
+  "introCopyNote": "Nhấn 'Sao chép' để sao chép và chia sẻ thông tin tài khoản",
+  "UserNotExist": "Người chơi này không có thực",
+  "Credit": "Hạn mức tín dụng",
+  "Domain": "Tên Miền",
+  "CompactCopy": "Sao chép gộp",
+  "IndividualCopy": "Sao chép lẻ",
+  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} tài khoản tạo không thành công",
+  "FailureReason": "Lý do thất bại"
 }

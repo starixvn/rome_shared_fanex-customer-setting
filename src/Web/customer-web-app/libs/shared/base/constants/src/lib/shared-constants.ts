@@ -17,6 +17,7 @@ export const UserLevelName: { [key: number]: string } = {
 export const ProductGroupIds = {
   SportsBook: 1,
   RNGGames: 2,
+  LiveAndRNGCasino: 3,
 };
 
 export const isSportsBookProduct = (productGroupId: number | undefined) =>
@@ -26,7 +27,7 @@ export const GroupTypeIds = {
   SportsBookCommission: 150,
   SportsBookBetSetting: 151,
   ParlayMaxPayout: 152,
-  PositionTaking: 153, 
+  PositionTaking: 153,
   RNGGamesBetSetting: 154,
   Commission: 156,
   OtherGamesBetSetting: 157,
@@ -88,4 +89,9 @@ export const i7Sites = ['yUT', 'y789', 'y889', 'yOther', '789y'];
 
 export const Currencies = {
   Won: '45',
+};
+
+export const DirectMemberAgentIds = {
+  Super: -4,
+  Master: -3,
 };

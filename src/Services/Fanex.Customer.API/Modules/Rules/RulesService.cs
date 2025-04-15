@@ -1,8 +1,8 @@
-﻿using Fanex.Customer.API.Shared.Models;
+﻿using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Enumerations;
-using Fanex.Customer.API.Resources;
-using Fanex.Data.Repository;
+using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Utils;
+using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.Rules
 {
@@ -28,12 +28,12 @@ namespace Fanex.Customer.API.Modules.Rules
 
         public async Task<Result> CheckLimitNewDownline(CheckAllLimitedRulesRequest request)
         {
-            var command = new CheckLimitNewDownlineCommand(request.CustId);
+            var command = new CheckLimitNewDownlineCommand(request.CustId, request.IsDirectMember);
             await dynamicRepository.ExecuteAsync(command);
 
             return command.IsAllowed
                 ? Result.CreateSuccess()
-                : GetLimitNewDownlineErrorResult(Enumeration.FromValue<UserLevel>(request.CustLevel), request.Language);
+                : GetLimitNewDownlineErrorResult(request);
         }
 
         public async Task<Result> CheckReachLimitDownline(CheckAllLimitedRulesRequest request)
@@ -60,7 +60,7 @@ namespace Fanex.Customer.API.Modules.Rules
         {
             var result = Result.CreateSuccess();
 
-            if (request.CustLevel == UserLevel.Agent.Value)
+            if (request.CustLevel == UserLevel.Agent.Value || request.IsDirectMember)
             {
                 result = await CheckMaxNewMemberBySuper(request).ConfigureAwait(false);
             }
@@ -78,17 +78,24 @@ namespace Fanex.Customer.API.Modules.Rules
             return result;
         }
 
-        private static Result GetLimitNewDownlineErrorResult(UserLevel custLevel, string language)
+        private static Result GetLimitNewDownlineErrorResult(CheckAllLimitedRulesRequest request)
         {
             const int LimitNewDownlineErrorCode = 1001;
 
+
             return new Result(
                 LimitNewDownlineErrorCode,
-                StaticResources.Get(GetLimitNewDownlineResourceKey(custLevel), language));
+                StaticResources.Get(GetLimitNewDownlineResourceKey(request), request.Language));
         }
 
-        private static string GetLimitNewDownlineResourceKey(UserLevel custLevel)
+        private static string GetLimitNewDownlineResourceKey(CheckAllLimitedRulesRequest request)
         {
+            if (request.IsDirectMember)
+            {
+                return "LimitAgentNewDownlineError";
+            }
+
+            var custLevel = Enumeration.FromValue<UserLevel>(request.CustLevel);
             if (custLevel.IsSuperLevel())
             {
                 return "LimitSuperNewDownlineError";

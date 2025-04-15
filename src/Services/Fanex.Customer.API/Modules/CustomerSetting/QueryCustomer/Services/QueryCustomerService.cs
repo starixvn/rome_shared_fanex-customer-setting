@@ -25,6 +25,7 @@ public interface IQueryCustomerService
 public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerService
 {
     private readonly ICustomerService customerService;
+
     private readonly ISiteDBGroupService siteDBGroupService;
 
     public QueryCustomerService(
@@ -54,14 +55,14 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
 
     private bool isAllowUncheckAll = false;
 
-    private bool IsAllowUncheckAll(int roleId, string site, string siteLabel, AppSettings appSettings)
+    private bool IsAllowUncheckAll(int roleId, string site, string siteLabel, bool? isDirectMember, AppSettings appSettings)
     {
         var isY7 = appSettings.IsSpecialSites(siteLabel);
         var IsAllowUncheckStakeLevelOnMemberSite = appSettings.IsAllowUncheckStakeLevelOnMember(site);
-        if (roleId != CustomerLevel.Member && !isY7)
+        if (roleId != CustomerLevel.Member && !isDirectMember.GetValueOrDefault() && !isY7)
             return true;
 
-        if (roleId == CustomerLevel.Member && IsAllowUncheckStakeLevelOnMemberSite)
+        if ((roleId == CustomerLevel.Member || isDirectMember.GetValueOrDefault()) && IsAllowUncheckStakeLevelOnMemberSite)
             return true;
 
         return false;
@@ -76,10 +77,11 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         {
             GeneralInfo = generalInfo,
             ProductGroups = GetProductGroups(
-                settingProfile, 
-                request, 
-                appSettings.Belonging777Group(request.SiteLabel), 
-                generalInfo)
+                settingProfile,
+                request,
+                appSettings.Belonging777Group(request.SiteLabel),
+                generalInfo,
+                false)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = 0;
@@ -88,13 +90,17 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
 
     public async Task<CustomerSettingModel> Query(QueryRequest request)
     {
-        var generalInfoDto = await GetGeneralInfo(request);
+        var isDirectMember = request.IsGetUpline ?
+            helperService.IsEditDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId) :
+            helperService.IsCreateNewDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId);
+        var generalInfoDto = await GetGeneralInfo(request, isDirectMember);
         var generalInfo = new GeneralInformation(generalInfoDto);
-        var uGroup  = generalInfoDto.Group;
+        var uGroup = generalInfoDto.Group;
         ptStep = appSettings.IsSupportPT3Decimal(IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel) ? 0.5M : 1M;
-        isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, appSettings);
-        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
-        if ((!request.IsGetUpline && request.RoleId == CustomerLevel.Agent) || (request.IsGetUpline && request.RoleId == CustomerLevel.Member)) 
+        isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, IsDirectMaster(request) ? request.SiteLabel : generalInfo.SiteLabel, isDirectMember, appSettings);
+        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, isDirectMember ? ProfileMode.DirectMember : request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
+        if ((!request.IsGetUpline && (request.RoleId == CustomerLevel.Agent || isDirectMember))
+            || (request.IsGetUpline && request.RoleId == CustomerLevel.Member))
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
         }
@@ -103,18 +109,20 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         {
             Group = uGroup,
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo)
+            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
         return customerSetting;
     }
 
-    private async Task<GeneralInformationDTO> GetGeneralInfo(QueryRequest request)
+    private async Task<GeneralInformationDTO> GetGeneralInfo(QueryRequest request, bool isDirectMember)
     {
         var generalInfo = await dynamicRepository.GetAsync<GeneralInformationDTO>(request.IsGetUpline
             ? new GetGeneralInfoForEditCriteria(request.CustId, request.SystemId)
-            : new GetCustomerCriteria(request.CustId, appSettings.SettingStatus, request.RoleId));
+            : request.RoleId == CustomerLevel.Agent
+                ? new GetAgentCriteria(request.CustId, appSettings.SettingStatus, request.RoleId)
+                : new GetSuperMasterCriteria(request.CustId, appSettings.SettingStatus, isDirectMember, request.RoleId));
 
         if (generalInfo != null && generalInfo.RoleId == CustomerLevel.Member)
         {
@@ -137,18 +145,19 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
     }
 
     private IEnumerable<ProductGroup> GetProductGroups(
-        IEnumerable<SettingProfile> settingProfile, 
-        BaseQueryRequest request, 
+        IEnumerable<SettingProfile> settingProfile,
+        BaseQueryRequest request,
         bool isSiteLabel777,
-        GeneralInformation generalInfo)
+        GeneralInformation generalInfo,
+        bool isDirectMember)
     {
-        return settingProfile.Where(p => p.DisplayMode != 3 && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
+        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
             GroupTypes = ((typeof(QueryRequest) == request.GetType()) ?
-            (((QueryRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryRequest)request, isSiteLabel777, generalInfo) : GetGroupTypes(g, (QueryRequest)request, isSiteLabel777)) :
+            (((QueryRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryRequest)request, isSiteLabel777, generalInfo, isDirectMember) : GetGroupTypes(g, (QueryRequest)request, isSiteLabel777, isDirectMember)) :
             GetGroupTypesForSuper(g, (QuerySuperRequest)request, isSiteLabel777)).Where(gt => gt != null)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
@@ -174,6 +183,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                         t.Key.DisplayType,
                         0,
                         false,
+                        null,
                         request.Language,
                         groupItems,
                         t,
@@ -187,15 +197,24 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         }).ToEnumerable().ToList(); // Must use ToList to prevent call SP 2 times because of Any method in the next action.
     }
 
-    private IEnumerable<GroupType> GetGroupTypes(IGrouping<int, SettingProfile> g, QueryRequest request, bool isSiteLabel777)
+    private IEnumerable<GroupType> GetGroupTypes(
+        IGrouping<int, SettingProfile> g,
+        QueryRequest request,
+        bool isSiteLabel777,
+        bool isDirectMember)
     {
         return g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
         .SelectAwait(async t =>
         {
-            var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevel(t.Key.GroupType, (byte)(request.RoleId - 1)) : t.Key.GroupType;
+            var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ?
+                helperService.GetGroupTypeByCustomerLevelAndUplineLevel(t.Key.GroupType,
+                    request.AgentId < 0 ? CustomerLevel.Member : (byte)(request.RoleId - 1),
+                    request.IsGetUpline ? request.UplineRoleId.GetValueOrDefault() : request.RoleId,
+                    request.AgentId)
+                : t.Key.GroupType;
             if (groupItemMapping.TryGetValue(groupTypeWithRoleId, out dynamic value))
             {
-                var groupItems = await value.QueryForAddNew(request.CustId, request.RoleId, g.Key, t.Key.GroupType);
+                var groupItems = await value.QueryForAddNew(request.CustId, request.RoleId, g.Key, t.Key.GroupType, isDirectMember);
                 var groupType = new GroupType
                 {
                     Id = t.Key.GroupType,
@@ -208,6 +227,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                         t.Key.DisplayType,
                         request.RoleId - 1,
                         request.IsGetUpline,
+                        isDirectMember,
                         request.Language,
                         groupItems,
                         t,
@@ -222,30 +242,32 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
     }
 
     private IEnumerable<GroupType> GetGroupTypesForEdit(
-        IGrouping<int, SettingProfile> g, 
-        QueryRequest request, 
+        IGrouping<int, SettingProfile> g,
+        QueryRequest request,
         bool isSiteLabel777,
-        GeneralInformation generalInfo)
+        GeneralInformation generalInfo,
+        bool isDirectMember)
     {
         return g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
         .SelectAwait(async t =>
         {
-            var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevelAndUplineLevel(t.Key.GroupType, request.RoleId, request.UplineRoleId.Value) : t.Key.GroupType;
+            var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevelAndUplineLevel(t.Key.GroupType, request.RoleId, request.UplineRoleId.Value, request.AgentId) : t.Key.GroupType;
             if (groupItemMapping.TryGetValue(groupTypeWithRoleId, out dynamic value))
             {
                 var groupItems = await value.QueryForEdit(
-                    request.CustId, 
-                    request.RoleId, 
-                    request.UplineRoleId, 
-                    g.Key, 
-                    t.Key.GroupType, 
+                    request.CustId,
+                    request.RoleId,
+                    request.UplineRoleId,
+                    g.Key,
+                    t.Key.GroupType,
                     request.IsMultipleMode,
                     generalInfo.Currency,
                     generalInfo.Site,
                     request.SystemId,
                     request.GroupName,
-                    request.IsCopy);
-              
+                    request.IsCopy,
+                    request.AgentId);
+
                 var groupType = new GroupType
                 {
                     Id = t.Key.GroupType,
@@ -259,6 +281,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                         t.Key.DisplayType,
                         request.RoleId,
                         request.IsGetUpline,
+                        isDirectMember,
                         request.Language,
                         groupItems,
                         t,
@@ -282,8 +305,13 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         return IsCrossline(request) && !helperService.IsPTGroupType(groupTypeId);
     }
 
-    private static bool IsCrossline(QueryRequest request)
+    private bool IsCrossline(QueryRequest request)
     {
+        if (helperService.IsEditDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId))
+        {
+            return helperService.IsEditCrosslineDirectMember(request.RoleId, request.UplineRoleId.GetValueOrDefault(), request.AgentId);
+        }
+
         return request.UplineRoleId - request.RoleId > 1;
     }
 
@@ -293,6 +321,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         int displayType,
         int roleId,
         bool isGetUpline,
+        bool? isDirectMember,
         string language,
         IEnumerable<GroupItemDefault> groupItems,
         IGrouping<object, SettingProfile> t,
@@ -321,6 +350,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                 groupTypeId,
                 displayType,
                 roleId,
+                isDirectMember,
                 language,
                 isSiteLabel777);
 

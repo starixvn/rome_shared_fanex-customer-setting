@@ -4,9 +4,13 @@ namespace Fanex.Customer.Client.Models
     {
         public string Username { get; set; }
 
+        public int RoleId { get; set; }
+
         public byte UpLineRoleId { get; set; }
 
         public int UplineCustId { get; set; }
+
+        public string UplineUserName { get; set; }
 
         public string Password { get; set; }
 

@@ -45,6 +45,8 @@ public class EditRequestContext
     public bool IsMultipleMode { get; set; }
 
     public byte EditFuntion { get; set; }
+
+    public int? AgentId { get; set; }
 }
 
 public class EditRequest

@@ -12,7 +12,7 @@ public class UserNameSuggestionQuery
 
     public bool IsInternal { get; set; }
 
-    public bool IsValid() =>
-        ActorId > 0 &&
-        !string.IsNullOrEmpty(Query);
+    public bool ExcludeMember { get; set; }
+
+    public bool IsValid() => ActorId > 0 && !string.IsNullOrEmpty(Query);
 }

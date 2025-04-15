@@ -1,3 +1,10 @@
+export interface UsernameSuggestion {
+  UserName: string;
+  FirstName: string;
+  LastName: string;
+  UserName2: string;
+}
+
 export class Result {
   public code: number;
   public message: string;
@@ -37,7 +44,9 @@ export class SubMessagesResult extends Result {
 }
 
 export class CreateCustomerResult extends SubMessagesResult {
-  newCustId?: number;
+  newCustIds?: number[];
+  newUserNames?: string[];
+  availableAlphaDomain?: string[];
 }
 
 export interface SubMessage {
@@ -86,6 +95,7 @@ export interface Params {
   noPermissionEditCredit: boolean;
   productGroupId: number;
   groupName: string;
+  agentId: number;
 }
 
 export interface Note {

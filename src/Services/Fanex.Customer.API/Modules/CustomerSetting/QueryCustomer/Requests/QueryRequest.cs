@@ -12,6 +12,8 @@ public class QueryRequest : BaseQueryRequest
 
     public string SiteLabel { get; set; }
 
+    public int? AgentId { get; set; }
+    
     public string GroupName { get; set; }
 
     public bool IsMultipleMode { get; set; }

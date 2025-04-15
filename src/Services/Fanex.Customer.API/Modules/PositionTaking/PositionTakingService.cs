@@ -1,13 +1,10 @@
-using System.Globalization;
 using Fanex.Customer.API.Modules.PositionTaking.Criterias;
 using Fanex.Customer.API.Modules.PositionTaking.Models;
-using Fanex.Customer.API.Modules.PositionTaking.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data.Repository;
 using Fanex.RemotingRef;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace Fanex.Customer.API.Modules.PositionTaking;
 
@@ -32,7 +29,7 @@ public class PositionTakingService : IPositionTakingService
 
     public PositionTakingService(IOptions<AppSettings> appSettingOptions, IDynamicRepository dynamicRepository, IRemotingRefService remotingRefService)
     {
-        this.appSettings = appSettingOptions.Value;
+        appSettings = appSettingOptions.Value;
         this.dynamicRepository = dynamicRepository;
         this.remotingRefService = remotingRefService;
     }
@@ -42,65 +39,57 @@ public class PositionTakingService : IPositionTakingService
         return [10, 50, 100, 500];
     }
 
+    private GetPositionTakingCriteriaBase CreatePositionTakingCriteria(PositionTakingRequest request)
+    {
+        if (request.IsDirectMember)
+        {
+            return new GetMemberPositionTakingCriteria
+            {
+                SettingStatus = appSettings.SettingStatus,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                ProductId = request.ProductId,
+                UplineId = request.CustId
+            };
+        }
+
+        return request.RoleId switch
+        {
+            CustomerLevel.Super => new GetMasterPositionTakingCriteria
+            {
+                SettingStatus = appSettings.SettingStatus,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                ProductId = request.ProductId,
+                SRecommend = request.CustId
+            },
+            CustomerLevel.Master => new GetAgentPositionTakingCriteria
+            {
+                SettingStatus = appSettings.SettingStatus,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                ProductId = request.ProductId,
+                MRecommend = request.CustId
+            },
+            _ => new GetMemberPositionTakingCriteria
+            {
+                SettingStatus = appSettings.SettingStatus,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                ProductId = request.ProductId,
+                UplineId = request.CustId
+            },
+        };
+    }
+
     public async Task<PositionTakingViewModel> GetPT(PositionTakingRequest request)
     {
-        ProductViewModel productViewModel;
-        using (var sr = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/App_Data/ProductSection.json"))
-        {
-            string jsonString = sr.ReadToEnd();
-            productViewModel = JsonConvert.DeserializeObject<ProductViewModel>(jsonString);
-        }
-
-        var product = productViewModel.Products.SingleOrDefault(p => p.Id == request.ProductId);
-        IEnumerable<PositionTakingEntity> positionTakingEntities;
-        var criteria = new GetMasterPositionTakingCriteria
-        {
-            SettingStatus = appSettings.SettingStatus,
-            PageSize = request.PageSize,
-            PageIndex = request.PageIndex,
-            ProductId = product.MainProductId != 0 ? product.MainProductId : request.ProductId,
-            SRecommend = request.CustId
-        };
-
-        GetAgentPositionTakingCriteria agentCriteria = new();
-        GetMemberPositionTakingCriteria memberCriteria = new();
-
-        switch (request.RoleId)
-        {
-            case CustomerLevel.Super:
-                positionTakingEntities = await GetPositionTakingEntities(criteria);
-
-                break;
-
-            case CustomerLevel.Master:
-                agentCriteria = new()
-                {
-                    SettingStatus = appSettings.SettingStatus,
-                    PageSize = request.PageSize,
-                    PageIndex = request.PageIndex,
-                    ProductId = product.MainProductId != 0 ? product.MainProductId : request.ProductId,
-                    MRecommend = request.CustId
-                };
-                positionTakingEntities = await GetPositionTakingEntities(agentCriteria);
-
-                break;
-
-            default:
-                memberCriteria = new()
-                {
-                    SettingStatus = appSettings.SettingStatus,
-                    PageSize = request.PageSize,
-                    PageIndex = request.PageIndex,
-                    ProductId = product.MainProductId != 0 ? product.MainProductId : request.ProductId,
-                    Recommend = request.CustId
-                };
-                positionTakingEntities = await GetPositionTakingEntities(memberCriteria);
-
-                break;
-        }
+        var criteria = CreatePositionTakingCriteria(request);
+        var positionTakingEntities = await GetPositionTakingEntities(criteria);
 
         var result = new PositionTakingViewModel
         {
+            LevelType = request.LevelType,
             PageSizeList = GetPageSizeList(),
             PageIndex = criteria.PageIndex,
             PageSize = criteria.PageSize,
@@ -120,12 +109,9 @@ public class PositionTakingService : IPositionTakingService
             Product = new ProductModel
             {
                 Id = criteria.ProductId,
-                Name = product != null ? remotingRefService.GetResourceDataByRefIdAndResourceId("Product", product.Id.ToString(), LanguageUtils.ToLanguage(request.Language), string.Empty) :
-                    ProductName(criteria.ProductId, LanguageUtils.ToLanguage(request.Language)),
-                ActivationGroups = new List<ActivationGroupModel>(),
-                ShowPTIcon = product.ShowPTIcon,
-                CustomerSettingLink = product != null ? product.CustomerSettingLink : null,
-                MainProductId = product.MainProductId,
+                Name = remotingRefService.GetResourceDataByRefIdAndResourceId("Product", criteria.ProductId.ToString(), LanguageUtils.ToLanguage(request.Language), string.Empty),
+                ActivationGroups = [],
+                ShowPTIcon = request.ProductGroupId == ProductGroupConstants.Sportsbook,
                 GroupId = request.ProductGroupId,
                 IsNewSetting = NewSettingProductGroups.Contains(request.ProductGroupId)
             }
@@ -134,11 +120,7 @@ public class PositionTakingService : IPositionTakingService
         var rawData = new PositionTakingEntityList
         {
             CustPT = positionTakingEntities,
-            TotalPages = request.RoleId switch {
-                CustomerLevel.Super => criteria.TotalPages,
-                CustomerLevel.Master => agentCriteria.TotalPages,
-                _ => memberCriteria.TotalPages
-            }
+            TotalPages = criteria.TotalPages
         };
 
         result.TotalPage = rawData.TotalPages;
@@ -154,7 +136,9 @@ public class PositionTakingService : IPositionTakingService
                 break;
 
             case CustomerLevel.Master:
-                result.ViewedLevels = [CustomerLevel.Master, CustomerLevel.Agent];
+                result.ViewedLevels = request.IsDirectMember
+                        ? (result.CustomerInfo.RoleId == CustomerLevel.Super ? [CustomerLevel.Super, CustomerLevel.Master] : [CustomerLevel.Master])
+                        : [CustomerLevel.Master, CustomerLevel.Agent];
                 break;
 
             case CustomerLevel.Agent:
@@ -225,7 +209,7 @@ public class PositionTakingService : IPositionTakingService
                     Enabled = customerGroup.Key.Enabled,
                     LockedAccess = new CustomerLockedAccess(customerGroup.Key.Locked, LanguageUtils.ToLanguage(languageCode))
                 },
-                UplinePT = new List<PositionTakingModel>(),
+                UplinePT = [],
                 GroupIndex = customerGroup.Key.GroupIndex,
                 PositionTakingByGroups = SportPT(
                     result,
@@ -281,7 +265,7 @@ public class PositionTakingService : IPositionTakingService
 
             if (!sportNameDictionary.ContainsKey(sportId))
             {
-                sportNameDictionary.Add(sportId, 
+                sportNameDictionary.Add(sportId,
                     remotingRefService.GetSportName(sportId.ToString(), LanguageUtils.ToLanguage(languageCode), null) ??
                     remotingRefService.GetResourceDataByRefIdAndResourceId("DummySport", sportId.ToString(), LanguageUtils.ToLanguage(languageCode), string.Empty));
                 sportInfo = new ActivationGroupModel
@@ -289,7 +273,7 @@ public class PositionTakingService : IPositionTakingService
                     Id = sportId,
                     Name = sportNameDictionary[sportId],
                     Active = true,
-                    ActivationGroups = new List<ActivationGroupModel>()
+                    ActivationGroups = []
                 };
             }
 
@@ -335,7 +319,7 @@ public class PositionTakingService : IPositionTakingService
                 Id = liveType,
                 Name = liveTypeNameDictionary[liveType],
                 Active = true,
-                ActivationGroups = new List<ActivationGroupModel>()
+                ActivationGroups = []
             };
 
             var liveTypeGroup = sportGroup.Where(custPT => custPT.IsLive == liveTypeId);
@@ -378,12 +362,12 @@ public class PositionTakingService : IPositionTakingService
                     remotingRefService.GetBetTypeName(betTypeId.ToString(), LanguageUtils.ToLanguage(languageCode)));
             }
 
-            ActivationGroupModel betTypeInfo = new ActivationGroupModel
+            ActivationGroupModel betTypeInfo = new()
             {
                 Id = betTypeId,
                 Active = true,
                 Name = betTypeNameDictionary[betTypeId],
-                ActivationGroups = new List<ActivationGroupModel>()
+                ActivationGroups = []
             };
 
             var betTypePT = liveTypeGroup.FirstOrDefault(custPT => custPT.BetType == betTypeId);
@@ -398,10 +382,5 @@ public class PositionTakingService : IPositionTakingService
         }
 
         return betTypePTs;
-    }
-
-    private string ProductName(int productId, string language)
-    {
-        return Lang.ResourceManager.GetString(string.Format("{0}{1}", "product_name_", productId), new CultureInfo(language)) ?? string.Empty;
     }
 }

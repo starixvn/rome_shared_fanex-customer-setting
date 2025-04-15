@@ -4,9 +4,9 @@ using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 
-public class GetCustomerCriteria : CriteriaBase
+public class GetAgentCriteria : CriteriaBase
 {
-    public GetCustomerCriteria(int custId, byte settingStatus, int roleId, int groupId = 0, int groupType = 0)
+    public GetAgentCriteria(int custId, byte settingStatus, int roleId, int groupId = 0, int groupType = 0)
     {
         CustId = custId;
         GroupId = groupId;
@@ -29,8 +29,6 @@ public class GetCustomerCriteria : CriteriaBase
     public override string GetSettingKey()
         => RoleId switch
         {
-            CustomerLevel.Super => "Acc_LiteMode_CustSetting_SuperAllInfoSel",
-            CustomerLevel.Master => "Acc_LiteMode_CustSetting_MasterAllInfoSel",
             CustomerLevel.Agent => "Acc_LiteMode_CustSetting_AgentAllInfoSel",
             _ => throw new IndexOutOfRangeException($"RoleId cannot = {RoleId}")
         };

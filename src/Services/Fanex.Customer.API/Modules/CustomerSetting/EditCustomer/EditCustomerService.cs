@@ -129,7 +129,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
 
                 if (!allowEdit) { continue; }
 
-                if (request.Context.RoleId == (byte)CustomerLevel.Member &&
+                if (request.Context.RoleId == CustomerLevel.Member &&
                     helperService.IsPTGroupType(groupType.Id)
                     && groupedPTMemberIds != null
                     && groupedPTMemberIds.Any(id => id == request.Context.CustId))
@@ -164,7 +164,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
     {
         MapUpdatedCustomerListFromString(request);
         var result = new List<UpdateCustomerResult>();
-        if (request.Context.RoleId == (byte)CustomerLevel.Member && IsUpdatePT(request.Settings))
+        if (request.Context.RoleId == CustomerLevel.Member && IsUpdatePT(request.Settings))
         {
             await UpdateGroupedPTMembers(request);
         }
@@ -191,8 +191,8 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
         var groupedMemberIds = await GetGroupedMemberIds(request.Context.CustomerIds);
         if (groupedMemberIds.Any())
         {
-            this.groupedPTMemberIds = groupedMemberIds;
-            this.updateGroupedPTResults = new List<UpdateGroupTypeResult>();
+            groupedPTMemberIds = groupedMemberIds;
+            updateGroupedPTResults = new List<UpdateGroupTypeResult>();
             foreach (var productGroup in request.Settings.ProductGroups)
             {
                 foreach (var groupType in productGroup.GroupTypes.Where(gt => helperService.IsPTGroupType(gt.Id)))
@@ -217,7 +217,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
 
     private async Task<UpdateGroupTypeResult> UpdateGeneralInfo(EditRequest request)
     {
-        GeneralInfoService generalInfoService = new GeneralInfoService(siteDBGroupService);
+        GeneralInfoService generalInfoService = new(siteDBGroupService);
         using IObjectDb db = ObjectDbFactory.CreateInstance(generalInfoService.GetSPName());
         var parameters = await generalInfoService.GenerateSPParams(request, appSettings.SettingStatus);
         await db.ExecuteNonQueryAsync(parameters);
@@ -262,12 +262,12 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
     {
         if (string.IsNullOrWhiteSpace(request.Context.CustomerIds))
         {
-            throw new InvalidOperationException("Customer Ids cannot be null or empty"); ;
+            throw new InvalidOperationException("Customer Ids cannot be null or empty");
         }
 
         if (string.IsNullOrWhiteSpace(request.Context.CustomerNames))
         {
-            throw new InvalidOperationException("Customer Names cannot be null or empty"); ;
+            throw new InvalidOperationException("Customer Names cannot be null or empty");
         }
 
         var custIdsList = request.Context.CustomerIds.Split(',').Select(custId => Convert.ToInt32(custId)).ToList();

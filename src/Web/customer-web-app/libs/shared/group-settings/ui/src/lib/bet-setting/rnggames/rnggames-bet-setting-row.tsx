@@ -66,7 +66,7 @@ export default function RNGGamesBetSettingRow({
     betSettingItem: RNGGamesBetSettingGroupItem,
     fieldName: keyof RNGGamesBetSettingProps
   ) => {
-    if ((betSettingItem.original || betSettingItem)[fieldName] == null) return null;
+    if ((betSettingItem.original || betSettingItem)[fieldName] === null) return null;
 
     const id = `${fieldName}-${sportTypeId}-${betTypeId}`;
     return isReadOnly ? (
@@ -77,8 +77,8 @@ export default function RNGGamesBetSettingRow({
         id={id}
         value={settingItem[fieldName]}
         isDisable={
-          !settingItem.isMultipleModeChecked
-          || (roleId===UserLevel.Super && !(settingItem as any)[fieldName + 'MultipleMode'])
+          !settingItem.isMultipleModeChecked ||
+          (roleId === UserLevel.Super && !(settingItem as any)[fieldName + 'MultipleMode'])
         }
         operator={fieldName === 'minBet' ? Operator['>='] : Operator['<=']}
         limit={upline[fieldName]}

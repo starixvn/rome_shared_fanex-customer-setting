@@ -1,4 +1,6 @@
 {
+  "ThisUserIsNotYourDirectMember": "This user is not your direct member",
+  "ThisAccountWasDisabled": "This account was disabled.",
   "general-information": "General Information",
   "username": "Username",
   "password": "Password",
@@ -86,6 +88,7 @@
   "success": "Success!",
   "copied": "Copied",
   "Group": "Group",
+  "lblCommissionForSuper": "Comm for Super",
   "lblCommissionForMaster": "Comm for Master",
   "lblCommissionForAgent": "Comm for Agent",
   "lblCommissionForMember": "Comm for Member",
@@ -157,6 +160,7 @@
   "Min": "Min",
   "Max": "Max",
   "creditNote": "Available Credit: {{availableCredit}}<br>The Maximum Member Credit set by your upline: {{memberMaxCredit}}",
+  "AvailableCredit": "Available Credit: {{availableCredit}}",
   "ProductStatus": "Product Status",
   "BetLimit": "Bet Limit",
   "WinLossLimit": "Win Loss Limit",
@@ -176,5 +180,18 @@
   "Member": "Member",
   "Master": "Master",
   "Agent": "Agent",
-  "Super": "Super"
+  "Super": "Super",
+  "GivenCreditPerAccount": "Given Credit per Account",
+  "NoOfAccounts": "No. of Accounts",
+  "CopySettingFrom": "Copy settings from",
+  "UsernamePlaceHolder": "Username or First/Last Name",
+  "CopySettingFromNote": "Only support copying setting values from an existing direct member.",
+  "introCopyNote": "Click 'Copy' to copy and share the account details",
+  "UserNotExist": "This user does not exist",
+  "Credit": "Credit",
+  "Domain": "Domain",
+  "CompactCopy": "Compact Copy",
+  "IndividualCopy": "Individual Copy",
+  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} accounts failed to be created.",
+  "FailureReason": "Failure Reason"
 }

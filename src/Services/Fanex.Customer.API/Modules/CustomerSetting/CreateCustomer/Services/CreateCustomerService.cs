@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Services.LiteMode;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Password.Service;
+using Fanex.Common.Extensions;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -50,6 +51,11 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
 
     public bool ValidateRequest(CreateRequest request)
     {
+        if (request.Settings.GeneralInfo == null ||  request.Settings.GeneralInfo.UplineRoleId == 0)
+        {
+            return false;
+        }
+
         if ((!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.FirstName) && request.Settings.GeneralInfo.FirstName.ContainsHTML())
         || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.LastName) && request.Settings.GeneralInfo.LastName.ContainsHTML())
         || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Phone) && request.Settings.GeneralInfo.Phone.ContainsHTML())
@@ -76,20 +82,27 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
     public async Task<CustomerSettingResult> Create(CreateRequest request)
     {
         CreateCustomerResult result;
+        var roleId = request.Settings.GeneralInfo.RoleId;
         var uplineRoleId = request.Settings.GeneralInfo.UplineRoleId;
         request.Settings.GeneralInfo.Password = await HashPassword(request.Settings.GeneralInfo.Password);
-        var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId);
+        var isDirectMember = helperService.IsCreateNewDirectMember(roleId, uplineRoleId, null);
+        var createCustomerService = GetCreateCustomerService(request.Context.IsFullMode(), request.Settings.GeneralInfo.UplineRoleId, isDirectMember);
         result = await createCustomerService.Create(request);
 
-        if (result.IsSuccessful && Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel())
+        if (result.NewCustIds.Any() && (Enumeration.FromValue<UserLevel>(uplineRoleId).IsAgentLevel() || isDirectMember))
         {
-            await balanceService.InitBalance(request.Settings.GeneralInfo.Site, result.NewCustId);
+            foreach (var newCustId in result.NewCustIds)
+            {
+                await balanceService.InitBalance(request.Settings.GeneralInfo.Site, newCustId);
+            }
         }
 
-        if (result.IsSuccessful)
+        if (result.NewCustIds.Any())
         {
-            AfterCreateCustomerProcess(
-                result.NewCustId,
+            foreach (var newCustId in result.NewCustIds)
+            {
+                AfterCreateCustomerProcess(
+                newCustId,
                 request.Context.SubAccId,
                 (byte)(uplineRoleId - 1),
                 request.Settings.GeneralInfo.SiteLabel,
@@ -97,20 +110,28 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
                 request.Settings.GeneralInfo.UserName,
                 request.Context.CreatorId,
                 request.Context.IP);
-        }
+            }
 
-        if (result.IsSuccessful)
-        {
             result.AvailableAlphaDomain = await customerService.GetBackupDomains(
                 request.Settings.GeneralInfo.Site,
-                (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
+                isDirectMember ? CustomerLevel.Member : (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
         }
 
         return result;
     }
 
-    private CreateCustomerBaseService GetCreateCustomerService(bool isFullMode, int uplineRoleId)
+    private CreateCustomerBaseService GetCreateCustomerService(bool isFullMode, int uplineRoleId, bool? isDirectMember)
     {
+        if (isDirectMember.GetValueOrDefault())
+        {
+            return uplineRoleId switch
+            {
+                CustomerLevel.Super => new CreateDirectMemberService(messageService, appSettings, helperService, customerService),
+                CustomerLevel.Master => new CreateDirectMemberService(messageService, appSettings, helperService, customerService),
+                _ => null
+            };
+        }
+
         if (isFullMode)
         {
             return uplineRoleId switch

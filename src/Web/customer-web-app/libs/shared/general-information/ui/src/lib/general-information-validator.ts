@@ -17,10 +17,10 @@ export type validateUsername = 'userName' | 'newUserName';
 export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername;
 
 export default class GeneralInformationValidator {
-  private readonly generalInfo: GeneralInfo;
+  protected readonly generalInfo: GeneralInfo;
   public validationState: ValidationResult;
 
-  private invalidateMaxCreditMessages: Record<UserLevel, string> = {
+  protected invalidateMaxCreditMessages: Record<UserLevel, string> = {
     [UserLevel.Company]: '',
     [UserLevel.Super]: 'superMaxCreditInvalid',
     [UserLevel.Master]: 'masterMaxCreditInvalid',
@@ -92,9 +92,9 @@ export default class GeneralInformationValidator {
         return this.generalInfo.roleId === UserLevel.Agent
           ? this.validateMemberMaxCreditWhenCreateAgent(isEditMode)
           : this.validateMaxCredit(isEditMode);
+      default:
+        return true;
     }
-
-    return true;
   }
 
   public async validateUsername() {

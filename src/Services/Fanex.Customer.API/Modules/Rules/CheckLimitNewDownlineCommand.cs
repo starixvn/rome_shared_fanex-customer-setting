@@ -4,12 +4,15 @@ namespace Fanex.Customer.API.Modules.Rules;
 
 public class CheckLimitNewDownlineCommand : NonQueryCommand
 {
-    public CheckLimitNewDownlineCommand(int custId)
+    public CheckLimitNewDownlineCommand(int custId, bool isDirectMember)
     {
         CustId = custId;
+        IsDirectMember = isDirectMember;
     }
 
     public int CustId { get; }
+
+    public bool IsDirectMember { get; }
 
     public bool IsAllowed { get; set; }
 

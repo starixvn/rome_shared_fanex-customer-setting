@@ -75,7 +75,6 @@ const ParlayMaxPayoutRow = (props: ParlayMaxPayoutRowProps) => {
       </div>
     );
   };
-
   return (
     <BlockRow
       label={

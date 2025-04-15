@@ -1,4 +1,6 @@
 {
+  "ThisUserIsNotYourDirectMember": "ผู้ใช้นี้ไม่ใช่สมาชิกโดยตรงของคุณ",
+  "ThisAccountWasDisabled": "บัญชีนี้ได้ถูกปิดไปแล้ว",
   "general-information": "ข้อมูลทั่วไป",
   "username": "ชื่อผู้ใช้",
   "password": "รหัสผ่าน",
@@ -85,6 +87,7 @@
   "success": "สำเร็จ!",
   "copied": "คัดลอกเรียบร้อยแล้ว",
   "Group": "กลุ่ม",
+  "lblCommissionForSuper": "ค่าคอมมิชชั่นจากซุปเปอร์",
   "lblCommissionForMaster": "ค่าคอมมิชชั่น จากตัวแทนหลัก",
   "lblCommissionForAgent": "ค่าคอมมิชชั่น จาก ตัวแทน",
   "lblCommissionForMember": "ค่าคอมมิชชั่นสำหรับสมาชิก",
@@ -156,6 +159,7 @@
   "Min": "ต่ำสุด",
   "Max": "สูงสุด",
   "creditNote": "เครดิตที่มีอยู่: {{availableCredit}}<br>เครดิตสมาชิกสูงสุดที่กำหนดโดยอัพไลน์ของคุณ: {{memberMaxCredit}}",
+  "AvailableCredit": "เครดิตที่มีอยู่: {{availableCredit}}",
   "ProductStatus": "สถานะผลิตภันฑ์",
   "BetLimit": "วงเงินเดิมพัน",
   "WinLossLimit": "วงเงินแพ้ชนะ",
@@ -175,5 +179,18 @@
   "Member": "สมาชิก",
   "Master": "มาสเตอร์",
   "Agent": "เอเย่นต์",
-  "Super": "ซุปเปอร์"
+  "Super": "ซุปเปอร์",
+  "GivenCreditPerAccount": "เครดิตที่ให้แต่ละบัญชี",
+  "NoOfAccounts": "จำนวนบัญชี",
+  "CopySettingFrom": "คัดลอกการตั้งค่าจา",
+  "UsernamePlaceHolder": "ยูเซอร์เนม หรือ ชื่อ/นามสุกล",
+  "CopySettingFromNote": "รองรับเฉพาะการคัดลอกค่าการตั้งค่าจากสมาชิกโดยตรงที่มีอยู่เท่านั้น",
+  "introCopyNote": "คลิก 'คัดลอก' เพื่อคัดลอกและแบ่งปันรายละเอียดบัญชี",
+  "UserNotExist": "ไม่มียูเซอร์นี้",
+  "Credit": "เครดิต",
+  "Domain": "โดเมน",
+  "CompactCopy": "คัดลอกแบบรวบรัด",
+  "IndividualCopy": "คัดลอกรายบุคคล",
+  "NoOfAccountCreatedFailed": "สร้างไม่สำเร็จ {{noOfFailedAccounts}} บัญชี",
+  "FailureReason": "สาเหตุที่ไม่สำเร็จ"
 }

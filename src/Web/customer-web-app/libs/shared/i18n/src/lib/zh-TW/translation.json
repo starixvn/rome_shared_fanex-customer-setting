@@ -1,4 +1,6 @@
 {
+  "ThisUserIsNotYourDirectMember": "此用戶不是您的直接成員",
+  "ThisAccountWasDisabled": "這個帳號禁用",
   "general-information": "基本信息",
   "username": "用戶名",
   "password": "密碼",
@@ -85,6 +87,7 @@
   "success": "成功！",
   "copied": "複製！",
   "Group": "組別",
+  "lblCommissionForSuper": "超級佣金",
   "lblCommissionForMaster": "總代理佣金",
   "lblCommissionForAgent": "代理佣金",
   "lblCommissionForMember": "會員的佣金",
@@ -156,6 +159,7 @@
   "Min": "最低",
   "Max": "最高",
   "creditNote": "可用信用額: {{availableCredit}}<br>您的上線已設置會員最高信用: {{memberMaxCredit}}",
+  "AvailableCredit": "可用信用額: {{availableCredit}}",
   "ProductStatus": "產品狀態",
   "BetLimit": "投注限額",
   "WinLossLimit": "輸贏限額",
@@ -175,5 +179,18 @@
   "Member": "會員",
   "Master": "總代理",
   "Agent": "代理",
-  "Super": "超級"
+  "Super": "超級",
+  "GivenCreditPerAccount": "每個賬號的信用額度",
+  "NoOfAccounts": "賬號數量",
+  "CopySettingFrom": "複製設置自",
+  "UsernamePlaceHolder": "用戶名或名/姓",
+  "CopySettingFromNote": "僅支援從現有直系會員複製設置值。",
+  "introCopyNote": "點擊“複製”即可複製並分享賬號詳情",
+  "UserNotExist": "此賬號不存在",
+  "Credit": "信用額度",
+  "Domain": "域名",
+  "CompactCopy": "簡潔複製",
+  "IndividualCopy": "单一複製",
+  "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} 賬號創建失敗",
+  "FailureReason": "失敗原因"
 }

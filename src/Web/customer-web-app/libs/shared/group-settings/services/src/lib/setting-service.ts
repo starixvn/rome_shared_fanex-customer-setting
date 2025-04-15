@@ -1,4 +1,4 @@
-import { CreateCustomerResult, Result, UpdateCustomerResult } from '@customer-web-app/share-models';
+import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
@@ -24,9 +24,7 @@ export const SettingService = {
             ...item,
             isMultipleModeChecked: true,
             upline: { ...item },
-            original: {
-              ...item,
-            },
+            original: { ...item },
             isAllowUnlimitCombo2: item.combo2 === 0,
             isAllowUnlimitCombo35: item.combo35 === 0,
             isAllowUnlimitComboOver6: item.comboOver6 === 0,
@@ -54,6 +52,7 @@ export const SettingService = {
     custId: number,
     roleId: number,
     uplineRoleId = 0,
+    agentId = 0,
     isGetUpLine = false,
     siteLabel = '',
     isMultipleMode = false,
@@ -65,11 +64,17 @@ export const SettingService = {
         appConfig.systemId
       }&siteLabel=${siteLabel}&productGroupId=${
         params.productGroupId ?? ProductGroupIds.SportsBook
-      }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}`
+      }&isMultipleMode=${isMultipleMode}&groupName=${groupName}&isCopy=${isCopy}&agentId=${agentId}`
     );
     return response.data;
   },
-  CreateCustomer: async (generalInfo: GeneralInfo, group: string, productGroups: ProductGroup[]) => {
+  CreateCustomer: async (
+    generalInfo: GeneralInfo,
+    group: string,
+    productGroups: ProductGroup[],
+    isDirectMember = false,
+    numberOfAccounts = 1
+  ) => {
     const { custId, ...otherInfo } = generalInfo;
     return await axiosInstance
       .post<CreateCustomerResult>(
@@ -78,6 +83,8 @@ export const SettingService = {
           generalInfo: { ...otherInfo },
           group,
           productGroups: JSON.stringify(productGroups),
+          isDirectMember,
+          numberOfAccounts,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -86,7 +93,7 @@ export const SettingService = {
       .then((response) => response.data)
       .catch((error) => {
         if (error.response?.status === 401 || error.response?.status === 403) {
-          return Result.UnAuthorizedResult;
+          return CreateCustomerResult.UnAuthorizedResult;
         }
 
         // Something unexpected
@@ -116,6 +123,7 @@ export const SettingService = {
           site,
           siteLabel,
           group,
+          agentId: params.agentId,
         },
         {
           headers: getHeadersForPostRequest(),
@@ -149,6 +157,7 @@ export const SettingService = {
     bodyFormData.append('productGroupId', params.productGroupId.toString());
     bodyFormData.append('site', site);
     bodyFormData.append('siteLabel', siteLabel);
+    bodyFormData.append('agentId', (params.agentId ?? 0).toString());
     if (group) {
       bodyFormData.append('group', group);
     }
@@ -240,6 +249,18 @@ export const SettingService = {
   GetCustomerCurrentWinLossAmount: async (custId: number, sportType: number, betType: number) => {
     const response = await axiosInstance.get<CurrentWinLossAmount[]>(
       `Customer/GetCurrentWinLossAmount?custId=${custId}&sportType=${sportType}&betType=${betType}`
+    );
+    return response.data;
+  },
+  GetUserNameSuggestion: async (query: string) => {
+    const response = await axiosInstance.get<UsernameSuggestion[]>(
+      `Customer/SearchSuggestDirectMembers?searchUsername=${query}&uplineCustId=${params.uplineId}`
+    );
+    return response.data;
+  },
+  GetDirectMember: async (username: string) => {
+    const response = await axiosInstance.get(
+      `Customer/CheckDirectMemberUserName?searchUsername=${username}&uplineCustId=${params.uplineId}`
     );
     return response.data;
   },

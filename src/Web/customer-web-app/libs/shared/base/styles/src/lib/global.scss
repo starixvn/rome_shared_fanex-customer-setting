@@ -103,6 +103,12 @@
   --bg-notAvailable: #ababab;
 
   --bg-first-load: rgba(255, 255, 255, 0.5); 
+  //auto suggetion
+  --suggetion-border: 0;
+  --suggetion-bg: #fff;
+  --suggetion-bg-active: #ddd;
+  --suggetion-shadown: 0 6px 12px rgba(0,0,0,.175);
+  --suggetion-color: #333;
 }
 
 :root [data-theme='dark'] {
@@ -200,6 +206,12 @@
 
   --bg-first-load: rgba(69, 69, 69, .7);
   
+  //auto suggetion
+  --suggetion-border: 1px solid #292929;
+  --suggetion-bg: #171717;
+  --suggetion-bg-active: #3c3c3c;
+  --suggetion-shadown: none;
+  --suggetion-color: #ededed;
 }
 
 input[type='text'],

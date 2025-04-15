@@ -66,12 +66,13 @@ function BetLimitRow({
   handleCheckAllItem,
 }: Readonly<BetLimitRowProps>) {
   const { t } = useTranslation();
+  const { isDirectMember } = useGroupSettingContext();
 
   if (item.length < 1) return null;
 
   const firstItem = item[0];
   const isShowNoneInput =
-    params.roleId === UserLevel.Member &&
+    (isDirectMember || params.roleId === UserLevel.Member) &&
     isAllowUncheckAll &&
     !firstItem.isMultipleChoice &&
     firstItem.productId === ProductIds.LiveCasino;
@@ -81,7 +82,7 @@ function BetLimitRow({
     <BlockRow
       key={firstItem.sportTypeId}
       label={
-        params.roleId !== UserLevel.Member ? (
+        params.roleId !== UserLevel.Member && !isDirectMember ? (
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
             <div>{firstItem.sportTypeName}</div>
             <input
@@ -129,7 +130,7 @@ function BetLimitRow({
               id={`name-${stakeLevel.productId}-${stakeLevel.sportTypeId}-${stakeLevel.stakeLevelId}`}
               className="blockLeft"
             >
-              {params.roleId === UserLevel.Member && !stakeLevel.isMultipleChoice ? (
+              {(isDirectMember || params.roleId === UserLevel.Member) && !stakeLevel.isMultipleChoice ? (
                 <input
                   type="radio"
                   checked={stakeLevel.isChecked}
@@ -144,7 +145,7 @@ function BetLimitRow({
                   onChange={(e) => handleOnBetLimitChange(stakeLevel, e.target.checked)}
                   disabled={
                     (!stakeLevel.isChecked &&
-                      params.roleId === UserLevel.Member &&
+                      (isDirectMember || params.roleId === UserLevel.Member) &&
                       item.filter((i) => i.isChecked).length === stakeLevel.maxChoice &&
                       stakeLevel.maxChoice !== 0) ||
                     isReadOnly
@@ -167,7 +168,7 @@ const BetLimitBlockId = 'BetLimitBlockId';
 const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function BetLimit(props, ref) {
   const { t } = useTranslation();
   const { isReadOnly, isAllowUncheckAll } = props;
-  const { productGroups, productGroupId, isEditMode, handleUpdateSettingItems, updateGroupSetting } =
+  const { productGroups, productGroupId, isEditMode, handleUpdateSettingItems, updateGroupSetting, isDirectMember } =
     useGroupSettingContext();
   const groupId = Number(productGroupId);
   const betLimitItems = getSettingItems<BetLimitGroupItem>(productGroups, groupId, GroupTypeIds.BetLimit);
@@ -226,7 +227,11 @@ const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
           return { ...i, isChecked };
         }
 
-        if (params.roleId === UserLevel.Member && !item.isMultipleChoice && i.stakeLevelId !== item.stakeLevelId) {
+        if (
+          (isDirectMember || params.roleId === UserLevel.Member) &&
+          !item.isMultipleChoice &&
+          i.stakeLevelId !== item.stakeLevelId
+        ) {
           return { ...i, isChecked: false };
         }
       }
@@ -275,7 +280,7 @@ const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
             </button>
           ))}
         </div>
-        {params.roleId !== UserLevel.Member && (
+        {params.roleId !== UserLevel.Member && !isDirectMember && (
           <BlockRow
             label={
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>

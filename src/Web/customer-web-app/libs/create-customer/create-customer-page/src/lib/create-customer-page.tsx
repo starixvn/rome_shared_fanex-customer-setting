@@ -1,21 +1,20 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { handleChangeGroupSettingValue, handleChangeItemValue } from '@customer-web-app/edit-customer-page';
-import { CreateCustomerResult, ValidateRefResult, ValidationRefType } from '@customer-web-app/share-models';
+import {
+    handleChangeGroupSettingValue, handleChangeItemValue
+} from '@customer-web-app/edit-customer-page';
+import {
+    CreateCustomerResult, ValidateRefResult, ValidationRefType
+} from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { Currencies, ProductGroupIds, SystemIds } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-  GeneralInfo,
-  GeneralInfoActionTypes,
-  generalInformationReducer,
-  initialState,
+    GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
 import {
-  GeneralInformation,
-  TransferCondition,
-  TransferOptions,
+    GeneralInformation, TransferCondition, TransferOptions
 } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
@@ -49,9 +48,9 @@ export function CreateCustomerPage() {
         params.uplineId,
         params.uplineRoleId,
         0,
+        params.agentId,
         false,
-        params.siteLabel,
-        false
+        params.siteLabel
       );
       const newProductGroups = handleInitProducts(productGroups, params.uplineRoleId);
       if (appConfig.systemId !== SystemIds.NAP) {
@@ -155,7 +154,9 @@ export function CreateCustomerPage() {
         setIsLoading(true);
         const createResult = result as CreateCustomerResult;
         setTimeout(() => {
-          window.redirectToSettingPage({ username: generalInfo.userName, custId: createResult.newCustId });
+          if (createResult.newCustIds && createResult.newCustIds.length > 0) {
+            window.redirectToSettingPage({ username: generalInfo.userName, custId: createResult.newCustIds[0] });
+          }
         }, 3000);
         return;
       } else {

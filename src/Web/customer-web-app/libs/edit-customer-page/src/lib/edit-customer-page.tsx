@@ -61,10 +61,11 @@ export function EditCustomerPage() {
         params.custId,
         params.roleId,
         params.uplineRoleId,
+        params.agentId,
         true
       );
 
-      const newProductGroups = handleInitProducts(productGroups);
+      const newProductGroups = handleInitProducts(productGroups, params.roleId === UserLevel.Member);
       setProductGroups(newProductGroups);
 
       setOriginalGeneralInfo(generalInfo);
@@ -159,14 +160,15 @@ export function EditCustomerPage() {
   };
 
   const isIndirectUpdate = (params: Params) => {
-    if (
-      (params.uplineRoleId === UserLevel.Super || params.uplineRoleId === UserLevel.Master) &&
-      params.roleId === UserLevel.Member
-    ) {
-      return true;
+    const isDirectMember = params.agentId === -4 || params.agentId === -3;
+    if (isDirectMember) {
+      return params.uplineRoleId === UserLevel.Super && params.agentId === -3;
+    } else {
+      return (
+        (params.uplineRoleId === UserLevel.Super || params.uplineRoleId === UserLevel.Master) &&
+        params.roleId === UserLevel.Member
+      );
     }
-
-    return false;
   };
 
   const getCustomerSettingChange = (groupTypeId?: number) => {
@@ -496,6 +498,7 @@ export function EditCustomerPage() {
             isEditMode:
               !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
               AppConfigHelper.isEditBetSettingOnly(),
+            isDirectMember: params.agentId === -4 || params.agentId === -3,
           }}
         >
           <GroupSetting ref={groupSettingRef} />

@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-        <Version>1.0.1.11-AlphaPlus-01</Version>
-        <Authors>@Rome</Authors>
-        <Company>Nexcel</Company>
-        <Product>Fanex</Product>
-        <PackageReleaseNotes>Alpha Plus</PackageReleaseNotes>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="8.0.0" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <Version>1.0.1.11-AlphaPlus-05</Version>
+    <Authors>@Rome</Authors>
+    <Company>Nexcel</Company>
+    <Product>Fanex</Product>
+    <PackageReleaseNotes>Fix weird character with currency param.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+  </ItemGroup>
 </Project>

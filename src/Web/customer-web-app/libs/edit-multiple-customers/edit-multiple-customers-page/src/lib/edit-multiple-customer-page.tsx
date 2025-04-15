@@ -53,6 +53,7 @@ export function EditMultipleCustomerPage() {
         firstCustomerId,
         params.roleId,
         params.uplineRoleId,
+        params.agentId,
         true,
         '',
         true,
@@ -290,7 +291,7 @@ export function EditMultipleCustomerPage() {
         continue;
       }
 
-      if (settingTypes.some((s) => s == g.id) && (!id || id === g.id)) {
+      if (settingTypes.some((s) => s === g.id) && (!id || id === g.id)) {
         result += countSportChangedOfGroupType(g, id);
       }
     }
@@ -526,6 +527,7 @@ export function EditMultipleCustomerPage() {
               !(params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
               AppConfigHelper.isEditBetSettingOnly(),
             roleId: params.roleId,
+            isDirectMember: params.agentId === -3 || params.agentId === -4,
           }}
         >
           <GroupSetting ref={groupSettingRef} />
