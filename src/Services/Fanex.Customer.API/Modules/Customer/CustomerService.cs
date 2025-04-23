@@ -51,6 +51,8 @@ public interface ICustomerService
     Task<AccountInfo> GetAccountInfo(int custId);
 
     Task<Object> GetWinLossLimitInformation(GetProductCategoriesRequest request);
+
+    Task<int> CheckCashMember(int uplineCustId, string userName);
 }
 
 public class CustomerService : ICustomerService
@@ -405,5 +407,22 @@ public class CustomerService : ICustomerService
         };
 
         return jsonResponse;
+    }
+
+    public async Task<int> CheckCashMember(int uplineCustId, string userName)
+    {
+        if (uplineCustId > 0 && !string.IsNullOrWhiteSpace(userName))
+        {
+            var command = new CheckCashMemberCommand(uplineCustId, userName);
+            var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
+            if (!result.Any())
+            {
+                return 0;
+            }
+
+            return result.First().IsEnabled ? result.First().CustId : -1;
+        }
+
+        return 0;
     }
 }
