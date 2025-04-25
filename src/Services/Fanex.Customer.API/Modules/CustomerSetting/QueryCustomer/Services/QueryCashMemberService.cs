@@ -64,7 +64,7 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
         var generalInfo = new GeneralInfoForCashMember(generalInfoDto);
         ptStep = appSettings.IsSupportPT3Decimal(generalInfo.SiteLabel) ? 0.5M : 1M;
         isAllowUncheckAll = IsAllowUncheckAll(CustomerLevel.Member, generalInfo.Site, generalInfo.SiteLabel, appSettings);
-        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew);
+        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew, ServiceType.Cash);
 
         var customerSetting = new CashMemberSettingModel
         {
@@ -91,8 +91,7 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
         {
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
-            GroupTypes =
-            (((QueryCashMemberRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryCashMemberRequest)request, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, (QueryCashMemberRequest)request, isSiteLabel777, false))
+            GroupTypes = ((QueryCashMemberRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryCashMemberRequest)request, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, (QueryCashMemberRequest)request, isSiteLabel777, false)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
 

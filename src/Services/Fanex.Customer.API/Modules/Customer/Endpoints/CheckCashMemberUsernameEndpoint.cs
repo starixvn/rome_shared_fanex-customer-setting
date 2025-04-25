@@ -9,7 +9,7 @@ public class CheckCashMemberUsernameEndpoint : IEndpoint<int, int, string, ICust
         app.MapGet("/api/customer/{uplineCustId}/check-cash-member/{userName}", (int uplineCustId, string userName, ICustomerService customerService)
             => HandleAsync(uplineCustId, userName, customerService))
             .Produces<int>()
-            .WithTags("Cash Member");
+            .WithTags("Cash Service");
     }
 
     public async Task<int> HandleAsync(int uplineCustId, string userName, ICustomerService customerService)
