@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Functions>
-    <Function Name="Register Cash Member">
-        <Setting Key="RegisterCashMember" SpName="RegisterCashMember" DbName="DBCUST.CustDB.asv_cust" />
-    </Function>
-</Functions>
