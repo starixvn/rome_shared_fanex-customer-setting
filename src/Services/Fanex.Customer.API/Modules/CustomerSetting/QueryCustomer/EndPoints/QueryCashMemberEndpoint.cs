@@ -11,7 +11,7 @@ public class QueryCashMemberEndpoint : IEndpoint<IResult, QueryCashMemberRequest
     {
         app.MapGet("/api/customer/cash-member", ([AsParameters] QueryCashMemberRequest request, IQueryCashMemberService service)
             => HandleAsync(request, service))
-            .Produces<CustomerSettingModel>().WithTags("Customer Settings");
+            .Produces<CustomerSettingModel>().WithTags("Cash Service");
     }
 
     public async Task<IResult> HandleAsync(QueryCashMemberRequest request, IQueryCashMemberService service)
