@@ -230,7 +230,7 @@
 		<Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-		<Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />

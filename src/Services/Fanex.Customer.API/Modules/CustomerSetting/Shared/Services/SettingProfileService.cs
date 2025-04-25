@@ -8,7 +8,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
 public class SettingProfileService : ISettingProfileService
 {
-    private const int CacheDurationInHour = 24;
+    private const int CacheDurationInHour = 0;
 
     private readonly IDynamicRepository dynamicRepository;
 
@@ -49,5 +49,5 @@ public class SettingProfileService : ISettingProfileService
 
     private async Task<IEnumerable<SettingProfile>> GetSettingProfile(byte systemId, string site, int currency, ProfileMode mode, ServiceType serviceType = ServiceType.Credit)
         => await dynamicRepository.FetchAsync<SettingProfile>(
-            new GetSettingProfileCriteria(appSettings.SettingStatus, site, currency, systemId, (byte)mode));
+            new GetSettingProfileCriteria(appSettings.SettingStatus, site, currency, systemId, (byte)mode, (byte)serviceType));
 }
