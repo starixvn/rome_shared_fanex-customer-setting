@@ -132,7 +132,6 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
             while (reader.Read())
             {
                 CommissionGroup item = MappingData(reader, roleId, uplineRoleId, agentId);
-
                 result.Add(item);
             }
 

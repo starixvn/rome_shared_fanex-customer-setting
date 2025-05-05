@@ -57,12 +57,5 @@ public class GeneralInfoForCashMember
 
     public int Currency { get; set; }
 
-    public IEnumerable<BankInfoDTO> Banks { get; set; } = new List<BankInfoDTO>();
-}
-
-public class BankInfoDTO
-{
     public int BankId { get; set; }
-    public string BankName { get; set; }
-    public string LogoUrl { get; set; }
 }
