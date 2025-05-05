@@ -15,18 +15,18 @@ using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
-public interface IQueryCashMemberService
+public interface IQueryCashCustomerService
 {
-    Task<CashMemberSettingModel> Query(QueryCashMemberRequest request);
+    Task<CashMemberSettingModel> Query(QueryCashCustomerRequest request);
 }
 
-public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMemberService
+public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCustomerService
 {
     private readonly ICustomerService customerService;
 
     private readonly ISiteDBGroupService siteDBGroupService;
 
-    public QueryCashMemberService(
+    public QueryCashCustomerService(
         ICustomerService customerService,
         ISiteDBGroupService siteDBGroupService,
         IDynamicRepository dynamicRepository,
@@ -58,12 +58,12 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
         return false;
     }
 
-    public async Task<CashMemberSettingModel> Query(QueryCashMemberRequest request)
+    public async Task<CashMemberSettingModel> Query(QueryCashCustomerRequest request)
     {
         var generalInfoDto = await GetGeneralInfo(request);
         var generalInfo = new GeneralInfoForCashMember(generalInfoDto);
         ptStep = appSettings.IsSupportPT3Decimal(generalInfo.SiteLabel) ? 0.5M : 1M;
-        isAllowUncheckAll = IsAllowUncheckAll(CustomerLevel.Member, generalInfo.Site, generalInfo.SiteLabel, appSettings);
+        isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, generalInfo.SiteLabel, appSettings);
         var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew, ServiceType.Cash);
 
         var customerSetting = new CashMemberSettingModel
@@ -75,7 +75,7 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
         return customerSetting;
     }
 
-    private async Task<GeneralInformationDTO> GetGeneralInfo(QueryCashMemberRequest request)
+    private async Task<GeneralInformationDTO> GetGeneralInfo(QueryCashCustomerRequest request)
         => await dynamicRepository.GetAsync<GeneralInformationDTO>(request.IsGetUpline
             ? new GetGeneralInfoForEditCriteria(request.CustId, request.SystemId)
             : new GetAgentCriteria(request.CustId, appSettings.SettingStatus, CustomerLevel.Agent));
@@ -91,13 +91,13 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
         {
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
-            GroupTypes = ((QueryCashMemberRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryCashMemberRequest)request, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, (QueryCashMemberRequest)request, isSiteLabel777, false)
+            GroupTypes = ((QueryCashCustomerRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryCashCustomerRequest)request, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, (QueryCashCustomerRequest)request, isSiteLabel777, false)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
 
     private IEnumerable<GroupType> GetGroupTypes(
         IGrouping<int, SettingProfile> g,
-        QueryCashMemberRequest request,
+        QueryCashCustomerRequest request,
         bool isSiteLabel777,
         bool isDirectMember)
     {
@@ -140,7 +140,7 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
 
     private IEnumerable<GroupType> GetGroupTypesForEdit(
         IGrouping<int, SettingProfile> g,
-        QueryCashMemberRequest request,
+        QueryCashCustomerRequest request,
         bool isSiteLabel777,
         GeneralInfoForCashMember generalInfo,
         bool isDirectMember)
@@ -192,7 +192,7 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
         }).ToEnumerable().ToList(); // Must use ToList to prevent call SP 2 times because of Any method in the next action.
     }
 
-    private bool IsReadOnlyGroupType(QueryCashMemberRequest request, int groupTypeId)
+    private bool IsReadOnlyGroupType(QueryCashCustomerRequest request, int groupTypeId)
     {
         if ((request.SystemId == Systems.EXT || request.SystemId == Systems.EXTY7) && request.RoleId == CustomerLevel.Super)
         {
@@ -202,7 +202,7 @@ public class QueryCashMemberService : BaseQueryCustomerService, IQueryCashMember
         return IsCrossline(request) && !helperService.IsPTGroupType(groupTypeId);
     }
 
-    private bool IsCrossline(QueryCashMemberRequest request)
+    private bool IsCrossline(QueryCashCustomerRequest request)
     {
         return request.UplineRoleId - request.RoleId > 1;
     }

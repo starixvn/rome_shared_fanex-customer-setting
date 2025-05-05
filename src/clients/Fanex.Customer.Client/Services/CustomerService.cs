@@ -41,6 +41,8 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName = "", bool isCopy = false, int? agentId = null);
 
+        Task<string> GetCashCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "");
+
         Task<string> CreateCustomer(CreateCustomerParam param);
 
         Task<string> UpdateCustomer(UpdateCustomerParam param);
@@ -219,6 +221,9 @@ namespace Fanex.Customer.Client.Services
         public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName = "", bool isCopy = false, int? agentId = 0)
             => httpClient.GetStringAsync($"customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}&IsMultipleMode={isMultipleMode}&GroupName={groupName}&IsCopy={isCopy}&AgentId={agentId}");
 
+        public Task<string> GetCashCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "")
+            => httpClient.GetStringAsync($"cash-customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}");
+
         public Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username)
             => httpClient.GetAsJsonAsync<Downline>($"customer/{custId}/{subAccountId}/downlines/{username}");
 
@@ -266,6 +271,15 @@ namespace Fanex.Customer.Client.Services
 
         public Task<int> CheckDirectMemberUserName(int uplineCustId, string userName)
             => httpClient.GetAsJsonAsync<int>($"customer/{uplineCustId}/check-exist-direct-member/{userName}");
+
+        public Task<string> GetSuggestCashMemberUsername(string uplineUsername)
+            => httpClient.GetAsJsonAsync<string>($"customer/{uplineUsername}/suggest-cash-member-username");
+
+        public Task<IEnumerable<SuggestDirectMember>> SearchSuggestCashMembers(int uplineCustId, string searchUserName)
+            => httpClient.GetAsJsonAsync<IEnumerable<SuggestDirectMember>>($"customer/{uplineCustId}/suggest-cash-members/{searchUserName}");
+
+        public Task<int> CheckCashMemberUserName(int uplineCustId, string userName)
+            => httpClient.GetAsJsonAsync<int>($"customer/{uplineCustId}/check-exist-cash-member/{userName}");
 
         public Task<bool> IsCustomerEnabled(int custId)
             => httpClient.GetAsJsonAsync<bool>($"customer/{custId}/IsEnabled");

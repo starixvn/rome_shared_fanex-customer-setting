@@ -4,7 +4,7 @@ public class SuggestDirectMember
 {
     public SuggestDirectMember()
     { }
-    
+
     public SuggestDirectMember(string userName, string firstName, string lastName, string userName2, int custId)
     {
         UserName = userName;
@@ -24,3 +24,6 @@ public class SuggestDirectMember
 
     public int CustId { get; }
 }
+
+public class SuggestCashMember : SuggestDirectMember
+{ }

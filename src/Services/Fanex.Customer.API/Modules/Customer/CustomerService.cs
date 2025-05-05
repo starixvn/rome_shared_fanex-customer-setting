@@ -24,8 +24,15 @@ public interface ICustomerService
     Task<Result> GetSuggestDirectMemberUsername(string uplineUserName);
 
     Task<IEnumerable<SuggestDirectMember>> SearchSuggestionDirectMember(int uplineCustId, string searchUserName);
+    
     Task<int> CheckExistDirectMember(int uplineCustId, string userName);
 
+    Task<Result> GetSuggestCashMemberUsername(string uplineUserName);
+
+    Task<IEnumerable<SuggestCashMember>> SearchSuggestionCashMember(int uplineCustId, string searchUserName);
+    
+    Task<int> CheckExistCashMember(int uplineCustId, string userName);
+    
     Task<bool> CheckExistedCustomer(string username);
 
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
@@ -51,8 +58,6 @@ public interface ICustomerService
     Task<AccountInfo> GetAccountInfo(int custId);
 
     Task<Object> GetWinLossLimitInformation(GetProductCategoriesRequest request);
-
-    Task<int> CheckCashMember(int uplineCustId, string userName);
 }
 
 public class CustomerService : ICustomerService
@@ -110,6 +115,31 @@ public class CustomerService : ICustomerService
         var command = new CheckExistDirectMemberUsernameCommand(uplineCustId, userName);
         var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
         if (!result.Any())
+        {
+            return 0;
+        }
+
+        return result.First().IsEnabled ? result.First().CustId : -1;
+    }
+
+    public async Task<Result> GetSuggestCashMemberUsername(string uplineUserName)
+    {
+        var command = new GetSuggestCashMemberUsernameCommand(uplineUserName);
+        await dynamicRepository.ExecuteAsync(command);
+        return new Result(command.ErrCode, command.ErrMsg, command.SeqName);
+    }
+
+    public async Task<IEnumerable<SuggestCashMember>> SearchSuggestionCashMember(int uplineCustId, string searchUserName)
+    {
+        var command = new SearchSuggestionCashMemberCriteria(uplineCustId, searchUserName);
+        return await dynamicRepository.FetchAsync<SuggestCashMember>(command);
+    }
+
+    public async Task<int> CheckExistCashMember(int uplineCustId, string userName)
+    {
+        var command = new CheckExistCashMemberUsernameCommand(uplineCustId, userName);
+        var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
+        if(!result.Any())
         {
             return 0;
         }
@@ -407,22 +437,5 @@ public class CustomerService : ICustomerService
         };
 
         return jsonResponse;
-    }
-
-    public async Task<int> CheckCashMember(int uplineCustId, string userName)
-    {
-        if (uplineCustId > 0 && !string.IsNullOrWhiteSpace(userName))
-        {
-            var command = new CheckCashMemberCommand(uplineCustId, userName);
-            var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
-            if (!result.Any())
-            {
-                return 0;
-            }
-
-            return result.First().IsEnabled ? result.First().CustId : -1;
-        }
-
-        return 0;
     }
 }

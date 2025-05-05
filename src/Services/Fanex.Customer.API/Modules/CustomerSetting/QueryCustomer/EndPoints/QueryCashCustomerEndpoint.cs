@@ -5,16 +5,16 @@ using MinimalApi.Endpoint;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.EndPoints;
 
-public class QueryCashMemberEndpoint : IEndpoint<IResult, QueryCashMemberRequest, IQueryCashMemberService>
+public class QueryCashCustomerEndpoint : IEndpoint<IResult, QueryCashCustomerRequest, IQueryCashCustomerService>
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/cash-member", ([AsParameters] QueryCashMemberRequest request, IQueryCashMemberService service)
+        app.MapGet("/api/cash-customer", ([AsParameters] QueryCashCustomerRequest request, IQueryCashCustomerService service)
             => HandleAsync(request, service))
             .Produces<CustomerSettingModel>().WithTags("Cash Service");
     }
 
-    public async Task<IResult> HandleAsync(QueryCashMemberRequest request, IQueryCashMemberService service)
+    public async Task<IResult> HandleAsync(QueryCashCustomerRequest request, IQueryCashCustomerService service)
     {
         if (string.IsNullOrWhiteSpace(request.Language))
         {

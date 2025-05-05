@@ -1,8 +1,6 @@
-using Fanex.Customer.API.Shared.Constants;
-
 namespace Fanex.Customer.API.Modules.QueryCustomer.Requests;
 
-public class QueryCashMemberRequest : BaseQueryRequest
+public class QueryCashCustomerRequest : BaseQueryRequest
 {
     public int CustId { get; set; }
 

@@ -6,7 +6,7 @@ public class CheckCashMemberUsernameEndpoint : IEndpoint<int, int, string, ICust
 {
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/customer/{uplineCustId}/check-cash-member/{userName}", (int uplineCustId, string userName, ICustomerService customerService)
+        app.MapGet("/api/customer/{uplineCustId}/check-exist-cash-member/{userName}", (int uplineCustId, string userName, ICustomerService customerService)
             => HandleAsync(uplineCustId, userName, customerService))
             .Produces<int>()
             .WithTags("Cash Service");
@@ -16,7 +16,7 @@ public class CheckCashMemberUsernameEndpoint : IEndpoint<int, int, string, ICust
     {
         if (uplineCustId > 0 && !string.IsNullOrWhiteSpace(userName))
         {
-            return await customerService.CheckCashMember(uplineCustId, userName);
+            return await customerService.CheckExistCashMember(uplineCustId, userName);
         }
 
         return 0;
