@@ -32,5 +32,7 @@ export interface GeneralInfo {
     discount: number;
     name: string;
   }[];
+  bankId?: string;
+  bankAccountNumber?: string;
 }
 export type UserInformation = Pick<GeneralInfo, 'firstName' | 'lastName' | 'phone' | 'mobilePhone' | 'fax'>;

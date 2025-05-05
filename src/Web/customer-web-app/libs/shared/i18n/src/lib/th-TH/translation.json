@@ -192,5 +192,9 @@
   "CompactCopy": "คัดลอกแบบรวบรัด",
   "IndividualCopy": "คัดลอกรายบุคคล",
   "NoOfAccountCreatedFailed": "สร้างไม่สำเร็จ {{noOfFailedAccounts}} บัญชี",
-  "FailureReason": "สาเหตุที่ไม่สำเร็จ"
+  "FailureReason": "สาเหตุที่ไม่สำเร็จ",
+  "BankInfo": "ข้อมูลธนาคาร",
+  "Bank": "ธนาคาร",
+  "AccountNumber": "หมายเลขบัญชี",
+  "ThisUserIsNotYourCashMember": "ผู้ใช้งานนี้ไม่ใช่สมาชิกเงินสดของคุณ"
 }

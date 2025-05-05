@@ -16,7 +16,7 @@ import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
     GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
-import { DirectMemberGeneralInformation } from '@customer-web-app/shared-general-information-ui';
+import { CashMemberGeneralInformation } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import {
@@ -218,7 +218,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
       </div>
     );
   };
-
+  console.log("Create Cash Member Page",generalInfo)
   return (
     <>
       {isLoading && <BlockUI />}
@@ -239,7 +239,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
           ) : (
             <ErrorBlock error={createCustomerResult} />
           ))}
-        <DirectMemberGeneralInformation
+        <CashMemberGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
           onGeneralInfoChange={handleGeneralInfoChange}

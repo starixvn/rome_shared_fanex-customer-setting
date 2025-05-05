@@ -192,5 +192,9 @@
   "CompactCopy": "簡潔複製",
   "IndividualCopy": "单一複製",
   "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} 賬號創建失敗",
-  "FailureReason": "失敗原因"
+  "FailureReason": "失敗原因",
+  "BankInfo": "銀行信息",
+  "Bank": "銀行",
+  "AccountNumber": "賬號",
+  "ThisUserIsNotYourCashMember": "此用戶不是您的現金會員"
 }
