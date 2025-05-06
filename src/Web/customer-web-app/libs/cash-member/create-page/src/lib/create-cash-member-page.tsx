@@ -73,7 +73,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { generalInfo, productGroups } = await SettingService.GetCustomerSetting(
+      const { generalInfo, productGroups } = await SettingService.GetCashCustomerSetting(
         params.uplineId,
         params.uplineRoleId,
         0,
@@ -140,7 +140,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
 
   const handleSelectDirectMember = async (custId: number) => {
     setIsLoading(true);
-    const { productGroups, group } = await SettingService.GetCustomerSetting(
+    const { productGroups, group } = await SettingService.GetCashCustomerSetting(
       custId,
       UserLevel.Member,
       params.uplineRoleId,

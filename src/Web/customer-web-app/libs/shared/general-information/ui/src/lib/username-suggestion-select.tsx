@@ -125,16 +125,17 @@ const customStyles: StylesConfig<UsernameSuggestionOption> = {
 };
 
 interface Props {
+  id: string;
   value: string;
   onChange: (newValue: SingleValue<UsernameSuggestionOption>) => void;
   onInputChange: (newValue: string, actionMeta: InputActionMeta) => void;
 }
 
-export default function UsernameSuggestionSelect({ value, onChange, onInputChange }: Props) {
+export default function UsernameSuggestionSelect({ id, value, onChange, onInputChange }: Props) {
   const { t } = useTranslation();
   return (
     <AsyncSelect
-      id="selectedDirectMember"
+      id={id}
       inputValue={value}
       loadOptions={promiseOptions}
       components={{ Option, Input, SingleValue: () => null, Placeholder: () => null }}

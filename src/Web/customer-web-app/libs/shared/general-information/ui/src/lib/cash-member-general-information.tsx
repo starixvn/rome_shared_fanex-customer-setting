@@ -18,7 +18,7 @@ import AvailableCreditNote from './available-credit-note';
 import { errorTooltip } from './common';
 import CopySettingFromNote from './copy-setting-from-note';
 import CreditRange from './credit-range';
-import DirectMemberGeneralInformationValidator from './direct-member-general-information-validator';
+import CashMemberGeneralInformationValidator from './cash-member-general-information-validator';
 import { GeneralInformationProps } from './general-information';
 import { generalInformationValidatorFields, validateMaxCredit } from './general-information-validator';
 import styles from './general-information.module.scss';
@@ -29,7 +29,6 @@ import UserInfo from './user-info';
 import Username from './username-field';
 import UsernameSuggestionSelect, { UsernameSuggestionOption } from './username-suggestion-select';
 import { BankInfomation } from './bank-info';
-import CashMemberGeneralInformationValidator from './cash-member-general-information-validator';
 
 function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
   const maxCredits: Record<UserLevel, validateMaxCredit> = {
@@ -43,17 +42,17 @@ function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
 }
 
 export interface CashMemberGeneralInformationProps extends GeneralInformationProps {
-  onSelectDirectMember: (custId: number) => void;
+  onSelectCashMember: (custId: number) => void;
   numberOfAccounts: number;
   setNumberOfAccounts: (value: number) => void;
 }
 
-let selectedDirectMember = '';
+let selectedCashMember = '';
 let selectedValue = '';
 
 export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMemberGeneralInformationProps>(
   function CashMemberGeneralInformation(
-    { generalInfo, onGeneralInfoChange, children, onSelectDirectMember, numberOfAccounts, setNumberOfAccounts },
+    { generalInfo, onGeneralInfoChange, children, onSelectCashMember, numberOfAccounts, setNumberOfAccounts },
     ref
   ) {
     const [collapse, setCollapse] = useState(true);
@@ -69,7 +68,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
       const validate = async () => {
         const validator = new CashMemberGeneralInformationValidator(
           generalInfo,
-          selectedDirectMember
+          selectedCashMember
         );
         let validateResult = true;
         const validateItemResult = await validator.validateAllRules();
@@ -102,7 +101,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
     const validateGeneralInfo = async (property: generalInformationValidatorFields, data?: Partial<GeneralInfo>) => {
       const validator = new CashMemberGeneralInformationValidator(
         { ...generalInfo, ...data },
-        selectedDirectMember
+        selectedCashMember
       );
       const result = await validator.validateField(property);
       return result;
@@ -111,10 +110,10 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
     const getErrorByField = (fieldName: string) =>
       validationResults[fieldName] && validationResults[fieldName] !== true;
 
-    const handleCheckIsDirectMember = async (username: string) => {
-      const custId = await SettingService.GetDirectMember(username);
+    const handleCheckIsCashMember = async (username: string) => {
+      const custId = await SettingService.GetCashMember(username);
       if (custId > 0) {
-        onSelectDirectMember(custId);
+        onSelectCashMember(custId);
         setValidationResults({
           ...validationResults,
           selectedCashMember: true,
@@ -132,30 +131,30 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
 
     const handleUserSuggestionInputChange = async (newValue: SingleValue<UsernameSuggestionOption>) => {
       if (newValue) {
-        setLocationTooltip('selectedDirectMember');
+        setLocationTooltip('selectedCashMember');
         const selectedUsername = newValue.value;
         setValue(selectedUsername);
         selectedValue = selectedUsername;
-        selectedDirectMember = selectedUsername;
-        await handleCheckIsDirectMember(selectedUsername);
+        selectedCashMember = selectedUsername;
+        await handleCheckIsCashMember(selectedUsername);
       }
     };
 
     const handleInputChange = async (newValue: string, { action }: InputActionMeta) => {
       if (action === 'input-change') {
-        setLocationTooltip('selectedDirectMember');
+        setLocationTooltip('selectedCashMember');
         setValue(newValue);
         selectedValue = newValue;
         if (!newValue) {
-          selectedDirectMember = '';
-          setValidationResults({ ...validationResults, selectedDirectMember: true });
+          selectedCashMember = '';
+          setValidationResults({ ...validationResults, selectedCashMember: true });
         }
       }
 
       if (action === 'input-blur') {
-        if (selectedValue && selectedValue !== selectedDirectMember) {
-          selectedDirectMember = selectedValue;
-          await handleCheckIsDirectMember(selectedValue);
+        if (selectedValue && selectedValue !== selectedCashMember) {
+          selectedCashMember = selectedValue;
+          await handleCheckIsCashMember(selectedValue);
         }
       }
     };
@@ -176,12 +175,13 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
             >
               <div>
                 <UsernameSuggestionSelect
+                  id="selectedCashMember"
                   value={value}
                   onChange={handleUserSuggestionInputChange}
                   onInputChange={handleInputChange}
                 />
-                {validationResults['selectedDirectMember'] !== undefined && (
-                  <span>{getErrorByField('selectedDirectMember') ? <IconWrong /> : <IconCorrect />}</span>
+                {validationResults['selectedCashMember'] !== undefined && (
+                  <span>{getErrorByField('selectedCashMember') ? <IconWrong /> : <IconCorrect />}</span>
                 )}
               </div>
             </BlockItem>

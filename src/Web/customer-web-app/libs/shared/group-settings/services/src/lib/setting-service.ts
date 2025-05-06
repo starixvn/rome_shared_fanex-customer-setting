@@ -3,7 +3,7 @@ import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/share
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import { CurrentWinLossAmount, ProductGroup } from '@customer-web-app/shared-group-settings-types';
-import axios from 'axios';
+import { CashMemberSettingService } from './cash-member-setting-service';
 
 export interface GroupSettingsResponse {
   generalInfo: GeneralInfo;
@@ -259,22 +259,12 @@ export const SettingService = {
     );
     return response.data;
   },
+
   GetDirectMember: async (username: string) => {
     const response = await axiosInstance.get(
       `Customer/CheckDirectMemberUserName?searchUsername=${username}&uplineCustId=${params.uplineId}`
     );
     return response.data;
   },
-  GetCashMember: async (username: string) => {
-    const response = await axiosInstance.get(
-      `Customer/CheckCashMemberUserName?searchUsername=${username}&uplineCustId=${params.uplineId}`
-    );
-    return response.data;
-  },
-  GetBanks: async () => {
-    const response = await axios.get("/cash-service/Payments/GetBanksByTransactionType", {
-      baseURL: "http://localhost:5100",
-    });
-    return response.data;
-  },
+  ...CashMemberSettingService,
 };

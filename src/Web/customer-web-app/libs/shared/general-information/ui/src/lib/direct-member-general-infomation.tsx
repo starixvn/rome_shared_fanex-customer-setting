@@ -177,6 +177,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
             >
               <div>
                 <UsernameSuggestionSelect
+                  id="selectedDirectMember"
                   value={value}
                   onChange={handleUserSuggestionInputChange}
                   onInputChange={handleInputChange}
