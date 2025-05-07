@@ -66,10 +66,12 @@ public class CopyCustomerService : PasswordServiceBase, ICopyCustomerService
         var index = 0;
         var retryLoop = 0;
         var usernames = new List<string>();
+        var originalPassword = request.Password;
 
         do
         {
             var suggestUsernameResult = Result.CreateSuccess();
+            request.Password = originalPassword;
             var result = await CopyCustomer(request);
             if (result.IsSuccessful)
             {
