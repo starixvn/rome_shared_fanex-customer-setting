@@ -1,9 +1,9 @@
-import {GeneralInfo, UserInformation} from "@customer-web-app/shared-general-information-state";
-import {useTranslation} from "react-i18next";
+import { GeneralInfo, UserInformation } from "@customer-web-app/shared-general-information-state";
+import { useTranslation } from "react-i18next";
 import styles from "./general-information.module.scss";
 import classNames from "classnames";
-import {BlockItem} from "@customer-web-app/shared/base/block";
-import {WrapperTooltip} from "@customer-web-app/wrapper-tooltip";
+import { BlockItem } from "@customer-web-app/shared/base/block";
+import { WrapperTooltip } from "@customer-web-app/wrapper-tooltip";
 import { Mobifone } from './mobifone';
 
 type GeneralInfoProps = keyof GeneralInfo;
@@ -22,8 +22,8 @@ interface FieldConfig {
 }
 
 
-function CashUserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collapse, isReadOnly=false, userInformationFields}: UserInfoProps) {
-  const {t} = useTranslation();
+function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, collapse, isReadOnly = false, userInformationFields }: UserInfoProps) {
+  const { t } = useTranslation();
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
 
   const renderField = (config: FieldConfig) => {
@@ -38,8 +38,6 @@ function CashUserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collap
         return (
           <div className={styles['mobile-phone-container']}>
             <Mobifone
-              countryCode={generalInfo.countryCode || ''}
-              onChangeCountryCode={(code) => handleGeneralInfoChange('countryCode', code)}
               phoneNumber={generalInfo.phone || ''}
               onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange('phone', phoneNumber)}
             />
@@ -61,7 +59,7 @@ function CashUserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collap
     <div className={styles['user-info']}>
       <div className={styles['subheader']} onClick={() => setCollapse(!collapse)}>
         <span
-          className={classNames('ic-arrow-down', {toggle: collapse})}
+          className={classNames('ic-arrow-down', { toggle: collapse })}
           data-tooltip-id="userInfo"
           data-tooltip-content={tooltipContent}
         ></span>
