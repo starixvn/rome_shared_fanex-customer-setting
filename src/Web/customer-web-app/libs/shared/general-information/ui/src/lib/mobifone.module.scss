@@ -1,0 +1,16 @@
+.phoneCode {
+  padding: 0;
+  max-width: 50px;
+  text-indent: 3px;
+  background: var(--bg-username-select);
+  border-radius: 3px 0 0 3px;
+  box-shadow: none;
+}
+
+.phoneNumber {
+  width: 100px !important;
+  border-left: none !important;
+  border-radius: 0 3px 3px 0 !important;
+  background: transparent !important;
+  padding: 0;
+}

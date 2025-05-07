@@ -138,7 +138,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
     productGroupsDispatch({ type: ProductGroupsActionTypes.Update, payload: newProductGroups });
   };
 
-  const handleSelectDirectMember = async (custId: number) => {
+  const handleSelectCashMember = async (custId: number) => {
     setIsLoading(true);
     const { productGroups, group } = await SettingService.GetCashCustomerSetting(
       custId,
@@ -243,7 +243,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
           ref={generalInfoRef}
           generalInfo={generalInfo}
           onGeneralInfoChange={handleGeneralInfoChange}
-          onSelectDirectMember={handleSelectDirectMember}
+          onSelectCashMember={handleSelectCashMember}
           numberOfAccounts={numberOfAccounts}
           setNumberOfAccounts={setNumberOfAccounts}
         />

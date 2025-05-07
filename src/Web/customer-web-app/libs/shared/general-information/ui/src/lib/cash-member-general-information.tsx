@@ -1,34 +1,29 @@
 import classNames from 'classnames';
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NumericFormat } from 'react-number-format';
 import { InputActionMeta, SingleValue } from 'react-select';
 
 import { ValidationRefType, ValidationResult } from '@customer-web-app/share-models';
-import { MaxNumberInputLength, SystemIds, UserLevel } from '@customer-web-app/shared-constants';
+import { SystemIds, UserLevel } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
-import { AppConfigHelper, NumberHelper } from '@customer-web-app/shared-helpers';
+import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/block';
 import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
-import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
-import AvailableCreditNote from './available-credit-note';
 import { errorTooltip } from './common';
 import CopySettingFromNote from './copy-setting-from-note';
-import CreditRange from './credit-range';
 import CashMemberGeneralInformationValidator from './cash-member-general-information-validator';
 import { GeneralInformationProps } from './general-information';
 import { generalInformationValidatorFields, validateMaxCredit } from './general-information-validator';
 import styles from './general-information.module.scss';
-import NoOfAccounts from './no-of-accounts';
 import { PasswordField } from './password-field';
 import PasswordRule from './password-rule';
-import UserInfo from './user-info';
 import Username from './username-field';
 import UsernameSuggestionSelect, { UsernameSuggestionOption } from './username-suggestion-select';
 import { BankInfomation } from './bank-info';
+import CashUserInfo from './cash-user-info';
 
 function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
   const maxCredits: Record<UserLevel, validateMaxCredit> = {
@@ -278,7 +273,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
             onChangeBankAccountNumber={bankAccountNumber => onGeneralInfoChange?.({ bankAccountNumber: bankAccountNumber })}
           />
 
-          <UserInfo
+          <CashUserInfo
             generalInfo={generalInfo}
             handleGeneralInfoChange={(fieldName, value) => {
               const data = { [fieldName]: value };
@@ -286,6 +281,12 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
             }}
             setCollapse={setCollapse}
             collapse={collapse}
+            userInformationFields={[
+              { field: 'firstName' },
+              { field: 'lastName' },
+              { field: 'phone' , component: 'phoneWithCountryCode' },
+              { field: 'fax' },
+            ]}
           />
         </div>
         {errorTooltip(locationTooltip, validationResults, t)}

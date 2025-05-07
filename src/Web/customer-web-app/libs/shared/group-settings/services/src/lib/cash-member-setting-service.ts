@@ -25,6 +25,12 @@ export const CashMemberSettingService = {
         });
         return response.data;
     },
+    GetCountryCodes: async () => {
+        const response = await axios.get("/cash-service/Payments/GetCountryCodes", {
+            baseURL: "http://localhost:5100",
+        });
+        return response.data;
+    },
     GetCashCustomerSetting: async (
         custId: number,
         roleId: number,
