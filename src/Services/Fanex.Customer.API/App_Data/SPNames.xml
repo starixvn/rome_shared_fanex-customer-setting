@@ -430,7 +430,4 @@
 	<Function Name="Update User Search">
 		<Setting Key="Acc_CustomerUpdUserSearch" SpName="Acc_CustomerUpdUserSearch" DbName="DBCust.CustDB.wsv_alp" />
 	</Function>
-	<Function Name="Cash Member">
-		<Setting Key="Age_CustomerSearch_CashMember" SpName="Age_CustomerSearch_CashMember" DbName="DBCust.CustDB.wsv_nap" />
-	</Function>
 </Functions>

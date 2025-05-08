@@ -29,6 +29,12 @@ namespace Fanex.Customer.Client.Services
 
         Task<int> CheckDirectMemberUserName(int uplineCustId, string userName);
 
+        Task<string> GetSuggestCashMemberUsername(string uplineUsername);
+
+        Task<IEnumerable<SuggestDirectMember>> SearchSuggestCashMembers(int uplineCustId, string searchUserName);
+
+        Task<int> CheckCashMemberUserName(int uplineCustId, string userName);
+
         Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
 
         Task<CopyCustomerResult> CopyCustomer(CopyCustomerParam param);
