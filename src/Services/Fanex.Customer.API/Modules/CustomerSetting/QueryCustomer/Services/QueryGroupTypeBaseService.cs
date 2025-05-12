@@ -15,6 +15,7 @@ using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType155;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType156;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType158;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType160;
+using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType162;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data;
 using Fanex.Data.Repository;
@@ -47,9 +48,9 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
 {
     protected readonly Dictionary<int, dynamic> criteriaMapping;
 
-    private readonly IDynamicRepository dynamicRepository;
+    protected readonly IDynamicRepository dynamicRepository;
 
-    private readonly AppSettings appSettings;
+    protected readonly AppSettings appSettings;
 
     protected readonly ICustomerSettingHelper helperService;
 
@@ -229,6 +230,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
             GroupTypes.ProductStatus => new GetProductStatusCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.StakeLevel => new GetStakeLevelCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.WinlossLimit => new GetWinlossLimitCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
+            GroupTypes.PotentialWinLimit => new GetPotentialWinLimitCriteria(custId, appSettings.SettingStatus),
             _ => null
         };
     }

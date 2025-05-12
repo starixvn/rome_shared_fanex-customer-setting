@@ -25,7 +25,7 @@ public interface ICustomerService
 
     Task<IEnumerable<SuggestDirectMember>> SearchSuggestionDirectMember(int uplineCustId, string searchUserName);
     Task<int> CheckExistDirectMember(int uplineCustId, string userName);
-    
+
     Task<bool> CheckExistedCustomer(string username);
 
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
@@ -37,6 +37,8 @@ public interface ICustomerService
     Task<List<PTSettingInfo>> GetPTSettingInfo(GetPTSettingInformationRequest request);
 
     Task<IEnumerable<CurrentWinLossAmount>> GetCurrentWinLossAmount(GetCurrentWinLossAmountRequest request);
+
+    Task<IEnumerable<CurrentPotentialWinLimitAmount>> GetCurrentPotentialWinLimitAmount(GetCurrentWinLossAmountRequest request);
 
     Task<Object> GetProductCategories(GetProductCategoriesRequest request);
 
@@ -107,7 +109,7 @@ public class CustomerService : ICustomerService
     {
         var command = new CheckExistDirectMemberUsernameCommand(uplineCustId, userName);
         var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
-        if(!result.Any())
+        if (!result.Any())
         {
             return 0;
         }
@@ -190,6 +192,9 @@ public class CustomerService : ICustomerService
 
         return result;
     }
+
+    public async Task<IEnumerable<CurrentPotentialWinLimitAmount>> GetCurrentPotentialWinLimitAmount(GetCurrentWinLossAmountRequest request)
+    => await dynamicRepository.FetchAsync<CurrentPotentialWinLimitAmount>(new GetCurrentPotentialWinLimitAmountCriteria(request.CustId));
 
     public async Task<Object> GetProductCategories(GetProductCategoriesRequest request)
     {
