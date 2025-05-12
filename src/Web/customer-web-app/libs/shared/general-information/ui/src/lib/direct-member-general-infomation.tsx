@@ -27,7 +27,7 @@ import { PasswordField } from './password-field';
 import PasswordRule from './password-rule';
 import UserInfo from './user-info';
 import Username from './username-field';
-import UsernameSuggestionSelect, { UsernameSuggestionOption } from './username-suggestion-select';
+import UsernameSuggestionSelect, { UsernameSuggestionOption, getDirectMemberPromiseOptions } from './username-suggestion-select';
 
 function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
   const maxCredits: Record<UserLevel, validateMaxCredit> = {
@@ -181,6 +181,7 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
                   value={value}
                   onChange={handleUserSuggestionInputChange}
                   onInputChange={handleInputChange}
+                  promiseOptions={getDirectMemberPromiseOptions}
                 />
                 {validationResults['selectedDirectMember'] !== undefined && (
                   <span>{getErrorByField('selectedDirectMember') ? <IconWrong /> : <IconCorrect />}</span>

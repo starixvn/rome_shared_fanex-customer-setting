@@ -47,7 +47,7 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
         return (
           <input
             type="text"
-            maxLength={50}
+            maxLength={40}
             value={generalInfo[field] || ''}
             onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
           />

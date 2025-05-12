@@ -11,7 +11,7 @@ export interface UsernameSuggestionOption extends UsernameSuggestion {
   value: string;
 }
 
-const promiseOptions = async (inputValue: string): Promise<UsernameSuggestionOption[]> => {
+export const getDirectMemberPromiseOptions = async (inputValue: string): Promise<UsernameSuggestionOption[]> => {
   if (inputValue.length >= 3) {
     const usernames = await SettingService.GetUserNameSuggestion(inputValue);
     return usernames.map((x) => ({ ...x, value: x.UserName }));
@@ -19,6 +19,16 @@ const promiseOptions = async (inputValue: string): Promise<UsernameSuggestionOpt
 
   return [];
 };
+
+export const getCashMemberPromiseOptions = async (inputValue: string): Promise<UsernameSuggestionOption[]> => {
+  if (inputValue.length >= 3) {
+    const usernames = await SettingService.GetCashMemberUserNameSuggestion(inputValue);
+    return usernames.map((x) => ({ ...x, value: x.UserName }));
+  }
+
+  return [];
+};
+
 
 const Option = (props: OptionProps<UsernameSuggestionOption, false>) => {
   return (
@@ -125,13 +135,14 @@ const customStyles: StylesConfig<UsernameSuggestionOption> = {
 };
 
 interface Props {
-  id: string;
-  value: string;
-  onChange: (newValue: SingleValue<UsernameSuggestionOption>) => void;
-  onInputChange: (newValue: string, actionMeta: InputActionMeta) => void;
+  readonly id: string;
+  readonly value: string;
+  readonly promiseOptions: (inputValue: string) => Promise<UsernameSuggestionOption[]>;
+  readonly onChange: (newValue: SingleValue<UsernameSuggestionOption>) => void;
+  readonly onInputChange: (newValue: string, actionMeta: InputActionMeta) => void;
 }
 
-export default function UsernameSuggestionSelect({ id, value, onChange, onInputChange }: Props) {
+export default function UsernameSuggestionSelect({ id, value, onChange, onInputChange, promiseOptions }: Props) {
   const { t } = useTranslation();
   return (
     <AsyncSelect

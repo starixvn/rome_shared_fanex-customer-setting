@@ -21,7 +21,7 @@ import styles from './general-information.module.scss';
 import { PasswordField } from './password-field';
 import PasswordRule from './password-rule';
 import Username from './username-field';
-import UsernameSuggestionSelect, { UsernameSuggestionOption } from './username-suggestion-select';
+import UsernameSuggestionSelect, { UsernameSuggestionOption, getCashMemberPromiseOptions } from './username-suggestion-select';
 import { BankInfomation } from './bank-info';
 import CashUserInfo from './cash-user-info';
 
@@ -50,7 +50,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
     { generalInfo, onGeneralInfoChange, children, onSelectCashMember, numberOfAccounts, setNumberOfAccounts },
     ref
   ) {
-    const [collapse, setCollapse] = useState(true);
+    const [collapse, setCollapse] = useState(false);
     const { t } = useTranslation();
     const blockRef = useRef<BlockRefType>(null);
     const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
@@ -174,6 +174,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
                   value={value}
                   onChange={handleUserSuggestionInputChange}
                   onInputChange={handleInputChange}
+                  promiseOptions={getCashMemberPromiseOptions}
                 />
                 {validationResults['selectedCashMember'] !== undefined && (
                   <span>{getErrorByField('selectedCashMember') ? <IconWrong /> : <IconCorrect />}</span>
