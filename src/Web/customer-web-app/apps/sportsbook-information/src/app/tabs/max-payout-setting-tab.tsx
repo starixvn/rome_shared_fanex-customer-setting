@@ -160,7 +160,7 @@ const FistTable = ({ data, isSpecialPlatform }: { data: SabaSport[], isSpecialPl
     }
     return e;
   });
-
+ 
   return (
     <table className={styles.tableaccordion}>
       <thead>
