@@ -81,6 +81,7 @@
   "UpdateUplineBetSettingNote": "Cập nhật giới hạn cược của cấp trên có thể giảm giới hạn cược của tất cả cấp dưới, nhằm đảm bảo giới hạn cược của cấp dưới không lớn hơn của cấp trên.",
   "LiteModePT": "Thiết Lập Rút Gọn - Mẫu Position Taking",
   "WinLossLimit": "Giới hạn thắng thua",
+  "WinLimit": "Giới hạn thắng",
   "CustomerSettingInformation": "Thông Tin Cài Đặt Tài Khoản",
   "BBINBetSetting2": "[BBIN]: Hoa hồng không được áp dụng cho sản phẩm BBIN, kể từ ngày 11/9/2023 (dd/mm/yyyy). Ngoài ra, khi bạn chỉnh sửa cài đặt của Member, những cài đặt mới này sẽ bắt đầu có hiệu lực kể từ lần chuyển khoản tiếp theo của họ.",
   "FGGNote": "[FGG]: Hoa hồng không được áp dụng cho sản phẩm FGG",

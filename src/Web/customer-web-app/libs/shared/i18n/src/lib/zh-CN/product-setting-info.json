@@ -81,6 +81,7 @@
   "UpdateUplineBetSettingNote": "更新上线的投注设置可会减少所有下线的投注设置，以确保下线们不大于上线的投注设置。",
   "LiteModePT": "精简模式 - 占成数模板",
   "WinLossLimit": "输赢限额",
+  "WinLimit": "赢限额",
   "CustomerSettingInformation": "客户设置信息",
   "BBINBetSetting2": "[BBIN]：不再提供佣金于BBIN产品从11/09/2023 始生效。此外，当您更改会员的设置时，此新更改只会在会员转额进游戏后才会生效。",
   "FGGNote": "[正博娱乐] : 不提供佣金于正博娱乐.",

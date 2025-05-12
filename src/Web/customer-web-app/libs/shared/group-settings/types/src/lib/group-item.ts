@@ -59,8 +59,14 @@ export interface WinLossLimitProps {
   productName: string;
   winLimit: number;
 }
+export interface WinLimitProps extends WinLossLimitProps {
+  winLimitValue: number;
+  minWinRange: number;
+}
 
 export interface WinLossLimitGroupItem extends WinLossLimitProps, GroupSettingItem<WinLossLimitProps> {}
+
+export interface WinLimitGroupItem extends WinLimitProps, GroupSettingItem<WinLimitProps> {}
 
 export interface CommissionProps {
   discount?: number;
