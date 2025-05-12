@@ -36,6 +36,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 [JsonDerivedType(typeof(GroupType157.BetSettingItem), typeDiscriminator: 21)]
 [JsonDerivedType(typeof(StakeLevelItem), typeDiscriminator: 22)]
 [JsonDerivedType(typeof(ProductStatusItem), typeDiscriminator: 23)]
+[JsonDerivedType(typeof(WinLimitItem), typeDiscriminator: 24)]
 [JsonDerivedType(typeof(PotentialWinLimit), typeDiscriminator: 24)]
 public class GroupItemDefault
 {

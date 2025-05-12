@@ -192,7 +192,7 @@
 			<Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
 			<Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
 		</Setting>
-		<Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+		<Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0">
 			<Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" />
 			<Mapping DataField="Credit_Ag_Bal" ObjectProperty="MaxCredit" />
 			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
