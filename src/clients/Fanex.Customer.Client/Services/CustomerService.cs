@@ -29,8 +29,6 @@ namespace Fanex.Customer.Client.Services
 
         Task<int> CheckDirectMemberUserName(int uplineCustId, string userName);
 
-        Task<string> GetSuggestCashMemberUsername(string uplineUsername);
-
         Task<IEnumerable<SuggestDirectMember>> SearchSuggestCashMembers(int uplineCustId, string searchUserName);
 
         Task<int> CheckCashMemberUserName(int uplineCustId, string userName);
@@ -277,9 +275,6 @@ namespace Fanex.Customer.Client.Services
 
         public Task<int> CheckDirectMemberUserName(int uplineCustId, string userName)
             => httpClient.GetAsJsonAsync<int>($"customer/{uplineCustId}/check-exist-direct-member/{userName}");
-
-        public Task<string> GetSuggestCashMemberUsername(string uplineUsername)
-            => httpClient.GetAsJsonAsync<string>($"customer/{uplineUsername}/suggest-cash-member-username");
 
         public Task<IEnumerable<SuggestDirectMember>> SearchSuggestCashMembers(int uplineCustId, string searchUserName)
             => httpClient.GetAsJsonAsync<IEnumerable<SuggestDirectMember>>($"customer/{uplineCustId}/suggest-cash-members/{searchUserName}");

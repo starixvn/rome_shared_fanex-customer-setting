@@ -381,7 +381,6 @@
 		<Setting Key="Age_CustomerCheckExist_DirectMember" SpName="Age_CustomerCheckExist_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 	</Function>
 	<Function Name="Cash Member">
-		<Setting Key="Age_CustomerSelSuggestUsername_CashMember" SpName="Age_CustomerSelSuggestUsername_CashMember" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
 		<Setting Key="Age_CustomerSearch_CashMember" SpName="Age_CustomerSearch_CashMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Age_CustomerCheckExist_CashMember" SpName="Age_CustomerCheckExist_CashMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 	</Function>

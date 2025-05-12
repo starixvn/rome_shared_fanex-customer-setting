@@ -27,8 +27,6 @@ public interface ICustomerService
     
     Task<int> CheckExistDirectMember(int uplineCustId, string userName);
 
-    Task<Result> GetSuggestCashMemberUsername(string uplineUserName);
-
     Task<IEnumerable<SuggestCashMember>> SearchSuggestionCashMember(int uplineCustId, string searchUserName);
     
     Task<int> CheckExistCashMember(int uplineCustId, string userName);
@@ -120,13 +118,6 @@ public class CustomerService : ICustomerService
         }
 
         return result.First().IsEnabled ? result.First().CustId : -1;
-    }
-
-    public async Task<Result> GetSuggestCashMemberUsername(string uplineUserName)
-    {
-        var command = new GetSuggestCashMemberUsernameCommand(uplineUserName);
-        await dynamicRepository.ExecuteAsync(command);
-        return new Result(command.ErrCode, command.ErrMsg, command.SeqName);
     }
 
     public async Task<IEnumerable<SuggestCashMember>> SearchSuggestionCashMember(int uplineCustId, string searchUserName)
