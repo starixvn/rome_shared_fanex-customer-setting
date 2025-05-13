@@ -55,7 +55,6 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
     const blockRef = useRef<BlockRefType>(null);
     const [validationResults, setValidationResults] = useState<{ [key: string]: ValidationResult | boolean }>({});
     const [locationTooltip, setLocationTooltip] = useState<string>('');
-    const { roleId, uplineMaxCredit } = generalInfo;
     const [value, setValue] = useState('');
     const isNotNAP = appConfig.systemId !== SystemIds.NAP;
 
@@ -68,16 +67,14 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
         let validateResult = true;
         const validateItemResult = await validator.validateAllRules();
         const isErrorField = Object.values(validateItemResult).find((item) => item !== true) as ValidationResult;
-
         if (isErrorField) {
           setValidationResults(validateItemResult);
-          if (isErrorField.fieldName === 'maxCredit') {
-            setLocationTooltip(maxCreditValidateFiled(generalInfo).toString());
-          } else {
-            setLocationTooltip(isErrorField.fieldName);
+          if (['firstName','lastName','phone'].includes(isErrorField.fieldName)) {
+            setCollapse(false);
           }
-          validateResult = false;
           blockRef.current?.expand();
+          setLocationTooltip(isErrorField.fieldName);
+          validateResult = false;
         }
         return validateResult;
       };
@@ -275,7 +272,6 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
           />
 
           <CashUserInfo
-            getErrorByField={getErrorByField}
             generalInfo={generalInfo}
             handleGeneralInfoChange={async (fieldName, value) => {
               const data = { [fieldName]: value };
@@ -286,9 +282,9 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
             setCollapse={setCollapse}
             collapse={collapse}
             userInformationFields={[
-              { field: 'firstName', required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => setLocationTooltip('') },
-              { field: 'lastName', required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => setLocationTooltip('') },
-              { field: 'phone', required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('phone'), onBlur: () => setLocationTooltip('') },
+              { field: 'firstName', required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => {setLocationTooltip('')}, isError: getErrorByField('firstName'), maxInputLength: 50 },
+              { field: 'lastName', required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => {setLocationTooltip('')} , isError: getErrorByField('lastName'), maxInputLength: 50 },
+              { field: 'phone', required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('phone'), onBlur: () => {setLocationTooltip('')} , isError: getErrorByField('phone'), maxInputLength: 45 },
               { field: 'fax', onFocus: () => {}, onBlur: () => {} },
             ]}
           />

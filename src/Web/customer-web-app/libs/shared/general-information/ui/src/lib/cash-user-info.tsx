@@ -14,24 +14,25 @@ interface UserInfoProps {
   readonly collapse: boolean;
   readonly isReadOnly?: boolean;
   readonly userInformationFields: ReadonlyArray<FieldConfig>;
-  readonly getErrorByField: (fieldName: keyof UserInformation) => boolean;
 }
 
 interface FieldConfig {
   readonly field: keyof UserInformation;
   readonly component?: string;
   readonly required?: boolean;
+  readonly maxInputLength?: number;
   readonly onFocus: () => void;
   readonly onBlur: () => void;
+  readonly isError?: boolean;
 }
 
 
-function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, collapse, isReadOnly = false, userInformationFields, getErrorByField }: UserInfoProps) {
+function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, collapse, isReadOnly = false, userInformationFields }: UserInfoProps) {
   const { t } = useTranslation();
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
 
   const renderField = (config: FieldConfig) => {
-    const { field, component } = config;
+    const { field, component, isError, onFocus, onBlur, maxInputLength } = config;
 
     if (isReadOnly) {
       return <span className={styles['readOny-user-info']}>{generalInfo[field] || ''}</span>;
@@ -42,25 +43,23 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
         return (
           <div className={styles['mobile-phone-container']}>
             <Mobifone
-              isError={getErrorByField(field)}
+              isError={isError}
               phoneNumber={generalInfo.phone || ''}
               onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange('phone', phoneNumber)}
-              onFocus={config.onFocus}
-              onBlur={config.onBlur}
+              onFocus={onFocus}
+              onBlur={onBlur}
             />
           </div>
         );
       default:
         return (
           <input
-            onFocus={config.onFocus}
-            onBlur={config.onBlur}
-            className={classNames({
-              error: getErrorByField(field),
-            })}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            className={classNames({ error: isError })}
             id={field}
             type="text"
-            maxLength={40}
+            maxLength={maxInputLength}
             value={generalInfo[field] || ''}
             onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
           />

@@ -107,7 +107,6 @@ export default class GeneralInformationValidator {
   public async validateRequired(fieldName: string) {
     this.resetValidationState();
     const value = this.generalInfo[fieldName as keyof GeneralInfo];
-    console.log("check required field", fieldName, value);
     if (!value) {
       return (this.validationState = new ValidationResult(fieldName, 'RequiredField'));
     }
