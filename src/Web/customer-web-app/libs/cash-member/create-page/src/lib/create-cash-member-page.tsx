@@ -218,7 +218,6 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
       </div>
     );
   };
-  console.log("Create Cash Member Page",generalInfo)
   return (
     <>
       {isLoading && <BlockUI />}
@@ -271,8 +270,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
                   mode: 'createCustomer',
                   handleSettingItemChange: handleSettingItemChange,
                   handleUpdateSettingItems: handleUpdateSettingItems,
-                  productGroupId: productGroup.id,
-                  isDirectMember: true,
+                  productGroupId: productGroup.id
                 }}
               >
                 <GroupSetting ref={ref?.ref} />

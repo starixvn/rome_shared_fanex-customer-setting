@@ -275,18 +275,21 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
           />
 
           <CashUserInfo
+            getErrorByField={getErrorByField}
             generalInfo={generalInfo}
-            handleGeneralInfoChange={(fieldName, value) => {
+            handleGeneralInfoChange={async (fieldName, value) => {
               const data = { [fieldName]: value };
+              const result = await validateGeneralInfo(fieldName as generalInformationValidatorFields, data);
+              setValidationResults({ ...validationResults, [fieldName]: result });
               onGeneralInfoChange?.(data);
             }}
             setCollapse={setCollapse}
             collapse={collapse}
             userInformationFields={[
-              { field: 'firstName' },
-              { field: 'lastName' },
-              { field: 'phone' , component: 'phoneWithCountryCode' },
-              { field: 'fax' },
+              { field: 'firstName', required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => setLocationTooltip('') },
+              { field: 'lastName', required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => setLocationTooltip('') },
+              { field: 'phone', required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('phone'), onBlur: () => setLocationTooltip('') },
+              { field: 'fax', onFocus: () => {}, onBlur: () => {} },
             ]}
           />
         </div>

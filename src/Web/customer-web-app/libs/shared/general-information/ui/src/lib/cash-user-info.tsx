@@ -14,15 +14,19 @@ interface UserInfoProps {
   readonly collapse: boolean;
   readonly isReadOnly?: boolean;
   readonly userInformationFields: ReadonlyArray<FieldConfig>;
+  readonly getErrorByField: (fieldName: keyof UserInformation) => boolean;
 }
 
 interface FieldConfig {
   readonly field: keyof UserInformation;
   readonly component?: string;
+  readonly required?: boolean;
+  readonly onFocus: () => void;
+  readonly onBlur: () => void;
 }
 
 
-function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, collapse, isReadOnly = false, userInformationFields }: UserInfoProps) {
+function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, collapse, isReadOnly = false, userInformationFields, getErrorByField }: UserInfoProps) {
   const { t } = useTranslation();
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
 
@@ -38,14 +42,23 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
         return (
           <div className={styles['mobile-phone-container']}>
             <Mobifone
+              isError={getErrorByField(field)}
               phoneNumber={generalInfo.phone || ''}
               onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange('phone', phoneNumber)}
+              onFocus={config.onFocus}
+              onBlur={config.onBlur}
             />
           </div>
         );
       default:
         return (
           <input
+            onFocus={config.onFocus}
+            onBlur={config.onBlur}
+            className={classNames({
+              error: getErrorByField(field),
+            })}
+            id={field}
             type="text"
             maxLength={40}
             value={generalInfo[field] || ''}
@@ -68,7 +81,12 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
       <WrapperTooltip className="global-tooltip" id="userInfo" />
       <div className={classNames(styles['row'], { toggle: collapse })}>
         {!collapse && userInformationFields.map((config) => (
-          <BlockItem key={config.field} label={t(config.field)}>
+          <BlockItem key={config.field} label={
+            <div>
+              {t(config.field)}
+              {config.required && <span className="require">*</span>}
+            </div>
+          }>
             {renderField(config)}
           </BlockItem>
         ))}

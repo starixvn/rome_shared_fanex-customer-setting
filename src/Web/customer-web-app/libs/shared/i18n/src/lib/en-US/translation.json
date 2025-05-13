@@ -177,6 +177,7 @@
   "Losing": "Losing",
   "BBinSettingNote": "Note: BBIN's Winning% shown as \"N/A\" because Maximum Win Limit control is not applied to the BBIN product.",
   "ViewWinLossLimitInfo": "Click to view Win Loss Limit Info",
+  "ViewWinLimitInfo": "Click to view Win Limit Info",
   "Member": "Member",
   "Master": "Master",
   "Agent": "Agent",

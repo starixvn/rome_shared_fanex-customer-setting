@@ -13,8 +13,9 @@ export type validateMaxCredit =
 
 export type validatePassword = 'password';
 export type validateUsername = 'userName' | 'newUserName';
+export type validateUserInfo = 'firstName' | 'lastName' | 'phone' | 'fax';
 
-export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername;
+export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername | validateUserInfo;
 
 export default class GeneralInformationValidator {
   protected readonly generalInfo: GeneralInfo;
@@ -92,9 +93,26 @@ export default class GeneralInformationValidator {
         return this.generalInfo.roleId === UserLevel.Agent
           ? this.validateMemberMaxCreditWhenCreateAgent(isEditMode)
           : this.validateMaxCredit(isEditMode);
+      case 'firstName':
+        return this.validateRequired(fieldName);
+      case 'lastName':
+        return this.validateRequired(fieldName);
+      case 'phone':
+        return this.validateRequired(fieldName);
       default:
         return true;
     }
+  }
+
+  public async validateRequired(fieldName: string) {
+    this.resetValidationState();
+    const value = this.generalInfo[fieldName as keyof GeneralInfo];
+    console.log("check required field", fieldName, value);
+    if (!value) {
+      return (this.validationState = new ValidationResult(fieldName, 'RequiredField'));
+    }
+
+    return true;
   }
 
   public async validateUsername() {

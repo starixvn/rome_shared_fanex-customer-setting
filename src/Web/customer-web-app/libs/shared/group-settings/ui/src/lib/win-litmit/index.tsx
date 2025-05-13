@@ -332,7 +332,7 @@ function Note() {
     e.stopPropagation();
   };
 
-  const tooltipContent = t('ViewWinLossLimitInfo');
+  const tooltipContent = t('ViewWinLimitInfo');
   return (
     <span onClick={handleClick} aria-hidden data-tooltip-id="global-tooltip" data-tooltip-content={tooltipContent}>
       {IconInfo}

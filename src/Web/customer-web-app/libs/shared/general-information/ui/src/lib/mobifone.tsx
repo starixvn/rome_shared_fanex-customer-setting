@@ -2,16 +2,23 @@
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import styles from './mobifone.module.scss';
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 export interface MobifoneProps {
   readonly phoneNumber: string;
   readonly onChangePhoneNumber: (phoneNumber: string) => void;
+  readonly isError?: boolean;
+  readonly onFocus: () => void;
+  readonly onBlur: () => void;
 }
 
 
 export function Mobifone({
   phoneNumber,
   onChangePhoneNumber,
+  isError = false,
+  onFocus,
+  onBlur,
 }: MobifoneProps) {
 
     const [countryCode, setCountryCode] = useState<string>('');
@@ -26,7 +33,9 @@ export function Mobifone({
   return (
       <div>
           <select
-            className={styles.phoneCode}
+            className={classNames([styles.phoneCode],{
+              error: isError,
+            })}
             value={countryCode}
             onChange={(e) => setCountryCode(e.target.value)}
           >
@@ -37,8 +46,13 @@ export function Mobifone({
             ))}
           </select>
         <input
+          onFocus={onFocus}
+          onBlur={onBlur}
+          id="phone"
           type="text"
-          className={styles.phoneNumber}
+          className={classNames([styles.phoneNumber],{
+            error: isError,
+          })}
           value={phoneNumber}
           onChange={e => onChangePhoneNumber(e.target.value)}
         />

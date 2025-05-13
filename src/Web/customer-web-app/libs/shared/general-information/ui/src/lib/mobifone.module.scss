@@ -2,15 +2,17 @@
   padding: 0;
   max-width: 50px;
   text-indent: 3px;
-  background: var(--bg-username-select);
   border-radius: 3px 0 0 3px;
   box-shadow: none;
+  .error & {
+    border-color: var(--border-input-error);
+    background-color: var(--bg-input-error);
+  }
 }
 
 .phoneNumber {
-  width: 100px !important;
+  width: 140px !important;
   border-left: none !important;
   border-radius: 0 3px 3px 0 !important;
-  background: transparent !important;
   padding: 0;
 }

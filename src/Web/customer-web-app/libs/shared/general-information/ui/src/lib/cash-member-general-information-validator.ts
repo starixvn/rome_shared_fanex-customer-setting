@@ -17,8 +17,10 @@ export default class CashMemberGeneralInformationValidator extends GeneralInform
     const results = {
       [`userName`]: await super.validateUsername(),
       [`password`]: super.validatePassword(),
-      [`selectedCashMember`]: await this.validateSelectedCashMember()
-  
+      [`selectedCashMember`]: await this.validateSelectedCashMember(),
+      [`firstName`]: await this.validateRequired('firstName'),
+      [`lastName`]: await this.validateRequired('lastName'),
+      [`phone`]: await this.validateRequired('phone'),
     };
     return results;
   }
