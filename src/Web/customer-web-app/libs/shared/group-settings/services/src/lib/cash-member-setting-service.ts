@@ -20,11 +20,11 @@ export const CashMemberSettingService = {
         return response.data;
     },
     GetBanks: async () => {
-        const response = await axios.get(`${(window.top as any).alpha.urls.cashServiceRootPath}Payments/GetBanksByTransactionType`);
+        const response = await axios.get(`${(window.top as any).alpha.urls.cashServiceRootPath}Payments/GetBanksByTransactionType`, { baseURL: "" });
         return response.data;
     },
     GetCountryCodes: async () => {
-        const response = await axios.get(`${(window.top as any).alpha.urls.cashServiceRootPath}Payments/GetCountryCodes`);
+        const response = await axios.get(`${(window.top as any).alpha.urls.cashServiceRootPath}Payments/GetCountryCodes`, { baseURL: "" });
         return response.data;
     },
     GetCashCustomerSetting: async (
