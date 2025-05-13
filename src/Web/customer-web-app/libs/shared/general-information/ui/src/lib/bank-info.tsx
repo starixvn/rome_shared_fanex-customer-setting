@@ -1,6 +1,7 @@
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { useEffect, useState } from 'react';
 import styles from './general-information.module.scss';
+import stylesDropdown from './bank-info.module.scss';
 import { BlockItem } from '@customer-web-app/shared/base/block';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
@@ -8,6 +9,7 @@ import classNames from 'classnames';
 interface Bank {
   id: string;
   name: string;
+  code?: string;
 }
 
 interface BankSelectProps {
@@ -16,6 +18,38 @@ interface BankSelectProps {
   onChangeBankId: (bankId: string) => void;
   onChangeBankAccountNumber: (bankAccountNumber: string) => void;
 }
+
+const BankDropdown = ({ banks }: { banks: Bank[] }) => {
+  const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className={stylesDropdown['bank-dropdown']}>
+      <div className={stylesDropdown['bank-dropdown-selected']} onClick={() => setIsOpen(!isOpen)}>
+        {selectedBank?.code &&
+          <img
+            src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${selectedBank.code}.png`}
+            style={{ width: '18px', height: '18px', marginRight: '8px' }}
+          />}
+        {selectedBank?.name || 'Select Bank Account'}
+        <span style={{ marginLeft: 'auto' }}>▼</span>
+      </div>
+      {isOpen &&
+        <div className={stylesDropdown['bank-options']}>
+          {banks.map(bank => (
+            <div key={bank.id} onClick={() => {
+              setSelectedBank(bank);
+              setIsOpen(false);
+            }}>
+              {bank.code && <img src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
+              {bank.name}
+            </div>
+          ))}
+        </div>
+      }
+    </div>
+  );
+}
+
 
 
 export function BankInfomation({ bankId, bankAccountNumber, onChangeBankId, onChangeBankAccountNumber }: BankSelectProps) {
@@ -29,6 +63,7 @@ export function BankInfomation({ bankId, bankAccountNumber, onChangeBankId, onCh
     }
     fetchBanks();
   }, []);
+  console.log(banks);
   return (
     <div className={styles['user-info']}>
       <div className={styles['subheader']}>
@@ -36,14 +71,16 @@ export function BankInfomation({ bankId, bankAccountNumber, onChangeBankId, onCh
       </div>
       <div className={classNames(styles['row'])}>
         <BlockItem label={t('Bank')}>
-          <select value={bankId} onChange={e => onChangeBankId(e.target.value)}>
+          {/* <select value={bankId} onChange={e => onChangeBankId(e.target.value)}>
             <option value="">Select Bank Account</option>
             {banks.map(bank => (
               <option key={bank.id} value={bank.id}>
+                {bank.code && <img src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`} alt={bank.name} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
                 {bank.name}
               </option>
             ))}
-          </select>
+          </select> */}
+          <BankDropdown banks={banks} />
         </BlockItem>
         <BlockItem label={t('AccountNumber')}>
           <input type="text" value={bankAccountNumber} onChange={e => onChangeBankAccountNumber(e.target.value)} />

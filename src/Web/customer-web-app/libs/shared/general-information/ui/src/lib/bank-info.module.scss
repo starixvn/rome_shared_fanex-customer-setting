@@ -1,0 +1,51 @@
+.bank-dropdown {
+    padding: 0 0 0 3px;
+    border: 1px solid var(--border-input);
+    border-radius: 3px;
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+    width: 300px;
+    overflow: clip;
+    height: var(--height);
+    display: inline-block;
+}
+
+.bank-dropdown-selected {
+    padding: 0 0 0 3px;
+    width: 100%;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    height: var(--height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bank-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: max-content;
+    min-width: 100%;
+    max-width: 400px;
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid var(--border-input);
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    z-index: 100;
+}
+
+.bank-options>div {
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.bank-options>div:hover {
+    background: #f0f0f0;
+}
