@@ -13,7 +13,7 @@ import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/bl
 import { IconCorrect, IconWrong } from '@customer-web-app/shared/base/common-icon';
 
 import { errorTooltip } from './common';
-import CopySettingFromNote from './copy-setting-from-note';
+import { CopyCashSettingFromNote } from './copy-setting-from-note';
 import CashMemberGeneralInformationValidator from './cash-member-general-information-validator';
 import { GeneralInformationProps } from './general-information';
 import { generalInformationValidatorFields, validateMaxCredit } from './general-information-validator';
@@ -161,7 +161,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
               label={
                 <>
                   {t('CopySettingFrom')}
-                  {<CopySettingFromNote />}
+                  {<CopyCashSettingFromNote />}
                 </>
               }
             >

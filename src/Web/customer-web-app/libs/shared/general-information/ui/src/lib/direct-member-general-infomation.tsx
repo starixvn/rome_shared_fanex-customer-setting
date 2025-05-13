@@ -16,7 +16,7 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import AvailableCreditNote from './available-credit-note';
 import { errorTooltip } from './common';
-import CopySettingFromNote from './copy-setting-from-note';
+import { CopySettingFromNote } from './copy-setting-from-note';
 import CreditRange from './credit-range';
 import DirectMemberGeneralInformationValidator from './direct-member-general-information-validator';
 import { GeneralInformationProps } from './general-information';

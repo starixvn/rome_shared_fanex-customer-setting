@@ -185,6 +185,7 @@
   "CopySettingFrom": "Sao chép cài đặt từ",
   "UsernamePlaceHolder": "Tên đăng nhập hoặc Tên/Họ",
   "CopySettingFromNote": "Chỉ hỗ trợ sao chép giá trị cài đặt từ Member trực tiếp có sẵn.",
+  "CopyCashSettingFromNote": "Chỉ hỗ trợ sao chép giá trị cài đặt từ Member tiền mặt có sẵn.",
   "introCopyNote": "Nhấn 'Sao chép' để sao chép và chia sẻ thông tin tài khoản",
   "UserNotExist": "Người chơi này không có thực",
   "Credit": "Hạn mức tín dụng",

@@ -186,6 +186,7 @@
   "CopySettingFrom": "複製設置自",
   "UsernamePlaceHolder": "用戶名或名/姓",
   "CopySettingFromNote": "僅支援從現有直系會員複製設置值。",
+  "CopyCashSettingFromNote": "僅支持從現有現金會員複製設置值。",
   "introCopyNote": "點擊“複製”即可複製並分享賬號詳情",
   "UserNotExist": "此賬號不存在",
   "Credit": "信用額度",
