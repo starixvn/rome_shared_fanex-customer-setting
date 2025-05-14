@@ -6,6 +6,7 @@ using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
@@ -22,8 +23,9 @@ public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCust
 
     public CreateAgentFullModeService(IMessageService messageService, 
         AppSettings appSettings, 
-        ICustomerSettingHelper helperService)
-        : base( messageService, appSettings, helperService)
+        ICustomerSettingHelper helperService,
+        IDynamicRepository dynamicRepository)
+        : base( messageService, appSettings, helperService, dynamicRepository)
     {
     }
 

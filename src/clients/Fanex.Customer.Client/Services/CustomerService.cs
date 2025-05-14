@@ -49,6 +49,8 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> CreateCustomer(CreateCustomerParam param);
 
+        Task<string> CreateCashCustomer(CreateCustomerParam param);
+
         Task<string> UpdateCustomer(UpdateCustomerParam param);
 
         Task<string> UpdateMultipleCustomers(UpdateMultipleCustomerParam param);
@@ -122,6 +124,31 @@ namespace Fanex.Customer.Client.Services
 
         public Task<string> CreateCustomer(CreateCustomerParam param)
             => httpClient.PostAsStringAsync("customer", new
+            {
+                context = new
+                {
+                    creatorId = param.CreatorId,
+                    subAccId = param.SubAccId,
+                    ip = param.IP,
+                    systemId = configuration.SystemId,
+                    language = param.Language,
+                    mode = param.Mode,
+                    custDBGroupId = param.CustDBGroupID,
+                    site = param.Site,
+                    siteLabel = param.SiteLabel,
+                    noOfCreateAccount = param.NoOfCreateAccount,
+                    uiBehavior = !string.IsNullOrWhiteSpace(param.UiBehavior) ? JsonNode.Parse(param.UiBehavior) : null
+                },
+                settings = new
+                {
+                    group = param.Group,
+                    generalInfo = param.GeneralInfo,
+                    productGroups = JsonNode.Parse(param.ProductGroups)
+                }
+            });
+
+        public Task<string> CreateCashCustomer(CreateCustomerParam param)
+            => httpClient.PostAsStringAsync("cash-customer", new
             {
                 context = new
                 {

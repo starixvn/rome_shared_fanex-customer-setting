@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,79 +26,79 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -119,47 +119,27 @@
   </resheader>
   <data name="AgentMinPTCannotBeGreaterThanAgentMaxPT" xml:space="preserve">
     <value>Agent Min PT must be less than or equal to Agent Max PT.</value>
-    <comment/>
   </data>
   <data name="AllProducts" xml:space="preserve">
     <value>Tất cả sản phẩm</value>
-    <comment/>
   </data>
   <data name="Comm1" xml:space="preserve">
     <value>Hoa hồng 1(Comm 1)</value>
-    <comment/>
   </data>
   <data name="Comm2" xml:space="preserve">
     <value>Hoa hồng 2(Comm 2)</value>
-    <comment/>
   </data>
   <data name="Comm3" xml:space="preserve">
     <value>Hoa hồng 3(Comm 3): được áp dụng cho các loại cược khác.</value>
-    <comment/>
   </data>
   <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
     <value>Biệt Danh của bạn đã được thiết lập xong</value>
   </data>
-	<data name="Live" xml:space="preserve">
-		<value>Trực Tuyến</value>
-		<comment/>
-	</data>
   <data name="CustomerSettings" xml:space="preserve">
     <value>Thiết lập khách hàng</value>
-		<comment/>
-	</data>
-	<data name="Max" xml:space="preserve">
-		<value>Lớn nhất</value>
-		<comment/>
-	</data>
-	<data name="Min" xml:space="preserve">
-		<value>Nhỏ nhất</value>
-		<comment/>
-	</data>
-
+  </data>
   <data name="GeneralInfo" xml:space="preserve">
     <value>Thông tin Chung</value>
-    <comment/>
   </data>
   <data name="GroupType150" xml:space="preserve">
     <value>Hoa hồng</value>
@@ -190,353 +170,281 @@
   </data>
   <data name="InvalidParameterValue" xml:space="preserve">
     <value>Giá trị tham số không hợp lệ.</value>
-    <comment/>
   </data>
   <data name="LimitAgentNewDownlineError" xml:space="preserve">
     <value>Xin lỗi, bạn chỉ có thể tạo mới 5 Member mỗi ngày, vui lòng thử lại vào ngày mai.</value>
-    <comment/>
   </data>
   <data name="LimitMasterNewDownlineError" xml:space="preserve">
     <value>Xin lỗi, bạn chỉ có thể tạo mới 3 Agent mỗi ngày, vui lòng thử lại vào ngày mai.</value>
-    <comment/>
   </data>
   <data name="LimitSuperNewDownlineError" xml:space="preserve">
     <value>Xin lỗi, bạn chỉ có thể tạo mới 3 Master mỗi ngày, vui lòng thử lại vào ngày mai.</value>
-    <comment/>
+  </data>
+  <data name="Live" xml:space="preserve">
+    <value>Trực Tuyến</value>
   </data>
   <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
     <value>Master Min PT must be less than or equal to Master Max PT.</value>
-    <comment/>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Lớn nhất</value>
   </data>
   <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
     <value>Tất cả các môn thể thao trừ {0} và {1}</value>
-    <comment/>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Nhỏ nhất</value>
   </data>
   <data name="Msg_1" xml:space="preserve">
     <value>Tỷ lệ hoa hồng không hợp lệ</value>
-    <comment/>
   </data>
   <data name="Msg_12" xml:space="preserve">
     <value>Không thể gán nhóm hoa hồng này cho Member.</value>
-    <comment/>
   </data>
   <data name="Msg_10002" xml:space="preserve">
     <value>Sai giá trị : Tiền cược lớn nhất cho mỗi banh</value>
-    <comment/>
   </data>
   <data name="Msg_10003" xml:space="preserve">
     <value>Sai giá trị : Tiền cược nhỏ nhất / Tiền cược lớn nhất / Tiền cược lớn nhất cho mỗi trận đấu</value>
-    <comment/>
   </data>
   <data name="Msg_10006" xml:space="preserve">
     <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
-    <comment/>
   </data>
   <data name="Msg_10007" xml:space="preserve">
     <value>Max bet must be less than or equal to Upline's max bet.</value>
-    <comment/>
   </data>
   <data name="Msg_10008" xml:space="preserve">
     <value>Max Per Match must be less than or equal to Upline'sMax Per Match.</value>
-    <comment/>
   </data>
   <data name="Msg_10009" xml:space="preserve">
     <value> Per Ball must be equal to or less than Agent Max Per Ball</value>
-    <comment/>
   </data>
   <data name="Msg_10010" xml:space="preserve">
     <value>Max Per Ball must be equal to or less than Super Agent Max Per Ball</value>
-    <comment/>
   </data>
   <data name="Msg_10011" xml:space="preserve">
     <value> Per Ball must be equal to or less than Master Agent Max Per Ball</value>
-    <comment/>
   </data>
   <data name="Msg_10016" xml:space="preserve">
     <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
-    <comment/>
   </data>
   <data name="Msg_10017" xml:space="preserve">
     <value>Max bet must be less than or equal to Upline's max bet.</value>
-    <comment/>
   </data>
   <data name="Msg_10018" xml:space="preserve">
     <value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
-    <comment/>
   </data>
   <data name="Msg_10019" xml:space="preserve">
     <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
-    <comment/>
   </data>
   <data name="Msg_10020" xml:space="preserve">
     <value>Max bet must be less than or equal to Upline's max bet.</value>
-    <comment/>
   </data>
   <data name="Msg_10021" xml:space="preserve">
     <value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
-    <comment/>
   </data>
   <data name="Msg_10022" xml:space="preserve">
     <value>Bạn không được phép thay đổi chức năng Tự động reset giới hạn chuyển khoản mỗi ngày.</value>
-    <comment/>
   </data>
   <data name="Msg_10024" xml:space="preserve">
     <value>Tiền thắng cược lớn nhất phải ít hơn hoặc bằng Tiền thắng cược lớn nhất của cấp trên trực tiếp.</value>
-    <comment/>
   </data>
   <data name="Msg_10033" xml:space="preserve">
     <value>Tiền thua cược lớn nhất phải ít hơn hoặc bằng Tiền thua cược lớn nhất của cấp trên trực tiếp.</value>
-    <comment/>
   </data>
   <data name="Msg_10034" xml:space="preserve">
     <value>Cấp trên của người dùng này chưa cấu hình cấp độ đặt cược.</value>
-    <comment/>
   </data>
   <data name="Msg_10035" xml:space="preserve">
     <value>Mỗi loại cược phải có ít nhất một Giới Hạn Cược.</value>
-    <comment/>
   </data>
   <data name="Msg_10036" xml:space="preserve">
     <value>Bạn chỉ có thể gán tối đa {0} giới hạn cược cho cấp Member của {1}.</value>
-    <comment/>
   </data>
   <data name="Msg_10059" xml:space="preserve">
     <value>Wrong Max Payout Per Match.</value>
-    <comment/>
   </data>
   <data name="Msg_10060" xml:space="preserve">
     <value>Max Per Match must be less than or equal to Max Payout Per Match</value>
-    <comment/>
   </data>
   <data name="Msg_10061" xml:space="preserve">
     <value>Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match</value>
-    <comment/>
   </data>
   <data name="Msg_10062" xml:space="preserve">
     <value>Cược Nhỏ Nhất phải lớn hơn hoặc bằng Cược Nhỏ Nhất của Cấp Trên</value>
-    <comment/>
   </data>
   <data name="Msg_10063" xml:space="preserve">
     <value>Max Bet must be less than or equal to Upline's Max Bet</value>
-    <comment/>
   </data>
   <data name="Msg_10064" xml:space="preserve">
     <value>Max Per Match must be less than or equal to Upline's Max Per Match</value>
-    <comment/>
   </data>
   <data name="Msg_10065" xml:space="preserve">
     <value>Max Payout Per Match must be less than or equal to Upline's Max Payout Per Match</value>
-    <comment/>
   </data>
   <data name="Msg_10066" xml:space="preserve">
     <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>
-    <comment/>
   </data>
   <data name="Msg_10067" xml:space="preserve">
     <value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
-    <comment/>
   </data>
   <data name="Msg_10070" xml:space="preserve">
     <value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên phải là số dương.</value>
-    <comment/>
   </data>
   <data name="Msg_10071" xml:space="preserve">
     <value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên: Cài đặt cho Cược Xiên Một Trận đang cao hơn giới hạn cược của cấp trên.</value>
-    <comment/>
   </data>
   <data name="Msg_10072" xml:space="preserve">
     <value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên: Cài đặt cho Combo 2 đang cao hơn giới hạn cược của cấp trên.</value>
-    <comment/>
   </data>
   <data name="Msg_10073" xml:space="preserve">
     <value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên: Cài đặt cho Combo 3 - 5 đang cao hơn giới hạn cược của cấp trên.</value>
-    <comment/>
   </data>
   <data name="Msg_10074" xml:space="preserve">
     <value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên: Cài đặt cho Combo Over 6 đang cao hơn giới hạn cược của cấp trên.</value>
-    <comment/>
   </data>
   <data name="Msg_10078" xml:space="preserve">
     <value>RNG Casino: Bạn đã đạt đến giới hạn cho số lần cập nhật Position Taking trong tháng (1 lần). Vui lòng thử lại sau {0} 12:00 PM GMT+8.</value>
-    <comment/>
   </data>
   <data name="Msg_20001" xml:space="preserve">
     <value>Sai giá trị PT</value>
-    <comment/>
   </data>
   <data name="Msg_20002" xml:space="preserve">
     <value>Sai giá trị PT (nhỏ nhất/lớn nhất được thiết lập bởi công ty).</value>
-    <comment/>
   </data>
   <data name="Msg_20005" xml:space="preserve">
     <value>Sai giá trị PT (giá trị lớn nhất).</value>
-    <comment/>
   </data>
   <data name="Msg_20008" xml:space="preserve">
     <value>Sai giá trị PT của Agent.</value>
-    <comment/>
   </data>
   <data name="Msg_20019" xml:space="preserve">
     <value>Existing masters exceed new Super Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20020" xml:space="preserve">
     <value>Existing members exceed new Super Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20021" xml:space="preserve">
     <value>Existing masters exceed new Master Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20022" xml:space="preserve">
     <value>Existing members exceed new Master Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20023" xml:space="preserve">
     <value>Existing agents exceed new Agent Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20024" xml:space="preserve">
     <value>Existing members exceed new Agent Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20025" xml:space="preserve">
     <value>The position taking violates Upline Min/Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20026" xml:space="preserve">
     <value>Existing agents exceed new Master Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20027" xml:space="preserve">
     <value>The position taking violates Master Max PT set by company</value>
-    <comment/>
   </data>
   <data name="Msg_20028" xml:space="preserve">
     <value>The position taking violates Super Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20029" xml:space="preserve">
     <value>The position taking violates Super Min PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20030" xml:space="preserve">
     <value>The Agent Min PT violates Master Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20031" xml:space="preserve">
     <value>The position taking violates Master Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20032" xml:space="preserve">
     <value>The position taking violates Master Min PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20033" xml:space="preserve">
     <value>The position taking violates Agent Min/Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20034" xml:space="preserve">
     <value>The position taking violates Agent Max PT.</value>
-    <comment/>
   </data>
   <data name="Msg_20044" xml:space="preserve">
     <value>Bạn không được phép dùng Auto PT, vui lòng liên hệ cấp trên để biết thêm chi tiết.</value>
-    <comment/>
   </data>
   <data name="Msg_20045" xml:space="preserve">
     <value>Tên Mẫu đã tồn tại.</value>
-    <comment/>
   </data>
   <data name="Msg_20046" xml:space="preserve">
     <value>Position Taking Không Hợp Lệ (PT lớn nhất do cấp trên đặt)</value>
-    <comment/>
   </data>
   <data name="Msg_20047" xml:space="preserve">
     <value>Mẫu này không tồn tại.</value>
-    <comment/>
   </data>
   <data name="Msg_20048" xml:space="preserve">
     <value>Position Taking Không Hợp Lệ (PT nhỏ/lớn nhất do cấp trên đặt)</value>
-    <comment/>
   </data>
   <data name="Msg_60033" xml:space="preserve">
     <value>Không thể tùy chỉnh trạng thái trò chơi của thành viên cấp dưới bởi vì tài khoản hiện tại không được phép chơi trò này.</value>
-    <comment/>
   </data>
   <data name="Msg_60035" xml:space="preserve">
     <value>Bạn không được phép vô hiệu hoá sản phẩm cược của cấp dưới.</value>
-    <comment/>
   </data>
   <data name="Msg_60037" xml:space="preserve">
     <value>Bạn không thể kích hoạt {0} khi {1} đang bị vô hiệu hóa.</value>
-    <comment/>
   </data>
   <data name="Msg_90012" xml:space="preserve">
     <value>Bạn không thể thực thi hành động này.</value>
-    <comment/>
   </data>
   <data name="NicknameRule" xml:space="preserve">
     <value>Biệt Danh không được giống nhau và chỉ chứa ký tự chữ cái và số đếm. Phải có ít nhất từ 5 đến 20 ký tự</value>
   </data>
   <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
     <value>Super Min PT must be less than or equal to Super Max PT.</value>
-    <comment/>
   </data>
   <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
     <value>Tài khoản sao chép này đã bị vô hiệu hóa.</value>
-    <comment/>
   </data>
   <data name="UMMainMsg" xml:space="preserve">
     <value>Không thể cập nhật do hệ thống đang bảo trì các thiết lập sau (GMT+8):</value>
-    <comment/>
   </data>
   <data name="UMSubMsg" xml:space="preserve">
     <value>{0}: {1} ({2} đến {3})</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_150" xml:space="preserve">
     <value>Tiền hoa hồng được cập nhật thành công</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_151" xml:space="preserve">
     <value>Thiết lập về tiền cược được cập nhật thành công</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_152" xml:space="preserve">
     <value>Thanh Toán Tối Đa Cho Mỗi Cược Xiên đã được cập nhật thành công.</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_153" xml:space="preserve">
     <value>PT được cập nhật thành công.</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_154" xml:space="preserve">
     <value>Thiết lập về tiền cược được cập nhật thành công</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_155" xml:space="preserve">
     <value>Cập nhật Giới hạn thắng thua thành công.</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_156" xml:space="preserve">
     <value>Tiền hoa hồng được cập nhật thành công</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_158" xml:space="preserve">
     <value>Cập nhật Giới hạn cược thành công.</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_160" xml:space="preserve">
     <value>Trạng thái trò chơi được cập nhật thành công.</value>
-    <comment/>
   </data>
   <data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
     <value>Thông Tin Chung đã được cập nhật thành công.</value>
-    <comment/>
   </data>
   <data name="lbl1X2" xml:space="preserve">
     <value>1 X 2</value>
-    <comment/>
+  </data>
+  <data name="GroupType161" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UpdateSuccess_161" xml:space="preserve">
+    <value>Trạng thái trò chơi được cập nhật thành công.</value>
   </data>
 </root>

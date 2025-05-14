@@ -1,5 +1,4 @@
 using Fanex.Customer.API.Modules.CreateCustomer.Services;
-using Fanex.Customer.API.Modules.CustomerSetting.RegisterCashMember;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.EditCustomer.Services;
 using Fanex.Customer.API.Modules.QueryCustomer.Services;
@@ -12,7 +11,6 @@ public static class CreateCustomerModule
     {
         services.AddSingleton<IQueryCustomerService, QueryCustomerService>();
         services.AddSingleton<IQueryCashCustomerService, QueryCashCustomerService>();
-        services.AddSingleton<IRegisterCashMemberService, RegisterCashMemberService>();
         services.AddHttpClient<ICreateCustomerService, CreateCustomerService>();
         services.AddSingleton<IQueryGroupTypeBaseService<WinLossLimitItem>, QueryGroupTypeBaseService<WinLossLimitItem>>();
         services.AddSingleton<IEditCustomerService, EditCustomerService>();

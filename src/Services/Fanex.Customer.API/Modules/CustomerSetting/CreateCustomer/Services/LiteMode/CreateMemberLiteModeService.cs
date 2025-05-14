@@ -1,12 +1,13 @@
 using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
-using Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
+using Fanex.Customer.API.Modules.CreateCustomer.Services;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Services.LiteMode;
 
@@ -23,8 +24,9 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
 
     public CreateMemberLiteModeService(IMessageService messageService, 
         AppSettings appSettings, 
-        ICustomerSettingHelper helperService)
-        : base( messageService, appSettings, helperService)
+        ICustomerSettingHelper helperService,
+        IDynamicRepository dynamicRepository)
+        : base( messageService, appSettings, helperService, dynamicRepository)
     {
     }
 

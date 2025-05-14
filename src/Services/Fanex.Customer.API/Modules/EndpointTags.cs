@@ -13,5 +13,7 @@ namespace Fanex.Customer.API.Modules
         public const string SecurityCode = "Security Code";
 
         public const string SubAccount = "Sub-Account";
+
+        public const string CashService = "Cash Service";
     }
 }

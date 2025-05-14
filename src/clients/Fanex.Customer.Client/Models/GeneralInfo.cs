@@ -43,5 +43,9 @@ namespace Fanex.Customer.Client.Models
         public string TemplateName { get; set; }
 
         public bool IsInternal { get; set; }
+
+        public int BankId { get; set; }
+
+        public string AccountNumber { get; set; }
     }
 }
