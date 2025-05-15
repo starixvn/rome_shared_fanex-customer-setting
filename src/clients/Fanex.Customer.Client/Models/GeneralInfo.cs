@@ -1,5 +1,11 @@
 namespace Fanex.Customer.Client.Models
 {
+    public class Bank
+    {
+        public int BankId { get; set; }
+        public string AccountNumber { get; set; }
+    }
+
     public class GeneralInfo
     {
         public string Username { get; set; }
@@ -44,8 +50,6 @@ namespace Fanex.Customer.Client.Models
 
         public bool IsInternal { get; set; }
 
-        public int BankId { get; set; }
-
-        public string AccountNumber { get; set; }
+        public Bank Bank { get; set; }
     }
 }
