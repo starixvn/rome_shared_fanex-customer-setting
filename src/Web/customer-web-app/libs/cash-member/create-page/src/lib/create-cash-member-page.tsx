@@ -191,7 +191,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
     if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
       const secretKey = (document.getElementById('SecretKey') as HTMLInputElement).value;
       const encryptedPassword = encrypt(generalInfo.password, secretKey);
-      const result = (await SettingService.CreateCustomer(
+      const result = (await SettingService.CreateCashMember(
         { ...generalInfo, password: encryptedPassword },
         group,
         productGroups,

@@ -63,7 +63,6 @@ export function BankInfomation({ bankId, bankAccountNumber, onChangeBankId, onCh
     }
     fetchBanks();
   }, []);
-  console.log(banks);
   return (
     <div className={styles['user-info']}>
       <div className={styles['subheader']}>
@@ -71,15 +70,6 @@ export function BankInfomation({ bankId, bankAccountNumber, onChangeBankId, onCh
       </div>
       <div className={classNames(styles['row'])}>
         <BlockItem label={t('Bank')}>
-          {/* <select value={bankId} onChange={e => onChangeBankId(e.target.value)}>
-            <option value="">Select Bank Account</option>
-            {banks.map(bank => (
-              <option key={bank.id} value={bank.id}>
-                {bank.code && <img src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`} alt={bank.name} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
-                {bank.name}
-              </option>
-            ))}
-          </select> */}
           <BankDropdown banks={banks} />
         </BlockItem>
         <BlockItem label={t('AccountNumber')}>

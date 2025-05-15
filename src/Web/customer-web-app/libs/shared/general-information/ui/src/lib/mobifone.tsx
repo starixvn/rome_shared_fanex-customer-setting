@@ -21,11 +21,12 @@ export function Mobifone({
   onBlur,
 }: MobifoneProps) {
 
-    const [countryCode, setCountryCode] = useState<string>('');
+    const [countryCode, setCountryCode] = useState<string>(phoneNumber?.split('-')[0] || '');
     const [countryCodes, setCountryCodes] = useState<string[]>([]);
 
     useEffect(() => {
         SettingService.GetCountryCodes().then((res) => {
+            countryCode != '' && setCountryCode(res[0]);
             setCountryCodes(res);
         });
     }, []);
@@ -37,7 +38,10 @@ export function Mobifone({
               error: isError,
             })}
             value={countryCode}
-            onChange={(e) => setCountryCode(e.target.value)}
+            onChange={(e) => {
+              setCountryCode(e.target.value);
+              onChangePhoneNumber(`${e.target.value}-${phoneNumber.split('-')[1]}`);
+            }}
           >
             {countryCodes.map((code) => (
               <option key={code} value={code}>
@@ -53,8 +57,8 @@ export function Mobifone({
           className={classNames([styles.phoneNumber],{
             error: isError,
           })}
-          value={phoneNumber}
-          onChange={e => onChangePhoneNumber(e.target.value)}
+          value={phoneNumber.split('-')[1]}
+          onChange={e => onChangePhoneNumber(`${countryCode}-${e.target.value}`)}
         />
       </div>
   );
