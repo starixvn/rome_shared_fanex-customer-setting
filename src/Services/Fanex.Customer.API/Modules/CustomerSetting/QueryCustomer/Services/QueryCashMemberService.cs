@@ -17,7 +17,7 @@ namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
 public interface IQueryCashCustomerService
 {
-    Task<CashMemberSettingModel> Query(QueryCashCustomerRequest request);
+    Task<CustomerSettingModel> Query(QueryCashCustomerRequest request);
 }
 
 public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCustomerService
@@ -58,15 +58,15 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         return false;
     }
 
-    public async Task<CashMemberSettingModel> Query(QueryCashCustomerRequest request)
+    public async Task<CustomerSettingModel> Query(QueryCashCustomerRequest request)
     {
         var generalInfoDto = await GetGeneralInfo(request);
-        var generalInfo = new GeneralInfoForCashMember(generalInfoDto);
+        var generalInfo = new GeneralInformation(generalInfoDto);
         ptStep = appSettings.IsSupportPT3Decimal(generalInfo.SiteLabel) ? 0.5M : 1M;
         isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, generalInfo.SiteLabel, appSettings);
         var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew, ServiceType.Cash);
 
-        var customerSetting = new CashMemberSettingModel
+        var customerSetting = new CustomerSettingModel
         {
             GeneralInfo = generalInfo,
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo)
@@ -84,7 +84,7 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         IEnumerable<SettingProfile> settingProfile,
         BaseQueryRequest request,
         bool isSiteLabel777,
-        GeneralInfoForCashMember generalInfo)
+        GeneralInformation generalInfo)
     {
         return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
@@ -142,7 +142,7 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         IGrouping<int, SettingProfile> g,
         QueryCashCustomerRequest request,
         bool isSiteLabel777,
-        GeneralInfoForCashMember generalInfo,
+        GeneralInformation generalInfo,
         bool isDirectMember)
     {
         return g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
