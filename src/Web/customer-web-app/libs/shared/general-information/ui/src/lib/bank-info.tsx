@@ -39,7 +39,7 @@ const BankDropdown = ({ banks }: { banks: Bank[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const emptyBank: Bank = { id: '', name: 'Select Bank Account' };
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const bankImageUrls = useMemo(() => 
+  const bankImageUrls = useMemo(() =>
     banks
       .filter(bank => bank.code)
       .map(bank => `${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`),
@@ -70,8 +70,14 @@ const BankDropdown = ({ banks }: { banks: Bank[] }) => {
             src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${selectedBank.code}.png`}
             style={{ width: '18px', height: '18px', marginRight: '8px' }}
           />}
-        {selectedBank?.name || emptyBank.name}
-        <span style={{ marginLeft: 'auto' }}>▼</span>
+        <span className={stylesDropdown['bank-name']}>
+          {selectedBank?.name || emptyBank.name}
+        </span>
+        <span className={stylesDropdown['bank-dropdown-arrow']}>
+          <svg width="10" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
       </div>
       {isOpen &&
         <div className={stylesDropdown['bank-options']}>
