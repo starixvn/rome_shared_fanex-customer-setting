@@ -43,7 +43,7 @@ export function Mobifone({
           onChangePhoneNumber(`${e.target.value}-${phoneNumber.split('-')[1] ?? ''}`);
         }}
       >
-        {countryCodes.map((code) => (
+        {countryCodes?.map((code) => (
           <option key={code} value={code}>
             +{code}
           </option>
