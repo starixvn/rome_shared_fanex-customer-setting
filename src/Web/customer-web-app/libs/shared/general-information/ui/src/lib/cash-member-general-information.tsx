@@ -69,7 +69,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
         const isErrorField = Object.values(validateItemResult).find((item) => item !== true) as ValidationResult;
         if (isErrorField) {
           setValidationResults(validateItemResult);
-          if (['firstName','lastName','phone'].includes(isErrorField.fieldName)) {
+          if (['firstName', 'lastName', 'phone'].includes(isErrorField.fieldName)) {
             setCollapse(false);
           }
           blockRef.current?.expand();
@@ -264,6 +264,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
               </div>
             </BlockItem>
           </div>
+          
           <BankInfomation
             bankId={generalInfo.bankId}
             bankAccountNumber={generalInfo.bankAccountNumber}
@@ -272,21 +273,22 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
           />
 
           <CashUserInfo
+            userInformationFields={[
+              { field: 'firstName', required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('firstName'), maxInputLength: 50 },
+              { field: 'lastName', required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('lastName'), maxInputLength: 50 },
+              { field: 'mobilePhone', required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('mobilePhone'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('mobilePhone'), maxInputLength: 45 },
+              { field: 'phone', onFocus: () => setLocationTooltip('phone'), onBlur: () => { setLocationTooltip('') }, maxInputLength: 50 },
+              { field: 'fax', onFocus: () => { }, onBlur: () => { } },
+            ]}
             generalInfo={generalInfo}
-            handleGeneralInfoChange={async (fieldName, value) => {
-              const data = { [fieldName]: value };
-              const result = await validateGeneralInfo(fieldName as generalInformationValidatorFields, data);
-              setValidationResults({ ...validationResults, [fieldName]: result });
+            handleGeneralInfoChange={async (field, value) => {
+              const data = { [field]: value };
+              const result = await validateGeneralInfo(field as generalInformationValidatorFields, data);
+              setValidationResults({ ...validationResults, [field]: result });
               onGeneralInfoChange?.(data);
             }}
             setCollapse={setCollapse}
             collapse={collapse}
-            userInformationFields={[
-              { field: 'firstName', required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => {setLocationTooltip('')}, isError: getErrorByField('firstName'), maxInputLength: 50 },
-              { field: 'lastName', required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => {setLocationTooltip('')} , isError: getErrorByField('lastName'), maxInputLength: 50 },
-              { field: 'phone', required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('phone'), onBlur: () => {setLocationTooltip('')} , isError: getErrorByField('phone'), maxInputLength: 45 },
-              { field: 'fax', onFocus: () => {}, onBlur: () => {} },
-            ]}
           />
         </div>
         {errorTooltip(locationTooltip, validationResults, t)}

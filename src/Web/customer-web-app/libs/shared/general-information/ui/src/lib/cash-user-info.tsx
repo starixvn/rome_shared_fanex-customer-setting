@@ -43,9 +43,10 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
         return (
           <div className={styles['mobile-phone-container']}>
             <Mobifone
+              id={field}
               isError={isError}
-              phoneNumber={generalInfo.phone || ''}
-              onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange('phone', phoneNumber)}
+              phoneNumber={generalInfo[field] || ''}
+              onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange(field, phoneNumber)}
               onFocus={onFocus}
               onBlur={onBlur}
             />

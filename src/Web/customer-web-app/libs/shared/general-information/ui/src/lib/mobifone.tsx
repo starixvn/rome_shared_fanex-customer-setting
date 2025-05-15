@@ -4,7 +4,8 @@ import styles from './mobifone.module.scss';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-export interface MobifoneProps {
+export interface MobifoneProps {  
+  readonly id: string;
   readonly phoneNumber: string;
   readonly onChangePhoneNumber: (phoneNumber: string) => void;
   readonly isError?: boolean;
@@ -14,6 +15,7 @@ export interface MobifoneProps {
 
 
 export function Mobifone({
+  id,
   phoneNumber,
   onChangePhoneNumber,
   isError = false,
@@ -52,7 +54,7 @@ export function Mobifone({
         <input
           onFocus={onFocus}
           onBlur={onBlur}
-          id="phone"
+          id={id}
           type="text"
           className={classNames([styles.phoneNumber],{
             error: isError,
