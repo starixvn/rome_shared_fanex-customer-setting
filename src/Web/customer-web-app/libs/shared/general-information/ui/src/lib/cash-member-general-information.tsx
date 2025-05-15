@@ -266,10 +266,10 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
           </div>
 
           <BankInfomation
-            bankId={generalInfo.bankId}
-            bankAccountNumber={generalInfo.bankAccountNumber}
-            onChangeBankId={bankId => onGeneralInfoChange?.({ bankId: bankId })}
-            onChangeBankAccountNumber={bankAccountNumber => onGeneralInfoChange?.({ bankAccountNumber: bankAccountNumber })}
+            bankId={generalInfo.bank?.bankId}
+            bankAccountNumber={generalInfo.bank?.accountNumber}
+            onChangeBankId={bankId => onGeneralInfoChange?.({ bank: { ...generalInfo.bank, bankId: bankId } })}
+            onChangeBankAccountNumber={bankAccountNumber => onGeneralInfoChange?.({ bank: { ...generalInfo.bank, accountNumber: bankAccountNumber } })}
           />
 
           <CashUserInfo

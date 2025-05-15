@@ -7,16 +7,16 @@ import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
 interface Bank {
-  id: string;
+  id: number;
   name: string;
   code?: string;
 }
 
 interface BankSelectProps {
-  bankId?: string;
-  bankAccountNumber?: string;
-  onChangeBankId: (bankId: string) => void;
-  onChangeBankAccountNumber: (bankAccountNumber: string) => void;
+  readonly bankId?: number;
+  readonly bankAccountNumber?: string;
+  readonly onChangeBankId: (bankId: number) => void;
+  readonly onChangeBankAccountNumber: (bankAccountNumber: string) => void;
 }
 
 const usePreloadImages = (urls: string[]) => {
@@ -34,10 +34,10 @@ const usePreloadImages = (urls: string[]) => {
   }, [urls]);
 };
 
-const BankDropdown = ({ banks }: { banks: Bank[] }) => {
+const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId: (bankId: number) => void }) => {
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const emptyBank: Bank = { id: '', name: 'Select Bank Account' };
+  const emptyBank: Bank = { id: 0, name: 'Select Bank Account' };
   const wrapperRef = useRef<HTMLDivElement>(null);
   const bankImageUrls = useMemo(() =>
     banks
@@ -85,6 +85,7 @@ const BankDropdown = ({ banks }: { banks: Bank[] }) => {
             <div key={bank.id} className={classNames({ [stylesDropdown['bank-option-selected']]: selectedBank?.id === bank.id })} onClick={() => {
               setSelectedBank(bank);
               setIsOpen(false);
+              onChangeBankId(bank.id);
             }}>
               {bank.code && <img src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
               {bank.name}
@@ -98,7 +99,7 @@ const BankDropdown = ({ banks }: { banks: Bank[] }) => {
 
 
 
-export function BankInfomation({ bankId, bankAccountNumber, onChangeBankId, onChangeBankAccountNumber }: BankSelectProps) {
+export function BankInfomation({ bankAccountNumber, onChangeBankId, onChangeBankAccountNumber }: BankSelectProps) {
   const { t } = useTranslation();
   const [banks, setBanks] = useState<Bank[]>([]);
 
@@ -117,7 +118,7 @@ export function BankInfomation({ bankId, bankAccountNumber, onChangeBankId, onCh
       </div>
       <div className={classNames(styles['row'])}>
         <BlockItem label={t('Bank')}>
-          <BankDropdown banks={banks} />
+          <BankDropdown banks={banks} onChangeBankId={onChangeBankId} />
         </BlockItem>
         <BlockItem label={t('AccountNumber')}>
           <input type="text" value={bankAccountNumber} onChange={e => onChangeBankAccountNumber(e.target.value)} />

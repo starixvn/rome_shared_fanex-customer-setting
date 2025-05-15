@@ -32,9 +32,9 @@ export interface GeneralInfo {
     discount: number;
     name: string;
   }[];
-  bankId?: string;
-  accountNumber?: string;
-  // public int BankId { get; set; }
-  // public string AccountNumber { get; set; }
+  bank?: {
+    bankId?: number;
+    accountNumber?: string;
+  }
 }
 export type UserInformation = Pick<GeneralInfo, 'firstName' | 'lastName' | 'phone' | 'mobilePhone' | 'fax'>;
