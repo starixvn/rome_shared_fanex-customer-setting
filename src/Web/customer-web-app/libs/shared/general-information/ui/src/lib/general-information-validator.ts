@@ -13,7 +13,7 @@ export type validateMaxCredit =
 
 export type validatePassword = 'password';
 export type validateUsername = 'userName' | 'newUserName';
-export type validateUserInfo = 'firstName' | 'lastName' | 'phone' | 'fax';
+export type validateUserInfo = 'firstName' | 'lastName' | 'mobilePhone' | 'fax';
 
 export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername | validateUserInfo;
 
@@ -79,6 +79,7 @@ export default class GeneralInformationValidator {
   }
 
   public async validateField(fieldName: generalInformationValidatorFields, isEditMode = false) {
+    console.log('validateField', fieldName, isEditMode);
     switch (fieldName) {
       case 'userName':
       case 'newUserName':
@@ -97,8 +98,8 @@ export default class GeneralInformationValidator {
         return this.validateRequired(fieldName);
       case 'lastName':
         return this.validateRequired(fieldName);
-      case 'phone':
-        return this.validateRequired(fieldName);
+      case 'mobilePhone':
+        return this.validateMobilePhone();
       default:
         return true;
     }
@@ -107,12 +108,25 @@ export default class GeneralInformationValidator {
   public async validateRequired(fieldName: string) {
     this.resetValidationState();
     const value = this.generalInfo[fieldName as keyof GeneralInfo];
+    console.log('validateRequired 1', fieldName, value);
     if (!value) {
+      console.log('validateRequired 1', fieldName, value);
       return (this.validationState = new ValidationResult(fieldName, 'RequiredField'));
     }
 
     return true;
   }
+
+  public async validateMobilePhone() {
+    this.resetValidationState();
+    const value = this.generalInfo.mobilePhone;
+    if (!value?.split('-')[1]) {
+      return (this.validationState = new ValidationResult('mobilePhone', 'RequiredField'));
+    }
+
+    return true;
+  }
+
 
   public async validateUsername() {
     this.resetValidationState();

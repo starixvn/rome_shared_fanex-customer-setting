@@ -198,5 +198,8 @@
   "BankInfo": "ข้อมูลธนาคาร",
   "Bank": "ธนาคาร",
   "AccountNumber": "หมายเลขบัญชี",
-  "ThisUserIsNotYourCashMember": "ผู้ใช้งานนี้ไม่ใช่สมาชิกเงินสดของคุณ"
+  "ThisUserIsNotYourCashMember": "ผู้ใช้งานนี้ไม่ใช่สมาชิกเงินสดของคุณ",
+  "FirstNameDescription": "ตามบัญชีธนาคารของสมาชิก",
+  "LastNameDescription": "ตามบัญชีธนาคารของสมาชิก",
+  "MobilePhoneDescription": "หมายเลขโทรศัพท์ของสมาชิก"
 }

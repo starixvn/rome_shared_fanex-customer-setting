@@ -14,13 +14,14 @@ export default class CashMemberGeneralInformationValidator extends GeneralInform
   }
 
   public async validateAllRules() {
+    console.log("generalInfo", this.generalInfo)
     const results = {
       [`userName`]: await super.validateUsername(),
       [`password`]: super.validatePassword(),
       [`selectedCashMember`]: await this.validateSelectedCashMember(),
       [`firstName`]: await this.validateRequired('firstName'),
       [`lastName`]: await this.validateRequired('lastName'),
-      [`phone`]: await this.validateRequired('phone'),
+      [`mobilePhone`]: await this.validateMobilePhone(),
     };
     return results;
   }

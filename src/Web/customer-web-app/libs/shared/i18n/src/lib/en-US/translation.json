@@ -199,7 +199,10 @@
   "BankInfo": "Bank Information",
   "Bank": "Bank",
   "AccountNumber": "Account Number",
-  "ThisUserIsNotYourCashMember": "This user is not your cash member"
+  "ThisUserIsNotYourCashMember": "This user is not your cash member",
+  "FirstNameDescription": "As per member's bank account",
+  "LastNameDescription": "As per member's bank account",
+  "MobilePhoneDescription": "Member's mobile phone number"
   "PotentialWinLimitNotice": "Potential Win Limit Notice",
   "PotentialWinLimitNoticeHint1": "Due to result amendments, settlement delays, and other factors, the accumulated Potential Win Limit may temporarily exceed the configured threshold.",
   "PotentialWinLimitNoticeHint2": "Parlay bets are excluded from this calculation during this phase.",

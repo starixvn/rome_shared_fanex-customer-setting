@@ -69,7 +69,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
         const isErrorField = Object.values(validateItemResult).find((item) => item !== true) as ValidationResult;
         if (isErrorField) {
           setValidationResults(validateItemResult);
-          if (['firstName', 'lastName', 'phone'].includes(isErrorField.fieldName)) {
+          if (['firstName', 'lastName', 'mobilePhone'].includes(isErrorField.fieldName)) {
             setCollapse(false);
           }
           blockRef.current?.expand();
@@ -264,7 +264,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
               </div>
             </BlockItem>
           </div>
-          
+
           <BankInfomation
             bankId={generalInfo.bankId}
             bankAccountNumber={generalInfo.bankAccountNumber}
@@ -274,9 +274,9 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
 
           <CashUserInfo
             userInformationFields={[
-              { field: 'firstName', required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('firstName'), maxInputLength: 50 },
-              { field: 'lastName', required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('lastName'), maxInputLength: 50 },
-              { field: 'mobilePhone', required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('mobilePhone'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('mobilePhone'), maxInputLength: 45 },
+              { field: 'firstName', description: t('FirstNameDescription'), required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('firstName'), maxInputLength: 50 },
+              { field: 'lastName', description: t('LastNameDescription'), required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('lastName'), maxInputLength: 50 },
+              { field: 'mobilePhone', description: t('MobilePhoneDescription'), required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('mobilePhone'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('mobilePhone'), maxInputLength: 45 },
               { field: 'phone', onFocus: () => setLocationTooltip('phone'), onBlur: () => { setLocationTooltip('') }, maxInputLength: 50 },
               { field: 'fax', onFocus: () => { }, onBlur: () => { } },
             ]}

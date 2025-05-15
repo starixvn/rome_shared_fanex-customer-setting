@@ -198,5 +198,8 @@
   "BankInfo": "银行信息",
   "Bank": "银行",
   "AccountNumber": "账号",
-  "ThisUserIsNotYourCashMember": "此用户不是您的现金会员"
+  "ThisUserIsNotYourCashMember": "此用户不是您的现金会员",
+  "FirstNameDescription": "按照会员的银行账户",
+  "LastNameDescription": "按照会员的银行账户",
+  "MobilePhoneDescription": "会员的手机号码"
 }

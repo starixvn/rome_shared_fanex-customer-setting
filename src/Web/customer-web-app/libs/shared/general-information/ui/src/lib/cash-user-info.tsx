@@ -18,6 +18,7 @@ interface UserInfoProps {
 
 interface FieldConfig {
   readonly field: keyof UserInformation;
+  readonly description?: string;
   readonly component?: string;
   readonly required?: boolean;
   readonly maxInputLength?: number;
@@ -32,10 +33,10 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
 
   const renderField = (config: FieldConfig) => {
-    const { field, component, isError, onFocus, onBlur, maxInputLength } = config;
+    const { field, component, isError, onFocus, onBlur, maxInputLength, description } = config;
 
     if (isReadOnly) {
-      return <span className={styles['readOny-user-info']}>{generalInfo[field] || ''}</span>;
+      return <span className={styles['readOny-user-info']}>{generalInfo[field] ?? ''}</span>;
     }
 
     switch (component) {
@@ -45,25 +46,29 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
             <Mobifone
               id={field}
               isError={isError}
-              phoneNumber={generalInfo[field] || ''}
+              phoneNumber={generalInfo[field] ?? ''}
               onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange(field, phoneNumber)}
               onFocus={onFocus}
               onBlur={onBlur}
             />
+            {description && <span className={styles['description']}>{description}</span>}
           </div>
         );
       default:
         return (
-          <input
+          <>
+           <input
             onFocus={onFocus}
             onBlur={onBlur}
             className={classNames({ error: isError })}
             id={field}
             type="text"
             maxLength={maxInputLength}
-            value={generalInfo[field] || ''}
+            value={generalInfo[field] ?? ''}
             onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
           />
+          {description && <span className={styles['description']}>{description}</span>}
+          </>
         );
     }
   };

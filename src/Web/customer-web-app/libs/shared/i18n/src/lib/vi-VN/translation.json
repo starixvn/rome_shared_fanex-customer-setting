@@ -197,5 +197,8 @@
   "BankInfo": "Thông tin Ngân Hàng",
   "Bank": "Ngân Hàng",
   "AccountNumber": "Số tài khoản",
-  "ThisUserIsNotYourCashMember": "Người dùng này không phải là Member tiền mặt của bạn"
+  "ThisUserIsNotYourCashMember": "Người dùng này không phải là Member tiền mặt của bạn",
+  "FirstNameDescription": "Theo tài khoản ngân hàng của thành viên",
+  "LastNameDescription": "Theo tài khoản ngân hàng của thành viên",
+  "MobilePhoneDescription": "Số điện thoại di động của thành viên"
 }

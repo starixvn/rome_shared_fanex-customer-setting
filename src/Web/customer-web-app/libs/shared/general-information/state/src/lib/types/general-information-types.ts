@@ -33,6 +33,8 @@ export interface GeneralInfo {
     name: string;
   }[];
   bankId?: string;
-  bankAccountNumber?: string;
+  accountNumber?: string;
+  // public int BankId { get; set; }
+  // public string AccountNumber { get; set; }
 }
 export type UserInformation = Pick<GeneralInfo, 'firstName' | 'lastName' | 'phone' | 'mobilePhone' | 'fax'>;
