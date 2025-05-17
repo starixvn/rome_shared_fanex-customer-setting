@@ -5,6 +5,7 @@ import stylesDropdown from './bank-info.module.scss';
 import { BlockItem } from '@customer-web-app/shared/base/block';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+import { inputNumberOnly } from '@customer-web-app/shared-helpers';
 
 interface Bank {
   id: number;
@@ -121,7 +122,10 @@ export function BankInfomation({ bankAccountNumber, onChangeBankId, onChangeBank
           <BankDropdown banks={banks} onChangeBankId={onChangeBankId} />
         </BlockItem>
         <BlockItem label={t('AccountNumber')}>
-          <input type="text" value={bankAccountNumber} onChange={e => onChangeBankAccountNumber(e.target.value)} />
+          <input type="text" value={bankAccountNumber} onChange={e => {
+            const value = inputNumberOnly(e.target.value);
+            onChangeBankAccountNumber(value);
+          }} />
         </BlockItem>
       </div >
     </div >)

@@ -3,8 +3,11 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-    handleChangeGroupSettingValue, handleChangeItemValue
+    handleChangeGroupSettingValue, handleChangeItemValue,
 } from '@customer-web-app/edit-customer-page';
+
+import { handleInitProducts } from '@customer-web-app/create-customer-page';
+
 import {
     CreateCustomerResult, ValidateRefResult, ValidationRefType
 } from '@customer-web-app/share-models';
@@ -45,6 +48,7 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
 
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const [productGroupsState, productGroupsDispatch] = useReducer(productGroupsReducer, initialProductGroupsState);
+  
   const { generalInfo } = generalInformationState;
   const { productGroups } = productGroupsState;
   const generalInfoRef = useRef<ValidationRefType>(null);
@@ -83,8 +87,9 @@ export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
       );
       if (appConfig.systemId !== SystemIds.NAP) {
         generalInfo.newUserName = params.suggestUsername;
-      }
-      productGroupsDispatch({ type: ProductGroupsActionTypes.InitCreate, payload: productGroups });
+      } 
+      const newProductGroups = handleInitProducts(productGroups, params.uplineRoleId);
+      productGroupsDispatch({ type: ProductGroupsActionTypes.InitCreate, payload: newProductGroups });
 
       generalInfoDispatch({
         type: GeneralInfoActionTypes.Update,

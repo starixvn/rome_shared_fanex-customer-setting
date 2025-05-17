@@ -120,7 +120,10 @@ export default class GeneralInformationValidator {
   public async validateMobilePhone() {
     this.resetValidationState();
     const value = this.generalInfo.mobilePhone;
-    if (!value?.split('-')[1]) {
+    const phoneCode = value?.split('-')[0];
+    const phoneNumber = value?.split('-')[1];
+    
+    if (!phoneNumber || !phoneCode) {
       return (this.validationState = new ValidationResult('mobilePhone', 'RequiredField'));
     }
 

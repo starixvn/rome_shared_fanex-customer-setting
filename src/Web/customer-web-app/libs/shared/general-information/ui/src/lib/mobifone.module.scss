@@ -1,24 +1,22 @@
-.phoneCode {
+
+input[type="text"].phoneNumber {
+  width: 115px !important;
+  border-left: none !important;
+  border-radius: 0 3px 3px 0 !important;
   padding: 0;
+  &.error {
+    border-color: var(--border-input-error);
+    background-color: var(--bg-input-error);
+  }
+}
+
+input[type="text"].phoneCode {
   max-width: 50px;
   text-indent: 3px;
   border-radius: 3px 0 0 3px;
   box-shadow: none;
-  &.error  {
-    border-color: var(--border-input-error);
-    background-color: var(--bg-input-error);
-    option,
-    optgroup {
-      background-color: var(--bg-input-error) !important;
-    }
-  }
-}
-
-.phoneNumber {
-  width: 140px !important;
-  border-left: none !important;
-  border-radius: 0 3px 3px 0 !important;
-  padding: 0;
+  position: relative;
+  padding: 0 0 0 6px;
   &.error {
     border-color: var(--border-input-error);
     background-color: var(--bg-input-error);

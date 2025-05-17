@@ -14,3 +14,8 @@ export const NumberHelper = {
     return (Math.trunc(value * 100) / 100).toLocaleString('en-US');
   },
 };
+
+export const inputNumberOnly = (value: string) => {
+  return value.replace(/[^0-9]/g, '');
+}
+
