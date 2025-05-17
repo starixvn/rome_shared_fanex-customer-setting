@@ -43,9 +43,10 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
   const bankImageUrls = useMemo(() =>
     banks
       .filter(bank => bank.code)
-      .map(bank => `${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`),
+      .map(bank => `${cdnUri}/bank/${bank.code?.toLocaleUpperCase()}.png`),
     [banks]
   );
+
   usePreloadImages(bankImageUrls);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -62,6 +63,8 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen]);
+
+  
 
   return (
     <div className={stylesDropdown['bank-dropdown']} ref={wrapperRef}>

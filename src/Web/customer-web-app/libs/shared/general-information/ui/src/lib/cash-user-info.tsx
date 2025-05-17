@@ -18,6 +18,7 @@ interface UserInfoProps {
 
 interface FieldConfig {
   readonly field: keyof UserInformation;
+  readonly label?: string;
   readonly description?: string;
   readonly component?: string;
   readonly required?: boolean;
@@ -33,7 +34,7 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
 
   const renderField = (config: FieldConfig) => {
-    const { field, component, isError, onFocus, onBlur, maxInputLength, description } = config;
+    const { field, component, isError, onFocus, onBlur, maxInputLength, description, label } = config;
 
     if (isReadOnly) {
       return <span className={styles['readOny-user-info']}>{generalInfo[field] ?? ''}</span>;
@@ -88,7 +89,7 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
         {!collapse && userInformationFields.map((config) => (
           <BlockItem key={config.field} label={
             <div>
-              {t(config.field)}
+              {config.label ?? t(config.field)}
               {config.required && <span className="require">*</span>}
             </div>
           }>

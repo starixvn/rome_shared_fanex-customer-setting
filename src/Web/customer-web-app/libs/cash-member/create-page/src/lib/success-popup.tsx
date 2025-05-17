@@ -16,7 +16,7 @@ type Props = {
 
 export default function CreateCashMemberSuccessPopup(props: Props) {
   const { t } = useTranslation();
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState("");
   const { newUserNames, handleOk, numberOfAccounts, message, subMessages } = props;
   const credit = props.credit.toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2 });
   const domains = props.availableAlphaDomain?.slice(0, 3).join(', ');
@@ -32,10 +32,12 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
   const individualText =
     newUserNames?.map((username) => formatUserInfo(username, credit, domains ?? '')).join('\n\n') ?? '';
 
-  const handleCopy = () => {
-    setCopied(true);
+  const numberOfNewUserNames = newUserNames?.length ?? 0;
+
+  const handleCopy = (btnId: string) => {
+    setCopied(btnId);
     setTimeout(() => {
-      setCopied(false);
+      setCopied('');
     }, 1500);
   };
 
@@ -52,26 +54,26 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
               <span style={{ fontStyle: 'italic', opacity: 0.8 }}>{t('introCopyNote')}</span>
             </div>
             <div className={styles['buttons']}>
-              <CopyToClipboard text={compactText} options={{ format: 'text/plain' }}>
+              <CopyToClipboard text={compactText} options={{ format: 'text/plain' }} onCopy={() => handleCopy('compact-copy-btn')}>
                 <button
                   type="button"
                   className={styles['copy-btn']}
-                  data-tooltip-id="copy-username-id"
-                  onClick={handleCopy}
+                  data-tooltip-id="compact-copy-btn"
                 >
                   {t('CompactCopy')}
                 </button>
               </CopyToClipboard>
-              <CopyToClipboard text={individualText} options={{ format: 'text/plain' }}>
-                <button
-                  type="button"
-                  className={styles['copy-btn']}
-                  data-tooltip-id="copy-username-id"
-                  onClick={handleCopy}
-                >
-                  {t('IndividualCopy')}
-                </button>
-              </CopyToClipboard>
+              {numberOfNewUserNames > 1 && (
+                <CopyToClipboard text={individualText} options={{ format: 'text/plain' }} onCopy={() => handleCopy('individual-copy-btn')}>
+                  <button
+                    type="button"
+                    className={styles['copy-btn']}
+                    data-tooltip-id="individual-copy-btn"
+                  >
+                    {t('IndividualCopy')}
+                  </button>
+                </CopyToClipboard>
+              )}
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('username')}</div>
@@ -113,7 +115,7 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
             </button>
           </div>
         </div>
-        <WrapperTooltip content={t('copied') ?? ''} id="copy-username-id" type="default" isOpen={copied} />
+        <WrapperTooltip content={t('copied') ?? ''} id={copied} type="default" isOpen={copied !== ''} />
       </div>
     </div>
   );

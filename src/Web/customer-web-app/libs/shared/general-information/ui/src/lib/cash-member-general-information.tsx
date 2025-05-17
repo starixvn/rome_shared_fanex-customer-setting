@@ -276,9 +276,8 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
             userInformationFields={[
               { field: 'firstName', description: t('FirstNameDescription'), required: true, onFocus: () => setLocationTooltip('firstName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('firstName'), maxInputLength: 50 },
               { field: 'lastName', description: t('LastNameDescription'), required: true, onFocus: () => setLocationTooltip('lastName'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('lastName'), maxInputLength: 50 },
-              { field: 'mobilePhone', description: t('MobilePhoneDescription'), required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('mobilePhone'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('mobilePhone'), maxInputLength: 45 },
+              { field: 'mobilePhone', label: t('mobile'), description: t('MobilePhoneDescription'), required: true, component: 'phoneWithCountryCode', onFocus: () => setLocationTooltip('mobilePhone'), onBlur: () => { setLocationTooltip('') }, isError: getErrorByField('mobilePhone'), maxInputLength: 45 },
               { field: 'phone', onFocus: () => setLocationTooltip('phone'), onBlur: () => { setLocationTooltip('') }, maxInputLength: 50 },
-              { field: 'fax', onFocus: () => { }, onBlur: () => { } },
             ]}
             generalInfo={generalInfo}
             handleGeneralInfoChange={async (field, value) => {

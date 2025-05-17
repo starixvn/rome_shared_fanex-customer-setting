@@ -8,6 +8,7 @@
   "lastName": "นามสกุล",
   "phone": "โทรศัพท์",
   "mobilePhone": "โทรศัพท์มือถือ",
+  "mobile": "โทรศัพท์มือถือ",
   "superMaxCredit": "Super Max Credit",
   "masterMaxCredit": "จำนวนเงินในบัญชีสูงสุดสำหรับตัวแทนหลัก",
   "agentMaxCredit": "จำนวนเงินสูงสุดในบัญชีของตัวแทน",

@@ -8,6 +8,7 @@
   "lastName": "姓",
   "phone": "电话",
   "mobilePhone": "手机",
+  "mobile": "手机",
   "superMaxCredit": "Super Max Credit",
   "masterMaxCredit": "总代理最高信用额",
   "agentMaxCredit": "代理信用额",
