@@ -72,6 +72,7 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo)
         };
 
+        customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
         return customerSetting;
     }
 
