@@ -18,6 +18,10 @@ public class PotentialWinLimit : GroupItemDefault
 
     [JsonIgnore]
     public decimal AccumToWin { get; set; }
+
+    [JsonIgnore]
+    public decimal AccumAmount=> AccumWinLoss + AccumToWin;
+
     public override Result Validate(string language)
     {
         // Add validation logic here

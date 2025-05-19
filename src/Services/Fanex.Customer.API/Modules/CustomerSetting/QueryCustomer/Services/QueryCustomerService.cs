@@ -151,7 +151,10 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         GeneralInformation generalInfo,
         bool isDirectMember)
     {
-        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
+        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) 
+            && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))
+            && SupportPotentialWinLimitBySite(generalInfo.Site, p.GroupType)
+        ).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
             Id = g.Key,
@@ -161,6 +164,9 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
             GetGroupTypesForSuper(g, (QuerySuperRequest)request, isSiteLabel777)).Where(gt => gt != null)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
+
+    private bool SupportPotentialWinLimitBySite(string site, int groupTypeId)
+    => groupTypeId != GroupTypes.PotentialWinLimit || appSettings.IsSupportPotentialWinLimit(site);
 
     private IEnumerable<GroupType> GetGroupTypesForSuper(IGrouping<int, SettingProfile> g, QuerySuperRequest request, bool isSiteLabel777)
     {

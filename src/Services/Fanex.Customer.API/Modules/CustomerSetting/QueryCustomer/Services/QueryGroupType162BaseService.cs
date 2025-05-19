@@ -42,8 +42,10 @@ public class QueryGroupType162BaseService<T> : QueryGroupTypeBaseService<T>
                 potentialWinLimit.AccumWinLoss = amount.AccumWinLoss;
                 potentialWinLimit.AccumToWin = amount.AccumToWin;
             }
+
+            return new[] { potentialWinLimit }.Cast<T>();
         }
 
-        return new[] { potentialWinLimit }.Cast<T>();
+        return Enumerable.Empty<T>();
     }
 }
