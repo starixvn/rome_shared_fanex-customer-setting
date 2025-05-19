@@ -41,10 +41,14 @@ class GroupType162Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
         var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        var isLimitWinLimit = groupItems.Any(x => (x as PotentialWinLimit)?.IsAllowUnlimitWinLimit == false);
         if (result.IsSuccessful)
         {
-            await ResetAccumWinLossAmount(context.CustId);
             result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
+            if (isLimitWinLimit)
+            {
+                _ = ResetAccumWinLossAmount(context.CustId);
+            }
         }
 
         return result;
