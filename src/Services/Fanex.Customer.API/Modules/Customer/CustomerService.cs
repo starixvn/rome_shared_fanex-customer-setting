@@ -38,8 +38,6 @@ public interface ICustomerService
 
     Task<IEnumerable<CurrentWinLossAmount>> GetCurrentWinLossAmount(GetCurrentWinLossAmountRequest request);
 
-    Task<IEnumerable<CurrentPotentialWinLimitAmount>> GetCurrentPotentialWinLimitAmount(GetCurrentWinLossAmountRequest request);
-
     Task<Object> GetProductCategories(GetProductCategoriesRequest request);
 
     Task<CommissionInfo> GetCommissionInfo(GetCommissionHintRequest request);
@@ -192,9 +190,6 @@ public class CustomerService : ICustomerService
 
         return result;
     }
-
-    public async Task<IEnumerable<CurrentPotentialWinLimitAmount>> GetCurrentPotentialWinLimitAmount(GetCurrentWinLossAmountRequest request)
-    => await dynamicRepository.FetchAsync<CurrentPotentialWinLimitAmount>(new GetCurrentPotentialWinLimitAmountCriteria(request.CustId));
 
     public async Task<Object> GetProductCategories(GetProductCategoriesRequest request)
     {
