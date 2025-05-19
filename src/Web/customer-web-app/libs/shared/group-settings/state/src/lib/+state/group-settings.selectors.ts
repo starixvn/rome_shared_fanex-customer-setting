@@ -1,10 +1,12 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    AgentPositionTakingGroupItem, BetLimitGroupItem, CommissionGroupItem, GroupItem, GroupType,
-    MasterDirectMemberPositionTakingGroupItem, MasterPositionTakingGroupItem,
-    MemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup, ProductStatusGroupItem,
-    RNGGamesBetSettingGroupItem, SportsBookBetSettingGroupItem,
-    SuperDirectMemberPositionTakingGroupItem, SuperPositionTakingGroupItem, WinLossLimitGroupItem
+  AgentPositionTakingGroupItem, BetLimitGroupItem, CommissionGroupItem, GroupItem, GroupType,
+  MasterDirectMemberPositionTakingGroupItem, MasterPositionTakingGroupItem,
+  MemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem,
+  PotentialWinLimitGroupItem,
+  ProductGroup, ProductStatusGroupItem,
+  RNGGamesBetSettingGroupItem, SportsBookBetSettingGroupItem,
+  SuperDirectMemberPositionTakingGroupItem, SuperPositionTakingGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 export const getGroupTypes = (productGroups: ProductGroup[] | undefined, groupId: number) =>
@@ -153,5 +155,13 @@ function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
     return isChangePositionTaking(item as GroupItem, roleId);
   }
 
+  if (groupTypeId === GroupTypeIds.PotentialWinLimit) {
+    const groupItem = item as PotentialWinLimitGroupItem;
+    return (
+      groupItem.winLimit !== groupItem.original.winLimit ||
+      groupItem.isAutoReset !== groupItem.original.isAutoReset ||
+      groupItem.isAllowUnlimitWinLimit !== groupItem.original.isAllowUnlimitWinLimit
+    );
+  }
   return false;
 }

@@ -103,6 +103,7 @@ export interface ParlayMaxPayoutProps {
   isAllowUnlimitSingleMatchParlay: boolean;
 }
 
+
 export type ParlayMaxPayoutKey = keyof ParlayMaxPayoutProps;
 
 export const ColumnsParlayMaxPayout: ReadonlyArray<{
@@ -141,6 +142,37 @@ export interface ParlayMaxPayoutGroupItem extends ParlayMaxPayoutProps, GroupSet
   singleMatchParlay: number;
   isAllowUnlimitSingleMatchParlay: boolean;
 }
+
+
+export interface PotentialWinLimitProps {
+  winLimit: number;
+  isAllowUnlimitWinLimit: boolean;
+  isAutoReset: boolean;
+}
+
+export type PotentialWinLimitKey = keyof PotentialWinLimitProps;
+
+export const ColumnsPotentialWinLimit: ReadonlyArray<{
+  inputFieldName: 'winLimit';
+  checkBoxFieldName:
+    | 'isAllowUnlimitWinLimit'
+}> = [
+  {
+    inputFieldName: 'winLimit',
+    checkBoxFieldName: 'isAllowUnlimitWinLimit',
+  }
+];
+
+export interface PotentialWinLimitGroupItem extends PotentialWinLimitProps, GroupSettingItem<PotentialWinLimitProps> {  
+  winLimit: number;
+  isAllowUnlimitWinLimit: boolean;
+  isAutoReset: boolean;
+  isAutoResetUpline: boolean;
+  accumAmount: number;
+  accumToWin: number;
+  accumWinLoss: number;
+}
+
 
 export interface PositionTakingProps {
   step: number;
