@@ -13,6 +13,7 @@ using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType161;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType162;
 using System.Text.RegularExpressions;
 

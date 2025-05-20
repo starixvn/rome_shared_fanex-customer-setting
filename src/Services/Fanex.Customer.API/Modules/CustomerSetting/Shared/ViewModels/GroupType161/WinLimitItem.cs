@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType155;
+namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType161;
 
 public class WinLimitItem : GroupItemDefault
 {

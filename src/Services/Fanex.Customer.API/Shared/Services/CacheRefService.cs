@@ -74,6 +74,11 @@ public class CacheRefService : ICacheRefService
 
     public string GetProductName(int productId, string language = "en-US", bool isSiteLabel777 = false)
     {
+        if (productId == 0)
+        {
+            return productId.ToString();
+        }
+        
         string name = null;
         if (isSiteLabel777)
         {

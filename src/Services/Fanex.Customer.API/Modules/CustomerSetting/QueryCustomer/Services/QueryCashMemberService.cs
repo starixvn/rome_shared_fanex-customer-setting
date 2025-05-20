@@ -64,7 +64,12 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         var generalInfo = new GeneralInformation(generalInfoDto);
         ptStep = appSettings.IsSupportPT3Decimal(generalInfo.SiteLabel) ? 0.5M : 1M;
         isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, generalInfo.SiteLabel, appSettings);
-        var settingProfile = await settingProfileService.GetSettingProfiles(request.SystemId, generalInfo.Site, generalInfo.Currency, request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew, ServiceType.Cash);
+        var settingProfile = await settingProfileService.GetSettingProfiles(
+            request.SystemId, 
+            generalInfo.Site, 
+            generalInfo.Currency, 
+            request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew, 
+            ServiceType.Cash);
 
         var customerSetting = new CustomerSettingModel
         {
@@ -87,12 +92,18 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         bool isSiteLabel777,
         GeneralInformation generalInfo)
     {
-        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
+        var cashRequest = (QueryCashCustomerRequest)request;
+        var productGroupId = request.ProductGroupId.GetValueOrDefault(0);
+        var isGetUpline = cashRequest.IsGetUpline;
+        return settingProfile.Where(p => 
+            !IsHideGroupType(p.DisplayMode) && 
+            (productGroupId == 0 || p.GroupId == request.ProductGroupId))
+            .GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
-            GroupTypes = ((QueryCashCustomerRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryCashCustomerRequest)request, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, (QueryCashCustomerRequest)request, isSiteLabel777, false)
+            GroupTypes = isGetUpline ? GetGroupTypesForEdit(g, cashRequest, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, cashRequest, isSiteLabel777, false)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
 

@@ -7,6 +7,7 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType155;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType156;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType158;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType160;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType161;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType162;
 using Fanex.Customer.API.Shared.Models;
 using Newtonsoft.Json;
