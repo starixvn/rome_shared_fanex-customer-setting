@@ -229,6 +229,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
             GroupTypes.ProductStatus => new GetProductStatusCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.StakeLevel => new GetStakeLevelCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.WinlossLimit => new GetWinlossLimitCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
+            GroupTypes.WinLimit => new GetWinLimitCriteria(custId, appSettings.SettingStatus, roleId, groupId, groupType),
             GroupTypes.PotentialWinLimit => new GetPotentialWinLimitCriteria(custId, appSettings.SettingStatus),
             _ => null
         };

@@ -11,6 +11,7 @@ namespace Fanex.Customer.API.Shared.Constants
         public const int Commission = 156;
         public const int StakeLevel = 158;
         public const int ProductStatus = 160;
+        public const int WinLimit = 161;
         public const int PotentialWinLimit = 162;
     }
 }

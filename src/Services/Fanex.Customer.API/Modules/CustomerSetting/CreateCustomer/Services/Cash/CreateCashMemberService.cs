@@ -148,7 +148,6 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
             request.Settings.GeneralInfo.Password,
             request.Settings.GeneralInfo.Phone ?? string.Empty,
             request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
-            request.Settings.GeneralInfo.Fax ?? string.Empty,
             request.Settings.GeneralInfo.Bank?.BankId ?? 0,
             request.Settings.GeneralInfo.Bank?.AccountNumber ?? string.Empty,
             helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false),
