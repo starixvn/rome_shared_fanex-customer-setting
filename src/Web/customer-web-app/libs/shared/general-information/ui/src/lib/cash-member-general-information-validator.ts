@@ -14,7 +14,6 @@ export default class CashMemberGeneralInformationValidator extends GeneralInform
   }
 
   public async validateAllRules() {
-    console.log("generalInfo", this.generalInfo)
     const results = {
       [`userName`]: await super.validateUsername(),
       [`password`]: super.validatePassword(),

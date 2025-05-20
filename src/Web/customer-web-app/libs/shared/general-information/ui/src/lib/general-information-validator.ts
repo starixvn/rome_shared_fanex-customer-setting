@@ -79,7 +79,6 @@ export default class GeneralInformationValidator {
   }
 
   public async validateField(fieldName: generalInformationValidatorFields, isEditMode = false) {
-    console.log('validateField', fieldName, isEditMode);
     switch (fieldName) {
       case 'userName':
       case 'newUserName':
@@ -108,9 +107,7 @@ export default class GeneralInformationValidator {
   public async validateRequired(fieldName: string) {
     this.resetValidationState();
     const value = this.generalInfo[fieldName as keyof GeneralInfo];
-    console.log('validateRequired 1', fieldName, value);
     if (!value) {
-      console.log('validateRequired 1', fieldName, value);
       return (this.validationState = new ValidationResult(fieldName, 'RequiredField'));
     }
 
@@ -123,9 +120,13 @@ export default class GeneralInformationValidator {
     const phoneCode = value?.split('-')[0];
     const phoneNumber = value?.split('-')[1];
     
-    if (!phoneNumber || !phoneCode) {
-      return (this.validationState = new ValidationResult('mobilePhone', 'RequiredField'));
+    if (!phoneCode) {
+      return (this.validationState = new ValidationResult('phoneCode', 'RequiredField'));
     }
+
+    if (!phoneNumber) {
+      return (this.validationState = new ValidationResult('phoneNumber', 'RequiredField'));
+    } 
 
     return true;
   }

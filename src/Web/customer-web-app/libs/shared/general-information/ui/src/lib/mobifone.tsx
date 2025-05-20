@@ -41,7 +41,7 @@ export function Mobifone({
   }
 
   return (
-    <div className={styles.phoneCodeContainer} id="mobilePhone" onFocus={onFocus} onBlur={onBlur}>
+    <div className={styles.phoneCodeContainer}>
       <input
         id="phoneCode"
         key="phoneCode"
@@ -49,14 +49,17 @@ export function Mobifone({
         value={`+${countryCode}`}
         onChange={handleMobifoneCodeChange}
         className={classNames([styles.phoneCode, isError && styles.error])}
+        onFocus={onFocus} onBlur={onBlur}
         maxLength={4}
         autoFocus
       />
       <input
         id="phoneNumber"
+        key="phoneNumber"
         type="text"
         maxLength={45}
         className={classNames([styles.phoneNumber, isError && styles.error])}
+        onFocus={onFocus} onBlur={onBlur}
         value={phoneNumber.split('-')[1] ?? ''}
         onChange={handleMobifoneNumberChange}
       />
