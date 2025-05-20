@@ -1,7 +1,7 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
     GroupType, MasterDirectMemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup,
-    ProductStatusGroupItem, SuperDirectMemberPositionTakingGroupItem, WinLossLimitGroupItem
+    ProductStatusGroupItem, SuperDirectMemberPositionTakingGroupItem, WinLimitGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 import { ProductGroupsAction, ProductGroupsActionTypes } from './product-groups.actions';
@@ -78,6 +78,16 @@ const initProductGroupsForCreate = (productGroups: ProductGroup[]) => {
 
             return { ...type, groupItems };
           }
+          case GroupTypeIds.WinLimit: {
+            const groupItems = (type.groupItems as WinLimitGroupItem[]).map((item) => ({
+              ...item,
+              isMultipleModeChecked: true,
+              original: { ...item },
+              winLimitValue: item.winLimit !== 0 ? item.winLimit : undefined,
+            }));
+
+            return { ...type, groupItems };
+          }
           case GroupTypeIds.PositionTaking: {
             if (params.uplineRoleId === UserLevel.Super) {
               const groupItems = (type.groupItems as SuperDirectMemberPositionTakingGroupItem[]).map((item) => ({
@@ -141,6 +151,18 @@ const handleInitProductsForEdit = (productGroups: ProductGroup[], isMemberLevel:
 
           return { ...type, groupItems };
         }
+
+        if (type.id === GroupTypeIds.WinLimit) {
+          const groupItems = (type.groupItems as WinLimitGroupItem[]).map((item) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+            winLimitValue: item.winLimit !== 0 ? item.winLimit : undefined,
+          }));
+
+          return { ...type, groupItems };
+        }
+
 
         if (type.id === GroupTypeIds.ParlayMaxPayout) {
           const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => ({

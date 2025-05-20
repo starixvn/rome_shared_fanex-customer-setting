@@ -45,7 +45,6 @@ export const WinLossLimitTab = ({ url }: { url: string }) => {
       return response.data;
     };
     fetchData(url).then((data) => {
-      console.log('data', data)
       setData(data);
     }).finally(() => {
       setLoading(false);

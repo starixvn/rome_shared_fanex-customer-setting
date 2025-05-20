@@ -168,6 +168,7 @@
   "MaximumLoss": "Tiền thua cược lớn nhất",
   "StakeLevelRequired": "Mỗi loại cược phải có ít nhất một Giới Hạn Cược.",
   "MaximumLossValueShouldBeInRange": "Tiền thua cược lớn nhất phải nằm trong khoảng ({{min}} - {{max}}).",
+  "MaximumWinValueShouldBeInRange": "Tiền thắng cược lớn nhất phải nằm trong khoảng ({{min}} - {{max}}).",
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - Được gán tối đa {{value}} giới hạn cược cho cấp Member.",
   "ClickToViewCurrentWinLossAmount": "Nhấn để xem Lượng Tiền Đang Thua",
   "CurrentWinLossAmount": "Giá trị thắng thua hiện tại",

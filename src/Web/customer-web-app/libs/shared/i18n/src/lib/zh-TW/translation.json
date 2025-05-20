@@ -169,6 +169,7 @@
   "MaximumLoss": "最高輸額",
   "StakeLevelRequired": "每種投注類型至少需要選擇一個投注限額。",
   "MaximumLossValueShouldBeInRange": "最高輸額需介於 ({{min}} - {{max}}) 的範圍.",
+  "MaximumWinValueShouldBeInRange": "最高赢额需介于 ({{min}} - {{max}}) 的范围.",
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - 分配最大{{value}}投註限額給會員。",
   "ClickToViewCurrentWinLossAmount": "點擊查看目前輸的數額",
   "CurrentWinLossAmount": "目前輸贏數額",

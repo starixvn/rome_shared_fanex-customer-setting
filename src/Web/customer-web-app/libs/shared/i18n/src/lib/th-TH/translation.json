@@ -169,6 +169,7 @@
   "MaximumLoss": "การสูญเสียสูงสุด",
   "StakeLevelRequired": "การเดิมพันแต่ละประเภทจะต้องเลือกอย่างน้อยหนึ่งวงเงินเดิมพัน",
   "MaximumLossValueShouldBeInRange": "ค่าแพ้สูงสุดควรอยู่ในช่วง ({{min}} - {{max}})",
+  "MaximumWinValueShouldBeInRange": "ค่าชนะสูงสุดควรอยู่ในช่วง ({{min}} - {{max}})",
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - กำหนดวงเงินเดิมพันสูงสุด {{value}} ในระดับสมาชิก",
   "ClickToViewCurrentWinLossAmount": "คลิกเพื่อดูยอดเสียปัจจุบัน",
   "CurrentWinLossAmount": "จำนวนแพ้/ชนะปัจจุบัน",
