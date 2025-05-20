@@ -194,6 +194,7 @@
   "Domain": "โดเมน",
   "CompactCopy": "คัดลอกแบบรวบรัด",
   "IndividualCopy": "คัดลอกรายบุคคล",
+  "Copy": "คัดลอก",
   "NoOfAccountCreatedFailed": "สร้างไม่สำเร็จ {{noOfFailedAccounts}} บัญชี",
   "FailureReason": "สาเหตุที่ไม่สำเร็จ",
   "BankInfo": "ข้อมูลธนาคาร",

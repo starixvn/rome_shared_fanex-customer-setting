@@ -60,7 +60,7 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
                   className={styles['copy-btn']}
                   data-tooltip-id="compact-copy-btn"
                 >
-                  {t('CompactCopy')}
+                  {t('Copy')}
                 </button>
               </CopyToClipboard>
               {numberOfNewUserNames > 1 && (
@@ -80,10 +80,6 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
               <div className={styles['row-value-username']}>
                 <div>{newUserNames?.join(', ')}</div>
               </div>
-            </div>
-            <div className={styles['info-copy']}>
-              <div className={styles['label']}>{t('Credit')}</div>
-              <div className={styles['row-value']}>{credit}</div>
             </div>
             <div className={styles['info-copy']}>
               <div className={styles['label']}>{t('Domain')}</div>

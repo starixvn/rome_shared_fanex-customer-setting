@@ -195,6 +195,7 @@
   "Domain": "Domain",
   "CompactCopy": "Compact Copy",
   "IndividualCopy": "Individual Copy",
+  "Copy": "Copy",
   "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} accounts failed to be created.",
   "FailureReason": "Failure Reason",
   "BankInfo": "Bank Information",

@@ -194,6 +194,7 @@
   "Domain": "域名",
   "CompactCopy": "简洁复制",
   "IndividualCopy": "單一复制",
+  "Copy": "复制",
   "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} 账号创建失败",
   "FailureReason": "失败原因",
   "BankInfo": "银行信息",
