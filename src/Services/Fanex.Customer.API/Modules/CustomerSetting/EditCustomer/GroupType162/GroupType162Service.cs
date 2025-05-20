@@ -5,18 +5,24 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType162;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.QueryCustomer.Criteria.GroupType162;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
+using Fanex.Data.Repository;
 using Newtonsoft.Json.Linq;
 
 namespace Fanex.Customer.API.Modules.EditCustomer.GroupType162;
 
 class GroupType162Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
 {
-    public GroupType162Service(IMessageService messageService, ICacheRefService cacheRefService)
-        : base(messageService, cacheRefService) { }
+    protected readonly IDynamicRepository dynamicRepository;
+    public GroupType162Service(IDynamicRepository dynamicRepository, IMessageService messageService, ICacheRefService cacheRefService)
+        : base(messageService, cacheRefService)
+    {
+        this.dynamicRepository = dynamicRepository;
+    }
 
     public override UpdateGroupTypeResult Validate(
         EditRequestContext context,
@@ -41,24 +47,30 @@ class GroupType162Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), context.Language);
         var result = new UpdateGroupTypeResult(productGroupId, cacheRefService.GetProductGroupName(productGroupId), groupTypeId, StaticResources.Get($"GroupType{groupTypeId}", context.Language), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
-        var isLimitWinLimit = groupItems.Any(x => (x as PotentialWinLimit)?.IsAllowUnlimitWinLimit == false);
+
         if (result.IsSuccessful)
         {
             result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
-            if (isLimitWinLimit)
-            {
-                _ = ResetAccumWinLossAmount(context.CustId);
-            }
+            _ = ResetAccumWinLossAmount(context.CustId, settingStatus, groupItems);
+
         }
 
         return result;
     }
 
-    private async Task ResetAccumWinLossAmount(int custId)
+    private async Task ResetAccumWinLossAmount(int custId, byte settingStatus, IEnumerable<GroupItemDefault> groupItems)
     {
-        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount");
-        var parameters = new Hashtable {{ "ListCustId", custId }};
-        await db.ExecuteNonQueryAsync(parameters);
+        var criteria = new GetPotentialWinLimitCriteria(custId, settingStatus);
+        var potentialWinLimit = await dynamicRepository.GetAsync<PotentialWinLimit>(criteria);
+        var currencyWinlimit = potentialWinLimit?.WinLimit;
+
+        var newWinLimit = groupItems.First() as PotentialWinLimit;
+        if ((potentialWinLimit == null || currencyWinlimit == 0) && newWinLimit?.WinLimit > 0)
+        {
+            using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount");
+            var parameters = new Hashtable { { "ListCustId", custId } };
+            await db.ExecuteNonQueryAsync(parameters);
+        }
     }
 
     private Hashtable GenerateSPParams(
@@ -71,7 +83,7 @@ class GroupType162Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
             { "custid", context.CustId },
             { "winlimit", ComposeJsonSettingParam(groupItems) },
             { "subaccid", context.SubAccId },
-            { "userid", context.ActorId },            
+            { "userid", context.ActorId },
             { "ip", context.IP },
             { "settingstatus", settingStatus}
         };

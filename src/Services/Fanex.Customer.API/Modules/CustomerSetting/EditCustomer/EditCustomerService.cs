@@ -67,7 +67,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {156, new GroupType156Service(messageService, cacheRefService)},
             {158, new GroupType158Service(messageService, cacheRefService)},
             {160, new GroupType160Service(messageService, cacheRefService)},
-            {162, new GroupType162Service(messageService, cacheRefService)},
+            {162, new GroupType162Service(dynamicRepository, messageService, cacheRefService)},
         };
     }
 
