@@ -92,6 +92,9 @@
 
   "MaxWinLoss": "Maximum Win/Loss refers to the highest amount a Member can win or lose. Bets will be denied if a Member’s total win/loss exceeds the limit.",
   "MaxWin": "Maximum Win = Selected multiplier * Given Credit",
+  "MaxWinExample": " (ex. if multiplier = 5 and credit = 1,000 → max win = 5,000)",
+  "MaxWinCashMember": "Maximum Win = Input value within allowed range",
+  "MaxWinCashMemberExample": " (ex. if agent’s credit = 1,000 and multiplier = 3 → range = [0.1; 3,000])",
   "MaxLoss": "Maximum Loss: Input value within the allowed range."
 }
  

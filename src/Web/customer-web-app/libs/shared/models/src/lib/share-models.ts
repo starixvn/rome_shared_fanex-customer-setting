@@ -117,6 +117,7 @@ export interface InformationPageParams {
 
   site?: string;
   siteLabel?: string;
+  isCashMember?: boolean;
 }
 
 declare global {
