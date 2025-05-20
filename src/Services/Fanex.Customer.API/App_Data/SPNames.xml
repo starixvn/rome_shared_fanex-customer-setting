@@ -20,7 +20,7 @@
     <Setting Key="DBSite03_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="SiteDB03.bodb02.wsv_alp" Plain="0" />
     <Setting Key="DBTXN_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="DBTXN.bodb02.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_AccumWinLoss_162_Select" SpName="Acc_CustSetting_AccumWinLoss_162_Select_xtest" DbName="SiteDB03.bodb02.wsv_alp" />
-    <Setting Key="Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount" SpName="CustWinLimitBet_Reset_xtest" DbName="SiteDB03.bodb02.wsv_alp" />
+    <Setting Key="Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount" SpName="Acc_CustWinLimitBet_Reset_xtest" DbName="SiteDB03.bodb02.wsv_alp" />
   </Function>
   <Function Name="Security Code">
     <Setting Key="Age_UpdateMainAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
