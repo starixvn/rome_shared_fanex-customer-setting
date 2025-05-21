@@ -21,4 +21,6 @@ public class SettingProfile
     public int SettingType { get; set; }
 
     public short DisplayMode { get; set; }
+
+    public int ProductId { get; set; }
 }
