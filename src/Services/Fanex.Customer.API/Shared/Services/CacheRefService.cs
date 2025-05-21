@@ -17,8 +17,7 @@ public interface ICacheRefService
     string GetBetTypeName(int bettypeId, string language = "en-US");
 
     string GetDisplayedBetTypeName(int bettypeId, string language = "en-US");
-
-    string GetSportsbookPotentialWinLimitName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
+    
     string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
 
     string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
@@ -133,12 +132,6 @@ public class CacheRefService : ICacheRefService
     public string GetDisplayedBetTypeName(int bettypeId, string language = "en-US")
         => remotingRef.GetDisplayedBetTypeName(bettypeId.ToString(), language);
 
-    public string GetSportsbookPotentialWinLimitName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
-    {
-        var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
-        return GetOrSetFromCacheData(SB_PotentialWinLimit_RefId, refKey, language, refKey);
-    }
-
     public string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US")
     {
         var refKey = CombineRefKey(productGroupId, groupTypeId, sporttypeId, bettypeId);
@@ -194,16 +187,7 @@ public class CacheRefService : ICacheRefService
                     betTypeId,
                     language);
             }
-        }
-        else if (displayType == DisplayType.PotentialWinLimit)
-        {
-            return GetSportsbookPotentialWinLimitName(
-                productGroupId,
-                groupTypeId,
-                sportTypeId,
-                betTypeId,
-                language);
-        }
+        }        
         else
         {
             var displayName = GetNameByGroupSubGroup(

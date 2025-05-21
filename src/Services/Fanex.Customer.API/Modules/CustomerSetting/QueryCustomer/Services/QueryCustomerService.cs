@@ -334,7 +334,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         bool isSiteLabel777)
     {
         return groupItems.Join(
-        t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType }),
+        t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType, sb.ProductId }),
         groupItems => new { SportType = groupItems.SportTypeId, BetType = groupItems.BetTypeId },
         groupItemsProfile => new { groupItemsProfile.Key.SportType, groupItemsProfile.Key.BetType },
         (groupItem, groupItemsProfile) =>
@@ -344,7 +344,8 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                 groupItem.MapUpline();
             }
 
-            groupItem.ProductName = cacheRefService.GetProductName(groupItem.ProductId, language);
+            groupItem.ProductId = groupItemsProfile.Key.ProductId;
+            groupItem.ProductName = cacheRefService.GetProductName(groupItemsProfile.Key.ProductId, language);
             groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
             groupItem.SubGroupName = cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
             groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);

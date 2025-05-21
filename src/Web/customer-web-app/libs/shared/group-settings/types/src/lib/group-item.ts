@@ -1,4 +1,4 @@
-export interface GroupItem {
+export interface GroupItem {  
   sportTypeId: number;
   sportTypeName?: string;
   betTypeId: number;
@@ -171,6 +171,8 @@ export interface PotentialWinLimitGroupItem extends PotentialWinLimitProps, Grou
   accumAmount: number;
   accumToWin: number;
   accumWinLoss: number;
+  productId: number;
+  productName: string;
 }
 
 

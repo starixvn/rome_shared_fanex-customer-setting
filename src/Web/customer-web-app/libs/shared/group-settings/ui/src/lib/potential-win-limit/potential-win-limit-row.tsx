@@ -29,7 +29,7 @@ type CachePotentialWinLimitItem = {
 const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
   const { t } = useTranslation();
   const { potentialWinLimitItem, uplineRoleId, setErrorTooltip } = props;
-  const { sportTypeId, betTypeId, displayName, upline, isMultipleModeChecked } = potentialWinLimitItem;
+  const { sportTypeId, betTypeId, productName, upline, isMultipleModeChecked } = potentialWinLimitItem;
   const { handleSettingItemChange, isMultipleMode, roleId, productGroupId } = useGroupSettingContext();
   const groupId = Number(productGroupId);
   const { setValidationState } = useContext(ValidationContext);
@@ -101,7 +101,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
     <BlockRow
       label={
         isMultipleMode && !isReadOnly
-          ? renderBlockRowTitle(isMultipleModeChecked, displayName, (isChecked) =>
+          ? renderBlockRowTitle(isMultipleModeChecked, productName, (isChecked) =>
             handleSettingItemChange?.(
               ProductGroupIds.SportsBook,
               GroupTypeIds.PotentialWinLimit,
@@ -112,7 +112,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
           )
           : (
             <>
-              {displayName}
+              {productName}
               <PotentialWinLimitNote />
             </>
           )
