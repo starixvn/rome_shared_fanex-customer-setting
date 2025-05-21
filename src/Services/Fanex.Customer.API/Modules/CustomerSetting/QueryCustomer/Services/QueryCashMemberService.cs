@@ -63,7 +63,7 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         var generalInfoDto = await GetGeneralInfo(request);
         var generalInfo = new GeneralInformation(generalInfoDto);
         ptStep = appSettings.IsSupportPT3Decimal(generalInfo.SiteLabel) ? 0.5M : 1M;
-        isAllowUncheckAll = IsAllowUncheckAll(request.RoleId, generalInfo.Site, generalInfo.SiteLabel, appSettings);
+        isAllowUncheckAll = IsAllowUncheckAll(request.IsGetUpline ? request.RoleId : request.RoleId - 1, generalInfo.Site, generalInfo.SiteLabel, appSettings);
         var settingProfile = await settingProfileService.GetSettingProfiles(
             request.SystemId, 
             generalInfo.Site, 
