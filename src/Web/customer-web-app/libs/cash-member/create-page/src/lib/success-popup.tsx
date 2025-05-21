@@ -18,19 +18,18 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState("");
   const { newUserNames, handleOk, numberOfAccounts, message, subMessages } = props;
-  const credit = props.credit.toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2 });
   const domains = props.availableAlphaDomain?.slice(0, 3).join(', ');
 
   const noOfFailedAccounts = numberOfAccounts - (newUserNames?.length ?? 0);
 
-  const formatUserInfo = (usernameText: string, creditText: string, domainText: string) => {
-    return `${t('username')}: ${usernameText}\n${t('credit')}: ${creditText}\n${t('domain')}: ${domainText}`;
+  const formatUserInfo = (usernameText: string, domainText: string) => {
+    return `${t('username')}: ${usernameText}\n${t('domain')}: ${domainText}`;
   };
 
-  const compactText = formatUserInfo(newUserNames?.join(', ') ?? '', credit, domains ?? '');
+  const compactText = formatUserInfo(newUserNames?.join(', ') ?? '', domains ?? '');
 
   const individualText =
-    newUserNames?.map((username) => formatUserInfo(username, credit, domains ?? '')).join('\n\n') ?? '';
+    newUserNames?.map((username) => formatUserInfo(username, domains ?? '')).join('\n\n') ?? '';
 
   const numberOfNewUserNames = newUserNames?.length ?? 0;
 
