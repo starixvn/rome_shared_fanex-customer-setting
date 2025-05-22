@@ -2,9 +2,9 @@ using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.Customer.Criteria;
 
-public class CheckCashMemberCommand : NonQueryCommand
+public class CheckExistCashMemberUsernameCommand : NonQueryCommand
 {
-    public CheckCashMemberCommand(int uplineCustId, string userName)
+    public CheckExistCashMemberUsernameCommand(int uplineCustId, string userName)
     {
         UplineCustId = uplineCustId;
         UserName = userName;
@@ -14,7 +14,9 @@ public class CheckCashMemberCommand : NonQueryCommand
 
     public string UserName { get; }
 
-    public override string GetSettingKey() => "Age_CustomerSearch_CashMember";
+    public int Mode => 1; // Cash member only
+
+    public override string GetSettingKey() => "Acc_CustomerInsMember_CheckExists";
 
     public override bool IsValid() => UplineCustId > 0 && !string.IsNullOrWhiteSpace(UserName);
 }

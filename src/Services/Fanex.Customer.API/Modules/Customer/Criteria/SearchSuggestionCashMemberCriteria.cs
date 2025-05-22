@@ -16,7 +16,9 @@ public class SearchSuggestionCashMemberCriteria : CriteriaBase
 
     public string UserName { get; }
 
-    public override string GetSettingKey() => "Age_CustomerSearch_CashMember";
+    public int Mode => 1; // Cash member only
+
+    public override string GetSettingKey() => "Acc_CustomerInsMember_Suggestion";
 
     public override bool IsValid() => UplineCustId > 0 && !string.IsNullOrWhiteSpace(UserName);
 }
