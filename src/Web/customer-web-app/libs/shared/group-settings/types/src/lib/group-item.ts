@@ -173,6 +173,7 @@ export interface PotentialWinLimitGroupItem extends PotentialWinLimitProps, Grou
   accumWinLoss: number;
   productId: number;
   productName: string;
+  isHideAccumSection: boolean;
 }
 
 

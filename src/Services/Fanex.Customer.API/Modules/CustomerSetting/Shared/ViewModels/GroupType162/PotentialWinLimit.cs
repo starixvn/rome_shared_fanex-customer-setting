@@ -11,6 +11,9 @@ public class PotentialWinLimit : GroupItemDefault
     [JsonIgnore]
     public bool IsAllowUnlimitWinLimit => WinLimit == 0;
 
+    [JsonIgnore]
+    public bool IsHideAccumSection => IsAllowUnlimitWinLimit;
+
     public bool IsAutoReset { get; set; }    
 
     [JsonIgnore]

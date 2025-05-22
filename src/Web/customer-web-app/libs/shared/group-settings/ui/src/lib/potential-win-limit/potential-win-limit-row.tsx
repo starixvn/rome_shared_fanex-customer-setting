@@ -202,7 +202,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
 
                   <div>
                     <div className='accum-info'
-                      hidden={potentialWinLimitItem.isAllowUnlimitWinLimit}>
+                      hidden={potentialWinLimitItem.isHideAccumSection}>
                       <div>
                         {t('AccumulateAmount', {
                           accumulateAmount: NumberHelper.formatWithCommas(potentialWinLimitItem.accumAmount),
