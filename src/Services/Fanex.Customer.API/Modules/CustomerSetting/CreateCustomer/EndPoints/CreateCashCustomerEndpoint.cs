@@ -26,6 +26,7 @@ public class CreateCashCustomerEndpoint : IEndpoint<IResult, CreateRequest, ICre
         }
         
         request.Context.IsCashService = true;
+        request.Context.NoOfCreateAccount = 1; // Only create 1 account at a time for cash service
         return Results.Ok(await service.Create(request));
     }
 }
