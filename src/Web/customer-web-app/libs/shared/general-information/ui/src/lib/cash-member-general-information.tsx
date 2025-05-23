@@ -268,8 +268,25 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
           <BankInfomation
             bankId={generalInfo.bank?.bankId}
             bankAccountNumber={generalInfo.bank?.accountNumber}
-            onChangeBankId={bankId => onGeneralInfoChange?.({ bank: { ...generalInfo.bank, bankId: bankId } })}
-            onChangeBankAccountNumber={bankAccountNumber => onGeneralInfoChange?.({ bank: { ...generalInfo.bank, accountNumber: bankAccountNumber } })}
+            isBankAccountNumberError={getErrorByField('bankAccountNumber')}
+            onChangeBankId={async (bankId) => {
+              const data = { bank: { ...generalInfo.bank, bankId: bankId } };
+              onGeneralInfoChange?.(data);
+              const result = await validateGeneralInfo('bankAccountNumber', data);
+              setValidationResults({ ...validationResults, bankAccountNumber: result });
+            }}
+            onChangeBankAccountNumber={async (bankAccountNumber) => {
+              const data = { bank: { ...generalInfo.bank, accountNumber: bankAccountNumber } };
+              onGeneralInfoChange?.(data);
+              const result = await validateGeneralInfo('bankAccountNumber', data);
+              setValidationResults({ ...validationResults, bankAccountNumber: result });
+            }}
+            onFocusBankAccountNumber={() => {
+              setLocationTooltip('bankAccountNumber');
+            }}
+            onBlurBankAccountNumber={() => {
+              setLocationTooltip('');
+            }}
           />
 
           <CashUserInfo

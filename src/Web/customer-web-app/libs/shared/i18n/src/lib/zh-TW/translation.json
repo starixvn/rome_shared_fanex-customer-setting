@@ -57,6 +57,7 @@
   "comboOver6": "複選 6+ & 系統串關",
   "CreateAccount": "新增帳號功能",
   "RequiredField": "必填欄",
+  "PleaseInputBankAccountNumber": "請輸入銀行帳號",
   "PasswordInCorrectFormat": "您的密码不符合最低安全要求",
   "SelectTemplate": "選擇模板",
   "unlimited": "無限",
@@ -204,5 +205,7 @@
   "ThisUserIsNotYourCashMember": "此用戶不是您的現金會員",
   "FirstNameDescription": "按照會員的銀行帳戶",
   "LastNameDescription": "按照會員的銀行帳戶",
-  "MobilePhoneDescription": "會員的手機號碼"
+  "MobilePhoneDescription": "會員的手機號碼",
+  "SelectBankAccount": "選擇銀行帳戶",
+  "SearchBank": "搜索銀行"
 }

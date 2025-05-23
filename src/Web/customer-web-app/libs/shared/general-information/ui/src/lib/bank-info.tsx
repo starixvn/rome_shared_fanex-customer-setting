@@ -18,6 +18,9 @@ interface BankSelectProps {
   readonly bankAccountNumber?: string;
   readonly onChangeBankId: (bankId: number) => void;
   readonly onChangeBankAccountNumber: (bankAccountNumber: string) => void;
+  readonly isBankAccountNumberError: boolean;
+  readonly onFocusBankAccountNumber: () => void;
+  readonly onBlurBankAccountNumber: () => void;
 }
 
 const usePreloadImages = (urls: string[]) => {
@@ -36,9 +39,11 @@ const usePreloadImages = (urls: string[]) => {
 };
 
 const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId: (bankId: number) => void }) => {
+  const { t } = useTranslation();
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const emptyBank: Bank = { id: 0, name: 'Select Bank Account' };
+  const [searchTerm, setSearchTerm] = useState('');
+  const emptyBank: Bank = { id: 0, name: t('SelectBankAccount') };
   const wrapperRef = useRef<HTMLDivElement>(null);
   const bankImageUrls = useMemo(() =>
     banks
@@ -64,13 +69,20 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
     };
   }, [isOpen]);
 
-  
+  const filteredBanks = useMemo(() => {
+    if (!searchTerm) return [emptyBank, ...banks];
+    const searchLower = searchTerm.toLowerCase();
+    return [emptyBank, ...banks].filter(bank =>
+      bank.name.toLowerCase().includes(searchLower)
+    );
+  }, [banks, searchTerm]);
 
   return (
     <div className={stylesDropdown['bank-dropdown']} ref={wrapperRef}>
-      <div className={stylesDropdown['bank-dropdown-selected']} onClick={() => setIsOpen(!isOpen)}>
+      <div className={stylesDropdown['bank-dropdown__selected']} onClick={() => setIsOpen(!isOpen)}>
         {selectedBank?.code &&
           <img
+            alt={selectedBank.name}
             src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${selectedBank.code}.png`}
             style={{ width: '18px', height: '18px', marginRight: '8px' }}
           />}
@@ -83,30 +95,57 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
           </svg>
         </span>
       </div>
-      {isOpen &&
-        <div className={stylesDropdown['bank-options']}>
-          {[emptyBank, ...banks].map(bank => (
-            <div key={bank.id} className={classNames({ [stylesDropdown['bank-option-selected']]: selectedBank?.id === bank.id })} onClick={() => {
+      {isOpen && (
+        <div className={stylesDropdown['bank-dropdown__menu']}>
+          <div className={stylesDropdown['bank-dropdown__search']}>
+            <input
+              type="text"
+              placeholder={t('SearchBank')}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => {
+                if (e.key === 'Tab' && filteredBanks.length > 0) {
+                  e.preventDefault();
+                  const firstBank = filteredBanks[0];
+                  setSelectedBank(firstBank);
+                  setIsOpen(false);
+                  onChangeBankId(firstBank.id);
+                  setSearchTerm('');
+                }
+              }}
+            />
+          </div>
+          <div className={stylesDropdown['bank-dropdown__list']}>
+          {filteredBanks.map((bank, index) => (
+            <div key={bank.id} className={classNames(stylesDropdown['bank-dropdown__item'], { [stylesDropdown['bank-dropdown__item--selected']]: selectedBank?.id === bank.id })} onClick={() => {
               setSelectedBank(bank);
               setIsOpen(false);
               onChangeBankId(bank.id);
+              setSearchTerm('');
             }}>
-              {bank.code && <img src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
-              {bank.name}
+              {bank.code && <img alt={bank.name} src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
+              {bank.id === 0 ? <span style={{ padding: '0 0 0 28px' }}>{bank.name}</span> : bank.name}
             </div>
           ))}
+          </div>
         </div>
-      }
+      )}
     </div>
   );
 }
 
-
-
-export function BankInfomation({ bankAccountNumber, onChangeBankId, onChangeBankAccountNumber }: BankSelectProps) {
+export function BankInfomation(props: BankSelectProps) {
   const { t } = useTranslation();
   const [banks, setBanks] = useState<Bank[]>([]);
-
+  const {
+    bankAccountNumber,
+    onChangeBankId,
+    onChangeBankAccountNumber,
+    isBankAccountNumberError,
+    onFocusBankAccountNumber,
+    onBlurBankAccountNumber
+  } = props;
   useEffect(() => {
     async function fetchBanks() {
       const result = await SettingService.GetBanks();
@@ -125,10 +164,17 @@ export function BankInfomation({ bankAccountNumber, onChangeBankId, onChangeBank
           <BankDropdown banks={banks} onChangeBankId={onChangeBankId} />
         </BlockItem>
         <BlockItem label={t('AccountNumber')}>
-          <input type="text" value={bankAccountNumber} onChange={e => {
-            const value = inputNumberOnly(e.target.value);
-            onChangeBankAccountNumber(value);
-          }} />
+          <input
+            id="bankAccountNumber"
+            type="text"
+            value={bankAccountNumber}
+            className={classNames({ error: isBankAccountNumberError })}
+            onChange={e => {
+              const value = inputNumberOnly(e.target.value);
+              onChangeBankAccountNumber(value);
+            }}
+            onFocus={onFocusBankAccountNumber}
+            onBlur={onBlurBankAccountNumber} />
         </BlockItem>
       </div >
     </div >)

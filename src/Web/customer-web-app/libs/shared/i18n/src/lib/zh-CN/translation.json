@@ -57,6 +57,7 @@
   "comboOver6": "复选 6+ & 系统串关",
   "CreateAccount": "新增帐号功能",
   "RequiredField": "必填栏",
+  "PleaseInputBankAccountNumber": "请输入银行账号",
   "PasswordInCorrectFormat": "您的密码不符合最低安全要求",
   "SelectTemplate": "选择模板",
   "unlimited": "无限",
@@ -204,5 +205,7 @@
   "ThisUserIsNotYourCashMember": "此用户不是您的现金会员",
   "FirstNameDescription": "按照会员的银行账户",
   "LastNameDescription": "按照会员的银行账户",
-  "MobilePhoneDescription": "会员的手机号码"
+  "MobilePhoneDescription": "会员的手机号码",
+  "SelectBankAccount": "选择银行账号",
+  "SearchBank": "搜索银行"
 }

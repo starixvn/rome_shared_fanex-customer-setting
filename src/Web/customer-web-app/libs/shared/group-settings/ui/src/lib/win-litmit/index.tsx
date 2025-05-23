@@ -228,7 +228,7 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
   const showCurrentWinLossAmount = (sportType: number, betType: number) => {
     NiceModal.show(WinLossAmount, { sportType, betType });
   };
-  console.log('winLimitItems', winLimitItems)
+
   return (
     <div id={winLimitBlockId} style={{ width: '880px', height: '100%' }}>
       <Block

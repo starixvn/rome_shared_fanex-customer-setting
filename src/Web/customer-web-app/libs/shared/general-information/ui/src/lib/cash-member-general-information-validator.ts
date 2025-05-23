@@ -18,13 +18,13 @@ export default class CashMemberGeneralInformationValidator extends GeneralInform
       [`userName`]: await super.validateUsername(),
       [`password`]: super.validatePassword(),
       [`selectedCashMember`]: await this.validateSelectedCashMember(),
+      [`bankAccountNumber`]: await this.validateBankAccountNumber(),
       [`firstName`]: await this.validateRequired('firstName'),
       [`lastName`]: await this.validateRequired('lastName'),
       [`mobilePhone`]: await this.validateMobilePhone(),
     };
     return results;
   }
-
 
   public async validateSelectedCashMember(): Promise<ValidationResult | boolean> {
     this.resetValidationState();
@@ -40,4 +40,5 @@ export default class CashMemberGeneralInformationValidator extends GeneralInform
 
     return true;
   }
+
 }

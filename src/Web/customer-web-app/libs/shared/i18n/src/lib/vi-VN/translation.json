@@ -57,6 +57,7 @@
   "comboOver6": "Combo 6+ & Cược Tổng Hợp",
   "CreateAccount": "Tạo tài khoản",
   "RequiredField": "Thông tin này bắt buộc phải nhập.",
+  "PleaseInputBankAccountNumber": "Vui lòng nhập số tài khoản ngân hàng",
   "PasswordInCorrectFormat": "Mật khẩu của bạn chưa đạt mức an toàn tối thiểu.",
   "SelectTemplate": "Chọn Mẫu",
   "unlimited": "Không giới hạn",
@@ -203,5 +204,7 @@
   "ThisUserIsNotYourCashMember": "Người dùng này không phải là Member tiền mặt của bạn",
   "FirstNameDescription": "Theo tài khoản ngân hàng của thành viên",
   "LastNameDescription": "Theo tài khoản ngân hàng của thành viên",
-  "MobilePhoneDescription": "Số điện thoại di động của thành viên"
+  "MobilePhoneDescription": "Số điện thoại di động của thành viên",
+  "SelectBankAccount": "Chọn Tài Khoản Ngân Hàng",
+  "SearchBank": "Tìm Kiếm Ngân Hàng"
 }

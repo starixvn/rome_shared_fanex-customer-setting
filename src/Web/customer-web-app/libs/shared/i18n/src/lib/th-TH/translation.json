@@ -57,6 +57,7 @@
   "comboOver6": "คอมโบ 6+ และ ระบบพาร์เลย์",
   "CreateAccount": "สร้างบัญชี",
   "RequiredField": "จำเป็นต้องใส่ข้อมูลนี้",
+  "PleaseInputBankAccountNumber": "กรุณากรอกหมายเลขบัญชีธนาคาร",
   "PasswordInCorrectFormat": "รหัสผ่านของคุณไม่เป็นไปตามข้อแม้ของการรักษาความปลอดภัย",
   "SelectTemplate": "เลือกเทมเพลต",
   "unlimited": "ไม่จำกัดค่า",
@@ -204,5 +205,7 @@
   "ThisUserIsNotYourCashMember": "ผู้ใช้งานนี้ไม่ใช่สมาชิกเงินสดของคุณ",
   "FirstNameDescription": "ตามบัญชีธนาคารของสมาชิก",
   "LastNameDescription": "ตามบัญชีธนาคารของสมาชิก",
-  "MobilePhoneDescription": "หมายเลขโทรศัพท์ของสมาชิก"
+  "MobilePhoneDescription": "หมายเลขโทรศัพท์ของสมาชิก",
+  "SelectBankAccount": "เลือกบัญชีธนาคาร",
+  "SearchBank": "ค้นหาธนาคาร"
 }

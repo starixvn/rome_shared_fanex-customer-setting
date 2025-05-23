@@ -58,6 +58,7 @@
   "comboOver6": "Combo 6+ & System Parlay",
   "CreateAccount": "Create Account",
   "RequiredField": "This field is required.",
+  "PleaseInputBankAccountNumber": "Please input bank account number",
   "PasswordInCorrectFormat": "Your password does not meet the minimum security requirement.",
   "SelectTemplate": "Select Template",
   "unlimited": "Unlimited",
@@ -205,7 +206,9 @@
   "ThisUserIsNotYourCashMember": "This user is not your cash member",
   "FirstNameDescription": "As per member's bank account",
   "LastNameDescription": "As per member's bank account",
-  "MobilePhoneDescription": "Member's mobile phone number"
+  "MobilePhoneDescription": "Member's mobile phone number",
+  "SelectBankAccount": "Select Bank Account",
+  "SearchBank": "Search bank..."
   "PotentialWinLimitNotice": "Potential Win Limit Notice",
   "PotentialWinLimitNoticeHint1": "Due to result amendments, settlement delays, and other factors, the accumulated Potential Win Limit may temporarily exceed the configured threshold.",
   "PotentialWinLimitNoticeHint2": "Parlay bets are excluded from this calculation during this phase.",
