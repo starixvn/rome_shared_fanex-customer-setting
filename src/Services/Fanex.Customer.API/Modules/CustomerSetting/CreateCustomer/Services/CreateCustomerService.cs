@@ -18,6 +18,7 @@ using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.Password.Service;
 using Fanex.Common.Extensions;
 using Fanex.Customer.API.Modules.CreateCustomer.Services.Cash;
+using Fanex.Customer.API.Modules.Customer.Criteria;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -113,9 +114,11 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
                 request.Context.IP);
             }
 
-            result.AvailableAlphaDomain = await customerService.GetBackupDomains(
-                request.Settings.GeneralInfo.Site,
-                isDirectMember ? CustomerLevel.Member : (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
+            result.AvailableAlphaDomain = request.Context.IsCashService
+                ? await customerService.GetDomainsForCashMember(request.Settings.GeneralInfo.UplineCustId)
+                : await customerService.GetBackupDomains(
+                    request.Settings.GeneralInfo.Site,
+                    isDirectMember ? CustomerLevel.Member : (byte)(request.Settings.GeneralInfo.UplineRoleId - 1));
         }
 
         return result;

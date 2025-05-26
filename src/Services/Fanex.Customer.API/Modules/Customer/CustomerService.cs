@@ -6,6 +6,7 @@ using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
+using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 
@@ -52,6 +53,8 @@ public interface ICustomerService
     Task<MemberBalance> GetMemberBalance(int custId, string siteDBName);
 
     Task<List<string>> GetBackupDomains(string site, byte roleId);
+
+    Task<List<string>> GetDomainsForCashMember(int uplineCustId);
 
     Task<AccountInfo> GetAccountInfo(int custId);
 
@@ -380,6 +383,12 @@ public class CustomerService : ICustomerService
         }
         var domains = roleId == CustomerLevel.Member ? memberDomains : agencyDomains;
         return domains;
+    }
+
+    public async Task<List<string>> GetDomainsForCashMember(int uplineCustId)
+    {
+        var backupDomainsResult = await dynamicRepository.FetchAsync<BackupDomain>(new GetDomainsForCashMemberCriteria(uplineCustId));
+        return [.. backupDomainsResult.Select(d => d.Domain)];
     }
 
     public async Task<AccountInfo> GetAccountInfo(int custId)
