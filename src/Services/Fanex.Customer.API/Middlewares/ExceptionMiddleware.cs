@@ -36,7 +36,8 @@ public class ExceptionMiddleware
         context.Response.ContentType = "application/json";
 
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        await _logger.ErrorAsync(await BuildError(context.Request, exception));
+        var error = await BuildError(context.Request, exception);
+        await _logger.ErrorAsync(error);
         await context.Response.WriteAsync(new
         {
             context.Response.StatusCode,
