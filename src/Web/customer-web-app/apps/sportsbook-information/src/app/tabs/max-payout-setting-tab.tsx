@@ -160,16 +160,16 @@ const FistTable = ({ data, isSpecialPlatform }: { data: SabaSport[], isSpecialPl
     }
     return e;
   });
-
+ 
   return (
     <table className={styles.tableaccordion}>
       <thead>
         <tr>
           <th>
-            <Trans i18nKey={'BetSettingsFollowed'} />
+            <Trans i18nKey={isSpecialPlatform ? 'VS_Header' : 'SabaTable_Header1'} />
           </th>
           <th>
-            <Trans i18nKey={isSpecialPlatform ? 'VS_Header' : 'SabaTable_Header1'} />
+            <Trans i18nKey={'BetSetting'} />
           </th>
         </tr>
       </thead>
