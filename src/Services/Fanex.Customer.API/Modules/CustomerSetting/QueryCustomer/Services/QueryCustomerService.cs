@@ -81,7 +81,8 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                 request,
                 appSettings.Belonging777Group(request.SiteLabel),
                 generalInfo,
-                false)
+                false,
+                generalInfo.UplineRoleId)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = 0;
@@ -109,7 +110,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         {
             Group = uGroup,
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember)
+            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember, request.UplineRoleId.GetValueOrDefault())
         };
 
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
@@ -149,11 +150,12 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         BaseQueryRequest request,
         bool isSiteLabel777,
         GeneralInformation generalInfo,
-        bool isDirectMember)
+        bool isDirectMember,
+        byte uplineRoleId)
     {
-        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) 
+        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode)
             && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))
-            && SupportPotentialWinLimitBySite(generalInfo.Site, p.GroupType)
+            && SupportPotentialWinLimitBySite(generalInfo.Site, p.GroupType, isDirectMember, uplineRoleId)
         ).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
@@ -165,8 +167,15 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
 
-    private bool SupportPotentialWinLimitBySite(string site, int groupTypeId)
-    => groupTypeId != GroupTypes.PotentialWinLimit || appSettings.IsSupportPotentialWinLimit(site);
+    private bool SupportPotentialWinLimitBySite(string site, int groupTypeId, bool isDirectMember, byte uplineRoleId)
+    {
+        if (groupTypeId == GroupTypes.PotentialWinLimit)
+        {
+            return !isDirectMember && uplineRoleId == CustomerLevel.Agent && appSettings.IsSupportPotentialWinLimit(site);
+        }
+
+        return true;
+    }
 
     private IEnumerable<GroupType> GetGroupTypesForSuper(IGrouping<int, SettingProfile> g, QuerySuperRequest request, bool isSiteLabel777)
     {
