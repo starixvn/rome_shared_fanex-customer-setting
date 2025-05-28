@@ -54,7 +54,6 @@ public class CacheRefService : ICacheRefService
 
     private const string SubGroupRefId = "SubGroup";
 
-    private const string SB_PotentialWinLimit_RefId = "SB_PotentialWinLimit";
     private const string SB_Comm_SMA_RefId = "SB_Comm_SMA";
 
     private const string SB_Comm_Member_RefId = "SB_Comm_Member";
@@ -187,7 +186,7 @@ public class CacheRefService : ICacheRefService
                     betTypeId,
                     language);
             }
-        }        
+        }
         else
         {
             var displayName = GetNameByGroupSubGroup(
