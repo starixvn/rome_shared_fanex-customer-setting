@@ -105,12 +105,12 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
         }
-
+        var role = request.IsGetUpline ? request.UplineRoleId.GetValueOrDefault() : request.RoleId;
         var customerSetting = new CustomerSettingModel
         {
             Group = uGroup,
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember, request.UplineRoleId.GetValueOrDefault())
+            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember, role)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
