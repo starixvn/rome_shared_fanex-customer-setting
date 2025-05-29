@@ -38,7 +38,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 [JsonDerivedType(typeof(StakeLevelItem), typeDiscriminator: 22)]
 [JsonDerivedType(typeof(ProductStatusItem), typeDiscriminator: 23)]
 [JsonDerivedType(typeof(WinLimitItem), typeDiscriminator: 24)]
-[JsonDerivedType(typeof(PotentialWinLimit), typeDiscriminator: 24)]
+[JsonDerivedType(typeof(PotentialWinLimit), typeDiscriminator: 25)]
 public class GroupItemDefault
 {
     public int ProductId { get; set; }
