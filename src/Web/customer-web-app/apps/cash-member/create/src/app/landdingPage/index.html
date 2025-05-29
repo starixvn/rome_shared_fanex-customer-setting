@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Service Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            /* max-width: 1600px; */
+            height: 650px;
+            margin: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner-image {
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 32px;
+        }
+
+        .title {
+            font-weight: 900;
+            font-size: 52px;
+            color: #03548d;
+            line-height: 1.2;
+            text-align: center;
+            max-width: 350px;
+            letter-spacing: 0.2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-weight: 700;
+            padding: 10px;
+            font-size: 24px;
+            color: #03548d;
+            line-height: 1.2;
+            text-align: center;
+            margin: 10px;
+            max-width: 250px;
+            letter-spacing: 0.1px;
+            border-radius: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 16px 32px;
+            border-radius: 18px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            letter-spacing: 0.2px;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .primary-button {
+            background: #0a2c4d;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .secondary-button {
+            background: #286fa1;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.95); }
+        }
+
+        .pulse-animate {
+            animation: pulse 1.2s infinite;
+            display: inline-block;
+            color: #ff9800;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="http://localhost:4211/public/BannerPC.png" alt="AdvCash" class="banner-image">
+        <div class="content">
+            <h1 class="title">EXCLUSIVELY FOR YOU</h1>
+            <div class="subtitle">
+                Enjoy Cash Service <span class="pulse-animate">FREE</span> for 14 days!
+            </div>
+            <div class="button-container">
+                <button class="button primary-button" onclick="alert('Activate now clicked!')">
+                    Activate now
+                </button>
+                <button class="button secondary-button" onclick="alert('Find out more clicked!')">
+                    Find out more
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

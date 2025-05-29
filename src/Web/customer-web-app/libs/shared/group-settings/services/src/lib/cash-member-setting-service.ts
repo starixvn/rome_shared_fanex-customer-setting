@@ -1,14 +1,25 @@
-
-
 import { CreateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
-import axios from 'axios';
 import { GroupSettingsResponse } from './setting-service';
 import { ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
 import { ProductGroup } from '@customer-web-app/shared-group-settings-types';
 
 export const CashMemberSettingService = {
+  GetCashServiceStatus: async () => {
+    const response = await axiosInstance.get(
+      `Customer/GetCashServiceStatus`,
+    );
+    return response.data;
+  },
+
+  UpdateCashServiceStatus: async (status: boolean) => {
+    const response = await axiosInstance.post(
+      `Customer/UpdateCashServiceStatus?status=${status}`,
+    );
+    return response.data;
+  },
+
   GetCashMemberUserNameSuggestion: async (query: string) => {
     const response = await axiosInstance.get<UsernameSuggestion[]>(
       `Customer/SearchSuggestCashMembers?searchUsername=${query}&uplineCustId=${params.uplineId}`
@@ -33,18 +44,6 @@ export const CashMemberSettingService = {
     );
     return response.data;
   },
-  // GetBanks: async () => {
-  //   const response = await axios.get(`${(window.top as any).alpha.urls.cashServiceRootPath}Payments/GetBanksByTransactionType`, {
-  //     baseURL: ""
-  //   });
-  //   return response.data;
-  // },
-  // GetCountryCodes: async () => {
-  //   const response = await axios.get(`${(window.top as any).alpha.urls.cashServiceRootPath}Payments/GetCountryCodes`, {
-  //     baseURL: ""
-  //   });
-  //   return response.data;
-  // },
   GetCashCustomerSetting: async (
     custId: number,
     roleId: number,
