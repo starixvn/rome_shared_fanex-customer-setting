@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.Customer.API.Resources {
+namespace Fanex.Customer.API.Resources
+{
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,1059 +23,1286 @@ namespace Fanex.Customer.API.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
-        
+    public class Resources
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resources()
+        {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        public static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Customer.API.Resources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
-            get {
+        public static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Agent Min PT must be less than or equal to Agent Max PT..
         /// </summary>
-        public static string AgentMinPTCannotBeGreaterThanAgentMaxPT {
-            get {
+        public static string AgentMinPTCannotBeGreaterThanAgentMaxPT
+        {
+            get
+            {
                 return ResourceManager.GetString("AgentMinPTCannotBeGreaterThanAgentMaxPT", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to All Products.
         /// </summary>
-        public static string AllProducts {
-            get {
+        public static string AllProducts
+        {
+            get
+            {
                 return ResourceManager.GetString("AllProducts", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Commission 1 (Comm 1).
         /// </summary>
-        public static string Comm1 {
-            get {
+        public static string Comm1
+        {
+            get
+            {
                 return ResourceManager.GetString("Comm1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Commission 2 (Comm 2).
         /// </summary>
-        public static string Comm2 {
-            get {
+        public static string Comm2
+        {
+            get
+            {
                 return ResourceManager.GetString("Comm2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Commission 3 (Comm 3): Applies to other bettypes..
         /// </summary>
-        public static string Comm3 {
-            get {
+        public static string Comm3
+        {
+            get
+            {
                 return ResourceManager.GetString("Comm3", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Your nickname was configured successfully.
         /// </summary>
-        public static string ConfiguredNicknameSuccessfully {
-            get {
+        public static string ConfiguredNicknameSuccessfully
+        {
+            get
+            {
                 return ResourceManager.GetString("ConfiguredNicknameSuccessfully", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Customer Settings.
         /// </summary>
-        public static string CustomerSettings {
-            get {
+        public static string CustomerSettings
+        {
+            get
+            {
                 return ResourceManager.GetString("CustomerSettings", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to General Information.
         /// </summary>
-        public static string GeneralInfo {
-            get {
+        public static string GeneralInfo
+        {
+            get
+            {
                 return ResourceManager.GetString("GeneralInfo", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Commission.
         /// </summary>
-        public static string GroupType150 {
-            get {
+        public static string GroupType150
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType150", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bet Setting.
         /// </summary>
-        public static string GroupType151 {
-            get {
+        public static string GroupType151
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType151", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Parlay Max Payout per Bet.
         /// </summary>
-        public static string GroupType152 {
-            get {
+        public static string GroupType152
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType152", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Position Taking.
         /// </summary>
-        public static string GroupType153 {
-            get {
+        public static string GroupType153
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType153", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bet Setting.
         /// </summary>
-        public static string GroupType154 {
-            get {
+        public static string GroupType154
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType154", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Commission.
         /// </summary>
-        public static string GroupType156 {
-            get {
+        public static string GroupType156
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType156", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bet Limit.
         /// </summary>
-        public static string GroupType158 {
-            get {
+        public static string GroupType158
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType158", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bet Setting.
         /// </summary>
-        public static string GroupType159 {
-            get {
+        public static string GroupType159
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType159", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Product Status.
         /// </summary>
-        public static string GroupType160 {
-            get {
+        public static string GroupType160
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType160", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Win Limit.
         /// </summary>
-        public static string GroupType161 {
-            get {
+        public static string GroupType161
+        {
+            get
+            {
                 return ResourceManager.GetString("GroupType161", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Invalid parameter value..
         /// </summary>
-        public static string InvalidParameterValue {
-            get {
+        public static string InvalidParameterValue
+        {
+            get
+            {
                 return ResourceManager.GetString("InvalidParameterValue", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to 1 X 2.
         /// </summary>
-        public static string lbl1X2 {
-            get {
+        public static string lbl1X2
+        {
+            get
+            {
                 return ResourceManager.GetString("lbl1X2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sorry, you can only create 5 members per day, please try again tomorrow..
         /// </summary>
-        public static string LimitAgentNewDownlineError {
-            get {
+        public static string LimitAgentNewDownlineError
+        {
+            get
+            {
                 return ResourceManager.GetString("LimitAgentNewDownlineError", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sorry, you can only create 3 agents per day, please try again tomorrow..
         /// </summary>
-        public static string LimitMasterNewDownlineError {
-            get {
+        public static string LimitMasterNewDownlineError
+        {
+            get
+            {
                 return ResourceManager.GetString("LimitMasterNewDownlineError", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sorry, you can only create 3 masters per day, please try again tomorrow..
         /// </summary>
-        public static string LimitSuperNewDownlineError {
-            get {
+        public static string LimitSuperNewDownlineError
+        {
+            get
+            {
                 return ResourceManager.GetString("LimitSuperNewDownlineError", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Live.
         /// </summary>
-        public static string Live {
-            get {
+        public static string Live
+        {
+            get
+            {
                 return ResourceManager.GetString("Live", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Master Min PT must be less than or equal to Master Max PT..
         /// </summary>
-        public static string MasterMinPTCannotBeGreaterThanMasterMaxPT {
-            get {
+        public static string MasterMinPTCannotBeGreaterThanMasterMaxPT
+        {
+            get
+            {
                 return ResourceManager.GetString("MasterMinPTCannotBeGreaterThanMasterMaxPT", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max.
         /// </summary>
-        public static string Max {
-            get {
+        public static string Max
+        {
+            get
+            {
                 return ResourceManager.GetString("Max", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to All Sports except &lt;br&gt; {0} and {1}.
         /// </summary>
-        public static string MaxPayoutSettingInfoSportsName {
-            get {
+        public static string MaxPayoutSettingInfoSportsName
+        {
+            get
+            {
                 return ResourceManager.GetString("MaxPayoutSettingInfoSportsName", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Min.
         /// </summary>
-        public static string Min {
-            get {
+        public static string Min
+        {
+            get
+            {
                 return ResourceManager.GetString("Min", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Invalid commission rate..
         /// </summary>
-        public static string Msg_1 {
-            get {
+        public static string Msg_1
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Wrong Max Per Ball.
         /// </summary>
-        public static string Msg_10002 {
-            get {
+        public static string Msg_10002
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10002", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Wrong Min bet/ Max bet/ Max per match.
         /// </summary>
-        public static string Msg_10003 {
-            get {
+        public static string Msg_10003
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10003", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Min Bet must be greater than or equal to Upline&apos;s Min Bet.
         /// </summary>
-        public static string Msg_10006 {
-            get {
+        public static string Msg_10006
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10006", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max bet must be less than or equal to Upline&apos;s max bet..
         /// </summary>
-        public static string Msg_10007 {
-            get {
+        public static string Msg_10007
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10007", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Match must be less than or equal to Upline&apos;sMax Per Match..
         /// </summary>
-        public static string Msg_10008 {
-            get {
+        public static string Msg_10008
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10008", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Ball must be less than or equal to Upline&apos;s Max Per Ball.
         /// </summary>
-        public static string Msg_10009 {
-            get {
+        public static string Msg_10009
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10009", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Ball must be less than or equal to Upline&apos;s Max Per Ball.
         /// </summary>
-        public static string Msg_10010 {
-            get {
+        public static string Msg_10010
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10010", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Ball must be less than or equal to Upline&apos;s Max Per Ball.
         /// </summary>
-        public static string Msg_10011 {
-            get {
+        public static string Msg_10011
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10011", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Min Bet must be greater than or equal to Upline&apos;s Min Bet.
         /// </summary>
-        public static string Msg_10016 {
-            get {
+        public static string Msg_10016
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10016", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max bet must be less than or equal to Upline&apos;s max bet..
         /// </summary>
-        public static string Msg_10017 {
-            get {
+        public static string Msg_10017
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10017", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Match must be less than or equal to Upline&apos;s Max Per Match..
         /// </summary>
-        public static string Msg_10018 {
-            get {
+        public static string Msg_10018
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10018", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Min Bet must be greater than or equal to Upline&apos;s Min Bet.
         /// </summary>
-        public static string Msg_10019 {
-            get {
+        public static string Msg_10019
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10019", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max bet must be less than or equal to Upline&apos;s max bet..
         /// </summary>
-        public static string Msg_10020 {
-            get {
+        public static string Msg_10020
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10020", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Match must be less than or equal to Upline&apos;s Max Per Match..
         /// </summary>
-        public static string Msg_10021 {
-            get {
+        public static string Msg_10021
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10021", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You are not allowed to change Daily auto reset limit..
         /// </summary>
-        public static string Msg_10022 {
-            get {
+        public static string Msg_10022
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10022", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Maximum Win should be less than or equal to Maximum Win of the direct upline..
         /// </summary>
-        public static string Msg_10024 {
-            get {
+        public static string Msg_10024
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10024", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Maximum Loss should be less than or equal to Maximum Loss of the direct upline..
         /// </summary>
-        public static string Msg_10033 {
-            get {
+        public static string Msg_10033
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10033", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to This user&apos;s upline does not have Stake Level..
         /// </summary>
-        public static string Msg_10034 {
-            get {
+        public static string Msg_10034
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10034", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Each bet type must have at least one Bet Limit value to be selected.
         /// </summary>
-        public static string Msg_10035 {
-            get {
+        public static string Msg_10035
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10035", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You can only assign maximum {0} bet limits to member level for {1}..
         /// </summary>
-        public static string Msg_10036 {
-            get {
+        public static string Msg_10036
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10036", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Wrong Max Payout Per Match..
         /// </summary>
-        public static string Msg_10059 {
-            get {
+        public static string Msg_10059
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10059", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Match must be less than or equal to Max Payout Per Match.
         /// </summary>
-        public static string Msg_10060 {
-            get {
+        public static string Msg_10060
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10060", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match.
         /// </summary>
-        public static string Msg_10061 {
-            get {
+        public static string Msg_10061
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10061", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Min Bet must be greater than or equal to Upline&apos;s Min Bet.
         /// </summary>
-        public static string Msg_10062 {
-            get {
+        public static string Msg_10062
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10062", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Bet must be less than or equal to Upline&apos;s Max Bet.
         /// </summary>
-        public static string Msg_10063 {
-            get {
+        public static string Msg_10063
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10063", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Match must be less than or equal to Upline&apos;s Max Per Match.
         /// </summary>
-        public static string Msg_10064 {
-            get {
+        public static string Msg_10064
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10064", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Payout Per Match must be less than or equal to Upline&apos;s Max Payout Per Match.
         /// </summary>
-        public static string Msg_10065 {
-            get {
+        public static string Msg_10065
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10065", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Max Per Ball must be less than or equal to Upline&apos;&apos;s Max Per Ball.
         /// </summary>
-        public static string Msg_10066 {
-            get {
+        public static string Msg_10066
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10066", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match.
         /// </summary>
-        public static string Msg_10067 {
-            get {
+        public static string Msg_10067
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10067", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The Parlay Max Payout value must be a positive amount..
         /// </summary>
-        public static string Msg_10070 {
-            get {
+        public static string Msg_10070
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10070", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Parlay Max Payout per Bet: The setting of Single Match Parlay is higher than the upline&apos;s..
         /// </summary>
-        public static string Msg_10071 {
-            get {
+        public static string Msg_10071
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10071", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Parlay Max Payout per Bet: The setting of Combo 2 is higher than the upline&apos;s..
         /// </summary>
-        public static string Msg_10072 {
-            get {
+        public static string Msg_10072
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10072", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Parlay Max Payout per Bet: The setting of Combo 3 - 5 is higher than the upline&apos;s..
         /// </summary>
-        public static string Msg_10073 {
-            get {
+        public static string Msg_10073
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10073", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Parlay Max Payout per Bet: The setting of Combo Over 6 is higher than the upline&apos;s..
         /// </summary>
-        public static string Msg_10074 {
-            get {
+        public static string Msg_10074
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10074", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to RNG Casino:  You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8..
         /// </summary>
-        public static string Msg_10078 {
-            get {
+        public static string Msg_10078
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_10078", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Unable to assign this commission group to the member..
         /// </summary>
-        public static string Msg_12 {
-            get {
+        public static string Msg_12
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_12", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Wrong position taking..
         /// </summary>
-        public static string Msg_20001 {
-            get {
+        public static string Msg_20001
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20001", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Wrong position taking (min/max set by company)..
         /// </summary>
-        public static string Msg_20002 {
-            get {
+        public static string Msg_20002
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20002", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Wrong position taking (max set by company)..
         /// </summary>
-        public static string Msg_20005 {
-            get {
+        public static string Msg_20005
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20005", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Wrong agent position taking..
         /// </summary>
-        public static string Msg_20008 {
-            get {
+        public static string Msg_20008
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20008", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Existing masters exceed new Super Max PT..
         /// </summary>
-        public static string Msg_20019 {
-            get {
+        public static string Msg_20019
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20019", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Existing members exceed new Super Max PT..
         /// </summary>
-        public static string Msg_20020 {
-            get {
+        public static string Msg_20020
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20020", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Existing masters exceed new Master Max PT..
         /// </summary>
-        public static string Msg_20021 {
-            get {
+        public static string Msg_20021
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20021", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Existing members exceed new Master Max PT..
         /// </summary>
-        public static string Msg_20022 {
-            get {
+        public static string Msg_20022
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20022", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Existing agents exceed new Agent Max PT..
         /// </summary>
-        public static string Msg_20023 {
-            get {
+        public static string Msg_20023
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20023", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Existing members exceed new Agent Max PT..
         /// </summary>
-        public static string Msg_20024 {
-            get {
+        public static string Msg_20024
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20024", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Upline Min/Max PT..
         /// </summary>
-        public static string Msg_20025 {
-            get {
+        public static string Msg_20025
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20025", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Existing agents exceed new Master Max PT..
         /// </summary>
-        public static string Msg_20026 {
-            get {
+        public static string Msg_20026
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20026", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Master Max PT set by company.
         /// </summary>
-        public static string Msg_20027 {
-            get {
+        public static string Msg_20027
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20027", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Super Max PT..
         /// </summary>
-        public static string Msg_20028 {
-            get {
+        public static string Msg_20028
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20028", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Super Min PT..
         /// </summary>
-        public static string Msg_20029 {
-            get {
+        public static string Msg_20029
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20029", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The Agent Min PT violates Master Max PT..
         /// </summary>
-        public static string Msg_20030 {
-            get {
+        public static string Msg_20030
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20030", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Master Max PT..
         /// </summary>
-        public static string Msg_20031 {
-            get {
+        public static string Msg_20031
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20031", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Master Min PT..
         /// </summary>
-        public static string Msg_20032 {
-            get {
+        public static string Msg_20032
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20032", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Agent Min/Max PT..
         /// </summary>
-        public static string Msg_20033 {
-            get {
+        public static string Msg_20033
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20033", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The position taking violates Agent Max PT..
         /// </summary>
-        public static string Msg_20034 {
-            get {
+        public static string Msg_20034
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20034", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You are not allowed to have Auto PT, please contact your upline..
         /// </summary>
-        public static string Msg_20044 {
-            get {
+        public static string Msg_20044
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20044", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to This Template Name already exists..
         /// </summary>
-        public static string Msg_20045 {
-            get {
+        public static string Msg_20045
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20045", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Invalid Position Taking(max set by upline)..
         /// </summary>
-        public static string Msg_20046 {
-            get {
+        public static string Msg_20046
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20046", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to This Template does not exist..
         /// </summary>
-        public static string Msg_20047 {
-            get {
+        public static string Msg_20047
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20047", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Invalid Position Taking(min/max set by upline)..
         /// </summary>
-        public static string Msg_20048 {
-            get {
+        public static string Msg_20048
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_20048", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Unable to edit downline&apos;s Product Status because the account disabled for this product..
         /// </summary>
-        public static string Msg_60033 {
-            get {
+        public static string Msg_60033
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_60033", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You are not allowed to disable downline&apos;s product..
         /// </summary>
-        public static string Msg_60035 {
-            get {
+        public static string Msg_60035
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_60035", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You cannot Enable {0} when {1} is Disabled..
         /// </summary>
-        public static string Msg_60037 {
-            get {
+        public static string Msg_60037
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_60037", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You are not allowed to perform this action..
         /// </summary>
-        public static string Msg_90012 {
-            get {
+        public static string Msg_90012
+        {
+            get
+            {
                 return ResourceManager.GetString("Msg_90012", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Myanmar Odds: Applies to {0} bettypes with Myanmar Odds Type..
         /// </summary>
-        public static string MyanmarOddsComm {
-            get {
+        public static string MyanmarOddsComm
+        {
+            get
+            {
                 return ResourceManager.GetString("MyanmarOddsComm", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Nickname must be unique, only alphabet or numeric and should have at least a minimum of 5 characters and maximum of 20 characters..
         /// </summary>
-        public static string NicknameRule {
-            get {
+        public static string NicknameRule
+        {
+            get
+            {
                 return ResourceManager.GetString("NicknameRule", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Super Min PT must be less than or equal to Super Max PT..
         /// </summary>
-        public static string SuperMinPTCannotBeGreaterThanSuperMaxPT {
-            get {
+        public static string SuperMinPTCannotBeGreaterThanSuperMaxPT
+        {
+            get
+            {
                 return ResourceManager.GetString("SuperMinPTCannotBeGreaterThanSuperMaxPT", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to This Source Account was disabled..
         /// </summary>
-        public static string ThisSourceAccountWasDisabled {
-            get {
+        public static string ThisSourceAccountWasDisabled
+        {
+            get
+            {
                 return ResourceManager.GetString("ThisSourceAccountWasDisabled", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Under maintenance ({0} - {1}). [5003].
         /// </summary>
-        public static string UM {
-            get {
+        public static string UM
+        {
+            get
+            {
                 return ResourceManager.GetString("UM", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Unable to Update because of the maintenance of the settings below (GMT+8):.
         /// </summary>
-        public static string UMMainMsg {
-            get {
+        public static string UMMainMsg
+        {
+            get
+            {
                 return ResourceManager.GetString("UMMainMsg", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to {0}: {1} ({2} to {3}).
         /// </summary>
-        public static string UMSubMsg {
-            get {
+        public static string UMSubMsg
+        {
+            get
+            {
                 return ResourceManager.GetString("UMSubMsg", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Updated commission setting successfully..
         /// </summary>
-        public static string UpdateSuccess_150 {
-            get {
+        public static string UpdateSuccess_150
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_150", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bet Setting is updated successfully..
         /// </summary>
-        public static string UpdateSuccess_151 {
-            get {
+        public static string UpdateSuccess_151
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_151", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Parlay Max Payout Per Bet is updated successfully..
         /// </summary>
-        public static string UpdateSuccess_152 {
-            get {
+        public static string UpdateSuccess_152
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_152", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Position taking is updated successfully..
         /// </summary>
-        public static string UpdateSuccess_153 {
-            get {
+        public static string UpdateSuccess_153
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_153", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bet Setting is updated successfully..
         /// </summary>
-        public static string UpdateSuccess_154 {
-            get {
+        public static string UpdateSuccess_154
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_154", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Updated Win Loss Limit successfully..
         /// </summary>
-        public static string UpdateSuccess_155 {
-            get {
+        public static string UpdateSuccess_155
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_155", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Updated commission setting successfully..
         /// </summary>
-        public static string UpdateSuccess_156 {
-            get {
+        public static string UpdateSuccess_156
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_156", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Updated Bet Limit successfully..
         /// </summary>
-        public static string UpdateSuccess_158 {
-            get {
+        public static string UpdateSuccess_158
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_158", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Product Status is updated successfully..
         /// </summary>
-        public static string UpdateSuccess_160 {
-            get {
+        public static string UpdateSuccess_160
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_160", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Win Limit is updated successfully..
         /// </summary>
-        public static string UpdateSuccess_161 {
-            get {
+        public static string UpdateSuccess_161
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_161", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to General Info is updated successfully..
         /// </summary>
-        public static string UpdateSuccess_GeneralInfo {
-            get {
+        public static string UpdateSuccess_GeneralInfo
+        {
+            get
+            {
                 return ResourceManager.GetString("UpdateSuccess_GeneralInfo", resourceCulture);
             }
         }
-        
-        public static string NicknameRule => ResourceManager.GetString("NicknameRule", resourceCulture);
 
         public static string GroupType162 => ResourceManager.GetString("GroupType162", resourceCulture);
 
         public static string UpdateSuccess_162 => ResourceManager.GetString("UpdateSuccess_162", resourceCulture);
-
-        public static string UpdateSuccess_162 => ResourceManager.GetString("UpdateSuccess_162", resourceCulture);
-	
     }
 }
