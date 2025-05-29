@@ -86,6 +86,8 @@ namespace Fanex.Customer.Client.Services
         Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currency, string language = "en-US");
 
         Task<int> GetCashServiceStatus(int custId);
+        
+        Task<int> GetCashServiceTotalDownline(int custId);
     }
 
     public class CustomerService : ICustomerService
@@ -333,6 +335,16 @@ namespace Fanex.Customer.Client.Services
             if (custId > 0)
             {
                 return httpClient.GetAsJsonAsync<int>($"customer/{custId}/cash-service-status");
+            }
+
+            return Task.FromResult(0);
+        }
+        
+        public Task<int> GetCashServiceTotalDownline(int custId)
+        {
+            if (custId > 0)
+            {
+                return httpClient.GetAsJsonAsync<int>($"customer/{custId}/cash-service-total-downline");
             }
 
             return Task.FromResult(0);

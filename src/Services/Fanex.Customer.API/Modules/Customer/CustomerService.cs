@@ -61,6 +61,7 @@ public interface ICustomerService
     Task<Object> GetWinLossLimitInformation(GetProductCategoriesRequest request);
 
     Task<int> GetCashServiceStatus(int custId);
+    Task<int> GetCashServiceTotalDownline(int custId);
 }
 
 public class CustomerService : ICustomerService
@@ -447,5 +448,12 @@ public class CustomerService : ICustomerService
         var result = await dynamicRepository.FetchAsync<dynamic>(criteria);
         // Expecting result to have a property named ServiceType (0: Credit, 1: Cash)
         return criteria.ServiceType;
+    }
+    
+    public async Task<int> GetCashServiceTotalDownline(int custId)
+    {
+        var criteria = new GetCashServiceTotalDownlineCriteria(custId);
+        await dynamicRepository.FetchAsync<dynamic>(criteria);
+        return criteria.TotalCashMember;
     }
 }
