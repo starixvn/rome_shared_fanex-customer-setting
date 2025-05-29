@@ -17,7 +17,7 @@ public interface ICacheRefService
     string GetBetTypeName(int bettypeId, string language = "en-US");
 
     string GetDisplayedBetTypeName(int bettypeId, string language = "en-US");
-
+    
     string GetSportsbookCommSMAName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");
 
     string GetSportsbookCommMemberName(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId, string language = "en-US");

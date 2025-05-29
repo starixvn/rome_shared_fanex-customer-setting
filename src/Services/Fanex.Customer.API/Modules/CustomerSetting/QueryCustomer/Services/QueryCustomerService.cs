@@ -81,7 +81,8 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                 request,
                 appSettings.Belonging777Group(request.SiteLabel),
                 generalInfo,
-                false)
+                false,
+                generalInfo.UplineRoleId)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = 0;
@@ -104,12 +105,12 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         {
             generalInfo.Commissions = await GetAgentSportsBookCommissions(request.CustId);
         }
-
+        var role = request.IsGetUpline ? request.UplineRoleId.GetValueOrDefault() : request.RoleId;
         var customerSetting = new CustomerSettingModel
         {
             Group = uGroup,
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember)
+            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember, role)
         };
 
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
@@ -149,9 +150,13 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         BaseQueryRequest request,
         bool isSiteLabel777,
         GeneralInformation generalInfo,
-        bool isDirectMember)
+        bool isDirectMember,
+        byte uplineRoleId)
     {
-        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode) && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))).GroupBy(p => p.GroupId)
+        return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode)
+            && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))
+            && SupportPotentialWinLimitBySite(generalInfo.Site, p.GroupType, isDirectMember, uplineRoleId)
+        ).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
             Id = g.Key,
@@ -160,6 +165,16 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
             (((QueryRequest)request).IsGetUpline ? GetGroupTypesForEdit(g, (QueryRequest)request, isSiteLabel777, generalInfo, isDirectMember) : GetGroupTypes(g, (QueryRequest)request, isSiteLabel777, isDirectMember)) :
             GetGroupTypesForSuper(g, (QuerySuperRequest)request, isSiteLabel777)).Where(gt => gt != null)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
+    }
+
+    private bool SupportPotentialWinLimitBySite(string site, int groupTypeId, bool isDirectMember, byte uplineRoleId)
+    {
+        if (groupTypeId == GroupTypes.PotentialWinLimit)
+        {
+            return !isDirectMember && uplineRoleId == CustomerLevel.Agent && appSettings.IsSupportPotentialWinLimit(site);
+        }
+
+        return true;
     }
 
     private IEnumerable<GroupType> GetGroupTypesForSuper(IGrouping<int, SettingProfile> g, QuerySuperRequest request, bool isSiteLabel777)
@@ -328,7 +343,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         bool isSiteLabel777)
     {
         return groupItems.Join(
-        t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType }),
+        t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType, sb.ProductId }),
         groupItems => new { SportType = groupItems.SportTypeId, BetType = groupItems.BetTypeId },
         groupItemsProfile => new { groupItemsProfile.Key.SportType, groupItemsProfile.Key.BetType },
         (groupItem, groupItemsProfile) =>
@@ -338,7 +353,8 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                 groupItem.MapUpline();
             }
 
-            groupItem.ProductName = cacheRefService.GetProductName(groupItem.ProductId, language);
+            groupItem.ProductId = groupItemsProfile.Key.ProductId;
+            groupItem.ProductName = cacheRefService.GetProductName(groupItemsProfile.Key.ProductId, language);
             groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
             groupItem.SubGroupName = cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
             groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);

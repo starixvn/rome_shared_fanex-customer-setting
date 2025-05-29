@@ -193,5 +193,13 @@
   "CompactCopy": "Compact Copy",
   "IndividualCopy": "Individual Copy",
   "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} accounts failed to be created.",
-  "FailureReason": "Failure Reason"
+  "FailureReason": "Failure Reason",
+  "PotentialWinLimitNotice": "Potential Win Limit Notice",
+  "PotentialWinLimitNoticeHint1": "Due to result amendments, settlement delays, and other factors, the accumulated Potential Win Limit may temporarily exceed the configured threshold.",
+  "PotentialWinLimitNoticeHint2": "Parlay bets are excluded from this calculation during this phase.",
+  "PotentialWinLimit": "Potential Win Limit",
+  "ClickToViewCurrentPotentialWinLimitAmount": "Click to view current Potential Win Amount",
+  "AccumulateAmount": "Accumulate amount: {{accumulateAmount}} ({{accumulatePercent}}% of {{maxPotentialWinLimit}})",
+  "ToWinAmount": "To Win: {{toWinAmount}}",
+  "WinlossAmount": "Win/Loss: {{winlossAmount}}"
 }

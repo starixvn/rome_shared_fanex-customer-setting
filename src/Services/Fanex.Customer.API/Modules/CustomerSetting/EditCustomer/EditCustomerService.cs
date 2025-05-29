@@ -1,11 +1,13 @@
+using Fanex.Customer.API.Constants;
 using Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
-using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.EditCustomer.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.EditCustomer.GroupType152;
 using Fanex.Customer.API.Modules.EditCustomer.GroupType153;
 using Fanex.Customer.API.Modules.EditCustomer.GroupType154;
+using Fanex.Customer.API.Modules.EditCustomer.GroupType162;
 using Fanex.Customer.API.Modules.EditCustomer.Requests;
 using Fanex.Customer.API.Modules.EditCustomer.Services.EditGroupTypeServices;
 using Fanex.Customer.API.Modules.Message;
@@ -16,7 +18,6 @@ using Fanex.Customer.API.Shared.Services;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
-using Fanex.Customer.API.Constants;
 
 namespace Fanex.Customer.API.Modules.EditCustomer.Services;
 
@@ -66,6 +67,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {156, new GroupType156Service(messageService, cacheRefService)},
             {158, new GroupType158Service(messageService, cacheRefService)},
             {160, new GroupType160Service(messageService, cacheRefService)},
+            {162, new GroupType162Service(dynamicRepository, messageService, cacheRefService)},
         };
     }
 

@@ -13,6 +13,7 @@ import Commission from './commission';
 import ParlayMaxPayout from './parlay-max-payout';
 import PositionTaking from './position-taking';
 import DirectMemberPositionTaking from './position-taking/direct-member';
+import PotentialWinLimit from './potential-win-limit';
 import ProductStatus from './product-status';
 import WinLossLimit from './win-loss-limit';
 
@@ -25,6 +26,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
   const parlayMaxPayoutRef = useRef<ValidationRefType>(null);
   const winLossLimitRef = useRef<ValidationRefType>(null);
   const betLimitRef = useRef<ValidationRefType>(null);
+  const potentialwinLossLimitRef = useRef<ValidationRefType>(null);
 
   const refDetails = [
     { ref: betSettingRef, id: GroupTypeIds.SportsBookBetSetting },
@@ -33,6 +35,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
     { ref: positionTakingRef, id: GroupTypeIds.PositionTaking },
     { ref: winLossLimitRef, id: GroupTypeIds.WinLossLimit },
     { ref: betLimitRef, id: GroupTypeIds.BetLimit },
+    { ref: potentialwinLossLimitRef, id: GroupTypeIds.PotentialWinLimit },
   ];
 
   const scrollToBlock = (id?: number) => {
@@ -86,7 +89,6 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
 
   const renderGroupTypeSetting = (groupType: GroupType) => {
     const { id, isReadOnly, isAllowUncheckAll, groupItems } = groupType;
-
     if (roleId === UserLevel.Super && AppConfigHelper.isNapSystem()) {
       switch (id) {
         case GroupTypeIds.SportsBookBetSetting:
@@ -118,6 +120,10 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
         return <RNGGamesBetSetting isReadOnly={isReadOnly} ref={betSettingRef} />;
       case GroupTypeIds.ParlayMaxPayout:
         return <ParlayMaxPayout isReadOnly={isReadOnly} ref={parlayMaxPayoutRef} />;
+
+      case GroupTypeIds.PotentialWinLimit:
+        return <PotentialWinLimit isReadOnly={isReadOnly} ref={potentialwinLossLimitRef} />;
+
       case GroupTypeIds.PositionTaking:
         return isDirectMember ? (
           <DirectMemberPositionTaking isReadOnly={isReadOnly} ref={positionTakingRef} />

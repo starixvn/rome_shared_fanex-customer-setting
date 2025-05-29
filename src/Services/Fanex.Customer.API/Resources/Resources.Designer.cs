@@ -1,4 +1,4 @@
-namespace Fanex.Customer.API.Resources
+﻿namespace Fanex.Customer.API.Resources
 {
 	using System;
 
@@ -661,6 +661,10 @@ namespace Fanex.Customer.API.Resources
 		public static string GroupType160 => ResourceManager.GetString("GroupType160", resourceCulture);
 
 		public static string NicknameRule => ResourceManager.GetString("NicknameRule", resourceCulture);
+
+        public static string GroupType162 => ResourceManager.GetString("GroupType162", resourceCulture);
+
+        public static string UpdateSuccess_162 => ResourceManager.GetString("UpdateSuccess_162", resourceCulture);
 	
 	}
 }
