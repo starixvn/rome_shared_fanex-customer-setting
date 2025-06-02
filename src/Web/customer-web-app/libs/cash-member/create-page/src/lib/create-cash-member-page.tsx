@@ -6,7 +6,7 @@ import {
     handleChangeGroupSettingValue, handleChangeItemValue,
 } from '@customer-web-app/edit-customer-page';
 
-import { handleInitProducts } from '@customer-web-app/create-customer-page';
+import { handleInitProducts } from './handler';
 
 import {
     CreateCustomerResult, ValidateRefResult, ValidationRefType
