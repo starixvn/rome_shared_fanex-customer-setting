@@ -15,7 +15,7 @@ export default function PotentialWinLimitNote() {
 
   return (
     <span
-      className="icon ic-info"
+      className="icon ic-warning red"
       style={{ position: 'absolute', top: '2px', fontSize: '17px', right: '0', margin: '0' }}
       data-tooltip-id="global-tooltip"
       data-tooltip-html={renderToStaticMarkup(tooltipContent())}

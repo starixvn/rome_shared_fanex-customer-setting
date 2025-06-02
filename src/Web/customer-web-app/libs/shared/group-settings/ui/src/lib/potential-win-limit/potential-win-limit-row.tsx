@@ -92,9 +92,12 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
 
 
   const potentialWinLimitPercent = () => {
-    if (potentialWinLimitItem.accumAmount <= 0) return NumberHelper.formatWithCommas(0);
+    if (potentialWinLimitItem.accumAmount <= 0) return <><strong>{NumberHelper.formatWithCommas(0)}</strong></>;
     
-    return NumberHelper.formatWithCommas((potentialWinLimitItem.accumAmount * 100) / (potentialWinLimitItem.winLimit||1));
+    return
+    <>
+    <strong>{NumberHelper.formatWithCommas((potentialWinLimitItem.accumAmount * 100) / (potentialWinLimitItem.winLimit||1))}</strong>
+    </>
   }
 
   return (
@@ -200,25 +203,27 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                     <div>{t('DailyAutoResetLimitAt')} </div>
                   </div>
 
-                  <div>
+                  <div style={{ alignSelf: 'flex-start'}}>
                     <div className='accum-info'
                       hidden={potentialWinLimitItem.isHideAccumSection}>
                       <div>
-                        {t('AccumulateAmount', {
-                          accumulateAmount: NumberHelper.formatWithCommas(potentialWinLimitItem.accumAmount),
-                          accumulatePercent: potentialWinLimitPercent(),
-                          maxPotentialWinLimit: NumberHelper.formatWithCommas(potentialWinLimitItem.winLimit || 0)
-                        })}
+                        {`${t('AccumulateAmount')} `}
+                        <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.accumAmount)}</strong>
+                        {` (`}
+                        {potentialWinLimitPercent()}
+                        {` % of `}
+                        <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.winLimit || 0)}</strong>
+                        {` )`}
                       </div>
-                      <div className="accum-to-win" style={{ float: 'left' }}>
-                        {t('ToWinAmount', {
-                          toWinAmount: NumberHelper.formatWithCommas(potentialWinLimitItem.accumToWin)
-                        })}
-                      </div>
-                      <div className="accum-winloss" style={{ float: 'right' }}>
-                        {t('WinlossAmount', {
-                          winlossAmount: NumberHelper.formatWithCommas(potentialWinLimitItem.accumWinLoss),
-                        })}
+                      <div style={{ display: 'flex' }}>
+                        <div className="accum-to-win" style={{ minWidth: '122px' }}>
+                          {`${t('ToWinAmount')}`}
+                          <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.accumToWin)}</strong>
+                        </div>
+                        <div className="accum-winloss">
+                          {`${t('WinlossAmount')}`}
+                          <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.accumWinLoss)}</strong>
+                        </div>
                       </div>
                     </div>
 
