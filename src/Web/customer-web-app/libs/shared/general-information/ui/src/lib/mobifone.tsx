@@ -51,7 +51,6 @@ export function Mobifone({
         className={classNames([styles.phoneCode, isError && styles.error])}
         onFocus={onFocus} onBlur={onBlur}
         maxLength={4}
-        autoFocus
       />
       <input
         id="phoneNumber"

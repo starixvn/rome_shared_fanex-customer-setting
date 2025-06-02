@@ -10,7 +10,7 @@ import { inputNumberOnly } from '@customer-web-app/shared-helpers';
 interface Bank {
   id: number;
   name: string;
-  code?: string;
+  code: string;
 }
 
 interface BankSelectProps {
@@ -43,7 +43,7 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const emptyBank: Bank = { id: 0, name: t('SelectBankAccount') };
+  const emptyBank: Bank = { id: 0, name: t('SelectBankAccount'), code: '' };
   const wrapperRef = useRef<HTMLDivElement>(null);
   const bankImageUrls = useMemo(() =>
     banks
@@ -146,9 +146,13 @@ export function BankInfomation(props: BankSelectProps) {
     onFocusBankAccountNumber,
     onBlurBankAccountNumber
   } = props;
+  
   useEffect(() => {
     async function fetchBanks() {
       const result = await SettingService.GetBanks();
+      result.map((bank: Bank) => {
+        bank.name = t(bank.code);
+      });
       setBanks(result || []);
     }
     fetchBanks();
