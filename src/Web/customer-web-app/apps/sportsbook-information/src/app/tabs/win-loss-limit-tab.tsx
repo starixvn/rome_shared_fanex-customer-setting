@@ -22,6 +22,7 @@ const MaxWinSetting = ({ isCashMember }: { isCashMember: boolean | undefined }) 
     return (
       <div>
         <div><Trans i18nKey="MaxWinCashMember" /></div>
+        <div><Trans i18nKey="MaxWinCashMemberAllowedRange" /></div>
         <div><Trans i18nKey="MaxWinCashMemberExample" /></div>
       </div>
     )

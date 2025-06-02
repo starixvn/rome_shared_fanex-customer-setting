@@ -94,6 +94,7 @@
   "MaxWin": "Maximum Win = Selected multiplier * Given Credit",
   "MaxWinExample": " (ex. if multiplier = 5 and credit = 1,000 → max win = 5,000)",
   "MaxWinCashMember": "Maximum Win = Input value within allowed range",
+  "MaxWinCashMemberAllowedRange": "Allowed range = [0.1; Agent's multiplier × Agent's Given Credit]",
   "MaxWinCashMemberExample": " (ex. if agent’s credit = 1,000 and multiplier = 3 → range = [0.1; 3,000])",
   "MaxLoss": "Maximum Loss: Input value within the allowed range."
 }
