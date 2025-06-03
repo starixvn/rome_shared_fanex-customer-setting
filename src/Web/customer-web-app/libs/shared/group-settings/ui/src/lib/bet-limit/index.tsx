@@ -72,7 +72,7 @@ function BetLimitRow({
 
   const firstItem = item[0];
   const isShowNoneInput =
-    (isDirectMember || params.roleId === UserLevel.Member) &&
+    (isDirectMember || params.roleId === UserLevel.Member  || params.uplineRoleId === UserLevel.Agent)&&
     isAllowUncheckAll &&
     !firstItem.isMultipleChoice &&
     firstItem.productId === ProductIds.LiveCasino;
@@ -82,7 +82,7 @@ function BetLimitRow({
     <BlockRow
       key={firstItem.sportTypeId}
       label={
-        params.roleId !== UserLevel.Member && !isDirectMember ? (
+        (params.roleId !== UserLevel.Member && !isDirectMember && params.uplineRoleId !== UserLevel.Agent) ? (
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
             <div>{firstItem.sportTypeName}</div>
             <input
@@ -130,7 +130,7 @@ function BetLimitRow({
               id={`name-${stakeLevel.productId}-${stakeLevel.sportTypeId}-${stakeLevel.stakeLevelId}`}
               className="blockLeft"
             >
-              {(isDirectMember || params.roleId === UserLevel.Member) && !stakeLevel.isMultipleChoice ? (
+              {(isDirectMember || params.roleId === UserLevel.Member || params.uplineRoleId === UserLevel.Agent) && !stakeLevel.isMultipleChoice ? (
                 <input
                   type="radio"
                   checked={stakeLevel.isChecked}
@@ -145,7 +145,7 @@ function BetLimitRow({
                   onChange={(e) => handleOnBetLimitChange(stakeLevel, e.target.checked)}
                   disabled={
                     (!stakeLevel.isChecked &&
-                      (isDirectMember || params.roleId === UserLevel.Member) &&
+                      (isDirectMember || params.roleId === UserLevel.Member || params.uplineRoleId === UserLevel.Agent) &&
                       item.filter((i) => i.isChecked).length === stakeLevel.maxChoice &&
                       stakeLevel.maxChoice !== 0) ||
                     isReadOnly
@@ -228,7 +228,7 @@ const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
         }
 
         if (
-          (isDirectMember || params.roleId === UserLevel.Member) &&
+          (isDirectMember || params.roleId === UserLevel.Member || params.uplineRoleId === UserLevel.Agent) &&
           !item.isMultipleChoice &&
           i.stakeLevelId !== item.stakeLevelId
         ) {
@@ -280,7 +280,7 @@ const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
             </button>
           ))}
         </div>
-        {params.roleId !== UserLevel.Member && !isDirectMember && (
+        {(params.roleId !== UserLevel.Member && !isDirectMember && params.uplineRoleId !== UserLevel.Agent) ? (
           <BlockRow
             label={
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
@@ -296,7 +296,7 @@ const BetLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
           >
             {renderNoneBlockColumn('select-all-id', MaxBetLimitColumns)}
           </BlockRow>
-        )}
+        ) : null}
         {Object.values(betLimitGroup).map((betLimitGroup, index) => {
           const groupBetLimitStyle = index === 0 ? { borderBottom: '1px solid #d1d1d1' } : { marginTop: '7px' };
           return (

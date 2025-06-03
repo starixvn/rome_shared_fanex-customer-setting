@@ -1,5 +1,12 @@
 namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 
+public class Bank
+{
+    public int BankId { get; set; }
+    
+    public string AccountNumber { get; set; }
+}
+
 public class GeneralInformation
 {
     public GeneralInformation()
@@ -33,6 +40,11 @@ public class GeneralInformation
         Currency = dto.Currency;
         TemplateName = dto.TemplateName;
         IsInternal = dto.IsInternal;
+        Bank = new Bank
+        {
+            BankId = dto.BankId,
+            AccountNumber = dto.AccountNumber
+        };
     }
 
     public int CustId { get; set; }
@@ -88,4 +100,6 @@ public class GeneralInformation
     public bool IsInternal { get; set; }
 
     public IEnumerable<SportsBookCommission> Commissions { get; set; }
+
+    public Bank Bank { get; set; }
 }

@@ -7,6 +7,7 @@ using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Modules.Customer;
+using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
@@ -29,8 +30,9 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
     public CreateDirectMemberService(IMessageService messageService,
         AppSettings appSettings,
         ICustomerSettingHelper helperService,
-        ICustomerService customerService)
-        : base(messageService, appSettings, helperService)
+        ICustomerService customerService,
+        IDynamicRepository dynamicRepository)
+        : base(messageService, appSettings, helperService, dynamicRepository)
     {
         this._customerService = customerService;
     }

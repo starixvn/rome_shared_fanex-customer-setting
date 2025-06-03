@@ -16,6 +16,7 @@ import DirectMemberPositionTaking from './position-taking/direct-member';
 import PotentialWinLimit from './potential-win-limit';
 import ProductStatus from './product-status';
 import WinLossLimit from './win-loss-limit';
+import WinLimit from './win-litmit';
 
 export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(_, ref) {
   const { productGroups, productGroupId, roleId, isDirectMember } = useGroupSettingContext();
@@ -26,6 +27,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
   const parlayMaxPayoutRef = useRef<ValidationRefType>(null);
   const winLossLimitRef = useRef<ValidationRefType>(null);
   const betLimitRef = useRef<ValidationRefType>(null);
+  const winLimitRef = useRef<ValidationRefType>(null);
   const potentialwinLossLimitRef = useRef<ValidationRefType>(null);
 
   const refDetails = [
@@ -34,6 +36,7 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
     { ref: parlayMaxPayoutRef, id: GroupTypeIds.ParlayMaxPayout },
     { ref: positionTakingRef, id: GroupTypeIds.PositionTaking },
     { ref: winLossLimitRef, id: GroupTypeIds.WinLossLimit },
+    { ref: winLimitRef, id: GroupTypeIds.WinLimit },
     { ref: betLimitRef, id: GroupTypeIds.BetLimit },
     { ref: potentialwinLossLimitRef, id: GroupTypeIds.PotentialWinLimit },
   ];
@@ -138,6 +141,8 @@ export const GroupSetting = forwardRef<ValidationRefType>(function GroupSetting(
         );
       case GroupTypeIds.WinLossLimit:
         return <WinLossLimit isReadOnly={isReadOnly} ref={winLossLimitRef} />;
+      case GroupTypeIds.WinLimit:
+        return <WinLimit isReadOnly={isReadOnly} ref={winLimitRef} />;
       default:
         return null;
     }

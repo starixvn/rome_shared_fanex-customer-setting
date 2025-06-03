@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@customer-web-app/create-cash-member-page": ["libs/cash-member/create-page/src/index.ts"],
       "@customer-web-app/create-customer-page": ["libs/create-customer/create-customer-page/src/index.ts"],
       "@customer-web-app/create-direct-member-page": ["libs/direct-member/create-page/src/index.ts"],
       "@customer-web-app/create-super-notes": ["libs/create-super/notes/src/index.ts"],

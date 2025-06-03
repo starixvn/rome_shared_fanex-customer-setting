@@ -1,428 +1,436 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Functions>
-  <Function Name="Partial UM">
-    <Setting Key="Acc_CheckUM" SpName="Acc_CheckUM" DbName="DBCUST.CUSTDB.wsv_nap" />
-  </Function>
-  <Function Name="SiteDB">
-    <Setting Key="Acc_SiteDBConfigSel" SpName="Acc_SiteDBConfigSel" DbName="DBCUST.CUSTDB.wsv_nap" TimeOut="600" />
-    <Setting Key="Acc_CustSetting_SiteGroupSel" SpName="Acc_CustSetting_SiteGroupSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite03_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="SiteDB03.bodb02.wsv_alp" />
-    <Setting Key="DBSite03_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="SiteDB03.bodb02.wsv_alp" />
-    <Setting Key="DBSite03_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="SiteDB03.bodb02.wsv_alp" />
-    <Setting Key="DBSite03_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="SiteDB03.bodb02.wsv_alp" />
-    <Setting Key="DBSite03_Acc_CustomerTotalAmountSel" SpName="Acc_CustomerTotalAmountSel" DbName="SiteDB03.bodb02.wsv_alp" />
-    <Setting Key="DBTXN_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="DBTXN.bodb02.wsv_alp" />
-    <Setting Key="DBTXN_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="DBTXN.bodb02.wsv_alp" />
-    <Setting Key="DBTXN_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="DBTXN.bodb02.wsv_alp" />
-    <Setting Key="DBTXN_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="DBTXN.bodb02.wsv_alp" />
-    <Setting Key="DBTXN_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CustDB.wsv_nap" />
-    <Setting Key="DBSite03_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBSite03.CustDB.wsv_nap" />
-    <Setting Key="DBSite03_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="SiteDB03.bodb02.wsv_alp" Plain="0" />
-    <Setting Key="DBTXN_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="DBTXN.bodb02.wsv_alp" Plain="0" />
+	<Function Name="Partial UM">
+		<Setting Key="Acc_CheckUM" SpName="Acc_CheckUM" DbName="DBCUST.CUSTDB.wsv_nap" />
+	</Function>
+	<Function Name="SiteDB">
+		<Setting Key="Acc_SiteDBConfigSel" SpName="Acc_SiteDBConfigSel" DbName="DBCUST.CUSTDB.wsv_nap" TimeOut="600" />
+		<Setting Key="Acc_CustSetting_SiteGroupSel" SpName="Acc_CustSetting_SiteGroupSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="DBSite03_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="SiteDB03.bodb02.wsv_alp" />
+		<Setting Key="DBSite03_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="SiteDB03.bodb02.wsv_alp" />
+		<Setting Key="DBSite03_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="SiteDB03.bodb02.wsv_alp" />
+		<Setting Key="DBSite03_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="SiteDB03.bodb02.wsv_alp" />
+		<Setting Key="DBSite03_Acc_CustomerTotalAmountSel" SpName="Acc_CustomerTotalAmountSel" DbName="SiteDB03.bodb02.wsv_alp" />
+		<Setting Key="DBTXN_Dot_BalanceDebitInitialize" SpName="Dot_BalanceDebitInitialize" DbName="DBTXN.bodb02.wsv_alp" />
+		<Setting Key="DBTXN_Dot_BalanceCreditInitialize" SpName="Dot_BalanceCreditInitialize" DbName="DBTXN.bodb02.wsv_alp" />
+		<Setting Key="DBTXN_Dot_BalanceDebitRemove" SpName="Dot_BalanceDebitRemove" DbName="DBTXN.bodb02.wsv_alp" />
+		<Setting Key="DBTXN_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="DBTXN.bodb02.wsv_alp" />
+		<Setting Key="DBTXN_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CustDB.wsv_nap" />
+		<Setting Key="DBSite03_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBSite03.CustDB.wsv_nap" />
+		<Setting Key="DBSite03_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="SiteDB03.bodb02.wsv_alp" Plain="0" />
+		<Setting Key="DBTXN_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="DBTXN.bodb02.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_AccumWinLoss_162_Select" SpName="Acc_CustSetting_AccumWinLoss_162_Select" DbName="SiteDB03.bodb02.wsv_alp" />
     <Setting Key="Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount" SpName="Acc_CustWinLimitBet_Reset" DbName="SiteDB03.bodb02.wsv_alp" />
-  </Function>
-  <Function Name="Security Code">
-    <Setting Key="Age_UpdateMainAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_UpdateSubAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_GetMainAccountSecurityCode" SpName="Age_CustomerSelSecurityCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_GetSubAccountSecurityCode" SpName="Age_CustomerSelSecurityCode_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_UpdateMainAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_UpdateSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_ResetSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerUpdSecurityFunctionInfo" SpName="Age_CustomerUpdSecurityFunctionInfo" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Otp">
-    <Setting Key="Age_OTP_CustomerOTPSel" SpName="Age_OTP_CustomerOTPSel" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="Age_OTP_CustomerCheckEnableOTP" SpName="Age_OTP_CustomerCheckEnableOTP" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" SpName="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="Age_OTP_CustomerOTPIns" SpName="Age_OTP_CustomerOTPIns" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="Age_OTP_CustomerOTPStatusUpd" SpName="Age_OTP_CustomerOTPStatusUpd" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="Age_OTP_CustomerOTPDel" SpName="Age_OTP_CustomerOTPDel" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="Age_OTP_CustomerOTPDeviceInfoIns" SpName="Age_OTP_CustomerOTPDeviceInfoIns" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="Age_OTP_CustomerOTPDeviceInfoSel" SpName="Age_OTP_CustomerOTPDeviceInfoSel" DbName="DBCUST.CustDB.wsv_alp">
-      <Mapping DataField="DeviceId" ObjectProperty="Id" />
-    </Setting>
-  </Function>
-  <Function Name="Sub Account">
-    <Setting Key="Age_CustSubIns_Register" SpName="Age_CustSubIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" />
-    <Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite1_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST1.CustDB.wsv_alp" />
-    <Setting Key="DBSite2_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST2.CustDB.wsv_alp" />
-    <Setting Key="DBSite3_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST3.CustDB.wsv_alp" />
-    <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST.CustDB.wsv_alp" />
-    <Setting Key="DBSite1_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST1.CustDB.wsv_alp" />
-    <Setting Key="DBSite2_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST2.CustDB.wsv_alp" />
-    <Setting Key="DBSite3_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST3.CustDB.wsv_alp" />
+	</Function>
+	<Function Name="Security Code">
+		<Setting Key="Age_UpdateMainAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_UpdateSubAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_GetMainAccountSecurityCode" SpName="Age_CustomerSelSecurityCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_GetSubAccountSecurityCode" SpName="Age_CustomerSelSecurityCode_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_UpdateMainAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_UpdateSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_ResetSubAccountSecurityCode" SpName="Age_CustomerUpdSecurityCode_Sub2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerUpdSecurityFunctionInfo" SpName="Age_CustomerUpdSecurityFunctionInfo" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Otp">
+		<Setting Key="Age_OTP_CustomerOTPSel" SpName="Age_OTP_CustomerOTPSel" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="Age_OTP_CustomerCheckEnableOTP" SpName="Age_OTP_CustomerCheckEnableOTP" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" SpName="Age_OTP_CustomerStatusUpdAfterVerifiedOTP" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="Age_OTP_CustomerOTPIns" SpName="Age_OTP_CustomerOTPIns" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="Age_OTP_CustomerOTPStatusUpd" SpName="Age_OTP_CustomerOTPStatusUpd" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="Age_OTP_CustomerOTPDel" SpName="Age_OTP_CustomerOTPDel" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="Age_OTP_CustomerOTPDeviceInfoIns" SpName="Age_OTP_CustomerOTPDeviceInfoIns" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="Age_OTP_CustomerOTPDeviceInfoSel" SpName="Age_OTP_CustomerOTPDeviceInfoSel" DbName="DBCUST.CustDB.wsv_alp">
+			<Mapping DataField="DeviceId" ObjectProperty="Id" />
+		</Setting>
+	</Function>
+	<Function Name="Sub Account">
+		<Setting Key="Age_CustSubIns_Register" SpName="Age_CustSubIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" />
+		<Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="DBSite1_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST1.CustDB.wsv_alp" />
+		<Setting Key="DBSite2_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST2.CustDB.wsv_alp" />
+		<Setting Key="DBSite3_Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCUST3.CustDB.wsv_alp" />
+		<Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST.CustDB.wsv_alp" />
+		<Setting Key="DBSite1_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST1.CustDB.wsv_alp" />
+		<Setting Key="DBSite2_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST2.CustDB.wsv_alp" />
+		<Setting Key="DBSite3_Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCUST3.CustDB.wsv_alp" />
 
-    <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST1.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST2.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST3.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="CustomerInfo">
-    <Setting Key="Acc_CustSetting_CustomerInfoSBSelect" SpName="Acc_CustSetting_CustomerInfoSBSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0">
-      <Mapping DataField="Username2" ObjectProperty="NickName" Class="CustomerInfo" />
-      <Mapping DataField="Currency" ObjectProperty="CurrencyId" Class="CustomerInfo" />
-      <Mapping DataField="MaxCredit" ObjectProperty="Credit" Class="CustomerInfo" />
-      <Mapping DataField="MaxCreditMax" ObjectProperty="MaxCredit" Class="CustomerInfo" />
-      <Mapping DataField="uGroup" ObjectProperty="Group" Class="GeneralInformationDTO" />
-      <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="GeneralInformationDTO" />
-      <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CustomerInfo" />
-    </Setting>
-    <Setting Key="Age_CustomerUpdUserInfo" SpName="Age_CustomerUpdUserInfo" DbName="DBCUST.CustDB.wsv_alp" />
-  </Function>
-  <Function Name="Copy Account">
-    <Setting Key="Acc_CustomerSelSAgentInfo" SpName="Acc_CustomerSelSAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="NewUserName" ObjectProperty="Suffix" />
-      <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
-    </Setting>
-    <Setting Key="Acc_CustomerSelMAgentInfo" SpName="Acc_CustomerSelMAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="NewUserName" ObjectProperty="Suffix" />
-      <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
-    </Setting>
-    <Setting Key="Acc_CustomerSelAgentInfo" SpName="Acc_CustomerSelAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="NewUserName" ObjectProperty="Suffix" />
-      <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
-    </Setting>
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_UpdCSStatus_Cust" SpName="Acc_UpdCSStatus_Cust" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_MaxMemberLimitBySuperCheck" SpName="Age_MaxMemberLimitBySuperCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerCheckReachDownline" SpName="Age_CustomerCheckReachDownline" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Customer Information">
-    <Setting Key="Acc_OutstandingMemberSel" SpName="Acc_OutstandingMemberSel" DbName="DBBOF.bodb02.wsv_alp" Plain="0" />
-    <Setting Key="Age_BalanceMemberSel" SpName="Age_BalanceMemberSel" DbName="DBAGE.bodb02.wsv_alp" Plain="0">
-      <Mapping ObjectProperty="YesterdayCustomerCash" DataField="yesterday_Cash" Class="MemberBalanceDTO" />
-    </Setting>
-    <Setting Key="Age_CustomerSelUserSearch" SpName="Age_CustomerSelUserSearch" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerSelUserSearch_ByRole" SpName="Age_CustomerSelUserSearch_ByRole" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerCheckExists" SpName="Acc_CustomerCheckExists" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerCreditInfoSel" SpName="Acc_CustomerCreditInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" Class="CreditInfo" />
-      <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CreditInfo" />
-    </Setting>
-    <Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
-    <Setting Key="Age_CustomerSelCheckBelonging_ByUsername" SpName="Age_CustomerSelCheckBelonging_ByUsername" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerSelCheckEnable" SpName="Acc_CustomerSelCheckEnable" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_Chatbot_CustomerStatusSel" SpName="Age_Chatbot_CustomerStatusSel" DbName="DBCust.CustDB.wsv_alp" />
-    <Setting Key="Acc_CustomerPTInfoSel" SpName="Acc_CustomerPTInfoSel" DbName="DBAGE.bodb02.wsv_alp" />
-    <Setting Key="Acc_LiteMode_CustSetting_ProductListInfoSel" SpName="Acc_LiteMode_CustSetting_ProductListInfoSel" DbName="DBAGE.bodb02.wsv_alp" />
-    <Setting Key="Age_MemCommission_SelBettype" SpName="Age_MemCommission_SelBettype" DbName="DBAGE.bodb02.wsv_alp" />
-    <Setting Key="Acc_SabaVirtualSportsBetSettingRef_Sel" SpName="Acc_SabaVirtualSportsBetSettingRef_Sel" DbName="DBTXN.bodb02.wsv_alp">
-      <Mapping DataField="SettingID" ObjectProperty="SettingId" />
-      <Mapping DataField="SettingID_Followed" ObjectProperty="SettingIdFollowed" />
-    </Setting>
-  </Function>
-  <Function Name="Problem Account - Limit New Downline">
-    <Setting Key="Acc_ProblemAccountLimitDownlineCheck" SpName="Acc_ProblemAccountLimitDownlineCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="API Logger">
-    <Setting Key="WriteLog_UserLog_ExternalAPI_Ins" SpName="WriteLog_UserLog_ExternalAPI_Ins" DbName="DBLOG.bodb_CustomerLog.wsv_alp" Plain="0" />
-    <Setting Key="WriteLog_UserLog_ExternalAPI_UpdResponse" SpName="WriteLog_UserLog_ExternalAPI_UpdResponse" DbName="DBLOG.bodb_CustomerLog.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Message">
-    <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Create Customer">
-    <Setting Key="Acc_CustomerIns_Register" SpName="Acc_CustomerIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustSetting_SiteCurrencySettingInfoSel" SpName="Acc_CustSetting_SiteCurrencySettingInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-      <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
-      <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
-      <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
-      <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
-      <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
-    </Setting>
-    <Setting Key="Acc_LiteMode_CustSetting_SuperAllInfoSel" SpName="Acc_LiteMode_CustSetting_SuperAllInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-      <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
-      <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
-      <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
-      <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
-      <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
-      <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
-      <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
-    </Setting>
-    <Setting Key="Acc_LiteMode_CustSetting_MasterAllInfoSel" SpName="Acc_LiteMode_CustSetting_MasterAllInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-      <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
-      <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
-      <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
-      <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
-      <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
-      <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
-      <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
-    </Setting>
-    <Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" />
-      <Mapping DataField="Credit_Ag_Bal" ObjectProperty="MaxCredit" />
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-      <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
-      <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
-      <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
-      <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
-      <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
-      <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
-      <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
-    </Setting>
-    <Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="DBSite1_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST1.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="DBSite2_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST2.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="DBSite3_Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCUST3.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="CustomerInfo">
+		<Setting Key="Acc_CustSetting_CustomerInfoSBSelect" SpName="Acc_CustSetting_CustomerInfoSBSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0">
+			<Mapping DataField="Username2" ObjectProperty="NickName" Class="CustomerInfo" />
+			<Mapping DataField="Currency" ObjectProperty="CurrencyId" Class="CustomerInfo" />
+			<Mapping DataField="MaxCredit" ObjectProperty="Credit" Class="CustomerInfo" />
+			<Mapping DataField="MaxCreditMax" ObjectProperty="MaxCredit" Class="CustomerInfo" />
+			<Mapping DataField="uGroup" ObjectProperty="Group" Class="GeneralInformationDTO" />
+			<Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="GeneralInformationDTO" />
+			<Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CustomerInfo" />
+		</Setting>
+		<Setting Key="Age_CustomerUpdUserInfo" SpName="Age_CustomerUpdUserInfo" DbName="DBCUST.CustDB.wsv_alp" />
+	</Function>
+	<Function Name="Copy Account">
+		<Setting Key="Acc_CustomerSelSAgentInfo" SpName="Acc_CustomerSelSAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="NewUserName" ObjectProperty="Suffix" />
+			<Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+		</Setting>
+		<Setting Key="Acc_CustomerSelMAgentInfo" SpName="Acc_CustomerSelMAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="NewUserName" ObjectProperty="Suffix" />
+			<Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+		</Setting>
+		<Setting Key="Acc_CustomerSelAgentInfo" SpName="Acc_CustomerSelAgentInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="NewUserName" ObjectProperty="Suffix" />
+			<Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+		</Setting>
+		<Setting Key="Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Validate" SpName="Acc_CustomerInsMember_CloneSetting_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_Com" SpName="Acc_CustomerInsMember_CloneSetting_Com" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_SAg" SpName="Acc_CustomerInsMember_CloneSetting_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg_Validate" SpName="Acc_CustomerInsMember_CloneSetting_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_CloneSetting_MAg" SpName="Acc_CustomerInsMember_CloneSetting_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_Ag_Validate" SpName="Acc_CustomerInsMember_Ag_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_Ag" SpName="Acc_CustomerInsMember_Ag" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_UpdCSStatus_Cust" SpName="Acc_UpdCSStatus_Cust" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_MaxMemberLimitBySuperCheck" SpName="Age_MaxMemberLimitBySuperCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerCheckReachDownline" SpName="Age_CustomerCheckReachDownline" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Customer Information">
+		<Setting Key="Acc_OutstandingMemberSel" SpName="Acc_OutstandingMemberSel" DbName="DBBOF.bodb02.wsv_alp" Plain="0" />
+		<Setting Key="Age_BalanceMemberSel" SpName="Age_BalanceMemberSel" DbName="DBAGE.bodb02.wsv_alp" Plain="0">
+			<Mapping ObjectProperty="YesterdayCustomerCash" DataField="yesterday_Cash" Class="MemberBalanceDTO" />
+		</Setting>
+		<Setting Key="Age_CustomerSelUserSearch" SpName="Age_CustomerSelUserSearch" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerSelUserSearch_ByRole" SpName="Age_CustomerSelUserSearch_ByRole" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustomerCheckExists" SpName="Acc_CustomerCheckExists" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerCreditInfoSel" SpName="Acc_CustomerCreditInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" Class="CreditInfo" />
+			<Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" Class="CreditInfo" />
+		</Setting>
+		<Setting Key="Age_CustomerSelSuggestUsernameNew" SpName="Age_CustomerSelSuggestUsernameNew" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CustomerSelCheckBelonging_ByUsername" SpName="Age_CustomerSelCheckBelonging_ByUsername" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustomerSelCheckEnable" SpName="Acc_CustomerSelCheckEnable" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_Chatbot_CustomerStatusSel" SpName="Age_Chatbot_CustomerStatusSel" DbName="DBCust.CustDB.wsv_alp" />
+		<Setting Key="Acc_CustomerPTInfoSel" SpName="Acc_CustomerPTInfoSel" DbName="DBAGE.bodb02.wsv_alp" />
+		<Setting Key="Acc_LiteMode_CustSetting_ProductListInfoSel" SpName="Acc_LiteMode_CustSetting_ProductListInfoSel" DbName="DBAGE.bodb02.wsv_alp" />
+		<Setting Key="Age_MemCommission_SelBettype" SpName="Age_MemCommission_SelBettype" DbName="DBAGE.bodb02.wsv_alp" />
+		<Setting Key="Acc_SabaVirtualSportsBetSettingRef_Sel" SpName="Acc_SabaVirtualSportsBetSettingRef_Sel" DbName="DBTXN.bodb02.wsv_alp">
+			<Mapping DataField="SettingID" ObjectProperty="SettingId" />
+			<Mapping DataField="SettingID_Followed" ObjectProperty="SettingIdFollowed" />
+		</Setting>
+	</Function>
+	<Function Name="Problem Account - Limit New Downline">
+		<Setting Key="Acc_ProblemAccountLimitDownlineCheck" SpName="Acc_ProblemAccountLimitDownlineCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="API Logger">
+		<Setting Key="WriteLog_UserLog_ExternalAPI_Ins" SpName="WriteLog_UserLog_ExternalAPI_Ins" DbName="DBLOG.bodb_CustomerLog.wsv_alp" Plain="0" />
+		<Setting Key="WriteLog_UserLog_ExternalAPI_UpdResponse" SpName="WriteLog_UserLog_ExternalAPI_UpdResponse" DbName="DBLOG.bodb_CustomerLog.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Message">
+		<Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Create Customer">
+		<Setting Key="Acc_CustomerIns_Register" SpName="Acc_CustomerIns_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerIns_Rollback" SpName="Acc_CustomerIns_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustSetting_SiteCurrencySettingInfoSel" SpName="Acc_CustSetting_SiteCurrencySettingInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
+			<Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
+			<Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
+			<Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+			<Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+		</Setting>
+		<Setting Key="Acc_LiteMode_CustSetting_SuperAllInfoSel" SpName="Acc_LiteMode_CustSetting_SuperAllInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
+			<Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
+			<Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
+			<Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+			<Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+			<Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+			<Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
+		</Setting>
+		<Setting Key="Acc_LiteMode_CustSetting_MasterAllInfoSel" SpName="Acc_LiteMode_CustSetting_MasterAllInfoSel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Credit_Max" ObjectProperty="MaxCredit" />
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
+			<Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
+			<Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
+			<Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+			<Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+			<Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+			<Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
+		</Setting>
+		<Setting Key="Acc_LiteMode_CustSetting_AgentAllInfoSel" SpName="Acc_LiteMode_CustSetting_AgentAllInfoSel_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="MaxCredit_Mem" ObjectProperty="MemberMaxCredit" />
+			<Mapping DataField="Credit_Ag_Bal" ObjectProperty="MaxCredit" />
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
+			<Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
+			<Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
+			<Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+			<Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+			<Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+			<Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
+		</Setting>
+		<Setting Key="Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg" SpName="Acc_LiteMode_CustomerInsMember_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
-    <Setting Key="Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateUpd" SpName="Acc_LiteMode_CustSetting_CustPTTemplateUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_LiteMode_CustSetting_AgentCommSBSel" SpName="Acc_LiteMode_CustSetting_AgentCommSBSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust1.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust2.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust3.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_SAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_MAg" SpName="Acc_LiteMode_CustomerInsMember_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_MAg_Validate" SpName="Acc_LiteMode_CustomerInsMember_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag" SpName="Acc_LiteMode_CustomerInsMember_Ag" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_LiteMode_CustomerInsMember_Ag_Validate" SpName="Acc_LiteMode_CustomerInsMember_Ag_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustSetting_ProductProfileSelect" SpName="Acc_LiteMode_CustSetting_ProductProfileSelect_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateSel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateIns" SpName="Acc_LiteMode_CustSetting_CustPTTemplateIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateDel" SpName="Acc_LiteMode_CustSetting_CustPTTemplateDel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustSetting_CustPTTemplateUpd" SpName="Acc_LiteMode_CustSetting_CustPTTemplateUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_LiteMode_CustSetting_AgentCommSBSel" SpName="Acc_LiteMode_CustSetting_AgentCommSBSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust1.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust2.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_Com" SpName="Acc_CustomerInsMember_Com" DbName="DBCust3.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_Com_Validate" SpName="Acc_CustomerInsMember_Com_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_Sag" SpName="Acc_CustomerInsMember_SAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_Sag_Validate" SpName="Acc_CustomerInsMember_SAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 
-    <Setting Key="Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite1_Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite2_Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="DBSite3_Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" />
-    <Setting Key="EAS_CustomerDateLimitMultipleUpd" SpName="EAS_CustomerDateLimitMultipleUpd" DbName="DBCust.CustDB.wsv_nap" />
-    <Setting Key="Acc_CustomerInsAutoTransferAgent" SpName="Acc_CustomerInsAutoTransferAgent" DbName="DBCust.CustDB.wsv_nap" />
-    <Setting Key="Age_CustomerInsNickName_Register" SpName="Age_CustomerInsNickName_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" />
-    <Setting Key="Age_CustomerInsNickName" SpName="Age_CustomerInsNickName" DbName="DBCust.CustDB.wsv_alp" />
-    <Setting Key="Age_CustomerInsNickName_Rollback" SpName="Age_CustomerInsNickName_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap" />
-    <Setting Key="Age_CustomerUpdNicknameLoginOnly" SpName="Age_CustomerUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Edit Customer Setting">
-    <Setting Key="Acc_CustomerUpdGeneralInfo" SpName="Acc_CustomerUpdGeneralInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_Discount150Sel" SpName="Acc_CustSetting_Discount150Sel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_Discount150Upd" SpName="Acc_CustSetting_Discount150Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_BetSetting151Sel" SpName="Acc_CustSetting_BetSetting151Sel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_BetSetting151Upd" SpName="Acc_CustSetting_BetSetting151Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" TimeOut="600" />
-    <Setting Key="Acc_CustSetting_BetSetting151Upd_Multi" SpName="Acc_CustSetting_BetSetting151Upd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_MaxPayoutSelect" SpName="Acc_CustSetting_MaxPayoutSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-      <Mapping DataField="Upline_SingleMatchParlay" ObjectProperty="UplineSingleMatchParlay" />
-      <Mapping DataField="Upline_Combo2" ObjectProperty="UplineCombo2" />
-      <Mapping DataField="Upline_Combo35" ObjectProperty="UplineCombo35" />
-      <Mapping DataField="Upline_ComboOver6" ObjectProperty="UplineComboOver6" />
-      <Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
-      <Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
-      <Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
-      <Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_MaxPayoutUpd" SpName="Acc_CustSetting_MaxPayoutUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_MaxPayoutUpd_Multi" SpName="Acc_CustSetting_MaxPayoutUpd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_LimitPTDailyCheck" SpName="Age_LimitPTDailyCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_LimitPTCheck_MultiCust" SpName="Age_LimitPTCheck_MultiCust" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_MemberPT_153_Select" SpName="Acc_CustSetting_MemberPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_AgentPT_153_Select" SpName="Acc_CustSetting_AgentPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_MasterPT_153_Select" SpName="Acc_CustSetting_MasterPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_SuperPT_153_Select" SpName="Acc_CustSetting_SuperPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_SuperPT_153_Upd" SpName="Acc_CustSetting_SuperPT_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_MasterPT_153_Upd" SpName="Acc_CustSetting_MasterPT_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_AgentPT_153_Upd" SpName="Acc_CustSetting_AgentPT_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_AgentPTOnMember_153_Upd" SpName="Acc_CustSetting_AgentPTOnMember_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_MasterPTOnMember_153_Upd" SpName="Acc_CustSetting_MasterPTOnMember_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_SuperPTOnMember_153_Upd" SpName="Acc_CustSetting_SuperPTOnMember_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_AgentPTOnMember_153_MultiUpd" SpName="Acc_CustSetting_AgentPTOnMember_153_MultiUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_MasterPTOnMember_153_MultiUpd" SpName="Acc_CustSetting_MasterPTOnMember_153_MultiUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_SuperPTOnMember_153_MultiUpd" SpName="Acc_CustSetting_SuperPTOnMember_153_MultiUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_MemberPT_153_Check" SpName="Acc_CustSetting_MemberPT_153_Check" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_GroupedPTMemberLstSelect" SpName="Acc_CustSetting_GroupedPTMemberLstSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_BetSetting_154_Upd" SpName="Acc_CustSetting_BetSetting_154_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_BetSetting_154_Upd_Multi" SpName="Acc_CustSetting_BetSetting_154_Upd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_BetSetting_154_Select" SpName="Acc_CustSetting_BetSetting_154_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-      <Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
-      <Mapping DataField="MaxPerNumberMax" ObjectProperty="MaxPerBallMax" />
-    </Setting>
-	  <Setting Key="Acc_CustSetting_Discount_156_Select" SpName="Acc_CustSetting_Discount_156_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_Discount_156_Upd" SpName="Acc_CustSetting_Discount_156_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_DisableProductStatus_160_Select" SpName="Acc_CustSetting_DisableProductStatus_160_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_DisableProductStatus_160_Upd" SpName="Acc_CustSetting_DisableProductStatus_160_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_StakeLevel_158_Select" SpName="Acc_CustSetting_StakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-      <Setting Key="Acc_CustSetting_GlobalStakeLevel_158_Select" SpName="Acc_CustSetting_GlobalStakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_StakeLevel_158_Upd" SpName="Acc_CustSetting_StakeLevel_158_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_WinLossLimit_155_Select" SpName="Acc_CustSetting_WinLossLimit_155_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-      <Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
-      <Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_WinLossLimit_155_Upd" SpName="Acc_CustSetting_WinLossLimit_155_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CUSTDB.wsv_nap" TimeOut="600" />
-    
+		<Setting Key="Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_MAg" SpName="Acc_CustomerInsMember_MAg" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_MAg_Validate" SpName="Acc_CustomerInsMember_MAg_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_DirectMember_Validate" SpName="Acc_CustomerInsMember_DirectMember_Validate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust1.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite2_Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust2.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsMember_DirectMember" SpName="Acc_CustomerInsMember_DirectMember" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" />
+		<Setting Key="EAS_CustomerDateLimitMultipleUpd" SpName="EAS_CustomerDateLimitMultipleUpd" DbName="DBCust.CustDB.wsv_nap" />
+		<Setting Key="Acc_CustomerInsAutoTransferAgent" SpName="Acc_CustomerInsAutoTransferAgent" DbName="DBCust.CustDB.wsv_nap" />
+		<Setting Key="Age_CustomerInsNickName_Register" SpName="Age_CustomerInsNickName_Register" DbName="DBGLOB.GlobCustDB.wsv_nap" />
+		<Setting Key="Age_CustomerInsNickName" SpName="Age_CustomerInsNickName" DbName="DBCust.CustDB.wsv_alp" />
+		<Setting Key="Age_CustomerInsNickName_Rollback" SpName="Age_CustomerInsNickName_Rollback" DbName="DBGLOB.GlobCustDB.wsv_nap" />
+		<Setting Key="Age_CustomerUpdNicknameLoginOnly" SpName="Age_CustomerUpdNicknameLoginOnly" DbName="DBCUST.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Edit Customer Setting">
+		<Setting Key="Acc_CustomerUpdGeneralInfo" SpName="Acc_CustomerUpdGeneralInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_Discount150Sel" SpName="Acc_CustSetting_Discount150Sel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_Discount150Upd" SpName="Acc_CustSetting_Discount150Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_BetSetting151Sel" SpName="Acc_CustSetting_BetSetting151Sel" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_BetSetting151Upd" SpName="Acc_CustSetting_BetSetting151Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" TimeOut="600" />
+		<Setting Key="Acc_CustSetting_BetSetting151Upd_Multi" SpName="Acc_CustSetting_BetSetting151Upd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_MaxPayoutSelect" SpName="Acc_CustSetting_MaxPayoutSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="Upline_SingleMatchParlay" ObjectProperty="UplineSingleMatchParlay" />
+			<Mapping DataField="Upline_Combo2" ObjectProperty="UplineCombo2" />
+			<Mapping DataField="Upline_Combo35" ObjectProperty="UplineCombo35" />
+			<Mapping DataField="Upline_ComboOver6" ObjectProperty="UplineComboOver6" />
+			<Mapping DataField="SingleMatchParlay_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitSingleMatchParlay" />
+			<Mapping DataField="Combo2_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo2" />
+			<Mapping DataField="Combo35_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitCombo35" />
+			<Mapping DataField="ComboOver6_IsAllowUnlimit" ObjectProperty="IsAllowUnlimitComboOver6" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_MaxPayoutUpd" SpName="Acc_CustSetting_MaxPayoutUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_MaxPayoutUpd_Multi" SpName="Acc_CustSetting_MaxPayoutUpd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_LimitPTDailyCheck" SpName="Age_LimitPTDailyCheck" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_LimitPTCheck_MultiCust" SpName="Age_LimitPTCheck_MultiCust" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_MemberPT_153_Select" SpName="Acc_CustSetting_MemberPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_AgentPT_153_Select" SpName="Acc_CustSetting_AgentPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_MasterPT_153_Select" SpName="Acc_CustSetting_MasterPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_SuperPT_153_Select" SpName="Acc_CustSetting_SuperPT_153_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_SuperPT_153_Upd" SpName="Acc_CustSetting_SuperPT_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_MasterPT_153_Upd" SpName="Acc_CustSetting_MasterPT_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_AgentPT_153_Upd" SpName="Acc_CustSetting_AgentPT_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_AgentPTOnMember_153_Upd" SpName="Acc_CustSetting_AgentPTOnMember_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_MasterPTOnMember_153_Upd" SpName="Acc_CustSetting_MasterPTOnMember_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_SuperPTOnMember_153_Upd" SpName="Acc_CustSetting_SuperPTOnMember_153_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_AgentPTOnMember_153_MultiUpd" SpName="Acc_CustSetting_AgentPTOnMember_153_MultiUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_MasterPTOnMember_153_MultiUpd" SpName="Acc_CustSetting_MasterPTOnMember_153_MultiUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_SuperPTOnMember_153_MultiUpd" SpName="Acc_CustSetting_SuperPTOnMember_153_MultiUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_MemberPT_153_Check" SpName="Acc_CustSetting_MemberPT_153_Check" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_GroupedPTMemberLstSelect" SpName="Acc_CustSetting_GroupedPTMemberLstSelect" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_BetSetting_154_Upd" SpName="Acc_CustSetting_BetSetting_154_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_BetSetting_154_Upd_Multi" SpName="Acc_CustSetting_BetSetting_154_Upd_Multi" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_BetSetting_154_Select" SpName="Acc_CustSetting_BetSetting_154_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="MaxPerNumber" ObjectProperty="MaxPerBall" />
+			<Mapping DataField="MaxPerNumberMax" ObjectProperty="MaxPerBallMax" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_Discount_156_Select" SpName="Acc_CustSetting_Discount_156_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_Discount_156_Upd" SpName="Acc_CustSetting_Discount_156_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_DisableProductStatus_160_Select" SpName="Acc_CustSetting_DisableProductStatus_160_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_DisableProductStatus_160_Upd" SpName="Acc_CustSetting_DisableProductStatus_160_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_StakeLevel_158_Select" SpName="Acc_CustSetting_StakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_GlobalStakeLevel_158_Select" SpName="Acc_CustSetting_GlobalStakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_StakeLevel_158_Upd" SpName="Acc_CustSetting_StakeLevel_158_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_WinLossLimit_155_Select" SpName="Acc_CustSetting_WinLossLimit_155_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+			<Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_WinLossLimit_155_Upd" SpName="Acc_CustSetting_WinLossLimit_155_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CUSTDB.wsv_nap" TimeOut="600" />
+    		<Setting Key="Acc_CustSetting_WinLimit_161_Select" SpName="Acc_CustSetting_WinLimit_161_Select_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_WinLimit_161_Upd" SpName="Acc_CustSetting_WinLimit_161_Upd_UAT2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     <Setting Key="Acc_CustSetting_PotentialWinLimit_162_Select" SpName="Acc_CustSetting_PotentialWinLimit_162_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
       <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
       <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
     </Setting>
     <Setting Key="Acc_CustSetting_PotentialWinLimit_162_Upd" SpName="Acc_CustSetting_PotentialWinLimit_162_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     
-    <Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
-    <Setting Key="Acc_ServerDBConfigSelByCust" SpName="Acc_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
-  </Function>
-  <Function Name="Available Domains">
-    <Setting Key="Age_DomainListSel" SpName="Age_DomainListSel" DbName="DBACC.bodb02.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Direct Member">
-    <Setting Key="Age_CustomerSelSuggestUsername_DirectMember" SpName="Age_CustomerSelSuggestUsername_DirectMember" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
-    <Setting Key="Age_CustomerSearch_DirectMember" SpName="Age_CustomerSearch_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-    <Setting Key="Age_CustomerCheckExist_DirectMember" SpName="Age_CustomerCheckExist_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-  </Function>
-  <Function Name="Sub Account">
-    <Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubSelInfo" SpName="Age_CustSubSelInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubUpdInfo" SpName="Age_CustSubUpdInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubUpdPageAccess" SpName="Age_CustSubUpdPageAccess" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_On_UserKickedout" SpName="Age_On_UserKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
-    <Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Password">
-    <Setting Key="ResetMainAccountPassword" SpName="Age_CustomerUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="UpdateMainAccountPassword" SpName="Age_CustomerPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="ResetSubAccountPassword" SpName="Age_CustSubPwdUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="UpdateSubAccountPassword" SpName="Age_CustSubPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerSkipForceUpdPwd" SpName="Age_CustomerSkipForceUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_OnUser_ForceKickedout" SpName="Age_OnUser_ForceKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerIndirectLoginAccountUpd" SpName="Age_CustomerIndirectLoginAccountUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Nickname">
-    <Setting Key="Age_CustomerInsNickName" SpName="Age_CustomerInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerUpdNicknameLoginOnly" SpName="Age_CustomerUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Protection Code">
-    <Setting Key="Age_CustomerSelProtectionCode" SpName="Age_CustomerSelProtectionCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerUpdProtectionCode" SpName="Age_CustomerUpdProtectionCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Profile Picture">
-    <Setting Key="Age_CustomerSelProfilePicture" SpName="Age_CustomerSelProfilePicture" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
-    <Setting Key="Age_CustomerUpdProfilePicture" SpName="Age_CustomerUpdProfilePicture" DbName="DBCust.bodb_Credit.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Change Language">
-    <Setting Key="Age_CustLanguageUsageUpd" SpName="Age_CustLanguageUsageUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="View Position Taking">
-    <Setting Key="ViewPT_GetSportsbookPT_Super" SpName="Age_CustomerSelPositionTakingByProductID_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="ViewPT_GetSportsbookPT_Master" SpName="Age_CustomerSelPositionTakingByProductID_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="ViewPT_GetSportsbookPT_Agent" SpName="Age_CustomerSelPositionTakingByProductID_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-  </Function>
-  <Function Name="Update User Search">
-    <Setting Key="Acc_CustomerUpdUserSearch" SpName="Acc_CustomerUpdUserSearch" DbName="DBCust.CustDB.wsv_alp" />
-  </Function>
+		<Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
+		<Setting Key="Acc_ServerDBConfigSelByCust" SpName="Acc_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
+	</Function>
+	<Function Name="Available Domains">
+		<Setting Key="Age_DomainListSel" SpName="Age_DomainListSel" DbName="DBACC.bodb02.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Direct Member">
+		<Setting Key="Age_CustomerSelSuggestUsername_DirectMember" SpName="Age_CustomerSelSuggestUsername_DirectMember" DbName="DBGLOB.GlobCustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CustomerSearch_DirectMember" SpName="Age_CustomerSearch_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CustomerCheckExist_DirectMember" SpName="Age_CustomerCheckExist_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+	</Function>
+	<Function Name="Cash Member">
+		<Setting Key="Age_CashService_GeneralSetting" SpName="Age_CashService_GeneralSetting_UAT2" DbName="DBCust.AgencyCashService.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_Suggestion" SpName="Acc_CustomerInsMember_Suggestion_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CheckExists" SpName="Acc_CustomerInsMember_CheckExists_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CashMember" SpName="Acc_CustomerInsMember_CashMember_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Acc_CustomerInsMember_CashMember_Validate" SpName="Acc_CustomerInsMember_CashMember_Validate_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+	</Function>
+	<Function Name="Sub Account">
+		<Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubSelInfo" SpName="Age_CustSubSelInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubIns" SpName="Age_CustSubIns" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubUpdInfo" SpName="Age_CustSubUpdInfo" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubUpdPageAccess" SpName="Age_CustSubUpdPageAccess" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_On_UserKickedout" SpName="Age_On_UserKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
+		<Setting Key="Age_MsgCustReadStatus_Ins" SpName="Age_MsgCustReadStatus_Ins" DbName="DBMSG.bodb_Message.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Password">
+		<Setting Key="ResetMainAccountPassword" SpName="Age_CustomerUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="UpdateMainAccountPassword" SpName="Age_CustomerPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="ResetSubAccountPassword" SpName="Age_CustSubPwdUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="UpdateSubAccountPassword" SpName="Age_CustSubPwdUpd2" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerSkipForceUpdPwd" SpName="Age_CustomerSkipForceUpdPwd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_OnUser_ForceKickedout" SpName="Age_OnUser_ForceKickedout" DbName="DBONUSER.ON_USER.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerIndirectLoginAccountUpd" SpName="Age_CustomerIndirectLoginAccountUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Nickname">
+		<Setting Key="Age_CustomerInsNickName" SpName="Age_CustomerInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerUpdNicknameLoginOnly" SpName="Age_CustomerUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubInsNickname" SpName="Age_CustSubInsNickname" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustSubUpdNicknameLoginOnly" SpName="Age_CustSubUpdNicknameLoginOnly" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Protection Code">
+		<Setting Key="Age_CustomerSelProtectionCode" SpName="Age_CustomerSelProtectionCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerUpdProtectionCode" SpName="Age_CustomerUpdProtectionCode" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Profile Picture">
+		<Setting Key="Age_CustomerSelProfilePicture" SpName="Age_CustomerSelProfilePicture" DbName="DBAGE.bodb02.wsv_alp" Plain="0" />
+		<Setting Key="Age_CustomerUpdProfilePicture" SpName="Age_CustomerUpdProfilePicture" DbName="DBCust.bodb_Credit.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Change Language">
+		<Setting Key="Age_CustLanguageUsageUpd" SpName="Age_CustLanguageUsageUpd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="View Position Taking">
+		<Setting Key="ViewPT_GetSportsbookPT_Super" SpName="Age_CustomerSelPositionTakingByProductID_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="ViewPT_GetSportsbookPT_Master" SpName="Age_CustomerSelPositionTakingByProductID_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="ViewPT_GetSportsbookPT_Agent" SpName="Age_CustomerSelPositionTakingByProductID_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+	</Function>
+	<Function Name="Update User Search">
+		<Setting Key="Acc_CustomerUpdUserSearch" SpName="Acc_CustomerUpdUserSearch" DbName="DBCust.CustDB.wsv_alp" />
+	</Function>
 </Functions>

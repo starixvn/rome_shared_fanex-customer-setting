@@ -31,6 +31,8 @@ public class RequestContext
     public int? NoOfCreateAccount { get; set; }
 
     public bool IsFullMode() => Mode == 1;
+
+    internal bool IsCashService { get; set; }
 }
 
 public class UIBehavior

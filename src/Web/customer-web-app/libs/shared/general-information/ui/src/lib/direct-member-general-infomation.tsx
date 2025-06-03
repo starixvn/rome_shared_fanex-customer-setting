@@ -16,7 +16,7 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import AvailableCreditNote from './available-credit-note';
 import { errorTooltip } from './common';
-import CopySettingFromNote from './copy-setting-from-note';
+import { CopySettingFromNote } from './copy-setting-from-note';
 import CreditRange from './credit-range';
 import DirectMemberGeneralInformationValidator from './direct-member-general-information-validator';
 import { GeneralInformationProps } from './general-information';
@@ -27,7 +27,7 @@ import { PasswordField } from './password-field';
 import PasswordRule from './password-rule';
 import UserInfo from './user-info';
 import Username from './username-field';
-import UsernameSuggestionSelect, { UsernameSuggestionOption } from './username-suggestion-select';
+import UsernameSuggestionSelect, { UsernameSuggestionOption, getDirectMemberPromiseOptions } from './username-suggestion-select';
 
 function maxCreditValidateFiled(obj: GeneralInfo): validateMaxCredit {
   const maxCredits: Record<UserLevel, validateMaxCredit> = {
@@ -177,9 +177,11 @@ export const DirectMemberGeneralInformation = forwardRef<ValidationRefType, Dire
             >
               <div>
                 <UsernameSuggestionSelect
+                  id="selectedDirectMember"
                   value={value}
                   onChange={handleUserSuggestionInputChange}
                   onInputChange={handleInputChange}
+                  promiseOptions={getDirectMemberPromiseOptions}
                 />
                 {validationResults['selectedDirectMember'] !== undefined && (
                   <span>{getErrorByField('selectedDirectMember') ? <IconWrong /> : <IconCorrect />}</span>

@@ -13,6 +13,7 @@ using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType161;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType162;
 using System.Text.RegularExpressions;
 
@@ -52,6 +53,7 @@ public class BaseQueryCustomerService : BaseCustomerService
             {157, new QueryGroupTypeBaseService<CustomerSetting.Shared.ViewModels.GroupType157.BetSettingItem>(dynamicRepository, appSettings, helperService)},
             {158, new QueryGroupTypeBaseService<StakeLevelItem>(dynamicRepository, appSettings, helperService)},
             {160, new QueryGroupTypeBaseService<ProductStatusItem>(dynamicRepository, appSettings, helperService)},
+            {161, new QueryGroupTypeBaseService<WinLimitItem>(dynamicRepository, appSettings, helperService)},
             {GroupTypes.PotentialWinLimit, new QueryGroupType162BaseService<PotentialWinLimit>(dynamicRepository, appSettings, helperService)},
         };
     }

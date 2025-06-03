@@ -33,3 +33,5 @@ i18next
     resources,
     defaultNS,
   });
+
+export const i18nInstance = i18next;

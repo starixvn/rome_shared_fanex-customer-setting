@@ -81,6 +81,7 @@
   "UpdateUplineBetSettingNote": "Updating upline's bet setting might decrease all downlines' bet settings to ensure that they are not greater than upline's bet setting.",
   "LiteModePT": "Lite Mode - Position Taking Template",
   "WinLossLimit": "Win Loss Limit",
+  "WinLimit": "Win Limit",
   "CustomerSettingInformation": "Customer Setting Information",
   "BBINBetSetting2": "[BBIN]: Commission is not applied to the BBIN product, with effective from 11/9/2023  (dd/mm/yyyy). Furthermore, when you edit member's settings, these new settings will take effect on member's next transfer.",
   "FGGNote": "[FGG] : Commission is not applied to FGG product.",
@@ -91,6 +92,10 @@
 
   "MaxWinLoss": "Maximum Win/Loss refers to the highest amount a Member can win or lose. Bets will be denied if a Member’s total win/loss exceeds the limit.",
   "MaxWin": "Maximum Win = Selected multiplier * Given Credit",
+  "MaxWinExample": " (ex. if multiplier = 5 and credit = 1,000 → max win = 5,000)",
+  "MaxWinCashMember": "Maximum Win = Input value within allowed range",
+  "MaxWinCashMemberAllowedRange": "Allowed range = [0.1; Agent's multiplier × Agent's Given Credit]",
+  "MaxWinCashMemberExample": " (ex. if agent’s credit = 1,000 and multiplier = 3 → range = [0.1; 3,000])",
   "MaxLoss": "Maximum Loss: Input value within the allowed range."
 }
  

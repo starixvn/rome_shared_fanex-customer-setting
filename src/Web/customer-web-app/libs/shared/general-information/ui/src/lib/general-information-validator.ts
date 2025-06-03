@@ -13,8 +13,10 @@ export type validateMaxCredit =
 
 export type validatePassword = 'password';
 export type validateUsername = 'userName' | 'newUserName';
+export type validateUserInfo = 'firstName' | 'lastName' | 'mobilePhone' | 'fax';
+export type validateBank = 'bankAccountNumber';
 
-export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername;
+export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername | validateUserInfo | validateBank;
 
 export default class GeneralInformationValidator {
   protected readonly generalInfo: GeneralInfo;
@@ -92,9 +94,56 @@ export default class GeneralInformationValidator {
         return this.generalInfo.roleId === UserLevel.Agent
           ? this.validateMemberMaxCreditWhenCreateAgent(isEditMode)
           : this.validateMaxCredit(isEditMode);
+      case 'firstName':
+        return this.validateRequired(fieldName);
+      case 'lastName':
+        return this.validateRequired(fieldName);
+      case 'mobilePhone':
+        return this.validateMobilePhone();
+      case 'bankAccountNumber':
+        return this.validateBankAccountNumber();
       default:
         return true;
     }
+  }
+
+  public async validateRequired(fieldName: string) {
+    this.resetValidationState();
+    const value = this.generalInfo[fieldName as keyof GeneralInfo];
+    if (!value) {
+      return (this.validationState = new ValidationResult(fieldName, 'RequiredField'));
+    }
+
+    return true;
+  }
+
+  public async validateMobilePhone() {
+    this.resetValidationState();
+    const value = this.generalInfo.mobilePhone;
+    const phoneCode = value?.split('-')[0];
+    const phoneNumber = value?.split('-')[1];
+    
+    if (!phoneCode) {
+      return (this.validationState = new ValidationResult('phoneCode', 'RequiredField'));
+    }
+
+    if (!phoneNumber) {
+      return (this.validationState = new ValidationResult('phoneNumber', 'RequiredField'));
+    } 
+
+    return true;
+  }
+
+  public async validateBankAccountNumber(): Promise<ValidationResult | boolean> {
+    this.resetValidationState();
+
+    if (this.generalInfo.bank?.bankId && !this.generalInfo.bank?.accountNumber) {
+      return (this.validationState = new ValidationResult('bankAccountNumber', 'PleaseInputBankAccountNumber'));
+    }
+
+
+    return true;
+   
   }
 
   public async validateUsername() {

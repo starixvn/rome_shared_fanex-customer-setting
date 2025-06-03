@@ -34,6 +34,7 @@ export const GroupTypeIds = {
   ProductStatus: 160,
   BetLimit: 158,
   WinLossLimit: 155,
+  WinLimit: 161,
   PotentialWinLimit: 162,
 };
 

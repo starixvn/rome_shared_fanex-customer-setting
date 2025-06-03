@@ -4,14 +4,21 @@ public class CheckDirectMember
 {
     public CheckDirectMember(string userName, int custId, bool enabled)
     {
-        UserName = userName;    
+        UserName = userName;
         CustId = custId;
         IsEnabled = enabled;
     }
 
-    public string UserName {get;}
+    public string UserName { get; }
 
-    public int CustId {get;}
+    public int CustId { get; }
 
-    public bool IsEnabled {get;}
+    public bool IsEnabled { get; }
+}
+
+public class CheckCashMember : CheckDirectMember
+{ 
+    public CheckCashMember(string userName, int custId, bool enabled) : base(userName, custId, enabled)
+    {
+    }
 }

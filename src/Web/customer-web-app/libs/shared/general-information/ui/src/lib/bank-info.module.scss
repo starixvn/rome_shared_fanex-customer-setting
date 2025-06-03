@@ -1,0 +1,84 @@
+.bank-dropdown {
+    padding: 0 0 0 3px;
+    border: 1px solid var(--border-input);
+    border-radius: 3px;
+    white-space: normal;
+    word-wrap: normal;
+    width: 250px;
+    overflow: clip;
+    height: var(--height);
+    display: inline-block;
+
+    &__search {
+        padding: 8px;
+        border-bottom: 1px solid #e0e0e0;
+
+        input {
+            width: 100% !important;
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: max-content;
+        min-width: 100%;
+        max-width: 350px;
+        background: #fff;
+        border: 1px solid var(--border-input);
+        border-radius: 3px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        z-index: 100;
+    }
+
+    &__list {
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    &__item {
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: background 0.2s;
+        white-space: normal;
+
+        &:hover {
+            background: #f0f0f0;
+        }
+
+        &--selected {
+            background: #f0f0f0;
+        }
+    }
+
+    &__selected {
+        padding: 0 0 0 3px;
+        width: 100%;
+        background: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        height: var(--height);
+        display: flex;
+        align-items: center;
+
+        .bank-name {
+            margin-right: 8px;
+            flex: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .arrow-icon {
+            display: inline-flex;
+            align-items: center;
+        }
+    }
+}

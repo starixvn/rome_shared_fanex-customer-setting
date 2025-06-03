@@ -117,12 +117,14 @@ export interface InformationPageParams {
 
   site?: string;
   siteLabel?: string;
+  isCashMember?: boolean;
 }
 
 declare global {
   const appConfig: ApplicationConfig;
   const params: Params;
   const informationPageParams: InformationPageParams;
+  const cdnUri: string;
 
   interface Window {
     redirectToSettingPage: (response: any) => string;

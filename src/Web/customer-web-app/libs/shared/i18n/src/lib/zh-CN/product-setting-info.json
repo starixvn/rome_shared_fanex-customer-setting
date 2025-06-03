@@ -81,6 +81,7 @@
   "UpdateUplineBetSettingNote": "更新上线的投注设置可会减少所有下线的投注设置，以确保下线们不大于上线的投注设置。",
   "LiteModePT": "精简模式 - 占成数模板",
   "WinLossLimit": "输赢限额",
+  "WinLimit": "赢限额",
   "CustomerSettingInformation": "客户设置信息",
   "BBINBetSetting2": "[BBIN]：不再提供佣金于BBIN产品从11/09/2023 始生效。此外，当您更改会员的设置时，此新更改只会在会员转额进游戏后才会生效。",
   "FGGNote": "[正博娱乐] : 不提供佣金于正博娱乐.",
@@ -91,5 +92,9 @@
 
   "MaxWinLoss": "最高赢输限额是指会员可以赢取或输的最高金额。如果会员的总赢/输限额超过限制，则投注将被拒绝。",
   "MaxWin": "最高赢额：选定乘数 * 信用额度",
+  "MaxWinExample": "（例如：如果乘数 = 5 且信用额度 = 1,000 → 最高赢额 = 5,000）",
+  "MaxWinCashMember": "最高赢额：在允许范围内输入数值",
+  "MaxWinCashMemberAllowedRange": "范围 = [0.1; 代理乘数 * 代理信用额度]",
+  "MaxWinCashMemberExample": "（例如：如果代理信用额度 = 1,000 且乘数 = 3 → 范围 = [0.1; 3,000]）",
   "MaxLoss": "最高输额: 输入允许范围内的数值"
 }

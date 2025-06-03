@@ -81,6 +81,7 @@
   "UpdateUplineBetSettingNote": "Cập nhật giới hạn cược của cấp trên có thể giảm giới hạn cược của tất cả cấp dưới, nhằm đảm bảo giới hạn cược của cấp dưới không lớn hơn của cấp trên.",
   "LiteModePT": "Thiết Lập Rút Gọn - Mẫu Position Taking",
   "WinLossLimit": "Giới hạn thắng thua",
+  "WinLimit": "Giới hạn thắng",
   "CustomerSettingInformation": "Thông Tin Cài Đặt Tài Khoản",
   "BBINBetSetting2": "[BBIN]: Hoa hồng không được áp dụng cho sản phẩm BBIN, kể từ ngày 11/9/2023 (dd/mm/yyyy). Ngoài ra, khi bạn chỉnh sửa cài đặt của Member, những cài đặt mới này sẽ bắt đầu có hiệu lực kể từ lần chuyển khoản tiếp theo của họ.",
   "FGGNote": "[FGG]: Hoa hồng không được áp dụng cho sản phẩm FGG",
@@ -90,6 +91,10 @@
   "WinLossLimitNote2": "RNG Casino: So sánh Giới hạn Thắng/Thua với Tổng Thắng/Thua của TẤT CẢ sản phẩm.",
 
   "MaxWinLoss": "Maximum Win/Loss refers to the highest amount a Member can win or lose. Bets will be denied if a Member’s total win/loss exceeds the limit.",
-  "MaxWin": "Maximum Win = Selected multiplier * Given Credit",
+  "MaxWin": "Thắng Tối Đa = Hệ số đã chọn * Tín dụng được cấp",
+  "MaxWinExample": " (ví dụ: nếu hệ số = 5 và tín dụng = 1.000 → thắng tối đa = 5.000)",
+  "MaxWinCashMember": "Thắng Tối Đa = Nhập giá trị trong phạm vi cho phép",
+  "MaxWinCashMemberAllowedRange": "Phạm vi = [0.1; Hệ số đã chọn * Tín dụng được cấp]",
+  "MaxWinCashMemberExample": " (ví dụ: nếu tín dụng của đại lý = 1.000 và hệ số = 3 → phạm vi = [0,1; 3.000])",
   "MaxLoss": "Maximum Loss: Upline's Maximum Loss value"
 }

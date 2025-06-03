@@ -29,6 +29,10 @@ namespace Fanex.Customer.Client.Services
 
         Task<int> CheckDirectMemberUserName(int uplineCustId, string userName);
 
+        Task<IEnumerable<SuggestDirectMember>> SearchSuggestCashMembers(int uplineCustId, string searchUserName);
+
+        Task<int> CheckCashMemberUserName(int uplineCustId, string userName);
+
         Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
 
         Task<CopyCustomerResult> CopyCustomer(CopyCustomerParam param);
@@ -41,7 +45,11 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName = "", bool isCopy = false, int? agentId = null);
 
+        Task<string> GetCashCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "");
+
         Task<string> CreateCustomer(CreateCustomerParam param);
+
+        Task<string> CreateCashCustomer(CreateCustomerParam param);
 
         Task<string> UpdateCustomer(UpdateCustomerParam param);
 
@@ -116,6 +124,31 @@ namespace Fanex.Customer.Client.Services
 
         public Task<string> CreateCustomer(CreateCustomerParam param)
             => httpClient.PostAsStringAsync("customer", new
+            {
+                context = new
+                {
+                    creatorId = param.CreatorId,
+                    subAccId = param.SubAccId,
+                    ip = param.IP,
+                    systemId = configuration.SystemId,
+                    language = param.Language,
+                    mode = param.Mode,
+                    custDBGroupId = param.CustDBGroupID,
+                    site = param.Site,
+                    siteLabel = param.SiteLabel,
+                    noOfCreateAccount = param.NoOfCreateAccount,
+                    uiBehavior = !string.IsNullOrWhiteSpace(param.UiBehavior) ? JsonNode.Parse(param.UiBehavior) : null
+                },
+                settings = new
+                {
+                    group = param.Group,
+                    generalInfo = param.GeneralInfo,
+                    productGroups = JsonNode.Parse(param.ProductGroups)
+                }
+            });
+
+        public Task<string> CreateCashCustomer(CreateCustomerParam param)
+            => httpClient.PostAsStringAsync("cash-customer", new
             {
                 context = new
                 {
@@ -219,6 +252,9 @@ namespace Fanex.Customer.Client.Services
         public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName = "", bool isCopy = false, int? agentId = 0)
             => httpClient.GetStringAsync($"customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}&IsMultipleMode={isMultipleMode}&GroupName={groupName}&IsCopy={isCopy}&AgentId={agentId}");
 
+        public Task<string> GetCashCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "")
+            => httpClient.GetStringAsync($"cash-customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}");
+
         public Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username)
             => httpClient.GetAsJsonAsync<Downline>($"customer/{custId}/{subAccountId}/downlines/{username}");
 
@@ -266,6 +302,12 @@ namespace Fanex.Customer.Client.Services
 
         public Task<int> CheckDirectMemberUserName(int uplineCustId, string userName)
             => httpClient.GetAsJsonAsync<int>($"customer/{uplineCustId}/check-exist-direct-member/{userName}");
+
+        public Task<IEnumerable<SuggestDirectMember>> SearchSuggestCashMembers(int uplineCustId, string searchUserName)
+            => httpClient.GetAsJsonAsync<IEnumerable<SuggestDirectMember>>($"customer/{uplineCustId}/suggest-cash-members/{searchUserName}");
+
+        public Task<int> CheckCashMemberUserName(int uplineCustId, string userName)
+            => httpClient.GetAsJsonAsync<int>($"customer/{uplineCustId}/check-exist-cash-member/{userName}");
 
         public Task<bool> IsCustomerEnabled(int custId)
             => httpClient.GetAsJsonAsync<bool>($"customer/{custId}/IsEnabled");

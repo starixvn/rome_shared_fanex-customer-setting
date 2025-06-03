@@ -8,7 +8,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
 public class SettingProfileService : ISettingProfileService
 {
-    private const int CacheDurationInHour = 24;
+    private const int CacheDurationInHour = 0;
 
     private readonly IDynamicRepository dynamicRepository;
 
@@ -23,6 +23,12 @@ public class SettingProfileService : ISettingProfileService
         DirectMember = 2
     }
 
+    public enum ServiceType
+    {
+        Credit = 0,
+        Cash = 1
+    }
+
     public SettingProfileService(IDynamicRepository dynamicRepository, IOptions<AppSettings> appSettings, ICacheService cacheService)
     {
         this.dynamicRepository = dynamicRepository ?? new DynamicRepository();
@@ -30,16 +36,18 @@ public class SettingProfileService : ISettingProfileService
         this.cacheService = cacheService ?? new CacheService();
     }
 
-    public async Task<IEnumerable<SettingProfile>> GetSettingProfiles(byte systemId, string site, int currency, ProfileMode mode)
-        => await this.GetSettingProfile(systemId, site, currency, mode);
+    public async Task<IEnumerable<SettingProfile>> GetSettingProfiles(byte systemId, string site, int currency, ProfileMode mode, ServiceType serviceType = ServiceType.Credit)
+        => await cacheService.GetOrSetAsync($"CreateCustomerSettingProfile_{systemId}_{site}_{currency}_{mode}_{serviceType}",
+          () => this.GetSettingProfile(systemId, site, currency, mode, serviceType),
+           new CacheItemOptions() { RelativeExpiration = new TimeSpan(CacheDurationInHour, 0, 0) });
 
-    public async Task<int?> GetSettingTypeByGroupType(byte systemId, string site, int currency, int groupTypeId, ProfileMode mode)
-            => (await GetSettingProfiles(systemId, site, currency, mode)).FirstOrDefault(g => g.GroupType == groupTypeId)?.SettingType;
+    public async Task<int?> GetSettingTypeByGroupType(byte systemId, string site, int currency, int groupTypeId, ProfileMode mode, ServiceType serviceType = ServiceType.Credit)
+            => (await GetSettingProfiles(systemId, site, currency, mode, serviceType)).FirstOrDefault(g => g.GroupType == groupTypeId)?.SettingType;
 
-    public async Task<IEnumerable<int>> GetAllSettingTypes(byte systemId, string site, int currency, ProfileMode mode)
-        => (await this.GetSettingProfile(systemId, site, currency, mode)).Select(i => i.SettingType).Distinct();
+    public async Task<IEnumerable<int>> GetAllSettingTypes(byte systemId, string site, int currency, ProfileMode mode, ServiceType serviceType = ServiceType.Credit)
+        => (await this.GetSettingProfile(systemId, site, currency, mode, serviceType)).Select(i => i.SettingType).Distinct();
 
-    private async Task<IEnumerable<SettingProfile>> GetSettingProfile(byte systemId, string site, int currency, ProfileMode mode)
+    private async Task<IEnumerable<SettingProfile>> GetSettingProfile(byte systemId, string site, int currency, ProfileMode mode, ServiceType serviceType = ServiceType.Credit)
         => await dynamicRepository.FetchAsync<SettingProfile>(
-            new GetSettingProfileCriteria(appSettings.SettingStatus, site, currency, systemId, (int)mode));
+            new GetSettingProfileCriteria(appSettings.SettingStatus, site, currency, systemId, (byte)mode, (byte)serviceType));
 }

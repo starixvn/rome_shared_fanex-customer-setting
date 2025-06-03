@@ -6,6 +6,7 @@ using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
+using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 
@@ -24,8 +25,13 @@ public interface ICustomerService
     Task<Result> GetSuggestDirectMemberUsername(string uplineUserName);
 
     Task<IEnumerable<SuggestDirectMember>> SearchSuggestionDirectMember(int uplineCustId, string searchUserName);
+    
     Task<int> CheckExistDirectMember(int uplineCustId, string userName);
 
+    Task<IEnumerable<SuggestCashMember>> SearchSuggestionCashMember(int uplineCustId, string searchUserName);
+    
+    Task<int> CheckExistCashMember(int uplineCustId, string userName);
+    
     Task<bool> CheckExistedCustomer(string username);
 
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
@@ -47,6 +53,8 @@ public interface ICustomerService
     Task<MemberBalance> GetMemberBalance(int custId, string siteDBName);
 
     Task<List<string>> GetBackupDomains(string site, byte roleId);
+
+    Task<List<string>> GetDomainsForCashMember(int uplineCustId);
 
     Task<AccountInfo> GetAccountInfo(int custId);
 
@@ -108,6 +116,24 @@ public class CustomerService : ICustomerService
         var command = new CheckExistDirectMemberUsernameCommand(uplineCustId, userName);
         var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
         if (!result.Any())
+        {
+            return 0;
+        }
+
+        return result.First().IsEnabled ? result.First().CustId : -1;
+    }
+
+    public async Task<IEnumerable<SuggestCashMember>> SearchSuggestionCashMember(int uplineCustId, string searchUserName)
+    {
+        var command = new SearchSuggestionCashMemberCriteria(uplineCustId, searchUserName);
+        return await dynamicRepository.FetchAsync<SuggestCashMember>(command);
+    }
+
+    public async Task<int> CheckExistCashMember(int uplineCustId, string userName)
+    {
+        var command = new CheckExistCashMemberUsernameCommand(uplineCustId, userName);
+        var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
+        if(!result.Any())
         {
             return 0;
         }
@@ -357,6 +383,12 @@ public class CustomerService : ICustomerService
         }
         var domains = roleId == CustomerLevel.Member ? memberDomains : agencyDomains;
         return domains;
+    }
+
+    public async Task<List<string>> GetDomainsForCashMember(int uplineCustId)
+    {
+        var backupDomainsResult = await dynamicRepository.FetchAsync<BackupDomain>(new GetDomainsForCashMemberCriteria(uplineCustId));
+        return [.. backupDomainsResult.Select(d => d.Domain)];
     }
 
     public async Task<AccountInfo> GetAccountInfo(int custId)
