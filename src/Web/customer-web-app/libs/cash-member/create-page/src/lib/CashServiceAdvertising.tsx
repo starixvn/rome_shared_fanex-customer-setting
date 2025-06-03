@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 interface ActiveCashContentProps {
     readonly onConfirm: () => void;
@@ -124,11 +124,12 @@ function ActiveCashContent(props: ActiveCashContentProps) {
 }
 
 interface BannerContentProps {
-    readonly onClickActivate: () => void;
+    readonly onClickActivateNow: () => void;
 }
 
 function BannerContent(props: BannerContentProps) {
-    const { onClickActivate } = props;
+   
+    const { onClickActivateNow } = props;
     return (
         <div style={{
             position: 'absolute',
@@ -195,7 +196,7 @@ function BannerContent(props: BannerContentProps) {
                         transition: 'background 0.2s',
                         letterSpacing: '0.2px',
                     }}
-                    onClick={onClickActivate}
+                    onClick={onClickActivateNow}
                 >
                     Activate now
                 </button>
@@ -222,13 +223,22 @@ function BannerContent(props: BannerContentProps) {
 }
 
 interface BannerProps {
+    readonly onConfirm: () => void;
     readonly onClose?: () => void;
 }
 
-function Banner(props: BannerProps) {
-    const { onClose } = props;
+function CashServiceAdvertising(props: BannerProps) {
+    const { onClose, onConfirm } = props;
     const [contentIndex, setContentIndex] = useState(0);
-
+    const cashServiceRootPath = useMemo(() => 
+        (window.top as any).alpha.urls.cashServiceRootPath,
+        []
+      );
+    
+    const getBannerImageUrl = useCallback(() => 
+        `${cashServiceRootPath}assets/banner/BannerPC.png`,
+        [cashServiceRootPath]
+    );
     return (
         <div style={{
             position: 'fixed',
@@ -236,7 +246,7 @@ function Banner(props: BannerProps) {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -283,7 +293,7 @@ function Banner(props: BannerProps) {
                     ×
                 </button>}
                 <img
-                    src={'http://localhost:4211/public/BannerPC.png'}
+                    src={'http://localhost:4211/public/banner/BannerPC.png'} // TODO: remove this
                     alt="AdvCash"
                     style={{
                         width: '100%',
@@ -291,11 +301,11 @@ function Banner(props: BannerProps) {
                         objectFit: 'cover',
                     }}
                 />
-                {contentIndex === 0 && <BannerContent onClickActivate={() => setContentIndex(1)} />}
-                {contentIndex === 1 && <ActiveCashContent onConfirm={() => setContentIndex(2)} onCancel={() => setContentIndex(0)} />}
+                {contentIndex === 0 && <BannerContent onClickActivateNow={() => setContentIndex(1)} />}
+                {contentIndex === 1 && <ActiveCashContent onConfirm={onConfirm} onCancel={() => setContentIndex(0)} />}
             </div>
         </div>
     );
 }
 
-export default Banner;
+export default CashServiceAdvertising;

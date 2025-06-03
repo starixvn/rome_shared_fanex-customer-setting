@@ -6,13 +6,18 @@ import { GeneralInfo } from '@customer-web-app/shared-general-information-state'
 import { ProductGroup } from '@customer-web-app/shared-group-settings-types';
 
 export const CashMemberSettingService = {
+  EnableCashService: async () => {
+    const response = await axiosInstance.post(
+      `Customer/EnableCashService`,
+    );
+    return response.data;
+  },
   GetCashServiceStatus: async () => {
     const response = await axiosInstance.get(
       `Customer/GetCashServiceStatus`,
     );
     return response.data;
   },
-
   UpdateCashServiceStatus: async (status: boolean) => {
     const response = await axiosInstance.post(
       `Customer/UpdateCashServiceStatus?status=${status}`,
