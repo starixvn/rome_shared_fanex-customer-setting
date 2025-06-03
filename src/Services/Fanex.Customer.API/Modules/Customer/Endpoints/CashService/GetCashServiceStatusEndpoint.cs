@@ -1,4 +1,5 @@
 using MinimalApi.Endpoint;
+using Fanex.Customer.API.Modules.Customer.Requests.CashService;
 
 namespace Fanex.Customer.API.Modules.Customer.Endpoints;
 

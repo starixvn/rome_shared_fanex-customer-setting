@@ -382,13 +382,24 @@
 		<Setting Key="Age_CustomerCheckExist_DirectMember" SpName="Age_CustomerCheckExist_DirectMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 	</Function>
 	<Function Name="Cash Member">
-		<Setting Key="Age_CashService_CustServiceTypeSel" SpName="Age_CashService_CustServiceTypeSel_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CashService_CustServiceTypeSel" SpName="Age_CashService_CustServiceTypeSel_UAT2" DbName="DBCust.CustDB.wsv_CashService" Plain="0" />
 		<Setting Key="Age_CashService_TotalDownline" SpName="Age_CashService_TotalDownline_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Age_CashService_GeneralSetting" SpName="Age_CashService_GeneralSetting_UAT2" DbName="DBCust.AgencyCashService.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_Suggestion" SpName="Acc_CustomerInsMember_Suggestion_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_CheckExists" SpName="Acc_CustomerInsMember_CheckExists_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_CashMember" SpName="Acc_CustomerInsMember_CashMember_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_CashMember_Validate" SpName="Acc_CustomerInsMember_CashMember_Validate_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CashService_CustServiceTypeUpdate" SpName="Age_CashService_CustServiceTypeUpdate_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_Age_CashService_CustServiceTypeUpdate" SpName="Age_CashService_CustServiceTypeUpdate_UAT2" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_nap" Plain="0" />
+		<Setting Key="DBSite1_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="DBSite3_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="WriteLog_CashService_UserLog_RunSP" SpName="WriteLog_CashService_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite1_WriteLog_CashService_UserLog_RunSP" SpName="WriteLog_CashService_UserLog_RunSP" DbName="DBCust3.CustDB.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_WriteLog_CashService_UserLog_RunSP" SpName="WriteLog_CashService_UserLog_RunSP" DbName="DBCust3.CustDB.wsv_CashService" Plain="0" />
+		
+		<Setting Key="Age_CashService_CustServiceTypeInitialize" SpName="Age_CashService_CustServiceTypeInitialize_UAT2" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="Age_CashServiceBilling_DailyFee_Ins" SpName="Age_CashServiceBilling_DailyFee_Ins" DbName="DBSIC.bodb02.wsv_CashService" Plain="0" />
 	</Function>
 	<Function Name="Sub Account">
 		<Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />

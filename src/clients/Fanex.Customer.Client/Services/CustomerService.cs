@@ -88,6 +88,8 @@ namespace Fanex.Customer.Client.Services
         Task<int> GetCashServiceStatus(int custId);
         
         Task<int> GetCashServiceTotalDownline(int custId);
+
+        Task<Result> UpdateCashServiceStatus(UpdateCashServiceStatusRequest request);
     }
 
     public class CustomerService : ICustomerService
@@ -349,5 +351,8 @@ namespace Fanex.Customer.Client.Services
 
             return Task.FromResult(0);
         }
+
+        public Task<Result> UpdateCashServiceStatus(UpdateCashServiceStatusRequest request)
+            => httpClient.PostAsJsonAsync<Result>("customer/cash-service-status", request);
     }
 }
