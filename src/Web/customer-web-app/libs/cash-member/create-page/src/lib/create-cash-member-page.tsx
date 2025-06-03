@@ -41,6 +41,7 @@ export interface CreateDirectMemberPageWrapperProps { }
 export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapperProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const checkCashServiceStatus = async () => {
@@ -49,6 +50,7 @@ export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapper
         setIsModalOpen(!isCashServiceActive);
         setIsEnabled(isCashServiceActive);
       } catch (error) {
+        setIsError(true);
         console.error('Error checking cash service status:', error);
       }
     };
@@ -66,7 +68,7 @@ export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapper
   return (
     <>
       {isModalOpen && <CashServiceAdvertising onConfirm={handleEnableCashService} />}
-      <CreateCashMemberPage isEnabled={isEnabled} />
+      {!isError && <CreateCashMemberPage isEnabled={isEnabled} />}
     </>
   );
 }
