@@ -12,6 +12,7 @@ import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import { ValidationContext } from '../bet-setting/validation-context';
 import { GroupSettingBlockProps } from '../types';
+import PotentialWinLimitInfo from './potential-win-limit-info';
 import PotentialWinLimitRow from './potential-win-limit-row';
 import PotentialWinLimitValidator from './potential-win-limit-validator';
 
@@ -80,7 +81,12 @@ const PotentialWinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(
   return (
     <Block
       id={PotentialWinLimitBlockId}
-      title={t('PotentialWinLimit')}
+      title={
+        <>
+          {t('PotentialWinLimit')}
+          <PotentialWinLimitInfo />
+        </>
+      }      
       ref={blockRef}
       isPartialUpdate={isEditMode === true && !props.isReadOnly}
       onSaveClick={() => updateGroupSetting?.(GroupTypeIds.PotentialWinLimit)}
