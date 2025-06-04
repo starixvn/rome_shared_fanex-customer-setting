@@ -47,19 +47,22 @@ public class CashCustomerService : ICashCustomerService
         var initCmd = CreateInitializeCommand(request);
         await dynamicRepository.ExecuteAsync(initCmd);
 
-        if (initCmd.ErrCode > 0 || !initCmd.TrialEndTime.HasValue)
+        if (initCmd.ErrCode > 0)
             return ResultFromCriteria(initCmd);
 
-        var billingCmd = new AgeCashServiceBillingDailyFeeInsCommand(
-            request.CustId,
-            initCmd.TrialEndTime.Value,
-            request.IP
-        );
-        await dynamicRepository.ExecuteAsync(billingCmd);
-
-        if (billingCmd.ErrCode > 0)
+        if (initCmd.TrialEndTime.HasValue)
         {
-            Fanex.Logging.LogService.Error($"Age_CashServiceBilling_DailyFee_Ins Error: {billingCmd.ErrCode}, Message: {billingCmd.ErrMsg}, Input: CustId={billingCmd.CustId}, TrialEndTime={billingCmd.TrialEndTime}, IP={billingCmd.IP}");
+            var billingCmd = new AgeCashServiceBillingDailyFeeInsCommand(
+                request.CustId,
+                initCmd.TrialEndTime.Value,
+                request.IP
+            );
+            await dynamicRepository.ExecuteAsync(billingCmd);
+
+            if (billingCmd.ErrCode > 0)
+            {
+                Fanex.Logging.LogService.Error($"Age_CashServiceBilling_DailyFee_Ins Error: {billingCmd.ErrCode}, Message: {billingCmd.ErrMsg}, Input: CustId={billingCmd.CustId}, TrialEndTime={billingCmd.TrialEndTime}, IP={billingCmd.IP}");
+            }
         }
 
         return new Result(0, "Success");
