@@ -1,0 +1,57 @@
+{
+  "sportsbook.potentialWinLimit": {
+    "overview": "Overview",
+    "description": "Potential Win Limit defines the maximum total potential win a Member can accumulate from Sportsbook bets. Bets will be denied if this limit is exceeded.",
+    "appliesTo": "Applies to: All Sports, All Bet Types under Sportsbook",
+    "excludes": "Excludes: Parlay Bets (Mix Parlay, System Parlay, Combo Parlay, Single Match Parlay) - excluded during this phase",
+    
+    "calculationLogic": {
+      "title": "Calculation Logic",
+      "formula": "Potential Win Formula: (Odds - 1) x Stake",
+      "accumulated": "Accumulated Potential Win = Sum of all running (unsettled) tickets + settled tickets (settled after limit set)",
+      "example": "Example",
+      "example-limit": "Limit = 10,000",
+      "example-ticketA": "Ticket A (Odds 10, Stake 1,000): Potential Win = 9,000",
+      "example-ticketB": "Ticket B (Odds 5): Max Allowed Stake = (10,000 - 9,000) ÷ (5 - 1) = 250"
+    },
+
+    "trackingStart": {
+      "title": "When Does Tracking Start?",
+      "accumulation": "Accumulation starts from the moment the Agent sets a specific Potential Win Limit.",
+      "included": "Only running tickets at that moment and settled tickets after that point are included.",
+      "example": "Example",
+      "example-limit": "Limit set at 2:00 PM",
+      "example-ticketA": "Ticket A (Running at 2:00 PM) -> Counted",
+      "example-ticketB": "Ticket B (Settled at 1:50 PM) -> Not counted",
+      "example-ticketC": "Ticket C (Settled at 2:10 PM) -> Counted"
+    },
+
+    "resetBehavior": {
+      "title": "Reset Behavior",
+      "dailyReset": "Daily Auto Reset = YES by default (12:00 PM GMT+8): Clears all settled tickets.",
+      "manualReset": "Manual Reset (via Transfer): Clears settled tickets at the time of transfer.",
+      "runningTickets": "Running tickets are never cleared and always count toward the limit."
+    },
+
+    "resultAmendment": {
+      "title": "Result Amendment Impact",
+      "recalculation": "Amending a settled ticket (e.g., WIN -> DRAW) will recalculate the accumulated win.",
+      "statusChange": "This can change Member status",
+      "statusChange-blockedToUnblocked": "Blocked -> Unblocked (if win decreases)",
+      "statusChange-unblockedToBlocked": "Unblocked -> Blocked (if win increases)",
+      "example": "Example",
+      "example-limit": "Limit = 10,000",
+      "example-before": "Running = 4,000, Settled Win = 6,000 -> Total = 10,000 -> Blocked",
+      "example-after": "After Amendment: Settled Win = 0 -> Total = 4,000 -> Unblocked"
+    },
+
+    "importantNotes": {
+      "title": "Important Notes for Agents",
+      "defaultLimit": "Members have Unlimited Potential Win Limit by default",
+      "defaultReset": "Daily Auto Reset = YES by default",
+      "appliesTo": "Applies only to Sportsbook (not Casino or RNG)",
+      "excludes": "Excludes Parlay bet types",
+      "management": "Limit can be managed in Member Account Page and Potential Win Limit Page"
+    }
+  }
+} 
