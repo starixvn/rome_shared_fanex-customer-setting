@@ -6,7 +6,7 @@ import { BlockItem } from '@customer-web-app/shared/base/block';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { inputNumberOnly } from '@customer-web-app/shared-helpers';
-
+import { currentCdnUri } from '@customer-web-app/shared-api-helper';
 interface Bank {
   id: number;
   name: string;
@@ -32,12 +32,12 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
   const wrapperRef = useRef<HTMLDivElement>(null);
   
   const baseUrl = useMemo(() => 
-    (window.top as any).alpha.urls.cashServiceRootPath,
+    currentCdnUri(),
     []
   );
 
   const getBankImageUrl = useCallback((code: string) => 
-    `${baseUrl}assets/bank/${code?.toLocaleUpperCase()}.png`,
+    `${baseUrl}/bank/${code?.toLocaleUpperCase()}.png`,
     [baseUrl]
   );
 

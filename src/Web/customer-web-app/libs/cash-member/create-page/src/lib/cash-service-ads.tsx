@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
+import { currentCdnUri } from '@customer-web-app/shared-api-helper';
+import { useMemo, useState } from 'react';
 
 interface ActiveCashContentProps {
     readonly onConfirm: () => void;
@@ -81,7 +82,7 @@ function ActiveCashContent(props: ActiveCashContentProps) {
                     <li><span style={{ fontWeight: 700, color: '#03548d' }}>THB 200</span> per day</li>
                     <li><span style={{ fontWeight: 700, color: '#03548d' }}>THB 0.15</span> per transaction via your linked bank account and per promotion.</li>
                 </ul>
-                <div style={{ display: 'flex', gap: 16, justifyContent: 'center', width: '100%' , marginTop: 20}}>
+                <div style={{ display: 'flex', gap: 16, justifyContent: 'center', width: '100%', marginTop: 20 }}>
                     <button
                         style={{
                             background: '#0a2c4d',
@@ -123,12 +124,12 @@ function ActiveCashContent(props: ActiveCashContentProps) {
     );
 }
 
-interface BannerContentProps {
+interface CashServiceAdsContentProps {
     readonly onClickActivateNow: () => void;
 }
 
-function BannerContent(props: BannerContentProps) {
-   
+function CashServiceAdsContent(props: CashServiceAdsContentProps) {
+
     const { onClickActivateNow } = props;
     return (
         <div style={{
@@ -222,23 +223,16 @@ function BannerContent(props: BannerContentProps) {
     );
 }
 
-interface BannerProps {
+interface CashServiceAdsProps {
     readonly onConfirm: () => void;
     readonly onClose?: () => void;
 }
 
-function CashServiceAdvertising(props: BannerProps) {
+function CashServiceAds(props: CashServiceAdsProps) {
     const { onClose, onConfirm } = props;
     const [contentIndex, setContentIndex] = useState(0);
-    const cashServiceRootPath = useMemo(() => 
-        (window.top as any).alpha.urls.cashServiceRootPath,
-        []
-      );
-    
-    const getBannerImageUrl = useCallback(() => 
-        `${cashServiceRootPath}assets/banner/BannerPC.png`,
-        [cashServiceRootPath]
-    );
+    const bannerPath = useMemo(() => currentCdnUri() + '/banner/BannerPC.png', []);
+
     return (
         <div style={{
             position: 'fixed',
@@ -293,7 +287,7 @@ function CashServiceAdvertising(props: BannerProps) {
                     ×
                 </button>}
                 <img
-                    src={'http://localhost:4211/public/banner/BannerPC.png'} // TODO: remove this
+                    src={bannerPath}
                     alt="AdvCash"
                     style={{
                         width: '100%',
@@ -301,11 +295,11 @@ function CashServiceAdvertising(props: BannerProps) {
                         objectFit: 'cover',
                     }}
                 />
-                {contentIndex === 0 && <BannerContent onClickActivateNow={() => setContentIndex(1)} />}
+                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={() => setContentIndex(1)} />}
                 {contentIndex === 1 && <ActiveCashContent onConfirm={onConfirm} onCancel={() => setContentIndex(0)} />}
             </div>
         </div>
     );
 }
 
-export default CashServiceAdvertising;
+export default CashServiceAds;

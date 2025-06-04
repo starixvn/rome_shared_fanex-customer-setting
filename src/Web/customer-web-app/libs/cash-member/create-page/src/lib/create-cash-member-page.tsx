@@ -32,56 +32,13 @@ import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import styles from './create-cash-member-page.module.scss';
 import CreateCashMemberSuccessPopup from './success-popup';
-import CashServiceAdvertising from './CashServiceAdvertising';
 
 /* eslint-disable-next-line */
-export interface CreateDirectMemberPageWrapperProps { }
-
-
-export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapperProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    const checkCashServiceStatus = async () => {
-      try {
-        const isCashServiceActive = await SettingService.GetCashServiceStatus();
-        setIsModalOpen(!isCashServiceActive);
-        setIsEnabled(isCashServiceActive);
-      } catch (error) {
-        setIsError(true);
-        console.error('Error checking cash service status:', error);
-      }
-    };
-    checkCashServiceStatus();
-  }, []);
-
-  const handleEnableCashService = async () => {
-    const result = await SettingService.EnableCashService();
-    if (result) {
-      setIsEnabled(true);
-      setIsModalOpen(false);
-    }
-  }
-
-  return (
-    <>
-      {isModalOpen && <CashServiceAdvertising onConfirm={handleEnableCashService} />}
-      {!isError && <CreateCashMemberPage isEnabled={isEnabled} />}
-    </>
-  );
-}
-
-
-
-
-
 interface CreateDirectMemberPageProps {
   readonly isEnabled: boolean;
 }
 
-function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
+export function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
   const { isEnabled } = props;
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
@@ -334,4 +291,4 @@ function CreateCashMemberPage(props: CreateDirectMemberPageProps) {
   );
 }
 
-export default CreateCashMemberPageWrapper;
+export default CreateCashMemberPage;
