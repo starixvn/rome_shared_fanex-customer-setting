@@ -206,14 +206,15 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                   <div style={{ alignSelf: 'flex-start'}}>
                     <div className='accum-info'
                       hidden={potentialWinLimitItem.isHideAccumSection || isMultipleMode}>
-                      <div>
-                        {`${t('AccumulateAmount')} `}
-                        <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.accumAmount)}</strong>
-                        {` (`}
-                        {potentialWinLimitPercent()}
-                        {` % of `}
-                        <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.winLimit || 0)}</strong>
-                        {` )`}
+                      <div className="accumulate-info">
+                        <span>
+                          {t('AccumulateAmount')}
+                          <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.accumAmount)}</strong>
+                        </span>
+                        <span className="percentage-info">
+                          {' '}({potentialWinLimitPercent()}% of
+                          <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.winLimit || 0)}</strong>)
+                        </span>
                       </div>
                       <div style={{ display: 'flex' }}>
                         <div className="accum-to-win" style={{ minWidth: '122px' }}>
