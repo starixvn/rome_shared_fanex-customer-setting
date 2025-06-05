@@ -370,8 +370,8 @@
     </Setting>
     <Setting Key="Acc_CustSetting_PotentialWinLimit_162_Upd" SpName="Acc_CustSetting_PotentialWinLimit_162_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
     
-		<Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
-		<Setting Key="Acc_ServerDBConfigSelByCust" SpName="Acc_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
+		<Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel_KL" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
+		<Setting Key="Acc_ServerDBConfigSelByCust" SpName="Acc_ServerDBConfigSelByCust_KL" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
 	</Function>
 	<Function Name="Available Domains">
 		<Setting Key="Age_DomainListSel" SpName="Age_DomainListSel" DbName="DBACC.bodb02.wsv_alp" Plain="0" />
