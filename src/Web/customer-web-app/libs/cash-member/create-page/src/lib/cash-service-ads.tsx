@@ -13,24 +13,23 @@ function ActiveCashContent(props: ActiveCashContentProps) {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: '50%',
+            width: '58%',
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '48px 32px',
+            padding: '20px 32px',
             background: 'linear-gradient(90deg,rgba(182, 218, 236, 0.56) 40%, rgba(180, 210, 232, 0) 60%)',
             boxSizing: 'border-box',
-        }}>
-
+        }} className="cash-service-popup-content">
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#0a2c4d',
-                padding: '32px 16px',
+                padding: '12px 16px',
                 background: 'white',
                 borderRadius: 16,
                 boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
@@ -38,11 +37,11 @@ function ActiveCashContent(props: ActiveCashContentProps) {
                 margin: '0 auto',
             }}>
                 <div style={{
-                    fontWeight: 700,
-                    fontSize: 24,
+                    fontWeight: 600,
+                    fontSize: 20,
                     color: '#0a2c4d',
                     textAlign: 'center',
-                    marginBottom: 16,
+                    marginBottom: 14,
                 }}>
                     Are you sure you want to activate Cash Service?
                 </div>
@@ -54,17 +53,17 @@ function ActiveCashContent(props: ActiveCashContentProps) {
                     borderRadius: 2,
                 }} />
                 <div style={{
-                    fontSize: 16,
+                    fontSize: 14,
                     color: '#222',
                     textAlign: 'center',
-                    marginBottom: 16,
+                    marginBottom: 14,
                     fontWeight: 400,
                     maxWidth: 400,
                 }}>
-                    Start your <span style={{ fontWeight: 700, color: '#03548d' }}>14-days free trial</span> with no transaction fees (excludes payment gateway transactions).
+                    Start your <span style={{ fontWeight: 600, color: '#03548d' }}>14-days free trial</span> with no transaction fees (excludes payment gateway transactions).
                 </div>
                 <div style={{
-                    fontSize: 16,
+                    fontSize: 14,
                     color: '#222',
                     textAlign: 'center',
                     fontWeight: 400,
@@ -74,13 +73,12 @@ function ActiveCashContent(props: ActiveCashContentProps) {
                 <ul style={{
                     textAlign: 'left',
                     margin: 0,
-                    padding: '0 0 0 24px',
                     color: '#222',
-                    fontSize: 16,
+                    fontSize: 14,
                     maxWidth: 400,
                 }}>
-                    <li><span style={{ fontWeight: 700, color: '#03548d' }}>THB 200</span> per day</li>
-                    <li><span style={{ fontWeight: 700, color: '#03548d' }}>THB 0.15</span> per transaction via your linked bank account and per promotion.</li>
+                    <li><span style={{ fontWeight: 600, color: '#03548d' }}>THB 200</span> per day</li>
+                    <li><span style={{ fontWeight: 600, color: '#03548d' }}>THB 0.15</span> per transaction via your linked bank account and per promotion.</li>
                 </ul>
                 <div style={{ display: 'flex', gap: 16, justifyContent: 'center', width: '100%', marginTop: 20 }}>
                     <button
@@ -89,9 +87,9 @@ function ActiveCashContent(props: ActiveCashContentProps) {
                             color: 'rgb(255, 255, 255)',
                             border: 'none',
                             borderRadius: 18,
-                            padding: '16px 32px',
-                            fontWeight: 600,
-                            fontSize: 15,
+                            padding: '10px 18px',
+                            fontWeight: 500,
+                            fontSize: 13,
                             cursor: 'pointer',
                             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
                             transition: 'background 0.2s',
@@ -107,9 +105,9 @@ function ActiveCashContent(props: ActiveCashContentProps) {
                             background: '#286fa1',
                             border: 'none',
                             borderRadius: 18,
-                            padding: '16px 32px',
-                            fontWeight: 600,
-                            fontSize: 15,
+                            padding: '10px 18px',
+                            fontWeight: 500,
+                            fontSize: 13,
                             cursor: 'pointer',
                             transition: 'background 0.2s',
                             letterSpacing: '0.2px',
@@ -146,8 +144,8 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
             boxSizing: 'border-box',
         }}>
             <div style={{
-                fontWeight: 900,
-                fontSize: 52,
+                fontWeight: 800,
+                fontSize: 38,
                 color: '#03548d',
                 lineHeight: 1.2,
                 textAlign: 'center',
@@ -169,9 +167,9 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
   }
             `}</style>
             <div style={{
-                fontWeight: 700,
-                padding: 10,
-                fontSize: 24,
+                fontWeight: 600,
+                padding: '0 30px',
+                fontSize: 20,
                 color: '#03548d',
                 lineHeight: 1.2,
                 textAlign: 'center',
@@ -189,9 +187,9 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                         color: 'rgb(255, 255, 255)',
                         border: 'none',
                         borderRadius: 18,
-                        padding: '16px 32px',
-                        fontWeight: 600,
-                        fontSize: 15,
+                        padding: '10px 18px',
+                        fontWeight: 500,
+                        fontSize: 13,
                         cursor: 'pointer',
                         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
                         transition: 'background 0.2s',
@@ -207,9 +205,9 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                         background: '#286fa1',
                         border: 'none',
                         borderRadius: 18,
-                        padding: '16px 32px',
-                        fontWeight: 600,
-                        fontSize: 15,
+                        padding: '10px 18px',
+                        fontWeight: 500,
+                        fontSize: 13,
                         cursor: 'pointer',
                         transition: 'background 0.2s',
                         letterSpacing: '0.2px',
@@ -250,18 +248,23 @@ function CashServiceAds(props: CashServiceAdsProps) {
             <style>{`
           @keyframes fadeInBg { from { opacity: 0; } to { opacity: 1; } }
           @keyframes fadeInPopup { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+          @media (min-width: 768px) {
+            .cash-service-popup {
+              top: 45px;
+            }
+          }
         `}</style>
             <div style={{
-                position: 'relative',
-                maxWidth: 820,
-                height: 550,
+                position: 'absolute',
+                maxWidth: 620,
+                height: 'auto',
                 margin: '20px',
                 borderRadius: 20,
                 overflow: 'hidden',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
                 animation: 'fadeInPopup 0.35s',
                 background: '#b4d2e8',
-            }}>
+            }} className="cash-service-popup">
                 {onClose && <button
                     onClick={onClose}
                     style={{
