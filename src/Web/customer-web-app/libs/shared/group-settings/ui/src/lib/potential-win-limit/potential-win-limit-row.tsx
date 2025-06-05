@@ -205,7 +205,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
 
                   <div style={{ alignSelf: 'flex-start'}}>
                     <div className='accum-info'
-                      hidden={potentialWinLimitItem.isHideAccumSection}>
+                      hidden={potentialWinLimitItem.isHideAccumSection || isMultipleMode}>
                       <div>
                         {`${t('AccumulateAmount')} `}
                         <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.accumAmount)}</strong>
