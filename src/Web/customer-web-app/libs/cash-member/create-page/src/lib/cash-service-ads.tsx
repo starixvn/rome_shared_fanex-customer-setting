@@ -124,11 +124,12 @@ function ActiveCashContent(props: ActiveCashContentProps) {
 
 interface CashServiceAdsContentProps {
     readonly onClickActivateNow: () => void;
+    readonly findOutMore: () => void;
 }
 
 function CashServiceAdsContent(props: CashServiceAdsContentProps) {
 
-    const { onClickActivateNow } = props;
+    const { onClickActivateNow, findOutMore } = props;
     return (
         <div style={{
             position: 'absolute',
@@ -212,7 +213,7 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                         transition: 'background 0.2s',
                         letterSpacing: '0.2px',
                     }}
-                    onClick={() => alert('Find out more clicked!')}
+                    onClick={findOutMore}
                 >
                     Find out more
                 </button>
@@ -298,11 +299,116 @@ function CashServiceAds(props: CashServiceAdsProps) {
                         objectFit: 'cover',
                     }}
                 />
-                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={() => setContentIndex(1)} />}
+                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={() => setContentIndex(1)} findOutMore={()=>alert('find out more')} />}
                 {contentIndex === 1 && <ActiveCashContent onConfirm={onConfirm} onCancel={() => setContentIndex(0)} />}
+                {contentIndex === 2 && <StepSlider steps={[
+                      <>
+                      <div style={{ fontSize: 20, fontWeight: 400, color: '#03548d', textAlign: 'center' }}>Instant deposits and withdrawals!</div>
+                      <img src="http://localhost:4211/public/cash-service-ads/step1.png" style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/>
+                      </>,
+                      <>
+                       <div style={{ fontSize: 20, fontWeight: 400, color: '#03548d', textAlign: 'center' }}>Manage credit and cash member</div>
+                       <img src="http://localhost:4211/public/cash-service-ads/step2.png" style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/>
+                      </>,
+                      <>
+                       <div style={{ fontSize: 20, fontWeight: 400, color: '#03548d', textAlign: 'center' }}>Dedicated domain</div>
+                       <img src="http://localhost:4211/public/cash-service-ads/step3.gif" style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/>
+                      </>,
+                      <>
+                       <div style={{ fontSize: 20, fontWeight: 400, color: '#03548d', textAlign: 'center' }}>Customise promotions</div>
+                       <img src="http://localhost:4211/public/cash-service-ads/step4.png" style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/>
+                      </>,
+                      <>
+                      <div style={{ fontSize: 20, fontWeight: 400, color: '#03548d', textAlign: 'center' }}>Try Cash Service for free!</div>
+                      </>,
+                ]} onClose={() => setContentIndex(0)} onFinish={onConfirm} />}
             </div>
         </div>
     );
 }
+
+interface StepSliderProps {
+    steps: React.ReactNode[];
+    onClose?: () => void;
+    onFinish?: () => void;
+  }
+  
+  const StepSlider: React.FC<StepSliderProps> = ({ steps, onClose, onFinish }) => {
+    const [current, setCurrent] = useState(0);
+  
+    const isLast = current === steps.length - 1;
+    const isFirst = current === 0;
+  
+    return (
+        <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'white',
+            boxSizing: 'border-box',
+        }}>
+        {onClose && (
+          <button
+            onClick={onClose}
+            style={{
+              position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', fontSize: 20, cursor: 'pointer'
+            }}
+          >×</button>
+        )}
+  
+        <div style={{ minHeight: 220 }}>{steps[current]}</div>
+  
+       
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 , marginTop: 20 , marginBottom: 10}}>
+          <button
+            onClick={() => setCurrent(c => c - 1)}
+            disabled={isFirst}
+            style={{
+              padding: '8px 18px',
+              borderRadius: 18,
+              border: 'none',
+              background: isFirst ? '#eee' : '#286fa1',
+              color: '#fff',
+              cursor: isFirst ? 'not-allowed' : 'pointer'
+            }}
+          >Back</button>
+          {!isLast ? (
+            <button
+              onClick={() => setCurrent(c => c + 1)}
+              style={{
+                padding: '8px 18px',
+                borderRadius: 18,
+                border: 'none',
+                background: '#0a2c4d',
+                color: '#fff',
+                cursor: 'pointer'
+              }}
+            >Next</button>
+          ) : (
+            <button
+              onClick={onFinish}
+              style={{
+                padding: '8px 18px',
+                borderRadius: 18,
+                border: 'none',
+                background: '#0a2c4d',
+                color: '#fff',
+                cursor: 'pointer'
+              }}
+            >Finish</button>
+          )}
+        </div>
+        <div style={{ color: '#9a9a9a', fontWeight: 500 }}>
+          {current + 1} of {steps.length}
+        </div>
+      </div>
+    );
+  };
 
 export default CashServiceAds;
