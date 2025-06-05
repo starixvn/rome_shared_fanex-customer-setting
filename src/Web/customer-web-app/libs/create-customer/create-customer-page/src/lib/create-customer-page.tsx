@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTranslate as useTolgeeTranslate } from '@tolgee/react';
 
 import {
     handleChangeGroupSettingValue, handleChangeItemValue
@@ -29,6 +30,8 @@ import { handleInitProducts } from './handler';
 
 export function CreateCustomerPage() {
   const { t } = useTranslation();
+  const { t: tTolgee } = useTolgeeTranslate();
+
   const theme = useTheme();
   const [generalInformationState, generalInfoDispatch] = useReducer(generalInformationReducer, initialState);
   const { generalInfo } = generalInformationState;
@@ -163,7 +166,7 @@ export function CreateCustomerPage() {
         setCreateCustomerResult(result);
         scrollToTop();
       }
-    }
+    } 
     scrollToInvalidGroup(isValidGeneralInfo, validateGroupSettingResult, isValidTransfer);
     setIsLoading(false);
   };
@@ -172,7 +175,7 @@ export function CreateCustomerPage() {
     return (
       <div className={styles.btn}>
         <button type="button" onClick={handleCreateCustomer}>
-          {t('CreateAccount')}
+          {t('CreateAccount')} {tTolgee('testMessage')}
         </button>
       </div>
     );

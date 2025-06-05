@@ -1,4 +1,43 @@
+variables:
+  TOLGEE_KEY: "tgpak_g5pwomtqg5tgkobsgnwgw5lbnq3xmytcnnsgw2ttguygg"
+  TOLGEE_PROJECT_ID: "7"
+  TOLGEE_RESOURCE_PATH: "./src/Web/customer-web-app/libs/shared/i18n-tolgee/data"
+  TOLGEE_URL: "https://tolgee-alpha.nexdev.net/v2/projects/@TOLGEE_PROJECT_ID/export?ak=@TOLGEE_KEY"
+  SYNC_TOLGEE: true
+
 include:
   - project: ci/core-cicd
     ref: main
     file: nexcel.gitlab-ci.yml
+
+  - project: ci/core-cicd
+    ref: main
+    file: cd/sync_tolgee/jobs.yml
+
+build_multistage_env:
+  needs:
+    - "prepare_vars"
+    - job: "sync_tolgee"
+      artifacts: true
+      optional: true
+ 
+build_multistage_noenv:
+  needs:
+    - "prepare_vars"
+    - job: "sync_tolgee"
+      artifacts: true
+      optional: true
+ 
+build_env:
+  needs:
+    - "prepare_vars"
+    - job: "sync_tolgee"
+      artifacts: true
+      optional: true
+ 
+build_noenv:
+  needs:
+    - "prepare_vars"
+    - job: "sync_tolgee"
+      artifacts: true
+      optional: true

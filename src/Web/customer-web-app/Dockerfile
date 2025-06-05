@@ -10,9 +10,12 @@ RUN npm install
 
 # Register TRANSFORM_CONFIG argument for transforming by environment
 ARG TRANSFORM_CONFIG=production
+
 RUN echo $TRANSFORM_CONFIG
 
 COPY src/Web/customer-web-app .
+COPY src/Web/customer-web-app/.env.$TRANSFORM_CONFIG ./apps/create-customer/.env.production
+
 RUN npx nx run-many -t build --mode $TRANSFORM_CONFIG
 
 # 2. Nginx
