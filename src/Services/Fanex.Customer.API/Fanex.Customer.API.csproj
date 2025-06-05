@@ -20,6 +20,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="ONEbook.OTP" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.1" />
     <PackageReference Include="TelegramBot.Client" Version="1.0.2" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
     <PackageReference Include="Fanex.Cryptography.Aes" Version="1.0.0.6" />
