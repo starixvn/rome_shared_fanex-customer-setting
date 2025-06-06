@@ -383,7 +383,11 @@
 	</Function>
 	<Function Name="Cash Member">
 		<Setting Key="Age_CashService_CustServiceTypeSel" SpName="Age_CashService_CustServiceTypeSel_UAT2" DbName="DBCust.CustDB.wsv_CashService" Plain="0" />
-		<Setting Key="Age_CashService_TotalDownline" SpName="Age_CashService_TotalDownline_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CashService_TotalDownline" SpName="Age_CashService_TotalDownline_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0">
+			<Mapping DataField="total_memberActive" ObjectProperty="TotalCashMemberActive" />
+			<Mapping DataField="total_memberClosed" ObjectProperty="TotalCashMemberClosed" />
+			<Mapping DataField="total_memberSuspended" ObjectProperty="TotalCashMemberSuspended" />
+		</Setting>
 		<Setting Key="Age_CashService_GeneralSetting" SpName="Age_CashService_GeneralSetting_UAT2" DbName="DBCust.AgencyCashService.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_Suggestion" SpName="Acc_CustomerInsMember_Suggestion_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_CheckExists" SpName="Acc_CustomerInsMember_CheckExists_UAT2" DbName="DBCust.CustDB.wsv_nap" Plain="0" />

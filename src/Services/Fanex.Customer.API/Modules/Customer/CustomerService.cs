@@ -63,7 +63,7 @@ public interface ICustomerService
 
     Task<int> GetCashServiceStatus(int custId);
 
-    Task<int> GetCashServiceTotalDownline(int custId);
+    Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
 }
 
 public class CustomerService : ICustomerService
@@ -447,15 +447,15 @@ public class CustomerService : ICustomerService
     public async Task<int> GetCashServiceStatus(int custId)
     {
         var criteria = new GetCashServiceStatusCriteria(custId);
-        var result = await dynamicRepository.FetchAsync<dynamic>(criteria);
+        await dynamicRepository.FetchAsync<dynamic>(criteria);
         // Expecting result to have a property named ServiceType (0: Credit, 1: Cash)
         return criteria.ServiceType;
     }
 
-    public async Task<int> GetCashServiceTotalDownline(int custId)
+    public async Task<TotalCashMember> GetCashServiceTotalDownline(int custId)
     {
         var criteria = new GetCashServiceTotalDownlineCriteria(custId);
-        await dynamicRepository.FetchAsync<dynamic>(criteria);
-        return criteria.TotalCashMember;
+        var result = await dynamicRepository.FetchAsync<TotalCashMember>(criteria);
+        return result.First();
     }
 }

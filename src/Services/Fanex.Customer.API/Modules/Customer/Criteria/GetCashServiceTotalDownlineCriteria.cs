@@ -10,8 +10,6 @@ public class GetCashServiceTotalDownlineCriteria: CriteriaBase
 
     public int CustId { get; }
 
-    public int TotalCashMember { get; set; }
-
     public override string GetSettingKey() => "Age_CashService_TotalDownline";
 
     public override bool IsValid() => true;
