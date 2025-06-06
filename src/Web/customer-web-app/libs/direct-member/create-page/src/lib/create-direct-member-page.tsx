@@ -2,25 +2,24 @@ import classNames from 'classnames';
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-    handleChangeGroupSettingValue, handleChangeItemValue
-} from '@customer-web-app/edit-customer-page';
-import {
-    CreateCustomerResult, ValidateRefResult, ValidationRefType
-} from '@customer-web-app/share-models';
+import { handleChangeGroupSettingValue, handleChangeItemValue } from '@customer-web-app/edit-customer-page';
+import { CreateCustomerResult, ValidateRefResult, ValidationRefType } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
-import {
-    Currencies, ProductGroupIds, SystemIds, UserLevel
-} from '@customer-web-app/shared-constants';
+import { Currencies, ProductGroupIds, SystemIds, UserLevel } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-    GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
+  GeneralInfo,
+  GeneralInfoActionTypes,
+  generalInformationReducer,
+  initialState,
 } from '@customer-web-app/shared-general-information-state';
 import { DirectMemberGeneralInformation } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import {
-    initialState as initialProductGroupsState, ProductGroupsActionTypes, productGroupsReducer
+  initialState as initialProductGroupsState,
+  ProductGroupsActionTypes,
+  productGroupsReducer,
 } from '@customer-web-app/shared-group-settings-state';
 import { GroupSettingItem } from '@customer-web-app/shared-group-settings-types';
 import { GroupSetting, ProductTab, scrollToTop } from '@customer-web-app/shared-group-settings-ui';
@@ -186,7 +185,7 @@ export function CreateDirectMemberPage(props: CreateDirectMemberPageProps) {
   const handleCreateDirectMember = async () => {
     setIsLoading(true);
     const isValidGeneralInfo = generalInfoRef.current ? ((await generalInfoRef.current.validate()) as boolean) : true;
-    const validateGroupSettingResult = (await validateGroupTypes()) as ValidateRefResult;
+    const validateGroupSettingResult = await validateGroupTypes();
 
     if (isValidGeneralInfo && validateGroupSettingResult.isValid) {
       const secretKey = (document.getElementById('SecretKey') as HTMLInputElement).value;

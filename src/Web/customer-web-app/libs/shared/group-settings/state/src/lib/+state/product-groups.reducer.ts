@@ -1,7 +1,13 @@
 import { GroupTypeIds, UserLevel } from '@customer-web-app/shared-constants';
 import {
-    GroupType, MasterDirectMemberPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup,
-    ProductStatusGroupItem, SuperDirectMemberPositionTakingGroupItem, WinLimitGroupItem, WinLossLimitGroupItem
+  GroupType,
+  MasterDirectMemberPositionTakingGroupItem,
+  ParlayMaxPayoutGroupItem,
+  ProductGroup,
+  ProductStatusGroupItem,
+  SuperDirectMemberPositionTakingGroupItem,
+  WinLimitGroupItem,
+  WinLossLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 import { ProductGroupsAction, ProductGroupsActionTypes } from './product-groups.actions';
@@ -27,6 +33,24 @@ export const initProductStatusGroup = (groupType: GroupType) => {
     }
 
     return { ...item, isMultipleModeChecked: true, isDisabledUpline: item.isDisabled, original: { ...item } };
+  });
+
+  return { ...groupType, groupItems };
+};
+
+export const initProductStatusGroupForEdit = (groupType: GroupType) => {
+  const groupItems = (groupType.groupItems as ProductStatusGroupItem[]).map((item) => {
+    if (item.parentSportType && item.parentBetType) {
+      const parentItem = groupType.groupItems.find(
+        (x) => x.sportTypeId === item.parentSportType && x.betTypeId === item.parentBetType
+      ) as ProductStatusGroupItem;
+
+      if (parentItem.isDisabled) {
+        return { ...item, isMultipleModeChecked: true, original: { ...item }, readonly: true };
+      }
+    }
+
+    return { ...item, isMultipleModeChecked: true, original: { ...item } };
   });
 
   return { ...groupType, groupItems };
@@ -163,7 +187,6 @@ const handleInitProductsForEdit = (productGroups: ProductGroup[], isMemberLevel:
           return { ...type, groupItems };
         }
 
-
         if (type.id === GroupTypeIds.ParlayMaxPayout) {
           const groupItems = (type.groupItems as ParlayMaxPayoutGroupItem[]).map((item) => ({
             ...item,
@@ -185,7 +208,7 @@ const handleInitProductsForEdit = (productGroups: ProductGroup[], isMemberLevel:
         }
 
         if (type.id === GroupTypeIds.ProductStatus) {
-          return initProductStatusGroup({ ...type });
+          return initProductStatusGroupForEdit({ ...type });
         }
 
         return {
