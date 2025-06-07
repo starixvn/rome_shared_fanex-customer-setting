@@ -41,6 +41,9 @@ class GroupType162Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus)
     {
+        var criteria = new GetPotentialWinLimitCriteria(context.CustId, settingStatus);
+        var currentWinLimit = await dynamicRepository.GetAsync<PotentialWinLimit>(criteria);
+
         using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_PotentialWinLimit_162_Upd");
         var parameters = GenerateSPParams(context, groupItems, productGroupId, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
@@ -51,21 +54,16 @@ class GroupType162Service : EditGroupTypeBaseService, IEditGroupTypeBaseService
         if (result.IsSuccessful)
         {
             result.Message = StaticResources.Get($"UpdateSuccess_{groupTypeId}", context.Language);
-            _ = ResetAccumWinLossAmount(context.CustId, settingStatus, groupItems);
-
+            await ResetAccumWinLossAmount(context.CustId, currentWinLimit, groupItems);
         }
 
         return result;
     }
 
-    private async Task ResetAccumWinLossAmount(int custId, byte settingStatus, IEnumerable<GroupItemDefault> groupItems)
+    private async Task ResetAccumWinLossAmount(int custId, PotentialWinLimit currentWinLimit, IEnumerable<GroupItemDefault> groupItems)
     {
-        var criteria = new GetPotentialWinLimitCriteria(custId, settingStatus);
-        var potentialWinLimit = await dynamicRepository.GetAsync<PotentialWinLimit>(criteria);
-        var currencyWinlimit = potentialWinLimit?.WinLimit;
-
         var newWinLimit = groupItems.First() as PotentialWinLimit;
-        if ((potentialWinLimit == null || currencyWinlimit == 0) && newWinLimit?.WinLimit > 0)
+        if ((currentWinLimit == null || currentWinLimit.WinLimit == 0) && newWinLimit?.WinLimit > 0)
         {
             using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount");
             var parameters = new Hashtable { { "ListCustId", custId } };

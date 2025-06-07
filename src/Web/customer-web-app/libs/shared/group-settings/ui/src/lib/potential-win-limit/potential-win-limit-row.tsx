@@ -45,7 +45,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
     sportTypeId: number,
     betTypeId: number,
     data: Partial<PotentialWinLimitGroupItem>,
-    validateFieldName: PotentialWinLimitKey, 
+    validateFieldName: PotentialWinLimitKey,
     cachedObject?: CachePotentialWinLimitItem
   ) => {
     if (cachedObject) {
@@ -92,12 +92,8 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
 
 
   const potentialWinLimitPercent = () => {
-    if (potentialWinLimitItem.accumAmount <= 0) return <><strong>{NumberHelper.formatWithCommas(0)}</strong></>;
-    
-    return
-    <>
-    <strong>{NumberHelper.formatWithCommas((potentialWinLimitItem.accumAmount * 100) / (potentialWinLimitItem.winLimit||1))}</strong>
-    </>
+    return potentialWinLimitItem.accumAmount <= 0 ? <strong>{NumberHelper.formatWithCommas(0)}</strong> :
+      <strong>{NumberHelper.formatWithCommas((potentialWinLimitItem.accumAmount * 100) / (potentialWinLimitItem.winLimit || 1))}</strong>
   }
 
   return (
@@ -203,7 +199,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                     <div>{t('DailyAutoResetLimitAt')} </div>
                   </div>
 
-                  <div style={{ alignSelf: 'flex-start'}}>
+                  <div style={{ alignSelf: 'flex-start' }}>
                     <div className='accum-info'
                       hidden={potentialWinLimitItem.isHideAccumSection || isMultipleMode}>
                       <div className="accumulate-info">
@@ -212,8 +208,9 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                           <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.accumAmount)}</strong>
                         </span>
                         <span className="percentage-info">
-                          {' '}({potentialWinLimitPercent()}% of
-                          <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.winLimit || 0)}</strong>)
+                          {' ('}{potentialWinLimitPercent()}% of {' '}
+                          <strong>{NumberHelper.formatWithCommas(potentialWinLimitItem.winLimit || 0)}</strong>
+                          {')'}
                         </span>
                       </div>
                       <div style={{ display: 'flex' }}>

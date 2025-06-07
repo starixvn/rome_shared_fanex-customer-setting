@@ -103,7 +103,7 @@ const PotentialWinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(
                   onChange={(e) => handleSelectAll(e.target.checked)}
                   checked={potentialWinLimits.every((item) => item.isMultipleModeChecked === true)}
                 />
-                <div>{t('SelectAllSports')}</div>
+                <div>{t('SelectAll')}</div>
               </div>
             )
           }
