@@ -1,57 +1,57 @@
 {
   "sportsbook.potentialWinLimit": {
-    "overview": "Overview",
-    "description": "Potential Win Limit defines the maximum total potential win a Member can accumulate from Sportsbook bets. Bets will be denied if this limit is exceeded.",
-    "appliesTo": "Applies to: All Sports, All Bet Types under Sportsbook",
-    "excludes": "Excludes: Parlay Bets (Mix Parlay, System Parlay, Combo Parlay, Single Match Parlay) - excluded during this phase",
+    "overview": "概述",
+    "description": "赢额上限定义了会员在体育博彩中可累计的最大可赢金额。如果超过该限额，将无法继续下注。",
+    "appliesTo": "适用于：所有体育项目及所有体育博彩类型",
+    "excludes": "不适用于：串关投注（混合串关、系统串关、组合串关、单场串关）——当前阶段不包含。",
     
     "calculationLogic": {
-      "title": "Calculation Logic",
-      "formula": "Potential Win Formula: (Odds - 1) x Stake",
-      "accumulated": "Accumulated Potential Win = Sum of all running (unsettled) tickets + settled tickets (settled after limit set)",
-      "example": "Example",
-      "example-limit": "Limit = 10,000",
-      "example-ticketA": "Ticket A (Odds 10, Stake 1,000): Potential Win = 9,000",
-      "example-ticketB": "Ticket B (Odds 5): Max Allowed Stake = (10,000 - 9,000) ÷ (5 - 1) = 250"
+      "title": "计算逻辑",
+      "formula": "赢额计算公式：(赔率 - 1) x 投注金额",
+      "accumulated": "累计赢额 = 所有未结算投注 + 限额设定后结算的投注赢额总和。",
+      "example": "示例",
+      "example-limit": "限额 = 10,000",
+      "example-ticketA": "投注 A（赔率 10，投注额 1,000）：赢额 = 9,000",
+      "example-ticketB": "投注 B（赔率 5）：最大允许投注额 = (10,000 - 9,000) ÷ (5 - 1) = 250"
     },
 
     "trackingStart": {
-      "title": "When Does Tracking Start?",
-      "accumulation": "Accumulation starts from the moment the Agent sets a specific Potential Win Limit.",
-      "included": "Only running tickets at that moment and settled tickets after that point are included.",
-      "example": "Example",
-      "example-limit": "Limit set at 2:00 PM",
-      "example-ticketA": "Ticket A (Running at 2:00 PM) -> Counted",
-      "example-ticketB": "Ticket B (Settled at 1:50 PM) -> Not counted",
-      "example-ticketC": "Ticket C (Settled at 2:10 PM) -> Counted"
+      "title": "跟踪从什么时候开始？",
+      "accumulation": "从代理设置具体赢额上限开始计入累计。",
+      "included": "仅计算当时的未结算投注及之后结算的投注。",
+      "example": "示例",
+      "example-limit": "限额设置时间为下午 2:00",
+      "example-ticketA": "投注 A（下午 2:00 时为未结算） -> 计入",
+      "example-ticketB": "投注 B（下午 1:50 结算） -> 不计入",
+      "example-ticketC": "投注 C（下午 2:10 结算） -> 计入"
     },
 
     "resetBehavior": {
-      "title": "Reset Behavior",
-      "dailyReset": "Daily Auto Reset = YES by default (12:00 PM GMT+8): Clears all settled tickets.",
-      "manualReset": "Manual Reset (via Transfer): Clears settled tickets at the time of transfer.",
-      "runningTickets": "Running tickets are never cleared and always count toward the limit."
+      "title": "重置行为",
+      "dailyReset": "每日自动重置 = 默认启用（GMT+8 下午 12:00）：清除所有已结算投注",
+      "manualReset": "手动重置（通过转账）：在转账时清除已结算投注",
+      "runningTickets": "未结算投注不会被清除，始终计入累计值"
     },
 
     "resultAmendment": {
-      "title": "Result Amendment Impact",
-      "recalculation": "Amending a settled ticket (e.g., WIN -> DRAW) will recalculate the accumulated win.",
-      "statusChange": "This can change Member status",
-      "statusChange-blockedToUnblocked": "Blocked -> Unblocked (if win decreases)",
-      "statusChange-unblockedToBlocked": "Unblocked -> Blocked (if win increases)",
-      "example": "Example",
-      "example-limit": "Limit = 10,000",
-      "example-before": "Running = 4,000, Settled Win = 6,000 -> Total = 10,000 -> Blocked",
-      "example-after": "After Amendment: Settled Win = 0 -> Total = 4,000 -> Unblocked"
+      "title": "修改结果的影响",
+      "recalculation": "修改已结算投注的结果（如 WIN -> DRAW）将重新计算累计赢额",
+      "statusChange": "这可能会影响会员状态：",
+      "statusChange-blockedToUnblocked": "已阻止 -> 解锁（如果赢额减少）",
+      "statusChange-unblockedToBlocked": "未阻止 -> 被阻止（如果赢额增加）",
+      "example": "示例",
+      "example-limit": "限额 = 10,000",
+      "example-before": "未结算 = 4,000，已结算赢额 = 6,000 -> 总计 = 10,000 -> 被阻止",
+      "example-after": "修改后：已结算赢额 = 0 -> 总计 = 4,000 -> 解锁"
     },
 
     "importantNotes": {
-      "title": "Important Notes for Agents",
-      "defaultLimit": "Members have Unlimited Potential Win Limit by default",
-      "defaultReset": "Daily Auto Reset = YES by default",
-      "appliesTo": "Applies only to Sportsbook (not Casino or RNG)",
-      "excludes": "Excludes Parlay bet types",
-      "management": "Limit can be managed in Member Account Page and Potential Win Limit Page"
+      "title": "给代理的重要提示",
+      "defaultLimit": "会员默认具有无限赢额上限",
+      "defaultReset": "每日自动重置 = 默认启用",
+      "appliesTo": "仅适用于体育博彩（不适用于赌场或 RNG）",
+      "excludes": "不包含串关投注类型",
+      "management": "赢额上限可通过会员账户页面和赢额上限页面进行管理"
     }
   }
 } 

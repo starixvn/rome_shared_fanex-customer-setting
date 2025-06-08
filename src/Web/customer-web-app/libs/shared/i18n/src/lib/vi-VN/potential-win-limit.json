@@ -1,57 +1,57 @@
 {
   "sportsbook.potentialWinLimit": {
-    "overview": "Overview",
-    "description": "Potential Win Limit defines the maximum total potential win a Member can accumulate from Sportsbook bets. Bets will be denied if this limit is exceeded.",
-    "appliesTo": "Applies to: All Sports, All Bet Types under Sportsbook",
-    "excludes": "Excludes: Parlay Bets (Mix Parlay, System Parlay, Combo Parlay, Single Match Parlay) - excluded during this phase",
+    "overview": "Tổng quan",
+    "description": "Giới hạn thắng tối đa là số tiền tối đa mà Member có thể tích lũy từ cược Sportsbook. Cược sẽ bị từ chối nếu vượt quá giới hạn này.",
+    "appliesTo": "Áp dụng cho: Tất cả môn thể thao và mọi loại cược trong Sportsbook",
+    "excludes": "Không áp dụng cho: Cược Tổng Hợp (Cược Xiên, Cược Tổng Hợp, Combo Cược Xiên, Cươc Xiên Một Trận) – không áp dụng ở giai đoạn này.",
     
     "calculationLogic": {
-      "title": "Calculation Logic",
-      "formula": "Potential Win Formula: (Odds - 1) x Stake",
-      "accumulated": "Accumulated Potential Win = Sum of all running (unsettled) tickets + settled tickets (settled after limit set)",
-      "example": "Example",
-      "example-limit": "Limit = 10,000",
-      "example-ticketA": "Ticket A (Odds 10, Stake 1,000): Potential Win = 9,000",
-      "example-ticketB": "Ticket B (Odds 5): Max Allowed Stake = (10,000 - 9,000) ÷ (5 - 1) = 250"
+      "title": "Logic tính toán",
+      "formula": "Công thức tính: (Tỷ lệ - 1) x Tiền cược",
+      "accumulated": "Tổng thắng tối đa = Tổng tất cả cược đang chạy + cược đã xử lý sau khi giới hạn được thiết lập.",
+      "example": "Ví dụ",
+      "example-limit": "Giới hạn = 10,000",
+      "example-ticketA": "Cược A (Tỷ lệ 10, Cược 1,000): Thắng tiềm năng = 9,000",
+      "example-ticketB": "Cược B (Tỷ lệ 5): Tiền cược tối đa cho phép = (10,000 - 9,000) ÷ (5 - 1) = 250"
     },
 
     "trackingStart": {
-      "title": "When Does Tracking Start?",
-      "accumulation": "Accumulation starts from the moment the Agent sets a specific Potential Win Limit.",
-      "included": "Only running tickets at that moment and settled tickets after that point are included.",
-      "example": "Example",
-      "example-limit": "Limit set at 2:00 PM",
-      "example-ticketA": "Ticket A (Running at 2:00 PM) -> Counted",
-      "example-ticketB": "Ticket B (Settled at 1:50 PM) -> Not counted",
-      "example-ticketC": "Ticket C (Settled at 2:10 PM) -> Counted"
+      "title": "Việc theo dõi bắt đầu khi nào?",
+      "accumulation": "Tích lũy bắt đầu từ thời điểm Agent thiết lập giới hạn thắng tối đa cụ thể.",
+      "included": "Chỉ tính cược đang chạy tại thời điểm đó và cược đã xử lý sau thời điểm đó.",
+      "example": "Ví dụ",
+      "example-limit": "Giới hạn được thiết lập lúc 2:00 chiều",
+      "example-ticketA": "Cược A (đang chạy lúc 2:00 chiều) -> Được tính",
+      "example-ticketB": "Cược B (xử lý lúc 1:50 chiều) -> Không tính",
+      "example-ticketC": "Cược C (xử lý lúc 2:10 chiều) -> Được tính"
     },
 
     "resetBehavior": {
-      "title": "Reset Behavior",
-      "dailyReset": "Daily Auto Reset = YES by default (12:00 PM GMT+8): Clears all settled tickets.",
-      "manualReset": "Manual Reset (via Transfer): Clears settled tickets at the time of transfer.",
-      "runningTickets": "Running tickets are never cleared and always count toward the limit."
+      "title": "Hành vi đặt lại",
+      "dailyReset": "Tự động đặt lại hàng ngày = CÓ theo mặc định (12:00 trưa GMT+8): Xóa tất cả cược đã xử lý",
+      "manualReset": "Đặt lại thủ công (qua chuyển khoản): Xóa cược đã xử lý tại thời điểm chuyển",
+      "runningTickets": "Cược đang chạy không bị xóa và luôn được tính vào giới hạn"
     },
 
     "resultAmendment": {
-      "title": "Result Amendment Impact",
-      "recalculation": "Amending a settled ticket (e.g., WIN -> DRAW) will recalculate the accumulated win.",
-      "statusChange": "This can change Member status",
-      "statusChange-blockedToUnblocked": "Blocked -> Unblocked (if win decreases)",
-      "statusChange-unblockedToBlocked": "Unblocked -> Blocked (if win increases)",
-      "example": "Example",
-      "example-limit": "Limit = 10,000",
-      "example-before": "Running = 4,000, Settled Win = 6,000 -> Total = 10,000 -> Blocked",
-      "example-after": "After Amendment: Settled Win = 0 -> Total = 4,000 -> Unblocked"
+      "title": "Ảnh hưởng của việc sửa đổi kết quả",
+      "recalculation": "Việc sửa kết quả cược (ví dụ Thắng -> Hòa) sẽ tính lại tổng thắng tối đa",
+      "statusChange": "Điều này có thể thay đổi trạng thái Member:",
+      "statusChange-blockedToUnblocked": "Bị chặn -> Được mở lại (nếu thắng giảm)",
+      "statusChange-unblockedToBlocked": "Không bị chặn -> Bị chặn (nếu thắng tăng)",
+      "example": "Ví dụ:",
+      "example-limit": "Giới hạn = 10,000",
+      "example-before": "Đang chạy = 4,000, Cược thắng đã xử lý = 6,000 -> Tổng = 10,000 -> Bị chặn",
+      "example-after": "Sau sửa đổi: Cược thắng = 0 -> Tổng = 4,000 -> Được mở lại"
     },
 
     "importantNotes": {
-      "title": "Important Notes for Agents",
-      "defaultLimit": "Members have Unlimited Potential Win Limit by default",
-      "defaultReset": "Daily Auto Reset = YES by default",
-      "appliesTo": "Applies only to Sportsbook (not Casino or RNG)",
-      "excludes": "Excludes Parlay bet types",
-      "management": "Limit can be managed in Member Account Page and Potential Win Limit Page"
+      "title": "Ghi chú quan trọng dành cho đại lý",
+      "defaultLimit": "Theo mặc định, Member có giới hạn thắng tối đa không giới hạn",
+      "defaultReset": "Tự động đặt lại hàng ngày = CÓ theo mặc định",
+      "appliesTo": "Chỉ áp dụng cho Sportsbook (không áp dụng cho Casino hoặc RNG)",
+      "excludes": "Không áp dụng cho cược xiên",
+      "management": "Giới hạn có thể được quản lý trong Trang Cài Đặt Member và Trang Giới Hạn Thắng Tối Đa "
     }
   }
 } 

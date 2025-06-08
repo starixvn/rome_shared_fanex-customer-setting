@@ -233,5 +233,12 @@
   "SMBC": "Bank Sumitomo",
   "TCRB": "THE THAI CREDIT RETAIL BANK",
   "TISCO": "Tisco Bank",
-  "TTB": "TMBThanachart Bank"
+  "TTB": "TMBThanachart Bank",
+  "PotentialWinLimitNotice": "Potential Win Limit Notice",
+  "PotentialWinLimitNoticeHint1": "由於賽果調整、結算延遲及其他因素，累計的潛在獲勝上限可能會暫時超過設定的閾值。",
+  "PotentialWinLimitNoticeHint2": "串關投注在此階段的計算中不包含在內。",
+  "PotentialWinLimit": "潛在獲勝上限",
+  "AccumulateAmount": "Accumulate amount: ",
+  "ToWinAmount": "贏取金額: ",
+  "WinlossAmount": "輸贏: "
 }

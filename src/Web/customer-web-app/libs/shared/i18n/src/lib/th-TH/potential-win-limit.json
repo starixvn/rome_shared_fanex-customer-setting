@@ -1,57 +1,57 @@
 {
   "sportsbook.potentialWinLimit": {
-    "overview": "Overview",
-    "description": "Potential Win Limit defines the maximum total potential win a Member can accumulate from Sportsbook bets. Bets will be denied if this limit is exceeded.",
-    "appliesTo": "Applies to: All Sports, All Bet Types under Sportsbook",
-    "excludes": "Excludes: Parlay Bets (Mix Parlay, System Parlay, Combo Parlay, Single Match Parlay) - excluded during this phase",
+    "overview": "ภาพรวม",
+    "description": "ขีดจำกัดการชนะสูงสุดกำหนดจำนวนเงินรางวัลรวมสูงสุดที่สมาชิกสามารถสะสมได้จากการเดิมพันกีฬา. การเดิมพันจะถูกปฏิเสธหากเกินขีดจำกัดนี้",
+    "appliesTo": "ใช้กับ: ทุกประเภทกีฬา และทุกประเภทการเดิมพันภายใต้ Sportsbook",
+    "excludes": "ไม่รวม: การเดิมพันแบบพาร์เลย์ (Mix Parlay, System Parlay, Combo Parlay, Single Match Parlay) - ไม่รวมในเฟสนี้",
     
     "calculationLogic": {
-      "title": "Calculation Logic",
-      "formula": "Potential Win Formula: (Odds - 1) x Stake",
-      "accumulated": "Accumulated Potential Win = Sum of all running (unsettled) tickets + settled tickets (settled after limit set)",
-      "example": "Example",
-      "example-limit": "Limit = 10,000",
-      "example-ticketA": "Ticket A (Odds 10, Stake 1,000): Potential Win = 9,000",
-      "example-ticketB": "Ticket B (Odds 5): Max Allowed Stake = (10,000 - 9,000) ÷ (5 - 1) = 250"
+      "title": "ตรรกะการคำนวณ",
+      "formula": "สูตรการคำนวณการชนะ: (อัตราต่อรอง - 1) x เงินเดิมพัน",
+      "accumulated": "การชนะสะสม = ผลรวมของบิลที่กำลังวิ่ง + บิลที่ตัดสินแล้ว (หลังจากตั้งค่าขีดจำกัด)",
+      "example": "ตัวอย่าง:",
+      "example-limit": "ขีดจำกัด = 10,000",
+      "example-ticketA": "บิล A (อัตรา 10, เดิมพัน 1,000): การชนะ = 9,000",
+      "example-ticketB": "บิล B (อัตรา 5): เดิมพันสูงสุดที่อนุญาต = (10,000 - 9,000) ÷ (5 - 1) = 250"
     },
 
     "trackingStart": {
-      "title": "When Does Tracking Start?",
-      "accumulation": "Accumulation starts from the moment the Agent sets a specific Potential Win Limit.",
-      "included": "Only running tickets at that moment and settled tickets after that point are included.",
-      "example": "Example",
-      "example-limit": "Limit set at 2:00 PM",
-      "example-ticketA": "Ticket A (Running at 2:00 PM) -> Counted",
-      "example-ticketB": "Ticket B (Settled at 1:50 PM) -> Not counted",
-      "example-ticketC": "Ticket C (Settled at 2:10 PM) -> Counted"
+      "title": "การเริ่มต้นการติดตามเริ่มเมื่อใด?",
+      "accumulation": "เริ่มคำนวณเมื่อเอเย่นต์ตั้งค่าขีดจำกัดการชนะ",
+      "included": "จะนับเฉพาะบิลที่กำลังวิ่ง และบิลที่ตัดสินหลังจากตั้งค่า",
+      "example": "ตัวอย่าง",
+      "example-limit": "ตั้งค่าขีดจำกัดเวลา 14:00 น.",
+      "example-ticketA": "บิล A (กำลังวิ่งเวลา 14:00 น.) -> นับรวม",
+      "example-ticketB": "บิล B (ตัดสินเวลา 13:50 น.) -> ไม่นับ",
+      "example-ticketC": "บิล C (ตัดสินเวลา 14:10 น.) -> นับรวม"
     },
 
     "resetBehavior": {
-      "title": "Reset Behavior",
-      "dailyReset": "Daily Auto Reset = YES by default (12:00 PM GMT+8): Clears all settled tickets.",
-      "manualReset": "Manual Reset (via Transfer): Clears settled tickets at the time of transfer.",
-      "runningTickets": "Running tickets are never cleared and always count toward the limit."
+      "title": "พฤติกรรมการรีเซ็ต",
+      "dailyReset": "รีเซ็ตอัตโนมัติรายวัน = ใช่ โดยค่าเริ่มต้น (12:00 น. GMT+8): เคลียร์บิลที่ตัดสินแล้วทั้งหมด",
+      "manualReset": "รีเซ็ตด้วยตนเอง (โอนเงิน): เคลียร์บิลที่ตัดสินตอนโอน",
+      "runningTickets": "บิลที่กำลังวิ่งจะไม่นำออกและยังคงนับรวม"
     },
 
     "resultAmendment": {
-      "title": "Result Amendment Impact",
-      "recalculation": "Amending a settled ticket (e.g., WIN -> DRAW) will recalculate the accumulated win.",
-      "statusChange": "This can change Member status",
-      "statusChange-blockedToUnblocked": "Blocked -> Unblocked (if win decreases)",
-      "statusChange-unblockedToBlocked": "Unblocked -> Blocked (if win increases)",
-      "example": "Example",
-      "example-limit": "Limit = 10,000",
-      "example-before": "Running = 4,000, Settled Win = 6,000 -> Total = 10,000 -> Blocked",
-      "example-after": "After Amendment: Settled Win = 0 -> Total = 4,000 -> Unblocked"
+      "title": "ผลกระทบจากการแก้ไขผลลัพธ์",
+      "recalculation": "หากมีการแก้ไขผลบิล (เช่น WIN -> DRAW) จะคำนวณการชนะใหม่",
+      "statusChange": "อาจเปลี่ยนสถานะของสมาชิกได้:",
+      "statusChange-blockedToUnblocked": "Blocked -> Unblocked (หากชนะลดลง)",
+      "statusChange-unblockedToBlocked": "Unblocked -> Blocked (หากชนะเพิ่มขึ้น)",
+      "example": "ตัวอย่าง",
+      "example-limit": "ขีดจำกัด = 10,000",
+      "example-before": "กำลังวิ่ง = 4,000, ชนะที่ตัดสินแล้ว = 6,000 -> รวม = 10,000 -> ถูกบล็อก",
+      "example-after": "หลังแก้ไข: ชนะที่ตัดสินแล้ว = 0 -> รวม = 4,000 -> ไม่ถูกบล็อก"
     },
 
     "importantNotes": {
-      "title": "Important Notes for Agents",
-      "defaultLimit": "Members have Unlimited Potential Win Limit by default",
-      "defaultReset": "Daily Auto Reset = YES by default",
-      "appliesTo": "Applies only to Sportsbook (not Casino or RNG)",
-      "excludes": "Excludes Parlay bet types",
-      "management": "Limit can be managed in Member Account Page and Potential Win Limit Page"
+      "title": "หมายเหตุสำคัญสำหรับตัวแทน",
+      "defaultLimit": "สมาชิกมีขีดจำกัดการชนะสูงสุดแบบไม่จำกัดโดยค่าเริ่มต้น",
+      "defaultReset": "รีเซ็ตอัตโนมัติรายวัน = ใช่ โดยค่าเริ่มต้น",
+      "appliesTo": "ใช้เฉพาะกับ Sportsbook (ไม่รวมคาสิโนหรือ RNG)",
+      "excludes": "ไม่รวมการเดิมพันแบบพาร์เลย์",
+      "management": "สามารถจัดการขีดจำกัดได้ที่หน้า Member Account และหน้า Potential Win Limit"
     }
   }
 } 
