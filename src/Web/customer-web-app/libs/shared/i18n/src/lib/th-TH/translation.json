@@ -235,10 +235,11 @@
   "TISCO": "ธนาคารทิสโก้ จำกัด (มหาชน)(Tisco Bank)",
   "TTB": "ทีเอ็มบีธนชาต",
   "PotentialWinLimitNotice": "Potential Win Limit Notice",
-  "PotentialWinLimitNoticeHint1": "เนื่องจากการแก้ไขผลลัพธ์ ความล่าช้าในการตัดบัญชี และปัจจัยอื่น ๆ ขีดจำกัดการชนะที่เป็นไปได้แบบสะสมอาจเกินเกณฑ์ที่กำหนดไว้ชั่วคราว",
-  "PotentialWinLimitNoticeHint2": "การเดิมพันแบบพาร์เลย์จะไม่ถูกรวมในการคำนวณในช่วงระยะนี้",
-  "PotentialWinLimit": "ขีดจำกัดการชนะที่เป็นไปได้",
-  "AccumulateAmount": "Accumulate amount: ",
+  "PotentialWinLimitNoticeHint1": "เนื่องจากการแก้ไขผล การล่าช้าในการตัดสิน และปัจจัยอื่น ๆ ยอดชนะสะสมอาจเกินขีดจำกัดที่ตั้งไว้ชั่วคราว",
+  "PotentialWinLimitNoticeHint2": "การเดิมพันแบบพาร์เลย์ไม่ถูกรวมในการคำนวณในช่วงนี้",
+  "PotentialWinLimit": "ขีดจำกัดการชนะสูงสุด",
+  "AccumulateAmount": "ยอดสะสม: ",
   "ToWinAmount": "จำนวนที่อาจชนะ: ",
-  "WinlossAmount": "ยอดได้เสีย: "
+  "WinlossAmount": "ยอดได้เสีย: ",
+  "PotentialWinLimitInfoTitle": "คลิกเพื่อดูข้อมูลขีดจำกัดการชนะสูงสุด (Sportsbook)"
 }
