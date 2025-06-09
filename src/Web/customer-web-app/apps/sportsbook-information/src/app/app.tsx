@@ -66,7 +66,7 @@ const RenderTab = ({ tab }: { tab: TabOptions }) => {
     case 'PTSettingTab':
       return <PtSettingTab url={tab.url} />;
     case 'BetSettingTab':
-      return <BetSettingTab />;
+      return <BetSettingTab url={tab.url} />;
     case 'ProductCategorySettingTab':
       return <ProductCategorySettingTab url={tab.url} />;
     case 'CommissionHintTab':

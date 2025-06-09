@@ -8,16 +8,9 @@ interface MaxPayoutSport {
   bettypeName: string[];
   sportName: string;
 }
-interface SabaSport {
-  settingName: string;
-  settingFollowedName: string;
-  rowSpan: number;
-}
 
 type MaxPayoutSettingData = {
   maxPayoutSport: MaxPayoutSport;
-  sabaSport: SabaSport[];
-  isSpecialPlatform: boolean;
 };
 
 export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
@@ -79,16 +72,6 @@ export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
         </div>
         <br />
         <div>
-          <strong>
-            <Trans i18nKey={data.isSpecialPlatform ? 'MPS_VSCaption' : 'MPS_SabaCaption'} />
-          </strong>
-          <div>
-            <Trans i18nKey={data.isSpecialPlatform ? 'MPS_VSDetails' : 'MPS_SabaDetails'} />
-          </div>
-          <FistTable data={data.sabaSport} isSpecialPlatform={data.isSpecialPlatform}  />
-        </div>
-        <br />
-        <div>
           <Trans i18nKey={'MPS10'} />
           <SecondTable data={data.maxPayoutSport} />
         </div>
@@ -147,47 +130,6 @@ export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
   );
 };
 
-const FistTable = ({ data, isSpecialPlatform }: { data: SabaSport[], isSpecialPlatform: boolean }) => {
-  const removeDuplicateSettingFollowedName = data?.map((e, index) => {
-    if (e.rowSpan === undefined) {
-      e.rowSpan = 1;
-    }
-    for (let i = index + 1; i < data.length; i++) {
-      if (e.settingFollowedName !== '' && e.settingFollowedName.toLowerCase() === data[i].settingFollowedName.toLowerCase()) {
-        e.rowSpan = e.rowSpan + 1;
-        data[i].settingFollowedName = '';
-      }
-    }
-    return e;
-  });
- 
-  return (
-    <table className={styles.tableaccordion}>
-      <thead>
-        <tr>
-          <th>
-            <Trans i18nKey={isSpecialPlatform ? 'VS_Header' : 'SabaTable_Header1'} />
-          </th>
-          <th>
-            <Trans i18nKey={'BetSetting'} />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {removeDuplicateSettingFollowedName.map((e, index) => (
-          <tr key={`${e.settingName}-${index}`}>
-            <td className="text-left">{e.settingName}</td>
-            {e.settingFollowedName && (
-              <td rowSpan={e.rowSpan} className="bgGrey text-left">
-                {e.settingFollowedName}
-              </td>
-            )}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
 const SecondTable = ({ data }: { data: MaxPayoutSport }) => {
   return (
     <table className={styles.tableaccordion}>
