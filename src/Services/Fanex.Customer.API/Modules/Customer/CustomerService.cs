@@ -1,6 +1,7 @@
 using Fanex.Customer.API.Modules.Customer.Criteria;
 using Fanex.Customer.API.Modules.Customer.Models;
 using Fanex.Customer.API.Modules.Customer.Requests;
+using Fanex.Customer.API.Modules.Customer.Requests.CashService;
 using Fanex.Customer.API.Resources;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
@@ -25,13 +26,13 @@ public interface ICustomerService
     Task<Result> GetSuggestDirectMemberUsername(string uplineUserName);
 
     Task<IEnumerable<SuggestDirectMember>> SearchSuggestionDirectMember(int uplineCustId, string searchUserName);
-    
+
     Task<int> CheckExistDirectMember(int uplineCustId, string userName);
 
     Task<IEnumerable<SuggestCashMember>> SearchSuggestionCashMember(int uplineCustId, string searchUserName);
-    
+
     Task<int> CheckExistCashMember(int uplineCustId, string userName);
-    
+
     Task<bool> CheckExistedCustomer(string username);
 
     Task<Downline> GetDownlineByUsername(int custId, int subAccountId, string username);
@@ -59,6 +60,10 @@ public interface ICustomerService
     Task<AccountInfo> GetAccountInfo(int custId);
 
     Task<Object> GetWinLossLimitInformation(GetProductCategoriesRequest request);
+
+    Task<int> GetCashServiceStatus(int custId);
+
+    Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
 }
 
 public class CustomerService : ICustomerService
@@ -133,7 +138,7 @@ public class CustomerService : ICustomerService
     {
         var command = new CheckExistCashMemberUsernameCommand(uplineCustId, userName);
         var result = await dynamicRepository.FetchAsync<CheckDirectMember>(command);
-        if(!result.Any())
+        if (!result.Any())
         {
             return 0;
         }
@@ -437,5 +442,20 @@ public class CustomerService : ICustomerService
         };
 
         return jsonResponse;
+    }
+
+    public async Task<int> GetCashServiceStatus(int custId)
+    {
+        var criteria = new GetCashServiceStatusCriteria(custId);
+        await dynamicRepository.FetchAsync<dynamic>(criteria);
+        // Expecting result to have a property named ServiceType (0: Credit, 1: Cash)
+        return criteria.ServiceType;
+    }
+
+    public async Task<TotalCashMember> GetCashServiceTotalDownline(int custId)
+    {
+        var criteria = new GetCashServiceTotalDownlineCriteria(custId);
+        var result = await dynamicRepository.FetchAsync<TotalCashMember>(criteria);
+        return result.First();
     }
 }

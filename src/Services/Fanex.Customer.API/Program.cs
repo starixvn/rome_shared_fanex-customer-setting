@@ -39,6 +39,8 @@ builder.Services.AddSingleton<IMessageService, MessageService>();
 builder.Services.AddSingleton<ISettingProfileService, SettingProfileService>();
 builder.Services.AddSingleton<IUMService, UMService>();
 builder.Services.AddSingleton<ICustomerSettingHelper, CustomerSettingHelper>();
+builder.Services.AddSingleton<IWriteLogSPService, WriteLogSPService>();
+builder.Services.AddSingleton<ICashCustomerService, CashCustomerService>();
 builder.Services.AddHttpClient<ISettingService, SettingService>(httpClient =>
 {
     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

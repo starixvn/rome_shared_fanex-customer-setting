@@ -1,12 +1,12 @@
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import styles from './general-information.module.scss';
 import stylesDropdown from './bank-info.module.scss';
 import { BlockItem } from '@customer-web-app/shared/base/block';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { inputNumberOnly } from '@customer-web-app/shared-helpers';
-
+import { currentCdnUri } from '@customer-web-app/shared-api-helper';
 interface Bank {
   id: number;
   name: string;
@@ -23,21 +23,6 @@ interface BankSelectProps {
   readonly onBlurBankAccountNumber: () => void;
 }
 
-const usePreloadImages = (urls: string[]) => {
-  useEffect(() => {
-    const preloadImages = urls.map(url => {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.src = url;
-        img.onload = resolve;
-        img.onerror = reject;
-      });
-    });
-
-    Promise.all(preloadImages).catch(console.error);
-  }, [urls]);
-};
-
 const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId: (bankId: number) => void }) => {
   const { t } = useTranslation();
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
@@ -45,14 +30,17 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
   const [searchTerm, setSearchTerm] = useState('');
   const emptyBank: Bank = { id: 0, name: t('SelectBankAccount'), code: '' };
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const bankImageUrls = useMemo(() =>
-    banks
-      .filter(bank => bank.code)
-      .map(bank => `${cdnUri}/bank/${bank.code?.toLocaleUpperCase()}.png`),
-    [banks]
+  
+  const baseUrl = useMemo(() => 
+    currentCdnUri(),
+    []
   );
 
-  usePreloadImages(bankImageUrls);
+  const getBankImageUrl = useCallback((code: string) => 
+    `${baseUrl}/bank/${code?.toLocaleUpperCase()}.png`,
+    [baseUrl]
+  );
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (!isOpen) return;
@@ -83,7 +71,7 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
         {selectedBank?.code &&
           <img
             alt={selectedBank.name}
-            src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${selectedBank.code}.png`}
+            src={getBankImageUrl(selectedBank.code)}
             style={{ width: '18px', height: '18px', marginRight: '8px' }}
           />}
         <span className={stylesDropdown['bank-name']}>
@@ -117,14 +105,14 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
             />
           </div>
           <div className={stylesDropdown['bank-dropdown__list']}>
-          {filteredBanks.map((bank, index) => (
+          {filteredBanks.map((bank) => (
             <div key={bank.id} className={classNames(stylesDropdown['bank-dropdown__item'], { [stylesDropdown['bank-dropdown__item--selected']]: selectedBank?.id === bank.id })} onClick={() => {
               setSelectedBank(bank);
               setIsOpen(false);
               onChangeBankId(bank.id);
               setSearchTerm('');
             }}>
-              {bank.code && <img alt={bank.name} src={`${(window.top as any).alpha.urls.cashServiceRootPath}assets/bank/${bank.code}.png`} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
+              {bank.code && <img alt={bank.name} src={getBankImageUrl(bank.code)} style={{ width: '20px', height: '20px', marginRight: '8px' }} />}
               {bank.id === 0 ? <span style={{ padding: '0 0 0 28px' }}>{bank.name}</span> : bank.name}
             </div>
           ))}
