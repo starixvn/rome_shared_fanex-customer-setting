@@ -50,20 +50,21 @@ public class CashCustomerService : ICashCustomerService
         if (initCmd.ErrCode > 0)
             return ResultFromCriteria(initCmd);
 
-        if (initCmd.TrialEndTime.HasValue)
-        {
-            var billingCmd = new AgeCashServiceBillingDailyFeeInsCommand(
-                request.CustId,
-                initCmd.TrialEndTime.Value,
-                request.IP
-            );
-            await dynamicRepository.ExecuteAsync(billingCmd);
+        // DailyFee is not apply for sprint 3, will be implemented in later sprints.
+        // if (initCmd.TrialEndTime.HasValue)
+        // {
+        //     var billingCmd = new AgeCashServiceBillingDailyFeeInsCommand(
+        //         request.CustId,
+        //         initCmd.TrialEndTime.Value,
+        //         request.IP
+        //     );
+        //     await dynamicRepository.ExecuteAsync(billingCmd);
 
-            if (billingCmd.ErrCode > 0)
-            {
-                Fanex.Logging.LogService.Error($"Age_CashServiceBilling_DailyFee_Ins Error: {billingCmd.ErrCode}, Message: {billingCmd.ErrMsg}, Input: CustId={billingCmd.CustId}, TrialEndTime={billingCmd.TrialEndTime}, IP={billingCmd.IP}");
-            }
-        }
+        //     if (billingCmd.ErrCode > 0)
+        //     {
+        //         Fanex.Logging.LogService.Error($"Age_CashServiceBilling_DailyFee_Ins Error: {billingCmd.ErrCode}, Message: {billingCmd.ErrMsg}, Input: CustId={billingCmd.CustId}, TrialEndTime={billingCmd.TrialEndTime}, IP={billingCmd.IP}");
+        //     }
+        // }
 
         return new Result(0, "Success");
     }
