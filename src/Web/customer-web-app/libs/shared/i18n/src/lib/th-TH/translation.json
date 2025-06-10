@@ -233,5 +233,13 @@
   "SMBC": "Bank Sumitomo",
   "TCRB": "THE THAI CREDIT RETAIL BANK",
   "TISCO": "ธนาคารทิสโก้ จำกัด (มหาชน)(Tisco Bank)",
-  "TTB": "ทีเอ็มบีธนชาต"
+  "TTB": "ทีเอ็มบีธนชาต",
+  "PotentialWinLimitNotice": "Potential Win Limit Notice",
+  "PotentialWinLimitNoticeHint1": "เนื่องจากการแก้ไขผล การล่าช้าในการตัดสิน และปัจจัยอื่น ๆ ยอดชนะสะสมอาจเกินขีดจำกัดที่ตั้งไว้ชั่วคราว",
+  "PotentialWinLimitNoticeHint2": "การเดิมพันแบบพาร์เลย์ไม่ถูกรวมในการคำนวณในช่วงนี้",
+  "PotentialWinLimit": "ขีดจำกัดการชนะสูงสุด",
+  "AccumulateAmount": "ยอดสะสม: ",
+  "ToWinAmount": "จำนวนที่อาจชนะ: ",
+  "WinlossAmount": "ยอดได้เสีย: ",
+  "PotentialWinLimitInfoTitle": "คลิกเพื่อดูข้อมูลขีดจำกัดการชนะสูงสุด (Sportsbook)"
 }

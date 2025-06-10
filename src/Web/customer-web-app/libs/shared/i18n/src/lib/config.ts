@@ -3,25 +3,30 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
+import potentialWinLimitSettingInfoUs from './en-US/potential-win-limit.json';
 import productSettingInfoUs from './en-US/product-setting-info.json';
 import enUS from './en-US/translation.json';
+import potentialWinLimitSettingInfoThai from './th-TH/potential-win-limit.json';
 import productSettingInfoThai from './th-TH/product-setting-info.json';
 import thTh from './th-TH/translation.json';
+import potentialWinLimitSettingInfoVi from './vi-VN/potential-win-limit.json';
 import productSettingInfoVi from './vi-VN/product-setting-info.json';
 import viVN from './vi-VN/translation.json';
+import potentialWinLimitSettingInfoCN from './zh-CN/potential-win-limit.json';
 import productSettingInfoCN from './zh-CN/product-setting-info.json';
 import zhCN from './zh-CN/translation.json';
+import potentialWinLimitSettingInfoTW from './zh-TW/potential-win-limit.json';
 import productSettingInfoTW from './zh-TW/product-setting-info.json';
 import zhTW from './zh-TW/translation.json';
 
 export const defaultNS = 'translation';
 
 export const resources = {
-  'en-US': { translation: { ...enUS, ...productSettingInfoUs } },
-  'th-TH': { translation: { ...thTh, ...productSettingInfoThai } },
-  'vi-VN': { translation: { ...viVN, ...productSettingInfoVi } },
-  'zh-CN': { translation: { ...zhCN, ...productSettingInfoCN } },
-  'zh-TW': { translation: { ...zhTW, ...productSettingInfoTW } },
+  'en-US': { translation: { ...enUS, ...productSettingInfoUs, ...potentialWinLimitSettingInfoUs } },
+  'th-TH': { translation: { ...thTh, ...productSettingInfoThai, ...potentialWinLimitSettingInfoThai } },
+  'vi-VN': { translation: { ...viVN, ...productSettingInfoVi, ...potentialWinLimitSettingInfoVi } },
+  'zh-CN': { translation: { ...zhCN, ...productSettingInfoCN, ...potentialWinLimitSettingInfoCN } },
+  'zh-TW': { translation: { ...zhTW, ...productSettingInfoTW, ...potentialWinLimitSettingInfoTW } },
 };
 
 i18next

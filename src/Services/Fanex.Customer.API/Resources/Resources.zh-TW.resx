@@ -450,4 +450,7 @@
   <data name="UpdateSuccess_161" xml:space="preserve">
     <value>產品狀態更新成功</value>
   </data>
+  <data name="GroupType162" xml:space="preserve">
+    <value>潛在獲勝上限</value>
+  </data>
 </root>

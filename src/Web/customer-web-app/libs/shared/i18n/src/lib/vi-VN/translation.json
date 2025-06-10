@@ -232,5 +232,13 @@
   "SMBC": "Bank Sumitomo",
   "TCRB": "THE THAI CREDIT RETAIL BANK",
   "TISCO": "Tisco Bank",
-  "TTB": "TMBThanachart Bank"
+  "TTB": "TMBThanachart Bank",
+  "PotentialWinLimitNotice": "Thông báo Giới Hạn Thắng Tối Đa",
+  "PotentialWinLimitNoticeHint1": "Do thay đổi kết quả, xử lý chậm hoặc các lý do khác, tổng Giới Hạn Thắng Tối Đa có thể tạm thời vượt quá giới hạn đã cài đặt.",
+  "PotentialWinLimitNoticeHint2": "Cược xiên không được tính trong phép tính này ở giai đoạn hiện tại.",
+  "PotentialWinLimit": "Giới Hạn Thắng Tối Đa ",
+  "AccumulateAmount": "Tổng số tích lũy: ",
+  "ToWinAmount": "Dự Kiến Thắng: ",
+  "WinlossAmount": "Thắng thua: ",
+  "PotentialWinLimitInfoTitle": "Nhấn để xem thông tin Giới Hạn Thắng Tối Đa (Sportsbook)"
 }

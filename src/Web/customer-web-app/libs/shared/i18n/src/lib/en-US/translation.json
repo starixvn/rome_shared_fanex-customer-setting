@@ -213,7 +213,6 @@
   "PotentialWinLimitNoticeHint1": "Due to result amendments, settlement delays, and other factors, the accumulated Potential Win Limit may temporarily exceed the configured threshold.",
   "PotentialWinLimitNoticeHint2": "Parlay bets are excluded from this calculation during this phase.",
   "PotentialWinLimit": "Potential Win Limit",
-  "ClickToViewCurrentPotentialWinLimitAmount": "Click to view current Potential Win Amount",
   "AccumulateAmount": "Accumulate amount: ",
   "ToWinAmount": "To Win: ",
   "WinlossAmount": "Win/Loss: ",
@@ -242,5 +241,6 @@
   "SMBC": "Bank Sumitomo",
   "TCRB": "THE THAI CREDIT RETAIL BANK",
   "TISCO": "Tisco Bank",
-  "TTB": "TMBThanachart Bank"
+  "TTB": "TMBThanachart Bank",
+  "PotentialWinLimitInfoTitle": "Click to view Potential Win Limit (Sportsbook) Info"
 }

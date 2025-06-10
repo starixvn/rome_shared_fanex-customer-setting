@@ -447,4 +447,7 @@
   <data name="UpdateSuccess_161" xml:space="preserve">
     <value>Trạng thái trò chơi được cập nhật thành công.</value>
   </data>
+  <data name="GroupType162" xml:space="preserve">
+    <value> Giới Hạn Thắng Tối Đa </value>
+  </data>
 </root>

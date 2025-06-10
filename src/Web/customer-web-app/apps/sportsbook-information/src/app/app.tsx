@@ -3,14 +3,15 @@ import { useEffect, useState } from 'react';
 
 import { TabOptions } from '@customer-web-app/share-models';
 
+import { useTranslation } from 'react-i18next';
 import styles from './app.module.scss';
 import { Layout } from './layout';
 import { BetSettingTab } from './tabs/bet-setting-tab';
 import { CommissionHintTab } from './tabs/commission-hint-tab';
 import { MaxPayoutSettingTab } from './tabs/max-payout-setting-tab';
+import { PotentialWinLimitSettingTab } from './tabs/potential-win-limit';
 import { ProductCategorySettingTab } from './tabs/product-category-setting-tab';
 import { PtSettingTab } from './tabs/pt-setting-tab';
-import { useTranslation } from 'react-i18next';
 import { WinLossLimitTab } from './tabs/win-loss-limit-tab';
 
 export function App() {
@@ -74,6 +75,8 @@ const RenderTab = ({ tab }: { tab: TabOptions }) => {
       return <MaxPayoutSettingTab url={tab.url} />;
     case 'WinLossLimitTab':
       return <WinLossLimitTab url={tab.url} />;
+    case 'PotentialWinLimitSettingTab':
+      return <PotentialWinLimitSettingTab />;
     default:
       return <div />;
   }
