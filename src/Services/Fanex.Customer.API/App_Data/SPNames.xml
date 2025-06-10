@@ -393,8 +393,8 @@
 		<Setting Key="Acc_CustomerInsMember_CheckExists" SpName="Acc_CustomerInsMember_CheckExists" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_CashMember" SpName="Acc_CustomerInsMember_CashMember" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="Acc_CustomerInsMember_CashMember_Validate" SpName="Acc_CustomerInsMember_CashMember_Validate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-		<Setting Key="Age_CashService_CustServiceTypeUpdate" SpName="Age_CashService_CustServiceTypeUpdate" DbName="DBCust.CustDB.wsv_nap" Plain="0" />
-		<Setting Key="DBSite3_Age_CashService_CustServiceTypeUpdate" SpName="Age_CashService_CustServiceTypeUpdate" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
+		<Setting Key="Age_CashService_CustServiceTypeUpdate" SpName="Age_CashService_CustServiceTypeUpdate" DbName="DBCust.CustDB.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_Age_CashService_CustServiceTypeUpdate" SpName="Age_CashService_CustServiceTypeUpdate" DbName="DBCust3.CustDB.wsv_CashService" Plain="0" />
 		<Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_nap" Plain="0" />
 		<Setting Key="DBSite1_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
 		<Setting Key="DBSite3_WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBCust3.CustDB.wsv_nap" Plain="0" />
