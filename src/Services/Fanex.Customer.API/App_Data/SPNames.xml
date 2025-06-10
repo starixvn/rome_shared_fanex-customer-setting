@@ -383,7 +383,7 @@
 	</Function>
 	<Function Name="Cash Member">
 		<Setting Key="Age_CashService_CustServiceTypeSel" SpName="Age_CashService_CustServiceTypeSel" DbName="DBCust.CustDB.wsv_CashService" Plain="0" />
-		<Setting Key="Age_CashService_TotalDownline" SpName="Age_CashService_TotalDownline" DbName="DBCust.CustDB.wsv_nap" Plain="0">
+		<Setting Key="Age_CashService_TotalDownline" SpName="Age_CashService_TotalDownline" DbName="DBCust.CustDB.wsv_CashService" Plain="0">
 			<Mapping DataField="total_memberActive" ObjectProperty="TotalCashMemberActive" />
 			<Mapping DataField="total_memberClosed" ObjectProperty="TotalCashMemberClosed" />
 			<Mapping DataField="total_memberSuspended" ObjectProperty="TotalCashMemberSuspended" />
