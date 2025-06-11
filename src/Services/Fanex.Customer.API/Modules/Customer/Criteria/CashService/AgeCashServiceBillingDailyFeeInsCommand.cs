@@ -10,6 +10,7 @@ namespace Fanex.Customer.API.Modules.Customer.Criteria.CashService
         public string IP { get; }
         public int ErrCode { get; set; }
         public string ErrMsg { get; set; }
+        public string LogData { get; set; }
 
         public AgeCashServiceBillingDailyFeeInsCommand(int custId, DateTime trialEndTime, string ip)
         {

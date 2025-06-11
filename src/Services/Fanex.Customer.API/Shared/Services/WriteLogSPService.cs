@@ -4,6 +4,7 @@ using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
 using Fanex.Data.Repository;
 using System.Threading.Tasks;
+using Fanex.Logging;
 
 
 public interface IWriteLogSPService
@@ -14,18 +15,19 @@ public interface IWriteLogSPService
         int actionId,
         string trackingValue,
         string trackingValue2,
-        int duration);
+        int duration,
+        int siteDBGroupId);
 }
 
 public class WriteLogSPService : IWriteLogSPService
 {
     private readonly IDynamicRepository dynamicRepository;
-    private readonly ISiteDBService siteDBService;
+    private readonly ILogger _logger;
 
-    public WriteLogSPService(IDynamicRepository dynamicRepository, ISiteDBService siteDBService)
+    public WriteLogSPService(IDynamicRepository dynamicRepository, ILogger logger)
     {
         this.dynamicRepository = dynamicRepository;
-        this.siteDBService = siteDBService;
+        this._logger = logger;
     }
 
     public async Task WriteLogSPAsync(
@@ -34,7 +36,8 @@ public class WriteLogSPService : IWriteLogSPService
         int actionId,
         string trackingValue,
         string trackingValue2,
-        int duration)
+        int duration,
+        int siteDBGroupId)
     {
         try
         {
@@ -42,21 +45,19 @@ public class WriteLogSPService : IWriteLogSPService
             await dynamicRepository.ExecuteAsync(dbLogCriteria);
             return;
         }
-        catch
+        catch (System.Exception ex)
         {
-            // Do nothing
+            await _logger.ErrorAsync(ex.ToString(), ex);
         }
 
         try
         {
-            var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(custId);
-            int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
             var criteria = new WriteLogSPCommand(userId, custId, actionId, trackingValue, trackingValue2, duration, siteDBGroupId);
             await dynamicRepository.ExecuteAsync(criteria);
         }
-        catch
+        catch (System.Exception ex)
         {
-            // Do nothing
+            await _logger.ErrorAsync(ex.ToString(), ex);
         }
     }
 
