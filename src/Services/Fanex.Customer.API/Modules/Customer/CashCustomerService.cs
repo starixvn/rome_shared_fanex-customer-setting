@@ -18,15 +18,21 @@ public class CashCustomerService : ICashCustomerService
     private readonly IDynamicRepository dynamicRepository;
     private readonly ISiteDBService siteDBService;
     private readonly IWriteLogSPService writeLogSPService;
+    private readonly IWriteLogSPTransferService writeLogSPTransferService;
+    private readonly Fanex.Logging.ILogger _logger;
 
     public CashCustomerService(
         IDynamicRepository dynamicRepository,
         ISiteDBService siteDBService,
-        IWriteLogSPService writeLogSPService)
+        IWriteLogSPService writeLogSPService,
+        IWriteLogSPTransferService writeLogSPTransferService,
+        Fanex.Logging.ILogger logger)
     {
         this.dynamicRepository = dynamicRepository;
         this.siteDBService = siteDBService;
         this.writeLogSPService = writeLogSPService;
+        this.writeLogSPTransferService = writeLogSPTransferService;
+        this._logger = logger;
     }
 
     public async Task<Result> UpdateEnableCashService(UpdateCashServiceStatusRequest request)
@@ -35,14 +41,17 @@ public class CashCustomerService : ICashCustomerService
         {
             return Result.CreateError(validationError);
         }
+
         request.Language = LanguageUtils.ToLanguageKey(request.Language);
-        var criteria = CreateUpdateCashServiceStatusCommand(request);
+        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
+        var criteria = CreateUpdateCashServiceStatusCommand(request, siteDBGroupId);
         var dataLog = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
         if (criteria.ErrCode != 0)
             return ResultFromCriteria(criteria);
 
-        await WriteLogsAsync(dataLog);
+        await WriteLogsAsync(dataLog, siteDBGroupId);
 
         var initCmd = CreateInitializeCommand(request);
         await dynamicRepository.ExecuteAsync(initCmd);
@@ -50,38 +59,45 @@ public class CashCustomerService : ICashCustomerService
         if (initCmd.ErrCode > 0)
             return ResultFromCriteria(initCmd);
 
-        // DailyFee is not apply for sprint 3, will be implemented in later sprints.
-        // if (initCmd.TrialEndTime.HasValue)
-        // {
-        //     var billingCmd = new AgeCashServiceBillingDailyFeeInsCommand(
-        //         request.CustId,
-        //         initCmd.TrialEndTime.Value,
-        //         request.IP
-        //     );
-        //     await dynamicRepository.ExecuteAsync(billingCmd);
+        if (initCmd.TrialEndTime.HasValue)
+        {
+            var billingCmd = new AgeCashServiceBillingDailyFeeInsCommand(
+                request.CustId,
+                initCmd.TrialEndTime.Value,
+                request.IP
+            );
+            await dynamicRepository.ExecuteAsync(billingCmd);
 
-        //     if (billingCmd.ErrCode > 0)
-        //     {
-        //         Fanex.Logging.LogService.Error($"Age_CashServiceBilling_DailyFee_Ins Error: {billingCmd.ErrCode}, Message: {billingCmd.ErrMsg}, Input: CustId={billingCmd.CustId}, TrialEndTime={billingCmd.TrialEndTime}, IP={billingCmd.IP}");
-        //     }
-        // }
+            if (billingCmd.ErrCode > 0)
+            {
+                await _logger.ErrorAsync($"Age_CashServiceBilling_DailyFee_Ins Error: {billingCmd.ErrCode}, Message: {billingCmd.ErrMsg}, Input: CustId={billingCmd.CustId}, TrialEndTime={billingCmd.TrialEndTime}, IP={billingCmd.IP}");
+            }
+            else
+            {
+                await writeLogSPTransferService.WriteLogSPTransferAsync(
+                    billingCmd.LogData,
+                    siteDBGroupId
+                );
+            }
+        }
 
         return new Result(0, "Success");
     }
 
-    private static UpdateCashServiceStatusCommand CreateUpdateCashServiceStatusCommand(UpdateCashServiceStatusRequest request) =>
+    internal static UpdateCashServiceStatusCommand CreateUpdateCashServiceStatusCommand(UpdateCashServiceStatusRequest request, int siteDBGroupId) =>
         new(
             request.CustId,
             request.ServiceType,
             request.SubAccId,
             request.IP,
-            request.Language
+            request.Language,
+            siteDBGroupId
         );
 
-    private static Result ResultFromCriteria(dynamic criteria) =>
+    internal static Result ResultFromCriteria(dynamic criteria) =>
         new(criteria.ErrCode, criteria.ErrMsg);
 
-    private async Task WriteLogsAsync(IEnumerable<LogDataEntity> dataLog)
+    internal async Task WriteLogsAsync(IEnumerable<LogDataEntity> dataLog, int siteDBGroupId)
     {
         if (dataLog == null)
             return;
@@ -96,12 +112,13 @@ public class CashCustomerService : ICashCustomerService
                 log.ActionID,
                 log.TrackingValue,
                 log.TrackingValue2,
-                log.Duration
+                log.Duration,
+                siteDBGroupId
             );
         }
     }
 
-    private static AgeCashServiceCustServiceTypeInitializeCommand CreateInitializeCommand(UpdateCashServiceStatusRequest request) =>
+    internal static AgeCashServiceCustServiceTypeInitializeCommand CreateInitializeCommand(UpdateCashServiceStatusRequest request) =>
         new(
             request.CustId,
             request.ServiceType,
@@ -111,7 +128,7 @@ public class CashCustomerService : ICashCustomerService
             request.Language
         );
 
-    private bool IsValidRequest(UpdateCashServiceStatusRequest request, out string error)
+    internal bool IsValidRequest(UpdateCashServiceStatusRequest request, out string error)
     {
         if (request == null)
         {
