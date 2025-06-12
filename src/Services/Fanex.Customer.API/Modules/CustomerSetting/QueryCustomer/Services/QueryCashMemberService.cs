@@ -77,6 +77,7 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo)
         };
 
+        await SetProductStatusTooltip(customerSetting, request.Language, request.CustId, appSettings.SettingStatus);
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
         return customerSetting;
     }

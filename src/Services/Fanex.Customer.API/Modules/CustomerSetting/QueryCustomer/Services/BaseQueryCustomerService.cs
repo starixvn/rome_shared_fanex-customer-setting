@@ -16,6 +16,9 @@ using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType161;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels.GroupType162;
 using System.Text.RegularExpressions;
+using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
+using Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Entities;
+using Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Criteria;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
@@ -60,4 +63,59 @@ public class BaseQueryCustomerService : BaseCustomerService
 
     protected bool IsHideGroupType(int displayMode)
         => displayMode == DisplayMode.Hidden;
+
+    protected async Task SetProductStatusTooltip(CustomerSettingModel customerSetting, string language, int custId, byte settingStatus)
+    {
+        const int PRODUCT_STATUS_GROUP_TYPE = 160;
+        const int JACKPOT_SPORT_TYPE_ID = 9904;
+        const int JACKPOT_BET_TYPE_ID = 4001;
+
+        var result = await dynamicRepository.FetchAsync<JackpotStatusTooltipProduct>(new GetJackpotStatusTooltipCriteria(custId, settingStatus));
+        if (result == null || !result.Any())
+        {
+            return;
+        }
+
+        var productNames = result
+            .Select(item => cacheRefService.GetProductName(item.RealProductId, language))
+            .Where(name => !string.IsNullOrEmpty(name));
+
+        if (!productNames.Any())
+        {
+            return;
+        }
+
+        string tooltipTemplate = Resources.Resources.ResourceManager.GetString("JackpotStatusTooltip", new System.Globalization.CultureInfo(language));
+        string tooltipMessage = string.Format(tooltipTemplate, string.Join(", ", productNames));
+
+        // Set tooltip for all group types with PRODUCT_STATUS_GROUP_TYPE
+        var productGroupsList = customerSetting.ProductGroups?.ToList();
+        if (productGroupsList != null)
+        {
+            foreach (var productGroup in productGroupsList)
+            {
+                if (productGroup.GroupTypes != null)
+                {
+                    var groupTypesList = productGroup.GroupTypes.ToList();
+                    foreach (var groupType in groupTypesList)
+                    {
+                        if (groupType.Id == PRODUCT_STATUS_GROUP_TYPE && groupType.GroupItems != null)
+                        {
+                            var groupItemsList = groupType.GroupItems.ToList();
+                            foreach (var groupItem in groupItemsList)
+                            {
+                                if (groupItem.SportTypeId == JACKPOT_SPORT_TYPE_ID && groupItem.BetTypeId == JACKPOT_BET_TYPE_ID)
+                                {
+                                    groupItem.TooltipMessage = tooltipMessage;
+                                }
+                            }
+                            groupType.GroupItems = groupItemsList;
+                        }
+                    }
+                    productGroup.GroupTypes = groupTypesList;
+                }
+            }
+            customerSetting.ProductGroups = productGroupsList;
+        }
+    }
 }

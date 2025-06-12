@@ -7,6 +7,7 @@ import { ProductStatusGroupItem } from '@customer-web-app/shared-group-settings-
 import { BlockRow } from '@customer-web-app/shared/base/block';
 
 import styles from './product-status.module.scss';
+import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 type Props = {
   onChange: (sportTypeId: number, betTypeId: number, isDisabled: boolean) => void;
@@ -31,7 +32,7 @@ export function ProductStatusItem(props: Readonly<Props>) {
     );
   }
 
-  const { sportTypeName, sportTypeId, betTypeId, isDisabled, readonly, isDisabledUpline } = props.data;
+  const { sportTypeName, sportTypeId, betTypeId, isDisabled, readonly, isDisabledUpline, tooltipMessage } = props.data;
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     props.onChange(sportTypeId, betTypeId, !e.target.checked);
@@ -52,7 +53,25 @@ export function ProductStatusItem(props: Readonly<Props>) {
 
   return (
     <div className={styles.container}>
-      <BlockRow label={sportTypeName}>
+      <BlockRow
+        label={
+          tooltipMessage ? (
+            <div style={{ justifyContent: 'space-between', width: '100%' }}>
+              <span className={styles.sportTypeName}>{sportTypeName}</span>
+              <span
+                className="ic-info"
+                id={`jackpot-tooltip-${sportTypeId}-${betTypeId}`}
+                data-tooltip-id={`jackpot-tooltip-${sportTypeId}-${betTypeId}`}
+                data-tooltip-place="top"
+                data-tooltip-content={tooltipMessage}
+              ></span>
+              <WrapperTooltip type="default" id={`jackpot-tooltip-${sportTypeId}-${betTypeId}`} place="top" />
+            </div>
+          ) : (
+            sportTypeName
+          )
+        }
+      >
         <div className={styles.status}>
           <div className={styles.blockCenter}>
             <input

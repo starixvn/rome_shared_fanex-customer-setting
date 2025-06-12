@@ -78,4 +78,6 @@ public class GroupItemDefault
 
     public virtual bool Is3DecimalPTValue()
         => false;
+
+    public string TooltipMessage { get; set; }
 }

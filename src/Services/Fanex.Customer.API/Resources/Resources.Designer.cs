@@ -241,6 +241,15 @@ namespace Fanex.Customer.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This jackpot status applies only to {0} jackpot. When the Jackpot is disabled, members can still play all games as usual, but jackpot participation will not be available..
+        /// </summary>
+        public static string JackpotStatusTooltip {
+            get {
+                return ResourceManager.GetString("JackpotStatusTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1 X 2.
         /// </summary>
         public static string lbl1X2 {
