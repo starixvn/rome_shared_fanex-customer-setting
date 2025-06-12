@@ -141,6 +141,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                     }}
                     onChangeUnlimited={(valueCheckBox, value) => {
                       if (valueCheckBox) {
+                        potentialWinLimitItem.isAutoReset = true;
                         onPotentialWinLimitChange(
                           sportTypeId,
                           betTypeId,
