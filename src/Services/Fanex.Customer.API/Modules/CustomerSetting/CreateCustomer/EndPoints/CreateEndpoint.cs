@@ -19,7 +19,6 @@ public class CreateEndpoint : IEndpoint<IResult, CreateRequest, ICreateCustomerS
 
     public async Task<IResult> HandleAsync(CreateRequest request, ICreateCustomerService service)
     {
-        Fanex.Logging.LogService.Info(JsonSerializer.Serialize(request));
         if (!service.ValidateRequest(request))
         {
             return Results.Ok(Shared.Models.Result.CreateError(StaticResources.Get("InvalidParameterValue", request.Context.Language ?? LanguageUtils.DefaultLanguage)));
