@@ -450,4 +450,7 @@
   <data name="GroupType162" xml:space="preserve">
     <value> Giới Hạn Thắng Tối Đa </value>
   </data>
+  <data name="UpdateSuccess_162" xml:space="preserve">
+    <value>Giới Hạn Thắng Tối Đa đã được cập nhật thành công.</value>
+  </data>
 </root>

@@ -450,4 +450,7 @@
   <data name="GroupType162" xml:space="preserve">
     <value>ขีดจำกัดการชนะที่เป็นไปได้</value>
   </data>
+  <data name="UpdateSuccess_162" xml:space="preserve">
+    <value>อัปเดตขีดจำกัดการชนะสูงสุดเรียบร้อยแล้ว</value>
+  </data>
 </root>

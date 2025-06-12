@@ -453,4 +453,7 @@
   <data name="GroupType162" xml:space="preserve">
     <value>潛在獲勝上限</value>
   </data>
+  <data name="UpdateSuccess_162" xml:space="preserve">
+    <value>贏額上限已成功更新。</value>
+  </data>
 </root>
