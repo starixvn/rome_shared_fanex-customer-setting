@@ -117,15 +117,18 @@ function CashServiceAds(props: CashServiceAdsProps) {
         <>
             <div className={styles['step-title']}>Supercharge Your Cash Flow!</div>
             <div className={styles.divider} />
-            <div className={styles['step-description']}>
-                Start your <span className={styles.highlight}>14-days FREE trial</span> today and enjoy instant savings of <strong>THB 2,800</strong>.
+            <div className={styles['step-highlight-block']}>
+                <span className={styles['free-badge']}>14-days <b>FREE</b> trial</span>
+                <span className={styles['save-amount']}>Start today and enjoy instant savings of <b>THB 2,800</b></span>
             </div>
-            <ul className={styles['step-description']}>
-                <li><span className={styles['icon-check']} /> <strong>No platform fee</strong> - save THB 200/day during the trial.</li>
-                <li><span className={styles['icon-check']} /> Just <strong>THB 0.15 per transaction</strong> via your linked bank account.</li>
+            <ul className={styles['step-benefits']}>
+                <li><span className={styles['icon-check']} /> <b>No platform fee</b> <span className={styles['benefit-note']}>- save THB 200/day during the trial.</span></li>
+                <li><span className={styles['icon-check']} /> <b> Just 0.15 per transaction</b> via your linked bank account.</li>
                 <li><span className={styles['icon-check']} /> Get results. Stay if you love it. Cancel anytime.</li>
             </ul>
-            <div className={styles['step-description']}>Don't miss out – activate your free trial now and take your cash flow to the next level.</div>
+            <div className={styles['step-note']}>
+                <span className={styles['icon-info']}>ℹ️</span> Don't miss out – Activate now and take your cash flow to the next level.
+            </div>
         </>
     ], []);
 
