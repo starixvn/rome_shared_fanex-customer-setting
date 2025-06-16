@@ -1,7 +1,7 @@
 import { currentCdnUri } from '@customer-web-app/shared-api-helper';
 import { useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
-
+import { CashServiceStatus } from '@customer-web-app/share-models';
 interface ActiveCashContentProps {
     readonly onConfirm: () => void;
     readonly onCancel: () => void;
@@ -51,7 +51,7 @@ function ActiveCashContent(props: ActiveCashContentProps) {
 }
 
 interface CashServiceAdsContentProps {
-    readonly onClickActivateNow: () => void;
+    readonly onClickActivateNow: (() => void) | undefined;
     readonly findOutMore: () => void;
 }
 
@@ -69,6 +69,7 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                 <button
                     className={styles['primary-button']}
                     onClick={onClickActivateNow}
+                    disabled={!onClickActivateNow}
                 >
                     Activate now
                 </button>
@@ -86,10 +87,11 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
 interface CashServiceAdsProps {
     readonly onConfirm: () => void;
     readonly onClose?: () => void;
+    readonly cashServiceStatus: CashServiceStatus;
 }
 
 function CashServiceAds(props: CashServiceAdsProps) {
-    const { onClose, onConfirm } = props;
+    const { onClose, onConfirm, cashServiceStatus } = props;
     const [contentIndex, setContentIndex] = useState(0);
     const bannerPath = useMemo(() => currentCdnUri() + '/cash-service-ads/BannerPC.png', []);
 
@@ -146,9 +148,9 @@ function CashServiceAds(props: CashServiceAdsProps) {
                     alt="AdvCash"
                     className={styles['banner-image']}
                 />
-                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={() => setContentIndex(1)} findOutMore={() => setContentIndex(2)} />}
+                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={cashServiceStatus.isCanUpdateCashServiceStatus ? () => setContentIndex(1) : undefined} findOutMore={() => setContentIndex(2)} />}
                 {contentIndex === 1 && <ActiveCashContent onConfirm={onConfirm} onCancel={() => setContentIndex(0)} />}
-                {contentIndex === 2 && <StepSlider steps={steps} onClose={() => setContentIndex(0)} onFinish={onConfirm} />}
+                {contentIndex === 2 && <StepSlider steps={steps} onClose={() => setContentIndex(0)} onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
             </div>
         </div>
     );
@@ -191,6 +193,7 @@ const StepSlider: React.FC<StepSliderProps> = ({ steps, onClose, onFinish }) => 
                 ) : (
                     <button
                         onClick={onFinish}
+                        disabled={!onFinish}
                         className={`${styles['step-button']} ${styles['next-button']}`}
                     >Finish</button>
                 )}
