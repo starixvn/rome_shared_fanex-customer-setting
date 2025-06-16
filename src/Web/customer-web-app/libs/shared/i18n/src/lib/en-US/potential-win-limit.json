@@ -49,9 +49,9 @@
       "title": "Important Notes for Agents",
       "defaultLimit": "Members have Unlimited Potential Win Limit by default",
       "defaultReset": "Daily Auto Reset = YES by default",
-      "appliesTo": "Applies only to Sportsbook (not Casino or RNG)",
+      "appliesTo": "Applies only to Sportsbook (not Live & RNG Casino or RNG Games)",
       "excludes": "Excludes Parlay bet types",
-      "management": "Limit can be managed in Member Account Page and Potential Win Limit Page"
+      "management": "Limit can be managed in Sportsbook setting page and Potential Win Limit Page"
     }
   }
 } 
