@@ -5,6 +5,12 @@ export interface UsernameSuggestion {
   UserName2: string;
 }
 
+export interface CashServiceStatus {
+  isOfferedCashService: boolean;
+  isCanUpdateCashServiceStatus: boolean;
+  isCashServiceEnabled: boolean;
+}
+
 export class Result {
   public code: number;
   public message: string;

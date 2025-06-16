@@ -1,4 +1,4 @@
-import { CreateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
+import { CashServiceStatus, CreateCustomerResult, UsernameSuggestion } from '@customer-web-app/share-models';
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupSettingsResponse } from './setting-service';
 import { ProductGroupIds } from '@customer-web-app/shared-constants';
@@ -16,7 +16,7 @@ export const CashMemberSettingService = {
     return response.data;
   },
   GetCashServiceStatus: async () => {
-    const response = await axiosInstance.get(
+    const response = await axiosInstance.get<CashServiceStatus>(
       `Customer/GetCashServiceStatus`,
     );
     return response.data;
