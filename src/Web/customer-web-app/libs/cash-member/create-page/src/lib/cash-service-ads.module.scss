@@ -305,9 +305,12 @@
 
 .step-image {
   width: 100%;
-  max-height: 260px;
+  max-height: 210px;
   height: auto;
   object-fit: contain;
+  @media (min-width: 768px) {
+    max-height: 260px;
+  }
 }
 
 .step-description {
@@ -322,6 +325,72 @@
   font-weight: 600;
   font-size: 18px;
   color: #0a2c4d;
-  padding: 10px 0;
+  padding: 15px 0 10px 0;
   text-align: center;
+}
+
+.step-highlight-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.free-badge {
+  background: #ffcd00;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  animation: pulse 1.2s infinite;
+  font-size: 16px;
+}
+
+.save-amount {
+  color: #03548d;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.step-benefits {
+  text-align: left;
+  margin: 0 auto 16px auto;
+  max-width: 400px;
+  padding-left: 0;
+  list-style: none;
+  li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+.benefit-note {
+  color: #888;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.step-note {
+  background: #e3f2fd;
+  color: #03548d;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 12px;
+  .icon-info {
+    margin-right: 6px;
+    font-size: 18px;
+  }
+}
+
+.icon-info {
+  margin-right: 6px;
+  font-size: 18px;
+  display: inline-block;
 }
