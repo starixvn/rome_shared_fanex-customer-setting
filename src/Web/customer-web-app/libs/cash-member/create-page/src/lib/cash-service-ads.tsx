@@ -94,7 +94,7 @@ function CashServiceAds(props: CashServiceAdsProps) {
     const { onClose, onConfirm, cashServiceStatus } = props;
     const [contentIndex, setContentIndex] = useState(0);
     const bannerPath = useMemo(() => currentCdnUri() + '/cash-service-ads/BannerPC.png', []);
-
+    const [currentStep, setCurrentStep] = useState(0);
     const steps = useMemo(() => [
         <>
             <div className={styles['step-title']}>Instant deposits and withdrawals!</div>
@@ -148,9 +148,9 @@ function CashServiceAds(props: CashServiceAdsProps) {
                     alt="AdvCash"
                     className={styles['banner-image']}
                 />
-                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={cashServiceStatus.isCanUpdateCashServiceStatus ? () => setContentIndex(1) : undefined} findOutMore={() => setContentIndex(2)} />}
+                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={cashServiceStatus.isCanUpdateCashServiceStatus ? () => { setContentIndex(2); setCurrentStep(4); } : undefined} findOutMore={() => setContentIndex(2)} />}
                 {contentIndex === 1 && <ActiveCashContent onConfirm={onConfirm} onCancel={() => setContentIndex(0)} />}
-                {contentIndex === 2 && <StepSlider steps={steps} onClose={() => setContentIndex(0)} onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
+                {contentIndex === 2 && <StepSlider steps={steps} currentStep={currentStep} onClose={() => setContentIndex(0)} onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
             </div>
         </div>
     );
@@ -158,12 +158,13 @@ function CashServiceAds(props: CashServiceAdsProps) {
 
 interface StepSliderProps {
     steps: React.ReactNode[];
+    currentStep: number;
     onClose?: () => void;
     onFinish?: () => void;
 }
 
-const StepSlider: React.FC<StepSliderProps> = ({ steps, onClose, onFinish }) => {
-    const [current, setCurrent] = useState(0);
+const StepSlider: React.FC<StepSliderProps> = ({ steps, currentStep, onClose, onFinish }) => {
+    const [current, setCurrent] = useState(currentStep || 0);
 
     const isLast = current === steps.length - 1;
     const isFirst = current === 0;
@@ -195,7 +196,7 @@ const StepSlider: React.FC<StepSliderProps> = ({ steps, onClose, onFinish }) => 
                         onClick={onFinish}
                         disabled={!onFinish}
                         className={`${styles['step-button']} ${styles['next-button']}`}
-                    >Finish</button>
+                    >Confirm</button>
                 )}
             </div>
             <div className={styles['step-counter']}>
