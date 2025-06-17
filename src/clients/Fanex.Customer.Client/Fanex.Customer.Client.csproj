@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-    <Version>1.0.2.3</Version>
+    <Version>1.0.3.1-BetSetting-04</Version>
     <Authors>@Rome</Authors>
     <Company>Nexcel</Company>
     <Product>Fanex</Product>
-    <PackageReleaseNotes>Add new Cash Member.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add Get Bet Setting.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

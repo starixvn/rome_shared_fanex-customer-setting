@@ -83,8 +83,10 @@ namespace Fanex.Customer.Client.Services
 
         Task<AccountInfo> GetAccountInfo(int custId);
 
-        Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currency, string language = "en-US");
-
+        Task<string> GetWinLossLimitInformation(int? custId, string site, string siteLabel, int currencyId, string language = "en-US");
+        
+        Task<string> GetBetLimitInformation(string siteName, string siteLabel, string language = "en-US");
+        
         Task<int> GetCashServiceStatus(int custId);
         
         Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
@@ -347,5 +349,8 @@ namespace Fanex.Customer.Client.Services
 
         public Task<Result> UpdateCashServiceStatus(UpdateCashServiceStatusRequest request)
             => httpClient.PostAsJsonAsync<Result>("customer/cash-service-status", request);
+            
+        public Task<string> GetBetLimitInformation(string siteName, string siteLabel, string language = "en-US")
+            => httpClient.GetStringAsync($"customer/bet-setting?siteName={siteName}&siteLabel={siteLabel}&language={language}");
     }
 }

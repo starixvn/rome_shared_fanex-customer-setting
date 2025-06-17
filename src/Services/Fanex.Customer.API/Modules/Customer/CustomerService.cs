@@ -7,7 +7,6 @@ using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Enumerations;
 using Fanex.Customer.API.Shared.Models;
 using Fanex.Customer.API.Shared.Services;
-using Fanex.Data;
 using Fanex.Data.Repository;
 using Microsoft.Extensions.Options;
 
@@ -62,6 +61,8 @@ public interface ICustomerService
     Task<Object> GetWinLossLimitInformation(GetProductCategoriesRequest request);
 
     Task<int> GetCashServiceStatus(int custId);
+    
+    Task<BetSettingData> GetBetLimitInformation(GetBetSettingRequest request);
 
     Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
 }
@@ -321,7 +322,6 @@ public class CustomerService : ICustomerService
         var betTypeIds = new[] { 1, 3, 5, 7, 8, 15, 20, 21, 153, 501, 609, 610, 612, 701, 704, 705, 9400, 9404, 9405, 9406, 9407, 9408, 9409 };
         var sportTypeIds = new[] { 43, 44 };
         var sportTypeNameArray = sportTypeIds.Select(sportTypeId => cacheRefService.GetSportTypeName(sportTypeId)).ToArray();
-        var isSpecialPlatform = appSettings.Belonging777Group(request.SiteLabel);
 
         string[] betTypeNames = betTypeIds.Select(betTypeId =>
         {
@@ -340,13 +340,6 @@ public class CustomerService : ICustomerService
             BettypeName = betTypeNames
         };
 
-        maxPayoutSettingInfo.SabaSport = await dynamicRepository.FetchAsync<SabaSport>(new GetSabaSportsCriteria(request.SiteName));
-        foreach (var sabaSport in maxPayoutSettingInfo.SabaSport)
-        {
-            sabaSport.SettingName = cacheRefService.GetParlayMaxPayoutBetSettingInfoSportName(sabaSport.SettingId, isSpecialPlatform, request.Language);
-            sabaSport.SettingFollowedName = cacheRefService.GetParlayMaxPayoutBetSettingInfoSportName(sabaSport.SettingIdFollowed, isSpecialPlatform, request.Language);
-        }
-        maxPayoutSettingInfo.IsSpecialPlatform = isSpecialPlatform;
         return maxPayoutSettingInfo;
     }
 
@@ -457,5 +450,22 @@ public class CustomerService : ICustomerService
         var criteria = new GetCashServiceTotalDownlineCriteria(custId);
         var result = await dynamicRepository.FetchAsync<TotalCashMember>(criteria);
         return result.First();
+    }
+    
+    public async Task<BetSettingData> GetBetLimitInformation(GetBetSettingRequest request)
+    {
+        var sabaSports = await dynamicRepository.FetchAsync<SabaSport>(new GetSabaSportsCriteria(request.SiteName));
+        var isSpecialPlatform = appSettings.Belonging777Group(request.SiteLabel);
+        foreach (var sabaSport in sabaSports)
+        {
+            sabaSport.SettingName = cacheRefService.GetParlayMaxPayoutBetSettingInfoSportName(sabaSport.SettingId, isSpecialPlatform, request.Language);
+            sabaSport.SettingFollowedName = cacheRefService.GetParlayMaxPayoutBetSettingInfoSportName(sabaSport.SettingIdFollowed, isSpecialPlatform, request.Language);
+        }
+
+        return new BetSettingData
+        {
+            SabaSport = [.. sabaSports],
+            IsSpecialPlatform = isSpecialPlatform
+        };
     }
 }
