@@ -1,5 +1,22 @@
+:root, :root [data-theme='light'] {    
+  //control
+  --color-control-bank: #333;
+  --border-control-bank: #d1d1d1;
+  --border-control-bank2: #d1d1d1;
+  --background-control-bank: #ffffff; 
+  --background-control-bank2: #ffffff;
+}
+:root [data-theme='dark'] {
+  //control
+  --color-control-bank: #ededed;
+  --border-control-bank: #2f2f2f;
+  --border-control-bank2: #696969;
+  --background-control-bank: #2b2b2b;
+  --background-control-bank2: #2f2f2f;
+}
 .bank-dropdown {
-    border: 1px solid var(--border-input);
+    border: 1px solid var(--border-control-bank);
+    background-color: var(--background-control-bank2);
     border-radius: 3px;
     white-space: normal;
     word-wrap: normal;
@@ -10,12 +27,12 @@
 
     &__search {
         padding: 8px;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--border-control-bank2);
 
         input {
             width: 100% !important;
             padding: 8px;
-            border: 1px solid var(--bg-input);
+            border: 1px solid var(--border-control-bank2);
             border-radius: 4px;
             font-size: 14px;
             outline: none;
@@ -24,13 +41,13 @@
 
     &__menu {
         position: absolute;
-        top: 100%;
+        top: 28px;
         left: 0;
         width: max-content;
         min-width: 100%;
         max-width: 350px;
-        background: #fff;
-        border: 1px solid var(--border-input);
+        background: var(--background-control-bank);
+        border: 1px solid var(--border-control-bank);
         border-radius: 3px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
         z-index: 100;
@@ -45,40 +62,53 @@
     &__item {
         padding: 5px 10px;
         cursor: pointer;
-        transition: background 0.2s;
+      
         white-space: normal;
+        color: var(--color-control-bank);
+        img{
+            width: 16px!important;
+            height: 16px!important;
+        }
 
         &:hover {
-            background: #f0f0f0;
+            background: #1967D2;
+            color: #ededed;
         }
 
         &--selected {
-            background: #f0f0f0;
+            background: #1967D2;
+            color: #ededed;
         }
     }
 
     &__selected {
         padding: 0 0 0 3px;
-        width: 100%;
-        background: var(--bg-input);
+        width: 100%;      
         border-radius: 4px;
         cursor: pointer;
         height: var(--height);
         display: flex;
         align-items: center;
         color: var(--color-label);
+        background:transparent;
 
         .bank-name {
-            margin-right: 8px;
+            margin-right: 12px;
             flex: 1;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
         }
 
-        .arrow-icon {
+        .bank-dropdown-arrow {
             display: inline-flex;
             align-items: center;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            top: 7px;
+            right: 3px;
+            fill: var(--color-control-bank);
         }
     }
 }
