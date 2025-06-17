@@ -130,7 +130,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                 ) : (
                   <PotentialWinLimitCell
                     key={id}
-                    isDisable={isReadOnly}
+                    isDisable={!potentialWinLimitItem.isMultipleModeChecked}
                     // maxValue of downline is flow upline
                     maxValue={upline ? upline[inputFieldName] : 0}
                     currentValue={potentialWinLimitItem[inputFieldName]}
@@ -141,6 +141,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                     }}
                     onChangeUnlimited={(valueCheckBox, value) => {
                       if (valueCheckBox) {
+                        potentialWinLimitItem.isAutoReset = true;
                         onPotentialWinLimitChange(
                           sportTypeId,
                           betTypeId,
@@ -193,7 +194,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
                     <input
                       type="checkbox"
                       checked={potentialWinLimitItem.isAutoReset}
-                      disabled={isReadOnly || potentialWinLimitItem.isAllowUnlimitWinLimit}
+                      disabled={isReadOnly || potentialWinLimitItem.isAllowUnlimitWinLimit || !potentialWinLimitItem.isMultipleModeChecked}
                       onChange={(e) => handlePotentialWinLimitChange(potentialWinLimitItem, { isAutoReset: e.target.checked })}
                     />
                     <div>{t('DailyAutoResetLimitAt')} </div>
