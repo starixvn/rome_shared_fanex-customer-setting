@@ -15,10 +15,13 @@ public interface ICashCustomerService
 
 public class CashCustomerService : ICashCustomerService
 {
+    private const int ERR_CODE_NO_DOMAIN_AVAILABLE = 100;
+
     private readonly IDynamicRepository dynamicRepository;
     private readonly ISiteDBService siteDBService;
     private readonly IWriteLogSPService writeLogSPService;
     private readonly IWriteLogSPTransferService writeLogSPTransferService;
+    private readonly IWriteLogSPCashService writeLogSPCashService;
     private readonly Fanex.Logging.ILogger _logger;
 
     public CashCustomerService(
@@ -26,12 +29,14 @@ public class CashCustomerService : ICashCustomerService
         ISiteDBService siteDBService,
         IWriteLogSPService writeLogSPService,
         IWriteLogSPTransferService writeLogSPTransferService,
+        IWriteLogSPCashService writeLogSPCashService,
         Fanex.Logging.ILogger logger)
     {
         this.dynamicRepository = dynamicRepository;
         this.siteDBService = siteDBService;
         this.writeLogSPService = writeLogSPService;
         this.writeLogSPTransferService = writeLogSPTransferService;
+        this.writeLogSPCashService = writeLogSPCashService;
         this._logger = logger;
     }
 
@@ -46,19 +51,41 @@ public class CashCustomerService : ICashCustomerService
         var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
         int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
         var criteria = CreateUpdateCashServiceStatusCommand(request, siteDBGroupId);
-        var dataLog = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
+        var updateDataLog = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
         if (criteria.ErrCode != 0)
             return ResultFromCriteria(criteria);
 
-        await WriteLogsAsync(dataLog, siteDBGroupId);
 
         var initCmd = CreateInitializeCommand(request);
-        await dynamicRepository.ExecuteAsync(initCmd);
+        var initDataLog = await dynamicRepository.FetchAsync<LogDataEntity>(initCmd);
 
         if (initCmd.ErrCode > 0)
-            return ResultFromCriteria(initCmd);
+        {
+            if (initCmd.ErrCode == ERR_CODE_NO_DOMAIN_AVAILABLE)
+            {
+                await _logger.ErrorAsync($"Age_CashService_CustServiceTypeInitialize returned ErrCode {ERR_CODE_NO_DOMAIN_AVAILABLE}: {initCmd.ErrMsg}");
+            }
+            else
+            {
+                var rollbackCmd = CreateUpdateCashServiceStatusCommand(
+                    new UpdateCashServiceStatusRequest
+                    {
+                        CustId = request.CustId,
+                        ServiceType = 0,
+                        IP = request.IP,
+                        Language = request.Language,
+                        Site = request.Site
+                    },
+                    siteDBGroupId
+                );
+                await dynamicRepository.ExecuteAsync(rollbackCmd);
+                return ResultFromCriteria(initCmd);
+            }
+        }
 
+        await WriteLogsCashAsync(initDataLog, siteDBGroupId);
+        await WriteLogsAsync(updateDataLog, siteDBGroupId);
         if (initCmd.TrialEndTime.HasValue)
         {
             var billingCmd = new AgeCashServiceBillingDailyFeeInsCommand(
@@ -88,7 +115,6 @@ public class CashCustomerService : ICashCustomerService
         new(
             request.CustId,
             request.ServiceType,
-            request.SubAccId,
             request.IP,
             request.Language,
             siteDBGroupId
@@ -118,12 +144,34 @@ public class CashCustomerService : ICashCustomerService
         }
     }
 
+    internal async Task WriteLogsCashAsync(IEnumerable<LogDataEntity> dataLog, int siteDBGroupId)
+    {
+        if (dataLog == null)
+            return;
+
+        foreach (var log in dataLog)
+        {
+            if (log == null || (log.UserID == 0 && log.CustID == 0 && log.ActionID == 0))
+                continue;
+            await writeLogSPCashService.WriteLogSPCashAsync(
+                log.UserID,
+                log.CustID,
+                log.ActionID,
+                log.TrackingValue,
+                log.TrackingValue2,
+                log.TrackingValueMask,
+                log.TrackingValueMask2,
+                log.Duration,
+                siteDBGroupId
+            );
+        }
+    }
+
     internal static AgeCashServiceCustServiceTypeInitializeCommand CreateInitializeCommand(UpdateCashServiceStatusRequest request) =>
         new(
             request.CustId,
             request.ServiceType,
             request.Site,
-            request.SubAccId,
             request.IP,
             request.Language
         );
