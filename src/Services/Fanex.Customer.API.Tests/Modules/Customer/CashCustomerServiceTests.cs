@@ -19,6 +19,7 @@ namespace Fanex.Customer.API.Modules.Customer.Tests
         private readonly Mock<ISiteDBService> _siteDBServiceMock = new();
         private readonly Mock<IWriteLogSPService> _writeLogSPServiceMock = new();
         private readonly Mock<IWriteLogSPTransferService> _writeLogSPTransferServiceMock = new();
+        private readonly Mock<IWriteLogSPCashService> _writeLogSPCashServiceMock = new();
         private readonly Mock<ILogger> _loggerMock = new();
 
         private CashCustomerService CreateService() => new(
@@ -26,6 +27,7 @@ namespace Fanex.Customer.API.Modules.Customer.Tests
             _siteDBServiceMock.Object,
             _writeLogSPServiceMock.Object,
             _writeLogSPTransferServiceMock.Object,
+            _writeLogSPCashServiceMock.Object,
             _loggerMock.Object
         );
 
@@ -55,7 +57,6 @@ namespace Fanex.Customer.API.Modules.Customer.Tests
             {
                 CustId = 1,
                 ServiceType = 1,
-                SubAccId = 2,
                 IP = "127.0.0.1",
                 Language = "en",
                 Site = "site1"
