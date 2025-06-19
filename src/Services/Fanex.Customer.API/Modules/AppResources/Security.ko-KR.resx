@@ -118,45 +118,44 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="alertErrorSecCodeConfirm" xml:space="preserve">
-    <value>Security Codes do not match.</value>
+    <value>보안 코드가 일치하지 않습니다.</value>
   </data>
   <data name="alertForcedChangeSCTitle" xml:space="preserve">
-    <value>You're required to change Security Code. Your new Security Code must be different from the one provided by your upline/CSD.&lt;br/&gt;
-Please use the form below to change your Security Code now.</value>
+    <value>보안 코드를 변경해야 합니다. 새 보안 코드는 상위/고객센터에서 제공한 코드와 달라야 합니다.&lt;br/&gt;아래 양식을 사용하여 지금 보안 코드를 변경하세요.</value>
   </data>
   <data name="alertForcedChangeSCWithoutValidationTitle" xml:space="preserve">
     <value>로그인 시 본인 인증을 위하여  본인의 보안코드를 설정해야 합니다.&lt;br/&gt;
 아래의 양식을 이용하여 지금 보안코드를 설정하시기 바랍니다.</value>
   </data>
   <data name="alertInputWrongSecCode" xml:space="preserve">
-    <value>Wrong Security Code. Please try again.</value>
+    <value>잘못된 보안 코드입니다. 다시 시도해 주세요.</value>
   </data>
   <data name="alertOldSecCodeEmpty" xml:space="preserve">
-    <value>Please enter old Security Code</value>
+    <value>이전 보안 코드를 입력해 주세요.</value>
   </data>
   <data name="alertSameSecCode" xml:space="preserve">
-    <value>Your new Security Code must be different from the current one.</value>
+    <value>새 보안 코드는 현재 코드와 달라야 합니다.</value>
   </data>
   <data name="alertSecCodeChangedOK" xml:space="preserve">
-    <value>Your Security Code has been changed successfully.</value>
+    <value>보안 코드가 성공적으로 변경되었습니다.</value>
   </data>
   <data name="alertSecCodeEmpty" xml:space="preserve">
-    <value>This field is required.</value>
+    <value>이 필드는 필수입니다.</value>
   </data>
   <data name="ConfirmSecurityCode" xml:space="preserve">
-    <value>Confirm Security Code</value>
+    <value>보안 코드 확인</value>
   </data>
   <data name="informSecCode" xml:space="preserve">
-    <value>Please input your security code before proceeding!</value>
+    <value>진행하기 전에 보안 코드를 입력해 주세요!</value>
   </data>
   <data name="lblSecCodeWrongRule" xml:space="preserve">
-    <value>The Security Code does not meet the security requirements.</value>
+    <value>보안 코드가 보안 요건을 충족하지 않습니다.</value>
   </data>
   <data name="oldSecCode" xml:space="preserve">
-    <value>Old Security Code</value>
+    <value>이전 보안 코드</value>
   </data>
   <data name="titleResetSecCode" xml:space="preserve">
-    <value>Reset Security Code</value>
+    <value>보안 코드 재설정</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>다시 설정</value>
@@ -165,22 +164,22 @@ Please use the form below to change your Security Code now.</value>
     <value>확인</value>
   </data>
   <data name="titleVerifySecurityCode" xml:space="preserve">
-    <value>Security Code Validation</value>
+    <value>보안 코드 검증</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
-    <value>Learn more</value>
+    <value>자세히 보기</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>비밀번호</value>
   </data>
   <data name="SecurityCodeValidation" xml:space="preserve">
-    <value>Security Code Validation</value>
+    <value>보안 코드 검증</value>
   </data>
   <data name="NotAuthorized" xml:space="preserve">
     <value>해당 기능에 대한 권한이 없습니다.</value>
   </data>
   <data name="SecurityCodeShower" xml:space="preserve">
-    <value>Hi {0}, please input the security code provided by your upline and create your own one.</value>
+    <value>{0}님, 상위에서 제공한 보안 코드를 입력하고 본인만의 코드를 생성해 주세요.</value>
   </data>
   <data name="errUserName" xml:space="preserve">
     <value>사용자명과 비밀번호를 입력해주세요</value>
@@ -222,11 +221,10 @@ Please use the form below to change your Security Code now.</value>
     <value>새 비밀번호는 현재 사용하고있는 것과 완전히 달라야합니다.</value>
   </data>
   <data name="lblPasswordExpired" xml:space="preserve">
-    <value>Your security and privacy are extremely important to us. Therefore, we continuously strive to improve our security precautions to protect your data. For this reason, we have decided to implement a password reset. 
-Please use the form below to change your password now.</value>
+    <value>귀하의 보안과 개인정보는 매우 중요합니다. 데이터를 보호하기 위해 보안 조치를 지속적으로 개선하고 있습니다. 이로 인해 비밀번호 재설정을 시행합니다. 아래 양식을 사용하여 지금 비밀번호를 변경하세요.</value>
   </data>
   <data name="lblPasswordHint" xml:space="preserve">
-    <value>Note: You're strongly recommended to change your password periodically to enhance security.</value>
+    <value>참고: 보안을 강화하기 위해 주기적으로 비밀번호를 변경하는 것이 좋습니다.</value>
   </data>
   <data name="lblPasswordWrongRule" xml:space="preserve">
     <value>입력하신 비밀번호는 최소 보안 요구 사항을 충족하지 않습니다</value>
@@ -254,10 +252,10 @@ Please use the form below to change your password now.</value>
 &lt;p&gt;&lt;strong&gt;참고 :&lt;/strong&gt; 비밀번호는 대소 문자를 구분합니다&lt;/p&gt;</value>
   </data>
   <data name="PasswordRules" xml:space="preserve">
-    <value>Password rules</value>
+    <value>비밀번호 규칙</value>
   </data>
   <data name="PasswordShower" xml:space="preserve">
-    <value>hi {0}, please create your own password</value>
+    <value>{0}님, 본인만의 비밀번호를 생성해 주세요</value>
   </data>
   <data name="lblBack" xml:space="preserve">
     <value>뒤</value>
@@ -280,28 +278,236 @@ Please use the form below to change your password now.</value>
 참고 : 비밀번호는 대소 문자를 구분합니다</value>
   </data>
   <data name="createSecurityCode" xml:space="preserve">
-    <value>Please create a Security Code which will be asked for any setting updates to make sure it is you.</value>
+    <value>설정 변경 시 본인 확인을 위해 사용할 보안 코드를 생성해 주세요.</value>
   </data>
   <data name="SecurityCodeRules02" xml:space="preserve">
-    <value>For example: 123456, 765432, 456789, etc. are NOT allowed.</value>
+    <value>예: 123456, 765432, 456789 등은 허용되지 않습니다.</value>
   </data>
   <data name="PasswordHint04" xml:space="preserve">
     <value>비밀번호 공백없이 6-10 자 여야하며 적어도 하나의 대문자, 하나의 소문자, 하나의 숫자를 포함해야합니다. (예 493abcDE,  59D7!4$h)
 참고 : 비밀번호는 대소 문자를 구분합니다</value>
   </data>
   <data name="KickoutMessageByForceChangePassword" xml:space="preserve">
-    <value>You have been logged out because your account's password has been reset by your upline. Please log in again with the new password. If you have any questions, please contact your upline for assistance.</value>
+    <value>상위 관리자가 비밀번호를 재설정하여 로그아웃되었습니다. 새 비밀번호로 다시 로그인해 주세요. 문의 사항이 있으면 상위 관리자에게 연락해 주세요.</value>
   </data>
   <data name="VerifySecurityCodeShower" xml:space="preserve">
-    <value>Hi {0}</value>
+    <value>{0}님</value>
   </data>
   <data name="SkipForceChangePasswordPlaceHolder" xml:space="preserve">
-    <value>Type "OK" to skip and accept the risk</value>
+    <value>"OK"를 입력하여 건너뛰고 위험을 감수합니다</value>
   </data>
   <data name="SkipForceChangePasswordWarning" xml:space="preserve">
-    <value>Are you sure you want to keep your current password? Your security may be at risk if you don't change your password frequently.</value>
+    <value>현재 비밀번호를 유지하시겠습니까? 비밀번호를 자주 변경하지 않으면 보안에 위험이 있을 수 있습니다.</value>
   </data>
   <data name="lblConfirmLocked" xml:space="preserve">
-    <value>Your account is locked and forced to log out due to multiple failed security checks. Please contact your upline to unlock.</value>
+    <value>여러 번 보안 검사에 실패하여 계정이 잠기고 강제 로그아웃되었습니다. 상위 관리자에게 연락하여 잠금을 해제하세요.</value>
+  </data>
+  <data name="Name1" xml:space="preserve">
+    <value>이것은 나의 긴 문자열입니다</value>
+    <comment>this is a comment</comment>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>보안 코드</value>
+  </data>
+  <data name="SecurityCodeRules" xml:space="preserve">
+    <value>보안 코드 규칙</value>
+  </data>
+  <data name="SecurityCodeRules01" xml:space="preserve">
+    <value>보안 코드는 6자리 숫자여야 하며, 최소 2개의 서로 다른 숫자를 포함하고 연속된 숫자가 아니어야 합니다.</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>비밀번호 표시</value>
+  </data>
+  <data name="ShowSecurityCode" xml:space="preserve">
+    <value>보안 코드 표시</value>
+  </data>
+  <data name="OtpHiMessage" xml:space="preserve">
+    <value>{0}님, 이전과 다른 기기/브라우저로 로그인하셨습니다. 계속하려면 OTP를 입력해 주세요.</value>
+  </data>
+  <data name="InputOtpBeforeProceeding" xml:space="preserve">
+    <value>진행하기 전에 OTP를 입력해 주세요!</value>
+  </data>
+  <data name="OtpNotes" xml:space="preserve">
+    <value>OTP는 민감한 작업을 수행하거나 다른 기기/브라우저로 로그인할 때 필요합니다. OTP 알림을 활성화하기 전에 모바일 인증 앱에 계정을 추가하거나 텔레그램 챗봇에 계정을 연결해야 합니다.</value>
+  </data>
+  <data name="RegisterMobileApplication" xml:space="preserve">
+    <value>모바일 인증 앱을 통해 OTP 설정</value>
+  </data>
+  <data name="DownloadSophos" xml:space="preserve">
+    <value>기기에 Sophos Authenticator를 다운로드하세요.</value>
+  </data>
+  <data name="SophosAuthenticator" xml:space="preserve">
+    <value>Sophos Authenticator</value>
+  </data>
+  <data name="OtherAuthenticators" xml:space="preserve">
+    <value>Google Authenticator, Microsoft Authenticator 등의 다른 2단계 인증 앱도 지원됩니다</value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>Sophos로 이 QR 코드를 스캔하여 계정을 생성하세요</value>
+  </data>
+  <data name="UnableScanQRCode" xml:space="preserve">
+    <value>QR 코드를 스캔할 수 없나요?</value>
+  </data>
+  <data name="ManualInputOtpKey" xml:space="preserve">
+    <value>아래 키를 Sophos의 수동 추가 페이지에 입력한 후 완료(IOS) 또는 추가(Android)를 클릭하세요</value>
+  </data>
+  <data name="Enter6DigitsOtp" xml:space="preserve">
+    <value>Sophos에서 생성된 6자리 코드를 아래 텍스트 상자에 입력한 후 확인을 클릭하여 등록을 완료하세요.</value>
+  </data>
+  <data name="ClickToRemoveOtp" xml:space="preserve">
+    <value>아래 버튼을 클릭하여 등록된 기기를 계정에서 제거하세요.</value>
+  </data>
+  <data name="RemoveOtp" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="EnableDisableOtp" xml:space="preserve">
+    <value>OTP 활성화/비활성화</value>
+  </data>
+  <data name="EnableOtpViaSophos" xml:space="preserve">
+    <value>모바일 인증 앱을 통해 OTP 활성화</value>
+  </data>
+  <data name="OtpIsInvalidOrExpired" xml:space="preserve">
+    <value>OTP가 유효하지 않거나 만료되었습니다.</value>
+  </data>
+  <data name="AuthenticatorAppVerified" xml:space="preserve">
+    <value>인증 앱이 확인되었습니다.</value>
+  </data>
+  <data name="RemoveOtpWarning" xml:space="preserve">
+    <value>시스템이 더 이상 등록된 기기에서 생성된 OTP를 받지 않습니다. 계속하시겠습니까?</value>
+  </data>
+  <data name="RemoveOtpSuccessMessage" xml:space="preserve">
+    <value>모바일 인증 앱 계정이 제거되고 텔레그램 OTP 알림이 비활성화되었습니다.</value>
+  </data>
+  <data name="UpdateOtpStatusSuccess" xml:space="preserve">
+    <value>OTP 상태가 성공적으로 업데이트되었습니다</value>
+  </data>
+  <data name="RemoveOtpForCust" xml:space="preserve">
+    <value>OTP 제거 - {0}</value>
+  </data>
+  <data name="ResetOtpWarning" xml:space="preserve">
+    <value>제거를 클릭하여 하위의 모바일 인증 앱 계정을 제거하고 하위의 텔레그램 OTP 알림을 비활성화합니다.</value>
+  </data>
+  <data name="OtpValidation" xml:space="preserve">
+    <value>OTP 검증</value>
+  </data>
+  <data name="ResetDownlineOtpWarning" xml:space="preserve">
+    <value>이 사용자의 등록된 기기를 제거하시겠습니까?</value>
+  </data>
+  <data name="RegenerateQR" xml:space="preserve">
+    <value>QR 재생성</value>
+  </data>
+  <data name="UsernameWarning" xml:space="preserve">
+    <value>새 계정은 사용자명 {0}으로 명명됩니다</value>
+  </data>
+  <data name="ChangeIt" xml:space="preserve">
+    <value>변경하시겠습니까?</value>
+  </data>
+  <data name="OtpDatetimeWarning" xml:space="preserve">
+    <value>기기의 날짜 및 시간 설정이 자동으로 설정되어야 합니다.</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>복사됨</value>
+  </data>
+  <data name="NoRegisterDeviceError" xml:space="preserve">
+    <value>이 사용자는 제거할 등록된 기기가 없습니다.</value>
+  </data>
+  <data name="RemoveRegisteredDeviceSuccess" xml:space="preserve">
+    <value>등록된 기기가 성공적으로 제거되었습니다.</value>
+  </data>
+  <data name="RemoveDisableOtpDownline" xml:space="preserve">
+    <value>비활성화된 사용자에서 등록된 기기를 제거하는 데 실패했습니다.</value>
+  </data>
+  <data name="FailedToRemoveOtp" xml:space="preserve">
+    <value>등록된 기기 제거에 실패했습니다!</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>계정명</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="LockAccountOtpMessage" xml:space="preserve">
+    <value>여러 번 보안 검사에 실패하여 계정이 잠겼습니다. 상위 관리자에게 연락하여 잠금을 해제하세요.</value>
+  </data>
+  <data name="OtpInvalidOrExpiredAndContactUpline" xml:space="preserve">
+    <value>OTP가 유효하지 않거나 만료되었습니다. 다른 OTP를 시도하거나 상위 관리자에게 연락하여 OTP를 재설정하세요.</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>건너뛰기</value>
+  </data>
+  <data name="KickoutMessageByProtectedMode" xml:space="preserve">
+    <value>계정이 강제로 로그아웃되었습니다. 추가 도움이 필요하면 상위 관리자에게 연락하세요.</value>
+  </data>
+  <data name="SwitchLabelOff" xml:space="preserve">
+    <value>끄기</value>
+  </data>
+  <data name="SwitchLabelOn" xml:space="preserve">
+    <value>켜기</value>
+  </data>
+  <data name="AccessToBetLists" xml:space="preserve">
+    <value>베팅 목록에 대한 접근</value>
+  </data>
+  <data name="AccessToStatementReport" xml:space="preserve">
+    <value>명세서 보고서에 대한 접근</value>
+  </data>
+  <data name="CreateNewDownline" xml:space="preserve">
+    <value>새 하위 계정 생성</value>
+  </data>
+  <data name="MandatoryActions" xml:space="preserve">
+    <value>필수 작업</value>
+  </data>
+  <data name="OptionalAction" xml:space="preserve">
+    <value>선택적 작업</value>
+  </data>
+  <data name="SCAskedOncePerSession" xml:space="preserve">
+    <value>보안 코드는 다음 작업을 수행하기 전에 세션당 한 번 요청됩니다</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>이체</value>
+  </data>
+  <data name="UpdateDownlineCreditAndSettings" xml:space="preserve">
+    <value>하위의 주어진 크레딧 및 설정 업데이트</value>
+  </data>
+  <data name="UpdateSecurityInformation" xml:space="preserve">
+    <value>보안 정보 업데이트 (비밀번호, 보안 코드, OTP 등)</value>
+  </data>
+  <data name="UpdateSubAccInformation" xml:space="preserve">
+    <value>하위 계정 정보 업데이트</value>
+  </data>
+  <data name="NewSecurityCode" xml:space="preserve">
+    <value>새 보안 코드</value>
+  </data>
+  <data name="GenerateOTP" xml:space="preserve">
+    <value>OTP 생성</value>
+  </data>
+  <data name="OTPViaTelegramDisabled" xml:space="preserve">
+    <value>텔레그램 OTP 알림이 비활성화됨</value>
+  </data>
+  <data name="SetupOTPViaTelegramChatbot" xml:space="preserve">
+    <value>텔레그램 챗봇을 통해 OTP 설정</value>
+  </data>
+  <data name="OTPViaChatbotIntroduction" xml:space="preserve">
+    <value>텔레그램 챗봇을 통해 에이전시 사이트에 접근하지 않고도 중요 비즈니스 보고서를 편리하고 안전하게 받을 수 있습니다. 이제 텔레그램 OTP 알림을 활성화하여 텔레그램 챗봇을 통해 OTP를 쉽게 받을 수도 있습니다.</value>
+  </data>
+  <data name="ToSetupChatbot" xml:space="preserve">
+    <value>챗봇을 설정하려면 아래 지침을 따르세요:</value>
+  </data>
+  <data name="EnableOtpViaTelegramChatbot" xml:space="preserve">
+    <value>텔레그램 챗봇을 통해 OTP 활성화</value>
+  </data>
+  <data name="UnlinkTelegramChatbot" xml:space="preserve">
+    <value>연결 해제를 클릭하여 텔레그램 챗봇을 계정에서 분리하세요</value>
+  </data>
+  <data name="OtpViaTelegramSuggestion" xml:space="preserve">
+    <value>이제 텔레그램을 통해 OTP를 받을 수 있습니다. 시도해 보세요!</value>
+  </data>
+  <data name="OtpViaTelegramChatbot" xml:space="preserve">
+    <value>텔레그램 챗봇을 통한 OTP</value>
+  </data>
+  <data name="RegisteredMobileApplication" xml:space="preserve">
+    <value>모바일 인증 앱을 통한 OTP</value>
+  </data>
+  <data name="PositionTakingTemplate" xml:space="preserve">
+    <value>포지션 테이킹 템플릿</value>
   </data>
 </root>

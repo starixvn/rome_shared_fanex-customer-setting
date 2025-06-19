@@ -19,6 +19,10 @@ import potentialWinLimitSettingInfoTW from './zh-TW/potential-win-limit.json';
 import productSettingInfoTW from './zh-TW/product-setting-info.json';
 import zhTW from './zh-TW/translation.json';
 
+import potentialWinLimitSettingInfoKO from './ko-KR/potential-win-limit.json';
+import productSettingInfoKO from './ko-KR/product-setting-info.json';
+import koKR from './ko-KR/translation.json';
+
 export const defaultNS = 'translation';
 
 export const resources = {
@@ -27,6 +31,7 @@ export const resources = {
   'vi-VN': { translation: { ...viVN, ...productSettingInfoVi, ...potentialWinLimitSettingInfoVi } },
   'zh-CN': { translation: { ...zhCN, ...productSettingInfoCN, ...potentialWinLimitSettingInfoCN } },
   'zh-TW': { translation: { ...zhTW, ...productSettingInfoTW, ...potentialWinLimitSettingInfoTW } },
+  'ko-KR': { translation: { ...koKR, ...productSettingInfoKO, ...potentialWinLimitSettingInfoKO } },
 };
 
 i18next
