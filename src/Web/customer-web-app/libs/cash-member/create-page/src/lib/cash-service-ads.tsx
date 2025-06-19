@@ -99,7 +99,7 @@ function CashServiceAds(props: CashServiceAdsProps) {
         <>
             <div className={styles['step-title']}>Instant deposits and withdrawals!</div>
             <img key={1} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step1.png'} alt="Instant deposits and withdrawals!" />
-            <div className={styles['step-description']}>Esily add <strong>payment gateway</strong> and <strong>bank accounts</strong> so your members can play instantly.</div>
+            <div className={styles['step-description']}>Easily add a <strong>payment gateway</strong> and <strong>bank accounts</strong> so your members can start playing instantly.</div>
         </>,
         <>
             <div className={styles['step-title']}>Manage credit and cash member</div>
@@ -124,7 +124,7 @@ function CashServiceAds(props: CashServiceAdsProps) {
                 <span className={styles['save-amount']}>Start today and enjoy instant savings of <b>THB 2,800</b></span>
             </div>
             <ul className={styles['step-benefits']}>
-                <li><span className={styles['icon-check']} /> <b>No platform fee</b> <span className={styles['benefit-note']}>- save THB 200/day during the trial.</span></li>
+                <li><span className={styles['icon-check']} /> <b>No platform fee</b> <span>- save THB 200/day during the trial.</span></li>
                 <li><span className={styles['icon-check']} /> <b> Just 0.15 per transaction</b> via your linked bank account.</li>
                 <li><span className={styles['icon-check']} /> Get results. Stay if you love it. Cancel anytime.</li>
             </ul>
