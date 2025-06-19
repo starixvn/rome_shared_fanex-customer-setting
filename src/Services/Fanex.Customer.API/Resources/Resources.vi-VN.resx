@@ -453,4 +453,7 @@
   <data name="UpdateSuccess_162" xml:space="preserve">
     <value>Giới Hạn Thắng Tối Đa đã được cập nhật thành công.</value>
   </data>
+  <data name="JackpotStatusTooltip" xml:space="preserve">
+    <value>Trạng thái Jackpot này chỉ áp dụng cho {0} Jackpot. Khi Jackpot bị tắt, thành viên vẫn có thể chơi tất cả Trò chơi Jackpot như bình thường, nhưng sẽ không thể tham gia Jackpot.</value>
+  </data>
 </root>

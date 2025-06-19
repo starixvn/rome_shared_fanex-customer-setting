@@ -8,6 +8,7 @@ export interface GroupItem {
   subGroupName?: string;
   isLive: boolean;
   isMultipleModeChecked: boolean;
+  tooltipMessage?: string;
 
   minBetMultipleMode: boolean;
   maxBetMultipleMode: boolean;

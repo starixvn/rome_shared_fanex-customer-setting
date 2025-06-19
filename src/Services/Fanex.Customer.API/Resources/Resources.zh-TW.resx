@@ -456,4 +456,7 @@
   <data name="UpdateSuccess_162" xml:space="preserve">
     <value>贏額上限已成功更新。</value>
   </data>
+  <data name="JackpotStatusTooltip" xml:space="preserve">
+    <value>此積寶狀態僅適用於{0} 積寶。當積寶被禁用時，會員仍可照常進行所有遊戲，但無法參與積寶活動</value>
+  </data>
 </root>

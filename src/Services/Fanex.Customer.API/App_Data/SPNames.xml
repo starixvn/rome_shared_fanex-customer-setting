@@ -450,4 +450,7 @@
 	<Function Name="Update User Search">
 		<Setting Key="Acc_CustomerUpdUserSearch" SpName="Acc_CustomerUpdUserSearch" DbName="DBCust.CustDB.wsv_alp" />
 	</Function>
+	<Function Name="Customer Setting Note and Tooltip">
+		<Setting Key="Acc_CustSetting_JackpotStatusTooltip" SpName="Acc_CustSetting_JackpotStatusTooltip" DbName="DBAGE.bodb02.wsv_nap" />
+	</Function>
 </Functions>
