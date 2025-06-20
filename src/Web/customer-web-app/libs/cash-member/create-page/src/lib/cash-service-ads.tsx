@@ -2,53 +2,6 @@ import { currentCdnUri } from '@customer-web-app/shared-api-helper';
 import { useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
 import { CashServiceStatus } from '@customer-web-app/share-models';
-interface ActiveCashContentProps {
-    readonly onConfirm: () => void;
-    readonly onCancel: () => void;
-}
-
-function ActiveCashContent(props: ActiveCashContentProps) {
-    const { onConfirm, onCancel } = props;
-    return (
-        <div className={styles['active-cash-content']}>
-            <div className={styles['content-box']}>
-                <div className={styles.title}>
-                    Supercharge Your Cash Flow!
-                </div>
-                <div className={styles.divider} />
-                <div className={styles.description}>
-                    Start your <span className={styles.highlight}>14-days FREE trial</span> today and enjoy instant savings of <strong>THB 2,800</strong>.
-                </div>
-                <ul className={styles.description}>
-                    <li key="1">
-                        <span className={styles['icon-check']} /> <strong>No platform fee</strong> - save THB 200/day during the trial.
-                    </li>
-                    <li key="2">
-                        <span className={styles['icon-check']} /> Just <strong>THB 0.15 per transaction</strong> via your linked bank account.
-                    </li>
-                    <li key="3">
-                        <span className={styles['icon-check']} /> Get results. Stay if you love it. Cancel anytime.
-                    </li>
-                </ul>
-                <div className={styles.description}> Don't miss out – activate your free trial now and take your cash flow to the next level.</div>
-                <div className={styles['button-container']}>
-                    <button
-                        className={styles['primary-button']}
-                        onClick={onConfirm}
-                    >
-                        Confirm
-                    </button>
-                    <button
-                        className={styles['secondary-button']}
-                        onClick={onCancel}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-}
 
 interface CashServiceAdsContentProps {
     readonly onClickActivateNow: (() => void) | undefined;
@@ -90,9 +43,14 @@ interface CashServiceAdsProps {
     readonly cashServiceStatus: CashServiceStatus;
 }
 
+enum ContentFrame {
+    Ads,
+    StepSlider
+}
+
 function CashServiceAds(props: CashServiceAdsProps) {
     const { onClose, onConfirm, cashServiceStatus } = props;
-    const [contentIndex, setContentIndex] = useState(0);
+    const [contentFrame, setContentFrame] = useState(ContentFrame.Ads);
     const bannerPath = useMemo(() => currentCdnUri() + '/cash-service-ads/BannerPC.png', []);
     const [currentStep, setCurrentStep] = useState(0);
     const steps = useMemo(() => [
@@ -103,7 +61,7 @@ function CashServiceAds(props: CashServiceAdsProps) {
         </>,
         <>
             <div className={styles['step-title']}>Manage credit and cash member</div>
-            <img key={2} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step2.png'} alt="Manage credit and cash member" />
+            <img key={2} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step2.jpg'} alt="Manage credit and cash member" />
             <div className={styles['step-description']}>Maximise your earnings by managing both credit and cash in single account.</div>
         </>,
         <>
@@ -114,7 +72,7 @@ function CashServiceAds(props: CashServiceAdsProps) {
         <>
             <div className={styles['step-title']}>Customise promotions</div>
             <img key={4} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step4.png'} alt="Customise promotions" />
-            <div className={styles['step-description']}>Create and manage promotions featuring popular products and providers to keep your members entertained.</div>
+            <div className={styles['step-description']}>Create and manage promotions featuring popular products <br /> and providers to keep your members entertained.</div>
         </>,
         <>
             <div className={styles['step-title']}>Supercharge Your Cash Flow!</div>
@@ -134,6 +92,16 @@ function CashServiceAds(props: CashServiceAdsProps) {
         </>
     ], []);
 
+    const onActivateNow = () => {
+        setContentFrame(ContentFrame.StepSlider);
+        setCurrentStep(4);
+    }
+
+    const onFindOutMore = () => {
+        setContentFrame(ContentFrame.StepSlider);
+        setCurrentStep(0);
+    }
+
     return (
         <div className={styles.overlay}>
             <div className={styles.popup}>
@@ -148,9 +116,16 @@ function CashServiceAds(props: CashServiceAdsProps) {
                     alt="AdvCash"
                     className={styles['banner-image']}
                 />
-                {contentIndex === 0 && <CashServiceAdsContent onClickActivateNow={cashServiceStatus.isCanUpdateCashServiceStatus ? () => { setContentIndex(2); setCurrentStep(4); } : undefined} findOutMore={() => setContentIndex(2)} />}
-                {contentIndex === 1 && <ActiveCashContent onConfirm={onConfirm} onCancel={() => setContentIndex(0)} />}
-                {contentIndex === 2 && <StepSlider steps={steps} currentStep={currentStep} onClose={() => setContentIndex(0)} onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
+                {contentFrame === ContentFrame.Ads &&
+                    <CashServiceAdsContent
+                        onClickActivateNow={cashServiceStatus.isCanUpdateCashServiceStatus ? onActivateNow : undefined}
+                        findOutMore={onFindOutMore} />}
+                {contentFrame === ContentFrame.StepSlider
+                    && <StepSlider
+                        steps={steps}
+                        currentStep={currentStep}
+                        onClose={() => setContentFrame(ContentFrame.Ads)}
+                        onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
             </div>
         </div>
     );
@@ -163,7 +138,8 @@ interface StepSliderProps {
     onFinish?: () => void;
 }
 
-const StepSlider: React.FC<StepSliderProps> = ({ steps, currentStep, onClose, onFinish }) => {
+const StepSlider: React.FC<StepSliderProps> = (props) => {
+    const { steps, currentStep, onClose, onFinish } = props;
     const [current, setCurrent] = useState(currentStep || 0);
 
     const isLast = current === steps.length - 1;
