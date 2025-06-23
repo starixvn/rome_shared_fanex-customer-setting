@@ -73,6 +73,7 @@ const PotentialWinLimitRow = (props: PotentialWinLimitRowProps) => {
       <div>
         <input type="checkbox" onChange={(e) => onChange(e.target.checked)} checked={isChecked} />
         <span>{blockRowTitle}</span>
+        <PotentialWinLimitNote />
       </div>
     );
   };
