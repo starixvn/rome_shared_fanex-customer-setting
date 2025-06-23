@@ -97,3 +97,8 @@ export const DirectMemberAgentIds = {
   Super: -4,
   Master: -3,
 };
+
+export enum ServiceTypes {
+  Credit = 0,
+  Cash = 1,
+}

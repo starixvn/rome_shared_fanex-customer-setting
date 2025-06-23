@@ -6,7 +6,7 @@ import {
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import {
-    BetTypeIds, GroupTypeIds, ProductGroupIds, SportTypeIds, UserLevel
+    BetTypeIds, GroupTypeIds, ProductGroupIds, ServiceTypes, SportTypeIds, UserLevel
 } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
@@ -57,13 +57,21 @@ export function EditCustomerPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { generalInfo, group, productGroups } = await SettingService.GetCustomerSetting(
-        params.custId,
-        params.roleId,
-        params.uplineRoleId,
-        params.agentId,
-        true
-      );
+      const { generalInfo, group, productGroups } = params.ServiceType == ServiceTypes.Cash ?
+        await SettingService.GetCashCustomerSetting(
+          params.custId,
+          params.roleId,
+          params.uplineRoleId,
+          params.agentId,
+          false
+        ) :
+        await SettingService.GetCustomerSetting(
+          params.custId,
+          params.roleId,
+          params.uplineRoleId,
+          params.agentId,
+          false
+        );
 
       const newProductGroups = handleInitProducts(productGroups, params.roleId === UserLevel.Member);
       setProductGroups(newProductGroups);
