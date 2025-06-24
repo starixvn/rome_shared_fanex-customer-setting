@@ -51,12 +51,12 @@ enum ContentFrame {
 function CashServiceAds(props: CashServiceAdsProps) {
     const { onClose, onConfirm, cashServiceStatus } = props;
     const [contentFrame, setContentFrame] = useState(ContentFrame.Ads);
-    const bannerPath = useMemo(() => currentCdnUri() + '/cash-service-ads/BannerPC.png', []);
+    const bannerPath = useMemo(() => currentCdnUri() + '/cash-service-ads/BannerPC.jpg', []);
     const [currentStep, setCurrentStep] = useState(0);
     const steps = useMemo(() => [
         <>
             <div className={styles['step-title']}>Instant deposits and withdrawals!</div>
-            <img key={1} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step1.png'} alt="Instant deposits and withdrawals!" />
+            <img key={1} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step1.jpg'} alt="Instant deposits and withdrawals!" />
             <div className={styles['step-description']}>Easily add a <strong>payment gateway</strong> and <strong>bank accounts</strong> so your members can start playing instantly.</div>
         </>,
         <>
@@ -71,7 +71,7 @@ function CashServiceAds(props: CashServiceAdsProps) {
         </>,
         <>
             <div className={styles['step-title']}>Customise promotions</div>
-            <img key={4} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step4.png'} alt="Customise promotions" />
+            <img key={4} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step4.jpg'} alt="Customise promotions" />
             <div className={styles['step-description']}>Create and manage promotions featuring popular products <br /> and providers to keep your members entertained.</div>
         </>,
         <>
