@@ -68,7 +68,7 @@ export function PotentialWinLimitCell(props: Readonly<Props>) {
               allowNegative={false}
               onChange={handleChange}
               //decimalScale={currentValue === ParlayMaxPayoutMissConfigValue ? 1 : 0}
-              decimalScale={0}
+              decimalScale={1}
               thousandSeparator=","
               onFocus={onFocus}
               onBlur={onBlur}
@@ -79,7 +79,7 @@ export function PotentialWinLimitCell(props: Readonly<Props>) {
         <div className={styles['max-value']}>{` ${Operator['<=']} ${NumberHelper.formatWithCommas(maxValue)}`}</div>
       )}
       <span>
-            (1 - {t('unlimited')})
+            (0.1 - {t('unlimited')})
       </span>
       </div>      
       <div className={classNames(styles.inline, styles.blockLeft)}>
