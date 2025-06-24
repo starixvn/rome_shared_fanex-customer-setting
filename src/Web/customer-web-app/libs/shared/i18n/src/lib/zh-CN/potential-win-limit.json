@@ -1,14 +1,14 @@
 {
   "sportsbook.potentialWinLimit": {
     "overview": "概述",
-    "description": "赢额上限定义了会员在体育博彩中可累计的最大可赢金额。如果超过该限额，将无法继续下注。",
-    "appliesTo": "适用于：所有体育项目及所有体育博彩类型",
+    "description": "潜在赢额上限定义了会员在体育博彩中可累计的最大可赢金额。如果超过该限额，将无法继续投注。",
+    "appliesTo": "适用于：所有体育项目及所有体育博彩的投注类型",
     "excludes": "不适用于：串关投注（混合串关、系统串关、组合串关、单场串关）——当前阶段不包含。",
     
     "calculationLogic": {
       "title": "计算逻辑",
-      "formula": "赢额计算公式：(赔率 - 1) x 投注金额",
-      "accumulated": "累计赢额 = 所有未结算投注 + 限额设定后结算的投注赢额总和。",
+      "formula": "潜在赢额计算公式：(赔率 - 1) x 投注金额",
+      "accumulated": "累计潜在赢额 = 所有未结算投注 + 限额设定后结算的投注赢额总和。",
       "example": "示例",
       "example-limit": "限额 = 10,000",
       "example-ticketA": "投注 A（赔率 10，投注额 1,000）：赢额 = 9,000",
@@ -16,8 +16,8 @@
     },
 
     "trackingStart": {
-      "title": "跟踪从什么时候开始？",
-      "accumulation": "从代理设置具体赢额上限开始计入累计。",
+      "title": "追踪从什么时候开始？",
+      "accumulation": "从代理设置潜在赢额上限那一刻开始进行累计计算。",
       "included": "仅计算当时的未结算投注及之后结算的投注。",
       "example": "示例",
       "example-limit": "限额设置时间为下午 2:00",
@@ -28,30 +28,30 @@
 
     "resetBehavior": {
       "title": "重置行为",
-      "dailyReset": "每日自动重置 = 默认启用（GMT+8 下午 12:00）：清除所有已结算投注",
+      "dailyReset": "每日自动重置 = 默认启用（于 中午12 時正 GMT +8）：清除所有已结算投注",
       "manualReset": "手动重置（通过转账）：在转账时清除已结算投注",
       "runningTickets": "未结算投注不会被清除，始终计入累计值"
     },
 
     "resultAmendment": {
-      "title": "修改结果的影响",
-      "recalculation": "修改已结算投注的结果（如 WIN -> DRAW）将重新计算累计赢额",
+      "title": "重新结算的影响",
+      "recalculation": "修改已结算投注的结果（如 赢 -> 和）将重新计算累计赢额",
       "statusChange": "这可能会影响会员状态：",
-      "statusChange-blockedToUnblocked": "已阻止 -> 解锁（如果赢额减少）",
-      "statusChange-unblockedToBlocked": "未阻止 -> 被阻止（如果赢额增加）",
+      "statusChange-blockedToUnblocked": "封锁 -> 解锁（如果赢额减少）",
+      "statusChange-unblockedToBlocked": "未封锁 -> 封锁（如果赢额增加）",
       "example": "示例",
       "example-limit": "限额 = 10,000",
-      "example-before": "未结算 = 4,000，已结算赢额 = 6,000 -> 总计 = 10,000 -> 被阻止",
+      "example-before": "未结算 = 4,000，已结算赢额 = 6,000 -> 总计 = 10,000 -> 封锁",
       "example-after": "修改后：已结算赢额 = 0 -> 总计 = 4,000 -> 解锁"
     },
 
     "importantNotes": {
       "title": "给代理的重要提示",
-      "defaultLimit": "会员默认具有无限赢额上限",
+      "defaultLimit": "所有会员的潜在赢额上限默认为无限",
       "defaultReset": "每日自动重置 = 默认启用",
-      "appliesTo": "仅适用于体育博彩（不适用于赌场或 RNG）",
+      "appliesTo": "仅适用于体育博彩（不适用于现场及RNG娱乐城或 RNG游戏）",
       "excludes": "不包含串关投注类型",
-      "management": "赢额上限可通过会员账户页面和赢额上限页面进行管理"
+      "management": "可通过体育博彩设定页面和体育博彩潜在赢额上限页面进行设置及管理"
     }
   }
 } 
