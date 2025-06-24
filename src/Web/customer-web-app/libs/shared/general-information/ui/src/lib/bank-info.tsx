@@ -72,15 +72,13 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
           <img
             alt={selectedBank.name}
             src={getBankImageUrl(selectedBank.code)}
-            style={{ width: '18px', height: '18px', marginRight: '8px' }}
+            style={{ width: '16px', height: '16px', marginRight: '8px', top: '-1px', position: 'relative' }}
           />}
         <span className={stylesDropdown['bank-name']}>
           {selectedBank?.name || emptyBank.name}
         </span>
         <span className={stylesDropdown['bank-dropdown-arrow']}>
-          <svg width="10" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M15.8909 23.6457C15.3613 23.6435 14.8543 23.4313 14.4809 23.0557L4.48091 13.0557C4.15326 12.6731 3.98205 12.1809 4.00149 11.6776C4.02093 11.1742 4.2296 10.6967 4.58579 10.3406C4.94198 9.98437 5.88727 9.16523 6.39062 9.14579C6.39062 9.14579 7.00802 8.81802 7.39062 9.14567L15.8906 17.6456L24.3906 9.14559C24.7732 8.81794 25.8906 9.14569 25.8906 9.14569C26.394 9.16513 26.8399 9.98437 27.196 10.3406C27.5522 10.6967 27.7609 11.1742 27.7803 11.6776C27.7998 12.1809 27.6286 12.6731 27.3009 13.0557L17.3009 23.0557C16.9276 23.4313 16.4205 23.6435 15.8909 23.6457Z"></path></svg>
         </span>
       </div>
       {isOpen && (
