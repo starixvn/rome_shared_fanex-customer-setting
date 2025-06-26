@@ -13,7 +13,7 @@ import {
     GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
 } from '@customer-web-app/shared-general-information-state';
 import {
-    EditGeneralInformation, TransferCondition, TransferOptions
+    EditGeneralInformation, TransferCondition, TransferOptions, EditCashMemberGeneralInformation
 } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
@@ -57,20 +57,20 @@ export function EditCustomerPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { generalInfo, group, productGroups } = params.ServiceType == ServiceTypes.Cash ?
+      const { generalInfo, group, productGroups } = params.serviceType == ServiceTypes.Cash ?
         await SettingService.GetCashCustomerSetting(
           params.custId,
           params.roleId,
           params.uplineRoleId,
           params.agentId,
-          false
+          true
         ) :
         await SettingService.GetCustomerSetting(
           params.custId,
           params.roleId,
           params.uplineRoleId,
           params.agentId,
-          false
+          true
         );
 
       const newProductGroups = handleInitProducts(productGroups, params.roleId === UserLevel.Member);
@@ -452,7 +452,20 @@ export function EditCustomerPage() {
   const renderGeneralInfo = () => {
     if (!AppConfigHelper.isEditBetSettingOnly()) {
       return (
-        <EditGeneralInformation
+        params.serviceType === ServiceTypes.Cash ? (
+        <EditCashMemberGeneralInformation
+          ref={generalInfoRef}
+          generalInfo={generalInfo}
+          isReadOnly={
+            params.productGroupId !== ProductGroupIds.SportsBook ||
+            (params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
+            isIndirectUpdate(params)
+          }
+          onGeneralInfoChange={handleGeneralInfoChange}
+          onUpdate={handleUpdateGeneralInfo}
+        />
+      ): (
+         <EditGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
           productGroupId={params.productGroupId}
@@ -464,7 +477,7 @@ export function EditCustomerPage() {
           onGeneralInfoChange={handleGeneralInfoChange}
           onUpdate={handleUpdateGeneralInfo}
         />
-      );
+      ));
     }
 
     return null;
