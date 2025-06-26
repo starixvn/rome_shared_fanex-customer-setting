@@ -36,10 +36,10 @@
     "resultAmendment": {
       "title": "Ảnh hưởng của việc sửa đổi kết quả",
       "recalculation": "Việc sửa kết quả cược (ví dụ Thắng -> Hòa) sẽ tính lại tổng thắng tối đa",
-      "statusChange": "Điều này có thể thay đổi trạng thái Member:",
+      "statusChange": "Điều này có thể thay đổi trạng thái Member",
       "statusChange-blockedToUnblocked": "Bị chặn -> Được mở lại (nếu thắng giảm)",
       "statusChange-unblockedToBlocked": "Không bị chặn -> Bị chặn (nếu thắng tăng)",
-      "example": "Ví dụ:",
+      "example": "Ví dụ",
       "example-limit": "Giới hạn = 10,000",
       "example-before": "Đang chạy = 4,000, Cược thắng đã xử lý = 6,000 -> Tổng = 10,000 -> Bị chặn",
       "example-after": "Sau sửa đổi: Cược thắng = 0 -> Tổng = 4,000 -> Được mở lại"

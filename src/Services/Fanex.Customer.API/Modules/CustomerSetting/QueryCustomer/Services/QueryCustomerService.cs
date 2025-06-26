@@ -159,7 +159,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
     {
         return settingProfile.Where(p => !IsHideGroupType(p.DisplayMode)
             && (!request.ProductGroupId.HasValue || request.ProductGroupId.Value == 0 || (request.ProductGroupId > 0 && p.GroupId == request.ProductGroupId))
-            && SupportPotentialWinLimitBySite(generalInfo.Site, p.GroupType, isDirectMember, uplineRoleId)
+            && SupportPotentialWinLimitByRole(generalInfo.Site, p.GroupType, isDirectMember, uplineRoleId)
         ).GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
@@ -171,11 +171,11 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
 
-    private bool SupportPotentialWinLimitBySite(string site, int groupTypeId, bool isDirectMember, byte uplineRoleId)
+    private bool SupportPotentialWinLimitByRole(string site, int groupTypeId, bool isDirectMember, byte uplineRoleId)
     {
         if (groupTypeId == GroupTypes.PotentialWinLimit)
         {
-            return !isDirectMember && uplineRoleId == CustomerLevel.Agent && appSettings.IsSupportPotentialWinLimit(site);
+            return !isDirectMember && uplineRoleId == CustomerLevel.Agent;
         }
 
         return true;

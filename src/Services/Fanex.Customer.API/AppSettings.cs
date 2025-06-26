@@ -4,11 +4,6 @@ namespace Fanex.Customer.API;
 
 public class AppSettings
 {
-    public string SiteSupportPotentialWinLimit { get; set; }
-
-    public bool IsSupportPotentialWinLimit(string site)
-    => SiteSupportPotentialWinLimit.Equals("*", StringComparison.CurrentCultureIgnoreCase) ||
-    SiteSupportPotentialWinLimit.Split(',').Any(s => s.Equals(site, StringComparison.CurrentCultureIgnoreCase));
     public byte SettingStatus { get; set; }
 
     public string SiteLabelBelonging777Group { get; set; }
