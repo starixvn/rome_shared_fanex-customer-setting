@@ -2,28 +2,45 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-    Params, Result, SubMessagesResult, UpdateCustomerResult, ValidateRefResult, ValidationRefType
+  Params,
+  Result,
+  SubMessagesResult,
+  UpdateCustomerResult,
+  ValidateRefResult,
+  ValidationRefType,
 } from '@customer-web-app/share-models';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import {
-    BetTypeIds, GroupTypeIds, ProductGroupIds, ServiceTypes, SportTypeIds, UserLevel
+  BetTypeIds,
+  GroupTypeIds,
+  ProductGroupIds,
+  ServiceTypes,
+  SportTypeIds,
+  UserLevel,
 } from '@customer-web-app/shared-constants';
 import { ErrorBlock } from '@customer-web-app/shared-error-block';
 import {
-    GeneralInfo, GeneralInfoActionTypes, generalInformationReducer, initialState
+  GeneralInfo,
+  GeneralInfoActionTypes,
+  generalInformationReducer,
+  initialState,
 } from '@customer-web-app/shared-general-information-state';
 import {
-    EditGeneralInformation, TransferCondition, TransferOptions, EditCashMemberGeneralInformation
+  EditGeneralInformation,
+  TransferCondition,
+  TransferOptions,
+  EditCashMemberGeneralInformation,
 } from '@customer-web-app/shared-general-information-ui';
 import { GroupSettingsContextProvider } from '@customer-web-app/shared-group-settings-context';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { getChanges, getSettingItems } from '@customer-web-app/shared-group-settings-state';
 import {
-    CommissionGroupItem, GroupItem, GroupSettingItem, ProductGroup
+  CommissionGroupItem,
+  GroupItem,
+  GroupSettingItem,
+  ProductGroup,
 } from '@customer-web-app/shared-group-settings-types';
-import {
-    GroupSetting, scrollToTop, SetMemberPtPopup
-} from '@customer-web-app/shared-group-settings-ui';
+import { GroupSetting, scrollToTop, SetMemberPtPopup } from '@customer-web-app/shared-group-settings-ui';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
 import { Layout, useTheme } from '@customer-web-app/shared/base/layout';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
@@ -31,8 +48,12 @@ import NiceModal from '@ebay/nice-modal-react';
 
 import styles from './edit-customer-page.module.scss';
 import {
-    getNewIndirectEditCustomerSettings, getUnCheckAutoPtItems, handleChangeGroupSettingValue,
-    handleChangeItemValue, handleInitProducts, isGeneralInfoChanged
+  getNewIndirectEditCustomerSettings,
+  getUnCheckAutoPtItems,
+  handleChangeGroupSettingValue,
+  handleChangeItemValue,
+  handleInitProducts,
+  isGeneralInfoChanged,
 } from './handler';
 import { renderUpdateCustomerResult } from './update-customer-result';
 
@@ -57,21 +78,25 @@ export function EditCustomerPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { generalInfo, group, productGroups } = params.serviceType == ServiceTypes.Cash ?
-        await SettingService.GetCashCustomerSetting(
-          params.custId,
-          params.roleId,
-          params.uplineRoleId,
-          params.agentId,
-          true
-        ) :
-        await SettingService.GetCustomerSetting(
-          params.custId,
-          params.roleId,
-          params.uplineRoleId,
-          params.agentId,
-          true
-        );
+      const {
+        generalInfo,
+        group,
+        productGroups,
+      } = params.serviceType == ServiceTypes.Cash
+        ? await SettingService.GetCashCustomerSetting(
+            params.custId,
+            params.roleId,
+            params.uplineRoleId,
+            params.agentId,
+            true
+          )
+        : await SettingService.GetCustomerSetting(
+            params.custId,
+            params.roleId,
+            params.uplineRoleId,
+            params.agentId,
+            true
+          );
 
       const newProductGroups = handleInitProducts(productGroups, params.roleId === UserLevel.Member);
       setProductGroups(newProductGroups);
@@ -89,12 +114,18 @@ export function EditCustomerPage() {
         setOriginGroup(group);
         setGroup(group);
       }
-      validateGeneralInfo();
+
       setIsLoading(false);
     };
 
     fetchData();
   }, [refreshData]);
+
+  useEffect(() => {
+    if (generalInfo && generalInfo.custId !== 0) {
+      validateGeneralInfo();
+    }
+  }, [generalInfo]);
 
   const handleGeneralInfoChange = (payload: Partial<GeneralInfo>) => {
     generalInfoDispatch({ type: GeneralInfoActionTypes.Update, payload });
@@ -451,8 +482,7 @@ export function EditCustomerPage() {
 
   const renderGeneralInfo = () => {
     if (!AppConfigHelper.isEditBetSettingOnly()) {
-      return (
-        params.serviceType === ServiceTypes.Cash ? (
+      return params.serviceType === ServiceTypes.Cash ? (
         <EditCashMemberGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
@@ -464,8 +494,8 @@ export function EditCustomerPage() {
           onGeneralInfoChange={handleGeneralInfoChange}
           onUpdate={handleUpdateGeneralInfo}
         />
-      ): (
-         <EditGeneralInformation
+      ) : (
+        <EditGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
           productGroupId={params.productGroupId}
@@ -477,7 +507,7 @@ export function EditCustomerPage() {
           onGeneralInfoChange={handleGeneralInfoChange}
           onUpdate={handleUpdateGeneralInfo}
         />
-      ));
+      );
     }
 
     return null;

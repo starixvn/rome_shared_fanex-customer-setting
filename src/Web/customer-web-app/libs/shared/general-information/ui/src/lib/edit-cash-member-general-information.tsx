@@ -7,12 +7,10 @@ import { scrollToBLock } from '@customer-web-app/shared-group-settings-ui';
 import { Block, BlockItem, BlockRefType } from '@customer-web-app/shared/base/block';
 
 import { errorTooltip } from './common';
-import { GeneralInformationProps } from './general-information';
 import { generalInformationValidatorFields } from './general-information-validator';
 import styles from './general-information.module.scss';
 import CashUserInfo from './cash-user-info';
 import EditCashMemberGeneralInformationValidator from './edit-cash-member-general-information-validator';
-import { debug } from 'console';
 
 interface EditCashMemberGeneralInformationProps {
   generalInfo: GeneralInfo;
