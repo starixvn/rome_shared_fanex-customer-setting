@@ -124,11 +124,11 @@ export default class GeneralInformationValidator {
     const phoneNumber = value?.split('-')[1];
     
     if (!phoneCode) {
-      return (this.validationState = new ValidationResult('phoneCode', 'RequiredField'));
+      return (this.validationState = new ValidationResult('mobilePhone', 'RequiredField'));
     }
 
     if (!phoneNumber) {
-      return (this.validationState = new ValidationResult('phoneNumber', 'RequiredField'));
+      return (this.validationState = new ValidationResult('mobilePhone', 'RequiredField'));
     } 
 
     return true;
