@@ -2,7 +2,7 @@ import { CreateCustomerResult, Result, UpdateCustomerResult, UsernameSuggestion 
 import { axiosInstance, getHeadersForPostRequest } from '@customer-web-app/shared-api-helper';
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { GeneralInfo } from '@customer-web-app/shared-general-information-state';
-import { CurrentWinLossAmount, ProductGroup } from '@customer-web-app/shared-group-settings-types';
+import { CurrentWinAmount, CurrentWinLossAmount, ProductGroup } from '@customer-web-app/shared-group-settings-types';
 import { CashMemberSettingService } from './cash-member-setting-service';
 
 export interface GroupSettingsResponse {
@@ -250,6 +250,12 @@ export const SettingService = {
   GetCustomerCurrentWinLossAmount: async (custId: number, sportType: number, betType: number) => {
     const response = await axiosInstance.get<CurrentWinLossAmount[]>(
       `Customer/GetCurrentWinLossAmount?custId=${custId}&sportType=${sportType}&betType=${betType}`
+    );
+    return response.data;
+  },
+  GetCurrentWinAmount: async (custId: number, sportType: number, betType: number) => {
+    const response = await axiosInstance.get<CurrentWinAmount[]>(
+      `Customer/GetCurrentWinAmount?custId=${custId}&sportType=${sportType}&betType=${betType}`
     );
     return response.data;
   },

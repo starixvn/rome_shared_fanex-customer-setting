@@ -65,6 +65,8 @@ public interface ICustomerService
     Task<BetSettingData> GetBetLimitInformation(GetBetSettingRequest request);
 
     Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
+
+    Task<IEnumerable<CurrentWinAmount>> GetCurrentWinAmount(GetCurrentWinAmountRequest request);
 }
 
 public class CustomerService : ICustomerService
@@ -209,6 +211,24 @@ public class CustomerService : ICustomerService
     {
         var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
         var result = await dynamicRepository.FetchAsync<CurrentWinLossAmount>(new GetCurrentWinLossAmountCriteria(
+            request.CustId,
+            request.SportType,
+            request.BetType,
+            appSettings.SettingStatus,
+            siteDBConfig.LinkedServerName));
+
+        foreach (var item in result)
+        {
+            item.SportTypeName = cacheRefService.GetSportTypeName(item.SportType, request.Language);
+        }
+
+        return result;
+    }
+
+    public async Task<IEnumerable<CurrentWinAmount>> GetCurrentWinAmount(GetCurrentWinAmountRequest request)
+    {
+        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        var result = await dynamicRepository.FetchAsync<CurrentWinAmount>(new GetCurrentWinAmountCriteria(
             request.CustId,
             request.SportType,
             request.BetType,

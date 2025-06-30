@@ -175,6 +175,8 @@
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - Assign maximum {{value}} bet limits to member level.",
   "ClickToViewCurrentWinLossAmount": "Click to view Current Win Loss Amount",
   "CurrentWinLossAmount": "Current Win/Loss Amount",
+  "ClickToViewCurrentWinAmount": "Click to view Current Win Amount",
+  "CurrentWinAmount": "Current Win Amount",
   "Product": "Product",
   "Winning": "Winning",
   "Losing": "Losing",

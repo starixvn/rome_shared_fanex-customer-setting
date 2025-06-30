@@ -9,12 +9,16 @@ export interface GroupType {
   isAllowUncheckAll: boolean;
 }
 
-export interface CurrentWinLossAmount {
+export interface CurrentWinAmount {
+  maxWinAmount: number;
+  winPercent: number;
+  sportType: number;
+  betType: number;
   currentAmount: number;
+  sportTypeName: number;
+}
+
+export interface CurrentWinLossAmount extends CurrentWinAmount {
   lossPercent: number;
   maxLossAmount: number;
-  maxWinAmount: number;
-  sportType: number;
-  sportTypeName: number;
-  winPercent: number;
 }

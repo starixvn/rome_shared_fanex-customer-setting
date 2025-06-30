@@ -174,6 +174,8 @@
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - 分配最大{{value}}投註限額給會員。",
   "ClickToViewCurrentWinLossAmount": "點擊查看目前輸的數額",
   "CurrentWinLossAmount": "目前輸贏數額",
+  "ClickToViewCurrentWinAmount": "點擊查看目前贏的數額",
+  "CurrentWinAmount": "目前贏數額",
   "Product": "產品",
   "Winning": "贏",
   "Losing": "輸",

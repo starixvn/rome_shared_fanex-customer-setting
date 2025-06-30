@@ -173,6 +173,8 @@
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - Được gán tối đa {{value}} giới hạn cược cho cấp Member.",
   "ClickToViewCurrentWinLossAmount": "Nhấn để xem Lượng Tiền Đang Thua",
   "CurrentWinLossAmount": "Giá trị thắng thua hiện tại",
+  "ClickToViewCurrentWinAmount": "Nhấn để xem Lượng Tiền Đang Thắng",
+  "CurrentWinAmount": "Giá trị thắng hiện tại",
   "Product": "Sản phẩm",
   "Winning": "Thắng",
   "Losing": "Thua",
