@@ -1,0 +1,57 @@
+{
+  "sportsbook.potentialWinLimit": {
+    "overview": "개요",
+    "description": "잠재적 승리 한도는 회원이 스포츠북 베팅에서 누적할 수 있는 최대 총 잠재적 승리를 정의합니다. 이 한도를 초과하면 베팅이 거부됩니다.",
+    "appliesTo": "적용 대상: 스포츠북의 모든 스포츠, 모든 베팅 유형",
+    "excludes": "제외: 파레이 베팅 (믹스 파레이, 시스템 파레이, 콤보 파레이, 단일 경기 파레이) - 이 단계에서 제외됨",
+    
+    "calculationLogic": {
+      "title": "계산 로직",
+      "formula": "잠재적 승리 공식: (배당률 - 1) x 베팅금",
+      "accumulated": "누적 잠재적 승리 = 모든 진행 중인 (미정산) 티켓의 합계 + 정산된 티켓 (한도 설정 후 정산된 티켓)",
+      "example": "예시",
+      "example-limit": "한도 = 10,000",
+      "example-ticketA": "티켓 A (배당률 10, 베팅금 1,000): 잠재적 승리 = 9,000",
+      "example-ticketB": "티켓 B (배당률 5): 최대 허용 베팅금 = (10,000 - 9,000) ÷ (5 - 1) = 250"
+    },
+
+    "trackingStart": {
+      "title": "추적은 언제 시작되나요?",
+      "accumulation": "에이전트가 특정 잠재적 승리 한도를 설정한 순간부터 누적이 시작됩니다.",
+      "included": "해당 순간의 진행 중인 티켓과 그 이후 정산된 티켓만 포함됩니다.",
+      "example": "예시",
+      "example-limit": "오후 2시에 한도 설정",
+      "example-ticketA": "티켓 A (오후 2시 진행 중) -> 포함됨",
+      "example-ticketB": "티켓 B (오후 1시 50분 정산) -> 포함되지 않음",
+      "example-ticketC": "티켓 C (오후 2시 10분 정산) -> 포함됨"
+    },
+
+    "resetBehavior": {
+      "title": "리셋 동작",
+      "dailyReset": "일일 자동 리셋 = 기본값 YES (GMT+8 오후 12시): 모든 정산된 티켓을 지웁니다.",
+      "manualReset": "수동 리셋 (이체를 통해): 이체 시점의 정산된 티켓을 지웁니다.",
+      "runningTickets": "진행 중인 티켓은 절대 지워지지 않으며 항상 한도에 포함됩니다."
+    },
+
+    "resultAmendment": {
+      "title": "결과 수정 영향",
+      "recalculation": "정산된 티켓을 수정하면 (예: 승리 -> 무승부) 누적 승리가 재계산됩니다.",
+      "statusChange": "이는 회원 상태를 변경할 수 있습니다",
+      "statusChange-blockedToUnblocked": "차단됨 -> 차단 해제됨 (승리가 감소하는 경우)",
+      "statusChange-unblockedToBlocked": "차단 해제됨 -> 차단됨 (승리가 증가하는 경우)",
+      "example": "예시",
+      "example-limit": "한도 = 10,000",
+      "example-before": "진행 중 = 4,000, 정산 승리 = 6,000 -> 총계 = 10,000 -> 차단됨",
+      "example-after": "수정 후: 정산 승리 = 0 -> 총계 = 4,000 -> 차단 해제됨"
+    },
+
+    "importantNotes": {
+      "title": "에이전트를 위한 중요 참고사항",
+      "defaultLimit": "회원은 기본적으로 무제한 잠재적 승리 한도를 가집니다",
+      "defaultReset": "일일 자동 리셋 = 기본값 YES",
+      "appliesTo": "스포츠북에만 적용 (라이브 & RNG 카지노 또는 RNG 게임에는 적용되지 않음)",
+      "excludes": "파레이 베팅 유형 제외",
+      "management": "한도는 스포츠북 설정 페이지와 잠재적 승리 한도 페이지에서 관리할 수 있습니다"
+    }
+  }
+} 

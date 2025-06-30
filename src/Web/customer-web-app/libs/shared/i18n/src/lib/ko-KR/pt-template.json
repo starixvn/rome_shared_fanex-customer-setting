@@ -1,0 +1,18 @@
+{
+  "TemplateName": "템플릿 이름",
+  "SelectByDefault": "기본값으로 선택",
+  "Action": "작업",
+  "PT_Level_4": "슈퍼 PT",
+  "PT_Level_3": "마스터 PT",
+  "PT_Level_2": "에이전트 PT",
+  "DeletePTTemplateConfirmMessage": "이 템플릿을 삭제하시겠습니까?",
+  "TemplateNameRequireMessage": "템플릿 이름이 필요합니다.",
+  "TemplateNameExistedMessage": "템플릿 이름이 이미 존재합니다.",
+  "PTTemplate": "포지션 테이킹 템플릿",
+  "TemplateNote1_Level_4": "포지션 테이킹 템플릿은 라이트 모드에서 생성된 새로운 마스터에만 적용됩니다.",
+  "TemplateNote2_Level_4": "선택된 포지션 테이킹 템플릿의 값이 모든 상품의 기본 슈퍼 PT 사전 설정으로 로드됩니다 (자동 PT는 영향받지 않음).",
+  "TemplateNote1_Level_3": "포지션 테이킹 템플릿은 라이트 모드에서 생성된 새로운 에이전트에만 적용됩니다.",
+  "TemplateNote2_Level_3": "선택된 포지션 테이킹 템플릿의 값이 모든 상품의 기본 마스터 PT 사전 설정으로 로드됩니다 (자동 PT는 영향받지 않음).",
+  "TemplateNote1_Level_2": "포지션 테이킹 템플릿은 라이트 모드에서 생성된 새로운 회원에만 적용됩니다.",
+  "TemplateNote2_Level_2": "선택된 포지션 테이킹 템플릿의 값이 모든 상품의 기본 에이전트 PT 사전 설정으로 로드됩니다."
+} 
