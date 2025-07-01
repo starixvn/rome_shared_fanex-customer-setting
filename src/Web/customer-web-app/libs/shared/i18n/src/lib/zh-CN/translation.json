@@ -174,6 +174,8 @@
   "MemberMaxStakeLevelCanBeSelect": "{{name}} - 分配最大{{value}}投注限额给会员。",
   "ClickToViewCurrentWinLossAmount": "点击查看目前输的数额",
   "CurrentWinLossAmount": "目前输赢数额",
+  "ClickToViewCurrentWinAmount": "点击查看当前赢的数额",
+  "CurrentWinAmount": "当前赢数额",
   "Product": "产品",
   "Winning": "赢",
   "Losing": "输",
@@ -242,6 +244,4 @@
   "ToWinAmount": "赢取金额: ",
   "WinlossAmount": "輸贏: ",
   "PotentialWinLimitInfoTitle": "点击查看（体育博彩）潜在赢额上限说明"
-  "ClickToViewCurrentWinAmount": "点击查看当前赢的数额",
-  "CurrentWinAmount": "当前赢数额"
 }

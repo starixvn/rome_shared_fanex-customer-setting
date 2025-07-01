@@ -1,5 +1,6 @@
 using Fanex.Customer.API.Constants;
 using Fanex.Customer.API.Modules.CreateCustomer.EditSettings;
+using Fanex.Customer.API.Modules.CustomerSetting.EditCustomer.GroupType161;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
@@ -67,6 +68,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             {156, new GroupType156Service(messageService, cacheRefService)},
             {158, new GroupType158Service(messageService, cacheRefService)},
             {160, new GroupType160Service(messageService, cacheRefService)},
+            {161, new GroupType161Service(messageService, cacheRefService)},
             {162, new GroupType162Service(dynamicRepository, messageService, cacheRefService)},
         };
     }

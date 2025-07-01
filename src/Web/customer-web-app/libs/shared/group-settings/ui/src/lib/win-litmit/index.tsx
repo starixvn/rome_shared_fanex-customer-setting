@@ -60,7 +60,7 @@ type ValidateWinLimitResult = {
   msgParams?: { [key: string]: string };
 };
 
-type MaximumLossColumnProps = {
+type MaximumWinColumnProps = {
   isReadOnly: boolean;
   data: WinLimitGroupItem;
   handleWinLimitChange: (
@@ -70,7 +70,7 @@ type MaximumLossColumnProps = {
   setTooltipError: (validateResult: ValidateWinLimitResult) => void;
 };
 
-function MaximumWinColumn(props: Readonly<MaximumLossColumnProps>) {
+function MaximumWinColumn(props: Readonly<MaximumWinColumnProps>) {
   const { isReadOnly, data, handleWinLimitChange, setTooltipError } = props;
   const { t } = useTranslation();
 
