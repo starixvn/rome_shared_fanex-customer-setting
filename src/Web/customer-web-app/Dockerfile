@@ -16,7 +16,7 @@ COPY src/Web/customer-web-app .
 RUN npx nx run-many -t build --mode $TRANSFORM_CONFIG
 
 # 2. Nginx
-FROM hub.nexdev.net/base/nginxinc/nginx-unprivileged:1.22-alpine-slim
+FROM hub.nexdev.net/base/nginxinc/nginx-unprivileged:1-alpine
 
 # Set root user has full permissions of read/write files/folders to copy needed things
 USER root
@@ -31,8 +31,6 @@ RUN rm -rf ./*
 
 # Copy static assets from builder stage
 COPY --from=builder /app/dist/apps .
-
 WORKDIR /usr/share/nginx/html
-
 # Containers run nginx with global directives and daemon off
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
