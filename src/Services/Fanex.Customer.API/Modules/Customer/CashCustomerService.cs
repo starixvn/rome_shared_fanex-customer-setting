@@ -11,6 +11,16 @@ namespace Fanex.Customer.API.Modules.Customer;
 public interface ICashCustomerService
 {
     Task<Result> UpdateEnableCashService(UpdateCashServiceStatusRequest request);
+
+    Task<IEnumerable<BankInfo>> GetAgentBanks(int agentId, int transType);
+
+    Task<IEnumerable<MemberBankInfo>> GetMemberBanks(int custId);
+
+    Task<Result> AddMemberBankInfo(AddMemberBankInfoRequest request);
+
+    Task<Result> UpdateMemberBankInfo(UpdateMemberBankInfoRequest request);
+
+    Task<Result> RemoveMemberBankInfo(RemoveMemberBankInfoRequest request);
 }
 
 public class CashCustomerService : ICashCustomerService
@@ -201,5 +211,68 @@ public class CashCustomerService : ICashCustomerService
         // IP and Language are not required
         error = null;
         return true;
+    }
+
+    public async Task<IEnumerable<MemberBankInfo>> GetMemberBanks(int custId)
+    {
+        var criteria = new GetCashMemberBanksCriteria(custId);
+        var result = await dynamicRepository.FetchAsync<MemberBankInfo>(criteria);
+        return result;
+    }
+
+    public async Task<IEnumerable<BankInfo>> GetAgentBanks(int agentId, int transType)
+    {
+        var criteria = new GetCashAgentBanksCriteria(agentId, transType);
+        var result = await dynamicRepository.FetchAsync<BankInfo>(criteria);
+        return result;
+    }
+
+
+    public async Task<Result> AddMemberBankInfo(AddMemberBankInfoRequest request)
+    {
+        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
+        var criteria = new AddMemberBankInfoCommand(request, siteDBGroupId);
+        var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
+
+        if (criteria.ErrCode > 0)
+        {
+            return ResultFromCriteria(criteria);
+        }
+        
+        await WriteLogsCashAsync(result, siteDBGroupId);
+        return ResultFromCriteria(result);
+    }
+
+    public async Task<Result> UpdateMemberBankInfo(UpdateMemberBankInfoRequest request)
+    {
+        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
+        var criteria = new UpdateMemberBankInfoCommand(request, siteDBGroupId);
+        var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
+
+        if (criteria.ErrCode > 0)
+        {
+            return ResultFromCriteria(criteria);
+        }
+
+        await WriteLogsCashAsync(result, siteDBGroupId);
+        return ResultFromCriteria(result);
+    }
+
+    public async Task<Result> RemoveMemberBankInfo(RemoveMemberBankInfoRequest request)
+    {
+        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
+        var criteria = new RemoveMemberBankInfoCommand(request, siteDBGroupId);
+        var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
+
+        if (criteria.ErrCode > 0)
+        {
+            return ResultFromCriteria(criteria);
+        }
+
+        await WriteLogsCashAsync(result, siteDBGroupId);
+        return ResultFromCriteria(result);
     }
 }

@@ -412,6 +412,21 @@
 
 		<Setting Key="Age_CashService_CustServiceTypeInitialize" SpName="Age_CashService_CustServiceTypeInitialize" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Age_CashServiceBilling_DailyFee_Ins" SpName="Age_CashServiceBilling_DailyFee_Ins" DbName="DBSIC.bodb02.wsv_CashService" Plain="0" />
+
+		<Setting Key="Acc_CustomerSelBankAccount_CashMember" SpName="Acc_CustomerSelBankAccount_CashMember_UAT2" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerSelBankAccount_CashMember" SpName="Acc_CustomerSelBankAccount_CashMember" DbName="DBCust3.AgencyCashService.wsv_CashService" Plain="0" />
+		
+		<Setting Key="Age_CashAgentBankInfoSel" SpName="Age_CashAgentBankInfoSel" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_Age_CashAgentBankInfoSel" SpName="Age_CashAgentBankInfoSel" DbName="DBCust3.AgencyCashService.wsv_CashService" Plain="0" />
+
+		<Setting Key="Acc_CustomerInsBankAccount_CashMember" SpName="Acc_CustomerInsBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerInsBankAccount_CashMember" SpName="Acc_CustomerInsBankAccount_CashMember" DbName="DBCust3.AgencyCashService.wsv_CashService" Plain="0" />
+	
+		<Setting Key="Acc_CustomerUpdBankAccount_CashMember" SpName="Acc_CustomerUpdBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerUpdBankAccount_CashMember" SpName="Acc_CustomerUpdBankAccount_CashMember" DbName="DBCust3.AgencyCashService.wsv_CashService" Plain="0" />
+	
+		<Setting Key="Acc_CustomerDelBankAccount_CashMember" SpName="Acc_CustomerDelBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_Acc_CustomerDelBankAccount_CashMember" SpName="Acc_CustomerDelBankAccount_CashMember" DbName="DBCust3.AgencyCashService.wsv_CashService" Plain="0" />
 	</Function>
 	<Function Name="Sub Account">
 		<Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
