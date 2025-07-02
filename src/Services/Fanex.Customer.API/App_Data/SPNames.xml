@@ -400,7 +400,7 @@
 		<Setting Key="WriteLog_CashService_UserLog_RunSP" SpName="WriteLog_CashService_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_CashService" Plain="0" />
 		<Setting Key="DBSite3_WriteLog_CashService_UserLog_RunSP" SpName="WriteLog_CashService_UserLog_RunSP" DbName="DBCust3.bodb_CustomerLog.wsv_CashService" Plain="0" />
 		<Setting Key="WriteLog_CashService_UserLog_Transfer" SpName="WriteLog_CashService_UserLog_Transfer" DbName="DBLOG.bodb_CustomerLog.wsv_CashService" Plain="0" />
-		<Setting Key="DBSite3_WriteLog_CashService_UserLog_Transfer" SpName="WriteLog_CashService_UserLog_Transfer" DbName="DBSITE03.bodb_CustomerLog.wsv_CashService" Plain="0" />
+		<Setting Key="DBSite3_WriteLog_CashService_UserLog_Transfer" SpName="WriteLog_CashService_UserLog_Transfer" DbName="DBSITE03.bodb_CustomerLog.asv_CashService" Plain="0" />
 
 		<Setting Key="Age_CashService_CustServiceTypeInitialize" SpName="Age_CashService_CustServiceTypeInitialize" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Age_CashServiceBilling_DailyFee_Ins" SpName="Age_CashServiceBilling_DailyFee_Ins" DbName="DBSIC.bodb02.wsv_CashService" Plain="0" />
