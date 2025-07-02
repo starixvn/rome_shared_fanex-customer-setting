@@ -482,13 +482,12 @@ export function EditCustomerPage() {
 
   const renderGeneralInfo = () => {
     if (!AppConfigHelper.isEditBetSettingOnly()) {
-      return params.serviceType === ServiceTypes.Cash ? (
+      return (params.serviceType === ServiceTypes.Cash && params.roleId == UserLevel.Member) ? (
         <EditCashMemberGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
           isReadOnly={
             params.productGroupId !== ProductGroupIds.SportsBook ||
-            (params.roleId === UserLevel.Super && AppConfigHelper.IsExternalNap()) ||
             isIndirectUpdate(params)
           }
           onGeneralInfoChange={handleGeneralInfoChange}
