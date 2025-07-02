@@ -25,20 +25,20 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState("");
   const [isCompleteSetup, setIsCompleteSetup] = useState(false);
+  const [compactText, setCompactText] = useState('');
+  const [individualText, setIndividualText] = useState('');
+
   const { newUserNames, handleOk, numberOfAccounts, message, subMessages } = props;
   
   const domains = props.availableAlphaDomain?.slice(0, 3).join(', ');
 
   const noOfFailedAccounts = numberOfAccounts - (newUserNames?.length ?? 0);
 
-  const formatUserInfo = (usernameText: string, domainText: string) => {
-    return `${t('username')}: ${usernameText}\n${t('domain')}: ${domainText}`;
+  const formatUserInfo = (usernameText: string, domainText: string, isCompleteSetup: boolean=false) => {
+    return isCompleteSetup 
+      ? `${t('username')}: ${usernameText}\n${t('domain')}: ${domainText}`
+      : `${t('username')}: ${usernameText}`;
   };
-
-  const compactText = formatUserInfo(newUserNames?.join(', ') ?? '', domains ?? '');
-
-  const individualText =
-    newUserNames?.map((username) => formatUserInfo(username, domains ?? '')).join('\n\n') ?? '';
 
   const numberOfNewUserNames = newUserNames?.length ?? 0;
 
@@ -52,6 +52,11 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
   const getSetupChecklist = async () => {
     const data = await SettingService.GetSetupChecklist();
     setIsCompleteSetup(data.isCompleteAll);
+
+    const ct = formatUserInfo(newUserNames?.join(', ') ?? '', domains ?? '', data.isCompleteAll) ;
+    const it = newUserNames?.map((username) => formatUserInfo(username, domains ?? '', data.isCompleteAll)).join('\n\n') ?? '';
+    setCompactText(ct);
+    setIndividualText(it);
   };
 
   useEffect(() => {
@@ -71,73 +76,75 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
           <div className={styles.IconThumbsUp}>{IconThumbsUp}</div>
           <div className={styles.success}>{t('success')}</div>
 
-          {!isCompleteSetup && (
-            <a href="#" onClick={handleReferChecklist}>{t('ReferChecklist')}</a>
-          )}
-
-          {isCompleteSetup && (
-            <div className={styles['account-info']}>
-              <div>
-                <span style={{ color: 'red' }}>* </span>
-                <span style={{ fontStyle: 'italic', opacity: 0.8 }}>{t('introCopyNote')}</span>
-              </div>
-              <div className={styles['buttons']}>
-                <CopyToClipboard text={compactText} options={{ format: 'text/plain' }} onCopy={() => handleCopy('compact-copy-btn')}>
+          <div className={styles['account-info']}>
+            <div>
+              <span style={{ color: 'red' }}>* </span>
+              <span style={{ fontStyle: 'italic', opacity: 0.8 }}>{t('introCopyNote')}</span>
+            </div>
+            <div className={styles['buttons']}>
+              <CopyToClipboard text={compactText} options={{ format: 'text/plain' }} onCopy={() => handleCopy('compact-copy-btn')}>
+                <button
+                  type="button"
+                  className={styles['copy-btn']}
+                  data-tooltip-id="compact-copy-btn"
+                >
+                  {t('Copy')}
+                </button>
+              </CopyToClipboard>
+              {numberOfNewUserNames > 1 && (
+                <CopyToClipboard text={individualText} options={{ format: 'text/plain' }} onCopy={() => handleCopy('individual-copy-btn')}>
                   <button
                     type="button"
                     className={styles['copy-btn']}
-                    data-tooltip-id="compact-copy-btn"
+                    data-tooltip-id="individual-copy-btn"
                   >
-                    {t('Copy')}
+                    {t('IndividualCopy')}
                   </button>
                 </CopyToClipboard>
-                {numberOfNewUserNames > 1 && (
-                  <CopyToClipboard text={individualText} options={{ format: 'text/plain' }} onCopy={() => handleCopy('individual-copy-btn')}>
-                    <button
-                      type="button"
-                      className={styles['copy-btn']}
-                      data-tooltip-id="individual-copy-btn"
-                    >
-                      {t('IndividualCopy')}
-                    </button>
-                  </CopyToClipboard>
-                )}
+              )}
+            </div>
+            <div className={styles['info-copy']}>
+              <div className={styles['label']}>{t('username')}</div>
+              <div className={styles['row-value-username']}>
+                <div>{newUserNames?.join(', ')}</div>
               </div>
-              <div className={styles['info-copy']}>
-                <div className={styles['label']}>{t('username')}</div>
-                <div className={styles['row-value-username']}>
-                  <div>{newUserNames?.join(', ')}</div>
-                </div>
-              </div>
+            </div>
+
+            {isCompleteSetup && (
               <div className={styles['info-copy']}>
                 <div className={styles['label']}>{t('Domain')}</div>
                 <div className={styles['row-value']}>{domains}</div>
+              </div>)}
+
+            {noOfFailedAccounts > 0 && (
+              <div className={styles['failed-account-created']}>
+                <p className={`msg msg-error ${styles['result-text']}`}>
+                  {t('NoOfAccountCreatedFailed', { noOfFailedAccounts })}
+                </p>
+
+                <p className="result-text">
+                  <span>{t('FailureReason')}: </span>
+                  <div className="msg msg-error">
+                    <div className="main-message">{message}</div>
+                    {subMessages?.map((subMessage) => (
+                      <div className={styles['sub-message']}>
+                        {subMessage.isLive && <span className={styles['live-badge']}>{t('Live')}</span>}
+                        {subMessage.message}
+                      </div>
+                    ))}
+                  </div>
+                </p>
               </div>
-              {noOfFailedAccounts > 0 && (
-                <div className={styles['failed-account-created']}>
-                  <p className={`msg msg-error ${styles['result-text']}`}>
-                    {t('NoOfAccountCreatedFailed', { noOfFailedAccounts })}
-                  </p>
+            )}
 
-                  <p className="result-text">
-                    <span>{t('FailureReason')}: </span>
-                    <div className="msg msg-error">
-                      <div className="main-message">{message}</div>
-                      {subMessages?.map((subMessage) => (
-                        <div className={styles['sub-message']}>
-                          {subMessage.isLive && <span className={styles['live-badge']}>{t('Live')}</span>}
-                          {subMessage.message}
-                        </div>
-                      ))}
-                    </div>
-                  </p>
-                </div>
-              )}
+            <button className={styles.buttonSuccess} type="button" onClick={handleOk}>
+              {t('okay')}
+            </button>
+          </div>
 
-              <button className={styles.buttonSuccess} type="button" onClick={handleOk}>
-                {t('okay')}
-              </button>
-            </div>)}
+          {!isCompleteSetup && (
+            <a href="#" onClick={handleReferChecklist}>{t('ReferChecklist')}</a>
+          )}
         </div>
         <WrapperTooltip content={t('copied') ?? ''} id={copied} type="default" isOpen={copied !== ''} />
       </div>

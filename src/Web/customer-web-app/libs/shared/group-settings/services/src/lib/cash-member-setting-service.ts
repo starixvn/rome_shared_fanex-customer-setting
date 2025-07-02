@@ -104,7 +104,7 @@ export const CashMemberSettingService = {
   },
   GetSetupChecklist: async () => {
     const response = await axiosInstance.get(
-      `Common/GetCashSetupChecklist`
+      `../cash-service/Common/GetSetupChecklist`
     );
     
     return response.data;
