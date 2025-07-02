@@ -102,4 +102,11 @@ export const CashMemberSettingService = {
         throw error;
       });
   },
+  GetSetupChecklist: async () => {
+    const response = await axiosInstance.get(
+      `Common/GetCashSetupChecklist`
+    );
+    
+    return response.data;
+  }
 };
