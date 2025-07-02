@@ -7,13 +7,13 @@ public class CustomerBankInfoEndpoint :
     IEndpoint<IResult, int, int, ICashCustomerService>,
     IEndpoint<IResult, int, ICashCustomerService>,
     IEndpoint<IResult, AddMemberBankInfoRequest, ICashCustomerService>,
-    IEndpoint<IResult, UpdateMemberBankInfoRequest, ICashCustomerService>
-    // IEndpoint<IResult, RemoveMemberBankInfoRequest, ICashCustomerService>
+    IEndpoint<IResult, UpdateMemberBankInfoRequest, ICashCustomerService>,
+    IEndpoint<IResult, RemoveMemberBankInfoRequest, ICashCustomerService>
 {
 
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        var enpoint = app.MapGroup("/api/customer/cash-service-bank-info").WithTags(EndpointTags.CashService);
+        var enpoint = app.MapGroup("/api/customer/bank-info").WithTags(EndpointTags.CustomerInfos);
 
 
         enpoint.MapGet("/agent/{agentId}/{transType}",
@@ -32,14 +32,13 @@ public class CustomerBankInfoEndpoint :
             .Produces<IResult>();
 
 
-        enpoint.MapPut("/member/update", (UpdateMemberBankInfoRequest request, ICashCustomerService customerService)
+        enpoint.MapPost("/member/update", (UpdateMemberBankInfoRequest request, ICashCustomerService customerService)
                 => HandleAsync(request, customerService))
             .Produces<IResult>();
 
 
-        // enpoint.MapDelete("/member/delete", (RemoveMemberBankInfoRequest request, ICashCustomerService customerService)
-        //         => HandleAsync(request, customerService))
-        //     .Produces<IResult>();
+        enpoint.MapPost("/member/remove", (RemoveMemberBankInfoRequest request, ICashCustomerService customerService)
+                => HandleAsync(request, customerService));
 
     }
 

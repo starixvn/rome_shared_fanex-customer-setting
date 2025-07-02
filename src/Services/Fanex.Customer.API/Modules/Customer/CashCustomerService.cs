@@ -227,52 +227,51 @@ public class CashCustomerService : ICashCustomerService
         return result;
     }
 
-
     public async Task<Result> AddMemberBankInfo(AddMemberBankInfoRequest request)
     {
-        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
-        int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
-        var criteria = new AddMemberBankInfoCommand(request, siteDBGroupId);
+        var criteria = new AddMemberBankInfoCommand(request, 0);
         var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
-        if (criteria.ErrCode > 0)
+        if (criteria.ErrCode != 0)
         {
-            return ResultFromCriteria(criteria);
+            return Result.CreateError(criteria.ErrMsg);
         }
-        
-        await WriteLogsCashAsync(result, siteDBGroupId);
-        return ResultFromCriteria(result);
+
+        var siteDbConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        var siteDbGroupId = siteDbConfig?.SiteDBGroupID ?? 0;
+        await WriteLogsCashAsync(result, siteDbGroupId);
+        return Result.CreateSuccess(criteria.ErrMsg);
     }
 
     public async Task<Result> UpdateMemberBankInfo(UpdateMemberBankInfoRequest request)
     {
-        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
-        int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
-        var criteria = new UpdateMemberBankInfoCommand(request, siteDBGroupId);
+        var criteria = new UpdateMemberBankInfoCommand(request, 0);
         var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
-        if (criteria.ErrCode > 0)
+        if (criteria.ErrCode != 0)
         {
-            return ResultFromCriteria(criteria);
+            return Result.CreateError(criteria.ErrMsg);
         }
 
-        await WriteLogsCashAsync(result, siteDBGroupId);
-        return ResultFromCriteria(result);
+        var siteDbConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        var siteDbGroupId = siteDbConfig?.SiteDBGroupID ?? 0;      
+        await WriteLogsCashAsync(result, siteDbGroupId);
+        return Result.CreateSuccess(criteria.ErrMsg);
     }
 
     public async Task<Result> RemoveMemberBankInfo(RemoveMemberBankInfoRequest request)
     {
-        var siteDBConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
-        int siteDBGroupId = siteDBConfig?.SiteDBGroupID ?? 0;
-        var criteria = new RemoveMemberBankInfoCommand(request, siteDBGroupId);
+        var criteria = new RemoveMemberBankInfoCommand(request, 0);
         var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
-        if (criteria.ErrCode > 0)
+        if (criteria.ErrCode != 0)
         {
-            return ResultFromCriteria(criteria);
+            return Result.CreateError(criteria.ErrMsg);
         }
 
-        await WriteLogsCashAsync(result, siteDBGroupId);
-        return ResultFromCriteria(result);
+        var siteDbConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
+        var siteDbGroupId = siteDbConfig?.SiteDBGroupID ?? 0;
+        await WriteLogsCashAsync(result, siteDbGroupId);
+        return Result.CreateSuccess(criteria.ErrMsg);
     }
 }

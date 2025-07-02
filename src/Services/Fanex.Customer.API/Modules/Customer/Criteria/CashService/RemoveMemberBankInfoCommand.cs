@@ -5,39 +5,20 @@ using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.Customer.Criteria.CashService;
 
-public class RemoveMemberBankInfoCommand : NonQueryCommand
+public class RemoveMemberBankInfoCommand : BaseMemberBankInfoCommand
 {
-    public RemoveMemberBankInfoCommand(RemoveMemberBankInfoRequest request, int siteDBGroupId)
+    public RemoveMemberBankInfoCommand(RemoveMemberBankInfoRequest request, int siteDBGroupId) : base(
+        request.ActorId,
+        request.CustId,
+        request.IP,
+        request.Language,
+        request.SubAccID,
+        siteDBGroupId)
     {
-        ActorId = request.ActorId;
-        CustId = request.CustId;
-        BankAccountMemberID = request.BankAccountMemberID;
-        IP = request.IP;
-        Language = request.Language;
-        SubAccID = request.SubAccID;
-        SiteDBGroupId = siteDBGroupId;
+        MemberBankAccountId = request.MemberBankAccountId;
     }
 
-    [SpParam(SqlParamName = "userID")]
-    public int ActorId { get; }
-
-    public int CustId { get; }
-
-    public int BankAccountMemberID { get; }
-
-    public string IP { get; }
-
-    public string Language { get; }
-
-    public int SubAccID { get; }
-
-    public int ErrCode { get; set; }
-
-    public string ErrMsg { get; set; }
-
-
-    [SpParam(Ignored = true)]
-    public int SiteDBGroupId { get; }
+    public int MemberBankAccountId { get; }
 
     public override string GetSettingKey() => SPNameUtils.GetSPNameWithPrefix("Acc_CustomerDelBankAccount_CashMember", SiteDBGroupId);
 

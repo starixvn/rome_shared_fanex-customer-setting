@@ -6,7 +6,7 @@ public class RemoveMemberBankInfoRequest
 
     public int CustId { get; set; }
 
-    public int BankAccountMemberID { get; set; }
+    public int MemberBankAccountId { get; set; }
 
     public string IP { get; set; }
 
