@@ -82,7 +82,7 @@ export function EditCustomerPage() {
         generalInfo,
         group,
         productGroups,
-      } = params.serviceType == ServiceTypes.Cash
+      } = params.serviceType == ServiceTypes.Cash && params.roleId === UserLevel.Member
         ? await SettingService.GetCashCustomerSetting(
             params.custId,
             params.roleId,
