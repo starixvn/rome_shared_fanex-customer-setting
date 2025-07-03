@@ -132,6 +132,7 @@ export const EditCashMemberGeneralInformation = forwardRef<ValidationRefType, Ed
             }}
             setCollapse={setCollapse}
             collapse={collapse}
+            isReadOnly={isReadOnly}
           />
           {errorTooltip(locationTooltip, validationResults, t)}
         </div>
