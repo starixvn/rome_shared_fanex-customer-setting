@@ -4,6 +4,7 @@ using MinimalApi.Endpoint;
 namespace Fanex.Customer.API.Modules.Customer.Endpoints;
 
 public class CustomerBankInfoEndpoint :
+    IEndpoint<IResult, string, ICashCustomerService>,
     IEndpoint<IResult, int, int, ICashCustomerService>,
     IEndpoint<IResult, int, ICashCustomerService>,
     IEndpoint<IResult, AddMemberBankInfoRequest, ICashCustomerService>,
@@ -15,6 +16,9 @@ public class CustomerBankInfoEndpoint :
     {
         var enpoint = app.MapGroup("/api/customer/bank-info").WithTags(EndpointTags.CustomerInfos);
 
+        enpoint.MapGet("/banks", (string site, ICashCustomerService customerService)
+            => HandleAsync(site, customerService))
+            .Produces<IResult>();
 
         enpoint.MapGet("/agent/{agentId}/{transType}",(int agentId, int transType, ICashCustomerService customerService)
             => HandleAsync(agentId, transType, customerService))
@@ -40,6 +44,17 @@ public class CustomerBankInfoEndpoint :
             => HandleAsync(request, customerService))
             .Produces<IResult>();
 
+    }
+
+    public async Task<IResult> HandleAsync(string site, ICashCustomerService customerService)
+    {
+        if (string.IsNullOrWhiteSpace(site))
+        {
+            return Results.BadRequest();
+        }
+
+        var result = await customerService.GetBanks(site);
+        return Results.Ok(result);
     }
 
     public async Task<IResult> HandleAsync(int custId, ICashCustomerService customerService)

@@ -413,6 +413,7 @@
 		<Setting Key="Age_CashService_CustServiceTypeInitialize" SpName="Age_CashService_CustServiceTypeInitialize" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Age_CashServiceBilling_DailyFee_Ins" SpName="Age_CashServiceBilling_DailyFee_Ins" DbName="DBSIC.bodb02.wsv_CashService" Plain="0" />
 
+		<Setting Key="Age_CashService_BankList" SpName="Age_CashService_BankList" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Acc_CustomerSelBankAccount_CashMember" SpName="Acc_CustomerSelBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />		
 		<Setting Key="Age_CashAgentBankInfoSel" SpName="Age_CashAgentBankInfoSel" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Acc_CustomerInsBankAccount_CashMember" SpName="Acc_CustomerInsBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />	

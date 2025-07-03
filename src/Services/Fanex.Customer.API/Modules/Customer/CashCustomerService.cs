@@ -12,6 +12,8 @@ public interface ICashCustomerService
 {
     Task<Result> UpdateEnableCashService(UpdateCashServiceStatusRequest request);
 
+    Task<IEnumerable<BankInfo>> GetBanks(string site);
+
     Task<IEnumerable<BankInfo>> GetAgentBanks(int agentId, int transType);
 
     Task<IEnumerable<MemberBankInfo>> GetMemberBanks(int custId);
@@ -273,5 +275,12 @@ public class CashCustomerService : ICashCustomerService
         var siteDbGroupId = siteDbConfig?.SiteDBGroupID ?? 0;
         await WriteLogsCashAsync(result, siteDbGroupId);
         return Result.CreateSuccess(criteria.ErrMsg);
+    }
+
+    public async Task<IEnumerable<BankInfo>> GetBanks(string site)
+    {
+        var criteria = new GetBanksCriteria(site);
+        var result = await dynamicRepository.FetchAsync<BankInfo>(criteria);
+        return result;
     }
 }

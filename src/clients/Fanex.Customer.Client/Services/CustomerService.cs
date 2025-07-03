@@ -95,7 +95,15 @@ namespace Fanex.Customer.Client.Services
 
         Task<Result> UpdateCashServiceStatus(UpdateCashServiceStatusRequest request);
 
+        Task<string> GetBanks(string site);
+
         Task<string> GetCustomerBankInfo(int custId, int roleId);
+
+        Task<string> AddMemberBankInfo(AddMemberBankInfoParam request);
+
+        Task<string> UpdateMemberBankInfo(UpdateMemberBankInfoParam request);
+
+        Task<string> RemoveMemberBankInfo(RemoveMemberBankInfoParam request);
     }
 
     public class CustomerService : ICustomerService
@@ -360,6 +368,8 @@ namespace Fanex.Customer.Client.Services
         public Task<string> GetBetLimitInformation(string siteName, string siteLabel, string language = "en-US")
             => httpClient.GetStringAsync($"customer/bet-setting?siteName={siteName}&siteLabel={siteLabel}&language={language}");
 
+        public Task<string> GetBanks(string site)
+            => httpClient.GetStringAsync($"customer/bank-info/banks?site={site}");
 
         public Task<string> GetCustomerBankInfo(int custId, int roleId)
         {
@@ -367,15 +377,20 @@ namespace Fanex.Customer.Client.Services
                 case 1:
                     return httpClient.GetStringAsync($"customer/bank-info/member/{custId}");
                 case 2:
-                    return httpClient.GetStringAsync($"customer/bank-info/agent/{custId}");
+                    var transType = 1;
+                    return httpClient.GetStringAsync($"customer/bank-info/agent/{custId}/{transType}");
                 default:
                     return Task.FromResult("");
             }
         }
 
-        public Task<Result> AddMemberBankInfo(AddMemberBankInfoParam request)
-        {
-            return httpClient.PostAsJsonAsync<Result>("customer/bank-info/member/add", request);
-        }
+        public Task<string> AddMemberBankInfo(AddMemberBankInfoParam request)
+            => httpClient.PostAsStringAsync("customer/bank-info/member/add", request);
+
+        public Task<string> UpdateMemberBankInfo(UpdateMemberBankInfoParam request)
+            => httpClient.PostAsStringAsync("customer/bank-info/member/update", request);
+
+        public Task<string> RemoveMemberBankInfo(RemoveMemberBankInfoParam request)
+            => httpClient.PostAsStringAsync($"customer/bank-info/member/remove", request);
     }
 }
