@@ -6,7 +6,7 @@ namespace Fanex.Customer.Client.Params
         public int CustId { get; set; }
         public string IP { get; set; }
         public string Language { get; set; } = "en-US";
-        public int SubAccID { get; set; }
+        public int SubAccId { get; set; }
     }
     public class AddMemberBankInfoParam : BaseMemberBankInfoParam
     {

@@ -81,15 +81,11 @@ public class CustomerBankInfoEndpoint :
 
     public async Task<IResult> HandleAsync(AddMemberBankInfoRequest request, ICashCustomerService customerService)
     {
-        if (request.CustId <= 0)
+        if (request.CustId <= 0 || request.ActorId <= 0)
         {
             return Results.BadRequest();
         }
 
-        if (request.ActorId <= 0)
-        {
-            return Results.BadRequest();
-        }
 
         var result = await customerService.AddMemberBankInfo(request);
         return Results.Ok(result);
@@ -97,7 +93,7 @@ public class CustomerBankInfoEndpoint :
 
     public async Task<IResult> HandleAsync(UpdateMemberBankInfoRequest request, ICashCustomerService customerService)
     {
-        if (request.CustId <= 0)
+        if (request.CustId <= 0 || request.ActorId <= 0)
         {
             return Results.BadRequest();
         }
@@ -108,7 +104,7 @@ public class CustomerBankInfoEndpoint :
 
     public async Task<IResult> HandleAsync(RemoveMemberBankInfoRequest request, ICashCustomerService customerService)
     {
-        if (request.CustId <= 0)
+        if (request.CustId <= 0 || request.ActorId <= 0)
         {
             return Results.BadRequest();
         }
