@@ -137,14 +137,15 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
               </div>
             )}
 
+            {!isCompleteSetup && (
+              <a href="#" onClick={handleReferChecklist}>{t('ReferChecklist')}</a>
+            )}
+            
             <button className={styles.buttonSuccess} type="button" onClick={handleOk}>
               {t('okay')}
             </button>
           </div>
 
-          {!isCompleteSetup && (
-            <a href="#" onClick={handleReferChecklist}>{t('ReferChecklist')}</a>
-          )}
         </div>
         <WrapperTooltip content={t('copied') ?? ''} id={copied} type="default" isOpen={copied !== ''} />
       </div>
