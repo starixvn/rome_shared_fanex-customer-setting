@@ -59,11 +59,16 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
     {
         var isY7 = appSettings.IsSpecialSites(siteLabel);
         var IsAllowUncheckStakeLevelOnMemberSite = appSettings.IsAllowUncheckStakeLevelOnMember(site);
+
         if (roleId != CustomerLevel.Member && !isDirectMember.GetValueOrDefault() && !isY7)
+        {
             return true;
+        }
 
         if ((roleId == CustomerLevel.Member || isDirectMember.GetValueOrDefault()) && IsAllowUncheckStakeLevelOnMemberSite)
+        {
             return true;
+        }
 
         return false;
     }
@@ -179,37 +184,50 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
 
     private IEnumerable<GroupType> GetGroupTypesForSuper(IGrouping<int, SettingProfile> g, QuerySuperRequest request, bool isSiteLabel777)
     {
-        return g.GroupBy(t => new { t.GroupType, t.DisplayType }).ToAsyncEnumerable()
-        .SelectAwait(async t =>
-        {
-            var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType) ? helperService.GetGroupTypeByCustomerLevel(t.Key.GroupType, (int)CustomerLevel.Super) : t.Key.GroupType;
-            if (groupItemMapping.TryGetValue(groupTypeWithRoleId, out dynamic value))
+        return g.GroupBy(t => new { t.GroupType, t.DisplayType })
+            .ToAsyncEnumerable()
+            .SelectAwait(async t =>
             {
-                var groupItems = await value.QuerySuperForAddNew(request.Site, request.Currency, g.Key, t.Key.GroupType);
-                var groupType = new GroupType
+                var groupTypeWithRoleId = helperService.IsGroupTypeByLevel(t.Key.GroupType)
+                    ? helperService.GetGroupTypeByCustomerLevel(t.Key.GroupType, (int)CustomerLevel.Super)
+                    : t.Key.GroupType;
+
+                if (groupItemMapping.TryGetValue(groupTypeWithRoleId, out dynamic value))
                 {
-                    Id = t.Key.GroupType,
-                    IsAllowUncheckAll = isAllowUncheckAll,
-                    Name = Resources.Resources.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
-                    DisplayType = t.Key.DisplayType,
-                    GroupItems = GetGroupItems(
+                    var groupItems = await value.QuerySuperForAddNew(
+                        request.Site,
+                        request.Currency,
                         g.Key,
-                        t.Key.GroupType,
-                        t.Key.DisplayType,
-                        0,
-                        false,
-                        null,
-                        request.Language,
-                        groupItems,
-                        t,
-                        isSiteLabel777)
-                };
+                        t.Key.GroupType);
 
-                return groupType;
-            }
+                    var groupType = new GroupType
+                    {
+                        Id = t.Key.GroupType,
+                        IsAllowUncheckAll = isAllowUncheckAll,
+                        Name = Resources.Resources.ResourceManager.GetString(
+                            $"GroupType{t.Key.GroupType}",
+                            new System.Globalization.CultureInfo(request.Language)),
+                        DisplayType = t.Key.DisplayType,
+                        GroupItems = GetGroupItems(
+                            g.Key,
+                            t.Key.GroupType,
+                            t.Key.DisplayType,
+                            0,
+                            false,
+                            null,
+                            request.Language,
+                            groupItems,
+                            t,
+                            isSiteLabel777)
+                    };
 
-            return null;
-        }).ToEnumerable().ToList(); // Must use ToList to prevent call SP 2 times because of Any method in the next action.
+                    return groupType;
+                }
+
+                return null;
+            })
+            .ToEnumerable()
+            .ToList(); // Must use ToList to prevent call SP 2 times because of Any method in the next action.
     }
 
     private IEnumerable<GroupType> GetGroupTypes(
@@ -330,6 +348,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
         return request.UplineRoleId - request.RoleId > 1;
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
     private IEnumerable<GroupItemDefault> GetGroupItems(
         int groupId,
         int groupTypeId,

@@ -341,13 +341,16 @@ public class PositionTakingService : IPositionTakingService
         return liveTypePTs;
     }
 
+    private const decimal PositionTakingDivisor = 100;
+    private const string DummySportForRNGSlot = "9906";
+
     private List<PositionTakingByGroupModel> BetTypePT(
         ActivationGroupModel liveTypeInfo,
         IEnumerable<PositionTakingEntity> liveTypeGroup,
         Dictionary<int, string> betTypeNameDictionary,
         string languageCode)
     {
-        var dummySportForRNGSlot = "9906";
+
         var betTypeIds = liveTypeGroup.Select(custPT => custPT.BetType).Distinct().ToList();
         var betTypePTs = new List<PositionTakingByGroupModel>();
 
@@ -358,7 +361,7 @@ public class PositionTakingService : IPositionTakingService
                 betTypeNameDictionary.Add(
                     betTypeId,
                     betTypeId == Voidbridge ?
-                    remotingRefService.GetResourceDataByRefIdAndResourceId("DummySport", dummySportForRNGSlot, LanguageUtils.ToLanguage(languageCode), string.Empty) :
+                    remotingRefService.GetResourceDataByRefIdAndResourceId("DummySport", DummySportForRNGSlot, LanguageUtils.ToLanguage(languageCode), string.Empty) :
                     remotingRefService.GetBetTypeName(betTypeId.ToString(), LanguageUtils.ToLanguage(languageCode)));
             }
 
@@ -370,12 +373,12 @@ public class PositionTakingService : IPositionTakingService
                 ActivationGroups = []
             };
 
-            var betTypePT = liveTypeGroup.FirstOrDefault(custPT => custPT.BetType == betTypeId);
+            var betTypePT = liveTypeGroup.FirstOrDefault(pt => pt.BetType == betTypeId);
             betTypePTs.Add(new PositionTakingByGroupModel
             {
                 Id = betTypeId,
                 Name = betTypeNameDictionary[betTypeId],
-                Value = betTypePT.PositionTaking / 100
+                Value = betTypePT != null ? betTypePT.PositionTaking / PositionTakingDivisor : 0
             });
 
             liveTypeInfo.ActivationGroups.Add(betTypeInfo);

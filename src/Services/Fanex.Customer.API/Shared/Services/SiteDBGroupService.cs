@@ -37,7 +37,16 @@ public class SiteDBGroupService : ISiteDBGroupService
 
     public async Task<string> GetSiteDBName(string site)
     {
+        if (string.IsNullOrWhiteSpace(site))
+        {
+            return null;
+        }
+
         var dbGroups = await GetAll();
-        return dbGroups.FirstOrDefault(g => g.Site.Equals(site, StringComparison.OrdinalIgnoreCase)).LinkedServerName;
+        var group = dbGroups.FirstOrDefault(g =>
+            !string.IsNullOrWhiteSpace(g.Site) &&
+            g.Site.Equals(site, StringComparison.OrdinalIgnoreCase));
+
+        return group?.LinkedServerName;
     }
 }
