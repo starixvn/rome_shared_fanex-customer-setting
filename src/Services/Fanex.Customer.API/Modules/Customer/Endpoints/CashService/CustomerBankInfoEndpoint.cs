@@ -16,29 +16,29 @@ public class CustomerBankInfoEndpoint :
         var enpoint = app.MapGroup("/api/customer/bank-info").WithTags(EndpointTags.CustomerInfos);
 
 
-        enpoint.MapGet("/agent/{agentId}/{transType}",
-                (int agentId, int transType, ICashCustomerService customerService)
-                    => HandleAsync(agentId, transType, customerService))
+        enpoint.MapGet("/agent/{agentId}/{transType}",(int agentId, int transType, ICashCustomerService customerService)
+            => HandleAsync(agentId, transType, customerService))
             .Produces<IResult>();
 
 
         enpoint.MapGet("/member/{custId}", (int custId, ICashCustomerService customerService)
-                => HandleAsync(custId, customerService))
+            => HandleAsync(custId, customerService))
             .Produces<IResult>();
 
 
         enpoint.MapPost("/member/add", (AddMemberBankInfoRequest request, ICashCustomerService customerService)
-                => HandleAsync(request, customerService))
+            => HandleAsync(request, customerService))
             .Produces<IResult>();
 
 
         enpoint.MapPost("/member/update", (UpdateMemberBankInfoRequest request, ICashCustomerService customerService)
-                => HandleAsync(request, customerService))
+            => HandleAsync(request, customerService))
             .Produces<IResult>();
 
 
         enpoint.MapPost("/member/remove", (RemoveMemberBankInfoRequest request, ICashCustomerService customerService)
-                => HandleAsync(request, customerService));
+            => HandleAsync(request, customerService))
+            .Produces<IResult>();
 
     }
 
