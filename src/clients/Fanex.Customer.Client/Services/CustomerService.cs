@@ -94,6 +94,8 @@ namespace Fanex.Customer.Client.Services
         Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
 
         Task<Result> UpdateCashServiceStatus(UpdateCashServiceStatusRequest request);
+
+        Task<Result> GetCustomerBankInfo(int custId, int roleId);
     }
 
     public class CustomerService : ICustomerService
@@ -357,5 +359,26 @@ namespace Fanex.Customer.Client.Services
             
         public Task<string> GetBetLimitInformation(string siteName, string siteLabel, string language = "en-US")
             => httpClient.GetStringAsync($"customer/bet-setting?siteName={siteName}&siteLabel={siteLabel}&language={language}");
+
+
+        public Task<Result> GetCustomerBankInfo(int custId, int roleId)
+        {
+            switch(roleId){
+                case 1:
+                    return httpClient.GetAsJsonAsync<Result>($"customer/bank-info/member/{custId}");
+                case 2:
+                    return httpClient.GetAsJsonAsync<Result>($"customer/bank-info/agent/{custId}");
+                default:
+                    return Task.FromResult(new Result{
+                        Code = Result.ErrorCode,
+                        Message = "Invalid role id"
+                    });
+            }
+        }
+
+        public Task<Result> AddMemberBankInfo(AddMemberBankInfoParam request)
+        {
+            return httpClient.PostAsJsonAsync<Result>("customer/bank-info/member/add", request);
+        }
     }
 }
