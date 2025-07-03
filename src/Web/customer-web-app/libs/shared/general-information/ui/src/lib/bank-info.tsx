@@ -135,11 +135,15 @@ export function BankInfomation(props: BankSelectProps) {
   
   useEffect(() => {
     async function fetchBanks() {
-      const result = await SettingService.GetBanks();
-      result.map((bank: Bank) => {
-        bank.name = t(bank.code);
+      const result = await SettingService.GetBanks<{bankId: number, bankName: string, bankCode: string}[]>();
+      const banks = result.map((bank: {bankId: number, bankName: string, bankCode: string}) => {
+        return {
+          id: bank.bankId,
+          name: t(bank.bankCode),
+          code: bank.bankCode
+        }
       });
-      setBanks(result || []);
+      setBanks(banks || []);
     }
     fetchBanks();
   }, []);

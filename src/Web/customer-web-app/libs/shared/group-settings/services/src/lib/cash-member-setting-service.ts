@@ -46,8 +46,8 @@ export const CashMemberSettingService = {
     );
     return response.data;
   },
-   GetBanks: async () => {
-    const response = await axiosInstance.get(
+   GetBanks: async <T>(): Promise<T> => {
+    const response = await axiosInstance.get<T>(
       `Customer/GetBanks`
     );
     return response.data;
