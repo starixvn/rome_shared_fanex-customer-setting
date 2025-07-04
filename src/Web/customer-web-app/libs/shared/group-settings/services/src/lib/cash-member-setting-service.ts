@@ -9,6 +9,7 @@ export const CashMemberSettingService = {
   EnableCashService: async () => {
     const response = await axiosInstance.post(
       `Customer/EnableCashService`,
+      {},
       {
         headers: getHeadersForPostRequest(),
       }
