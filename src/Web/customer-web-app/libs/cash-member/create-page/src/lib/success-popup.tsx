@@ -64,7 +64,7 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
   }, []);
 
   const handleReferChecklist = () => {
-    window.top && window.top.indexManager.initCashServiceChecklist(true);
+    window.top && window.top.indexManager.showHideCashServiceChecklist(true);
   };
 
   return (
