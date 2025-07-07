@@ -8,29 +8,6 @@ public class BaseMemberBankInfoCommand : NonQueryCommand
     public BaseMemberBankInfoCommand(
         int actorId,
         int custId,
-        int memberBankId,
-        string memberBankAccountNumber,
-        string agentBankAccountNumber,
-        int agentBankId,
-        string ip,
-        string language,
-        int subAccID,
-        int siteDBGroupId)
-    {
-        ActorId = actorId;
-        CustId = custId;
-        MemberBankId = memberBankId;
-        MemberBankAccountNumber = memberBankAccountNumber;
-        AgentBankAccountNumber = agentBankAccountNumber;
-        AgentBankId = agentBankId;
-        IP = ip;
-        Language = language;
-        SubAccID = subAccID;
-        SiteDBGroupId = siteDBGroupId;
-    }
-    public BaseMemberBankInfoCommand(
-        int actorId,
-        int custId,
         string ip,
         string language,
         int subAccID,
@@ -48,14 +25,6 @@ public class BaseMemberBankInfoCommand : NonQueryCommand
     public int ActorId { get; }
 
     public int CustId { get; set; }
-
-    public int MemberBankId { get; }
-
-    public string MemberBankAccountNumber { get; }
-
-    public string AgentBankAccountNumber { get; }
-
-    public int AgentBankId { get; }
 
     public string IP { get; }
 

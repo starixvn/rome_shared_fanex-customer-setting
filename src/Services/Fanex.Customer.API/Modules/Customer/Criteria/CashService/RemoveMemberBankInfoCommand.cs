@@ -12,7 +12,6 @@ public class RemoveMemberBankInfoCommand(RemoveMemberBankInfoRequest request, in
     request.SubAccId,
     siteDBGroupId)
 {
-    [SpParam(SqlParamName = "BankAccountMemberID")]
     public int MemberBankAccountId { get; } = request.MemberBankAccountId;
 
     public override string GetSettingKey() => SPNameUtils.GetSPNameWithPrefix("Acc_CustomerDelBankAccount_CashMember", SiteDBGroupId);
