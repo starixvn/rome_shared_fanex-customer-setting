@@ -1,0 +1,24 @@
+:root, :root [data-theme='light'] {
+    --titleComponent-color: #97141e;
+    --titleComponent-border-color: #cecece;
+    --titleComponent-label-color: #444;
+    --icon-required-color: #FF0000;
+}
+:root [data-theme='dark'] {
+    --titleComponent-color: #ededed;
+    --titleComponent-border-color: #313334;
+    --titleComponent-label-color: #ededed;
+    --icon-required-color: #FF4F50;
+}
+
+.label-component {
+  display: block;
+  font-weight: 600;
+  color: var(--titleComponent-label-color);
+  text-transform: capitalize;
+}
+
+.required {
+  color: var(--icon-required-color);
+  margin-left: 4px;
+}

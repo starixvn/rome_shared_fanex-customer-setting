@@ -201,7 +201,7 @@
   "Copy": "複製",
   "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} 賬號創建失敗",
   "FailureReason": "失敗原因",
-  "BankInfo": "銀行信息",
+  "BankInformation": "銀行信息",
   "Bank": "銀行",
   "AccountNumber": "賬號",
   "ThisUserIsNotYourCashMember": "此用戶不是您的現金會員",
@@ -244,5 +244,10 @@
   "ToWinAmount": "贏取金額: ",
   "WinlossAmount": "輸贏: ",
   "PotentialWinLimitInfoTitle": "點擊查看（體育博彩）潛在贏額上限說明"
-  "ReferChecklist": "參考清單"
+  "ReferChecklist": "參考清單",
+  "MemberInfo": "會員信息",
+  "BankInfo": "銀行信息",
+  "FirstNameRequired": "名是必填的",
+  "LastNameRequired": "姓是必填的",
+  "MobileNumberRequired": "手機號碼是必填的"
 }

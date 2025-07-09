@@ -526,3 +526,26 @@ input[type='text'][disabled] {
     }
   }
 }
+
+.control-field{
+  background-color: var(--background-control);
+  border: 1px solid var(--border-control);
+  border-radius: 3px;
+  padding-inline: 8px;
+  height: 28px;
+  width: 100%; 
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  &[type="text"]{
+    cursor: text;
+  }
+  &.error{
+    border-color: var(--border-control-error);
+  }
+  &.disabled{
+    
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

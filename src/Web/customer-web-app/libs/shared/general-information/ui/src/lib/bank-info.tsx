@@ -151,7 +151,7 @@ export function BankInfomation(props: BankSelectProps) {
   return (
     <div className={styles['user-info']}>
       <div className={styles['subheader']}>
-        {t('BankInfo')}
+        {t('BankInformation')}
       </div>
       <div className={classNames(styles['row'])}>
         <BlockItem label={t('Bank')}>

@@ -1,0 +1,103 @@
+:root, :root [data-theme='light'] {
+    //button
+    --button-text: #ffffff;
+
+    --button-background: #0b599c;
+    --button-background-hover: #0a5494;
+
+    --button-outline-background: #ffffff;
+    --button-outline-text: #0a5494;
+    --button-outline-background-hover: #0a5494;
+    --button-outline-text-hover: #ffffff;
+    --button-outline-border: #0a5494;
+
+    --button-background-cancel: #696969;
+    --button-background-cancel-hover: #636363;  
+
+    --button-background-reject: #CC0000;
+    --button-background-reject-hover: #cc3d3d;
+
+    //back button
+    --button-back-background: #ffffff;
+    --button-back-background-hover: #0b599c;
+    --button-back-text: #0b599c;
+    --button-back-text-hover: #ffffff;
+    --button-back-border: #0b599c;
+    
+    //button switch-toggle
+    --button-switch-toggle-background: #D3DFEC;
+    --button-switch-toggle-background-active: #0b599c;
+    --button-switch-toggle-color: #333333;
+    --button-switch-toggle-color-active: #ffffff;
+
+    //button switch
+    --button-switch-background-active: #0b599c;
+    --button-switch-dot-background: #ffffff;
+    --button-switch-background: #c2c2c2;
+    
+    //tab
+    --tab-component-color: #333;
+    --tab-component-border-color: #516e8f;
+    
+
+    &.view-super{
+        --tab-component-color-active: #97141e;
+        --tab-component-border-color: #67151b;    
+    }
+    &.view-master{
+        --tab-component-color-active: #209656;
+        --tab-component-border-color: #276443;
+    }
+    &.view-agent{
+        --tab-component-color-active: #2267b6;
+        --tab-component-border-color: #516e8f;
+    }
+}
+:root [data-theme='dark'] {   
+    //button
+    --button-text: #ffffff;
+
+    --button-background: #36587D;
+    --button-background-hover: #335376;
+
+    --button-outline-background: #171717;
+    --button-outline-text: #459be5;
+    --button-outline-background-hover: #36587D;
+    --button-outline-text-hover: #ffffff;
+    --button-outline-border: #36587D;
+
+    --button-background-cancel: #696969;
+    --button-background-cancel-hover: #636363;
+
+    --button-background-reject: #9D2F34;
+    --button-background-reject-hover: #9D1016;
+
+    //back button
+    --button-back-background: #171717;
+    --button-back-background-hover: #36587D;
+    --button-back-text: #459be5;
+    --button-back-text-hover: #ffffff;
+    --button-back-border: #459be5;
+    --button-back-border-hover: #36587D;
+
+    //button switch
+    --button-switch-background-active: #36587D;
+    --button-switch-dot-background: #ededed;
+    --button-switch-background: #2b2b2b;
+
+    //button switch-toggle
+    --button-switch-toggle-background: #303740;
+    --button-switch-toggle-background-active: #36587D;
+    --button-switch-toggle-color: #ededed;
+    --button-switch-toggle-color-active: #ededed;
+    
+    
+     //tab
+   
+     --tab-component-color: #666666;
+     --tab-component-border-color: #516e8f;
+     &.view-super, &.view-master, &.view-agent{
+        --tab-component-color-active: #ededed;
+        --tab-component-border-color: #ededed;
+     }
+}

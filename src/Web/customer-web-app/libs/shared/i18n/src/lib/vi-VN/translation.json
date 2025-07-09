@@ -200,7 +200,7 @@
   "Copy": "Sao chép",
   "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} tài khoản tạo không thành công",
   "FailureReason": "Lý do thất bại",
-  "BankInfo": "Thông tin Ngân Hàng",
+  "BankInformation": "Thông tin Ngân Hàng",
   "Bank": "Ngân Hàng",
   "AccountNumber": "Số tài khoản",
   "ThisUserIsNotYourCashMember": "Người dùng này không phải là Member tiền mặt của bạn",
@@ -243,5 +243,10 @@
   "ToWinAmount": "Dự Kiến Thắng: ",
   "WinlossAmount": "Thắng thua: ",
   "PotentialWinLimitInfoTitle": "Nhấn để xem thông tin Giới Hạn Thắng Tối Đa (Sportsbook)",
-  "ReferChecklist": "Xem danh sách kiểm tra"
+  "ReferChecklist": "Xem danh sách kiểm tra",
+  "MemberInfo": "Thông tin thành viên",
+  "BankInfo": "Thông tin ngân hàng",
+  "FirstNameRequired": "Tên là bắt buộc",
+  "LastNameRequired": "Họ là bắt buộc",
+  "MobileNumberRequired": "Số điện thoại là bắt buộc"
 }

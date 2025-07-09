@@ -3,7 +3,7 @@ import { i18nInstance } from '@customer-web-app/shared-i18n';
 import { IconError } from '@customer-web-app/shared/base/common-icon';
 import * as Sentry from '@sentry/react';
 import { useEffect } from 'react';
-import { EditInfoCashMember } from '@customer-web-app/edit-info-cash-member-page';
+import { EditInfoCashMemberPage } from '@customer-web-app/edit-info-cash-member-page';
 
 export function App() {
   function getCookie(name: string) {
@@ -23,7 +23,7 @@ export function App() {
 
   return (
     <Sentry.ErrorBoundary fallback={IconError}>
-       <EditInfoCashMember />
+       <EditInfoCashMemberPage />
     </Sentry.ErrorBoundary>
   );
 }

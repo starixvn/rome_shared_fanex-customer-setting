@@ -102,3 +102,8 @@ export enum ServiceTypes {
   Credit = 0,
   Cash = 1,
 }
+
+export const PHONE_CODE_MAX_LENGTH = 3;
+export const PHONE_NUMBER_MAX_LENGTH = 40;
+export const NUMBER_REGEX = /[^0-9]/g;
+export const EMAIL_REGEX = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;

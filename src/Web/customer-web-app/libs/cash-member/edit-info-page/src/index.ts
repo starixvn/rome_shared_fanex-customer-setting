@@ -1,1 +1,1 @@
-export * from './lib/edit-info-cash-member';
+export * from './lib/edit-info-cash-member-page';

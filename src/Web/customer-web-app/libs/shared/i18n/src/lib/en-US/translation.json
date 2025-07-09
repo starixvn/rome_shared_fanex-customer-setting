@@ -202,7 +202,7 @@
   "Copy": "Copy",
   "NoOfAccountCreatedFailed": "{{noOfFailedAccounts}} accounts failed to be created.",
   "FailureReason": "Failure Reason",
-  "BankInfo": "Bank Information",
+  "BankInformation": "Bank Information",
   "Bank": "Bank",
   "AccountNumber": "Account Number",
   "ThisUserIsNotYourCashMember": "This user is not your cash member",
@@ -245,5 +245,10 @@
   "TISCO": "Tisco Bank",
   "TTB": "TMBThanachart Bank",
   "PotentialWinLimitInfoTitle": "Click to view Potential Win Limit (Sportsbook) Info",
-  "ReferChecklist": "Please refer to checklist to share the account details"
+  "ReferChecklist": "Please refer to checklist to share the account details",
+  "MemberInfo": "Member Info",
+  "BankInfo": "Bank Info",
+  "FirstNameRequired": "First name is required",
+  "LastNameRequired": "Last name is required",
+  "MobileNumberRequired": "Mobile Number is required"
 }
