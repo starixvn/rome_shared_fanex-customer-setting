@@ -12,6 +12,7 @@ import { SettingService } from '@customer-web-app/shared-group-settings-services
 declare global {
   interface Window {
     indexManager: any;
+    handleReferChecklist: () => void;
   }
 }
 
@@ -20,6 +21,8 @@ type Props = {
   numberOfAccounts: number;
   handleOk: () => void;
 } & CreateCustomerResult;
+
+
 
 export default function CreateCashMemberSuccessPopup(props: Props) {
   const { t } = useTranslation();
@@ -138,7 +141,10 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
             )}
 
             {!isCompleteSetup && (
-              <a href="#" onClick={handleReferChecklist}>{t('ReferChecklist')}</a>
+              <>
+                <div dangerouslySetInnerHTML={{ __html: t('ReferChecklist') }} />
+                <a href='#' onClick={handleReferChecklist}>{t('checklist')}</a>
+              </>
             )}
             
             <button className={styles.buttonSuccess} type="button" onClick={handleOk}>

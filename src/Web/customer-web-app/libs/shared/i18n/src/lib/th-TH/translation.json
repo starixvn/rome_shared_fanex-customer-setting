@@ -244,7 +244,8 @@
   "ToWinAmount": "จำนวนที่อาจชนะ: ",
   "WinlossAmount": "ยอดได้เสีย: ",
   "PotentialWinLimitInfoTitle": "คลิกเพื่อดูข้อมูลขีดจำกัดการชนะสูงสุด (กีฬา)"
-  "ReferChecklist": "อ้างอิงรายการตรวจสอบ",
+  "ReferChecklist": "โดเมน: อ้างอิง ",
+  "checklist": "รายการตรวจสอบ",
   "MemberInfo": "ข้อมูลสมาชิก",
   "BankInfo": "ข้อมูลธนาคาร",
   "FirstNameRequired": "ชื่อต้องระบุ",

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const axiosInstance = axios.create({
     headers: {
         __RequestVerificationToken: (document.getElementsByName('__RequestVerificationToken')[0] as HTMLInputElement).value,
@@ -25,21 +26,21 @@ const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> =
 }
 
 const GetCustomerBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-    const { data } = await axiosInstance.get<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/GetCustomerBankInfo`, {
+    const { data } = await axiosInstance.get<T>(`Customer/GetCustomerBankInfo`, {
         params
     });
     return data;
 }
 
 const GetBanks = async <T>(params?: Record<string, any>): Promise<T> => {
-    const { data } = await axiosInstance.get<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/GetBanks`, {
+    const { data } = await axiosInstance.get<T>(`Customer/GetBanks`, {
         params
     });
     return data;
 }
 
 const AddMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-    const { data } = await axiosInstance.post<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/AddMemberBankInfo`, params, {
+    const { data } = await axiosInstance.post<T>(`Customer/AddMemberBankInfo`, params, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -48,7 +49,7 @@ const AddMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> =>
 }
 
 const UpdateMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-    const { data } = await axiosInstance.post<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/UpdateMemberBankInfo`, params, {
+    const { data } = await axiosInstance.post<T>(`Customer/UpdateMemberBankInfo`, params, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -57,7 +58,7 @@ const UpdateMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T>
 }
 
 const RemoveMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-    const { data } = await axiosInstance.post<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/RemoveMemberBankInfo`, params, {
+    const { data } = await axiosInstance.post<T>(`Customer/RemoveMemberBankInfo`, params, {
         headers: {
             'Content-Type': 'application/json'
         }

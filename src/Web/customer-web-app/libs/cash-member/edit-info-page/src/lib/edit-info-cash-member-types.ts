@@ -19,7 +19,3 @@ export interface MemberBankAccountRecord {
     memberBankCode: string;
     memberBankID: number;
 }
-
-export {
-    updateInfoCustomerPageConfig
-};
