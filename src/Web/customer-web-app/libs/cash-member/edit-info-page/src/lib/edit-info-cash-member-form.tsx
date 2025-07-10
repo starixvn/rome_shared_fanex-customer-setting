@@ -1,6 +1,6 @@
 import { FormProvider, useForm, Controller } from 'react-hook-form';
 import styles from './edit-info-cash-member-page.module.scss';
-import { ButtonFull, ButtonOutline, Label } from '@customer-web-app/shared/base/components';
+import { ButtonFull, ButtonOutline, Label, useResultMessage } from '@customer-web-app/shared/base/components';
 import { useEffect, useState } from 'react';
 import { GetCustomerInfo, UpdateCustomerInfo } from './edit-info-cash-member-services';
 import { splitMobile } from '@customer-web-app/shared-helpers';
@@ -16,6 +16,7 @@ export const EditInfoCashMemberForm = () => {
         mode: 'onChange',
         criteriaMode: 'all',
     });
+    const { showResult, renderResultMessage } = useResultMessage();
     const { control, reset, formState: { errors } } = methods;
     useEffect(() => {
         const fetchCustomerInfo = async () => {
@@ -43,19 +44,25 @@ export const EditInfoCashMemberForm = () => {
         fetchCustomerInfo();
     }, [reset, updateInfoCustomerPageConfig.custId]);
     const onSubmit = async (data: any) => {
-        if(errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
+        if (errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
             return;
         }
         console.log(data);
-        const res = await UpdateCustomerInfo({
+        const res = await UpdateCustomerInfo<{ errorCode: string, errorMessage: string, isSuccess: boolean }>({
             custId: updateInfoCustomerPageConfig.custId,
             ...data,
             mobilePhone: `${data.mobileCode}-${data.mobileNumber}`
         });
+        if (res.isSuccess) {
+            showResult('success', t('UpdateSuccess'),10000);
+        } else {
+            showResult('error', res.errorMessage);
+        }
         console.log(res);
     }
     return (
         <div className={styles['edit-info-cash-member-form']}>
+            {renderResultMessage()}
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <div className={styles['form-group']}>
@@ -63,18 +70,18 @@ export const EditInfoCashMemberForm = () => {
                             <div className={styles['form-group-item']}>
                                 <Label required>First Name</Label>
                                 <Controller
-                                    rules={{ required: t('FirstNameRequired')}}
+                                    rules={{ required: t('FirstNameRequired') }}
                                     name="firstName"
-                                    render={({ field }) => <input {...field} className={classNames(styles['input'], errors.firstName && styles['input-error'])}/>}
+                                    render={({ field }) => <input {...field} className={classNames(styles['input'], errors.firstName && styles['input-error'])} />}
                                 />
                                 {errors.firstName && <div style={{ color: 'red', fontSize: '12px' }}>{errors.firstName.message as string}</div>}
                             </div>
                             <div className={styles['form-group-item']}>
                                 <Label required>Last Name</Label>
                                 <Controller
-                                    rules={{ required: t('LastNameRequired')}}
+                                    rules={{ required: t('LastNameRequired') }}
                                     name="lastName"
-                                    render={({ field }) => <input {...field} className={classNames(styles['input'], errors.lastName && styles['input-error'])}/>}
+                                    render={({ field }) => <input {...field} className={classNames(styles['input'], errors.lastName && styles['input-error'])} />}
                                 />
                                 {errors.lastName && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lastName.message as string}</div>}
                             </div>
@@ -87,7 +94,7 @@ export const EditInfoCashMemberForm = () => {
                                     <Controller
                                         name="mobileCode"
                                         control={control}
-                                        rules={{ required: t('MobileNumberRequired')}}
+                                        rules={{ required: t('MobileNumberRequired') }}
                                         render={({ field }) => (
                                             <input
                                                 {...field}
@@ -108,7 +115,7 @@ export const EditInfoCashMemberForm = () => {
                                     <Controller
                                         name="mobileNumber"
                                         control={control}
-                                        rules={{ required: t('MobileNumberRequired')}}
+                                        rules={{ required: t('MobileNumberRequired') }}
                                         render={({ field }) => (
                                             <input
                                                 {...field}
@@ -133,12 +140,12 @@ export const EditInfoCashMemberForm = () => {
                                 <Label>Phone</Label>
                                 <Controller
                                     name="phone"
-                                    render={({ field }) => <input {...field} 
-                                    onChange={(e) => {
-                                        e.preventDefault();
-                                        const value = e.target.value.replace(NUMBER_REGEX, '').slice(0, PHONE_NUMBER_MAX_LENGTH);
-                                        field.onChange(value);
-                                    }} />}
+                                    render={({ field }) => <input {...field}
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            const value = e.target.value.replace(NUMBER_REGEX, '').slice(0, PHONE_NUMBER_MAX_LENGTH);
+                                            field.onChange(value);
+                                        }} />}
                                 />
                             </div>
                         </div>

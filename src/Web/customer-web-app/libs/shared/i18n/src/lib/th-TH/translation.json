@@ -249,5 +249,7 @@
   "BankInfo": "ข้อมูลธนาคาร",
   "FirstNameRequired": "ชื่อต้องระบุ",
   "LastNameRequired": "นามสกุลต้องระบุ",
-  "MobileNumberRequired": "หมายเลขโทรศัพท์ต้องระบุ"
+  "MobileNumberRequired": "หมายเลขโทรศัพท์ต้องระบุ",
+  "UpdateSuccess": "อัพเดตสำเร็จ",
+  "UpdateFailed": "อัพเดตไม่สำเร็จ"
 }

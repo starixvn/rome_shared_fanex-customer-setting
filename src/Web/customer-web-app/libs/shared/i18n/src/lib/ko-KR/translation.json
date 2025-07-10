@@ -250,5 +250,7 @@
   "BankInfo": "은행 정보",
   "FirstNameRequired": "이름은 필수입니다",
   "LastNameRequired": "성은 필수입니다",
-  "MobileNumberRequired": "휴대폰 번호는 필수입니다"
+  "MobileNumberRequired": "휴대폰 번호는 필수입니다",
+  "UpdateSuccess": "업데이트 성공",
+  "UpdateFailed": "업데이트 실패"
 }

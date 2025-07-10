@@ -250,5 +250,7 @@
   "BankInfo": "Bank Info",
   "FirstNameRequired": "First name is required",
   "LastNameRequired": "Last name is required",
-  "MobileNumberRequired": "Mobile Number is required"
+  "MobileNumberRequired": "Mobile Number is required",
+  "UpdateSuccess": "Update successfully",
+  "UpdateFailed": "Update failed"
 }

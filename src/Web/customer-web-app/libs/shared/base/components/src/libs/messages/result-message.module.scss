@@ -1,0 +1,77 @@
+// CSS Custom Properties for theming
+:root {
+  // Light theme colors
+  --color-error-bg: #FFE8E8;
+  --color-error-border: #E2B6B6;
+  --color-error-icon: #CC0000;
+  
+  --color-warning-bg: #FFFFFA;
+  --color-warning-border: #C6A180;
+  --color-warning-icon: #A75000;
+  
+  --color-success-bg: #E2FFF2;
+  --color-success-border: #5CB774;
+  --color-success-icon: #268026;
+}
+
+:root[data-theme="dark"] {
+  // Dark theme colors
+  --color-error-bg: #501B1B;
+  --color-error-border: #FF8C8C;
+  --color-error-icon: #FF6D6D;
+  
+  --color-warning-bg: #312F26;
+  --color-warning-border: #78776D;
+  --color-warning-icon: #EB8526;
+  
+  --color-success-bg: #3A5031;
+  --color-success-border: #7ECC4D;
+  --color-success-icon: #7ECC4D;
+}
+
+// Base message styles
+.message {
+  position: relative;
+  font-weight: 500;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 8px 7px 8px 35px;
+  line-height: 18px;
+}
+
+// Base icon styles
+.icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 7px;
+  left: 10px;
+}
+
+// Message type variants
+.error {
+  background-color: var(--color-error-bg);
+  border-color: var(--color-error-border);
+
+  .icon {
+    fill: var(--color-error-icon);
+  }
+}
+
+.warning {
+  background-color: var(--color-warning-bg);
+  border-color: var(--color-warning-border);
+
+  .icon {
+    fill: var(--color-warning-icon);
+  }
+}
+
+.success {
+  background-color: var(--color-success-bg);
+  border-color: var(--color-success-border);
+
+  .icon {
+    fill: var(--color-success-icon);
+  }
+}

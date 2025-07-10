@@ -248,5 +248,7 @@
   "BankInfo": "Thông tin ngân hàng",
   "FirstNameRequired": "Tên là bắt buộc",
   "LastNameRequired": "Họ là bắt buộc",
-  "MobileNumberRequired": "Số điện thoại là bắt buộc"
+  "MobileNumberRequired": "Số điện thoại là bắt buộc",
+  "UpdateSuccess": "Cập nhật thành công",
+  "UpdateFailed": "Cập nhật thất bại"
 }
