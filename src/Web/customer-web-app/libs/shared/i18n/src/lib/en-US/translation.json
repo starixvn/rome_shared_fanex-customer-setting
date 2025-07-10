@@ -252,5 +252,19 @@
   "LastNameRequired": "Last name is required",
   "MobileNumberRequired": "Mobile Number is required",
   "UpdateSuccess": "Update successfully",
-  "UpdateFailed": "Update failed"
+  "UpdateFailed": "Update failed",
+  "MemberBankAccount": "Member's Bank Account",
+  "MemberBankAccountNumber": "Member's Bank Account Number",
+  "AgentBankAccount": "Agent's Bank Account",
+  "Action": "Action",
+  "AddBankAccount": "Add Bank Account",
+  "BankName": "Bank Name",
+  "BankNameRequired": "Bank name is required",
+  "AccountNumberRequired": "Account number is required",
+  "UpdatedSuccessfully": "Updated successfully",
+  "DeleteBankAccount": "Delete Bank Account",
+  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete {{bankNumber}}?",
+  "ThisActionIsPermanentAndCannotBeUndone": "This action is permanent and cannot be undone.",
+  "AgentBankAccountTooltip": "To match deposits made by members to your account, please select the bank account you wish to use to receive the deposits.",
+  "AgentBankAccountTooltip2": "You can change your preferred Deposit Matching Mode under  Bank Management."
 }

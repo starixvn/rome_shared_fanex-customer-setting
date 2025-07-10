@@ -2,6 +2,7 @@ import { ButtonTabActive, ButtonTabInactive, TabNav } from '@customer-web-app/sh
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { EditInfoCashMemberForm } from './edit-info-cash-member-form';
+import { EditBankInfoCashMember } from './edit-bank-info-cash-member';
 
 export function EditInfoCashMemberPage() {
     const { t } = useTranslation();
@@ -34,7 +35,7 @@ export function EditInfoCashMemberPage() {
                 <EditInfoCashMemberForm />
             )}
             {activeTab === 'bankInfo' && (
-                <div>Bank Info</div>
+                <EditBankInfoCashMember />
             )}
 
         </>

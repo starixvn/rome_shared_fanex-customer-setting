@@ -17,7 +17,6 @@ const GetCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
 const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
     const { data } = await axiosInstance.post<T>(`Customer/EditInfoPost`, params, {
         headers: {
-            //    ...getHeadersForPostRequest(),
             'Content-Type': 'application/json'
         }
     });
@@ -42,7 +41,6 @@ const GetBanks = async <T>(params?: Record<string, any>): Promise<T> => {
 const AddMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
     const { data } = await axiosInstance.post<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/AddMemberBankInfo`, params, {
         headers: {
-            //getHeadersForPostRequest(),
             'Content-Type': 'application/json'
         }
     });
@@ -52,7 +50,6 @@ const AddMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> =>
 const UpdateMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
     const { data } = await axiosInstance.post<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/UpdateMemberBankInfo`, params, {
         headers: {
-            //getHeadersForPostRequest(),
             'Content-Type': 'application/json'
         }
     });
@@ -62,7 +59,6 @@ const UpdateMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T>
 const RemoveMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
     const { data } = await axiosInstance.post<T>(`${updateInfoCustomerPageConfig.serverRootUrl}Customer/RemoveMemberBankInfo`, params, {
         headers: {
-            //getHeadersForPostRequest(),
             'Content-Type': 'application/json'
         }
     });

@@ -1,3 +1,18 @@
+:root {
+  --icon-tick-color: #444;
+  --icon-close2-color: #333333;
+  --icon-pen-color: #444;
+  --icon-info-link: #325275;
+}
+
+:root[data-theme="dark"] {
+  --icon-tick-color: #ededed;
+  --icon-close2-color: #ededed;
+  --icon-pen-color: #ededed;
+  --icon-info-link: #578fcc;
+}
+
+
 .icon {
   position: absolute;
   top: 6px;
@@ -53,4 +68,22 @@
   padding: 1px;
   margin-left: 3px;
   cursor: pointer;
+}
+
+.iconTick {
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-tick-color);
+}
+
+.iconClose2 {
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-close2-color);
+}
+
+.iconPen {
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-pen-color);
 }

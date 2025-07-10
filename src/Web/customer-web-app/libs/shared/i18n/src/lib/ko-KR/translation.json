@@ -252,5 +252,19 @@
   "LastNameRequired": "성은 필수입니다",
   "MobileNumberRequired": "휴대폰 번호는 필수입니다",
   "UpdateSuccess": "업데이트 성공",
-  "UpdateFailed": "업데이트 실패"
+  "UpdateFailed": "업데이트 실패",
+  "MemberBankAccount": "Member's Bank Account",
+  "MemberBankAccountNumber": "Member's Bank Account Number",
+  "AgentBankAccount": "Agent's Bank Account",
+  "Action": "Action",
+  "AddBankAccount": "Add Bank Account",
+  "BankName": "Bank Name",
+  "BankNameRequired": "Bank name is required",
+  "AccountNumberRequired": "Account number is required",
+  "UpdatedSuccessfully": "Updated successfully",
+  "DeleteBankAccount": "Delete Bank Account",
+  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete {{bankNumber}}?",
+  "ThisActionIsPermanentAndCannotBeUndone": "This action is permanent and cannot be undone.",
+  "AgentBankAccountTooltip": "To match deposits made by members to your account, please select the bank account you wish to use to receive the deposits.",
+  "AgentBankAccountTooltip2": "You can change your preferred Deposit Matching Mode under  Bank Management."
 }

@@ -1,0 +1,50 @@
+// =============================================================================
+// Button Icon Component Styles
+// =============================================================================
+
+// CSS Custom Properties (CSS Variables)
+// =============================================================================
+:root {
+  --button-icon-hover: rgba(0, 0, 0, 0.04);
+  --text-color-primary: #333;
+}
+
+:root[data-theme="dark"] {
+  --button-icon-hover: rgba(255, 255, 255, 0.08);
+  --text-color-primary: #ededed;
+}
+
+// =============================================================================
+// Button Icon Base Styles
+// =============================================================================
+.buttonIcon {
+  margin: 0 4px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: var(--text-color-primary);
+  border: none;
+  background: transparent;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: var(--button-icon-hover);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--text-color-primary);
+    outline-offset: 2px;
+  }
+  
+  // =============================================================================
+  // Disabled State
+  // =============================================================================
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+    
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

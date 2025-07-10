@@ -8,6 +8,18 @@ declare global {
         cdnUri: string;
     }
 }
+export interface MemberBankAccountRecord {   
+    agentBankAccountID: number;
+    agentBankAccountNumber: string;
+    agentBankAccountStatus: string;
+    agentBankCode: string;
+    agentBankID: number;
+    memberBankAccountID: number;
+    memberBankAccountNumber: string;
+    memberBankCode: string;
+    memberBankID: number;
+}
+
 export {
     updateInfoCustomerPageConfig
 };
