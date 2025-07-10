@@ -78,25 +78,22 @@ export function EditCustomerPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const {
-        generalInfo,
-        group,
-        productGroups,
-      } = params.serviceType == ServiceTypes.Cash && params.roleId === UserLevel.Member
-        ? await SettingService.GetCashCustomerSetting(
-            params.custId,
-            params.roleId,
-            params.uplineRoleId,
-            params.agentId,
-            true
-          )
-        : await SettingService.GetCustomerSetting(
-            params.custId,
-            params.roleId,
-            params.uplineRoleId,
-            params.agentId,
-            true
-          );
+      const { generalInfo, group, productGroups } =
+        params.serviceType == ServiceTypes.Cash && params.roleId === UserLevel.Member
+          ? await SettingService.GetCashCustomerSetting(
+              params.custId,
+              params.roleId,
+              params.uplineRoleId,
+              params.agentId,
+              true
+            )
+          : await SettingService.GetCustomerSetting(
+              params.custId,
+              params.roleId,
+              params.uplineRoleId,
+              params.agentId,
+              true
+            );
 
       const newProductGroups = handleInitProducts(productGroups, params.roleId === UserLevel.Member);
       setProductGroups(newProductGroups);
@@ -482,14 +479,11 @@ export function EditCustomerPage() {
 
   const renderGeneralInfo = () => {
     if (!AppConfigHelper.isEditBetSettingOnly()) {
-      return (params.serviceType === ServiceTypes.Cash && params.roleId == UserLevel.Member) ? (
+      return params.serviceType === ServiceTypes.Cash && params.roleId == UserLevel.Member ? (
         <EditCashMemberGeneralInformation
           ref={generalInfoRef}
           generalInfo={generalInfo}
-          isReadOnly={
-            params.productGroupId !== ProductGroupIds.SportsBook ||
-            isIndirectUpdate(params)
-          }
+          isReadOnly={params.productGroupId !== ProductGroupIds.SportsBook || isIndirectUpdate(params)}
           onGeneralInfoChange={handleGeneralInfoChange}
           onUpdate={handleUpdateGeneralInfo}
         />
