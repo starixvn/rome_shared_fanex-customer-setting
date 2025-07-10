@@ -27,4 +27,7 @@ public class PositionTakingEntity
     public decimal PositionTaking { get; set; }
 
     public int RowNumber { get; set; }
+
+    public int ServiceType { get; set; }
+    public bool IsCashMember => ServiceType == 1;
 }
