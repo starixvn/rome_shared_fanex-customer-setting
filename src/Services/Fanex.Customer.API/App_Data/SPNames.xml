@@ -19,8 +19,8 @@
 		<Setting Key="DBSite03_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBSite03.CustDB.wsv_nap" />
 		<Setting Key="DBSite03_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="SiteDB03.bodb02.wsv_alp" Plain="0" />
 		<Setting Key="DBTXN_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="DBTXN.bodb02.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_AccumWinLoss_162_Select" SpName="Acc_CustSetting_AccumWinLoss_162_Select" DbName="SiteDB03.bodb02.wsv_alp" />
-    <Setting Key="Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount" SpName="Acc_CustWinLimitBet_Reset" DbName="SiteDB03.bodb02.wsv_alp" />
+		<Setting Key="Acc_CustSetting_AccumWinLoss_162_Select" SpName="Acc_CustSetting_AccumWinLoss_162_Select" DbName="SiteDB03.bodb02.wsv_alp" />
+		<Setting Key="Acc_CustSetting_PotentialWinLimit_162_ResetWinLossAmount" SpName="Acc_CustWinLimitBet_Reset" DbName="SiteDB03.bodb02.wsv_alp" />
 	</Function>
 	<Function Name="Security Code">
 		<Setting Key="Age_UpdateMainAccountSecurityCodeCounter" SpName="Age_CustomerUpdSecurityCodeStatus" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
@@ -349,7 +349,7 @@
 			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
 			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
 		</Setting>
-		<Setting Key="Acc_CustSetting_GlobalStakeLevel_158_Select" SpName="Acc_CustSetting_GlobalStakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
+		<Setting Key="Acc_CustSetting_GlobalStakeLevel_158_Select" SpName="Acc_CustSetting_GlobalStakeLevel_158_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
 			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
 			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
 		</Setting>
@@ -362,14 +362,14 @@
 		</Setting>
 		<Setting Key="Acc_CustSetting_WinLossLimit_155_Upd" SpName="Acc_CustSetting_WinLossLimit_155_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CUSTDB.wsv_nap" TimeOut="600" />
-    		<Setting Key="Acc_CustSetting_WinLimit_161_Select" SpName="Acc_CustSetting_WinLimit_161_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+		<Setting Key="Acc_CustSetting_WinLimit_161_Select" SpName="Acc_CustSetting_WinLimit_161_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="Acc_CustSetting_WinLimit_161_Upd" SpName="Acc_CustSetting_WinLimit_161_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    <Setting Key="Acc_CustSetting_PotentialWinLimit_162_Select" SpName="Acc_CustSetting_PotentialWinLimit_162_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
-      <Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
-      <Mapping DataField="Bettype" ObjectProperty="BettypeId" />
-    </Setting>
-    <Setting Key="Acc_CustSetting_PotentialWinLimit_162_Upd" SpName="Acc_CustSetting_PotentialWinLimit_162_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-    
+		<Setting Key="Acc_CustSetting_PotentialWinLimit_162_Select" SpName="Acc_CustSetting_PotentialWinLimit_162_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+		</Setting>
+		<Setting Key="Acc_CustSetting_PotentialWinLimit_162_Upd" SpName="Acc_CustSetting_PotentialWinLimit_162_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+
 		<Setting Key="Acc_ServerDBConfigSel" SpName="Acc_ServerDBConfigSel" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
 		<Setting Key="Acc_ServerDBConfigSelByCust" SpName="Acc_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.wsv_nap" TimeOut="600" />
 	</Function>
@@ -400,8 +400,8 @@
 		<Setting Key="WriteLog_CashService_UserLog_RunSP" SpName="WriteLog_CashService_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.wsv_CashService" Plain="0" />
 		<Setting Key="DBSite3_WriteLog_CashService_UserLog_RunSP" SpName="WriteLog_CashService_UserLog_RunSP" DbName="DBCust3.bodb_CustomerLog.wsv_CashService" Plain="0" />
 		<Setting Key="WriteLog_CashService_UserLog_Transfer" SpName="WriteLog_CashService_UserLog_Transfer" DbName="DBLOG.bodb_CustomerLog.wsv_CashService" Plain="0" />
-		<Setting Key="DBSite3_WriteLog_CashService_UserLog_Transfer" SpName="WriteLog_CashService_UserLog_Transfer" DbName="DBCust3.bodb_CustomerLog.wsv_CashService" Plain="0" />
-		
+		<Setting Key="DBSite3_WriteLog_CashService_UserLog_Transfer" SpName="WriteLog_CashService_UserLog_Transfer" DbName="DBSITE03.bodb_CustomerLog.asv_CashService" Plain="0" />
+
 		<Setting Key="Age_CashService_CustServiceTypeInitialize" SpName="Age_CashService_CustServiceTypeInitialize" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Age_CashServiceBilling_DailyFee_Ins" SpName="Age_CashServiceBilling_DailyFee_Ins" DbName="DBSIC.bodb02.wsv_CashService" Plain="0" />
 	</Function>
