@@ -5,7 +5,16 @@ import { useEffect, useState } from 'react';
 import { GetCustomerInfo, UpdateCustomerInfo } from './edit-info-cash-member-services';
 import { splitMobile } from '@customer-web-app/shared-helpers';
 import { useTranslation } from 'react-i18next';
-import { PHONE_CODE_MAX_LENGTH, NUMBER_REGEX, PHONE_NUMBER_MAX_LENGTH, EMAIL_REGEX } from '@customer-web-app/shared-constants';
+import {
+    PHONE_CODE_MAX_LENGTH,
+    NUMBER_REGEX,
+    PHONE_NUMBER_MAX_LENGTH,
+    EMAIL_REGEX,
+    EMAIL_MAX_LENGTH,
+    LAST_NAME_MAX_LENGTH,
+    FIRST_NAME_MAX_LENGTH,
+    REMARK_MAX_LENGTH
+} from '@customer-web-app/shared-constants';
 import classNames from 'classnames';
 
 export const EditInfoCashMemberForm = () => {
@@ -34,7 +43,6 @@ export const EditInfoCashMemberForm = () => {
             }>({
                 custId: updateInfoCustomerPageConfig.custId
             });
-            console.log(data);
             const mobile = splitMobile(data.mobilePhone);
             data.mobileCode = mobile.countryCode;
             data.mobileNumber = mobile.mobile;
@@ -47,18 +55,16 @@ export const EditInfoCashMemberForm = () => {
         if (errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
             return;
         }
-        console.log(data);
         const res = await UpdateCustomerInfo<{ errorCode: string, errorMessage: string, isSuccess: boolean }>({
             custId: updateInfoCustomerPageConfig.custId,
             ...data,
             mobilePhone: `${data.mobileCode}-${data.mobileNumber}`
         });
         if (res.isSuccess) {
-            showResult('success', t('UpdateSuccess'),10000);
+            showResult('success', t('UpdateSuccess'), 1200);
         } else {
             showResult('error', res.errorMessage);
         }
-        console.log(res);
     }
     return (
         <div className={styles['edit-info-cash-member-form']}>
@@ -72,7 +78,16 @@ export const EditInfoCashMemberForm = () => {
                                 <Controller
                                     rules={{ required: t('FirstNameRequired') }}
                                     name="firstName"
-                                    render={({ field }) => <input {...field} className={classNames(styles['input'], errors.firstName && styles['input-error'])} />}
+                                    render={({ field }) =>
+                                        <input
+                                            {...field}
+                                            maxLength={FIRST_NAME_MAX_LENGTH}
+                                            className={classNames(styles['input'], errors.firstName && styles['input-error'])}
+                                            onBlur={(e) => {
+                                                const trimmedValue = e.target.value.trim();
+                                                field.onChange(trimmedValue);
+                                            }}
+                                        />}
                                 />
                                 {errors.firstName && <div style={{ color: 'red', fontSize: '12px' }}>{errors.firstName.message as string}</div>}
                             </div>
@@ -81,7 +96,16 @@ export const EditInfoCashMemberForm = () => {
                                 <Controller
                                     rules={{ required: t('LastNameRequired') }}
                                     name="lastName"
-                                    render={({ field }) => <input {...field} className={classNames(styles['input'], errors.lastName && styles['input-error'])} />}
+                                    render={({ field }) =>
+                                        <input
+                                            {...field}
+                                            maxLength={LAST_NAME_MAX_LENGTH}
+                                            className={classNames(styles['input'], errors.lastName && styles['input-error'])}
+                                            onBlur={(e) => {
+                                                const trimmedValue = e.target.value.trim();
+                                                field.onChange(trimmedValue);
+                                            }}
+                                        />}
                                 />
                                 {errors.lastName && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lastName.message as string}</div>}
                             </div>
@@ -140,12 +164,14 @@ export const EditInfoCashMemberForm = () => {
                                 <Label>Phone</Label>
                                 <Controller
                                     name="phone"
-                                    render={({ field }) => <input {...field}
-                                        onChange={(e) => {
-                                            e.preventDefault();
-                                            const value = e.target.value.replace(NUMBER_REGEX, '').slice(0, PHONE_NUMBER_MAX_LENGTH);
-                                            field.onChange(value);
-                                        }} />}
+                                    render={({ field }) =>
+                                        <input {...field}
+                                            onChange={(e) => {
+                                                e.preventDefault();
+                                                const value = e.target.value.replace(NUMBER_REGEX, '').slice(0, PHONE_NUMBER_MAX_LENGTH);
+                                                field.onChange(value);
+                                            }}
+                                        />}
                                 />
                             </div>
                         </div>
@@ -160,14 +186,30 @@ export const EditInfoCashMemberForm = () => {
                                             message: t('EmailNotValid')
                                         }
                                     }}
-                                    render={({ field }) => <input {...field} />}
+                                    render={({ field }) =>
+                                        <input
+                                            maxLength={EMAIL_MAX_LENGTH}
+                                            {...field}
+                                            onBlur={(e) => {
+                                                const trimmedValue = e.target.value.trim();
+                                                field.onChange(trimmedValue);
+                                            }}
+                                        />}
                                 />
+                                {errors.email && <div style={{ color: 'red', fontSize: '12px' }}>{errors.email.message as string}</div>}
                             </div>
                             <div className={styles['form-group-item']}>
                                 <Label>Fax</Label>
                                 <Controller
                                     name="fax"
-                                    render={({ field }) => <input {...field} />}
+                                    render={({ field }) =>
+                                        <input
+                                            {...field}
+                                            onBlur={(e) => {
+                                                const trimmedValue = e.target.value.trim();
+                                                field.onChange(trimmedValue);
+                                            }}
+                                        />}
                                 />
                             </div>
                         </div>
@@ -175,7 +217,16 @@ export const EditInfoCashMemberForm = () => {
                             <Label>Remark</Label>
                             <Controller
                                 name="remark"
-                                render={({ field }) => <textarea {...field} style={{ height: '100px' }} />}
+                                render={({ field }) =>
+                                    <textarea
+                                        {...field}
+                                        maxLength={REMARK_MAX_LENGTH}
+                                        style={{ height: '100px' }}
+                                        onBlur={(e) => {
+                                            const trimmedValue = e.target.value.trim();
+                                            field.onChange(trimmedValue);
+                                        }}
+                                    />}
                             />
                         </div>
                         <div className={styles['form-group-row']}>

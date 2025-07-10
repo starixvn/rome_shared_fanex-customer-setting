@@ -5,6 +5,7 @@ import { EditInfoCashMemberForm } from './edit-info-cash-member-form';
 import { EditBankInfoCashMember } from './edit-bank-info-cash-member';
 
 export function EditInfoCashMemberPage() {
+    const isShowOnlyTabUpdateInfo = true;
     const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState('memberInfo');
     const tabButton = (tab: string) => {
@@ -26,9 +27,11 @@ export function EditInfoCashMemberPage() {
 
     return (
         <>
-            <TabNav>
-                {tabButton(activeTab)}
-            </TabNav>
+            {!isShowOnlyTabUpdateInfo && (
+                <TabNav>
+                    {tabButton(activeTab)}
+                </TabNav>
+            )}
 
 
             {activeTab === 'memberInfo' && (

@@ -199,6 +199,7 @@ export const EditBankInfoCashMember = () => {
 
     const loadAgentBankOptions = useCallback(async () => {
         const agentBanks = await GetCustomerBankInfo<Bank[]>({
+            custId: updateInfoCustomerPageConfig.agentId,
             roleId: 2
         });
         setAgentBanks(agentBanks);
