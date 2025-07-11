@@ -140,11 +140,12 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
               </div>
             )}
 
-            {!isCompleteSetup && (
-              <>
-                <div dangerouslySetInnerHTML={{ __html: t('ReferChecklist') }} />
-                <a href='#' onClick={handleReferChecklist}>{t('checklist')}</a>
-              </>
+            {!isCompleteSetup && (            
+              <div className={styles['refer-checklist']}>
+                <span className="icon ic-info"></span>
+                <span dangerouslySetInnerHTML={{ __html: t('ReferChecklist') }} />
+                <button type="button" onClick={handleReferChecklist} className={styles['checklist-link']}>{t('checklist')}</button>
+              </div>
             )}
             
             <button className={styles.buttonSuccess} type="button" onClick={handleOk}>
