@@ -463,7 +463,7 @@
 		<Setting Key="ViewPT_GetSportsbookPT_Super" SpName="Age_CustomerSelPositionTakingByProductID_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="ViewPT_GetSportsbookPT_Master" SpName="Age_CustomerSelPositionTakingByProductID_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="ViewPT_GetSportsbookPT_Agent" SpName="Age_CustomerSelPositionTakingByProductID_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-	</Function>
+	</Function> 
 	<Function Name="Update User Search">
 		<Setting Key="Acc_CustomerUpdUserSearch" SpName="Acc_CustomerUpdUserSearch" DbName="DBCust.CustDB.wsv_alp" />
 	</Function>
