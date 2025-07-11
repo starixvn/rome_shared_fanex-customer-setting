@@ -7,7 +7,7 @@ import { EditBankInfoCashMember } from './edit-bank-info-cash-member';
 export function EditInfoCashMemberPage() {
     const isShowOnlyTabUpdateInfo = true;
     const { t } = useTranslation();
-    const [activeTab, setActiveTab] = useState('memberInfo');
+    const [activeTab, setActiveTab] = useState('bankInfo');
     const tabButton = (tab: string) => {
         const tabList: React.ReactNode[] = [];
         if (tab === 'memberInfo') {

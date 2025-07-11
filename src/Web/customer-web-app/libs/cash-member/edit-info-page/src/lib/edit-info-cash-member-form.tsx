@@ -74,7 +74,7 @@ export const EditInfoCashMemberForm = () => {
                     <div className={styles['form-group']}>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
-                                <Label required>First Name</Label>
+                                <Label required>{t('FirstName')}</Label>
                                 <Controller
                                     rules={{ required: t('FirstNameRequired') }}
                                     name="firstName"
@@ -92,7 +92,7 @@ export const EditInfoCashMemberForm = () => {
                                 {errors.firstName && <div style={{ color: 'red', fontSize: '12px' }}>{errors.firstName.message as string}</div>}
                             </div>
                             <div className={styles['form-group-item']}>
-                                <Label required>Last Name</Label>
+                                <Label required>{t('LastName')}</Label>
                                 <Controller
                                     rules={{ required: t('LastNameRequired') }}
                                     name="lastName"
@@ -112,7 +112,7 @@ export const EditInfoCashMemberForm = () => {
                         </div>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
-                                <Label required>Mobile</Label>
+                                <Label required>{t('Mobile')}</Label>
                                 <div className={classNames("control-field", styles['control-field-mobile'], (errors.mobileCode || errors.mobileNumber) && styles['input-error'])}>
                                     <span className="text-gray-500">+</span>
                                     <Controller
@@ -161,7 +161,7 @@ export const EditInfoCashMemberForm = () => {
                                 </div>}
                             </div>
                             <div className={styles['form-group-item']}>
-                                <Label>Phone</Label>
+                                <Label>{t('Phone')}</Label>
                                 <Controller
                                     name="phone"
                                     render={({ field }) =>
@@ -177,7 +177,7 @@ export const EditInfoCashMemberForm = () => {
                         </div>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
-                                <Label>Email</Label>
+                                <Label>{t('Email')}</Label>
                                 <Controller
                                     name="email"
                                     rules={{
@@ -199,7 +199,7 @@ export const EditInfoCashMemberForm = () => {
                                 {errors.email && <div style={{ color: 'red', fontSize: '12px' }}>{errors.email.message as string}</div>}
                             </div>
                             <div className={styles['form-group-item']}>
-                                <Label>Fax</Label>
+                                <Label>{t('Fax')}</Label>
                                 <Controller
                                     name="fax"
                                     render={({ field }) =>
@@ -214,7 +214,7 @@ export const EditInfoCashMemberForm = () => {
                             </div>
                         </div>
                         <div className={styles['form-group-item']}>
-                            <Label>Remark</Label>
+                            <Label>{t('Remark')}</Label>
                             <Controller
                                 name="remark"
                                 render={({ field }) =>
@@ -230,8 +230,8 @@ export const EditInfoCashMemberForm = () => {
                             />
                         </div>
                         <div className={styles['form-group-row']}>
-                            <ButtonFull text="Save" onClick={methods.handleSubmit(onSubmit)} />
-                            <ButtonOutline text="Reset" onClick={() => {
+                            <ButtonFull text={t('Save')} onClick={methods.handleSubmit(onSubmit)} />
+                            <ButtonOutline text={t('Reset')} onClick={() => {
                                 reset(originalCustomerInfo);
                             }} />
                         </div>

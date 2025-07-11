@@ -1,9 +1,4 @@
 import { useState, useEffect, useMemo, useCallback, memo } from "react";
-// import {
-//     ButtonFullComponent,
-//     ButtonPenComponent,
-//     ButtonDeleteComponent,
-// } from "../../../../components/Buttons";
 import { MemberBankAccountRecord } from "./edit-info-cash-member-types";
 
 import { useTranslation } from "react-i18next";
@@ -12,15 +7,6 @@ import { IconTick, IconClose2, IconPen, NoDataIcon } from "@customer-web-app/sha
 import { ButtonIcon, ButtonFull } from "@customer-web-app/shared/base/components";
 import { useResultMessage } from "@customer-web-app/shared/base/components";
 import { GetCustomerBankInfo, RemoveMemberBankInfo, UpdateMemberBankInfo } from './edit-info-cash-member-services'
-import styles from './edit-info-cash-member-page.module.scss';
-// import NoRecordFound from "../../../../components/NoRecordFoundComponent";
-// import { MemberBankAccountRecord } from "../../types/UpdateCustomerType";
-// import { AddBankModal } from "./AddBankModal";
-// import { GetCustomerBankInfo, RemoveMemberBankInfo, UpdateMemberBankInfo } from "../../services/CustomerInfoServices";
-// import { IconClose, IconInfo, IconTick } from "../../../../components/Icons";
-// import { useResultMessage } from "../../../../hooks/useResultMessage";
-// import ConfirmPopup from "../../../../components/ConfirmPopup";
-// import Tippy from "@tippyjs/react";
 
 interface Bank {
     bankId: number;
@@ -402,29 +388,6 @@ export const EditBankInfoCashMember = () => {
                     </tr>
                 </tbody>
             </TableSkeleton>
-            {/* {showAddBankAccountPopup && (
-                <AddBankModal
-                    closeModal={handleCloseModal}
-                    onAddSuccess={handleAddBankSuccess}
-                />
-            )}
-            {showDeleteConfirm && (
-                <ConfirmPopup
-                    title={t('updateInfoCashMember.deleteBankAccount')}
-                    message={
-                        <>
-                            <div className="text-center">
-                                {t('updateInfoCashMember.areYouSureYouWantToDeleteThisBankAccount', { bankNumber: bankAccounts.find(account => account.memberBankAccountID === deleteAccountId)?.memberBankAccountNumber })}
-                            </div>
-                            <div className="text-center text-[12px]">
-                                *{t('updateInfoCashMember.thisActionIsPermanentAndCannotBeUndone')}
-                            </div>
-                        </>
-                    }
-                    onCancel={handleCancelDelete}
-                    onConfirm={handleConfirmDelete}
-                />
-            )} */}
         </>
     );
 };

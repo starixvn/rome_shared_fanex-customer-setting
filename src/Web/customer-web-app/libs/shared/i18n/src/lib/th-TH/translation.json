@@ -267,5 +267,8 @@
   "ThisActionIsPermanentAndCannotBeUndone": "This action is permanent and cannot be undone.",
   "AgentBankAccountTooltip": "To match deposits made by members to your account, please select the bank account you wish to use to receive the deposits.",
   "AgentBankAccountTooltip2": "You can change your preferred Deposit Matching Mode under  Bank Management.",
-  "EmailNotValid": "อีเมลไม่ถูกต้อง!"
+  "EmailNotValid": "อีเมลไม่ถูกต้อง!",
+  "Remark": "หมายเหตุ",
+  "Save": "บันทึก",
+  "Reset": "รีเซ็ต"
 }
