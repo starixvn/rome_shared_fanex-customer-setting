@@ -21,7 +21,6 @@ const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> =
             'Content-Type': 'application/json'
         }
     });
-    console.log('data', data);
     return data;
 }
 

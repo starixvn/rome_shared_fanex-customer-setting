@@ -19,11 +19,12 @@ interface BankSelectProps {
   readonly onChangeBankId: (bankId: number) => void;
   readonly onChangeBankAccountNumber: (bankAccountNumber: string) => void;
   readonly isBankAccountNumberError: boolean;
+  readonly isBankIdError: boolean;
   readonly onFocusBankAccountNumber: () => void;
   readonly onBlurBankAccountNumber: () => void;
 }
 
-const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId: (bankId: number) => void }) => {
+const BankDropdown = ({ banks, onChangeBankId, isBankIdError }: { banks: Bank[], onChangeBankId: (bankId: number) => void, isBankIdError: boolean }) => {
   const { t } = useTranslation();
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +68,7 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
 
   return (
     <div className={stylesDropdown['bank-dropdown']} ref={wrapperRef}>
-      <div className={stylesDropdown['bank-dropdown__selected']} onClick={() => setIsOpen(!isOpen)}>
+      <div className={classNames(stylesDropdown['bank-dropdown__selected'], { [stylesDropdown['bank-dropdown__selected--error']]: isBankIdError })} onClick={() => setIsOpen(!isOpen)}>
         {selectedBank?.code &&
           <img
             alt={selectedBank.name}
@@ -129,6 +130,7 @@ export function BankInfomation(props: BankSelectProps) {
     onChangeBankId,
     onChangeBankAccountNumber,
     isBankAccountNumberError,
+    isBankIdError,
     onFocusBankAccountNumber,
     onBlurBankAccountNumber
   } = props;
@@ -155,7 +157,7 @@ export function BankInfomation(props: BankSelectProps) {
       </div>
       <div className={classNames(styles['row'])}>
         <BlockItem label={t('Bank')}>
-          <BankDropdown banks={banks} onChangeBankId={onChangeBankId} />
+          <BankDropdown banks={banks} onChangeBankId={onChangeBankId} isBankIdError={isBankIdError} />
         </BlockItem>
         <BlockItem label={t('AccountNumber')}>
           <input

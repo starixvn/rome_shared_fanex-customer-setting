@@ -14,7 +14,7 @@ export type validateMaxCredit =
 export type validatePassword = 'password';
 export type validateUsername = 'userName' | 'newUserName';
 export type validateUserInfo = 'firstName' | 'lastName' | 'mobilePhone' | 'fax';
-export type validateBank = 'bankAccountNumber';
+export type validateBank = 'bankAccountNumber' | 'bankId';
 
 export type generalInformationValidatorFields = validateMaxCredit | validatePassword | validateUsername | validateUserInfo | validateBank;
 
@@ -102,6 +102,8 @@ export default class GeneralInformationValidator {
         return this.validateMobilePhone();
       case 'bankAccountNumber':
         return this.validateBankAccountNumber();
+      case 'bankId':
+        return this.validateBankId();
       default:
         return true;
     }
@@ -144,6 +146,16 @@ export default class GeneralInformationValidator {
 
     return true;
    
+  }
+
+  public async validateBankId(): Promise<ValidationResult | boolean> {
+    this.resetValidationState();
+
+    if (this.generalInfo.bank?.accountNumber && !this.generalInfo.bank?.bankId) {
+      return (this.validationState = new ValidationResult('bankId', 'PleaseSelectBank'));
+    }
+
+    return true;
   }
 
   public async validateUsername() {
