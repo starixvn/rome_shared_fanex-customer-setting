@@ -201,7 +201,9 @@
     cursor: auto;
     position: relative;
     top: -1px;
-     
+    &:before{
+      color: var(--icon-cash-service);
+    }
   }
 }
 .checklist-link {
