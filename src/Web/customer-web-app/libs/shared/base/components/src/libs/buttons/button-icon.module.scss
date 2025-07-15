@@ -18,7 +18,6 @@
 // Button Icon Base Styles
 // =============================================================================
 .buttonIcon {
-  margin: 0 4px;
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
@@ -31,10 +30,6 @@
     background-color: var(--button-icon-hover);
   }
   
-  &:focus {
-    outline: 2px solid var(--text-color-primary);
-    outline-offset: 2px;
-  }
   
   // =============================================================================
   // Disabled State

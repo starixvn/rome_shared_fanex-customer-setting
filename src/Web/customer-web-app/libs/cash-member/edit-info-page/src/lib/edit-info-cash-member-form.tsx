@@ -1,6 +1,6 @@
 import { FormProvider, useForm, Controller } from 'react-hook-form';
 import styles from './edit-info-cash-member-page.module.scss';
-import { ButtonFull, ButtonOutline, Label, useResultMessage } from '@customer-web-app/shared/base/components';
+import { ButtonFull, ButtonOutline, Label, useResultMessage, useSystems } from '@customer-web-app/shared/base/components';
 import { useEffect, useState } from 'react';
 import { GetCustomerInfo, UpdateCustomerInfo } from './edit-info-cash-member-services';
 import { splitMobile } from '@customer-web-app/shared-helpers';
@@ -19,6 +19,7 @@ import classNames from 'classnames';
 
 export const EditInfoCashMemberForm = () => {
     const { t } = useTranslation();
+    const { isAlpha } = useSystems(updateInfoCustomerPageConfig.systemId);
     const [originalCustomerInfo, setOriginalCustomerInfo] = useState<any>(null);
     const methods = useForm<any>({
         defaultValues: {},
@@ -55,26 +56,26 @@ export const EditInfoCashMemberForm = () => {
         if (errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
             return;
         }
-        const res = await UpdateCustomerInfo<{ errorCode: string, errorMessage: string, isSuccess: boolean }>({
+        const res = await UpdateCustomerInfo<{ errorCode: string, errorMessage: string, isSuccess: boolean, isSuccessful: boolean }>({
             custId: updateInfoCustomerPageConfig.custId,
             ...data,
             mobilePhone: `${data.mobileCode}-${data.mobileNumber}`
         });
-        if (res.isSuccess) {
-            showResult('success', t('UpdateSuccess'), 1200);
+        if (res.isSuccess || res.isSuccessful) {
+            showResult('success', t('UpdateSuccess'), 12000);
         } else {
             showResult('error', res.errorMessage);
         }
     }
     return (
-        <div className={styles['edit-info-cash-member-form']}>
+        <div className={classNames(styles['edit-info-cash-member-form'], isAlpha ? styles['w-50'] : styles['w-100'])}>
             {renderResultMessage()}
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <div className={styles['form-group']}>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
-                                <Label required>{t('FirstName')}</Label>
+                                <Label required>{t('firstName')}</Label>
                                 <Controller
                                     rules={{ required: t('FirstNameRequired') }}
                                     name="firstName"
@@ -89,10 +90,10 @@ export const EditInfoCashMemberForm = () => {
                                             }}
                                         />}
                                 />
-                                {errors.firstName && <div style={{ color: 'red', fontSize: '12px' }}>{errors.firstName.message as string}</div>}
+                                {errors.firstName && <div style={{ color: 'red', fontSize: '13px' }}>{errors.firstName.message as string}</div>}
                             </div>
                             <div className={styles['form-group-item']}>
-                                <Label required>{t('LastName')}</Label>
+                                <Label required>{t('lastName')}</Label>
                                 <Controller
                                     rules={{ required: t('LastNameRequired') }}
                                     name="lastName"
@@ -107,7 +108,7 @@ export const EditInfoCashMemberForm = () => {
                                             }}
                                         />}
                                 />
-                                {errors.lastName && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lastName.message as string}</div>}
+                                {errors.lastName && <div style={{ color: 'red', fontSize: '13px' }}>{errors.lastName.message as string}</div>}
                             </div>
                         </div>
                         <div className={styles['form-group-row']}>
@@ -156,7 +157,7 @@ export const EditInfoCashMemberForm = () => {
                                         )}
                                     />
                                 </div>
-                                {(errors.mobileCode || errors.mobileNumber) && <div style={{ color: 'red', fontSize: '12px' }}>
+                                {(errors.mobileCode || errors.mobileNumber) && <div style={{ color: 'red', fontSize: '13px' }}>
                                     {(errors.mobileCode?.message || errors.mobileNumber?.message) as string}
                                 </div>}
                             </div>
@@ -196,7 +197,7 @@ export const EditInfoCashMemberForm = () => {
                                             }}
                                         />}
                                 />
-                                {errors.email && <div style={{ color: 'red', fontSize: '12px' }}>{errors.email.message as string}</div>}
+                                {errors.email && <div style={{ color: 'red', fontSize: '13px' }}>{errors.email.message as string}</div>}
                             </div>
                             <div className={styles['form-group-item']}>
                                 <Label>{t('Fax')}</Label>
@@ -213,7 +214,7 @@ export const EditInfoCashMemberForm = () => {
                                 />
                             </div>
                         </div>
-                        <div className={styles['form-group-item']}>
+                        {!isAlpha && <div className={styles['form-group-item']}>
                             <Label>{t('Remark')}</Label>
                             <Controller
                                 name="remark"
@@ -228,9 +229,9 @@ export const EditInfoCashMemberForm = () => {
                                         }}
                                     />}
                             />
-                        </div>
-                        <div className={styles['form-group-row']}>
-                            <ButtonFull text={t('Save')} onClick={methods.handleSubmit(onSubmit)} />
+                        </div>}
+                        <div className={styles['form-group-row']} style={{ justifyContent: isAlpha ? 'flex-start' : 'flex-end' }}>
+                            <ButtonFull text={t('Update')} onClick={methods.handleSubmit(onSubmit)} />
                             <ButtonOutline text={t('Reset')} onClick={() => {
                                 reset(originalCustomerInfo);
                             }} />

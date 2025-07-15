@@ -264,12 +264,18 @@
   "AccountNumberRequired": "Account number is required",
   "UpdatedSuccessfully": "Updated successfully",
   "DeleteBankAccount": "Delete Bank Account",
-  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete {{bankNumber}}?",
+  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete",
   "ThisActionIsPermanentAndCannotBeUndone": "This action is permanent and cannot be undone.",
   "AgentBankAccountTooltip": "To match deposits made by members to your account, please select the bank account you wish to use to receive the deposits.",
   "AgentBankAccountTooltip2": "You can change your preferred Deposit Matching Mode under  Bank Management.",
   "EmailNotValid": "이메일이 유효하지 않습니다!",
   "Remark": "비고",
   "Save": "저장",
-  "Reset": "초기화"
+  "Reset": "초기화",
+  "InfoUsername": "정보 {{username}}",
+  "NoData": "데이터가 없습니다.",
+  "NoMatchingBankAccount": "일치하는 은행 계좌가 없습니다",
+  "AddSuccess": "성공적으로 추가되었습니다",
+  "AddFailed": "추가 실패",
+  "RemoveSuccess": "삭제 성공"
 }

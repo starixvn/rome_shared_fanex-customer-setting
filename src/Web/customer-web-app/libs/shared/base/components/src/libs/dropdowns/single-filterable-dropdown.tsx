@@ -147,7 +147,6 @@ export const SingleFilterableDropdown = ({
 
   const renderSearchInput = () => {
     if (!configs?.searchable) return null;
-
     return (
       <div className={styles.searchContainer}>
         <input
@@ -172,7 +171,9 @@ export const SingleFilterableDropdown = ({
       <div
         key={`${option.value}-${index}`}
         onClick={() => handleSelect(option)}
-        className={styles.dropdownOption}
+        className={classNames(styles.dropdownOption, {
+          [styles.dropdownOptionSelected]: selected?.key === option.key
+        })}
       >
         {option.icon}
         <span 

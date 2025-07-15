@@ -76,6 +76,21 @@
             border: 1px solid #ccc;
             outline: none
         }
+    }    
+    &.w-50 {
+        width: 50%;
+    }
+
+    &.w-70 {
+        width: 70%;
+    }
+    
+    &.w-75 {
+        width: 75%;
+    }
+    
+    &.w-100 {
+        width: 100%;
     }
 }
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { SystemIds } from '@customer-web-app/shared-constants';
+console.log("updateInfoCustomerPageConfig", updateInfoCustomerPageConfig)
 export const axiosInstance = axios.create({
     headers: {
         __RequestVerificationToken: (document.getElementsByName('__RequestVerificationToken')[0] as HTMLInputElement).value,
@@ -16,7 +17,12 @@ const GetCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
     return data;
 }
 const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-    const { data } = await axiosInstance.post<T>(`Customer/EditInfoPost`, params, {
+    let url = 'Customer/EditInfoPost';
+    if (updateInfoCustomerPageConfig.systemId === SystemIds.Alpha) {
+        url = `Customer/UpdateInfoPost`;
+    }
+
+    const { data } = await axiosInstance.post<T>(url, params, {
         headers: {
             'Content-Type': 'application/json'
         }

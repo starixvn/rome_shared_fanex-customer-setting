@@ -1,0 +1,12 @@
+:root {
+  --color-error-field-message: #fe0000;
+}
+
+:root[data-theme="dark"] {
+  --color-error-field-message: #fe0000;
+}
+
+.errorFieldMessage {
+  color: var(--color-error-field-message);
+  font-size: 13px;
+}

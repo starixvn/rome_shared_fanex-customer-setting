@@ -264,12 +264,18 @@
   "AccountNumberRequired": "Account number is required",
   "UpdatedSuccessfully": "Updated successfully",
   "DeleteBankAccount": "Delete Bank Account",
-  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete {{bankNumber}}?",
+  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete",
   "ThisActionIsPermanentAndCannotBeUndone": "This action is permanent and cannot be undone.",
   "AgentBankAccountTooltip": "To match deposits made by members to your account, please select the bank account you wish to use to receive the deposits.",
   "AgentBankAccountTooltip2": "You can change your preferred Deposit Matching Mode under  Bank Management.",
   "EmailNotValid": "Email is not valid!",
   "Remark": "Remark",
   "Save": "Save",
-  "Reset": "Reset"
+  "Reset": "Reset",
+  "InfoUsername": "Info {{username}}",
+  "NoData": "There is no data.",
+  "NoMatchingBankAccount": "No Matching Bank Account",
+  "AddSuccess": "Add successfully",
+  "AddFailed": "Add failed",
+  "RemoveSuccess": "Remove successfully"
 }

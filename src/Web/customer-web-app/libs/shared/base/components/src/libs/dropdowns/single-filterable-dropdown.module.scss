@@ -48,7 +48,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 12px;
-  flex: 1;
+  // flex: 1;
   
   // Hide nickname elements within the text
   :global(.nickname) {
@@ -87,7 +87,7 @@
   overflow-y: auto;
   background-color: var(--background-control);
   border: 1px solid var(--border-control);
-  border-radius: 8px;
+  border-radius: 3px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   margin-top: 2px;
   z-index: 9999;
@@ -102,7 +102,7 @@
   padding: 8px;
   background-color: var(--background-control);
   border-bottom: 1px solid var(--border-control);
-  border-radius: 8px 8px 0 0;
+  border-radius: 3px 3px 0 0;
 }
 
 // =============================================================================
@@ -121,8 +121,8 @@
 .dropdownOption {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 4px;
+  padding: 5px 12px;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
   
@@ -130,9 +130,12 @@
     background-color: #1967D2;
     color: #fff;
   }
-  
+  &.dropdownOptionSelected {
+    background-color: #1967D2;
+    color: #fff;
+  }
   &:last-child {
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 3px 3px;
   }
   
   // Mobile responsive padding
@@ -147,7 +150,6 @@
 .optionLabel {
   display: flex;
   flex-direction: column;
-  flex: 1;
   word-break: break-word;
 }
 

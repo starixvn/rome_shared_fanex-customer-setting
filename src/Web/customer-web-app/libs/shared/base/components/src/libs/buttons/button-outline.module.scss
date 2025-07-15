@@ -8,5 +8,9 @@
     cursor: pointer;
     height: 28px;
     padding: 1px 16px 0 16px;
-    font-weight: 600;
+    font-weight: 500;
+    &:hover {
+        background-color: var(--button-outline-background-hover);
+        color: var(--button-outline-text-hover);
+    }
 }

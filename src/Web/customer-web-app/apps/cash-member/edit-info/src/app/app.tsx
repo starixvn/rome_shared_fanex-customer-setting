@@ -2,15 +2,23 @@
 import { i18nInstance } from '@customer-web-app/shared-i18n';
 import { IconError } from '@customer-web-app/shared/base/common-icon';
 import * as Sentry from '@sentry/react';
-import { EditInfoCashMemberPage } from '@customer-web-app/edit-info-cash-member-page';
+import { EditInfoCashMemberPage, EditInfoCustomerPage} from '@customer-web-app/edit-info-cash-member-page';
 import { useCookieLanguage } from '@customer-web-app/shared/base/components';
+
+function EditInfoCustomerPageWrapper() {
+  if (updateInfoCustomerPageConfig.isCashMember) {
+      return <EditInfoCashMemberPage />
+  }
+  return <EditInfoCustomerPage />
+}
 
 export function App() {
   useCookieLanguage(i18nInstance);
 
+
   return (
     <Sentry.ErrorBoundary fallback={IconError}>
-       <EditInfoCashMemberPage />
+      <EditInfoCustomerPageWrapper />
     </Sentry.ErrorBoundary>
   );
 }

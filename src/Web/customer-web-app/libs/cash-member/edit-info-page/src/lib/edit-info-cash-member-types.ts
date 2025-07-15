@@ -7,6 +7,7 @@ declare global {
         custId: number;
         cdnUri: string;
         agentId: number;
+        systemId: number;
     }
 }
 export interface MemberBankAccountRecord {   

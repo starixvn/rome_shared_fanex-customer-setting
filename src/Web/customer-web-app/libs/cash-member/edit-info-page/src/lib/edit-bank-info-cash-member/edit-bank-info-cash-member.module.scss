@@ -1,0 +1,48 @@
+:root {
+  --primary-color: #094980;
+}
+:root[data-theme="dark"] {
+  --primary-color: #459be5;
+}
+.buttonContainer {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.addButton {
+  width: 150px;
+  
+  :global(& > *) {
+    width: 100%;
+  }
+}
+
+.bankIcon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.noRecordCell {
+  padding: 12px;
+  text-align: center;
+}
+
+.noRecordContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.gridTable{
+  width: 70%;
+  table{
+    width: 100%;
+  }
+}

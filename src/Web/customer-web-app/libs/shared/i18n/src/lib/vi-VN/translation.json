@@ -262,12 +262,18 @@
   "AccountNumberRequired": "Account number is required",
   "UpdatedSuccessfully": "Updated successfully",
   "DeleteBankAccount": "Delete Bank Account",
-  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete {{bankNumber}}?",
+  "AreYouSureYouWantToDeleteThisBankAccount": "Are you sure you want to delete",
   "ThisActionIsPermanentAndCannotBeUndone": "This action is permanent and cannot be undone.",
   "AgentBankAccountTooltip": "To match deposits made by members to your account, please select the bank account you wish to use to receive the deposits.",
   "AgentBankAccountTooltip2": "You can change your preferred Deposit Matching Mode under  Bank Management.",
   "EmailNotValid": "Email không hợp lệ!",
   "Remark": "Ghi chú",
   "Save": "Lưu",
-  "Reset": "Đặt lại"
+  "Reset": "Đặt lại",
+  "InfoUsername": "Thông tin {{username}}",
+  "NoData": "Không có dữ liệu.",
+  "NoMatchingBankAccount": "Không có tài khoản ngân hàng tương ứng",
+  "AddSuccess": "Thêm thành công",
+  "AddFailed": "Thêm thất bại",
+  "RemoveSuccess": "Xóa thành công"
 }
