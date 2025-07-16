@@ -202,7 +202,7 @@ export const EditInfoCustomerPage = () => {
                                         />}
                                 />
                             </div>}
-                            <div className={styles['form-group-row']} style={{ justifyContent: isAlpha ? 'flex-start' : 'flex-end' }}>
+                            <div className={styles['form-group-row']} style={{ justifyContent: isAlphaSystem ? 'flex-start' : 'flex-end' }}>
                                 <ButtonFull text={t('Update')} onClick={methods.handleSubmit(onSubmit)} disabled={isLoading} />
                                 <ButtonOutline text={t('Reset')} onClick={() => {
                                     reset(originalCustomerInfo);
