@@ -112,7 +112,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
             GeneralInfo = generalInfo,
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember, role)
         };
-
+        await SetProductStatusTooltip(customerSetting, request.Language, request.CustId, appSettings.SettingStatus);
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
         return customerSetting;
     }

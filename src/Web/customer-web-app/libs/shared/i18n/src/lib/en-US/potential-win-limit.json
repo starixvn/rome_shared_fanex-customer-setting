@@ -46,7 +46,7 @@
     },
 
     "importantNotes": {
-      "title": "Important Notes for Agents",
+      "title": "Important Notes",
       "defaultLimit": "Members have Unlimited Potential Win Limit by default",
       "defaultReset": "Daily Auto Reset = YES by default",
       "appliesTo": "Applies only to Sportsbook (not Live & RNG Casino or RNG Games)",
