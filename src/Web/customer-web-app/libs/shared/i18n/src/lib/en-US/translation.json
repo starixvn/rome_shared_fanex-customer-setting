@@ -272,7 +272,7 @@
   "Remark": "Remark",
   "Save": "Save",
   "Reset": "Reset",
-  "InfoUsername": "Info {{username}}",
+  "Info": "Info",
   "NoData": "There is no data.",
   "NoMatchingBankAccount": "No Matching Bank Account",
   "AddSuccess": "Add successfully",

@@ -1,14 +1,14 @@
 import { ButtonTabActive, ButtonTabInactive, TabNav, Title, useSystems } from '@customer-web-app/shared/base/components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { EditInfoCashMemberForm } from './edit-info-cash-member-form';
 import { CustomerBankDetail } from './customer-bank-detail';
-import { EditInfoTitle } from './edit-info-title';
+import { PageTitle } from './page-title';
 
 export function EditInfoCashMemberPage() {
-    const { isAlpha } = useSystems(updateInfoCustomerPageConfig.systemId);
+    const { isAlphaSystem, isExternalNapSystem } = useSystems(updateInfoCustomerPageConfig.systemId);
     const { t } = useTranslation();
-    const [activeTab, setActiveTab] = useState('bankInfo');
+    const [activeTab, setActiveTab] = useState('');
     const tabButton = (tab: string) => {
         const tabList: React.ReactNode[] = [];
         if (tab === 'memberInfo') {
@@ -25,23 +25,21 @@ export function EditInfoCashMemberPage() {
             </li>
         ));
     }
+    useEffect(() => {
+        if (isExternalNapSystem && updateInfoCustomerPageConfig.isCashMember) {
+            setActiveTab('memberInfo');
+        }
+        if(isAlphaSystem && updateInfoCustomerPageConfig.isCashMember){
+            setActiveTab('bankInfo');
+        }
+    }, [isExternalNapSystem, isAlphaSystem, updateInfoCustomerPageConfig.isCashMember]);
 
     return (
         <>
-            <EditInfoTitle />
-            {isAlpha && (
-                <TabNav>
-                    {tabButton(activeTab)}
-                </TabNav>
-            )}
-
-            {activeTab === 'memberInfo' && (
-                <EditInfoCashMemberForm />
-            )}
-            {activeTab === 'bankInfo' && (
-                <CustomerBankDetail />
-            )}
-
+            <PageTitle />
+            {isAlphaSystem && <TabNav>{tabButton(activeTab)}</TabNav>}
+            {activeTab === 'memberInfo' && <EditInfoCashMemberForm />}
+            {activeTab === 'bankInfo' && isAlphaSystem && <CustomerBankDetail />}
         </>
     );
 }

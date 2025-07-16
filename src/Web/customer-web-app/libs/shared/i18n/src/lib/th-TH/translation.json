@@ -271,7 +271,7 @@
   "Remark": "หมายเหตุ",
   "Save": "บันทึก",
   "Reset": "รีเซ็ต",
-  "InfoUsername": "ข้อมูล {{username}}",
+  "Info": "ข้อมูล",
   "NoData": "ไม่มีข้อมูล",
   "NoMatchingBankAccount": "ไม่มีบัญชีธนาคารที่ตรงกับการฝากเงิน",
   "AddSuccess": "เพิ่มสำเร็จ",

@@ -272,7 +272,7 @@
   "Remark": "비고",
   "Save": "저장",
   "Reset": "초기화",
-  "InfoUsername": "정보 {{username}}",
+  "Info": "정보",
   "NoData": "데이터가 없습니다.",
   "NoMatchingBankAccount": "일치하는 은행 계좌가 없습니다",
   "AddSuccess": "성공적으로 추가되었습니다",

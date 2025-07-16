@@ -271,7 +271,7 @@
   "Remark": "备注",
   "Save": "保存",
   "Reset": "重置",
-  "InfoUsername": "信息 {{username}}",
+  "Info": "信息",
   "NoData": "没有数据。",
   "NoMatchingBankAccount": "没有匹配的银行账户",
   "AddSuccess": "添加成功",

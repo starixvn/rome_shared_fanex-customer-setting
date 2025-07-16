@@ -14,7 +14,7 @@ import {
     FIRST_NAME_MAX_LENGTH,
     REMARK_MAX_LENGTH
 } from '@customer-web-app/shared-constants';
-import { EditInfoTitle } from './edit-info-title';
+import { PageTitle } from './page-title';
 
 
 export const EditInfoCustomerPage = () => {
@@ -70,7 +70,7 @@ export const EditInfoCustomerPage = () => {
     }
     return (
         <>
-            <EditInfoTitle />
+            <PageTitle />
             <div className={classNames(styles['edit-info-cash-member-form'], isAlpha ? styles['w-50'] : styles['w-100'])}>
                 <div style={{ marginBottom: '5px' }}>
                     {renderResultMessage()}
