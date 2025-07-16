@@ -248,7 +248,7 @@
   "ReferChecklist": "Domain: Please refer to ",
   "checklist": "checklist",
   "MemberInfo": "Member Info",
-  "BankInfo": "Bank Info",
+  "BankAccount": "Bank Account",
   "FirstNameRequired": "First name is required",
   "LastNameRequired": "Last name is required",
   "MobileNumberRequired": "Mobile Number is required",

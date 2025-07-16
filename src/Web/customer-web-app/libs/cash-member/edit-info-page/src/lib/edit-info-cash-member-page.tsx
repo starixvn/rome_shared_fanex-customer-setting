@@ -5,19 +5,24 @@ import { EditInfoCashMemberForm } from './edit-info-cash-member-form';
 import { CustomerBankDetail } from './customer-bank-detail';
 import { PageTitle } from './page-title';
 
+const enum Tab {
+    MemberInfo = 'MemberInfo',
+    BankAccount = 'BankAccount'
+}
+
 export function EditInfoCashMemberPage() {
     const { isAlphaSystem, isExternalNapSystem } = useSystems(updateInfoCustomerPageConfig.systemId);
     const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState('');
     const tabButton = (tab: string) => {
         const tabList: React.ReactNode[] = [];
-        if (tab === 'memberInfo') {
+        if (tab === Tab.MemberInfo) {
             tabList.push(<ButtonTabActive text={t('MemberInfo')} />)
-            tabList.push(<ButtonTabInactive text={t('BankInfo')} onClick={() => setActiveTab('bankInfo')} />)
+            tabList.push(<ButtonTabInactive text={t('BankAccount')} onClick={() => setActiveTab(Tab.BankAccount)} />)
         }
-        if (tab === 'bankInfo') {
-            tabList.push(<ButtonTabInactive text={t('MemberInfo')} onClick={() => setActiveTab('memberInfo')} />)
-            tabList.push(<ButtonTabActive text={t('BankInfo')} />)
+        if (tab === Tab.BankAccount) {
+            tabList.push(<ButtonTabInactive text={t('MemberInfo')} onClick={() => setActiveTab(Tab.MemberInfo)} />)
+            tabList.push(<ButtonTabActive text={t('BankAccount')} />)
         }
         return tabList.map((item, index) => (
             <li key={`${tab}-${index}`} className="mr-[8px]">
@@ -27,10 +32,10 @@ export function EditInfoCashMemberPage() {
     }
     useEffect(() => {
         if (isExternalNapSystem && updateInfoCustomerPageConfig.isCashMember) {
-            setActiveTab('memberInfo');
+            setActiveTab(Tab.MemberInfo);
         }
         if(isAlphaSystem && updateInfoCustomerPageConfig.isCashMember){
-            setActiveTab('bankInfo');
+            setActiveTab(Tab.BankAccount);
         }
     }, [isExternalNapSystem, isAlphaSystem, updateInfoCustomerPageConfig.isCashMember]);
 
@@ -38,8 +43,8 @@ export function EditInfoCashMemberPage() {
         <>
             <PageTitle />
             {isAlphaSystem && <TabNav>{tabButton(activeTab)}</TabNav>}
-            {activeTab === 'memberInfo' && <EditInfoCashMemberForm />}
-            {activeTab === 'bankInfo' && isAlphaSystem && <CustomerBankDetail />}
+            {activeTab === Tab.MemberInfo && <EditInfoCashMemberForm />}
+            {activeTab === Tab.BankAccount && isAlphaSystem && <CustomerBankDetail />}
         </>
     );
 }

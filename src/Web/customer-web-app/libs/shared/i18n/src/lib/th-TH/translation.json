@@ -247,7 +247,7 @@
   "ReferChecklist": "โดเมน: อ้างอิง ",
   "checklist": "รายการตรวจสอบ",
   "MemberInfo": "ข้อมูลสมาชิก",
-  "BankInfo": "ข้อมูลธนาคาร",
+  "BankAccount": "บัญชีธนาคาร",
   "FirstNameRequired": "ชื่อต้องระบุ",
   "LastNameRequired": "นามสกุลต้องระบุ",
   "MobileNumberRequired": "หมายเลขโทรศัพท์ต้องระบุ",

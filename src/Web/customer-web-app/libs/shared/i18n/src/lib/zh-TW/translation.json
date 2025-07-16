@@ -247,7 +247,7 @@
   "ReferChecklist": "域名: 請參考 ",
   "checklist": "清單",
   "MemberInfo": "會員信息",
-  "BankInfo": "銀行信息",
+  "BankAccount": "銀行帳戶",
   "FirstNameRequired": "名是必填的",
   "LastNameRequired": "姓是必填的",
   "MobileNumberRequired": "手機號碼是必填的",

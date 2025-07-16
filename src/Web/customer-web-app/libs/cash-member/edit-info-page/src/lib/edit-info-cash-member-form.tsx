@@ -19,7 +19,7 @@ import classNames from 'classnames';
 
 export const EditInfoCashMemberForm = () => {
     const { t } = useTranslation();
-    const { isAlpha } = useSystems(updateInfoCustomerPageConfig.systemId);
+    const { isAlphaSystem } = useSystems(updateInfoCustomerPageConfig.systemId);
     const [originalCustomerInfo, setOriginalCustomerInfo] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
     const methods = useForm<any>({
@@ -73,7 +73,7 @@ export const EditInfoCashMemberForm = () => {
         setIsLoading(false);
     }
     return (
-        <div className={classNames(styles['edit-info-cash-member-form'], isAlpha ? styles['w-50'] : styles['w-100'])}>
+        <div className={classNames(styles['edit-info-cash-member-form'], isAlphaSystem ? styles['w-50'] : styles['w-100'])}>
             <div style={{ marginBottom: '5px' }}>
                 {renderResultMessage()}
             </div>
@@ -222,7 +222,7 @@ export const EditInfoCashMemberForm = () => {
                                 />
                             </div>
                         </div>
-                        {!isAlpha && <div className={styles['form-group-item']}>
+                        {!isAlphaSystem && <div className={styles['form-group-item']}>
                             <Label>{t('Remark')}</Label>
                             <Controller
                                 name="remark"
