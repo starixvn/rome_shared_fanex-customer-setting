@@ -2,8 +2,8 @@ import { ButtonTabActive, ButtonTabInactive, TabNav, Title, useSystems } from '@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { EditInfoCashMemberForm } from './edit-info-cash-member-form';
-import { EditBankInfoCashMember } from './edit-bank-info-cash-member';
-import { SystemIds } from '@customer-web-app/shared-constants';
+import { CustomerBankDetail } from './customer-bank-detail';
+import { EditInfoTitle } from './edit-info-title';
 
 export function EditInfoCashMemberPage() {
     const { isAlpha } = useSystems(updateInfoCustomerPageConfig.systemId);
@@ -28,9 +28,7 @@ export function EditInfoCashMemberPage() {
 
     return (
         <>
-            <Title>
-                {t('InfoUsername', { username: updateInfoCustomerPageConfig.username.toLocaleUpperCase() })}
-            </Title>
+            <EditInfoTitle />
             {isAlpha && (
                 <TabNav>
                     {tabButton(activeTab)}
@@ -41,7 +39,7 @@ export function EditInfoCashMemberPage() {
                 <EditInfoCashMemberForm />
             )}
             {activeTab === 'bankInfo' && (
-                <EditBankInfoCashMember />
+                <CustomerBankDetail />
             )}
 
         </>

@@ -21,6 +21,7 @@ export const EditInfoCashMemberForm = () => {
     const { t } = useTranslation();
     const { isAlpha } = useSystems(updateInfoCustomerPageConfig.systemId);
     const [originalCustomerInfo, setOriginalCustomerInfo] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const methods = useForm<any>({
         defaultValues: {},
         mode: 'onChange',
@@ -53,6 +54,7 @@ export const EditInfoCashMemberForm = () => {
         fetchCustomerInfo();
     }, [reset, updateInfoCustomerPageConfig.custId]);
     const onSubmit = async (data: any) => {
+        setIsLoading(true);
         if (errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
             return;
         }
@@ -62,20 +64,25 @@ export const EditInfoCashMemberForm = () => {
             mobilePhone: `${data.mobileCode}-${data.mobileNumber}`
         });
         if (res.isSuccess || res.isSuccessful) {
-            showResult('success', t('UpdateSuccess'), 12000);
+            setOriginalCustomerInfo(data);
+            reset(data);
+            showResult('success', t('UpdateSuccess'), 1200);
         } else {
             showResult('error', res.errorMessage);
         }
+        setIsLoading(false);
     }
     return (
         <div className={classNames(styles['edit-info-cash-member-form'], isAlpha ? styles['w-50'] : styles['w-100'])}>
-            {renderResultMessage()}
+            <div style={{ marginBottom: '5px' }}>
+                {renderResultMessage()}
+            </div>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <div className={styles['form-group']}>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
-                                <Label required>{t('firstName')}</Label>
+                                <Label required>{t('FirstName')}</Label>
                                 <Controller
                                     rules={{ required: t('FirstNameRequired') }}
                                     name="firstName"
@@ -189,8 +196,9 @@ export const EditInfoCashMemberForm = () => {
                                     }}
                                     render={({ field }) =>
                                         <input
-                                            maxLength={EMAIL_MAX_LENGTH}
                                             {...field}
+                                            maxLength={EMAIL_MAX_LENGTH}
+                                            className={classNames(styles['input'], errors.email && styles['input-error'])}
                                             onBlur={(e) => {
                                                 const trimmedValue = e.target.value.trim();
                                                 field.onChange(trimmedValue);
@@ -231,10 +239,10 @@ export const EditInfoCashMemberForm = () => {
                             />
                         </div>}
                         <div className={styles['form-group-row']} style={{ justifyContent: isAlpha ? 'flex-start' : 'flex-end' }}>
-                            <ButtonFull text={t('Update')} onClick={methods.handleSubmit(onSubmit)} />
+                            <ButtonFull text={t('Update')} onClick={methods.handleSubmit(onSubmit)} disabled={isLoading} />
                             <ButtonOutline text={t('Reset')} onClick={() => {
                                 reset(originalCustomerInfo);
-                            }} />
+                            }} disabled={isLoading} />
                         </div>
                     </div>
                 </form>

@@ -22,9 +22,8 @@ interface EditingRow {
     agentBankCode: string;
 }
 
-// Memoized bank cell component
-const BankCell = memo(({ accountNumber, bankCode }: { accountNumber: string, bankCode: string }) => {
-    if (!accountNumber || !bankCode) return <div className={styles.noMatchingBankAccount}>No Matching Bank Account</div>;
+const BankCell = memo(({ bankAccountNumber, bankCode }: Partial<Bank>) => {
+    if (!bankAccountNumber || !bankCode) return <div className={styles.noMatchingBankAccount}>No Matching Bank Account</div>;
 
     return (
         <div className={styles.bankCell}>
@@ -34,14 +33,13 @@ const BankCell = memo(({ accountNumber, bankCode }: { accountNumber: string, ban
                 className={styles.bankIcon}
                 loading="lazy"
             />
-            {accountNumber}
+            {bankAccountNumber}
         </div>
     );
 });
 
 BankCell.displayName = 'BankCell';
 
-// Memoized table row component
 export const BankAccountRow = memo(({
     account,
     index,
@@ -82,7 +80,7 @@ export const BankAccountRow = memo(({
 
         return (
             <BankCell
-                accountNumber={account.agentBankAccountNumber}
+                bankAccountNumber={account.agentBankAccountNumber}
                 bankCode={account.agentBankCode}
             />
         );
@@ -132,7 +130,7 @@ export const BankAccountRow = memo(({
             <td style={{ maxWidth: '50px' }}>{index + 1}</td>
             <td style={{ maxWidth: '300px' }}>
                 <BankCell
-                    accountNumber={account.memberBankAccountNumber}
+                    bankAccountNumber={account.memberBankAccountNumber}
                     bankCode={account.memberBankCode}
                 />
             </td>

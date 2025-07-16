@@ -1,14 +1,13 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { MemberBankAccountRecord } from "../edit-info-cash-member-types";
-
 import { useTranslation } from "react-i18next";
-import { ConfirmPopup, DropdownOption, TableSkeleton } from "@customer-web-app/shared/base/components";
+import { DropdownOption, TableSkeleton } from "@customer-web-app/shared/base/components";
 import { NoDataIcon } from "@customer-web-app/shared/base/common-icon";
 import { ButtonFull } from "@customer-web-app/shared/base/components";
 import { useResultMessage } from "@customer-web-app/shared/base/components";
-import { GetCustomerBankInfo, RemoveMemberBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
+import { GetCustomerBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
 import { BankAccountRow } from './grid-components';
-import styles from "./edit-bank-info-cash-member.module.scss";
+import styles from "./customer-bank-detail.module.scss";
 import { AddBankModal } from "./add-new-bank-modal";
 import { DeleteBankModal } from "./delete-bank-modal";
 
@@ -29,7 +28,7 @@ interface EditingRow {
     agentBankCode: string;
 }
 
-export const EditBankInfoCashMember = () => {
+export const CustomerBankDetail = () => {
     const { t } = useTranslation();
     const [showAddBankAccountPopup, setShowAddBankAccountPopup] = useState(false);
     const [bankAccounts, setBankAccounts] = useState<MemberBankAccountRecord[]>([]);

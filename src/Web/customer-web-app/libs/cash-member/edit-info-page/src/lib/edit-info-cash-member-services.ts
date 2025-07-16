@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { SystemIds } from '@customer-web-app/shared-constants';
-console.log("updateInfoCustomerPageConfig", updateInfoCustomerPageConfig)
+
 export const axiosInstance = axios.create({
     headers: {
         __RequestVerificationToken: (document.getElementsByName('__RequestVerificationToken')[0] as HTMLInputElement).value,
