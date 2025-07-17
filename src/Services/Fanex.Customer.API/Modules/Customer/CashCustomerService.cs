@@ -231,6 +231,7 @@ public class CashCustomerService : ICashCustomerService
 
     public async Task<Result> AddMemberBankInfo(AddMemberBankInfoRequest request)
     {
+        request.Language = LanguageUtils.ToLanguageKey(request.Language);
         var criteria = new AddMemberBankInfoCommand(request, 0);
         var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
@@ -247,6 +248,7 @@ public class CashCustomerService : ICashCustomerService
 
     public async Task<Result> UpdateMemberBankInfo(UpdateMemberBankInfoRequest request)
     {
+        request.Language = LanguageUtils.ToLanguageKey(request.Language);
         var criteria = new UpdateMemberBankInfoCommand(request, 0);
         var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
@@ -263,6 +265,7 @@ public class CashCustomerService : ICashCustomerService
 
     public async Task<Result> RemoveMemberBankInfo(RemoveMemberBankInfoRequest request)
     {
+        request.Language = LanguageUtils.ToLanguageKey(request.Language);
         var criteria = new RemoveMemberBankInfoCommand(request, 0);
         var result = await dynamicRepository.FetchAsync<LogDataEntity>(criteria);
 
