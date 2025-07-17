@@ -275,5 +275,6 @@
   "NoMatchingBankAccount": "Không có tài khoản ngân hàng tương ứng",
   "AddSuccess": "Thêm thành công",
   "AddFailed": "Thêm thất bại",
-  "RemoveSuccess": "Xóa thành công"
+  "RemoveSuccess": "Xóa thành công",
+  "NoChanges": "Không có thay đổi để cập nhật."
 }

@@ -276,5 +276,6 @@
   "NoMatchingBankAccount": "未找到匹配的銀行帳戶",
   "AddSuccess": "添加成功",
   "AddFailed": "添加失敗",
-  "RemoveSuccess": "刪除成功"
+  "RemoveSuccess": "刪除成功",
+  "NoChanges": "沒有需要更新的變化。"
 }

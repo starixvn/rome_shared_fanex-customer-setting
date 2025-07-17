@@ -276,5 +276,6 @@
   "NoMatchingBankAccount": "ไม่มีบัญชีธนาคารที่ใช้จับคู่เงินฝาก",
   "AddSuccess": "เพิ่มสำเร็จ",
   "AddFailed": "เพิ่มล้มเหลว",
-  "RemoveSuccess": "ลบสำเร็จ"
+  "RemoveSuccess": "ลบสำเร็จ",
+  "NoChanges": "ไม่มีการเปลี่ยนแปลงที่ต้องอัพเดต"
 }

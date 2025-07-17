@@ -277,5 +277,6 @@
   "NoMatchingBankAccount": "일치하는 은행 계좌가 없습니다",
   "AddSuccess": "성공적으로 추가되었습니다",
   "AddFailed": "추가 실패",
-  "RemoveSuccess": "삭제 성공"
+  "RemoveSuccess": "삭제 성공",
+  "NoChanges": "업데이트할 변경사항이 없습니다"
 }

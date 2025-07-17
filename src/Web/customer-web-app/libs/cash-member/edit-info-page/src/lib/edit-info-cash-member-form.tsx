@@ -29,7 +29,7 @@ export const EditInfoCashMemberForm = () => {
         criteriaMode: 'all',
     });
     const { showResult, renderResultMessage } = useResultMessage();
-    const { control, reset, formState: { errors } } = methods;
+    const { control, reset, formState: { errors, isDirty } } = methods;
     useEffect(() => {
         const fetchCustomerInfo = async () => {
             const data = await GetCustomerInfo<{
@@ -55,6 +55,10 @@ export const EditInfoCashMemberForm = () => {
         fetchCustomerInfo();
     }, [reset, updateInfoCustomerPageConfig.custId]);
     const onSubmit = async (data: any) => {
+        if (!isDirty) {
+            showResult('error', t('NoChanges'));
+            return;
+        }
         setIsLoading(true);
         if (errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
             return;

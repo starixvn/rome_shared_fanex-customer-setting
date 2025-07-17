@@ -277,5 +277,6 @@
   "NoMatchingBankAccount": "No Matching Bank Account",
   "AddSuccess": "Add successfully",
   "AddFailed": "Add failed",
-  "RemoveSuccess": "Remove successfully"
+  "RemoveSuccess": "Remove successfully",
+  "NoChanges": "There is no change to update."
 }

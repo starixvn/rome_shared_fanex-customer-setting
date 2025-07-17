@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { MemberBankAccountRecord, UpdateMemberBankInfoResponse } from "../edit-info-cash-member-types";
 import { useTranslation } from "react-i18next";
 import { DropdownOption, TableSkeleton } from "@customer-web-app/shared/base/components";
-import { NoDataIcon } from "@customer-web-app/shared/base/common-icon";
+import { IconExclamationPoint, IconInfo, NoDataIcon } from "@customer-web-app/shared/base/common-icon";
 import { ButtonFull } from "@customer-web-app/shared/base/components";
 import { useResultMessage } from "@customer-web-app/shared/base/components";
 import { GetCustomerBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
@@ -10,6 +10,7 @@ import { BankAccountRow } from './grid-components';
 import styles from "./customer-bank-detail.module.scss";
 import { AddBankModal } from "./add-new-bank-modal";
 import { DeleteBankModal } from "./delete-bank-modal";
+import { WrapperTooltip } from "@customer-web-app/wrapper-tooltip";
 
 interface Bank {
     bankId: number;
@@ -196,7 +197,17 @@ export const CustomerBankDetail = () => {
                         <tr>
                             <th scope="col" style={{ maxWidth: '50px' }}>#</th>
                             <th scope="col" style={{ maxWidth: '300px' }}>{t('MemberBankAccount')}</th>
-                            <th scope="col" style={{ maxWidth: '300px' }}>{t('AgentBankAccount')}</th>
+                            <th scope="col" style={{ maxWidth: '300px' }}>
+                                    {t('AgentBankAccount')}
+                                    <span data-tooltip-id="agent-bank-tooltip">
+                                        <IconExclamationPoint />
+                                    </span>
+                                    <WrapperTooltip
+                                        id="agent-bank-tooltip"
+                                        content={t('AgentBankAccountTooltip')}
+                                        place="top"
+                                    />
+                            </th>
                             <th scope="col" style={{ maxWidth: '150px' }}>{t('Action')}</th>
                         </tr>
                     </thead>
@@ -229,17 +240,17 @@ export const CustomerBankDetail = () => {
             </div>
             {showAddBankAccountPopup && (
                 <AddBankModal
-                    onCancel={()=>{
+                    onCancel={() => {
                         setShowAddBankAccountPopup(false);
                     }}
-                    onAddSuccess={()=>{
+                    onAddSuccess={() => {
                         setShowAddBankAccountPopup(false);
                         loadBankAccounts();
                     }}
                 />
             )}
             {showDeleteConfirm && (
-                <DeleteBankModal 
+                <DeleteBankModal
                     record={bankAccounts.find((record: MemberBankAccountRecord) => record.memberBankAccountID === deleteAccountId) as MemberBankAccountRecord}
                     onDeleteSuccess={() => {
                         setShowDeleteConfirm(false);

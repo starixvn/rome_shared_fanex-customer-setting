@@ -854,3 +854,14 @@ export const IconTrashBin = ({ className}: { className?: string}) => (
     <path  d="M26.5 4h-6.5v-2.5c0-0.825-0.675-1.5-1.5-1.5h-7c-0.825 0-1.5 0.675-1.5 1.5v2.5h-6.5c-0.825 0-1.5 0.675-1.5 1.5v2.5h26v-2.5c0-0.825-0.675-1.5-1.5-1.5zM18 4h-6v-1.975h6v1.975z"></path>
   </svg>
 );
+
+export const IconExclamationPoint = ({ className }: { className?: string }) => (  
+  <svg
+    className={classNames(styles.iconExclamationPoint, className)}
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+  >
+    <path d="M14.667 12h2.667v-2.667h-2.667zM16 26.667c-5.88 0-10.667-4.787-10.667-10.667s4.787-10.667 10.667-10.667c5.88 0 10.667 4.787 10.667 10.667s-4.787 10.667-10.667 10.667zM16 2.667c-7.364 0-13.333 5.97-13.333 13.333s5.97 13.333 13.333 13.333c7.364 0 13.333-5.97 13.333-13.333s-5.97-13.333-13.333-13.333zM14.667 22.667h2.667v-8h-2.667v8z"></path>
+  </svg>
+);

@@ -3,6 +3,7 @@
   --icon-close2-color: #333333;
   --icon-pen-color: #444;
   --icon-info-link: #325275;
+  --icon-exclamation-point: #118AF2;
 }
 
 :root[data-theme="dark"] {
@@ -10,6 +11,7 @@
   --icon-close2-color: #ededed;
   --icon-pen-color: #ededed;
   --icon-info-link: #578fcc;
+  --icon-exclamation-point: #118AF2;
 }
 
 
@@ -86,4 +88,11 @@
   width: 20px;
   height: 20px;
   fill: var(--icon-pen-color);
+}
+
+.iconExclamationPoint {
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+  fill: var(--icon-exclamation-point);
 }
