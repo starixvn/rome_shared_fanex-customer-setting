@@ -30,6 +30,7 @@ export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapper
     const result = await SettingService.EnableCashService();
     if (result) {
       setIsEnabled(true);
+      window.top && window.top.indexManager.showHideCashServiceChecklist(true);
       setIsModalOpen(false);
     }
   }
