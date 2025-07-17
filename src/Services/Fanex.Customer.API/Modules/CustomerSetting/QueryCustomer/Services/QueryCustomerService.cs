@@ -12,9 +12,6 @@ using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 using static Fanex.Customer.API.Modules.CustomerSetting.Shared.Services.SettingProfileService;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
-using Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Criteria;
-using Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Entities;
-using System.Text.Json;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
@@ -115,7 +112,6 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
             GeneralInfo = generalInfo,
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember, role)
         };
-
         await SetProductStatusTooltip(customerSetting, request.Language, request.CustId, appSettings.SettingStatus);
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
         return customerSetting;
@@ -175,7 +171,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
     {
         if (groupTypeId == GroupTypes.PotentialWinLimit)
         {
-            return !isDirectMember && uplineRoleId == CustomerLevel.Agent;
+            return isDirectMember || uplineRoleId == CustomerLevel.Agent;
         }
 
         return true;
@@ -373,6 +369,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                 isDirectMember,
                 language,
                 isSiteLabel777);
+
             if (helperService.IsPTGroupType(groupTypeId))
             {
                 ((PTItem)groupItem).Step = ptStep;

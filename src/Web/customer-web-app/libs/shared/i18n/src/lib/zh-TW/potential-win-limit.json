@@ -1,42 +1,42 @@
 {
   "sportsbook.potentialWinLimit": {
-    "overview": "概覽",
-    "description": "潜在赢额上限定义了会员在体育博彩中可累计的最大可赢金额。如果超过该限额，将无法继续投注。",
+    "overview": "概述",
+    "description": "潛在贏額上限定義了會員在體育博彩中可累積的最大可贏金額。如果超過該限額，將無法繼續投注。",
     "appliesTo": "适用于：所有体育项目及所有体育博彩的投注类型",
-    "excludes": "不適用於：串關投注（混合串關、系統串關、組合串關、單場串關）——此階段不包含。",
+    "excludes": "不適用於：串關投注（混合串關、系統串關、組合串關、單場串關）——當前階段不包含。",
     
     "calculationLogic": {
       "title": "計算邏輯",
       "formula": "潜在赢额计算公式：(赔率 - 1) x 投注金额",
-      "accumulated": "累计潜在赢额 = 所有未结算投注 + 限额设定后结算的投注赢额总和。",
+      "accumulated": "累計潛在贏額 = 所有未結算投注 + 限額設定後結算的投注贏額總和。",
       "example": "範例",
       "example-limit": "限額 = 10,000",
-      "example-ticketA": "投注 A（賠率 10，投注金 1,000）：贏額 = 9,000",
+      "example-ticketA": " 投注 A（賠率 10，投注金 1,000）：潛在贏額 = 9,000",
       "example-ticketB": "投注 B（賠率 5）：最大允許投注金 = (10,000 - 9,000) ÷ (5 - 1) = 250"
     },
 
     "trackingStart": {
       "title": "追踪从什么时候开始？",
-      "accumulation": "从代理设置潜在赢额上限那一刻开始进行累计计算。",
-      "included": "僅計算當時未結算投注及其後結算的投注。",
+      "accumulation": "從代理設置特定潛在贏額上限開始納入累計。",
+      "included": "僅計算當時未結算投注及之後結算的投注。",
       "example": "範例",
-      "example-limit": "限額設定時間為下午 2:00",
+      "example-limit": "限額設置時間為下午 2:00",
       "example-ticketA": "投注 A（下午 2:00 時仍為未結算） -> 納入計算",
-      "example-ticketB": "投注 B（下午 1:50 結算） -> 不納入",
-      "example-ticketC": "投注 C（下午 2:10 結算） -> 納入"
+      "example-ticketB": "投注 B（下午 1:50 結算） -> 不納入計算",
+      "example-ticketC": "投注 C（下午 2:10 結算） -> 納入計算"
     },
 
     "resetBehavior": {
       "title": "重置行為",
-      "dailyReset": "每日自动重置 = 默认启用（于 中午12 時正 GMT +8）：清除所有已结算投注",
-      "manualReset": "手動重置（透過轉帳）：在轉帳時清除已結算投注",
+      "dailyReset": "每日自動重置 = 默認啟用（GMT+8 下午 12:00）：清除所有已結算投注",
+      "manualReset": "手動重置（通過轉賬）：在轉賬時清除已結算投注",
       "runningTickets": "未結算投注不會被清除，始終納入統計"
     },
 
     "resultAmendment": {
       "title": "重新结算的影响",
-      "recalculation": "修改已结算投注的结果（如 赢 -> 和）将重新计算累计赢额",
-      "statusChange": "這可能會改變會員狀態：",
+      "recalculation": "修改已結算投注的結果（如 WIN -> DRAW）將重新計算累計贏額",
+      "statusChange": "這可以改變會員狀態：",
       "statusChange-blockedToUnblocked": "封锁 -> 解锁（如果赢额减少）",
       "statusChange-unblockedToBlocked": "未封锁 -> 封锁（如果赢额增加）",
       "example": "範例",
@@ -46,12 +46,12 @@
     },
 
     "importantNotes": {
-      "title": "給代理的重要提示",
-      "defaultLimit": "所有会员的潜在赢额上限默认为无限",
-      "defaultReset": "每日自動重置 = 預設啟用",
-      "appliesTo": "僅適用於體育博彩（不適用於現場及RNG娛樂城或 RNG遊戲）",
+      "title": "重要提示",
+      "defaultLimit": "會員默认为無限制的潛在贏額上限",
+      "defaultReset": "每日自動重置 = 默認啟用",
+      "appliesTo": "僅適用於體育博彩（不適用於現場及RNG娛樂城或RNG遊戲）",
       "excludes": "不包含串關投注類型",
-      "management": "可通過體育博彩設定頁面和體育博彩潛在贏額上限頁面進行設置及管理"
+      "management": "限額可在會員帳戶頁面和潛在贏額上限頁面進行管理。"
     }
   }
 } 

@@ -448,7 +448,7 @@
     <value>สถานะผลิตภันฑ์ อัพเดทสำเร็จแล้ว</value>
   </data>
   <data name="GroupType162" xml:space="preserve">
-    <value>ขีดจำกัดการชนะที่เป็นไปได้</value>
+    <value>ขีดจำกัดการชนะสูงสุด</value>
   </data>
   <data name="UpdateSuccess_162" xml:space="preserve">
     <value>อัปเดตขีดจำกัดการชนะสูงสุดเรียบร้อยแล้ว</value>
