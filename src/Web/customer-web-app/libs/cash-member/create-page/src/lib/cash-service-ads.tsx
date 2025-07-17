@@ -2,6 +2,7 @@ import { currentCdnUri } from '@customer-web-app/shared-api-helper';
 import { useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
 import { CashServiceStatus } from '@customer-web-app/share-models';
+import { useTranslation, Trans } from 'react-i18next';
 
 interface CashServiceAdsContentProps {
     readonly onClickActivateNow: (() => void) | undefined;
@@ -10,13 +11,17 @@ interface CashServiceAdsContentProps {
 
 function CashServiceAdsContent(props: CashServiceAdsContentProps) {
     const { onClickActivateNow, findOutMore } = props;
+    const { t } = useTranslation();
     return (
         <div className={styles['ads-content']}>
             <div className={styles['main-title']}>
-                EXCLUSIVELY FOR YOU
+                {t('ExclusivelyForYou')}
             </div>
             <div className={styles['sub-title']}>
-                Enjoy Cash Service <span className={styles['pulse-animate'] + ' ' + styles['free-highlight']}>FREE</span> for 14 days!
+                <Trans i18nKey="EnjoyCashServiceFreeFor14Days"
+                    components={{
+                        free: <span className={styles['pulse-animate'] + ' ' + styles['free-highlight']}></span>
+                    }} />
             </div>
             <div className={styles['button-container']}>
                 <button
@@ -24,13 +29,13 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                     onClick={onClickActivateNow}
                     disabled={!onClickActivateNow}
                 >
-                    Activate now
+                    {t('ActivateNow')}
                 </button>
                 <button
                     className={styles['secondary-button']}
                     onClick={findOutMore}
                 >
-                    Find out more
+                    {t('FindOutMore')}
                 </button>
             </div>
         </div>
@@ -49,48 +54,49 @@ enum ContentFrame {
 }
 
 function CashServiceAds(props: CashServiceAdsProps) {
+    const { t } = useTranslation();
     const { onClose, onConfirm, cashServiceStatus } = props;
     const [contentFrame, setContentFrame] = useState(ContentFrame.Ads);
     const bannerPath = useMemo(() => currentCdnUri() + '/cash-service-ads/BannerPC.jpg', []);
     const [currentStep, setCurrentStep] = useState(0);
     const steps = useMemo(() => [
         <>
-            <div className={styles['step-title']}>Instant deposits and withdrawals!</div>
-            <img key={1} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step1.jpg'} alt="Instant deposits and withdrawals!" />
-            <div className={styles['step-description']}>Easily add a <strong>payment gateway</strong> and <strong>bank accounts</strong> so your members can start playing instantly.</div>
+            <div className={styles['step-title']}>{t('InstantDepositsAndWithdrawals')}</div>
+            <img key={1} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step1.jpg'} alt={t('InstantDepositsAndWithdrawals')} />
+            <div className={styles['step-description']}>{t('EasilyAddAPaymentGatewayAndBankAccountsSoYourMembersCanStartPlayingInstantly')}</div>
         </>,
         <>
-            <div className={styles['step-title']}>Manage credit and cash member</div>
-            <img key={2} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step2.jpg'} alt="Manage credit and cash member" />
-            <div className={styles['step-description']}>Maximise your earnings by managing both credit and cash in single account.</div>
+            <div className={styles['step-title']}>{t('ManageCreditAndCashMember')}</div>
+            <img key={2} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step2.jpg'} alt={t('ManageCreditAndCashMember')} />
+            <div className={styles['step-description']}>{t('MaximiseYourEarningsByManagingBothCreditAndCashInSingleAccount')}</div>
         </>,
         <>
-            <div className={styles['step-title']}>Dedicated domain</div>
-            <img key={3} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step3.gif'} alt="Dedicated domain" />
-            <div className={styles['step-description']}>Elevate your brand with a unique sign-up linked for member registrations.</div>
+            <div className={styles['step-title']}>{t('DedicatedDomain')}</div>
+            <img key={3} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step3.gif'} alt={t('DedicatedDomain')} />
+            <div className={styles['step-description']}>{t('ElevateYourBrandWithASignUpLinkedForMemberRegistrations')}</div>
         </>,
         <>
-            <div className={styles['step-title']}>Customise promotions</div>
-            <img key={4} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step4.jpg'} alt="Customise promotions" />
-            <div className={styles['step-description']}>Create and manage promotions featuring popular products <br /> and providers to keep your members entertained.</div>
+            <div className={styles['step-title']}>{t('CustomisePromotions')}</div>
+            <img key={4} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step4.jpg'} alt={t('CustomisePromotions')} />
+            <div className={styles['step-description']}>{t('CreateAndManagePromotionsFeaturingPopularProductsAndProvidersToKeepYourMembersEntertained')}</div>
         </>,
         <>
-            <div className={styles['step-title']}>Supercharge Your Cash Flow!</div>
+            <div className={styles['step-title']}>{t('SuperchargeYourCashFlow')}</div>
             <div className={styles.divider} />
             <div className={styles['step-highlight-block']}>
-                <span className={styles['free-badge']}>14-days <b>FREE</b> trial</span>
-                <span className={styles['save-amount']}>Start today and enjoy instant savings of <b>THB 2,800</b></span>
+                <span className={styles['free-badge']}>{t('14-daysFreeTrial')}</span>
+                <span className={styles['save-amount']}>{t('StartTodayAndEnjoyInstantSavingsOf')}</span>
             </div>
             <ul className={styles['step-benefits']}>
-                <li><span className={styles['icon-check']} /> <b>No platform fee</b> <span>- save THB 200/day during the trial.</span></li>
-                <li><span className={styles['icon-check']} /> <b> Just 0.15 per transaction</b> via your linked bank account.</li>
-                <li><span className={styles['icon-check']} /> Get results. Stay if you love it. Cancel anytime.</li>
+                <li><span className={styles['icon-check']} /> <b>{t('NoPlatformFee')}</b> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
+                <li><span className={styles['icon-check']} /> <b> {t('Just015PerTransactionViaYourLinkedBankAccount')}</b></li>
+                <li><span className={styles['icon-check']} /> {t('GetResultsStayIfYouLoveItCancelAnytime')}</li>
             </ul>
             <div className={styles['step-note']}>
-                <span className={styles['icon-info']}>ℹ️</span> Don't miss out – Activate now and take your cash flow to the next level.
+                <span className={styles['icon-info']}>ℹ️</span> {t('DontMissOutActivateNowAndTakeYourCashFlowToTheNextLevel')}
             </div>
         </>
-    ], []);
+    ], [t]);
 
     const onActivateNow = () => {
         setContentFrame(ContentFrame.StepSlider);
@@ -141,6 +147,7 @@ interface StepSliderProps {
 const StepSlider: React.FC<StepSliderProps> = (props) => {
     const { steps, currentStep, onClose, onFinish } = props;
     const [current, setCurrent] = useState(currentStep || 0);
+    const { t } = useTranslation();
 
     const isLast = current === steps.length - 1;
     const isFirst = current === 0;
@@ -161,18 +168,18 @@ const StepSlider: React.FC<StepSliderProps> = (props) => {
                     onClick={() => setCurrent(c => c - 1)}
                     disabled={isFirst}
                     className={`${styles['step-button']} ${styles['back-button']}`}
-                >Back</button>
+                >{t('Back')}</button>
                 {!isLast ? (
                     <button
                         onClick={() => setCurrent(c => c + 1)}
                         className={`${styles['step-button']} ${styles['next-button']}`}
-                    >Next</button>
+                    >{t('Next')}</button>
                 ) : (
                     <button
                         onClick={onFinish}
                         disabled={!onFinish}
                         className={`${styles['step-button']} ${styles['next-button']}`}
-                    >Confirm</button>
+                    >{t('Confirm')}</button>
                 )}
             </div>
             <div className={styles['step-counter']}>

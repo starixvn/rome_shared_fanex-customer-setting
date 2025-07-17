@@ -82,7 +82,7 @@ export const EditInfoCashMemberForm = () => {
                     <div className={styles['form-group']}>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
-                                <Label required>{t('FirstName')}</Label>
+                                <Label required>{t('firstName')}</Label>
                                 <Controller
                                     rules={{ required: t('FirstNameRequired') }}
                                     name="firstName"
