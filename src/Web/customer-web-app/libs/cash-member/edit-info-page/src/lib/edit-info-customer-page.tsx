@@ -15,6 +15,7 @@ import {
     REMARK_MAX_LENGTH
 } from '@customer-web-app/shared-constants';
 import { PageTitle } from './page-title';
+import { UpdateCustomerInfoResponse } from './edit-info-cash-member-types';
 
 
 export const EditInfoCustomerPage = () => {
@@ -55,7 +56,7 @@ export const EditInfoCustomerPage = () => {
         if (errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
             return;
         }
-        const res = await UpdateCustomerInfo<{ errorCode: string, errorMessage: string, isSuccess: boolean, isSuccessful: boolean }>({
+        const res = await UpdateCustomerInfo<UpdateCustomerInfoResponse>({
             custId: updateInfoCustomerPageConfig.custId,
             ...data,
         });
@@ -64,7 +65,7 @@ export const EditInfoCustomerPage = () => {
             reset(data);
             showResult('success', t('UpdateSuccess'), 1200);
         } else {
-            showResult('error', res.errorMessage);
+            showResult('error', res.message || res.errorMessage);
         }
         setIsLoading(false);
     }

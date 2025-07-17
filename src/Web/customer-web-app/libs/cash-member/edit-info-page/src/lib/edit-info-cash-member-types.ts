@@ -21,3 +21,14 @@ export interface MemberBankAccountRecord {
     memberBankCode: string;
     memberBankID: number;
 }
+
+export interface BaseResponse {
+    errorCode: string;
+    errorMessage: string;
+    message: string;
+    isSuccess: boolean;
+    isSuccessful: boolean;
+}
+
+export type UpdateCustomerInfoResponse = BaseResponse;
+export type UpdateMemberBankInfoResponse = BaseResponse;

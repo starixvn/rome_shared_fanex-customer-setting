@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { MemberBankAccountRecord } from "../edit-info-cash-member-types";
+import { MemberBankAccountRecord, UpdateMemberBankInfoResponse } from "../edit-info-cash-member-types";
 import { useTranslation } from "react-i18next";
 import { DropdownOption, TableSkeleton } from "@customer-web-app/shared/base/components";
 import { NoDataIcon } from "@customer-web-app/shared/base/common-icon";
@@ -123,7 +123,7 @@ export const CustomerBankDetail = () => {
         if (!editingRow) return;
         try {
             setIsLoading(true);
-            const response = await UpdateMemberBankInfo<any>({
+            const response = await UpdateMemberBankInfo<UpdateMemberBankInfoResponse>({
                 custId: updateInfoCustomerPageConfig.custId,
                 memberBankID: editingRow.memberBankID,
                 memberBankAccountID: editingRow.memberBankAccountID,
@@ -145,9 +145,9 @@ export const CustomerBankDetail = () => {
                         }
                         : account
                 ));
-                showResult('success', t('updateSuccess'));
+                showResult('success', t('UpdateSuccess'));
             } else {
-                showResult('error', response.message);
+                showResult('error', response.message || response.errorMessage);
             }
 
         } catch (error) {
@@ -188,7 +188,9 @@ export const CustomerBankDetail = () => {
                 />
             </div>
             <div className={styles.gridTable}>
-                {renderResultMessage()}
+                <div style={{ marginBottom: '5px' }}>
+                    {renderResultMessage()}
+                </div>
                 <TableSkeleton>
                     <thead>
                         <tr>

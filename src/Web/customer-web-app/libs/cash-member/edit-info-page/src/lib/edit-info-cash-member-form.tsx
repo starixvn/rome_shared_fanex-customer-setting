@@ -16,6 +16,7 @@ import {
     REMARK_MAX_LENGTH
 } from '@customer-web-app/shared-constants';
 import classNames from 'classnames';
+import { UpdateCustomerInfoResponse } from './edit-info-cash-member-types';
 
 export const EditInfoCashMemberForm = () => {
     const { t } = useTranslation();
@@ -58,7 +59,7 @@ export const EditInfoCashMemberForm = () => {
         if (errors.firstName || errors.lastName || errors.mobileCode || errors.mobileNumber || errors.email || errors.fax) {
             return;
         }
-        const res = await UpdateCustomerInfo<{ errorCode: string, errorMessage: string, isSuccess: boolean, isSuccessful: boolean }>({
+        const res = await UpdateCustomerInfo<UpdateCustomerInfoResponse>({
             custId: updateInfoCustomerPageConfig.custId,
             ...data,
             mobilePhone: `${data.mobileCode}-${data.mobileNumber}`
@@ -68,7 +69,7 @@ export const EditInfoCashMemberForm = () => {
             reset(data);
             showResult('success', t('UpdateSuccess'), 1200);
         } else {
-            showResult('error', res.errorMessage);
+            showResult('error', res.message || res.errorMessage);
         }
         setIsLoading(false);
     }
