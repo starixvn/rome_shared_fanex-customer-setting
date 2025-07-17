@@ -109,7 +109,7 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         {
             Id = g.Key,
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
-            GroupTypes = isGetUpline ? GetGroupTypesForEdit(g, cashRequest, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, cashRequest, isSiteLabel777, false)
+            GroupTypes = (isGetUpline ? GetGroupTypesForEdit(g, cashRequest, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, cashRequest, isSiteLabel777, false)).Where(gt => gt != null)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
     }
 
