@@ -9,6 +9,7 @@ import {
   SportsBookBetSettingGroupItem,
   WinLossLimitGroupItem,
   RNGGamesBetSettingGroupItem,
+  WinLimitGroupItem,
 } from '@customer-web-app/shared-group-settings-types';
 
 export function getNewMultipleEditCustomerSettings(
@@ -75,6 +76,17 @@ export const handleInitProducts = (productGroups: ProductGroup[]) => {
             isMultipleModeChecked: true,
             original: { ...item },
             lossLimitValue: item.lossLimit !== 0 ? item.lossLimit : undefined,
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.WinLimit) {
+          const groupItems = (type.groupItems as WinLimitGroupItem[]).map((item) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+            winLimitValue: item.winLimit !== 0 ? item.winLimit : undefined,
           }));
 
           return { ...type, groupItems };
