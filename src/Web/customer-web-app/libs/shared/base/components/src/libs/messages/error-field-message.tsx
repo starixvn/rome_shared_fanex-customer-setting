@@ -1,5 +1,5 @@
 import styles from './error-field-message.module.scss';
 
-export const ErrorFieldMessage = ({ message }: { message: string }) => {
-    return <div className={styles.errorFieldMessage}>{message}</div>;
+export const ErrorFieldMessage = ({ message, style }: { message: string, style?: React.CSSProperties }) => {
+    return <div className={styles.errorFieldMessage} style={style}>{message}</div>;
 };

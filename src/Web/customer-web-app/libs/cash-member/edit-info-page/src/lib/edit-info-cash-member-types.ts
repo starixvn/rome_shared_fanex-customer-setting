@@ -32,3 +32,13 @@ export interface BaseResponse {
 
 export type UpdateCustomerInfoResponse = BaseResponse;
 export type UpdateMemberBankInfoResponse = BaseResponse;
+
+export interface BaseCustomerInfo {
+    firstName: string;
+    lastName: string;
+    mobileCode: string;
+    mobileNumber: string;
+    phone: string;
+    email: string;
+    fax: string;
+}

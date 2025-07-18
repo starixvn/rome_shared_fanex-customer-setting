@@ -6,12 +6,14 @@ export const ButtonOutline: React.FC<{
     type?: 'button' | 'submit' | 'reset';
     className?: string;
     disabled?: boolean;
+    style?: React.CSSProperties;
 }> = ({
   text,
   onClick,
   type,
   className = '',
   disabled = false,
+  style,
 }) => {
   return (
     <div className={`${className}`}>
@@ -20,6 +22,7 @@ export const ButtonOutline: React.FC<{
         className={styles['button-outline']}
         onClick={onClick}
         disabled={disabled}
+        style={style}
       >
         {text}
       </button>

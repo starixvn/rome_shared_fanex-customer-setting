@@ -2,14 +2,24 @@
 import { i18nInstance } from '@customer-web-app/shared-i18n';
 import { IconError } from '@customer-web-app/shared/base/common-icon';
 import * as Sentry from '@sentry/react';
-import { EditInfoCashMemberPage, EditInfoCustomerPage} from '@customer-web-app/edit-info-cash-member-page';
-import { useCookieLanguage } from '@customer-web-app/shared/base/components';
+import { EditInfoCashMemberPage, ViewInfoCashMemberForm ,EditInfoNomalMemberAlpha} from '@customer-web-app/edit-info-cash-member-page';
+import { useCookieLanguage, useSystems } from '@customer-web-app/shared/base/components';
 
 function EditInfoCustomerPageWrapper() {
-  if (updateInfoCustomerPageConfig.isCashMember) {
-      return <EditInfoCashMemberPage />
+  const { isAlphaSystem, isExternalNapSystem } = useSystems(updateInfoCustomerPageConfig.systemId);
+
+  if(isAlphaSystem && updateInfoCustomerPageConfig.isCashMember){
+    return <EditInfoCashMemberPage />
   }
-  return <EditInfoCustomerPage />
+
+  if(isAlphaSystem && !updateInfoCustomerPageConfig.isCashMember){
+    return <EditInfoNomalMemberAlpha />
+  }
+
+  if(isExternalNapSystem && updateInfoCustomerPageConfig.isCashMember){
+    return <ViewInfoCashMemberForm />
+  }
+  return null;
 }
 
 export function App() {

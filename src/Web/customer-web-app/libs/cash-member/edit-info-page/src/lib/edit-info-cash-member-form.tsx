@@ -1,5 +1,5 @@
 import { FormProvider, useForm, Controller } from 'react-hook-form';
-import styles from './edit-info-cash-member-page.module.scss';
+import styles from './edit-info-base-style.module.scss';
 import { ButtonFull, ButtonOutline, Label, useResultMessage, useSystems } from '@customer-web-app/shared/base/components';
 import { useEffect, useState } from 'react';
 import { GetCustomerInfo, UpdateCustomerInfo } from './edit-info-cash-member-services';
@@ -243,7 +243,7 @@ export const EditInfoCashMemberForm = () => {
                                     />}
                             />
                         </div>}
-                        <div className={styles['form-group-row']} style={{ justifyContent: isAlphaSystem ? 'flex-start' : 'flex-end' }}>
+                        <div className={classNames(styles['form-group-row'], isAlphaSystem && styles['justify-start'])}>
                             <ButtonFull text={t('Update')} onClick={methods.handleSubmit(onSubmit)} disabled={isLoading} />
                             <ButtonOutline text={t('Reset')} onClick={() => {
                                 reset(originalCustomerInfo);

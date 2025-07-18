@@ -7,7 +7,8 @@ type MessageType = 'success' | 'error' | 'warning' | 'info';
 interface ResultMessageProps {
     type: MessageType;
     message: string;
-    className?: string;
+    className?: string; 
+    style?: React.CSSProperties;
 }
 
 const MESSAGE_CONFIG = {
@@ -29,6 +30,7 @@ export const ResultMessage: React.FC<ResultMessageProps> = ({
     type,
     message,
     className = '',
+    style,
 }) => {
     const config = MESSAGE_CONFIG[type as keyof typeof MESSAGE_CONFIG];
     
@@ -39,7 +41,7 @@ export const ResultMessage: React.FC<ResultMessageProps> = ({
     const IconComponent = config.icon;
 
     return (
-        <div className={classNames(styles.resultMessage, className)} role="alert">
+        <div className={classNames(styles.resultMessage, className)} role="alert" style={style}>
             <div className={`${styles.message} ${config.styleClass}`}>
                 <IconComponent className={styles.icon} />
                 <div>{message}</div>

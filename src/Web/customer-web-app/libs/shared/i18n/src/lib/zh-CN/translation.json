@@ -277,5 +277,6 @@
   "AddSuccess": "添加成功",
   "AddFailed": "添加失败",
   "RemoveSuccess": "删除成功",
-  "NoChanges": "没有需要更新的变化。"
+  "NoChanges": "没有需要更新的变化。",
+  "CustomerInformation": "会员资料"
 }

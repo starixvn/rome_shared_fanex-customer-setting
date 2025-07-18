@@ -276,5 +276,6 @@
   "AddSuccess": "Thêm thành công",
   "AddFailed": "Thêm thất bại",
   "RemoveSuccess": "Xóa thành công",
-  "NoChanges": "Không có thay đổi để cập nhật."
+  "NoChanges": "Không có thay đổi để cập nhật.",
+  "CustomerInformation": "Thông tin khách hàng"
 }

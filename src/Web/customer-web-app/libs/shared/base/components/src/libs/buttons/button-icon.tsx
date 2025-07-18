@@ -7,10 +7,12 @@ export const ButtonIcon: React.FC<{
     type?: 'button' | 'submit' | 'reset';
     icon?: React.ReactNode;
     className?: string;
-}> = ({ onClick, disabled, type, icon, className }) => {
+    style?: React.CSSProperties;
+}> = ({ onClick, disabled, type, icon, className, style }) => {
     return (
         <button
             type={type || 'button'}
+            style={style}
             className={classNames(styles.buttonIcon, className, {
                 [styles.disabled]: disabled,
             })}

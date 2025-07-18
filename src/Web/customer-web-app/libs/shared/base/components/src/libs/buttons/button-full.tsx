@@ -6,15 +6,17 @@ export const ButtonFull: React.FC<{
     type?: 'button' | 'submit' | 'reset';
     className?: string;
     disabled?: boolean;
+    style?: React.CSSProperties;
 }> = ({
     text,
     onClick,  
     type,
     className = '',
     disabled = false,
+    style,
   }) => {
     return (
-      <div className={`${className}`}>
+      <div className={`${className}`} style={style}>
         <button
           type={type || 'button'}
           className={styles['button-full']}

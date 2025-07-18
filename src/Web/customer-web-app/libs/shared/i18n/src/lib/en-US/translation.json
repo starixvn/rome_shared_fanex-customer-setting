@@ -278,5 +278,6 @@
   "AddSuccess": "Add successfully",
   "AddFailed": "Add failed",
   "RemoveSuccess": "Remove successfully",
-  "NoChanges": "There is no change to update."
+  "NoChanges": "There is no change to update.",
+  "CustomerInformation": "Customer Information"
 }

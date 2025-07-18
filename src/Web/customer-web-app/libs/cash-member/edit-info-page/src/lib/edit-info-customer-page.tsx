@@ -1,6 +1,6 @@
 import { FormProvider, useForm, Controller } from 'react-hook-form';
 import classNames from 'classnames';
-import styles from './edit-info-cash-member-page.module.scss';
+import styles from './edit-info-base-style.module.scss';
 import { ButtonFull, ButtonOutline, ErrorFieldMessage, Label, Title, useResultMessage, useSystems } from '@customer-web-app/shared/base/components';
 import { useEffect, useState } from 'react';
 import { GetCustomerInfo, UpdateCustomerInfo } from './edit-info-cash-member-services';
