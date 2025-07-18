@@ -80,3 +80,9 @@
   height: 20px;
   fill: var(--pen-icon-color);
 }
+
+.bankAccountNumber {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

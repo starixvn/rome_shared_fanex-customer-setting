@@ -4,6 +4,7 @@ import { SingleFilterableDropdown, DropdownOption } from "@customer-web-app/shar
 import { IconTick, IconClose2, IconPen, IconTrashBin } from "@customer-web-app/shared/base/common-icon";
 import { ButtonIcon } from "@customer-web-app/shared/base/components";
 import styles from "./grid-components.module.scss";
+import { WrapperTooltip } from "@customer-web-app/wrapper-tooltip";
 
 interface Bank {
     bankId: number;
@@ -33,7 +34,7 @@ const BankCell = memo(({ bankAccountNumber, bankCode }: Partial<Bank>) => {
                 className={styles.bankIcon}
                 loading="lazy"
             />
-            {bankAccountNumber}
+            <span className={styles.bankAccountNumber} title={bankAccountNumber}>{bankAccountNumber}</span>
         </div>
     );
 });

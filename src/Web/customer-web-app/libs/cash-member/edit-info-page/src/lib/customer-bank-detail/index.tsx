@@ -204,7 +204,7 @@ export const CustomerBankDetail = () => {
                                     </span>
                                     <WrapperTooltip
                                         id="agent-bank-tooltip"
-                                        content={t('AgentBankAccountTooltip')}
+                                        content={`${t('AgentBankAccountTooltip')} ${t('AgentBankAccountTooltip2')}`}
                                         place="top"
                                     />
                             </th>

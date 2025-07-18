@@ -176,6 +176,12 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
                                                 const value = e.target.value.replace(NUMBER_REGEX, '').slice(0, 50);
                                                 field.onChange(value);
                                             }}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter') {
+                                                    e.preventDefault();
+                                                    handleSubmit(onSubmit)();
+                                                }
+                                            }}
                                         />
                                     )}
                                 />
@@ -204,6 +210,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
                                     disabled={isLoading || isBlockAction}
                                 />
                                 <ButtonFull
+                                    type="submit"
                                     text={isLoading ? t('Loading') : t('Save')}
                                     onClick={handleSubmit(onSubmit)}
                                     disabled={isLoading || isBlockAction}

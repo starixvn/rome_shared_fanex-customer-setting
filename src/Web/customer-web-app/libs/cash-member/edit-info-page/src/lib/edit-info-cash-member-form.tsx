@@ -235,7 +235,7 @@ export const EditInfoCashMemberForm = () => {
                                     <textarea
                                         {...field}
                                         maxLength={REMARK_MAX_LENGTH}
-                                        style={{ height: '100px' }}
+                                        style={{ height: '150px' }}
                                         onBlur={(e) => {
                                             const trimmedValue = e.target.value.trim();
                                             field.onChange(trimmedValue);
