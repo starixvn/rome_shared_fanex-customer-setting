@@ -60,6 +60,7 @@ export const EditInfoNomalMemberAlpha = () => {
             }
 
             const response = await UpdateCustomerInfo<UpdateCustomerInfoResponse>({
+                CustId: updateInfoCustomerPageConfig.custId,
                 FirstName: formData.firstName,
                 LastName: formData.lastName,
                 Phone: formData.phone,
