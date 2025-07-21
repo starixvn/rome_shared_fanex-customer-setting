@@ -28,6 +28,7 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState("");
   const [isCompleteSetup, setIsCompleteSetup] = useState(false);
+  const [isCanEditCashService, setIsCanEditCashService] = useState(false);
   const [compactText, setCompactText] = useState('');
   const [individualText, setIndividualText] = useState('');
 
@@ -54,10 +55,15 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
 
   const getSetupChecklist = async () => {
     const data = await SettingService.GetSetupChecklist();
-    setIsCompleteSetup(data.isCompleteAll);
 
-    const ct = formatUserInfo(newUserNames?.join(', ') ?? '', domains ?? '', data.isCompleteAll) ;
-    const it = newUserNames?.map((username) => formatUserInfo(username, domains ?? '', data.isCompleteAll)).join('\n\n') ?? '';
+    const isCanEditCashService = data.isCanEditCashService;
+    setIsCanEditCashService(isCanEditCashService);
+
+    const isCompleteAll = isCanEditCashService && data.isCompleteAll;
+    setIsCompleteSetup(isCompleteAll);
+
+    const ct = formatUserInfo(newUserNames?.join(', ') ?? '', domains ?? '', isCompleteAll) ;
+    const it = newUserNames?.map((username) => formatUserInfo(username, domains ?? '', isCompleteAll)).join('\n\n') ?? '';
     setCompactText(ct);
     setIndividualText(it);
   };
@@ -140,7 +146,7 @@ export default function CreateCashMemberSuccessPopup(props: Props) {
               </div>
             )}
 
-            {!isCompleteSetup && (            
+            {isCanEditCashService && !isCompleteSetup && (            
               <div className={styles['refer-checklist']}>
                 <span className="icon ic-info"></span>
                 <span dangerouslySetInnerHTML={{ __html: t('ReferChecklist') }} />
