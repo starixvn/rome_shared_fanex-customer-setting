@@ -170,7 +170,8 @@ export function BankInfomation(props: BankSelectProps) {
               onChangeBankAccountNumber(value);
             }}
             onFocus={onFocusBankAccountNumber}
-            onBlur={onBlurBankAccountNumber} />
+            onBlur={onBlurBankAccountNumber} 
+            maxLength={50}/>
         </BlockItem>
       </div >
     </div >)
