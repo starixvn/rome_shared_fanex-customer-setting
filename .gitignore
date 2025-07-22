@@ -36,4 +36,3 @@ node_modules/
 .next
 *.orig
 .nx
-/src/Web/customer-web-app/libs/shared/i18n/src/lib/en-US/translation.json
