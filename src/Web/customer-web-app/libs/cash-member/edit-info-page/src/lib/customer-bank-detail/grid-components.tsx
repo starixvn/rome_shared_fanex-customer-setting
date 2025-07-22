@@ -29,7 +29,7 @@ const BankCell = memo(({ bankAccountNumber, bankCode }: Partial<Bank>) => {
     return (
         <div className={styles.bankCell}>
             <img
-                src={`${updateInfoCustomerPageConfig.cdnUri}cash-member/create/bank/${bankCode}.png`}
+                src={`${updateInfoCustomerPageConfig.cdnUri}cash-member/create/bank/${bankCode.toUpperCase()}.png`}
                 alt={`${bankCode} bank icon`}
                 className={styles.bankIcon}
                 loading="lazy"
