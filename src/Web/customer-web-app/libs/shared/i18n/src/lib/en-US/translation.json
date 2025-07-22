@@ -59,6 +59,7 @@
   "CreateAccount": "Create Account",
   "RequiredField": "This field is required.",
   "PleaseInputBankAccountNumber": "Please input bank account number",
+  "PleaseSelectBank": "Please select bank",
   "PasswordInCorrectFormat": "Your password does not meet the minimum security requirement.",
   "SelectTemplate": "Select Template",
   "unlimited": "Unlimited",

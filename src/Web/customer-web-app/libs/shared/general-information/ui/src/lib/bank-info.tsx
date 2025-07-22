@@ -67,7 +67,7 @@ const BankDropdown = ({ banks, onChangeBankId, isBankIdError }: { banks: Bank[],
   }, [banks, searchTerm]);
 
   return (
-    <div className={stylesDropdown['bank-dropdown']} ref={wrapperRef}>
+    <div className={stylesDropdown['bank-dropdown']} ref={wrapperRef} id="bankId">
       <div className={classNames(stylesDropdown['bank-dropdown__selected'], { [stylesDropdown['bank-dropdown__selected--error']]: isBankIdError })} onClick={() => setIsOpen(!isOpen)}>
         {selectedBank?.code &&
           <img

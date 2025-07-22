@@ -58,6 +58,7 @@
   "CreateAccount": "สร้างบัญชี",
   "RequiredField": "จำเป็นต้องใส่ข้อมูลนี้",
   "PleaseInputBankAccountNumber": "กรุณากรอกหมายเลขบัญชีธนาคาร",
+  "PleaseSelectBank": "กรุณาเลือกธนาคาร",
   "PasswordInCorrectFormat": "รหัสผ่านของคุณไม่เป็นไปตามข้อแม้ของการรักษาความปลอดภัย",
   "SelectTemplate": "เลือกเทมเพลต",
   "unlimited": "ไม่จำกัดค่า",

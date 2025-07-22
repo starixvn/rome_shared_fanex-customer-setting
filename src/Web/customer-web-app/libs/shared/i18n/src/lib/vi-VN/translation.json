@@ -58,6 +58,7 @@
   "CreateAccount": "Tạo tài khoản",
   "RequiredField": "Thông tin này bắt buộc phải nhập.",
   "PleaseInputBankAccountNumber": "Vui lòng nhập số tài khoản ngân hàng",
+  "PleaseSelectBank": "Vui lòng chọn ngân hàng",
   "PasswordInCorrectFormat": "Mật khẩu của bạn chưa đạt mức an toàn tối thiểu.",
   "SelectTemplate": "Chọn Mẫu",
   "unlimited": "Không giới hạn",

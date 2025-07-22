@@ -58,6 +58,7 @@
   "CreateAccount": "新增帳號功能",
   "RequiredField": "必填欄",
   "PleaseInputBankAccountNumber": "請輸入銀行帳號",
+  "PleaseSelectBank": "請選擇銀行",
   "PasswordInCorrectFormat": "您的密码不符合最低安全要求",
   "SelectTemplate": "選擇模板",
   "unlimited": "無限",

@@ -85,9 +85,11 @@ function CashServiceAds(props: CashServiceAdsProps) {
             <div className={styles.divider} />
             <div className={styles['step-highlight-block']}>
                 <span className={styles['free-badge']}>{
-                    <Trans i18nKey="14-daysFreeTrial" components={{b: <b></b>}} />
+                    <Trans i18nKey="14-daysFreeTrial" components={{ b: <b></b> }} />
                 }</span>
-                <span className={styles['save-amount']}>{t('StartTodayAndEnjoyInstantSavingsOf')}</span>
+                <span className={styles['save-amount']}>{
+                    <Trans i18nKey="StartTodayAndEnjoyInstantSavingsOf" components={{ b: <b></b> }} />
+                }</span>
             </div>
             <ul className={styles['step-benefits']}>
                 <li><span className={styles['icon-check']} /> <b>{t('NoPlatformFee')}</b> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
