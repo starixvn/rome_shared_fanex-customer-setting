@@ -1,13 +1,13 @@
 @import './assets/icons/style.css';
 @import './assets/roboto/roboto.css';
 
+
 body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 400;
   font-size: var(--font-size);
   line-height: 1.42857;
   color: var(--color-label);
-  background-color: var(--bg-body-tab);
   * {
     box-sizing: border-box;
   }
