@@ -97,3 +97,15 @@ export const DirectMemberAgentIds = {
   Super: -4,
   Master: -3,
 };
+
+export enum ServiceTypes {
+  Credit = 0,
+  Cash = 1,
+}
+
+export const PHONE_CODE_MAX_LENGTH = 3;
+export const PHONE_NUMBER_MAX_LENGTH = 40;
+export const EMAIL_MAX_LENGTH = 50;
+export const FIRST_NAME_MAX_LENGTH = 50;
+export const LAST_NAME_MAX_LENGTH = 50;
+export const REMARK_MAX_LENGTH = 50;

@@ -6,7 +6,7 @@ import {
   PotentialWinLimitGroupItem,
   ProductGroup, ProductStatusGroupItem,
   RNGGamesBetSettingGroupItem, SportsBookBetSettingGroupItem,
-  SuperDirectMemberPositionTakingGroupItem, SuperPositionTakingGroupItem, WinLossLimitGroupItem
+  SuperDirectMemberPositionTakingGroupItem, SuperPositionTakingGroupItem, WinLimitGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 export const getGroupTypes = (productGroups: ProductGroup[] | undefined, groupId: number) =>
@@ -132,6 +132,14 @@ function isChanged<T>(item: T, groupTypeId: number, roleId: number) {
     return (
       groupItem.winLimit !== groupItem.original.winLimit ||
       groupItem.lossLimit !== groupItem.original.lossLimit ||
+      groupItem.isAutoReset !== groupItem.original.isAutoReset
+    );
+  }
+
+  if (groupTypeId === GroupTypeIds.WinLimit) {
+    const groupItem = item as WinLimitGroupItem;
+    return (
+      groupItem.winLimit !== groupItem.original.winLimit ||
       groupItem.isAutoReset !== groupItem.original.isAutoReset
     );
   }

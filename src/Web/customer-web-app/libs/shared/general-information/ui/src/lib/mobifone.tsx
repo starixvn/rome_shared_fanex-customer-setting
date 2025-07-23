@@ -41,7 +41,7 @@ export function Mobifone({
   }
 
   return (
-    <div className={styles.phoneCodeContainer}>
+    <div id="mobilePhone" className={styles.phoneCodeContainer}>
       <input
         id="phoneCode"
         key="phoneCode"

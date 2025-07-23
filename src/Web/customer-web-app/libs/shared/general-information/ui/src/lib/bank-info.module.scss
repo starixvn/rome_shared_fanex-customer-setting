@@ -15,7 +15,7 @@
   --background-control-bank2: #2f2f2f;
 }
 .bank-dropdown {
-    border: 1px solid var(--border-control-bank);
+    // border: 1px solid var(--border-control-bank);
     background-color: var(--background-control-bank2);
     border-radius: 3px;
     white-space: normal;
@@ -82,6 +82,7 @@
     }
 
     &__selected {
+        border: 1px solid var(--border-control-bank);
         padding: 0 0 0 3px;
         width: 100%;      
         border-radius: 4px;
@@ -110,5 +111,10 @@
             right: 3px;
             fill: var(--color-control-bank);
         }
+    }
+
+    &__selected--error {
+        border: 1px solid var(--border-input-error);
+        background-color: var(--bg-input-error);
     }
 }

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { BlockUI } from '@customer-web-app/shared-block-ui';
 import { SportTypeIds } from '@customer-web-app/shared-constants';
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
-import { CurrentWinLossAmount } from '@customer-web-app/shared-group-settings-types';
+import { CurrentWinAmount } from '@customer-web-app/shared-group-settings-types';
 import { NumberHelper } from '@customer-web-app/shared-helpers';
 import { BlockColumn, BlockRow } from '@customer-web-app/shared/base/block';
 import { IconClose } from '@customer-web-app/shared/base/common-icon';
@@ -13,34 +13,34 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
 import styles from './win-amount.module.scss';
 
-const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: number; betType: number }) => {
+const WinAmount = NiceModal.create(({ sportType, betType }: { sportType: number; betType: number }) => {
   const { t } = useTranslation();
   const modal = useModal();
   const theme = useTheme();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [winLossAmount, setWinLossAmount] = useState<CurrentWinLossAmount[]>([]);
+  const [winAmount, setWinAmount] = useState<CurrentWinAmount[]>([]);
 
   useEffect(() => {
-    const getCustomerWinLossAmount = async () => {
+    const getCustomerWinAmount = async () => {
       const firstCustId = params.custId ?? Number(params.custIds?.split(',')[0]);
-      const currentWinLossAmount = await SettingService.GetCustomerCurrentWinLossAmount(
+      const currentWinAmount = await SettingService.GetCurrentWinAmount(
         firstCustId,
         sportType,
         betType
       );
-      setWinLossAmount(currentWinLossAmount);
+      setWinAmount(currentWinAmount);
       setIsLoading(false);
     };
 
-    getCustomerWinLossAmount();
+    getCustomerWinAmount();
   }, [betType, sportType]);
 
-  const showWinningPercentColumn = (wl: CurrentWinLossAmount) => {
-    const { winPercent, currentAmount, maxWinAmount } = wl;
-    const currentAmountValue = NumberHelper.formatWithCommas(currentAmount);
+  const showWinningPercentColumn = (w: CurrentWinAmount) => {
+    const { winPercent, maxWinAmount, currentAmount } = w;
     const maxWinAmountValue = NumberHelper.formatWithCommas(maxWinAmount);
     const winPercentValue = NumberHelper.formatWithCommas(winPercent);
+    const currentAmountValue = NumberHelper.formatWithCommas(currentAmount);
 
     if (winPercent === 0) return <div>{winPercent}%</div>;
     if (winPercent > 0 && winPercent <= 100)
@@ -68,28 +68,6 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
     if (winPercent === -3) return <div className={styles.notAvailable}>{t('N/A')}</div>;
   };
 
-  const showLosingPercentColumn = (wl: CurrentWinLossAmount) => {
-    const { lossPercent, currentAmount, maxLossAmount } = wl;
-    const currentAmountValue = NumberHelper.formatWithCommas(-currentAmount);
-    const maxLossAmountValue = NumberHelper.formatWithCommas(maxLossAmount);
-    const lossPercentValue = NumberHelper.formatWithCommas(lossPercent);
-
-    if (lossPercent === 0) return <div>{lossPercent}%</div>;
-    if (lossPercent === -1) return <div>{t('unlimited')}</div>;
-    if (lossPercent > 0 && lossPercent <= 100)
-      return (
-        <div>
-          {lossPercentValue}% ({currentAmountValue}/{maxLossAmountValue})
-        </div>
-      );
-    if (lossPercent > 100)
-      return (
-        <div className={styles.textRed}>
-          {lossPercentValue}% ({currentAmountValue}/{maxLossAmountValue})
-        </div>
-      );
-  };
-
   return isLoading ? (
     <BlockUI />
   ) : (
@@ -97,7 +75,7 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.title}>
-            {t(`CurrentWinLossAmount`)}
+            {t(`CurrentWinAmount`)}
             <span
               onClick={() => {
                 modal.resolve({
@@ -116,18 +94,14 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
               <div className={styles.contentHead}>
                 <BlockRow label={t('Product')}>
                   <BlockColumn>{t('Winning')}%</BlockColumn>
-                  <BlockColumn>{t('Losing')}%</BlockColumn>
                 </BlockRow>
               </div>
-              {winLossAmount.length > 0 &&
-                winLossAmount.map((wl) => {
+              {winAmount.length > 0 &&
+                winAmount.map((w) => {
                   return (
-                    <BlockRow key={wl.sportType} label={wl.sportTypeName}>
+                    <BlockRow key={w.sportType} label={w.sportTypeName}>
                       <BlockColumn>
-                        <div className={styles.textCenter}>{showWinningPercentColumn(wl)}</div>
-                      </BlockColumn>
-                      <BlockColumn>
-                        <div className={styles.textCenter}>{showLosingPercentColumn(wl)}</div>
+                        <div className={styles.textCenter}>{showWinningPercentColumn(w)}</div>
                       </BlockColumn>
                     </BlockRow>
                   );
@@ -141,4 +115,4 @@ const WinLossAmount = NiceModal.create(({ sportType, betType }: { sportType: num
   );
 });
 
-export default WinLossAmount;
+export default WinAmount;

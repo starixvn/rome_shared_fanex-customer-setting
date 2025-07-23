@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@customer-web-app/create-cash-member-page": ["libs/cash-member/create-page/src/index.ts"],
+      "@customer-web-app/edit-info-cash-member-page": ["libs/cash-member/edit-info-page/src/index.ts"],
       "@customer-web-app/create-customer-page": ["libs/create-customer/create-customer-page/src/index.ts"],
       "@customer-web-app/create-direct-member-page": ["libs/direct-member/create-page/src/index.ts"],
       "@customer-web-app/create-super-notes": ["libs/create-super/notes/src/index.ts"],
@@ -48,7 +49,8 @@
       "@customer-web-app/shared/base/styles": ["libs/shared/base/styles/src/index.scss"],
       "@customer-web-app/site-currency-section": ["libs/create-super/site-currency-section/src/index.ts"],
       "@customer-web-app/sportsbook-information-page": ["libs/sportsbook-information-page/src/index.ts"],
-      "@customer-web-app/wrapper-tooltip": ["libs/shared/base/wrapper-tooltip/src/index.ts"]
+      "@customer-web-app/wrapper-tooltip": ["libs/shared/base/wrapper-tooltip/src/index.ts"],
+      "@customer-web-app/shared/base/components": ["libs/shared/base/components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

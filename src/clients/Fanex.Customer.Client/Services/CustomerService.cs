@@ -71,6 +71,8 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US");
 
+        Task<string> GetCurrentWinAmounts(int custId, int sportType, int betType, string language = "en-US");
+
         Task<string> GetPTSettingInformation(int? custId, bool isTest, string site, string language = "en-US");
 
         Task<string> GetProductCategories(int? custId, string site, string siteLabel, int currency, string language = "en-US");
@@ -92,6 +94,16 @@ namespace Fanex.Customer.Client.Services
         Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
 
         Task<Result> UpdateCashServiceStatus(UpdateCashServiceStatusRequest request);
+
+        Task<string> GetBanks(string site);
+
+        Task<string> GetCustomerBankInfo(int custId, int roleId);
+
+        Task<string> AddMemberBankInfo(AddMemberBankInfoParam request);
+
+        Task<string> UpdateMemberBankInfo(UpdateMemberBankInfoParam request);
+
+        Task<string> RemoveMemberBankInfo(RemoveMemberBankInfoParam request);
     }
 
     public class CustomerService : ICustomerService
@@ -254,6 +266,9 @@ namespace Fanex.Customer.Client.Services
 
         public Task<string> GetCustomerCurrentWinLossAmounts(int custId, int sportType, int betType, string language = "en-US")
             => httpClient.GetStringAsync($"customer/current-winloss-amount?custId={custId}&sportType={sportType}&betType={betType}&language={language}");
+            
+        public Task<string> GetCurrentWinAmounts(int custId, int sportType, int betType, string language = "en-US")
+            => httpClient.GetStringAsync($"customer/current-win-amount?custId={custId}&sportType={sportType}&betType={betType}&language={language}");
 
         public Task<string> GetCustomerSetting(int custId, byte roleId, int systemId, byte uplineRoleId = 0, string language = Languages.English, bool isGetUpline = false, int productGroupId = 1, string siteLabel = "", bool isMultipleMode = false, string groupName = "", bool isCopy = false, int? agentId = 0)
             => httpClient.GetStringAsync($"customer?CustId={custId}&RoleId={roleId}&SystemId={systemId}&UplineRoleId={uplineRoleId}&Language={language}&IsGetUpline={isGetUpline}&ProductGroupId={productGroupId}&SiteLabel={siteLabel}&IsMultipleMode={isMultipleMode}&GroupName={groupName}&IsCopy={isCopy}&AgentId={agentId}");
@@ -352,5 +367,30 @@ namespace Fanex.Customer.Client.Services
             
         public Task<string> GetBetLimitInformation(string siteName, string siteLabel, string language = "en-US")
             => httpClient.GetStringAsync($"customer/bet-setting?siteName={siteName}&siteLabel={siteLabel}&language={language}");
+
+        public Task<string> GetBanks(string site)
+            => httpClient.GetStringAsync($"customer/bank-info/banks?site={site}");
+
+        public Task<string> GetCustomerBankInfo(int custId, int roleId)
+        {
+            switch(roleId){
+                case 1:
+                    return httpClient.GetStringAsync($"customer/bank-info/member/{custId}");
+                case 2:
+                    var transType = 1;
+                    return httpClient.GetStringAsync($"customer/bank-info/agent/{custId}/{transType}");
+                default:
+                    return Task.FromResult("");
+            }
+        }
+
+        public Task<string> AddMemberBankInfo(AddMemberBankInfoParam request)
+            => httpClient.PostAsStringAsync("customer/bank-info/member/add", request);
+
+        public Task<string> UpdateMemberBankInfo(UpdateMemberBankInfoParam request)
+            => httpClient.PostAsStringAsync("customer/bank-info/member/update", request);
+
+        public Task<string> RemoveMemberBankInfo(RemoveMemberBankInfoParam request)
+            => httpClient.PostAsStringAsync($"customer/bank-info/member/remove", request);
     }
 }

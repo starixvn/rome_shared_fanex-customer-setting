@@ -19,11 +19,12 @@ interface BankSelectProps {
   readonly onChangeBankId: (bankId: number) => void;
   readonly onChangeBankAccountNumber: (bankAccountNumber: string) => void;
   readonly isBankAccountNumberError: boolean;
+  readonly isBankIdError: boolean;
   readonly onFocusBankAccountNumber: () => void;
   readonly onBlurBankAccountNumber: () => void;
 }
 
-const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId: (bankId: number) => void }) => {
+const BankDropdown = ({ banks, onChangeBankId, isBankIdError }: { banks: Bank[], onChangeBankId: (bankId: number) => void, isBankIdError: boolean }) => {
   const { t } = useTranslation();
   const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -66,8 +67,8 @@ const BankDropdown = ({ banks, onChangeBankId }: { banks: Bank[], onChangeBankId
   }, [banks, searchTerm]);
 
   return (
-    <div className={stylesDropdown['bank-dropdown']} ref={wrapperRef}>
-      <div className={stylesDropdown['bank-dropdown__selected']} onClick={() => setIsOpen(!isOpen)}>
+    <div className={stylesDropdown['bank-dropdown']} ref={wrapperRef} id="bankId">
+      <div className={classNames(stylesDropdown['bank-dropdown__selected'], { [stylesDropdown['bank-dropdown__selected--error']]: isBankIdError })} onClick={() => setIsOpen(!isOpen)}>
         {selectedBank?.code &&
           <img
             alt={selectedBank.name}
@@ -129,17 +130,22 @@ export function BankInfomation(props: BankSelectProps) {
     onChangeBankId,
     onChangeBankAccountNumber,
     isBankAccountNumberError,
+    isBankIdError,
     onFocusBankAccountNumber,
     onBlurBankAccountNumber
   } = props;
   
   useEffect(() => {
     async function fetchBanks() {
-      const result = await SettingService.GetBanks();
-      result.map((bank: Bank) => {
-        bank.name = t(bank.code);
+      const result = await SettingService.GetBanks<{bankId: number, bankName: string, bankCode: string}[]>();
+      const banks = result.map((bank: {bankId: number, bankName: string, bankCode: string}) => {
+        return {
+          id: bank.bankId,
+          name: t(bank.bankCode),
+          code: bank.bankCode
+        }
       });
-      setBanks(result || []);
+      setBanks(banks || []);
     }
     fetchBanks();
   }, []);
@@ -147,11 +153,11 @@ export function BankInfomation(props: BankSelectProps) {
   return (
     <div className={styles['user-info']}>
       <div className={styles['subheader']}>
-        {t('BankInfo')}
+        {t('BankInformation')}
       </div>
       <div className={classNames(styles['row'])}>
         <BlockItem label={t('Bank')}>
-          <BankDropdown banks={banks} onChangeBankId={onChangeBankId} />
+          <BankDropdown banks={banks} onChangeBankId={onChangeBankId} isBankIdError={isBankIdError} />
         </BlockItem>
         <BlockItem label={t('AccountNumber')}>
           <input
@@ -164,7 +170,8 @@ export function BankInfomation(props: BankSelectProps) {
               onChangeBankAccountNumber(value);
             }}
             onFocus={onFocusBankAccountNumber}
-            onBlur={onBlurBankAccountNumber} />
+            onBlur={onBlurBankAccountNumber} 
+            maxLength={50}/>
         </BlockItem>
       </div >
     </div >)

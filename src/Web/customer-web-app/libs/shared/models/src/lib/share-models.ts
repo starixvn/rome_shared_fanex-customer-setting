@@ -102,6 +102,7 @@ export interface Params {
   productGroupId: number;
   groupName: string;
   agentId: number;
+  serviceType: number;
 }
 
 export interface Note {

@@ -1,0 +1,23 @@
+:root, :root [data-theme='light'] {
+    --titleComponent-color: #97141e;
+    --titleComponent-border-color: #cecece;
+    --titleComponent-label-color: #444;
+}
+:root [data-theme='dark'] {
+    --titleComponent-color: #ededed;
+    --titleComponent-border-color: #313334;
+    --titleComponent-label-color: #ededed;
+}
+
+
+.title {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  align-items: center;
+  text-transform: uppercase;
+  color: var(--titleComponent-color);
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--titleComponent-border-color);
+  line-height: 39px;
+}

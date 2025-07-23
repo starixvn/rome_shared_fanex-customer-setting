@@ -14,6 +14,8 @@ public class CustomerListInfo
 
     public bool Suspended { get; set; }
 
+    public bool IsCashMember { get; set; }
+
     public CustomerClosedReason ClosedReason { get; set; }
 
     public CustomerLockedAccess LockedAccess { get; set; }

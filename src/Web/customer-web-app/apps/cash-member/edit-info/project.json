@@ -1,0 +1,78 @@
+{
+  "name": "edit-info-cash-member",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cash-member/edit-info/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/cash-member/edit-info"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "edit-info-cash-member:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "edit-info-cash-member:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "edit-info-cash-member:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "edit-info-cash-member:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "edit-info-cash-member:build:development"
+        },
+        "production": {
+          "buildTarget": "edit-info-cash-member:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../coverage/apps/cash-member/edit-info"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cash-member/edit-info/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "edit-info-cash-member:build"
+      }
+    }
+  },
+  "tags": []
+}

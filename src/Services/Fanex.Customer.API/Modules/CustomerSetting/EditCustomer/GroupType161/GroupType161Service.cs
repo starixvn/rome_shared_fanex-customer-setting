@@ -36,7 +36,7 @@ public class GroupType161Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
         IEnumerable<GroupItemDefault> groupItems,
         byte settingStatus)
     {
-        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_WinLossLimit_161_Upd");
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustSetting_WinLimit_161_Upd");
         var parameters = GenerateSPParams(context, groupItems, productGroupId, settingStatus);
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
@@ -76,7 +76,7 @@ public class GroupType161Service : EditGroupTypeBaseService, IEditGroupTypeBaseS
             throw new InvalidOperationException("Group Items cannot be empty");
         }
 
-        if (groupItems.First().GetType() != typeof(WinLossLimitItem))
+        if (groupItems.First().GetType() != typeof(WinLimitItem))
         {
             throw new InvalidOperationException("Item's type is not correct.");
         }

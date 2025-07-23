@@ -19,6 +19,7 @@ export default class CashMemberGeneralInformationValidator extends GeneralInform
       [`password`]: super.validatePassword(),
       [`selectedCashMember`]: await this.validateSelectedCashMember(),
       [`bankAccountNumber`]: await this.validateBankAccountNumber(),
+      [`bankId`]: await this.validateBankId(),
       [`firstName`]: await this.validateRequired('firstName'),
       [`lastName`]: await this.validateRequired('lastName'),
       [`mobilePhone`]: await this.validateMobilePhone(),

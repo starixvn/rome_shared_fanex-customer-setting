@@ -29,6 +29,7 @@ public interface IQueryGroupTypeBaseService<T>
 
     Task<IEnumerable<T>> QuerySuperForAddNew(string site, int currency, int groupId, int groupType);
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
     Task<IEnumerable<T>> QueryForEdit(
         int custId,
         byte roleId,
@@ -196,6 +197,7 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
         };
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
     private ICriteria GetQueryForEditCriteria(
         int custId,
         byte roleId,

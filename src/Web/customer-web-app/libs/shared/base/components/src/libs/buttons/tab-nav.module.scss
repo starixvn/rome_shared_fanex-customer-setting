@@ -1,0 +1,9 @@
+@import './button-color.scss';
+.tab-nav {
+    display: flex;
+    margin-top: -12px;
+    border-bottom: 1px solid var(--tab-component-border-color);
+    margin-bottom: 15px;
+    list-style: none;
+    padding-inline-start: 0;
+}

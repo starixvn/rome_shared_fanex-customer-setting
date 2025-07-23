@@ -23,15 +23,22 @@ import potentialWinLimitSettingInfoKO from './ko-KR/potential-win-limit.json';
 import productSettingInfoKO from './ko-KR/product-setting-info.json';
 import koKR from './ko-KR/translation.json';
 
+import adsCash from './en-US/ads-cash.json';
+import adsCashKO from './ko-KR/ads-cash.json';
+import adsCashVi from './vi-VN/ads-cash.json';
+import adsCashThai from './th-TH/ads-cash.json';
+import adsCashCN from './zh-CN/ads-cash.json';
+import adsCashTW from './zh-TW/ads-cash.json';
+
 export const defaultNS = 'translation';
 
 export const resources = {
-  'en-US': { translation: { ...enUS, ...productSettingInfoUs, ...potentialWinLimitSettingInfoUs } },
-  'th-TH': { translation: { ...thTh, ...productSettingInfoThai, ...potentialWinLimitSettingInfoThai } },
-  'vi-VN': { translation: { ...viVN, ...productSettingInfoVi, ...potentialWinLimitSettingInfoVi } },
-  'zh-CN': { translation: { ...zhCN, ...productSettingInfoCN, ...potentialWinLimitSettingInfoCN } },
-  'zh-TW': { translation: { ...zhTW, ...productSettingInfoTW, ...potentialWinLimitSettingInfoTW } },
-  'ko-KR': { translation: { ...koKR, ...productSettingInfoKO, ...potentialWinLimitSettingInfoKO } },
+  'en-US': { translation: { ...enUS, ...productSettingInfoUs, ...potentialWinLimitSettingInfoUs, ...adsCash } },
+  'th-TH': { translation: { ...thTh, ...productSettingInfoThai, ...potentialWinLimitSettingInfoThai, ...adsCashThai } },
+  'vi-VN': { translation: { ...viVN, ...productSettingInfoVi, ...potentialWinLimitSettingInfoVi, ...adsCashVi } },
+  'zh-CN': { translation: { ...zhCN, ...productSettingInfoCN, ...potentialWinLimitSettingInfoCN, ...adsCashCN } },
+  'zh-TW': { translation: { ...zhTW, ...productSettingInfoTW, ...potentialWinLimitSettingInfoTW, ...adsCashTW } },
+  'ko-KR': { translation: { ...koKR, ...productSettingInfoKO, ...potentialWinLimitSettingInfoKO, ...adsCashKO } },
 };
 
 i18next

@@ -150,6 +150,13 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
         }
       }
     };
+    const onBlurTrimValue = (field: string, value: string | undefined) => {
+      if (!value) return;
+      const trimmedValue = value.trim();
+      if (trimmedValue !== value) {
+        onGeneralInfoChange?.({ [field]: trimmedValue });
+      }
+    }
 
     return (
       <Block id="general-information" title={t('general-information')} ref={blockRef} isPartialUpdate={false}>
@@ -269,17 +276,20 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
             bankId={generalInfo.bank?.bankId}
             bankAccountNumber={generalInfo.bank?.accountNumber}
             isBankAccountNumberError={getErrorByField('bankAccountNumber')}
+            isBankIdError={getErrorByField('bankId')}
             onChangeBankId={async (bankId) => {
               const data = { bank: { ...generalInfo.bank, bankId: bankId } };
               onGeneralInfoChange?.(data);
-              const result = await validateGeneralInfo('bankAccountNumber', data);
-              setValidationResults({ ...validationResults, bankAccountNumber: result });
+              const bankAccountNumberResult = await validateGeneralInfo('bankAccountNumber', data);
+              const bankIdResult = await validateGeneralInfo('bankId', data);
+              setValidationResults({ ...validationResults, bankAccountNumber: bankAccountNumberResult, bankId: bankIdResult });
             }}
             onChangeBankAccountNumber={async (bankAccountNumber) => {
               const data = { bank: { ...generalInfo.bank, accountNumber: bankAccountNumber } };
               onGeneralInfoChange?.(data);
-              const result = await validateGeneralInfo('bankAccountNumber', data);
-              setValidationResults({ ...validationResults, bankAccountNumber: result });
+              const bankIdResult = await validateGeneralInfo('bankId', data);
+              const bankAccountNumberResult = await validateGeneralInfo('bankAccountNumber', data);
+              setValidationResults({ ...validationResults, bankId: bankIdResult, bankAccountNumber: bankAccountNumberResult });
             }}
             onFocusBankAccountNumber={() => {
               setLocationTooltip('bankAccountNumber');
@@ -296,7 +306,10 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
                 description: t('FirstNameDescription'),
                 required: true,
                 onFocus: () => setLocationTooltip('firstName'),
-                onBlur: () => { setLocationTooltip('') },
+                onBlur: () => { 
+                  setLocationTooltip('');
+                  onBlurTrimValue('firstName', generalInfo.firstName);
+                },
                 isError: getErrorByField('firstName'),
                 maxInputLength: 50
               },
@@ -305,7 +318,10 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
                 description: t('LastNameDescription'),
                 required: true,
                 onFocus: () => setLocationTooltip('lastName'),
-                onBlur: () => { setLocationTooltip('') },
+                onBlur: () => { 
+                  setLocationTooltip('');
+                  onBlurTrimValue('lastName', generalInfo.lastName);
+                },
                 isError: getErrorByField('lastName'),
                 maxInputLength: 50
               },
@@ -316,14 +332,20 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
                 required: true,
                 component: 'phoneWithCountryCode',
                 onFocus: () => setLocationTooltip('mobilePhone'),
-                onBlur: () => { setLocationTooltip('') },
+                onBlur: () => { 
+                  setLocationTooltip('');
+                  onBlurTrimValue('mobilePhone', generalInfo.mobilePhone);
+                },
                 isError: getErrorByField('mobilePhone'),
                 maxInputLength: 45
               },
               {
                 field: 'phone',
                 onFocus: () => setLocationTooltip('phone'),
-                onBlur: () => { setLocationTooltip('') },
+                onBlur: () => { 
+                  setLocationTooltip('');
+                  onBlurTrimValue('phone', generalInfo.phone);
+                },
                 maxInputLength: 50
               },
             ]}

@@ -1,0 +1,23 @@
+@import './button-color.scss';
+.button-full {
+  min-width: 90px;
+  background-color: var(--button-background);
+  color: var(--button-text);
+  border-radius: 3px;
+  height: 28px;
+  padding: 1px 16px 0 16px;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--button-background-hover);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}

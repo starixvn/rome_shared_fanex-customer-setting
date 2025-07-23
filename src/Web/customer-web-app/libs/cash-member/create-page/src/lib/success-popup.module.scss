@@ -189,3 +189,31 @@
   margin-right: 3px;
   border-radius: 3px;
 }
+.refer-checklist{
+  margin-top: 5px;
+  background-color: var(--bg-main);
+  border-radius: 3px;
+  padding: 5px 7px;
+  margin-bottom: 0!important;
+  [class^="ic-"], [class*=" ic-"]{
+    display: inline-block;
+    vertical-align: middle;
+    cursor: auto;
+    position: relative;
+    top: -1px;
+    &:before{
+      color: var(--icon-cash-service);
+    }
+  }
+}
+.checklist-link {
+  background: none;
+  border: none;
+  color: var(--bg-btn-create);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  font-weight: bold;
+  text-transform: capitalize;  
+}

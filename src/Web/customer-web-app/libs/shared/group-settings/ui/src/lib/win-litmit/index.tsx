@@ -17,35 +17,34 @@ import NiceModal from '@ebay/nice-modal-react';
 import { CustomerSettingInformationPageUrl } from '../customer-setting-information-page-url';
 import { scrollToBLock } from '../scroll-helper';
 import { GroupSettingBlockProps } from '../types';
-import WinLossAmount from './win-amount';
+import WinAmount from './win-amount';
 
-const UnLimitedWinLossLimit = 0;
+const UnLimitedWinLimit = 0;
 
-const validateWinLimitItem = (winLossLimit: WinLimitGroupItem) => {
-  const id = `winLimit-${winLossLimit.productId}-${winLossLimit.sportTypeId}-${winLossLimit.betTypeId}`;
-  if (winLossLimit.winLimitValue === undefined && winLossLimit.winLimit !== UnLimitedWinLossLimit) {
+const validateWinLimitItem = (winLimit: WinLimitGroupItem) => {
+  const id = `winLimit-${winLimit.productId}-${winLimit.sportTypeId}-${winLimit.betTypeId}`;
+  if (winLimit.winLimitValue === undefined && winLimit.winLimit !== UnLimitedWinLimit) {
     return {
       id,
-      productId: winLossLimit.productId,
+      productId: winLimit.productId,
       isValid: false,
       message: 'RequiredField',
     };
   }
 
-
   if (
-    winLossLimit.winLimit !== UnLimitedWinLossLimit &&
-    ((winLossLimit.winLimitValue < winLossLimit.minWinRange && winLossLimit.minWinRange !== UnLimitedWinLossLimit) ||
-      (winLossLimit.winLimitValue > winLossLimit.maxWinRange && winLossLimit.maxWinRange !== UnLimitedWinLossLimit))
+    winLimit.winLimit !== UnLimitedWinLimit &&
+    ((winLimit.winLimitValue < winLimit.minWinRange && winLimit.minWinRange !== UnLimitedWinLimit) ||
+      (winLimit.winLimitValue > winLimit.maxWinRange && winLimit.maxWinRange !== UnLimitedWinLimit))
   ) {
     return {
       id,
-      productId: winLossLimit.productId,
+      productId: winLimit.productId,
       isValid: false,
       message: 'MaximumWinValueShouldBeInRange',
       msgParams: {
-        min: NumberHelper.formatWithCommas(winLossLimit.minWinRange),
-        max: NumberHelper.formatWithCommas(winLossLimit.maxWinRange),
+        min: NumberHelper.formatWithCommas(winLimit.minWinRange),
+        max: NumberHelper.formatWithCommas(winLimit.maxWinRange),
       },
     };
   }
@@ -53,7 +52,7 @@ const validateWinLimitItem = (winLossLimit: WinLimitGroupItem) => {
   return { id: '', isValid: true };
 };
 
-type ValidateWinLossLimitResult = {
+type ValidateWinLimitResult = {
   id: string;
   productId?: number;
   isValid: boolean;
@@ -61,27 +60,27 @@ type ValidateWinLossLimitResult = {
   msgParams?: { [key: string]: string };
 };
 
-type MaximumLossColumnProps = {
+type MaximumWinColumnProps = {
   isReadOnly: boolean;
   data: WinLimitGroupItem;
   handleWinLimitChange: (
-    winLossLimit: WinLimitGroupItem,
-    newWinLossLimit: Partial<WinLimitGroupItem>
+    winLimit: WinLimitGroupItem,
+    newWinLimit: Partial<WinLimitGroupItem>
   ) => void;
-  setTooltipError: (validateResult: ValidateWinLossLimitResult) => void;
+  setTooltipError: (validateResult: ValidateWinLimitResult) => void;
 };
 
-function MaximumWinColumn(props: Readonly<MaximumLossColumnProps>) {
+function MaximumWinColumn(props: Readonly<MaximumWinColumnProps>) {
   const { isReadOnly, data, handleWinLimitChange, setTooltipError } = props;
   const { t } = useTranslation();
 
-  const [validateWinLossLimit, setValidateWinLossLimit] = useState<ValidateWinLossLimitResult>({
+  const [validateWinLimit, setValidateWinLimit] = useState<ValidateWinLimitResult>({
     id: '',
     isValid: true,
   });
 
   useEffect(() => {
-    setValidateWinLossLimit(validateWinLimitItem(data));
+    setValidateWinLimit(validateWinLimitItem(data));
   }, [data]);
 
   const id = `winLimit-${data.productId}-${data.sportTypeId}-${data.betTypeId}`;
@@ -89,10 +88,10 @@ function MaximumWinColumn(props: Readonly<MaximumLossColumnProps>) {
     <BlockColumn>
       <div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {data.winLimit === UnLimitedWinLossLimit ? (
+          {data.winLimit === UnLimitedWinLimit ? (
             <input type="text" value={t('unlimited')} disabled />
           ) : (
-            <div className={cn({ error: validateWinLossLimit.id === id })} id={id}>
+            <div className={cn({ error: validateWinLimit.id === id })} id={id}>
               <div className="blockLeft">
                 <NumericFormat
                   type="text"
@@ -125,19 +124,19 @@ function MaximumWinColumn(props: Readonly<MaximumLossColumnProps>) {
           )}
           <span>
             ({NumberHelper.formatWithCommas(data.minWinRange)} -{' '}
-            {data.maxWinRange === UnLimitedWinLossLimit
+            {data.maxWinRange === UnLimitedWinLimit
               ? t('unlimited')
               : NumberHelper.formatWithCommas(data.maxWinRange)}
             )
           </span>
         </div>
-        {data.maxWinRange === UnLimitedWinLossLimit && (
+        {data.maxWinRange === UnLimitedWinLimit && (
           <div>
             <div className="blockLeft">
               <input
                 type="checkbox"
                 disabled={isReadOnly}
-                checked={data.winLimit === UnLimitedWinLossLimit}
+                checked={data.winLimit === UnLimitedWinLimit}
                 onChange={(e) =>
                   handleWinLimitChange(data, {
                     winLimit: e.target.checked ? 0 : data.winLimitValue,
@@ -164,7 +163,7 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
   const productIds = Array.from(new Set(winLimitItems.map((item) => item.productId)));
 
   const [selectedProductId, setSelectedProductId] = useState(productIds[0]);
-  const [validateWinLossLimit, setValidateWinLossLimit] = useState<ValidateWinLossLimitResult>({
+  const [validateWinLimit, setValidateWinLimit] = useState<ValidateWinLimitResult>({
     id: '',
     isValid: true,
   });
@@ -176,33 +175,29 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
     }
   }, [productIds, selectedProductId]);
 
-  const validateWinLossLimits = (winLossLimitItems: WinLimitGroupItem[]) => {
-    for (const item of winLossLimitItems) {
+  const validateWinLimits = (winLimitItems: WinLimitGroupItem[]) => {
+    for (const item of winLimitItems) {
       const error = validateWinLimitItem(item);
       if (!error.isValid) {
-        setValidateWinLossLimit(error);
+        setValidateWinLimit(error);
         return error;
       }
     }
-
     return { id: '', isValid: true };
   };
 
   useImperativeHandle(ref, () => {
     const validate = () => {
-      const validateResult = validateWinLossLimits(winLimitItems);
-
+      const validateResult = validateWinLimits(winLimitItems);
       if (!validateResult.isValid) {
         if (validateResult.productId) {
           setSelectedProductId(validateResult.productId);
         }
         blockRef.current?.expand();
       }
-
       if (validateResult.isValid) {
-        setValidateWinLossLimit({ id: '', isValid: true });
+        setValidateWinLimit({ id: '', isValid: true });
       }
-
       return validateResult.isValid;
     };
 
@@ -225,8 +220,8 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
     );
   };
 
-  const showCurrentWinLossAmount = (sportType: number, betType: number) => {
-    NiceModal.show(WinLossAmount, { sportType, betType });
+  const showCurrentWinAmount = (sportType: number, betType: number) => {
+    NiceModal.show(WinAmount, { sportType, betType });
   };
 
   return (
@@ -270,7 +265,7 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
                   isReadOnly={isReadOnly}
                   data={winLimit}
                   handleWinLimitChange={handleWinLimitChange}
-                  setTooltipError={setValidateWinLossLimit}
+                  setTooltipError={setValidateWinLimit}
                 />
                 <div style={{ width: '400px', height: '100%' }}>
                   <BlockColumn>
@@ -289,11 +284,11 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
                               <span
                                 aria-hidden
                                 onClick={() =>
-                                  showCurrentWinLossAmount(winLimit.sportTypeId, winLimit.betTypeId)
+                                  showCurrentWinAmount(winLimit.sportTypeId, winLimit.betTypeId)
                                 }
                                 style={{ cursor: 'pointer', color: 'blue', display: 'inline-block' }}
                               >
-                                {t('ClickToViewCurrentWinLossAmount')}
+                                {t('ClickToViewCurrentWinAmount')}
                               </span>
                             )}
                           </div>
@@ -305,12 +300,12 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
               </BlockRow>
             );
           })}
-        {!validateWinLossLimit.isValid && (
+        {!validateWinLimit.isValid && (
           <WrapperTooltip
             type="error"
-            anchorSelect={`#${validateWinLossLimit.id}`}
-            isOpen={selectedProductId === validateWinLossLimit.productId && !validateWinLossLimit.isValid}
-            content={t(validateWinLossLimit?.message ?? '', validateWinLossLimit?.msgParams)}
+            anchorSelect={`#${validateWinLimit.id}`}
+            isOpen={selectedProductId === validateWinLimit.productId && !validateWinLimit.isValid}
+            content={t(validateWinLimit?.message ?? '', validateWinLimit?.msgParams)}
           />
         )}
       </Block>

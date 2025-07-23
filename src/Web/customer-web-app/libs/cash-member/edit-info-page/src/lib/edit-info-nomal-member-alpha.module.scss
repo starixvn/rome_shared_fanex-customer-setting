@@ -1,0 +1,50 @@
+.form {
+    width: 675px;
+    font-weight: 500;
+
+    table {
+        width: 100%;
+    }
+    .tableHeader{
+        text-align: left;
+        box-shadow: none;
+        height: 32px;
+    }
+
+    .labelCell {
+        min-width: 120px;
+        text-align: right;
+    }
+
+    .buttonContainer {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-start;
+        margin-top: 10px;
+        button {
+            min-width: 90px;
+        }
+    }
+
+    .input {
+        width: 100%;
+        min-width: 200px;
+        border: 1px solid #d1d5db;
+        border-radius: 3px;
+        padding: 0 8px !important;
+        height: 28px;
+        outline: none;
+
+        &:focus {
+            outline: none;
+        }
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+
+.resultMessageContainer {
+    margin-bottom: 5px;
+}

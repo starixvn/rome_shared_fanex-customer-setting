@@ -17,6 +17,9 @@
 		<Setting Key="DBTXN_Dot_BalanceCreditRemove" SpName="Dot_BalanceCreditRemove" DbName="DBTXN.bodb02.wsv_alp" />
 		<Setting Key="DBTXN_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CustDB.wsv_nap" />
 		<Setting Key="DBSite03_Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBSite03.CustDB.wsv_nap" />
+		<Setting Key="DBTXN_Acc_CustSetting_WinPercent_161_Select" SpName="Acc_CustSetting_WinPercent_161_Select" DbName="DBTXN.CustDB.wsv_nap" />
+		<Setting Key="DBSite03_Acc_CustSetting_WinPercent_161_Select" SpName="Acc_CustSetting_WinPercent_161_Select" DbName="DBSite03.CustDB.wsv_nap" />
+		
 		<Setting Key="DBSite03_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="SiteDB03.bodb02.wsv_alp" Plain="0" />
 		<Setting Key="DBTXN_Acc_BalanceMemberSel" SpName="Acc_BalanceMemberSel" DbName="DBTXN.bodb02.wsv_alp" Plain="0" />
 		<Setting Key="Acc_CustSetting_AccumWinLoss_162_Select" SpName="Acc_CustSetting_AccumWinLoss_162_Select" DbName="SiteDB03.bodb02.wsv_alp" />
@@ -362,7 +365,12 @@
 		</Setting>
 		<Setting Key="Acc_CustSetting_WinLossLimit_155_Upd" SpName="Acc_CustSetting_WinLossLimit_155_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="Acc_CustSetting_WinLossPercentSelect" SpName="Acc_CustSetting_WinLossPercentSelect" DbName="DBTXN.CUSTDB.wsv_nap" TimeOut="600" />
-		<Setting Key="Acc_CustSetting_WinLimit_161_Select" SpName="Acc_CustSetting_WinLimit_161_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
+    		<Setting Key="Acc_CustSetting_WinLimit_161_Select" SpName="Acc_CustSetting_WinLimit_161_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0" >
+			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
+			<Mapping DataField="Bettype" ObjectProperty="BettypeId" />
+			<Mapping DataField="MaxWinLimit" ObjectProperty="WinLimit" />
+			<Mapping DataField="MaxLossLimit" ObjectProperty="LossLimit" />
+		</Setting>
 		<Setting Key="Acc_CustSetting_WinLimit_161_Upd" SpName="Acc_CustSetting_WinLimit_161_Upd" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="Acc_CustSetting_PotentialWinLimit_162_Select" SpName="Acc_CustSetting_PotentialWinLimit_162_Select" DbName="DBCust.CustDB.wsv_alp" Plain="0">
 			<Mapping DataField="Sporttype" ObjectProperty="SporttypeId" />
@@ -404,6 +412,15 @@
 
 		<Setting Key="Age_CashService_CustServiceTypeInitialize" SpName="Age_CashService_CustServiceTypeInitialize" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Age_CashServiceBilling_DailyFee_Ins" SpName="Age_CashServiceBilling_DailyFee_Ins" DbName="DBSIC.bodb02.wsv_CashService" Plain="0" />
+
+		<Setting Key="Age_CashService_BankList" SpName="Age_CashService_BankList" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" >
+			<Mapping DataField="Bank" ObjectProperty="BankName" />
+		</Setting>
+		<Setting Key="Acc_CustomerSelBankAccount_CashMember" SpName="Acc_CustomerSelBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />		
+		<Setting Key="Age_CashAgentBankInfoSel" SpName="Age_CashAgentBankInfoSel" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="Acc_CustomerInsBankAccount_CashMember" SpName="Acc_CustomerInsBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />	
+		<Setting Key="Acc_CustomerUpdBankAccount_CashMember" SpName="Acc_CustomerUpdBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="Acc_CustomerDelBankAccount_CashMember" SpName="Acc_CustomerDelBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 	</Function>
 	<Function Name="Sub Account">
 		<Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
@@ -446,7 +463,7 @@
 		<Setting Key="ViewPT_GetSportsbookPT_Super" SpName="Age_CustomerSelPositionTakingByProductID_SAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="ViewPT_GetSportsbookPT_Master" SpName="Age_CustomerSelPositionTakingByProductID_MAg" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
 		<Setting Key="ViewPT_GetSportsbookPT_Agent" SpName="Age_CustomerSelPositionTakingByProductID_Ag" DbName="DBCust.CustDB.wsv_alp" Plain="0" />
-	</Function>
+	</Function> 
 	<Function Name="Update User Search">
 		<Setting Key="Acc_CustomerUpdUserSearch" SpName="Acc_CustomerUpdUserSearch" DbName="DBCust.CustDB.wsv_alp" />
 	</Function>

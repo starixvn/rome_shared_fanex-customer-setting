@@ -3,7 +3,7 @@ import { GeneralInfo } from '@customer-web-app/shared-general-information-state'
 import {
     AgentPositionTakingGroupItem, GroupSettingItem, GroupType, MasterEditMemberPositionTakingGroupItem,
     MasterPositionTakingGroupItem, ParlayMaxPayoutGroupItem, ProductGroup, ProductStatusGroupItem,
-    SuperEditMemberPositionTakingGroupItem, WinLossLimitGroupItem
+    SuperEditMemberPositionTakingGroupItem, WinLimitGroupItem, WinLossLimitGroupItem
 } from '@customer-web-app/shared-group-settings-types';
 
 export const handleChangeItemValue = (
@@ -97,6 +97,17 @@ export const handleInitProducts = (productGroups: ProductGroup[], isMemberLevel:
             isMultipleModeChecked: true,
             original: { ...item },
             lossLimitValue: item.lossLimit !== 0 ? item.lossLimit : undefined,
+          }));
+
+          return { ...type, groupItems };
+        }
+
+        if (type.id === GroupTypeIds.WinLimit) {
+          const groupItems = (type.groupItems as WinLimitGroupItem[]).map((item) => ({
+            ...item,
+            isMultipleModeChecked: true,
+            original: { ...item },
+            winLimitValue: item.winLimit !== 0 ? item.winLimit : undefined,
           }));
 
           return { ...type, groupItems };

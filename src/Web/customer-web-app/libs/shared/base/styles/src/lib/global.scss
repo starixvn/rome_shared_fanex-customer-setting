@@ -60,6 +60,7 @@
   --border-icon-success: #f4f4f4;
   --bg-icon: #333;
   --color-icon: #fff;
+  --icon-cash-service: #045ace;
   //product setting
   --border-color-product-setting: #5f626b;
   --color-header-table: #ffffff;
@@ -167,6 +168,7 @@
   --border-icon-success: #2f2f2f;
   --bg-icon: #fff;
   --color-icon: #333;
+  --icon-cash-service: #41a4ff;
   //product setting
   --border-color-product-setting: #5f626b;
   --color-header-table: #ededed;
@@ -524,5 +526,28 @@ input[type='text'][disabled] {
     &:before{
       color: var(--color-alert-error);
     }
+  }
+}
+
+.control-field{
+  background-color: var(--background-control);
+  border: 1px solid var(--border-control);
+  border-radius: 3px;
+  padding-inline: 8px;
+  height: 28px;
+  width: 100%; 
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  &[type="text"]{
+    cursor: text;
+  }
+  &.error{
+    border-color: var(--border-control-error);
+  }
+  &.disabled{
+    
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 }
