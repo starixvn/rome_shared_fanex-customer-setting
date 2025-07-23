@@ -1,21 +1,13 @@
 :root {
-  --pen-icon-color: #404040;
-  --trash-icon-color: #D33333;
-
-  --save-icon-color: #52A220;
-  --cancel-icon-color: #D33333;
-
   --button-icon-hover: rgba(0,0,0,.1);
+  --save-icon-color: #52A220;
+  --cancel-icon-color: #e54748;
 }
 
 :root[data-theme="dark"] {
-  --pen-icon-color: #ededed;
-  --trash-icon-color: #CC7070;
-
-  --save-icon-color: #CC7070;
-  --cancel-icon-color: #CC7070;
-
   --button-icon-hover: rgba(255,255,255,.1);
+  --save-icon-color: #52A220;
+  --cancel-icon-color: #e54748;
 }
 
 
@@ -56,11 +48,10 @@
   }
 }
 
-
-.saveIcon {
-  width: 20px;
-  height: 20px;
-  fill: #52A220;
+.bankAccountNumber {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cancelIcon {
@@ -69,20 +60,8 @@
   fill: var(--cancel-icon-color);
 }
 
-.trashIcon{
-  width: 16px;
-  height: 16px;
-  fill: var(--trash-icon-color);
-}
-
-.penIcon{
+.saveIcon {
   width: 20px;
   height: 20px;
-  fill: var(--pen-icon-color);
-}
-
-.bankAccountNumber {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  fill: var(--save-icon-color);
 }

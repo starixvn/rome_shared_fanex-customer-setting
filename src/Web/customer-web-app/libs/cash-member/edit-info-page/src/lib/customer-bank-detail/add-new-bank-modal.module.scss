@@ -2,12 +2,14 @@
   --modal-background: #fff;
   --modal-border-color: #d1d5db;
   --modal-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --text-color: #444;
 }
 
 :root[data-theme="dark"] {
   --modal-background: #121212;
   --modal-border-color: #2d3748;
   --modal-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --text-color: #fff;
 }
 
 .modalOverlay {
@@ -32,7 +34,7 @@
   margin-top: 100px;
   min-width: 350px;
   border-radius: 3px;
-  
+  color: var(--text-color);
   @media (max-width: 768px) {
     max-width: 90%;
   }
@@ -79,6 +81,7 @@
   border-radius: 4px;
   padding: 4px 8px !important;
   outline: none;
+  color: inherit;
 
   &:focus {
     outline: none;

@@ -115,7 +115,7 @@ export const BankAccountRow = memo(({
                 <ButtonIcon
                     onClick={handleEditClick}
                     disabled={isLoading}
-                    icon={<IconPen className={styles.penIcon} />}
+                    icon={<IconPen />}
                 />
                 <ButtonIcon
                     onClick={handleDeleteClick}

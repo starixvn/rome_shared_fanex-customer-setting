@@ -3,13 +3,15 @@
     --modal-background: #ffffff;
     --modal-border-color: #ffffff;
     --modal-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    --modal-text-color: #444;
 }
 
-:root[data-theme="dark"] {
+:root [data-theme='dark'] {
     --modal-title-color: #459BE5;
     --modal-background: #171717;
     --modal-border-color: #515151;
     --modal-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    --modal-text-color: #fff;
 }
 
 .overlay {
@@ -32,6 +34,7 @@
   max-width: 90%;
   overflow: auto;
   border-radius: 4px;
+  color: var(--modal-text-color); 
 
   @media (min-width: 769px) {
     max-width: none;
