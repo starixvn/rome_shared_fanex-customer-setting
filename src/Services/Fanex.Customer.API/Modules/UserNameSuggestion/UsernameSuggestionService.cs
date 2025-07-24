@@ -11,7 +11,8 @@ namespace Fanex.Customer.API.Modules.UserNameSuggestion
             bool isInternal,
             bool directDownline,
             bool isAccInfo,
-            bool excludeMember);
+            bool excludeMember,
+            bool excludeCashMember);
 
         Task<bool> UpdateUserSearch(
             int userId,
@@ -34,7 +35,8 @@ namespace Fanex.Customer.API.Modules.UserNameSuggestion
             bool isInternal,
             bool directDownline,
             bool isAccInfo,
-            bool excludeMember)
+            bool excludeMember,
+            bool excludeCashMember)
             => (await dynamicRepository.FetchAsync<UsernameSuggestion>(
               new SelectAutoSuggestionCriteria(
                   actorId,
@@ -42,7 +44,8 @@ namespace Fanex.Customer.API.Modules.UserNameSuggestion
                   isInternal,
                   directDownline,
                   isAccInfo,
-                  excludeMember))).OrderBy(item => item.UserName);
+                  excludeMember,
+                  excludeCashMember))).OrderBy(item => item.UserName);
 
         public async Task<IEnumerable<UsernameSuggestion>> GetUsernameSuggestionByRole(int custId, string username, byte roleId)
             => (await dynamicRepository.FetchAsync<UsernameSuggestion>(

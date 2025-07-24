@@ -29,7 +29,7 @@ public class UserNameSuggestionEndpoint :
             return Results.BadRequest();
         }
 
-        return Results.Ok(await service.GetUsernamesSuggestion(request.ActorId, request.Query, request.IsInternal, request.DirectDownlines, request.IsAccInfo, request.ExcludeMember));
+        return Results.Ok(await service.GetUsernamesSuggestion(request.ActorId, request.Query, request.IsInternal, request.DirectDownlines, request.IsAccInfo, request.ExcludeMember, request.ExcludeCashMember));
     }
 
     public async Task<IResult> HandleAsync(UsernameSuggestionByRoleQuery request, UsernameSuggestionService service)
