@@ -135,7 +135,6 @@ export const CustomerBankDetail = () => {
             });
 
             if (response.isSuccessful) {
-                // Update local state only after successful API call
                 setBankAccounts(prev => prev.map(account =>
                     account.memberBankAccountID === editingRow.id
                         ? {
@@ -198,15 +197,11 @@ export const CustomerBankDetail = () => {
                             <th scope="col" style={{ maxWidth: '50px' }}>#</th>
                             <th scope="col" style={{ maxWidth: '300px' }}>{t('MemberBankAccount')}</th>
                             <th scope="col" style={{ maxWidth: '300px' }}>
-                                    {t('AgentBankAccount')}
-                                    <span data-tooltip-id="agent-bank-tooltip">
-                                        <IconExclamationPoint />
-                                    </span>
-                                    <WrapperTooltip
-                                        id="agent-bank-tooltip"
-                                        content={`${t('AgentBankAccountTooltip')} ${t('AgentBankAccountTooltip2')}`}
-                                        place="top"
-                                    />
+                                {t('AgentBankAccount')}
+                                <IconExclamationPoint data-tooltip-id="agent-bank-tooltip" style={{ position: 'absolute' }} />
+                                <WrapperTooltip id="agent-bank-tooltip" place="top">
+                                    <div style={{ textAlign: 'left' }}>{`${t('AgentBankAccountTooltip')} ${t('AgentBankAccountTooltip2')}`}</div>
+                                </WrapperTooltip>
                             </th>
                             <th scope="col" style={{ maxWidth: '150px' }}>{t('Action')}</th>
                         </tr>

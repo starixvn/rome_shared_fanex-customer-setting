@@ -1,6 +1,6 @@
 import { FormProvider, useForm, Controller } from 'react-hook-form';
 import styles from './edit-info-base-style.module.scss';
-import { ButtonFull, ButtonOutline, Label, useResultMessage, useSystems } from '@customer-web-app/shared/base/components';
+import { ButtonFull, ButtonOutline, ErrorFieldMessage, Label, useResultMessage, useSystems } from '@customer-web-app/shared/base/components';
 import { useEffect, useState } from 'react';
 import { GetCustomerInfo, UpdateCustomerInfo } from './edit-info-cash-member-services';
 import { splitMobile } from '@customer-web-app/shared-helpers';
@@ -30,6 +30,7 @@ export const EditInfoCashMemberForm = () => {
     });
     const { showResult, renderResultMessage } = useResultMessage();
     const { control, reset, formState: { errors, isDirty } } = methods;
+    
     useEffect(() => {
         const fetchCustomerInfo = async () => {
             const data = await GetCustomerInfo<{
@@ -102,7 +103,7 @@ export const EditInfoCashMemberForm = () => {
                                             }}
                                         />}
                                 />
-                                {errors.firstName && <div style={{ color: 'red', fontSize: '13px' }}>{errors.firstName.message as string}</div>}
+                                {errors.firstName && <ErrorFieldMessage message={errors.firstName.message as string} />}
                             </div>
                             <div className={styles['form-group-item']}>
                                 <Label required>{t('lastName')}</Label>
@@ -120,14 +121,14 @@ export const EditInfoCashMemberForm = () => {
                                             }}
                                         />}
                                 />
-                                {errors.lastName && <div style={{ color: 'red', fontSize: '13px' }}>{errors.lastName.message as string}</div>}
+                                {errors.lastName && <ErrorFieldMessage message={errors.lastName.message as string} />}
                             </div>
                         </div>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
                                 <Label required>{t('Mobile')}</Label>
                                 <div className={classNames("control-field", styles['control-field-mobile'], (errors.mobileCode || errors.mobileNumber) && styles['input-error'])}>
-                                    <span className="text-gray-500">+</span>
+                                    <span className={styles['mobile-code-prefix']}>+</span>
                                     <Controller
                                         name="mobileCode"
                                         control={control}
@@ -148,7 +149,7 @@ export const EditInfoCashMemberForm = () => {
                                             />
                                         )}
                                     />
-                                    <div className="w-px h-4 sm:h-6 bg-gray-300"></div>
+                                    <div className={styles['mobile-separator']}></div>
                                     <Controller
                                         name="mobileNumber"
                                         control={control}
@@ -169,9 +170,7 @@ export const EditInfoCashMemberForm = () => {
                                         )}
                                     />
                                 </div>
-                                {(errors.mobileCode || errors.mobileNumber) && <div style={{ color: 'red', fontSize: '13px' }}>
-                                    {(errors.mobileCode?.message || errors.mobileNumber?.message) as string}
-                                </div>}
+                                {(errors.mobileCode || errors.mobileNumber) && <ErrorFieldMessage message={(errors.mobileCode?.message || errors.mobileNumber?.message) as string} />}
                             </div>
                             <div className={styles['form-group-item']}>
                                 <Label>{t('Phone')}</Label>
@@ -210,7 +209,7 @@ export const EditInfoCashMemberForm = () => {
                                             }}
                                         />}
                                 />
-                                {errors.email && <div style={{ color: 'red', fontSize: '13px' }}>{errors.email.message as string}</div>}
+                                {errors.email && <ErrorFieldMessage message={errors.email.message as string} />}
                             </div>
                             <div className={styles['form-group-item']}>
                                 <Label>{t('Fax')}</Label>

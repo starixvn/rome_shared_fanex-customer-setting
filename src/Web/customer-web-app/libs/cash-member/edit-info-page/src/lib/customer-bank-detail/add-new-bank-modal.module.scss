@@ -1,62 +1,9 @@
 :root {
-  --modal-background: #fff;
-  --modal-border-color: #d1d5db;
-  --modal-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --text-color: #444;
 }
 
 :root[data-theme="dark"] {
-  --modal-background: #121212;
-  --modal-border-color: #2d3748;
-  --modal-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --text-color: #fff;
-}
-
-.modalOverlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.modalContainer {
-  padding: 12px;
-  padding-top: 0;
-  background-color: var(--modal-background);
-  border: 1px solid var(--modal-border-color);
-  box-shadow: var(--modal-box-shadow);
-  margin-top: 100px;
-  min-width: 350px;
-  border-radius: 3px;
-  color: var(--text-color);
-  @media (max-width: 768px) {
-    max-width: 90%;
-  }
-  
-  &.dark {
-    background-color: #121212;
-  }
-}
-
-.modalHeader {
-  position: relative;
-  margin-bottom: 10px;
-  text-align: center;
-  border-bottom: 1px solid var(--border-color);
-  padding: 11px 0;
-}
-
-.closeModal {
-    position: absolute;
-    right: -5px;
-    top: 5px;
-
 }
 
 .resultMessage {
