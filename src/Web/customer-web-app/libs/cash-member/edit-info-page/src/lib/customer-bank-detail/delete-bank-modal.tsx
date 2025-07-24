@@ -29,7 +29,7 @@ export const DeleteBankModal = ({
             if (response.isSuccessful) {
                 showResult('success', t('RemoveSuccess'), 1500, onDeleteSuccess);
             } else {
-                showResult('error', response.message);
+                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
             }
         } catch (error) {
             console.error('Error deleting bank account:', error);

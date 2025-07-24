@@ -113,7 +113,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
             if (response.isSuccessful) {
                 showResult('success', t('AddSuccess'), 1000, onAddSuccess);
             } else {
-                showResult('error', response.message);
+                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
             }
 
         } catch (error) {

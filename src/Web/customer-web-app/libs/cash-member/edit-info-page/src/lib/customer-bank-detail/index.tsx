@@ -147,7 +147,7 @@ export const CustomerBankDetail = () => {
                 ));
                 showResult('success', t('UpdateSuccess'));
             } else {
-                showResult('error', response.message || response.errorMessage);
+                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
             }
 
         } catch (error) {
