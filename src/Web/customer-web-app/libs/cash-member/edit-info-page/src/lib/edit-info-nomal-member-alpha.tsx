@@ -89,7 +89,7 @@ export const EditInfoNomalMemberAlpha = () => {
         reset(formData);
         showResult('success', t('UpdateSuccess'));
       } else {
-        showResult('error', response.errorMessage || response.message);
+        showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
       }
     } catch (error) {
       showResult('error', t('UpdateFailed'));
