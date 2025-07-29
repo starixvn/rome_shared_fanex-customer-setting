@@ -110,7 +110,7 @@ export const EditCashMemberGeneralInformation = forwardRef<ValidationRefType, Ed
                 label: t('mobile'),
                 description: t('MobilePhoneDescription'),
                 required: true,
-                component: 'phoneWithCountryCode',
+                component: 'phoneWithCountryCodeModeEdit',
                 onFocus: () => setLocationTooltip('mobilePhone'),
                 onBlur: () => { setLocationTooltip('') },
                 isError: getErrorByField('mobilePhone'),

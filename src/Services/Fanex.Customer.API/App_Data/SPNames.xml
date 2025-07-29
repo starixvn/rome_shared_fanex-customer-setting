@@ -421,6 +421,7 @@
 		<Setting Key="Acc_CustomerInsBankAccount_CashMember" SpName="Acc_CustomerInsBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />	
 		<Setting Key="Acc_CustomerUpdBankAccount_CashMember" SpName="Acc_CustomerUpdBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 		<Setting Key="Acc_CustomerDelBankAccount_CashMember" SpName="Acc_CustomerDelBankAccount_CashMember" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
+		<Setting Key="Age_CashService_CountryCodeSel" SpName="Age_CashService_CountryCodeSel" DbName="DBCust.AgencyCashService.wsv_CashService" Plain="0" />
 	</Function>
 	<Function Name="Sub Account">
 		<Setting Key="Age_CustSubSel" SpName="Age_CustSubSel" DbName="DBCust.CustDB.wsv_alp" Plain="0" />

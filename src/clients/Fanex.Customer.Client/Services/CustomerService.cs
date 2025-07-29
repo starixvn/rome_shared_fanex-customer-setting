@@ -104,6 +104,8 @@ namespace Fanex.Customer.Client.Services
         Task<string> UpdateMemberBankInfo(UpdateMemberBankInfoParam request);
 
         Task<string> RemoveMemberBankInfo(RemoveMemberBankInfoParam request);
+
+        Task<string> GetCountryCodes(string site);
     }
 
     public class CustomerService : ICustomerService
@@ -392,5 +394,8 @@ namespace Fanex.Customer.Client.Services
 
         public Task<string> RemoveMemberBankInfo(RemoveMemberBankInfoParam request)
             => httpClient.PostAsStringAsync($"customer/bank-info/member/remove", request);
+
+        public Task<string> GetCountryCodes(string site)
+            => httpClient.GetStringAsync($"customer/cash-service/country-codes?site={site}");
     }
 }

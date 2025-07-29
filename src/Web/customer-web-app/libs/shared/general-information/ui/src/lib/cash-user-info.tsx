@@ -51,6 +51,22 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
               onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange(field, phoneNumber)}
               onFocus={onFocus}
               onBlur={onBlur}
+              isLoadDefaultCountryCode={true}
+            />
+            {description && <span className={styles['description']}>{description}</span>}
+          </div>
+        );
+      case 'phoneWithCountryCodeModeEdit':
+        return (
+          <div className={styles['mobile-phone-container']}>
+            <Mobifone
+              id={field}
+              isError={isError}
+              phoneNumber={generalInfo[field] ?? ''}
+              onChangePhoneNumber={(phoneNumber) => handleGeneralInfoChange(field, phoneNumber)}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              isLoadDefaultCountryCode={false}
             />
             {description && <span className={styles['description']}>{description}</span>}
           </div>
