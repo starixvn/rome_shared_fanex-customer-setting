@@ -50,7 +50,8 @@
       "@customer-web-app/site-currency-section": ["libs/create-super/site-currency-section/src/index.ts"],
       "@customer-web-app/sportsbook-information-page": ["libs/sportsbook-information-page/src/index.ts"],
       "@customer-web-app/wrapper-tooltip": ["libs/shared/base/wrapper-tooltip/src/index.ts"],
-      "@customer-web-app/shared/base/components": ["libs/shared/base/components/src/index.ts"]
+      "@customer-web-app/shared/base/components": ["libs/shared/base/components/src/index.ts"],
+      "@customer-web-app/advertisement-pages": ["libs/advertisement-pages/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

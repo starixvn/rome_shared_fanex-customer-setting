@@ -109,7 +109,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72) 40%, rgba(255, 255, 255, 0.36) 75%, rgba(255, 255, 255, 0) 100% );
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72) 40%, rgba(255, 255, 255, 0.36) 75%, rgba(255, 255, 255, 0) 100%);
   box-sizing: border-box;
   padding: 15px;
 }
@@ -125,7 +125,7 @@
   align-items: center;
   justify-content: center;
   padding: 15px 20px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72) 40%, rgba(255, 255, 255, 0.36) 75%, rgba(255, 255, 255, 0) 100% );
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72) 40%, rgba(255, 255, 255, 0.36) 75%, rgba(255, 255, 255, 0) 100%);
   box-sizing: border-box;
 }
 
@@ -330,6 +330,33 @@
   }
 }
 
+.dont-show-again {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: #666;
+  font-size: 14px;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+
+  input {
+    margin: 0;
+    width: 13px;
+    height: 13px;
+    top: 0;
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 13px;
+    cursor: pointer;
+    color: #000;
+    margin-bottom: 0;
+  }
+}
+
 // ===================
 // TYPOGRAPHY & TEXT STYLES
 // ===================
@@ -448,7 +475,7 @@
     margin: 20px;
     border-radius: 20px;
   }
-  
+
   .close-button {
     top: 16px;
     right: 16px;
@@ -456,34 +483,34 @@
     height: 32px;
     font-size: 20px;
   }
-  
+
   .ads-content {
     padding: 20px;
   }
-  
+
   .main-title {
     font-size: 32px;
     max-width: 320px;
   }
-  
+
   .sub-title {
     font-size: 18px;
     max-width: 240px;
     padding: 0 25px;
   }
-  
+
   .step-title {
     font-size: 17px;
   }
-  
+
   .step-description {
     font-size: 14px;
   }
-  
+
   .step-image {
     max-height: 180px;
   }
-  
+
   .step-content {
     height: 320px;
   }
@@ -495,68 +522,68 @@
     max-width: 350px;
     letter-spacing: 0.2px;
   }
-  
+
   .sub-title {
     font-size: 20px;
     max-width: 250px;
     padding: 0 30px;
     letter-spacing: 0.1px;
   }
-  
+
   .step-image {
     max-height: 260px;
   }
-  
+
   .step-title {
     font-size: 18px;
     padding: 15px 0 10px 0;
   }
-  
+
   .step-description {
     font-size: 14px;
     padding: 10px 0;
   }
-  
+
   .step-content {
     height: 350px;
   }
-  
+
   .popup {
     top: 45px;
   }
-  
+
   .step-benefits li {
     font-size: 15px;
     margin-bottom: 8px;
   }
-  
+
   .step-note {
     font-size: 14px;
     padding: 8px 16px;
     margin-top: 12px;
-    
+
     .icon-info {
       margin-right: 6px;
       font-size: 18px;
     }
   }
-  
+
   .button-container button {
     font-size: 14px;
     padding: 0 18px;
     height: 32px;
     min-width: 90px;
   }
-  
+
   .step-button {
     height: 30px;
     font-size: 14px;
   }
-  
+
   .save-amount {
     font-size: 18px;
   }
-  
+
   .free-badge {
     font-size: 16px;
     padding: 4px 12px;

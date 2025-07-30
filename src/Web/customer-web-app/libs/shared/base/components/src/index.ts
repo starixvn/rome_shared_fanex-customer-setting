@@ -8,3 +8,4 @@ export * from './libs/table/table-skeleton';
 export * from './libs/titles/title';
 export * from './libs/messages/error-field-message';
 export * from './libs/modals/confirm-modal';
+export * from './libs/overlay/overlay-skeleton';
