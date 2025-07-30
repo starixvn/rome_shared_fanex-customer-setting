@@ -37,7 +37,7 @@ export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapper
 
   return (
     <>
-      {isModalOpen && <CashServiceAds onConfirm={handleEnableCashService} cashServiceStatus={cashServiceStatus} />}
+      {isModalOpen && <CashServiceAds isOpen={isModalOpen} onConfirm={handleEnableCashService} cashServiceStatus={cashServiceStatus} />}
       {isEnabled && !isError ?  <CreateCashMemberPage isEnabled={isEnabled} /> : null}
     </>
   );

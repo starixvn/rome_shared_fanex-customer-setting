@@ -2,23 +2,14 @@
 import { i18nInstance } from '@customer-web-app/shared-i18n';
 import { IconError } from '@customer-web-app/shared/base/common-icon';
 import * as Sentry from '@sentry/react';
-import { OverlaySkeleton, useCookieLanguage } from '@customer-web-app/shared/base/components';
-import { CashServiceAds } from '@customer-web-app/advertisement-pages';
+import { useCookieLanguage } from '@customer-web-app/shared/base/components';
+import { MainSitePopUpAds } from '@customer-web-app/advertisement-pages';
 
 declare const appConfig: any;
 
-function CashServicePage() {
-  return <CashServiceAds
-    onClose={() => { }}
-    onConfirm={() => { }}
-    cashServiceStatus={{ isCashServiceEnabled: false, isCanUpdateCashServiceStatus: false, isOfferedCashService: true }}
-    onDontShowAgain={() => { }}
-  />;
-}
-
 function Advertisement() {
   if (appConfig.advName === 'CashServiceAds') {
-    return <CashServicePage />;
+    return <MainSitePopUpAds />;
   }
   return (
     <div>Advertisement</div>

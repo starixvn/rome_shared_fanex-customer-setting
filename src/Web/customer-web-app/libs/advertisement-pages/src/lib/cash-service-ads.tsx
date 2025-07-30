@@ -1,5 +1,5 @@
 import { currentCdnUri } from '@customer-web-app/shared-api-helper';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
 import { CashServiceStatus } from '@customer-web-app/share-models';
 import { useTranslation, Trans } from 'react-i18next';
@@ -49,6 +49,7 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
 }
 
 interface CashServiceAdsProps {
+    readonly isOpen: boolean;
     readonly onDontShowAgain?: () => void;
     readonly onConfirm?: () => void;
     readonly onClose?: () => void;
@@ -62,8 +63,7 @@ enum ContentFrame {
 
 export function CashServiceAds(props: CashServiceAdsProps) {
     const { t } = useTranslation();
-    const { onClose, onConfirm, cashServiceStatus, onDontShowAgain } = props;
-    const [isOpen, setIsOpen] = useState(true);
+    const { isOpen, onClose, onConfirm, cashServiceStatus, onDontShowAgain } = props;
     const [contentFrame, setContentFrame] = useState(ContentFrame.Ads);
     const imagePath = `${currentCdnUri()}advertisement/cash-service-ads/`;
     const bannerPath = useMemo(() => `${imagePath}BannerPC.jpg`, []);
@@ -120,15 +120,13 @@ export function CashServiceAds(props: CashServiceAdsProps) {
         setContentFrame(ContentFrame.TourGuide);
         setCurrentStep(0);
     }
-
     if (!isOpen) return null;
 
     return (
-        <div className={styles.overlay}>
+        <div id="cash-service-popup" className={styles.overlay}>
             <div className={styles.popup}>
                 {onClose && <button
                     onClick={() => {
-                        setIsOpen(false);
                         onClose();
                     }}
                     className={styles['close-button']}
@@ -150,7 +148,10 @@ export function CashServiceAds(props: CashServiceAdsProps) {
                     && <StepSlider
                         steps={steps}
                         currentStep={currentStep}
-                        onClose={() => setContentFrame(ContentFrame.Ads)}
+                        onClose={() => {
+                            setContentFrame(ContentFrame.Ads);
+                            onClose?.();
+                        }}
                         onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
 
                 
