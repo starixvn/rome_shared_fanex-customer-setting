@@ -74,7 +74,7 @@ export const EditInfoCashMemberForm = () => {
             reset(data);
             showResult('success', t('UpdateSuccess'), 1200);
         } else {
-            showResult('error', res.message || res.errorMessage);
+            showResult('error', res.message === 'NoPermission' ? t('YouAreNotAuthorized') : res.message);
         }
         setIsLoading(false);
     }
