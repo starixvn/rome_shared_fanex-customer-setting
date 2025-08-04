@@ -59,6 +59,7 @@ export function Mobifone({
         onFocus={onFocus} onBlur={onBlur}
         maxLength={4}
       />
+      <div className={styles['mobile-separator']} />
       <input
         id="phoneNumber"
         key="phoneNumber"
