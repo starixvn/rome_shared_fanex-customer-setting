@@ -4,6 +4,7 @@ import { SingleFilterableDropdown, DropdownOption } from "@customer-web-app/shar
 import { IconTick, IconClose2, IconPen, IconTrashBin } from "@customer-web-app/shared/base/common-icon";
 import { ButtonIcon } from "@customer-web-app/shared/base/components";
 import styles from "./grid-components.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface Bank {
     bankId: number;
@@ -23,7 +24,8 @@ interface EditingRow {
 }
 
 const BankCell = memo(({ bankAccountNumber, bankCode }: Partial<Bank>) => {
-    if (!bankAccountNumber || !bankCode) return <div className={styles.noMatchingBankAccount}>No Matching Bank Account</div>;
+    const { t } = useTranslation();
+    if (!bankAccountNumber || !bankCode) return <div className={styles.noMatchingBankAccount}>{t('NoMatchingBankAccount')}</div>;
 
     return (
         <div className={styles.bankCell}>

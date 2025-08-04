@@ -49,7 +49,9 @@ export const DeleteBankModal = ({
             loading={isLoading}
         >
             <div>
-                {renderResultMessage()}
+                <div style={{ marginBottom: '10px' }}>
+                    {renderResultMessage()}
+                </div>
                 <div style={{ textAlign: 'center' }}>
                     {t('AreYouSureYouWantToDeleteThisBankAccount')}
                     <span style={{ fontSize: '13px', fontWeight: 'bold', marginLeft: '5px' }}>

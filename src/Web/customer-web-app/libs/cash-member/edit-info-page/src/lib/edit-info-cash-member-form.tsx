@@ -126,7 +126,7 @@ export const EditInfoCashMemberForm = () => {
                         </div>
                         <div className={styles['form-group-row']}>
                             <div className={styles['form-group-item']}>
-                                <Label required>{t('Mobile')}</Label>
+                                <Label required>{t('mobile')}</Label>
                                 <div className={classNames("control-field", styles['control-field-mobile'], (errors.mobileCode || errors.mobileNumber) && styles['input-error'])}>
                                     <span className={styles['mobile-code-prefix']}>+</span>
                                     <Controller
@@ -173,7 +173,7 @@ export const EditInfoCashMemberForm = () => {
                                 {(errors.mobileCode || errors.mobileNumber) && <ErrorFieldMessage message={(errors.mobileCode?.message || errors.mobileNumber?.message) as string} />}
                             </div>
                             <div className={styles['form-group-item']}>
-                                <Label>{t('Phone')}</Label>
+                                <Label>{t('phone')}</Label>
                                 <Controller
                                     name="phone"
                                     render={({ field }) =>
@@ -212,7 +212,7 @@ export const EditInfoCashMemberForm = () => {
                                 {errors.email && <ErrorFieldMessage message={errors.email.message as string} />}
                             </div>
                             <div className={styles['form-group-item']}>
-                                <Label>{t('Fax')}</Label>
+                                <Label>{t('fax')}</Label>
                                 <Controller
                                     name="fax"
                                     render={({ field }) =>
