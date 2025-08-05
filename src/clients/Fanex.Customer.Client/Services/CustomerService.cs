@@ -79,8 +79,6 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> GetCommissionHint(int custId, string site, string language = "en-US");
 
-        Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US");
-
         Task<List<UpdateCustomerResult>> CopySupersWinLossLimit(CopySupersWinLossLimitParam param);
 
         Task<AccountInfo> GetAccountInfo(int custId);
@@ -307,10 +305,7 @@ namespace Fanex.Customer.Client.Services
             }
             return httpClient.GetStringAsync($"customer/product-categories?currencyId={currencyId}&site={site}&sitelabel={siteLabel}&&language={language}");
         }
-
-        public Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US")
-            => httpClient.GetStringAsync($"customer/max-payout-setting-information?siteName={siteName}&siteLabel={siteLabel}&language={language}");
-
+        
         public Task<string> GetCommissionHint(int custId, string site, string language = "en-US")
             => httpClient.GetStringAsync($"customer/commission-hint?custId={custId}&site={site}&language={language}");
 

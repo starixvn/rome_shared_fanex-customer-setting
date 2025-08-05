@@ -44,7 +44,6 @@
   "MPS7": "3. Nếu Member đặt vé cược thứ hai với Tỷ Lệ Cược = 5, vé cược sẽ có:",
   "MPS8": "- Cược Lớn Nhất = (Thanh Toán Tối Đa Mỗi Trận - Thanh Toán Tối Đa Tích Lũy) / Tỷ Lệ Cược = (1.000 - 700) / 5 = 60.",
   "MPS9": "<i> * Thanh Toán Tối Đa Tích Lũy là khoản Thanh Toán Tối Đa của tất cả vé cược trong cùng một trận, không tính các vé cược Bị Hủy/Từ Chối. Do đó, nếu vé cược thứ nhất bị hủy, thì Cược Lớn Nhất của vé cược thứ hai = (1.000 - 0) / 5 = 200. </i>",
-  "MPS10": "- Thiết lập Thanh Toán Tối Đa sẽ được áp dụng cho tất cả loại cược Sportsbook ngoại trừ các loại cược được liệt kê ở bảng phía dưới. Thể Thao Điện Tử, Muay Thái và Cược Xiên sẽ không áp dụng thiết lập Thanh Toán Tối Đa.",
   "MPS11": "Thể Thao",
   "MPS12": "Các loại cược không áp dụng thiết lập Thanh Toán Tối Đa",
   "MPS13": "Tất cả các môn thể thao trừ {0} và {1}",
