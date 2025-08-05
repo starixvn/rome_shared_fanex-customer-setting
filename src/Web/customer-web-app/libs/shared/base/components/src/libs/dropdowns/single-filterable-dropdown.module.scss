@@ -1,164 +1,135 @@
-// =============================================================================
-// Single Filterable Dropdown Component Styles
-// =============================================================================
-
-// CSS Custom Properties (CSS Variables)
-// =============================================================================
 :root {
   --background-control: #fff;
   --border-control: #e0e0e0;
+  --text-color: #444;
 }
 
-:root[data-theme="dark"] {
+:root [data-theme='dark'] {
   --background-control: #121212;
   --border-control: #2c2c2c;
+  --text-color: #ededed;
 }
 
-// =============================================================================
-// Main Container
-// =============================================================================
+
 .filterableDropdown {
+  color: var(--text-color);
   position: relative;
   display: inline-block;
   width: 100%;
-}
 
-// =============================================================================
-// Control Field (Main Button/Input Area)
-// =============================================================================
-.control {
-  display: flex;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  user-select: none;
-  
-  &.disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
+  .control {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
   }
-}
 
-// =============================================================================
-// Selected Text Display
-// =============================================================================
-.selectedText {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 12px;
-  // flex: 1;
-  
-  // Hide nickname elements within the text
-  :global(.nickname) {
-    display: none;
+
+  .selectedText {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 12px;
+
+    :global(.nickname) {
+      display: none;
+    }
   }
-}
 
-// =============================================================================
-// Arrow Icon
-// =============================================================================
-.arrowIcon {
-  width: 12px;
-  height: 12px;
-  position: absolute;
-  right: 3px;
-  top: 50%;
-  transform: translateY(-50%);
-  fill: #333;
-  transition: transform 0.2s ease;
-  
-  // Dark mode support
-  @media (prefers-color-scheme: dark) {
-    fill: #ededed;
+  .arrowIcon {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: var(--text-color);
+    transition: transform 0.2s ease;
   }
-}
 
-// =============================================================================
-// Dropdown Menu Container
-// =============================================================================
-.dropdownMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: var(--background-control);
-  border: 1px solid var(--border-control);
-  border-radius: 3px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  margin-top: 2px;
-  z-index: 9999;
-}
-
-// =============================================================================
-// Search Container
-// =============================================================================
-.searchContainer {
-  position: sticky;
-  top: 0;
-  padding: 8px;
-  background-color: var(--background-control);
-  border-bottom: 1px solid var(--border-control);
-  border-radius: 3px 3px 0 0;
-}
-
-// =============================================================================
-// Search Input
-// =============================================================================
-.searchInput {
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-}
-
-// =============================================================================
-// Dropdown Options
-// =============================================================================
-.dropdownOption {
-  display: flex;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 5px 12px;
-  cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
-  
-  &:hover {
-    background-color: #1967D2;
-    color: #fff;
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--background-control);
+    border: 1px solid var(--border-control);
+    border-radius: 3px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-top: 2px;
+    z-index: 9999;
   }
-  &.dropdownOptionSelected {
-    background-color: #1967D2;
-    color: #fff;
+
+  .searchContainer {
+    position: sticky;
+    top: 0;
+    padding: 8px;
+    background-color: var(--background-control);
+    border-bottom: 1px solid var(--border-control);
+    border-radius: 3px 3px 0 0;
   }
-  &:last-child {
-    border-radius: 0 0 3px 3px;
+
+  .searchInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-color);
   }
-  
-  // Mobile responsive padding
-  @media (max-width: 768px) {
+
+  .dropdownOption {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: #1967D2;
+      color: #fff;
+    }
+
+    &.dropdownOptionSelected {
+      background-color: #1967D2;
+      color: #fff;
+    }
+
+    &:last-child {
+      border-radius: 0 0 3px 3px;
+    }
+
+    // Mobile responsive padding
+    @media (max-width: 768px) {
+      padding: 12px;
+    }
+  }
+
+  .optionLabel {
+    display: flex;
+    flex-direction: column;
+    word-break: break-word;
+  }
+
+
+  .noData {
     padding: 12px;
+    text-align: center;
+    font-style: italic;
   }
-}
-
-// =============================================================================
-// Option Label Text
-// =============================================================================
-.optionLabel {
-  display: flex;
-  flex-direction: column;
-  word-break: break-word;
-}
-
-// =============================================================================
-// No Data Message
-// =============================================================================
-.noData {
-  padding: 12px;
-  text-align: center;
-  color: #6b7280; // text-gray-500 equivalent
-  font-style: italic;
+  img{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 5px;
+  }
 }

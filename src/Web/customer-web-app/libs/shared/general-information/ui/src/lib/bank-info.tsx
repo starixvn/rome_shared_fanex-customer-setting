@@ -38,7 +38,7 @@ const BankDropdown = ({ banks, onChangeBankId, isBankIdError }: { banks: Bank[],
   );
 
   const getBankImageUrl = useCallback((code: string) => 
-    `${baseUrl}/bank/${code?.toLocaleUpperCase()}.png`,
+    `${baseUrl}cash-member/create/bank/${code?.toLocaleUpperCase()}.png`,
     [baseUrl]
   );
 

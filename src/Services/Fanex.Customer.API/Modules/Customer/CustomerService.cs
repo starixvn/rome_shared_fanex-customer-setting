@@ -1,4 +1,5 @@
 using Fanex.Customer.API.Modules.Customer.Criteria;
+using Fanex.Customer.API.Modules.Customer.Criteria.CashService;
 using Fanex.Customer.API.Modules.Customer.Models;
 using Fanex.Customer.API.Modules.Customer.Requests;
 using Fanex.Customer.API.Modules.Customer.Requests.CashService;
@@ -67,6 +68,8 @@ public interface ICustomerService
     Task<TotalCashMember> GetCashServiceTotalDownline(int custId);
 
     Task<IEnumerable<CurrentWinAmount>> GetCurrentWinAmount(GetCurrentWinAmountRequest request);
+
+    Task<IEnumerable<string>> GetCountryCodes(string site);
 }
 
 public class CustomerService : ICustomerService
@@ -487,5 +490,11 @@ public class CustomerService : ICustomerService
             SabaSport = [.. sabaSports],
             IsSpecialPlatform = isSpecialPlatform
         };
+    }
+
+    public async Task<IEnumerable<string>> GetCountryCodes(string site)
+    {
+        var criteria = new GetCountryCodesCriteria(site);
+        return await dynamicRepository.FetchAsync<string>(criteria);
     }
 }

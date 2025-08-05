@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { AxiosError } from 'axios';
+import { useTranslation } from 'react-i18next';
 import { AlphaSystemIds } from '@customer-web-app/shared-constants';
 
 export const axiosInstance = axios.create({
@@ -17,18 +18,27 @@ const GetCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
   });
   return data;
 };
-const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-  let url = 'Customer/EditInfoPost'; // default
-  if (AlphaSystemIds.includes(updateInfoCustomerPageConfig.systemId)) {
-    url = `Customer/UpdateInfoPost`;
-  }
 
-  const { data } = await axiosInstance.post<T>(url, params, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return data;
+const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
+  try {
+    let url = 'Customer/EditInfoPost'; // default
+    if (AlphaSystemIds.includes(updateInfoCustomerPageConfig.systemId)) {
+      url = `Customer/UpdateInfoPost`;
+    }
+
+    const { data } = await axiosInstance.post<T>(url, params, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError<{ message: string }>;
+    if (axiosError.response?.data.message === 'NoPermission') {
+      return axiosError.response.data as T;
+    }
+    throw error;
+  }
 };
 
 const GetCustomerBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
@@ -46,30 +56,54 @@ const GetBanks = async <T>(params?: Record<string, any>): Promise<T> => {
 };
 
 const AddMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-  const { data } = await axiosInstance.post<T>(`Customer/AddMemberBankInfo`, params, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return data;
+  try {
+    const { data } = await axiosInstance.post<T>(`Customer/AddMemberBankInfo`, params, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError<{ message: string }>;
+    if (axiosError.response?.data.message === 'NoPermission') {
+      return axiosError.response.data as T;
+    }
+    throw error;
+  }
 };
 
 const UpdateMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-  const { data } = await axiosInstance.post<T>(`Customer/UpdateMemberBankInfo`, params, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return data;
+  try {
+    const { data } = await axiosInstance.post<T>(`Customer/UpdateMemberBankInfo`, params, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError<{ message: string }>;
+    if (axiosError.response?.data.message === 'NoPermission') {
+      return axiosError.response.data as T;
+    }
+    throw error;
+  }
 };
 
 const RemoveMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
-  const { data } = await axiosInstance.post<T>(`Customer/RemoveMemberBankInfo`, params, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return data;
+  try {
+    const { data } = await axiosInstance.post<T>(`Customer/RemoveMemberBankInfo`, params, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError<{ message: string }>;
+    if (axiosError.response?.data.message === 'NoPermission') {
+      return axiosError.response.data as T;
+    }
+    throw error;
+  }
 };
 
 export {

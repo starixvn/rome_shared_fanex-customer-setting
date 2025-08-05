@@ -1,5 +1,5 @@
 import { currentCdnUri } from '@customer-web-app/shared-api-helper';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
 import { CashServiceStatus } from '@customer-web-app/share-models';
 import { useTranslation, Trans } from 'react-i18next';
@@ -7,10 +7,11 @@ import { useTranslation, Trans } from 'react-i18next';
 interface CashServiceAdsContentProps {
     readonly onClickActivateNow: (() => void) | undefined;
     readonly findOutMore: () => void;
+    readonly onDontShowAgain?: () => void;
 }
 
 function CashServiceAdsContent(props: CashServiceAdsContentProps) {
-    const { onClickActivateNow, findOutMore } = props;
+    const { onClickActivateNow, findOutMore, onDontShowAgain } = props;
     const { t } = useTranslation();
     return (
         <div className={styles['ads-content']}>
@@ -38,46 +39,54 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                     {t('FindOutMore')}
                 </button>
             </div>
+            {onDontShowAgain &&
+                    <div className={styles['dont-show-again']} onClick={onDontShowAgain}>
+                        <input type="checkbox" id="dont-show-again" />
+                        <label htmlFor="dont-show-again">{t('DontShowAgain')}</label>
+                    </div>}
         </div>
     );
 }
 
 interface CashServiceAdsProps {
-    readonly onConfirm: () => void;
+    readonly isOpen: boolean;
+    readonly onDontShowAgain?: () => void;
+    readonly onConfirm?: () => void;
     readonly onClose?: () => void;
     readonly cashServiceStatus: CashServiceStatus;
 }
 
 enum ContentFrame {
     Ads,
-    StepSlider
+    TourGuide
 }
 
-function CashServiceAds(props: CashServiceAdsProps) {
+export function CashServiceAds(props: CashServiceAdsProps) {
     const { t } = useTranslation();
-    const { onClose, onConfirm, cashServiceStatus } = props;
+    const { isOpen, onClose, onConfirm, cashServiceStatus, onDontShowAgain } = props;
     const [contentFrame, setContentFrame] = useState(ContentFrame.Ads);
-    const bannerPath = useMemo(() => currentCdnUri() + '/cash-service-ads/BannerPC.jpg', []);
+    const imagePath = `${currentCdnUri()}advertisement/cash-service-ads/`;
+    const bannerPath = useMemo(() => `${imagePath}BannerPC.jpg`, []);
     const [currentStep, setCurrentStep] = useState(0);
     const steps = useMemo(() => [
         <>
             <div className={styles['step-title']}>{t('InstantDepositsAndWithdrawals')}</div>
-            <img key={1} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step1.jpg'} alt={t('InstantDepositsAndWithdrawals')} />
+            <img key={1} className={styles['step-image']} src={`${imagePath}step1.jpg`} alt={t('InstantDepositsAndWithdrawals')} />
             <div className={styles['step-description']}>{t('EasilyAddAPaymentGatewayAndBankAccountsSoYourMembersCanStartPlayingInstantly')}</div>
         </>,
         <>
             <div className={styles['step-title']}>{t('ManageCreditAndCashMember')}</div>
-            <img key={2} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step2.jpg'} alt={t('ManageCreditAndCashMember')} />
+            <img key={2} className={styles['step-image']} src={`${imagePath}step2.jpg`} alt={t('ManageCreditAndCashMember')} />
             <div className={styles['step-description']}>{t('MaximiseYourEarningsByManagingBothCreditAndCashInSingleAccount')}</div>
         </>,
         <>
             <div className={styles['step-title']}>{t('DedicatedDomain')}</div>
-            <img key={3} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step3.gif'} alt={t('DedicatedDomain')} />
+            <img key={3} className={styles['step-image']} src={`${imagePath}step3.gif`} alt={t('DedicatedDomain')} />
             <div className={styles['step-description']}>{t('ElevateYourBrandWithASignUpLinkedForMemberRegistrations')}</div>
         </>,
         <>
             <div className={styles['step-title']}>{t('CustomisePromotions')}</div>
-            <img key={4} className={styles['step-image']} src={currentCdnUri() + '/cash-service-ads/step4.jpg'} alt={t('CustomisePromotions')} />
+            <img key={4} className={styles['step-image']} src={`${imagePath}step4.jpg`} alt={t('CustomisePromotions')} />
             <div className={styles['step-description']}>{t('CreateAndManagePromotionsFeaturingPopularProductsAndProvidersToKeepYourMembersEntertained')}</div>
         </>,
         <>
@@ -103,20 +112,23 @@ function CashServiceAds(props: CashServiceAdsProps) {
     ], [t]);
 
     const onActivateNow = () => {
-        setContentFrame(ContentFrame.StepSlider);
+        setContentFrame(ContentFrame.TourGuide);
         setCurrentStep(4);
     }
 
     const onFindOutMore = () => {
-        setContentFrame(ContentFrame.StepSlider);
+        setContentFrame(ContentFrame.TourGuide);
         setCurrentStep(0);
     }
+    if (!isOpen) return null;
 
     return (
-        <div className={styles.overlay}>
+        <div id="cash-service-popup" className={styles.overlay}>
             <div className={styles.popup}>
                 {onClose && <button
-                    onClick={onClose}
+                    onClick={() => {
+                        onClose();
+                    }}
                     className={styles['close-button']}
                 >
                     ×
@@ -129,13 +141,20 @@ function CashServiceAds(props: CashServiceAdsProps) {
                 {contentFrame === ContentFrame.Ads &&
                     <CashServiceAdsContent
                         onClickActivateNow={cashServiceStatus.isCanUpdateCashServiceStatus ? onActivateNow : undefined}
-                        findOutMore={onFindOutMore} />}
-                {contentFrame === ContentFrame.StepSlider
+                        findOutMore={onFindOutMore}
+                        onDontShowAgain={onDontShowAgain}
+                    />}
+                {contentFrame === ContentFrame.TourGuide
                     && <StepSlider
                         steps={steps}
                         currentStep={currentStep}
-                        onClose={() => setContentFrame(ContentFrame.Ads)}
+                        onClose={() => {
+                            setContentFrame(ContentFrame.Ads);
+                            onClose?.();
+                        }}
                         onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
+
+                
             </div>
         </div>
     );
@@ -192,5 +211,3 @@ const StepSlider: React.FC<StepSliderProps> = (props) => {
         </div>
     );
 };
-
-export default CashServiceAds;

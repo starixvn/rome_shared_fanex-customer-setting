@@ -3,13 +3,15 @@
     --modal-background: #ffffff;
     --modal-border-color: #ffffff;
     --modal-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    --modal-text-color: #444;
 }
 
-:root[data-theme="dark"] {
+:root [data-theme='dark'] {
     --modal-title-color: #459BE5;
     --modal-background: #171717;
     --modal-border-color: #515151;
     --modal-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    --modal-text-color: #fff;
 }
 
 .overlay {
@@ -19,7 +21,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  z-index: 500;
+  z-index: 100;
 }
 
 .modal {
@@ -30,11 +32,57 @@
   box-shadow: var(--modal-box-shadow);
   margin-top: 100px;
   max-width: 90%;
-  overflow: auto;
+  overflow: visible;
   border-radius: 4px;
+  color: var(--modal-text-color);
 
   @media (min-width: 769px) {
     max-width: none;
+  }
+}
+
+// Modal sizes
+.modalSmall {
+  width: 350px;
+  max-width: 90vw;
+  
+  @media (max-width: 480px) {
+    width: 95vw;
+    margin-top: 50px;
+  }
+}
+
+.modalMedium {
+  width: 600px;
+  max-width: 90vw;
+  
+  @media (max-width: 768px) {
+    width: 95vw;
+    margin-top: 50px;
+  }
+}
+
+.modalLarge {
+  width: 800px;
+  max-width: 90vw;
+  
+  @media (max-width: 1024px) {
+    width: 95vw;
+    margin-top: 50px;
+  }
+}
+
+.modalFullscreen {
+  width: 95vw;
+  height: 95vh;
+  margin-top: 2.5vh;
+  margin-bottom: 2.5vh;
+  
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
   }
 }
 
@@ -54,7 +102,7 @@
 }
 
 .content {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .footer {

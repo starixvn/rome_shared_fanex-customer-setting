@@ -1,7 +1,7 @@
 import { SettingService } from '@customer-web-app/shared-group-settings-services';
 import { useState, useEffect } from 'react';
 import { CreateCashMemberPage } from './create-cash-member-page';
-import CashServiceAds from './cash-service-ads';
+import { CashServiceAds } from '@customer-web-app/advertisement-pages';
 import { CashServiceStatus } from '@customer-web-app/share-models';
 export interface CreateDirectMemberPageWrapperProps { }
 
@@ -37,7 +37,7 @@ export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapper
 
   return (
     <>
-      {isModalOpen && <CashServiceAds onConfirm={handleEnableCashService} cashServiceStatus={cashServiceStatus} />}
+      {isModalOpen && <CashServiceAds isOpen={isModalOpen} onConfirm={handleEnableCashService} cashServiceStatus={cashServiceStatus} />}
       {isEnabled && !isError ?  <CreateCashMemberPage isEnabled={isEnabled} /> : null}
     </>
   );

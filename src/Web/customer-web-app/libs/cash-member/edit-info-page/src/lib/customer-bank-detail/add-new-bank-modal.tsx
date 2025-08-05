@@ -1,16 +1,13 @@
-import { DropdownOption, SingleFilterableDropdown } from "@customer-web-app/shared/base/components";
+import { ConfirmPopup, DropdownOption, SingleFilterableDropdown } from "@customer-web-app/shared/base/components";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { useResultMessage } from "@customer-web-app/shared/base/components";
 import { AddMemberBankInfo, GetBanks, GetCustomerBankInfo } from "../edit-info-cash-member-services";
 import { FormProvider, useForm, Controller } from 'react-hook-form';
-import { ButtonIcon, ButtonFull, ButtonCancel } from "@customer-web-app/shared/base/components";
-import { IconClose2 } from "@customer-web-app/shared/base/common-icon";
 import styles from "./add-new-bank-modal.module.scss";
 import { Label, ErrorFieldMessage } from "@customer-web-app/shared/base/components";
 import { NUMBER_REGEX } from '@customer-web-app/shared-constants';
 import classNames from "classnames";
-
 
 interface AddBankModalProps {
     onCancel: () => void;
@@ -37,12 +34,29 @@ interface AddMemberBankFormData {
 export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false);
-    const [isBlockAction, setIsBlockAction] = useState(false);
     const { renderResultMessage, showResult, clearResult } = useResultMessage();
+
+    const methods = useForm<AddMemberBankFormData>({
+        mode: 'onChange',
+        criteriaMode: 'all',
+    });
+
+    const {
+        handleSubmit,
+        control,
+        watch,
+        formState: { errors },
+        reset,
+        setValue,
+    } = methods;
 
     useEffect(() => {
         loadModalData();
     }, []);
+
+    const bankIcon = (bankCode: string) => {
+        return <img src={`${updateInfoCustomerPageConfig.cdnUri}cash-member/create/bank/${bankCode?.toUpperCase()}.png`} alt={bankCode} className={styles.bankIcon} />
+    }
 
     const loadModalData = async () => {
         const memberBanks = await GetBanks<Bank[]>({});
@@ -50,7 +64,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
             key: bank.bankId,
             value: bank.bankId,
             label: bank.bankName,
-            icon: <img src={`${updateInfoCustomerPageConfig.cdnUri}cash-member/create/bank/${bank.bankCode?.toUpperCase()}.png`} alt={bank.bankName} className={styles.bankIcon} />
+            icon: bankIcon(bank.bankCode)
         }));
         const noMachingBank = {
             bankId: 0,
@@ -72,7 +86,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
             key: bank.bankId + '|' + bank.bankAccountNumber,
             value: bank.bankId + '|' + bank.bankAccountNumber,
             label: bank.bankAccountNumber,
-            icon: <img src={`${updateInfoCustomerPageConfig.cdnUri}cash-member/create/bank/${bank.bankCode?.toUpperCase()}.png`} alt={bank.bankName} className={styles.bankIcon} />
+            icon: bankIcon(bank.bankCode)
         }))];
 
         reset({
@@ -85,24 +99,9 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
         });
     }
 
-    const methods = useForm<AddMemberBankFormData>({
-        mode: 'onChange',
-        criteriaMode: 'all',
-    });
-
-    const {
-        handleSubmit,
-        control,
-        watch,
-        formState: { errors },
-        reset,
-        setValue,
-    } = methods;
-
     const onSubmit = async (formData: AddMemberBankFormData) => {
         try {
             setIsLoading(true);
-            setIsBlockAction(true);
             const response = await AddMemberBankInfo<any>({
                 CustId: formData.memberId,
                 MemberBankId: formData.memberBankID,
@@ -114,7 +113,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
             if (response.isSuccessful) {
                 showResult('success', t('AddSuccess'), 1000, onAddSuccess);
             } else {
-                showResult('error', response.message);
+                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
             }
 
         } catch (error) {
@@ -122,27 +121,26 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
             showResult('error', t('AddFailed'));
         } finally {
             setIsLoading(false);
-            setIsBlockAction(false);
         }
     };
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContainer}>
-                <div className={styles.modalHeader}>
-                    <Label>{t('AddBankAccount')}</Label>
-                    <ButtonIcon
-                        onClick={onCancel}
-                        icon={<IconClose2 />}
-                        className={styles.closeModal}
-                    />
-                </div>
-                <div>
+        <ConfirmPopup
+            title={t('AddBankAccount')}
+            onCancel={() => {
+                clearResult();
+                onCancel();             
+            }}
+            onConfirm={handleSubmit(onSubmit)}
+            size="small"
+            loading={isLoading}
+        >
+              <div>
                     <div className={styles.resultMessage}>
                         {renderResultMessage()}
                     </div>
                     <FormProvider {...methods}>
-                        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                        <form className={styles.form}>
                             <div className={styles.formField}>
                                 <Label>{t('MemberBankAccount')}</Label>
                                 <SingleFilterableDropdown
@@ -152,9 +150,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
                                     }}
                                     defaultOption={watch('memberBankDropdownOptions')?.[0] as DropdownOption}
                                 />
-                                {errors.memberBankID && (
-                                    <div className={styles.errorMessage}>{errors.memberBankID.message}</div>
-                                )}
+                                {errors.memberBankID && <ErrorFieldMessage message={errors.memberBankID.message as string} />}
                             </div>
 
                             <div className={styles.formField}>
@@ -198,28 +194,10 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
                                     }}
                                     defaultOption={watch('agentBankDropdownOptions')?.[0] as DropdownOption}
                                 />
-                            </div>
-
-                            <div className={styles.buttonContainer}>
-                                <ButtonCancel
-                                    text={t('Cancel')}
-                                    onClick={() => {
-                                        onCancel();
-                                        clearResult();
-                                    }}
-                                    disabled={isLoading || isBlockAction}
-                                />
-                                <ButtonFull
-                                    type="submit"
-                                    text={isLoading ? t('Loading') : t('Save')}
-                                    onClick={handleSubmit(onSubmit)}
-                                    disabled={isLoading || isBlockAction}
-                                />
-                            </div>
+                            </div>  
                         </form>
                     </FormProvider>
                 </div>
-            </div>
-        </div>
+        </ConfirmPopup>
     )
 }

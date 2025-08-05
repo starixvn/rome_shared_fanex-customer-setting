@@ -80,7 +80,7 @@ export const ViewInfoCashMemberForm = () => {
             </div>
           
             <div className={styles['form-row']}>
-                <Label className={styles['label']}>{t('Phone')}</Label>
+                <Label className={styles['label']}>{t('phone')}</Label>
                 <input 
                     className={styles['input-field']} 
                     value={customerInfo.phone || '-'} 
@@ -106,7 +106,7 @@ export const ViewInfoCashMemberForm = () => {
                 />
             </div>
             <div className={styles['form-row']}>
-                <Label className={styles['label']}>{t('Fax')}</Label>
+                <Label className={styles['label']}>{t('fax')}</Label>
                 <input 
                     className={styles['input-field']} 
                     value={customerInfo.fax || '-'} 

@@ -7,6 +7,7 @@ import { inputNumberOnly } from '@customer-web-app/shared-helpers';
 export interface MobifoneProps {
   readonly id: string;
   readonly phoneNumber: string;
+  readonly isLoadDefaultCountryCode?: boolean;
   readonly onChangePhoneNumber: (phoneNumber: string) => void;
   readonly isError?: boolean;
   readonly onFocus: () => void;
@@ -20,14 +21,20 @@ export function Mobifone({
   isError = false,
   onFocus,
   onBlur,
+  isLoadDefaultCountryCode = false,
 }: MobifoneProps) {
-  const [countryCode, setCountryCode] = useState<string>(phoneNumber?.split('-')[0] || '');
+  const [countryCode, setCountryCode] = useState<string>('');
 
   useEffect(() => {
-    SettingService.GetCountryCodes().then((res) => {
-      countryCode == '' && setCountryCode(res[0]);
-    });
-  }, []);
+    if (isLoadDefaultCountryCode) {
+      SettingService.GetCountryCodes().then((res) => {
+        countryCode == '' && setCountryCode(res[0]);
+      });
+    }
+    if (!isLoadDefaultCountryCode && phoneNumber) {
+      setCountryCode(phoneNumber?.split('-')[0] || '');
+    }
+  }, [phoneNumber]);
 
   const handleMobifoneCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = inputNumberOnly(e.target.value);
@@ -52,6 +59,7 @@ export function Mobifone({
         onFocus={onFocus} onBlur={onBlur}
         maxLength={4}
       />
+      <div className={styles['mobile-separator']} />
       <input
         id="phoneNumber"
         key="phoneNumber"

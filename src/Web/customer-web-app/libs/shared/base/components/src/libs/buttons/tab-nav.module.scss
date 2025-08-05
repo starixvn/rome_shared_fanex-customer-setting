@@ -1,8 +1,33 @@
 @import './button-color.scss';
+:root,
+:root [data-theme='light'] {
+    --tab-nav-border-color: #cecece;
+    &.view-super {
+        --tab-nav-border-color: #67151b;
+    }
+
+    &.view-master {
+        --tab-nav-border-color: #276443;
+    }
+
+    &.view-agent {
+        --tab-nav-border-color: #516e8f;
+    }
+}
+
+:root [data-theme='dark'] {
+    --tab-nav-border-color: #313334;
+    &.view-super,
+    &.view-master,
+    &.view-agent {
+        --tab-nav-border-color: #ededed;
+    }
+}
+
 .tab-nav {
     display: flex;
     margin-top: -12px;
-    border-bottom: 1px solid var(--tab-component-border-color);
+    border-bottom: 1px solid var(--tab-nav-border-color);
     margin-bottom: 15px;
     list-style: none;
     padding-inline-start: 0;

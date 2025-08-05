@@ -9,6 +9,7 @@ export interface CashServiceStatus {
   isOfferedCashService: boolean;
   isCanUpdateCashServiceStatus: boolean;
   isCashServiceEnabled: boolean;
+  isAllowCloseAds?: boolean;
 }
 
 export class Result {

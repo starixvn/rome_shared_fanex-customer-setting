@@ -4,14 +4,24 @@
   --icon-pen-color: #444;
   --icon-info-link: #325275;
   --icon-exclamation-point: #118AF2;
+  --trash-icon-color: #D33333;
+  --trash-icon-color: #D33333;
+  --save-icon-color: #52A220;
+  --cancel-icon-color: #D33333;
+
+  --button-icon-hover: rgba(0,0,0,.1);
 }
 
-:root[data-theme="dark"] {
-  --icon-tick-color: #ededed;
+:root [data-theme='dark'] {
+  --icon-tick-color: #52A220;
   --icon-close2-color: #ededed;
   --icon-pen-color: #ededed;
   --icon-info-link: #578fcc;
   --icon-exclamation-point: #118AF2;
+  --trash-icon-color: #e54748;
+  --save-icon-color: #52A220;
+  --cancel-icon-color: #e54748;
+  --button-icon-hover: rgba(255,255,255,.1);
 }
 
 
@@ -23,6 +33,7 @@
   width: 14px;
   height: 14px;
 }
+
 .iconLink {
   display: inline-block;
   vertical-align: middle;
@@ -95,4 +106,10 @@
   height: 20px;
   margin-left: 4px;
   fill: var(--icon-exclamation-point);
+}
+
+.iconTrashBin{
+  width: 16px;
+  height: 16px;
+  fill: var(--trash-icon-color);
 }

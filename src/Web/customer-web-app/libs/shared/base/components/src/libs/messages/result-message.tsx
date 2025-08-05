@@ -44,7 +44,7 @@ export const ResultMessage: React.FC<ResultMessageProps> = ({
         <div className={classNames(styles.resultMessage, className)} role="alert" style={style}>
             <div className={`${styles.message} ${config.styleClass}`}>
                 <IconComponent className={styles.icon} />
-                <div>{message}</div>
+                <div className={styles.messageText}>{message}</div>
             </div>
         </div>
     );

@@ -1,4 +1,9 @@
-@import './button-color.scss';
+:root {
+  --tab-component-color-active: #000;
+}
+:root [data-theme='dark'] {
+  --tab-component-color-active: #fff;
+}
 
 .button-tab-active {
   font-weight: 500;

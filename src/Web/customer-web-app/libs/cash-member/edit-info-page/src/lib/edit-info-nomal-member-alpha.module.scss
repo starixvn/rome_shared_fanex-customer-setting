@@ -1,3 +1,11 @@
+:root {
+    --color-text-primary: #000;
+}
+
+:root [data-theme='dark'] {
+    --color-text-primary: #fff;
+}
+
 .form {
     width: 675px;
     font-weight: 500;

@@ -7,7 +7,8 @@
     --table-header-color: #1a1a1a;
     --text-color: #333;
   }
-:root[data-theme="dark"] {
+
+:root [data-theme='dark'] {
     --table-header-background: #303740;
     --table-background: #171717;
     --table-background-hover: #4D4A41;
@@ -16,6 +17,7 @@
     --table-header-color: #ffffff;
     --text-color: #ededed;
   }
+
 .table-skeleton{
     width: 100%;
     table {

@@ -29,12 +29,12 @@ export const DeleteBankModal = ({
             if (response.isSuccessful) {
                 showResult('success', t('RemoveSuccess'), 1500, onDeleteSuccess);
             } else {
-                showResult('error', response.message);
+                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
             }
         } catch (error) {
             console.error('Error deleting bank account:', error);
             showResult('error', t('RemoveFailed'));
-        } 
+        }
         finally {
             setIsLoading(false);
         }
@@ -42,24 +42,26 @@ export const DeleteBankModal = ({
 
     return (
         <ConfirmPopup
-            children={
-                <div>
-                    {renderResultMessage()}
-                    <div style={{ textAlign: 'center' }}>
-                        {t('AreYouSureYouWantToDeleteThisBankAccount')}
-                        <span style={{ fontSize: '13px', fontWeight: 'bold', marginLeft: '5px' }}>
-                            {record.memberBankAccountNumber}
-                        </span>
-                    </div>
-                    <div style={{ textAlign: 'center', fontSize: '13px' }}>
-                        *{t('ThisActionIsPermanentAndCannotBeUndone')}
-                    </div>
-                </div>
-            }
+            size="small"
             title={t('DeleteBankAccount')}
             onConfirm={handleConfirmDelete}
             onCancel={onCancel}
             loading={isLoading}
-        />
+        >
+            <div>
+                <div style={{ marginBottom: '10px' }}>
+                    {renderResultMessage()}
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                    {t('AreYouSureYouWantToDeleteThisBankAccount')}
+                    <span style={{ fontSize: '13px', fontWeight: 'bold', marginLeft: '5px' }}>
+                        {record.memberBankAccountNumber}
+                    </span>
+                </div>
+                <div style={{ textAlign: 'center', fontSize: '13px' }}>
+                    *{t('ThisActionIsPermanentAndCannotBeUndone')}
+                </div>
+            </div>
+        </ConfirmPopup>
     );
 };
