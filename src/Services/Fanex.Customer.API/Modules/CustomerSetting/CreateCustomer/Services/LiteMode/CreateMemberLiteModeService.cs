@@ -68,6 +68,7 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
             { "ip", request.Context.IP },
             { "systemid", request.Context.SystemId },
             { "settingstatus", appSettings.SettingStatus },
+            { "accumcreditallcashmember", await GetCashAccumCredit(request.Settings.GeneralInfo.UplineCustId) }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));

@@ -4,6 +4,7 @@ using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
 
@@ -18,8 +19,9 @@ public class CopyMemberService : CopyCustomerBaseService
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
     public CopyMemberService(IMessageService messageService,
-        AppSettings appSettings)
-        : base(messageService, appSettings)
+        AppSettings appSettings,
+        IDynamicRepository dynamicRepository)
+        : base(messageService, appSettings, dynamicRepository)
     {
     }
 
@@ -61,6 +63,7 @@ public class CopyMemberService : CopyCustomerBaseService
             { "issearchandcopy", true },
             { "existingcustid", request.SourceCustId },
             { "isqrcode", request.IsQrCode },
+            { "accumcreditallcashmember", await GetCashAccumCredit(request.UplineId)}
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.CustDBGroupID));

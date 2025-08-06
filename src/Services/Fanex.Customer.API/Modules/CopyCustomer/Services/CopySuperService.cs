@@ -4,6 +4,7 @@ using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Shared.Utils;
 using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace Fanex.Customer.API.Modules.CopyCustomer.Services;
 
@@ -18,8 +19,9 @@ public class CopySuperService : CopyCustomerBaseService
     private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
     public CopySuperService(IMessageService messageService,
-        AppSettings appSettings)
-        : base(messageService, appSettings)
+        AppSettings appSettings,
+        IDynamicRepository dynamicRepository)
+        : base(messageService, appSettings, dynamicRepository)
     {
     }
 

@@ -145,10 +145,10 @@ public class CopyCustomerService : PasswordServiceBase, ICopyCustomerService
     {
         return roleId switch
         {
-            CustomerLevel.Super => new CopySuperService(messageService, appSettings),
-            CustomerLevel.Master => new CopyMasterService(messageService, appSettings),
-            CustomerLevel.Agent => new CopyAgentService(messageService, appSettings),
-            CustomerLevel.Member => new CopyMemberService(messageService, appSettings),
+            CustomerLevel.Super => new CopySuperService(messageService, appSettings, dynamicRepository),
+            CustomerLevel.Master => new CopyMasterService(messageService, appSettings, dynamicRepository),
+            CustomerLevel.Agent => new CopyAgentService(messageService, appSettings, dynamicRepository),
+            CustomerLevel.Member => new CopyMemberService(messageService, appSettings, dynamicRepository),
             _ => throw new ArgumentOutOfRangeException(nameof(roleId))
         };
     }
