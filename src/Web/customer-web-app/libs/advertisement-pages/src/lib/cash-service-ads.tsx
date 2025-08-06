@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
 import { CashServiceStatus } from '@customer-web-app/share-models';
 import { useTranslation, Trans } from 'react-i18next';
+import classNames from 'classnames';
 
 interface CashServiceAdsContentProps {
     readonly onClickActivateNow: (() => void) | undefined;
@@ -81,12 +82,12 @@ export function CashServiceAds(props: CashServiceAdsProps) {
         </>,
         <>
             <div className={styles['step-title']}>{t('DedicatedDomain')}</div>
-            <img key={3} className={styles['step-image']} src={`${imagePath}step3.gif`} alt={t('DedicatedDomain')} />
+            <img key={3} className={classNames(styles['step-image'], styles['support-scale'])} src={`${imagePath}step3.gif`} alt={t('DedicatedDomain')} />
             <div className={styles['step-description']}>{t('ElevateYourBrandWithASignUpLinkedForMemberRegistrations')}</div>
         </>,
         <>
             <div className={styles['step-title']}>{t('CustomisePromotions')}</div>
-            <img key={4} className={styles['step-image']} src={`${imagePath}step4.jpg`} alt={t('CustomisePromotions')} />
+            <img key={4} className={classNames(styles['step-image'])} src={`${imagePath}step4.jpg`} alt={t('CustomisePromotions')} />
             <div className={styles['step-description']}>{t('CreateAndManagePromotionsFeaturingPopularProductsAndProvidersToKeepYourMembersEntertained')}</div>
         </>,
         <>
