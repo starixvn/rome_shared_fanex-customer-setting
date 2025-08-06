@@ -11,9 +11,7 @@ function Advertisement() {
   if (appConfig.advName === 'CashServiceAds') {
     return <MainSitePopUpAds />;
   }
-  return (
-    <div>Advertisement</div>
-  );
+  return null;
 }
 
 export function App() {

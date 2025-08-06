@@ -1,5 +1,5 @@
 import { currentCdnUri } from '@customer-web-app/shared-api-helper';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
 import { CashServiceStatus } from '@customer-web-app/share-models';
 import { useTranslation, Trans } from 'react-i18next';
@@ -40,10 +40,10 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                 </button>
             </div>
             {onDontShowAgain &&
-                    <div className={styles['dont-show-again']} onClick={onDontShowAgain}>
-                        <input type="checkbox" id="dont-show-again" />
-                        <label htmlFor="dont-show-again">{t('DontShowAgain')}</label>
-                    </div>}
+                <div className={styles['dont-show-again']} onClick={onDontShowAgain}>
+                    <input type="checkbox" id="dont-show-again" />
+                    <label htmlFor="dont-show-again">{t('DontShowAgain')}</label>
+                </div>}
         </div>
     );
 }
@@ -101,8 +101,8 @@ export function CashServiceAds(props: CashServiceAdsProps) {
                 }</span>
             </div>
             <ul className={styles['step-benefits']}>
-                <li><span className={styles['icon-check']} /> <b>{t('NoPlatformFee')}</b> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
-                <li><span className={styles['icon-check']} /> <b> {t('Just015PerTransactionViaYourLinkedBankAccount')}</b></li>
+                <li><span className={styles['icon-check']} /> <span style={{ fontWeight: 'bold' }}>{t('NoPlatformFee')}</span> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
+                <li><span className={styles['icon-check']} /> <span style={{ fontWeight: 'bold' }}> {t('Just015PerTransactionViaYourLinkedBankAccount')}</span></li>
                 <li><span className={styles['icon-check']} /> {t('GetResultsStayIfYouLoveItCancelAnytime')}</li>
             </ul>
             <div className={styles['step-note']}>
@@ -154,7 +154,7 @@ export function CashServiceAds(props: CashServiceAdsProps) {
                         }}
                         onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
 
-                
+
             </div>
         </div>
     );
