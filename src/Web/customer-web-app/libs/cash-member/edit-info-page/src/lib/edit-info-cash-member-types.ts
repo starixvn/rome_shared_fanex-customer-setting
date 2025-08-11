@@ -24,6 +24,7 @@ export interface MemberBankAccountRecord {
 
 export interface BaseResponse {
     errorCode: string;
+    code: number;
     errorMessage: string;
     message: string;
     isSuccess: boolean;
@@ -32,6 +33,8 @@ export interface BaseResponse {
 
 export type UpdateCustomerInfoResponse = BaseResponse;
 export type UpdateMemberBankInfoResponse = BaseResponse;
+export type AddMemberBankInfoResponse = BaseResponse;
+export type RemoveMemberBankInfoResponse = BaseResponse;
 
 export interface BaseCustomerInfo {
     firstName: string;

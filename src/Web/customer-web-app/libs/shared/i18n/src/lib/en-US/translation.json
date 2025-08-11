@@ -279,6 +279,10 @@
   "AddSuccess": "Add successfully",
   "AddFailed": "Add failed",
   "RemoveSuccess": "Remove successfully",
+  "RemoveFailed": "Remove failed",
   "NoChanges": "There is no change to update.",
-  "CustomerInformation": "Customer Information"
+  "CustomerInformation": "Customer Information",
+  "CashServiceDisabled": "Cash Service is disabled.",
+  "BankAccountAlreadyExist": "This bank account already exist, please enter a different bank account number.",
+  "BankAccountNotFound": "Bank account not found."
 }

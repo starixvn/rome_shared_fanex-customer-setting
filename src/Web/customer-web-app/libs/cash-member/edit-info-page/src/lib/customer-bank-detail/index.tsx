@@ -11,6 +11,7 @@ import styles from "./customer-bank-detail.module.scss";
 import { AddBankModal } from "./add-new-bank-modal";
 import { DeleteBankModal } from "./delete-bank-modal";
 import { WrapperTooltip } from "@customer-web-app/wrapper-tooltip";
+import { CashServiceStatus } from "@customer-web-app/share-models";
 
 interface Bank {
     bankId: number;
@@ -34,6 +35,11 @@ export const CustomerBankDetail = () => {
     const [showAddBankAccountPopup, setShowAddBankAccountPopup] = useState(false);
     const [bankAccounts, setBankAccounts] = useState<MemberBankAccountRecord[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [cashServiceStatus, setCashServiceStatus] = useState<CashServiceStatus>({
+        isOfferedCashService: false,
+        isCashServiceEnabled: false,
+        isCanUpdateCashServiceStatus: false,
+    });
     const [editingRow, setEditingRow] = useState<EditingRow | null>(null);
     const [agentBankOptions, setAgentBankOptions] = useState<DropdownOption[]>([]);
     const [agentBanks, setAgentBanks] = useState<Bank[]>([]);
@@ -59,16 +65,11 @@ export const CustomerBankDetail = () => {
     }, []);
 
     const loadCashServiceStatus = useCallback(async () => {
-        const response = await GetCashServiceStatus<{
-            isOfferedCashService: boolean;
-            isCashServiceEnabled: boolean;
-            isCanUpdateCashServiceStatus: boolean;
-        }>();
-        console.log(response);
+        const response = await GetCashServiceStatus<CashServiceStatus>();
+        setCashServiceStatus(response);
     }, []);
 
     const loadBankAccounts = useCallback(async () => {
-
         const memberBanks = await GetCustomerBankInfo<MemberBankAccountRecord[]>({
             custId: updateInfoCustomerPageConfig.custId,
             roleId: 1
@@ -156,8 +157,12 @@ export const CustomerBankDetail = () => {
                         : account
                 ));
                 showResult('success', t('UpdateSuccess'));
+            } else if (response.code === 203) {
+                showResult('error', t('BankAccountNotFound'), 1000, loadBankAccounts);
+            } else if (response.message === 'NoPermission') {
+                showResult('error', t('YouAreNotAuthorized'));
             } else {
-                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
+                showResult('error', t('UpdateFailed'));
             }
 
         } catch (error) {
@@ -190,12 +195,12 @@ export const CustomerBankDetail = () => {
     return (
         <>
             <div className={styles.buttonContainer}>
-                <ButtonFull
+                {cashServiceStatus.isCashServiceEnabled ? <ButtonFull
                     className={styles.addButton}
                     onClick={handleAddBankClick}
                     disabled={isLoading}
                     text={t('AddBankAccount')}
-                />
+                /> : null}
             </div>
             <div className={styles.gridTable}>
                 <div style={{ marginBottom: '5px' }}>
@@ -213,7 +218,7 @@ export const CustomerBankDetail = () => {
                                     <div style={{ textAlign: 'left' }}>{`${t('AgentBankAccountTooltip')} ${t('AgentBankAccountTooltip2')}`}</div>
                                 </WrapperTooltip>
                             </th>
-                            <th scope="col" style={{ maxWidth: '150px' }}>{t('Action')}</th>
+                            {cashServiceStatus.isCashServiceEnabled ? <th scope="col" style={{ maxWidth: '150px' }}>{t('Action')}</th> : null}
                         </tr>
                     </thead>
                     {bankAccounts.length === 0 && (
@@ -236,6 +241,7 @@ export const CustomerBankDetail = () => {
                                     onSave={handleSaveEdit}
                                     onCancel={handleCancelEdit}
                                     onAgentBankChange={handleAgentBankChange}
+                                    isCashServiceEnabled={cashServiceStatus.isCashServiceEnabled}
                                     isLoading={isLoading}
                                 />
                             ))

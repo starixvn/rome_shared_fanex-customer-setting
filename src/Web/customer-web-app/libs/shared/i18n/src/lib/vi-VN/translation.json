@@ -277,6 +277,10 @@
   "AddSuccess": "Thêm thành công",
   "AddFailed": "Thêm thất bại",
   "RemoveSuccess": "Xóa thành công",
+  "RemoveFailed": "Xóa thất bại",
   "NoChanges": "Không có thay đổi để cập nhật.",
-  "CustomerInformation": "Thông tin khách hàng"
+  "CustomerInformation": "Thông tin khách hàng",
+  "CashServiceDisabled": "Dịch vụ tiền mặt đã bị vô hiệu hóa",
+  "BankAccountAlreadyExist": "Tài khoản ngân hàng này đã tồn tại, vui lòng nhập số tài khoản ngân hàng khác.",
+  "BankAccountNotFound": "Không tìm thấy tài khoản ngân hàng"
 }

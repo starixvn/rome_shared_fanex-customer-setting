@@ -8,6 +8,7 @@ import styles from "./add-new-bank-modal.module.scss";
 import { Label, ErrorFieldMessage } from "@customer-web-app/shared/base/components";
 import { NUMBER_REGEX } from '@customer-web-app/shared-constants';
 import classNames from "classnames";
+import { AddMemberBankInfoResponse } from "../edit-info-cash-member-types";
 
 interface AddBankModalProps {
     onCancel: () => void;
@@ -102,7 +103,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
     const onSubmit = async (formData: AddMemberBankFormData) => {
         try {
             setIsLoading(true);
-            const response = await AddMemberBankInfo<any>({
+            const response = await AddMemberBankInfo<AddMemberBankInfoResponse>({
                 CustId: formData.memberId,
                 MemberBankId: formData.memberBankID,
                 MemberBankAccountNumber: formData.memberBankAccountNumber,
@@ -112,10 +113,16 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
 
             if (response.isSuccessful) {
                 showResult('success', t('AddSuccess'), 1000, onAddSuccess);
-            } else {
-                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
             }
-
+            else if (response.message === 'NoPermission') {
+                showResult('error', t('YouAreNotAuthorized'));
+            }
+            else if (response.code === 102) {
+                showResult('error', t('BankAccountAlreadyExist'));
+            }
+            else {
+                showResult('error', t('AddFailed'));
+            }
         } catch (error) {
             console.error('Error adding bank account:', error);
             showResult('error', t('AddFailed'));
@@ -129,75 +136,75 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
             title={t('AddBankAccount')}
             onCancel={() => {
                 clearResult();
-                onCancel();             
+                onCancel();
             }}
             onConfirm={handleSubmit(onSubmit)}
             size="small"
             loading={isLoading}
         >
-              <div>
-                    <div className={styles.resultMessage}>
-                        {renderResultMessage()}
-                    </div>
-                    <FormProvider {...methods}>
-                        <form className={styles.form}>
-                            <div className={styles.formField}>
-                                <Label>{t('MemberBankAccount')}</Label>
-                                <SingleFilterableDropdown
-                                    dropdownOptions={watch('memberBankDropdownOptions') ?? []}
-                                    onSelect={(option) => {
-                                        setValue('memberBankID', Number(option.value));
-                                    }}
-                                    defaultOption={watch('memberBankDropdownOptions')?.[0] as DropdownOption}
-                                />
-                                {errors.memberBankID && <ErrorFieldMessage message={errors.memberBankID.message as string} />}
-                            </div>
-
-                            <div className={styles.formField}>
-                                <Label required>{t('MemberBankAccountNumber')}</Label>
-                                <Controller
-                                    name="memberBankAccountNumber"
-                                    control={control}
-                                    rules={{ required: t('AccountNumberRequired') || 'Account number is required' }}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            maxLength={50}
-                                            type="text"
-                                            className={classNames(styles.inputMemberBankAccountNumber, {
-                                                [styles.error]: errors.memberBankAccountNumber
-                                            })}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                const value = e.target.value.replace(NUMBER_REGEX, '').slice(0, 50);
-                                                field.onChange(value);
-                                            }}
-                                            onKeyDown={(e) => {
-                                                if (e.key === 'Enter') {
-                                                    e.preventDefault();
-                                                    handleSubmit(onSubmit)();
-                                                }
-                                            }}
-                                        />
-                                    )}
-                                />
-                                {errors.memberBankAccountNumber && <ErrorFieldMessage message={errors.memberBankAccountNumber.message as string} />}
-                            </div>
-                            <div className={styles.formField}>
-                                <Label>{t('AgentBankAccount')}</Label>
-                                <SingleFilterableDropdown
-                                    dropdownOptions={watch('agentBankDropdownOptions') ?? []}
-                                    onSelect={(option) => {
-                                        const selectedBank = watch('agentBanks')?.find((opt) => (opt.bankId + '|' + opt.bankAccountNumber) === option.value);
-                                        setValue('agentBankID', selectedBank?.bankId ?? 0);
-                                        setValue('agentBankAccountNumber', selectedBank?.bankAccountNumber ?? '');
-                                    }}
-                                    defaultOption={watch('agentBankDropdownOptions')?.[0] as DropdownOption}
-                                />
-                            </div>  
-                        </form>
-                    </FormProvider>
+            <div>
+                <div className={styles.resultMessage}>
+                    {renderResultMessage()}
                 </div>
+                <FormProvider {...methods}>
+                    <form className={styles.form}>
+                        <div className={styles.formField}>
+                            <Label>{t('MemberBankAccount')}</Label>
+                            <SingleFilterableDropdown
+                                dropdownOptions={watch('memberBankDropdownOptions') ?? []}
+                                onSelect={(option) => {
+                                    setValue('memberBankID', Number(option.value));
+                                }}
+                                defaultOption={watch('memberBankDropdownOptions')?.[0] as DropdownOption}
+                            />
+                            {errors.memberBankID && <ErrorFieldMessage message={errors.memberBankID.message as string} />}
+                        </div>
+
+                        <div className={styles.formField}>
+                            <Label required>{t('MemberBankAccountNumber')}</Label>
+                            <Controller
+                                name="memberBankAccountNumber"
+                                control={control}
+                                rules={{ required: t('AccountNumberRequired') || 'Account number is required' }}
+                                render={({ field }) => (
+                                    <input
+                                        {...field}
+                                        maxLength={50}
+                                        type="text"
+                                        className={classNames(styles.inputMemberBankAccountNumber, {
+                                            [styles.error]: errors.memberBankAccountNumber
+                                        })}
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            const value = e.target.value.replace(NUMBER_REGEX, '').slice(0, 50);
+                                            field.onChange(value);
+                                        }}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                e.preventDefault();
+                                                handleSubmit(onSubmit)();
+                                            }
+                                        }}
+                                    />
+                                )}
+                            />
+                            {errors.memberBankAccountNumber && <ErrorFieldMessage message={errors.memberBankAccountNumber.message as string} />}
+                        </div>
+                        <div className={styles.formField}>
+                            <Label>{t('AgentBankAccount')}</Label>
+                            <SingleFilterableDropdown
+                                dropdownOptions={watch('agentBankDropdownOptions') ?? []}
+                                onSelect={(option) => {
+                                    const selectedBank = watch('agentBanks')?.find((opt) => (opt.bankId + '|' + opt.bankAccountNumber) === option.value);
+                                    setValue('agentBankID', selectedBank?.bankId ?? 0);
+                                    setValue('agentBankAccountNumber', selectedBank?.bankAccountNumber ?? '');
+                                }}
+                                defaultOption={watch('agentBankDropdownOptions')?.[0] as DropdownOption}
+                            />
+                        </div>
+                    </form>
+                </FormProvider>
+            </div>
         </ConfirmPopup>
     )
 }

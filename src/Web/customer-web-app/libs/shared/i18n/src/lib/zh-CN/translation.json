@@ -278,6 +278,10 @@
   "AddSuccess": "添加成功",
   "AddFailed": "添加失败",
   "RemoveSuccess": "删除成功",
+  "RemoveFailed": "删除失败",
   "NoChanges": "没有需要更新的变化。",
-  "CustomerInformation": "会员资料"
+  "CustomerInformation": "会员资料",
+  "CashServiceDisabled": "现金服务已被禁用",
+  "BankAccountAlreadyExist": "此银行账户已存在。请输入其他银行账户。",
+  "BankAccountNotFound": "未找到银行账户。"
 }

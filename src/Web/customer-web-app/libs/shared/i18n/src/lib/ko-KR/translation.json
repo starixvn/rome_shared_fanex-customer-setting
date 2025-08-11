@@ -279,6 +279,10 @@
   "AddSuccess": "성공적으로 추가되었습니다",
   "AddFailed": "추가 실패",
   "RemoveSuccess": "삭제 성공",
+  "RemoveFailed": "삭제 실패",
   "NoChanges": "업데이트할 변경사항이 없습니다",
-  "CustomerInformation": "고객 정보"
+  "CustomerInformation": "고객 정보",
+  "CashServiceDisabled": "캐시 서비스가 비활성화되었습니다",
+  "BankAccountAlreadyExist": "이 은행 계좌는 이미 존재합니다. 다른 은행 계좌 번호를 입력해 주세요.",
+  "BankAccountNotFound": "은행 계좌를 찾을 수 없습니다"
 }

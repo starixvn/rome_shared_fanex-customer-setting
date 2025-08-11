@@ -278,6 +278,10 @@
   "AddSuccess": "添加成功",
   "AddFailed": "添加失敗",
   "RemoveSuccess": "刪除成功",
+  "RemoveFailed": "刪除失敗",
   "NoChanges": "沒有需要更新的變化。",
-  "CustomerInformation": "會員資料"
+  "CustomerInformation": "會員資料",
+  "CashServiceDisabled": "現金服務已被禁用",
+  "BankAccountAlreadyExist": "此銀行賬戶已存在。請輸入其他銀行賬戶。",
+  "BankAccountNotFound": "未找到銀行賬戶。"
 }
