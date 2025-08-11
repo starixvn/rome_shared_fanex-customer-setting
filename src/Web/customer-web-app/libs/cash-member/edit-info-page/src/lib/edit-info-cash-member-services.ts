@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { AxiosError } from 'axios';
-import { useTranslation } from 'react-i18next';
 import { AlphaSystemIds } from '@customer-web-app/shared-constants';
 
 export const axiosInstance = axios.create({
@@ -106,6 +105,13 @@ const RemoveMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T>
   }
 };
 
+const GetCashServiceStatus = async <T>(params?: Record<string, any>): Promise<T> => {
+  const { data } = await axiosInstance.get<T>(`Customer/GetCashServiceStatus`, {
+    params,
+  });
+  return data;
+};
+
 export {
   GetCustomerInfo,
   UpdateCustomerInfo,
@@ -114,4 +120,5 @@ export {
   AddMemberBankInfo,
   UpdateMemberBankInfo,
   RemoveMemberBankInfo,
+  GetCashServiceStatus,
 };

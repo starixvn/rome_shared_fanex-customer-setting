@@ -5,7 +5,7 @@ import { DropdownOption, TableSkeleton } from "@customer-web-app/shared/base/com
 import { IconExclamationPoint, IconInfo, NoDataIcon } from "@customer-web-app/shared/base/common-icon";
 import { ButtonFull } from "@customer-web-app/shared/base/components";
 import { useResultMessage } from "@customer-web-app/shared/base/components";
-import { GetCustomerBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
+import { GetCashServiceStatus, GetCustomerBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
 import { BankAccountRow } from './grid-components';
 import styles from "./customer-bank-detail.module.scss";
 import { AddBankModal } from "./add-new-bank-modal";
@@ -48,6 +48,7 @@ export const CustomerBankDetail = () => {
         setIsLoading(true);
         const initializeData = async () => {
             await Promise.all([
+                loadCashServiceStatus(),
                 loadBankAccounts(),
                 loadAgentBankOptions()
             ]);
@@ -55,6 +56,15 @@ export const CustomerBankDetail = () => {
         initializeData().finally(() => {
             setIsLoading(false);
         });
+    }, []);
+
+    const loadCashServiceStatus = useCallback(async () => {
+        const response = await GetCashServiceStatus<{
+            isOfferedCashService: boolean;
+            isCashServiceEnabled: boolean;
+            isCanUpdateCashServiceStatus: boolean;
+        }>();
+        console.log(response);
     }, []);
 
     const loadBankAccounts = useCallback(async () => {
