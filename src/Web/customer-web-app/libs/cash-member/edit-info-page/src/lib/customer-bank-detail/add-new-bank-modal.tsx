@@ -121,7 +121,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
                 showResult('error', t('BankAccountAlreadyExist'));
             }
             else {
-                showResult('error', t('AddFailed'));
+                showResult('error', response.message || t('AddFailed'));
             }
         } catch (error) {
             console.error('Error adding bank account:', error);

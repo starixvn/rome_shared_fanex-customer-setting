@@ -35,11 +35,6 @@ export const CustomerBankDetail = () => {
     const [showAddBankAccountPopup, setShowAddBankAccountPopup] = useState(false);
     const [bankAccounts, setBankAccounts] = useState<MemberBankAccountRecord[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [cashServiceStatus, setCashServiceStatus] = useState<CashServiceStatus>({
-        isOfferedCashService: false,
-        isCashServiceEnabled: false,
-        isCanUpdateCashServiceStatus: false,
-    });
     const [editingRow, setEditingRow] = useState<EditingRow | null>(null);
     const [agentBankOptions, setAgentBankOptions] = useState<DropdownOption[]>([]);
     const [agentBanks, setAgentBanks] = useState<Bank[]>([]);
@@ -54,7 +49,6 @@ export const CustomerBankDetail = () => {
         setIsLoading(true);
         const initializeData = async () => {
             await Promise.all([
-                loadCashServiceStatus(),
                 loadBankAccounts(),
                 loadAgentBankOptions()
             ]);
@@ -62,11 +56,6 @@ export const CustomerBankDetail = () => {
         initializeData().finally(() => {
             setIsLoading(false);
         });
-    }, []);
-
-    const loadCashServiceStatus = useCallback(async () => {
-        const response = await GetCashServiceStatus<CashServiceStatus>();
-        setCashServiceStatus(response);
     }, []);
 
     const loadBankAccounts = useCallback(async () => {
@@ -162,7 +151,7 @@ export const CustomerBankDetail = () => {
             } else if (response.message === 'NoPermission') {
                 showResult('error', t('YouAreNotAuthorized'));
             } else {
-                showResult('error', t('UpdateFailed'));
+                showResult('error', response.message || t('UpdateFailed'));
             }
 
         } catch (error) {
@@ -195,12 +184,12 @@ export const CustomerBankDetail = () => {
     return (
         <>
             <div className={styles.buttonContainer}>
-                {cashServiceStatus.isCashServiceEnabled ? <ButtonFull
+                <ButtonFull
                     className={styles.addButton}
                     onClick={handleAddBankClick}
                     disabled={isLoading}
                     text={t('AddBankAccount')}
-                /> : null}
+                />
             </div>
             <div className={styles.gridTable}>
                 <div style={{ marginBottom: '5px' }}>
@@ -218,7 +207,7 @@ export const CustomerBankDetail = () => {
                                     <div style={{ textAlign: 'left' }}>{`${t('AgentBankAccountTooltip')} ${t('AgentBankAccountTooltip2')}`}</div>
                                 </WrapperTooltip>
                             </th>
-                            {cashServiceStatus.isCashServiceEnabled ? <th scope="col" style={{ maxWidth: '150px' }}>{t('Action')}</th> : null}
+                            <th scope="col" style={{ maxWidth: '150px' }}>{t('Action')}</th>
                         </tr>
                     </thead>
                     {bankAccounts.length === 0 && (
@@ -241,7 +230,7 @@ export const CustomerBankDetail = () => {
                                     onSave={handleSaveEdit}
                                     onCancel={handleCancelEdit}
                                     onAgentBankChange={handleAgentBankChange}
-                                    isCashServiceEnabled={cashServiceStatus.isCashServiceEnabled}
+                                    isCashServiceEnabled={true}
                                     isLoading={isLoading}
                                 />
                             ))

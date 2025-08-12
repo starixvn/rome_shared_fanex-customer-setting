@@ -37,7 +37,7 @@ export const DeleteBankModal = ({
                 showResult('error', t('YouAreNotAuthorized'));
             }
             else {
-                showResult('error', t('RemoveFailed'));
+                showResult('error', response.message || t('RemoveFailed'));
             } 
         } catch (error) {
             console.error('Error deleting bank account:', error);
