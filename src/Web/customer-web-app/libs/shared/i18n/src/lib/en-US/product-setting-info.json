@@ -44,7 +44,6 @@
   "MPS7": "3. If member places the second ticket with Odds = 5, the ticket will have:",
   "MPS8": "- Max Bet = (Max Payout Per Match - Accumulated Max Payout) / Odds = (1,000 - 700) / 5 = 60.",
   "MPS9": "<i> * Accumulated Max Payout is the Max Payout of all tickets of the same match excludes the Void/Reject tickets. Therefore, if the first ticket is voided, Max Bet of the second ticket = (1,000 - 0)/5 = 200. </i>",
-  "MPS10": "- Max Payout setting is applied to all bet types of Sportsbook except the bet types listed in the table below. E-Sports and Muay Thai do not apply Max Payout setting.",
   "MPS11": "Sports",
   "MPS12": "Bet types that do not apply Max Payout setting",
   "MPS13": "All Sports except <br> {0} and {1}",
