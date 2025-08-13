@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Functions>
+	<Function Name="Common">
+		<Setting Key="Age_CustSetting_GetUplineByCustID" SpName="Age_CustSetting_GetUplineByCustID" DbName="DBCUST.CUSTDB.wsv_nap" />
+	</Function>
 	<Function Name="Partial UM">
 		<Setting Key="Acc_CheckUM" SpName="Acc_CheckUM" DbName="DBCUST.CUSTDB.wsv_nap" />
 	</Function>

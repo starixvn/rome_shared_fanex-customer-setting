@@ -45,7 +45,7 @@ public class GeneralInfoService
         if (request.Context.RoleId == (int)CustomerLevel.Member)
         {
             spParams.Add("totalamt", await GetTotalAmountMember(request.Context.CustId, request.Settings.GeneralInfo.Site));
-            spParams.Add("accumcreditallcashmember", await GetTotalCashMemberReturnCredit(request.Settings.GeneralInfo.UplineCustId));
+            spParams.Add("accumcreditallcashmember", await GetTotalCashMemberReturnCredit(await GetUplineIdByCustId(request.Context.CustId)));
         }
 
         return spParams;
@@ -69,5 +69,12 @@ public class GeneralInfoService
         using IObjectDb db = ObjectDbFactory.CreateInstance($"Age_CashAccumCredit_AgSel");
         await db.ExecuteNonQueryAsync(new { CustId = agentId });
         return (decimal)db.GetParameterValue("accumcreditreturn");
+    }
+
+    private async Task<int> GetUplineIdByCustId(int custId)
+    {
+        using IObjectDb db = ObjectDbFactory.CreateInstance($"Age_CustSetting_GetUplineByCustID");
+        await db.ExecuteNonQueryAsync(new { CustId = custId });
+        return (int)db.GetParameterValue("uplineid");
     }
 }
