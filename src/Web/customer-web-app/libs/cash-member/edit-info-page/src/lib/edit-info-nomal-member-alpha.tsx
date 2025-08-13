@@ -221,7 +221,7 @@ export const EditInfoNomalMemberAlpha = () => {
               </tr>
               <tr>
                 <td className={styles.labelCell}>
-                  <Label>{t('email')}</Label>
+                  <Label>{t('Email')}</Label>
                 </td>
                 <td>
                   <Controller

@@ -269,6 +269,7 @@
   "AgentBankAccountTooltip": "为了将会员的存款与您的帐户相匹配，请选择您希望用来接收存款的银行帐户。",
   "AgentBankAccountTooltip2": "您可以在银行管理页面更改您首选的存款匹配模式",
   "EmailNotValid": "邮箱不合法！",
+  "Email": "电邮",
   "Remark": "备注",
   "Save": "保存",
   "Reset": "重置",
