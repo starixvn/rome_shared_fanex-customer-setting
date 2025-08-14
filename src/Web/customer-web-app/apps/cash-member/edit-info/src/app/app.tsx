@@ -2,7 +2,7 @@
 import { i18nInstance } from '@customer-web-app/shared-i18n';
 import { IconError } from '@customer-web-app/shared/base/common-icon';
 import * as Sentry from '@sentry/react';
-import { EditInfoCashMemberPage, ViewInfoCashMemberForm ,EditInfoNomalMemberAlpha} from '@customer-web-app/edit-info-cash-member-page';
+import { EditInfoCashMemberPage, ViewInfoCashMemberForm ,EditInfoNormalMemberAlpha} from '@customer-web-app/edit-info-cash-member-page';
 import { useCookieLanguage, useSystems } from '@customer-web-app/shared/base/components';
 
 function EditInfoCustomerPageWrapper() {
@@ -13,7 +13,7 @@ function EditInfoCustomerPageWrapper() {
   }
 
   if(isAlphaSystem && !updateInfoCustomerPageConfig.isCashMember){
-    return <EditInfoNomalMemberAlpha />
+    return <EditInfoNormalMemberAlpha />
   }
 
   if(isExternalNapSystem && updateInfoCustomerPageConfig.isCashMember){

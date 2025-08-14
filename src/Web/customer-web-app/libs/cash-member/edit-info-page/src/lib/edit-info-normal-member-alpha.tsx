@@ -19,19 +19,17 @@ import {
 } from '@customer-web-app/shared/base/components';
 
 import { GetCustomerInfo, UpdateCustomerInfo } from './edit-info-cash-member-services';
-import { UpdateCustomerInfoResponse } from './edit-info-cash-member-types';
-import styles from './edit-info-nomal-member-alpha.module.scss';
+import { InfoNormalMember, UpdateCustomerInfoResponse } from './edit-info-cash-member-types';
+import styles from './edit-info-normal-member-alpha.module.scss';
 import { PageTitle } from './page-title';
 
-export const EditInfoNomalMemberAlpha = () => {
+export const EditInfoNormalMemberAlpha = () => {
   const NumberCols = 4;
   const { t } = useTranslation();
-  const [originalCustomerInfo, setOriginalCustomerInfo] = useState<any>({
+  const [originalCustomerInfo, setOriginalCustomerInfo] = useState<InfoNormalMember>({
     firstName: '',
     lastName: '',
     mobilePhone: '',
-    mobileCode: '',
-    mobileNumber: '',
     phone: '',
     email: '',
     fax: '',
@@ -39,7 +37,7 @@ export const EditInfoNomalMemberAlpha = () => {
   const [loading, setLoading] = useState(false);
   const { showResult, renderResultMessage } = useResultMessage();
 
-  const methods = useForm<any>({
+  const methods = useForm<InfoNormalMember>({
     defaultValues: originalCustomerInfo,
     mode: 'onChange',
     criteriaMode: 'all',
@@ -54,7 +52,7 @@ export const EditInfoNomalMemberAlpha = () => {
 
   useEffect(() => {
     const fetchCustomerInfo = async () => {
-      const data = await GetCustomerInfo<any>({
+      const data = await GetCustomerInfo<InfoNormalMember>({
         custId: updateInfoCustomerPageConfig.custId,
       });
       reset(data);
@@ -63,7 +61,7 @@ export const EditInfoNomalMemberAlpha = () => {
     fetchCustomerInfo();
   }, [reset]);
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit = async (formData: InfoNormalMember) => {
     setLoading(true);
     try {
       if (!isDirty) {
@@ -98,7 +96,7 @@ export const EditInfoNomalMemberAlpha = () => {
     }
   };
 
-  const isValidEmail = (formData: any) => {
+  const isValidEmail = (formData: InfoNormalMember) => {
     if (formData.email && !EMAIL_REGEX.test(formData.email)) {
       showResult('error', t('EmailNotValid'));
       return false;

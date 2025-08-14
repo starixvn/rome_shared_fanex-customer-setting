@@ -16,14 +16,25 @@ import {
     REMARK_MAX_LENGTH
 } from '@customer-web-app/shared-constants';
 import classNames from 'classnames';
-import { UpdateCustomerInfoResponse } from './edit-info-cash-member-types';
+import { InfoCashMember, UpdateCustomerInfoResponse } from './edit-info-cash-member-types';
+
+
 
 export const EditInfoCashMemberForm = () => {
     const { t } = useTranslation();
     const { isAlphaSystem } = useSystems(updateInfoCustomerPageConfig.systemId);
-    const [originalCustomerInfo, setOriginalCustomerInfo] = useState<any>(null);
+    const [originalCustomerInfo, setOriginalCustomerInfo] = useState<InfoCashMember>({
+        firstName: '',
+        lastName: '',
+        mobilePhone: '',
+        mobileCode: '',
+        mobileNumber: '',
+        phone: '',
+        email: '',
+        fax: '',
+    });
     const [isLoading, setIsLoading] = useState(false);
-    const methods = useForm<any>({
+    const methods = useForm<InfoCashMember>({
         defaultValues: {},
         mode: 'onChange',
         criteriaMode: 'all',

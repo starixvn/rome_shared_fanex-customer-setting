@@ -5,30 +5,19 @@ import { GetCustomerInfo } from './edit-info-cash-member-services';
 import { splitMobile } from '@customer-web-app/shared-helpers';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+import { InfoCashMember } from './edit-info-cash-member-types';
 
-interface CustomerInfo {
-    custId: number;
-    firstName: string;
-    lastName: string;
-    mobilePhone: string;
-    mobileCode: string;
-    mobileNumber: string;
-    phone: string;
-    email: string;
-    fax: string;
-    remark: string;
-}
 
 export const ViewInfoCashMemberForm = () => {
     const { t } = useTranslation();
     const { isAlphaSystem } = useSystems(updateInfoCustomerPageConfig.systemId);
-    const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
+    const [customerInfo, setCustomerInfo] = useState<InfoCashMember | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchCustomerInfo = async () => {
             try {
-                const data = await GetCustomerInfo<CustomerInfo>({
+                const data = await GetCustomerInfo<InfoCashMember>({
                     custId: updateInfoCustomerPageConfig.custId
                 });
                 const mobile = splitMobile(data.mobilePhone);
