@@ -22,8 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Customer.Client.NETFr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetLimitControl.API", "src\Services\BetLimitControl.API\BetLimitControl.API.csproj", "{5739D9DC-FB21-44DF-B3F0-DFCA914A42AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Customer.API.Tests", "src\Services\Fanex.Customer.API.Tests\Fanex.Customer.API.Tests.csproj", "{3EF80C96-C52F-4923-859A-C27DD00E7D33}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,18 +80,6 @@ Global
 		{5739D9DC-FB21-44DF-B3F0-DFCA914A42AE}.Release|x64.Build.0 = Release|Any CPU
 		{5739D9DC-FB21-44DF-B3F0-DFCA914A42AE}.Release|x86.ActiveCfg = Release|Any CPU
 		{5739D9DC-FB21-44DF-B3F0-DFCA914A42AE}.Release|x86.Build.0 = Release|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Debug|x64.Build.0 = Debug|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Debug|x86.Build.0 = Debug|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Release|x64.ActiveCfg = Release|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Release|x64.Build.0 = Release|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Release|x86.ActiveCfg = Release|Any CPU
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,7 +91,6 @@ Global
 		{9EE28FCC-B89D-4B5E-8E05-CE133699B710} = {2BAAFA69-4718-4666-8761-F1C270B05E8D}
 		{110A46A2-C0D1-436D-9DF9-C052555A7567} = {2BAAFA69-4718-4666-8761-F1C270B05E8D}
 		{5739D9DC-FB21-44DF-B3F0-DFCA914A42AE} = {93325F17-8673-4F0A-913F-BE9635FBC724}
-		{3EF80C96-C52F-4923-859A-C27DD00E7D33} = {93325F17-8673-4F0A-913F-BE9635FBC724}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DAF03FB-26A5-4D6E-A7A9-53485196FB35}
