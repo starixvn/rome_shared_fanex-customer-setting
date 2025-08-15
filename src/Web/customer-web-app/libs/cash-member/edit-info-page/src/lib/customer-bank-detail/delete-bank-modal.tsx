@@ -1,5 +1,5 @@
 import { ConfirmPopup, useResultMessage } from "@customer-web-app/shared/base/components";
-import { MemberBankAccountRecord, RemoveMemberBankInfoResponse } from "../edit-info-cash-member-types";
+import { BankAccountErrorCode, MemberBankAccountRecord, RemoveMemberBankInfoResponse } from "../edit-info-cash-member-types";
 import { useTranslation } from "react-i18next";
 import { RemoveMemberBankInfo } from "../edit-info-cash-member-services";
 import { useCallback, useState } from "react";
@@ -30,7 +30,7 @@ export const DeleteBankModal = ({
             if (response.isSuccessful) {
                 showResult('success', t('RemoveSuccess'), 1500, onDeleteSuccess);
             }
-            else if (response.code === 203) {
+            else if (response.code === BankAccountErrorCode.BankAccountNotFound) {
                 showResult('error', t('BankAccountNotFound'), 1000, onDeleteSuccess);
             }
             else if (response.message === 'NoPermission') {

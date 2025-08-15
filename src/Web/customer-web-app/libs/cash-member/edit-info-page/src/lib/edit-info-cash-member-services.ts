@@ -11,14 +11,14 @@ export const axiosInstance = axios.create({
   baseURL: updateInfoCustomerPageConfig.applicationPath,
 });
 
-const GetCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
+const GetCustomerInfo = async <T>(params?: Record<string, unknown>): Promise<T> => {
   const { data } = await axiosInstance.get<T>(`Customer/GetCustomerInfo`, {
     params,
   });
   return data;
 };
 
-const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> => {
+const UpdateCustomerInfo = async <T>(params?: Record<string, unknown>): Promise<T> => {
   try {
     let url = 'Customer/EditInfoPost'; // default
     if (AlphaSystemIds.includes(updateInfoCustomerPageConfig.systemId)) {
@@ -40,21 +40,21 @@ const UpdateCustomerInfo = async <T>(params?: Record<string, any>): Promise<T> =
   }
 };
 
-const GetCustomerBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
+const GetCustomerBankInfo = async <T>(params?: Record<string, unknown>): Promise<T> => {
   const { data } = await axiosInstance.get<T>(`Customer/GetCustomerBankInfo`, {
     params,
   });
   return data;
 };
 
-const GetBanks = async <T>(params?: Record<string, any>): Promise<T> => {
+const GetBanks = async <T>(params?: Record<string, unknown>): Promise<T> => {
   const { data } = await axiosInstance.get<T>(`Customer/GetBanks`, {
     params,
   });
   return data;
 };
 
-const AddMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
+const AddMemberBankInfo = async <T>(params?: Record<string, unknown>): Promise<T> => {
   try {
     const { data } = await axiosInstance.post<T>(`Customer/AddMemberBankInfo`, params, {
       headers: {
@@ -71,7 +71,7 @@ const AddMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> =>
   }
 };
 
-const UpdateMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
+const UpdateMemberBankInfo = async <T>(params?: Record<string, unknown>): Promise<T> => {
   try {
     const { data } = await axiosInstance.post<T>(`Customer/UpdateMemberBankInfo`, params, {
       headers: {
@@ -88,7 +88,7 @@ const UpdateMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T>
   }
 };
 
-const RemoveMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T> => {
+const RemoveMemberBankInfo = async <T>(params?: Record<string, unknown>): Promise<T> => {
   try {
     const { data } = await axiosInstance.post<T>(`Customer/RemoveMemberBankInfo`, params, {
       headers: {
@@ -105,7 +105,7 @@ const RemoveMemberBankInfo = async <T>(params?: Record<string, any>): Promise<T>
   }
 };
 
-const GetCashServiceStatus = async <T>(params?: Record<string, any>): Promise<T> => {
+const GetCashServiceStatus = async <T>(params?: Record<string, unknown>): Promise<T> => {
   const { data } = await axiosInstance.get<T>(`Customer/GetCashServiceStatus`, {
     params,
   });

@@ -62,6 +62,10 @@ enum ContentFrame {
     TourGuide
 }
 
+const IconCheck = () => {
+    return <span className={styles['icon-check']} />
+}
+
 export function CashServiceAds(props: CashServiceAdsProps) {
     const { t } = useTranslation();
     const { isOpen, onClose, onConfirm, cashServiceStatus, onDontShowAgain } = props;
@@ -102,9 +106,9 @@ export function CashServiceAds(props: CashServiceAdsProps) {
                 }</span>
             </div>
             <ul className={styles['step-benefits']}>
-                <li><span className={styles['icon-check']} /> <span style={{ fontWeight: 'bold' }}>{t('NoPlatformFee')}</span> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
-                <li><span className={styles['icon-check']} /> <span style={{ fontWeight: 'bold' }}> {t('Just015PerTransactionViaYourLinkedBankAccount')}</span></li>
-                <li><span className={styles['icon-check']} /> {t('GetResultsStayIfYouLoveItCancelAnytime')}</li>
+                <li><IconCheck /> <span style={{ fontWeight: 'bold' }}>{t('NoPlatformFee')}</span> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
+                <li><IconCheck /> <span style={{ fontWeight: 'bold' }}> {t('Just015PerTransactionViaYourLinkedBankAccount')}</span></li>
+                <li><IconCheck /> {t('GetResultsStayIfYouLoveItCancelAnytime')}</li>
             </ul>
             <div className={styles['step-note']}>
                 <span className={styles['icon-info']}>ℹ️</span> {t('DontMissOutActivateNowAndTakeYourCashFlowToTheNextLevel')}

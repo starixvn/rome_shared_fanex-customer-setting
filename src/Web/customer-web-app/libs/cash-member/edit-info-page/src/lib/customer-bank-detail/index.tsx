@@ -1,17 +1,16 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { MemberBankAccountRecord, UpdateMemberBankInfoResponse } from "../edit-info-cash-member-types";
+import { BankAccountErrorCode, MemberBankAccountRecord, UpdateMemberBankInfoResponse } from "../edit-info-cash-member-types";
 import { useTranslation } from "react-i18next";
 import { DropdownOption, TableSkeleton } from "@customer-web-app/shared/base/components";
-import { IconExclamationPoint, IconInfo, NoDataIcon } from "@customer-web-app/shared/base/common-icon";
+import { IconExclamationPoint, NoDataIcon } from "@customer-web-app/shared/base/common-icon";
 import { ButtonFull } from "@customer-web-app/shared/base/components";
 import { useResultMessage } from "@customer-web-app/shared/base/components";
-import { GetCashServiceStatus, GetCustomerBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
+import { GetCustomerBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
 import { BankAccountRow } from './grid-components';
 import styles from "./customer-bank-detail.module.scss";
 import { AddBankModal } from "./add-new-bank-modal";
 import { DeleteBankModal } from "./delete-bank-modal";
 import { WrapperTooltip } from "@customer-web-app/wrapper-tooltip";
-import { CashServiceStatus } from "@customer-web-app/share-models";
 
 interface Bank {
     bankId: number;
@@ -146,7 +145,7 @@ export const CustomerBankDetail = () => {
                         : account
                 ));
                 showResult('success', t('UpdateSuccess'));
-            } else if (response.code === 203) {
+            } else if (response.code === BankAccountErrorCode.BankAccountNotFound) {
                 showResult('error', t('BankAccountNotFound'), 1000, loadBankAccounts);
             } else if (response.message === 'NoPermission') {
                 showResult('error', t('YouAreNotAuthorized'));

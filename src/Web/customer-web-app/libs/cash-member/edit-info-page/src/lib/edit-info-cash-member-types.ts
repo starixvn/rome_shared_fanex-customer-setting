@@ -52,3 +52,8 @@ export interface InfoCashMember extends BaseCustomerInfo {
     mobileNumber: string;
     remark?: string;
 };
+
+export enum BankAccountErrorCode {
+    BankAccountAlreadyExist = 102,
+    BankAccountNotFound = 203
+}

@@ -8,7 +8,7 @@ import styles from "./add-new-bank-modal.module.scss";
 import { Label, ErrorFieldMessage } from "@customer-web-app/shared/base/components";
 import { NUMBER_REGEX } from '@customer-web-app/shared-constants';
 import classNames from "classnames";
-import { AddMemberBankInfoResponse } from "../edit-info-cash-member-types";
+import { AddMemberBankInfoResponse, BankAccountErrorCode } from "../edit-info-cash-member-types";
 
 interface AddBankModalProps {
     onCancel: () => void;
@@ -32,6 +32,7 @@ interface AddMemberBankFormData {
     agentBankDropdownOptions: DropdownOption[];
     agentBanks: any[];
 }
+
 export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false);
@@ -117,7 +118,7 @@ export const AddBankModal = ({ onCancel, onAddSuccess }: AddBankModalProps) => {
             else if (response.message === 'NoPermission') {
                 showResult('error', t('YouAreNotAuthorized'));
             }
-            else if (response.code === 102) {
+            else if (response.code === BankAccountErrorCode.BankAccountAlreadyExist) {
                 showResult('error', t('BankAccountAlreadyExist'));
             }
             else {
