@@ -76,10 +76,11 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
             request.IsGetUpline ? ProfileMode.Edit : ProfileMode.AddNew, 
             ServiceType.Cash);
 
+        var role = request.IsGetUpline ? request.UplineRoleId.GetValueOrDefault() : request.RoleId;
         var customerSetting = new CustomerSettingModel
         {
             GeneralInfo = generalInfo,
-            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo)
+            ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, role)
         };
 
         await SetProductStatusTooltip(customerSetting, request.Language, request.CustId, appSettings.SettingStatus);
@@ -96,14 +97,16 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         IEnumerable<SettingProfile> settingProfile,
         BaseQueryRequest request,
         bool isSiteLabel777,
-        GeneralInformation generalInfo)
+        GeneralInformation generalInfo,
+        byte uplineRoleId)
     {
         var cashRequest = (QueryCashCustomerRequest)request;
         var productGroupId = request.ProductGroupId.GetValueOrDefault(0);
         var isGetUpline = cashRequest.IsGetUpline;
-        return settingProfile.Where(p => 
-            !IsHideGroupType(p.DisplayMode) && 
-            (productGroupId == 0 || p.GroupId == request.ProductGroupId))
+        return settingProfile.Where(p =>
+            !IsHideGroupType(p.DisplayMode)
+            && SupportPotentialWinLimitByRole(p.GroupType, uplineRoleId)
+            && (productGroupId == 0 || p.GroupId == request.ProductGroupId))
             .GroupBy(p => p.GroupId)
         .Select((g) => new ProductGroup
         {
@@ -111,6 +114,16 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
             Name = cacheRefService.GetProductGroupName(g.Key, request.Language),
             GroupTypes = (isGetUpline ? GetGroupTypesForEdit(g, cashRequest, isSiteLabel777, generalInfo, false) : GetGroupTypes(g, cashRequest, isSiteLabel777, false)).Where(gt => gt != null)
         }).Where(p => p.GroupTypes != null && p.GroupTypes.Any(gt => gt != null && gt.GroupItems.Any()));
+    }
+
+    private bool SupportPotentialWinLimitByRole(int groupTypeId, byte uplineRoleId)
+    {
+        if (groupTypeId == GroupTypes.PotentialWinLimit)
+        {
+            return uplineRoleId == CustomerLevel.Agent;
+        }
+
+        return true;
     }
 
     private IEnumerable<GroupType> GetGroupTypes(
