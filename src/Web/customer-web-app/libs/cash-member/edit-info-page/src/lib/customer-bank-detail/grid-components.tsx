@@ -53,7 +53,8 @@ export const BankAccountRow = memo(({
     onSave,
     onCancel,
     onAgentBankChange,
-    isLoading
+    isLoading,
+    isCashServiceEnabled
 }: {
     account: MemberBankAccountRecord;
     index: number;
@@ -66,6 +67,7 @@ export const BankAccountRow = memo(({
     onCancel: () => void;
     onAgentBankChange: (option: DropdownOption) => void;
     isLoading: boolean;
+    isCashServiceEnabled: boolean;
 }) => {
 
     const renderAgentBankCell = () => {
@@ -137,7 +139,7 @@ export const BankAccountRow = memo(({
                 />
             </td>
             <td style={{ maxWidth: '300px' }}>{renderAgentBankCell()}</td>
-            <td style={{ maxWidth: '150px' }}>{renderActionCell()}</td>
+            {isCashServiceEnabled ? <td style={{ maxWidth: '150px' }}>{renderActionCell()}</td> : null}
         </tr>
     );
 });

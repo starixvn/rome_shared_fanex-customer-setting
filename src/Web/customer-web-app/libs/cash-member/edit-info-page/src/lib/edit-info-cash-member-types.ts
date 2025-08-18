@@ -10,7 +10,7 @@ declare global {
         systemId: number;
     }
 }
-export interface MemberBankAccountRecord {   
+export interface MemberBankAccountRecord {
     agentBankAccountID: number;
     agentBankAccountNumber: string;
     agentBankAccountStatus: string;
@@ -24,6 +24,7 @@ export interface MemberBankAccountRecord {
 
 export interface BaseResponse {
     errorCode: string;
+    code: number;
     errorMessage: string;
     message: string;
     isSuccess: boolean;
@@ -32,13 +33,27 @@ export interface BaseResponse {
 
 export type UpdateCustomerInfoResponse = BaseResponse;
 export type UpdateMemberBankInfoResponse = BaseResponse;
+export type AddMemberBankInfoResponse = BaseResponse;
+export type RemoveMemberBankInfoResponse = BaseResponse;
 
 export interface BaseCustomerInfo {
     firstName: string;
     lastName: string;
-    mobileCode: string;
-    mobileNumber: string;
+    mobilePhone: string;
     phone: string;
     email: string;
     fax: string;
+}
+
+export interface InfoNormalMember extends BaseCustomerInfo {}
+
+export interface InfoCashMember extends BaseCustomerInfo {
+    mobileCode: string;
+    mobileNumber: string;
+    remark?: string;
+};
+
+export enum BankAccountErrorCode {
+    BankAccountAlreadyExist = 102,
+    BankAccountNotFound = 203
 }

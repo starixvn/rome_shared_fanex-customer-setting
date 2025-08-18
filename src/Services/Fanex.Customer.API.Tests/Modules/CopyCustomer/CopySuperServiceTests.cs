@@ -1,11 +1,9 @@
-using System.Threading.Tasks;
-using Xunit;
-using Moq;
-using Fanex.Customer.API.Modules.CopyCustomer.Services;
-using Fanex.Customer.API.Modules.CopyCustomer.Models;
-using Fanex.Customer.API.Modules.Message;
-using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Modules.CopyCustomer;
+using Fanex.Customer.API.Modules.CopyCustomer.Models;
+using Fanex.Customer.API.Modules.CopyCustomer.Services;
+using Fanex.Customer.API.Modules.Message;
+using Fanex.Data.Repository;
+using Moq;
 
 namespace Fanex.Customer.API.Tests.Modules.CopyCustomer
 {
@@ -16,7 +14,8 @@ namespace Fanex.Customer.API.Tests.Modules.CopyCustomer
         {
             var messageService = new Mock<IMessageService>();
             var appSettings = new AppSettings();
-            var service = new TestableCopySuperService(messageService.Object, appSettings)
+            var dynamicRepository = new Mock<IDynamicRepository>();
+            var service = new TestableCopySuperService(messageService.Object, appSettings, dynamicRepository.Object)
             {
                 ValidateResult = new CopyCustomerResult(0, 1, 0, "Validation failed")
             };
@@ -31,7 +30,8 @@ namespace Fanex.Customer.API.Tests.Modules.CopyCustomer
         {
             var messageService = new Mock<IMessageService>();
             var appSettings = new AppSettings();
-            var service = new TestableCopySuperService(messageService.Object, appSettings)
+            var dynamicRepository = new Mock<IDynamicRepository>();
+            var service = new TestableCopySuperService(messageService.Object, appSettings, dynamicRepository.Object)
             {
                 ValidateResult = new CopyCustomerResult(0, 0, 0, "OK"),
                 RegisterResult = new CopyCustomerResult(0, 2, 0, "Register failed")
@@ -47,7 +47,8 @@ namespace Fanex.Customer.API.Tests.Modules.CopyCustomer
         {
             var messageService = new Mock<IMessageService>();
             var appSettings = new AppSettings();
-            var service = new TestableCopySuperService(messageService.Object, appSettings)
+            var dynamicRepository = new Mock<IDynamicRepository>();
+            var service = new TestableCopySuperService(messageService.Object, appSettings, dynamicRepository.Object)
             {
                 ValidateResult = new CopyCustomerResult(0, 0, 0, "OK"),
                 RegisterResult = new CopyCustomerResult(123, 0, 0, "OK"),
@@ -64,7 +65,8 @@ namespace Fanex.Customer.API.Tests.Modules.CopyCustomer
         {
             var messageService = new Mock<IMessageService>();
             var appSettings = new AppSettings();
-            var service = new TestableCopySuperService(messageService.Object, appSettings)
+            var dynamicRepository = new Mock<IDynamicRepository>();
+            var service = new TestableCopySuperService(messageService.Object, appSettings, dynamicRepository.Object)
             {
                 ValidateResult = new CopyCustomerResult(0, 0, 0, "OK"),
                 RegisterResult = new CopyCustomerResult(123, 0, 0, "OK"),
@@ -78,12 +80,12 @@ namespace Fanex.Customer.API.Tests.Modules.CopyCustomer
 
         private class TestableCopySuperService : CopySuperService
         {
-            public CopyCustomerResult ValidateResult { get; set; }
-            public CopyCustomerResult RegisterResult { get; set; }
-            public CopyCustomerResult CopySuperResult { get; set; }
+            public CopyCustomerResult? ValidateResult { get; set; }
+            public CopyCustomerResult? RegisterResult { get; set; }
+            public CopyCustomerResult? CopySuperResult { get; set; }
 
-            public TestableCopySuperService(IMessageService messageService, AppSettings appSettings)
-                : base(messageService, appSettings) { }
+            public TestableCopySuperService(IMessageService messageService, AppSettings appSettings, IDynamicRepository dynamicRepository)
+                : base(messageService, appSettings, dynamicRepository) { }
 
             public new async Task<CopyCustomerResult> Copy(CopyCustomerRequest request)
                 => await base.Copy(request);

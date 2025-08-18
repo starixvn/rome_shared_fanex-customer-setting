@@ -39,7 +39,7 @@ namespace Fanex.Customer.Client.Services
 
         Task<CopyMultipleCustomersResult> CopyMultipleCustomers(CopyMultipleCustomersParam param);
 
-        Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, bool isDirectMember = false, string language = Languages.English);
+        Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, bool isDirectMember = false, bool isCashMember = false, string language = Languages.English);
 
         Task<string> GetGlobalSetting(string siteLabel, string site, int currency, int systemId, int productGroupId = 1, string language = Languages.English);
 
@@ -122,8 +122,8 @@ namespace Fanex.Customer.Client.Services
             };
         }
 
-        public Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, bool isDirectMember = false, string language = Languages.English)
-            => httpClient.PostAsJsonAsync<Result>("rules/CheckAllLimitedRules", new { custId, custLevel, actorUsername, isDirectMember, language });
+        public Task<Result> CheckAllLimitedRules(int custId, byte custLevel, string actorUsername, bool isDirectMember = false, bool isCashMember = false, string language = Languages.English)
+            => httpClient.PostAsJsonAsync<Result>("rules/CheckAllLimitedRules", new { custId, custLevel, actorUsername, isDirectMember, isCashMember, language });
 
         public Task<bool> CheckExistedCustomer(string username)
             => httpClient.GetAsJsonAsync<bool>($"customer/{username}/exist");

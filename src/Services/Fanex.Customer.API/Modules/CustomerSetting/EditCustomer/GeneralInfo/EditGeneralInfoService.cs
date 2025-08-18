@@ -39,11 +39,13 @@ public class GeneralInfoService
         if (request.Context.RoleId == (int)CustomerLevel.Agent)
         {
             spParams.Add("maxcredit", request.Settings.GeneralInfo.MemberMaxCredit);
+            spParams.Add("accumcreditallcashmember", await GetTotalCashMemberReturnCredit(request.Context.CustId));
         }
 
         if (request.Context.RoleId == (int)CustomerLevel.Member)
         {
-            spParams.Add("totalamt", await GetTotalAmtountMember(request.Context.CustId, request.Settings.GeneralInfo.Site));
+            spParams.Add("totalamt", await GetTotalAmountMember(request.Context.CustId, request.Settings.GeneralInfo.Site));
+            spParams.Add("accumcreditallcashmember", await GetTotalCashMemberReturnCredit(await GetUplineIdByCustId(request.Context.CustId)));
         }
 
         return spParams;
@@ -54,11 +56,25 @@ public class GeneralInfoService
         return (CustomerSettingResult)Result.CreateSuccess();
     }
 
-    private async Task<decimal> GetTotalAmtountMember(int custId, string site)
+    private async Task<decimal> GetTotalAmountMember(int custId, string site)
     {
         var siteDBName = await siteDBGroupService.GetSiteDBName(site);
         using IObjectDb db = ObjectDbFactory.CreateInstance($"{siteDBName}_Acc_CustomerTotalAmountSel");
         await db.ExecuteNonQueryAsync(new { CustId = custId });
         return (decimal)db.GetParameterValue("totalamt");
+    }
+
+    private async Task<decimal> GetTotalCashMemberReturnCredit(int agentId)
+    {
+        using IObjectDb db = ObjectDbFactory.CreateInstance($"Age_CashAccumCredit_AgSel");
+        await db.ExecuteNonQueryAsync(new { CustId = agentId });
+        return (decimal)db.GetParameterValue("accumcreditreturn");
+    }
+
+    private async Task<int> GetUplineIdByCustId(int custId)
+    {
+        using IObjectDb db = ObjectDbFactory.CreateInstance($"Age_CustSetting_GetUplineByCustID");
+        await db.ExecuteNonQueryAsync(new { CustId = custId });
+        return (int)db.GetParameterValue("uplineid");
     }
 }

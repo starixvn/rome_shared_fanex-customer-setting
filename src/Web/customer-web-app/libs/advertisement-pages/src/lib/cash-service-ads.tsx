@@ -1,8 +1,9 @@
 import { currentCdnUri } from '@customer-web-app/shared-api-helper';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import styles from './cash-service-ads.module.scss';
 import { CashServiceStatus } from '@customer-web-app/share-models';
 import { useTranslation, Trans } from 'react-i18next';
+import classNames from 'classnames';
 
 interface CashServiceAdsContentProps {
     readonly onClickActivateNow: (() => void) | undefined;
@@ -40,10 +41,10 @@ function CashServiceAdsContent(props: CashServiceAdsContentProps) {
                 </button>
             </div>
             {onDontShowAgain &&
-                    <div className={styles['dont-show-again']} onClick={onDontShowAgain}>
-                        <input type="checkbox" id="dont-show-again" />
-                        <label htmlFor="dont-show-again">{t('DontShowAgain')}</label>
-                    </div>}
+                <div className={styles['dont-show-again']} onClick={onDontShowAgain}>
+                    <input type="checkbox" id="dont-show-again" />
+                    <label htmlFor="dont-show-again">{t('DontShowAgain')}</label>
+                </div>}
         </div>
     );
 }
@@ -59,6 +60,10 @@ interface CashServiceAdsProps {
 enum ContentFrame {
     Ads,
     TourGuide
+}
+
+const IconCheck = () => {
+    return <span className={styles['icon-check']} />
 }
 
 export function CashServiceAds(props: CashServiceAdsProps) {
@@ -81,12 +86,12 @@ export function CashServiceAds(props: CashServiceAdsProps) {
         </>,
         <>
             <div className={styles['step-title']}>{t('DedicatedDomain')}</div>
-            <img key={3} className={styles['step-image']} src={`${imagePath}step3.gif`} alt={t('DedicatedDomain')} />
+            <img key={3} className={classNames(styles['step-image'], styles['support-scale'])} src={`${imagePath}step3.gif`} alt={t('DedicatedDomain')} />
             <div className={styles['step-description']}>{t('ElevateYourBrandWithASignUpLinkedForMemberRegistrations')}</div>
         </>,
         <>
             <div className={styles['step-title']}>{t('CustomisePromotions')}</div>
-            <img key={4} className={styles['step-image']} src={`${imagePath}step4.jpg`} alt={t('CustomisePromotions')} />
+            <img key={4} className={classNames(styles['step-image'])} src={`${imagePath}step4.jpg`} alt={t('CustomisePromotions')} />
             <div className={styles['step-description']}>{t('CreateAndManagePromotionsFeaturingPopularProductsAndProvidersToKeepYourMembersEntertained')}</div>
         </>,
         <>
@@ -101,9 +106,9 @@ export function CashServiceAds(props: CashServiceAdsProps) {
                 }</span>
             </div>
             <ul className={styles['step-benefits']}>
-                <li><span className={styles['icon-check']} /> <b>{t('NoPlatformFee')}</b> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
-                <li><span className={styles['icon-check']} /> <b> {t('Just015PerTransactionViaYourLinkedBankAccount')}</b></li>
-                <li><span className={styles['icon-check']} /> {t('GetResultsStayIfYouLoveItCancelAnytime')}</li>
+                <li><IconCheck /> <span style={{ fontWeight: 'bold' }}>{t('NoPlatformFee')}</span> <span>- {t('SaveTHB200DayDuringTheTrial')}</span></li>
+                <li><IconCheck /> <span style={{ fontWeight: 'bold' }}> {t('Just015PerTransactionViaYourLinkedBankAccount')}</span></li>
+                <li><IconCheck /> {t('GetResultsStayIfYouLoveItCancelAnytime')}</li>
             </ul>
             <div className={styles['step-note']}>
                 <span className={styles['icon-info']}>ℹ️</span> {t('DontMissOutActivateNowAndTakeYourCashFlowToTheNextLevel')}
@@ -154,7 +159,7 @@ export function CashServiceAds(props: CashServiceAdsProps) {
                         }}
                         onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined} />}
 
-                
+
             </div>
         </div>
     );

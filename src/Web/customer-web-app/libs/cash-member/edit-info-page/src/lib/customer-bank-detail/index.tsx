@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { MemberBankAccountRecord, UpdateMemberBankInfoResponse } from "../edit-info-cash-member-types";
+import { BankAccountErrorCode, MemberBankAccountRecord, UpdateMemberBankInfoResponse } from "../edit-info-cash-member-types";
 import { useTranslation } from "react-i18next";
 import { DropdownOption, TableSkeleton } from "@customer-web-app/shared/base/components";
-import { IconExclamationPoint, IconInfo, NoDataIcon } from "@customer-web-app/shared/base/common-icon";
+import { IconExclamationPoint, NoDataIcon } from "@customer-web-app/shared/base/common-icon";
 import { ButtonFull } from "@customer-web-app/shared/base/components";
 import { useResultMessage } from "@customer-web-app/shared/base/components";
 import { GetCustomerBankInfo, UpdateMemberBankInfo } from '../edit-info-cash-member-services'
@@ -58,7 +58,6 @@ export const CustomerBankDetail = () => {
     }, []);
 
     const loadBankAccounts = useCallback(async () => {
-
         const memberBanks = await GetCustomerBankInfo<MemberBankAccountRecord[]>({
             custId: updateInfoCustomerPageConfig.custId,
             roleId: 1
@@ -146,8 +145,12 @@ export const CustomerBankDetail = () => {
                         : account
                 ));
                 showResult('success', t('UpdateSuccess'));
+            } else if (response.code === BankAccountErrorCode.BankAccountNotFound) {
+                showResult('error', t('BankAccountNotFound'), 1000, loadBankAccounts);
+            } else if (response.message === 'NoPermission') {
+                showResult('error', t('YouAreNotAuthorized'));
             } else {
-                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
+                showResult('error', response.message || t('UpdateFailed'));
             }
 
         } catch (error) {
@@ -226,6 +229,7 @@ export const CustomerBankDetail = () => {
                                     onSave={handleSaveEdit}
                                     onCancel={handleCancelEdit}
                                     onAgentBankChange={handleAgentBankChange}
+                                    isCashServiceEnabled={true}
                                     isLoading={isLoading}
                                 />
                             ))

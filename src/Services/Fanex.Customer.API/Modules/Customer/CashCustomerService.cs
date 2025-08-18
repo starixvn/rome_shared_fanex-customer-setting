@@ -237,7 +237,7 @@ public class CashCustomerService : ICashCustomerService
 
         if (criteria.ErrCode != 0)
         {
-            return Result.CreateError(criteria.ErrMsg);
+            return Result.CreateError(criteria.ErrMsg, criteria.ErrCode);
         }
 
         var siteDbConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
@@ -254,7 +254,7 @@ public class CashCustomerService : ICashCustomerService
 
         if (criteria.ErrCode != 0)
         {
-            return Result.CreateError(criteria.ErrMsg);
+            return Result.CreateError(criteria.ErrMsg, criteria.ErrCode);
         }
 
         var siteDbConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);
@@ -271,7 +271,7 @@ public class CashCustomerService : ICashCustomerService
 
         if (criteria.ErrCode != 0)
         {
-            return Result.CreateError(criteria.ErrMsg);
+            return Result.CreateError(criteria.ErrMsg, criteria.ErrCode);
         }
 
         var siteDbConfig = await siteDBService.GetSiteDBConfigByCustId(request.CustId);

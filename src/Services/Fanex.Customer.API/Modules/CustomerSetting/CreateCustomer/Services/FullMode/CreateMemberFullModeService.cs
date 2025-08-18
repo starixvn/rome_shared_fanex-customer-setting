@@ -65,6 +65,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             { "ugroup", request.Settings.Group },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
+            { "accumcreditallcashmember", await GetCashAccumCredit(request.Settings.GeneralInfo.UplineCustId)}
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));

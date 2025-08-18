@@ -3,6 +3,7 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Data.Repository;
+using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria.Cash;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -11,7 +12,7 @@ public interface ICreateCustomerBaseService
     Task<CreateCustomerResult> Create(CreateRequest request);
 }
 
-public class CreateCustomerBaseService: ICreateCustomerBaseService
+public class CreateCustomerBaseService : ICreateCustomerBaseService
 {
     protected readonly IMessageService messageService;
 
@@ -21,8 +22,8 @@ public class CreateCustomerBaseService: ICreateCustomerBaseService
 
     protected readonly IDynamicRepository dynamicRepository;
 
-    public CreateCustomerBaseService(IMessageService messageService, 
-        AppSettings appSettings, 
+    public CreateCustomerBaseService(IMessageService messageService,
+        AppSettings appSettings,
         ICustomerSettingHelper helperService,
         IDynamicRepository dynamicRepository)
     {
@@ -34,4 +35,12 @@ public class CreateCustomerBaseService: ICreateCustomerBaseService
 
     public virtual Task<CreateCustomerResult> Create(CreateRequest request)
         => throw new NotImplementedException();
+        
+    public async Task<decimal> GetCashAccumCredit(int agentId)
+    {
+        var command = new GetCashAccumCredit(agentId);
+        await dynamicRepository.ExecuteAsync(command);
+
+        return command.AccumCreditReturn;
+    }
 }

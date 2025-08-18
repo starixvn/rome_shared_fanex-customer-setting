@@ -7,6 +7,7 @@ export const ButtonFull: React.FC<{
     className?: string;
     disabled?: boolean;
     style?: React.CSSProperties;
+    title?: string;
 }> = ({
     text,
     onClick,  
@@ -14,6 +15,7 @@ export const ButtonFull: React.FC<{
     className = '',
     disabled = false,
     style,
+    title,
   }) => {
     return (
       <div className={`${className}`} style={style}>
@@ -22,6 +24,7 @@ export const ButtonFull: React.FC<{
           className={styles['button-full']}
           onClick={onClick}
           disabled={disabled}
+          title={title}
         >
           {text}
         </button>

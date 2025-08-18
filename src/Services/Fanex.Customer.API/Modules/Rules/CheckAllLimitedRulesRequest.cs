@@ -14,6 +14,8 @@ public class CheckAllLimitedRulesRequest
 
     public bool IsDirectMember { get; set; }
 
+    public bool IsCashMember { get; set; }
+
     public bool IsValid()
         => CustId > 0
         && CustLevel > UserLevel.Member.Value

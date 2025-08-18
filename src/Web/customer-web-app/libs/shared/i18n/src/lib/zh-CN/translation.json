@@ -269,6 +269,7 @@
   "AgentBankAccountTooltip": "为了将会员的存款与您的帐户相匹配，请选择您希望用来接收存款的银行帐户。",
   "AgentBankAccountTooltip2": "您可以在银行管理页面更改您首选的存款匹配模式",
   "EmailNotValid": "邮箱不合法！",
+  "Email": "电邮",
   "Remark": "备注",
   "Save": "保存",
   "Reset": "重置",
@@ -278,6 +279,10 @@
   "AddSuccess": "添加成功",
   "AddFailed": "添加失败",
   "RemoveSuccess": "删除成功",
+  "RemoveFailed": "删除失败",
   "NoChanges": "没有需要更新的变化。",
-  "CustomerInformation": "会员资料"
+  "CustomerInformation": "会员资料",
+  "CashServiceDisabled": "现金服务已被禁用",
+  "BankAccountAlreadyExist": "此银行账户已存在。请输入其他银行账户。",
+  "BankAccountNotFound": "未找到银行账户。"
 }

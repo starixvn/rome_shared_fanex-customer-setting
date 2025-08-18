@@ -270,6 +270,7 @@
   "AgentBankAccountTooltip": "To match deposits made by members to your account, please select the bank account you wish to use to receive the deposits.",
   "AgentBankAccountTooltip2": "You can change your preferred Deposit Matching Mode under  Bank Management.",
   "EmailNotValid": "Email is not valid!",
+  "Email": "Email",
   "Remark": "Remark",
   "Save": "Save",
   "Reset": "Reset",
@@ -279,6 +280,10 @@
   "AddSuccess": "Add successfully",
   "AddFailed": "Add failed",
   "RemoveSuccess": "Remove successfully",
+  "RemoveFailed": "Remove failed",
   "NoChanges": "There is no change to update.",
-  "CustomerInformation": "Customer Information"
+  "CustomerInformation": "Customer Information",
+  "CashServiceDisabled": "Cash Service is disabled.",
+  "BankAccountAlreadyExist": "This bank account already exist, please enter a different bank account number.",
+  "BankAccountNotFound": "Bank account not found."
 }

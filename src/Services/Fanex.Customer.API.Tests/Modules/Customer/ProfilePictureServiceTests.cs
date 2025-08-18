@@ -25,7 +25,7 @@ namespace Fanex.Customer.API.Tests.Modules.Customer
         public async Task GetActorProfilePicture_ReturnsModel_WhenFound()
         {
             var expected = new ActorProfilePictureModel();
-            _dynamicRepositoryMock.Setup(r => r.GetAsync<ActorProfilePictureModel>(It.IsAny<ICriteria>()))
+            _dynamicRepositoryMock.Setup(r => r.GetAsync<ActorProfilePictureModel?>(It.IsAny<ICriteria>()))
                 .ReturnsAsync(expected);
 
             var result = await _service.GetActorProfilePicture(1);
@@ -36,8 +36,8 @@ namespace Fanex.Customer.API.Tests.Modules.Customer
         [Fact]
         public async Task GetActorProfilePicture_ReturnsNewModel_WhenNull()
         {
-            _dynamicRepositoryMock.Setup(r => r.GetAsync<ActorProfilePictureModel>(It.IsAny<ICriteria>()))
-                .ReturnsAsync((ActorProfilePictureModel)null);
+            _dynamicRepositoryMock.Setup(r => r.GetAsync<ActorProfilePictureModel?>(It.IsAny<ICriteria>()))
+                .ReturnsAsync((ActorProfilePictureModel?)null);
 
             var result = await _service.GetActorProfilePicture(1);
 

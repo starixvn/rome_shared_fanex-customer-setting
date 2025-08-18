@@ -60,7 +60,7 @@ namespace Fanex.Customer.API.Modules.Rules
         {
             var result = Result.CreateSuccess();
 
-            if (request.CustLevel == UserLevel.Agent.Value || request.IsDirectMember)
+            if (!request.IsCashMember && (request.CustLevel == UserLevel.Agent.Value || request.IsDirectMember))
             {
                 result = await CheckMaxNewMemberBySuper(request).ConfigureAwait(false);
             }
@@ -70,7 +70,7 @@ namespace Fanex.Customer.API.Modules.Rules
                 result = await CheckReachLimitDownline(request).ConfigureAwait(false);
             }
 
-            if (result.IsSuccessful)
+            if (!request.IsCashMember && result.IsSuccessful)
             {
                 result = await CheckLimitNewDownline(request).ConfigureAwait(false);
             }

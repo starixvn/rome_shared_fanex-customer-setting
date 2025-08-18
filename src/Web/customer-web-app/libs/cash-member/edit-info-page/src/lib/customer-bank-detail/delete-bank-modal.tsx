@@ -1,5 +1,5 @@
 import { ConfirmPopup, useResultMessage } from "@customer-web-app/shared/base/components";
-import { MemberBankAccountRecord } from "../edit-info-cash-member-types";
+import { BankAccountErrorCode, MemberBankAccountRecord, RemoveMemberBankInfoResponse } from "../edit-info-cash-member-types";
 import { useTranslation } from "react-i18next";
 import { RemoveMemberBankInfo } from "../edit-info-cash-member-services";
 import { useCallback, useState } from "react";
@@ -22,15 +22,23 @@ export const DeleteBankModal = ({
 
         try {
             setIsLoading(true);
-            const response = await RemoveMemberBankInfo<any>({
+            const response = await RemoveMemberBankInfo<RemoveMemberBankInfoResponse>({
                 custId: updateInfoCustomerPageConfig.custId,
                 memberBankAccountID: record.memberBankAccountID,
             });
+
             if (response.isSuccessful) {
                 showResult('success', t('RemoveSuccess'), 1500, onDeleteSuccess);
-            } else {
-                showResult('error', response.message === 'NoPermission' ? t('YouAreNotAuthorized') : response.message);
             }
+            else if (response.code === BankAccountErrorCode.BankAccountNotFound) {
+                showResult('error', t('BankAccountNotFound'), 1000, onDeleteSuccess);
+            }
+            else if (response.message === 'NoPermission') {
+                showResult('error', t('YouAreNotAuthorized'));
+            }
+            else {
+                showResult('error', response.message || t('RemoveFailed'));
+            } 
         } catch (error) {
             console.error('Error deleting bank account:', error);
             showResult('error', t('RemoveFailed'));
