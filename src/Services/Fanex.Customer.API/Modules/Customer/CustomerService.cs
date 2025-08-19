@@ -49,6 +49,8 @@ public interface ICustomerService
 
     Task<CommissionInfo> GetCommissionInfo(GetCommissionHintRequest request);
 
+    Task<MaxPayoutSettingInfo> GetMaxPayoutSettingInfo(GetMaxPayoutSettingInformationRequest request);
+
     Task<MemberBalance> GetMemberBalance(int custId, string siteDBName);
 
     Task<List<string>> GetBackupDomains(string site, byte roleId);
@@ -335,6 +337,33 @@ public class CustomerService : ICustomerService
 
         commissionInfo.CommissionTypeList = commissionTypeList;
         return commissionInfo;
+    }
+
+    public async Task<MaxPayoutSettingInfo> GetMaxPayoutSettingInfo(GetMaxPayoutSettingInformationRequest request)
+    {
+        var maxPayoutSettingInfo = new MaxPayoutSettingInfo();
+        var betTypeIds = new[] { 1, 3, 5, 7, 8, 15, 20, 21, 153, 501, 609, 610, 612, 701, 704, 705, 9400, 9404, 9405, 9406, 9407, 9408, 9409 };
+        var sportTypeIds = new[] { 43, 44 };
+        var sportTypeNameArray = sportTypeIds.Select(sportTypeId => cacheRefService.GetSportTypeName(sportTypeId)).ToArray();
+
+        string[] betTypeNames = betTypeIds.Select(betTypeId =>
+        {
+            if (betTypeId == 5)
+            {
+                return StaticResources.Get("lbl1X2", request.Language);
+            }
+
+            return cacheRefService.GetBetTypeName(betTypeId, request.Language);
+        }).ToArray();
+
+        string sportTypeNames = string.Format(StaticResources.Get("MaxPayoutSettingInfoSportsName", request.Language), sportTypeNameArray[0], sportTypeNameArray[1]);
+        maxPayoutSettingInfo.MaxPayoutSport = new MaxPayoutSport
+        {
+            SportName = sportTypeNames,
+            BettypeName = betTypeNames
+        };
+
+        return maxPayoutSettingInfo;
     }
 
     public async Task<MemberBalance> GetMemberBalance(int custId, string siteDBName)

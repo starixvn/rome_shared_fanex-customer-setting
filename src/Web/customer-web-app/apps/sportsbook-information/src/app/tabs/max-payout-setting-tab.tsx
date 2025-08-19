@@ -1,6 +1,37 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 
-export const MaxPayoutSettingTab = () => {
+import styles from '../app.module.scss';
+
+interface MaxPayoutSport {
+  bettypeName: string[];
+  sportName: string;
+}
+
+type MaxPayoutSettingData = {
+  maxPayoutSport: MaxPayoutSport;
+};
+
+export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
+  const [data, setData] = useState<MaxPayoutSettingData>({} as MaxPayoutSettingData);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async (url: string) => {
+      const response = await axios.get<MaxPayoutSettingData>(url);
+      return response.data;
+    };
+    fetchData(url).then((data) => {
+      setData(data);
+      setLoading(false);
+    });
+  }, [url]);
+
+  if (loading) {
+    return <div />;
+  }
+
   return (
     <div>
       <div>
@@ -38,6 +69,11 @@ export const MaxPayoutSettingTab = () => {
         <br />
         <div>
           <Trans i18nKey={'MPS9'} />
+        </div>
+        <br />
+        <div>
+          <Trans i18nKey={'MPS10'} />
+          <SecondTable data={data.maxPayoutSport} />
         </div>
         <br />
         <div>
@@ -91,5 +127,36 @@ export const MaxPayoutSettingTab = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const SecondTable = ({ data }: { data: MaxPayoutSport }) => {
+  return (
+    <table className={styles.tableaccordion}>
+      <thead>
+        <tr>
+          <th>
+            <Trans i18nKey={'MPS11'} />
+          </th>
+          <th>
+            <Trans i18nKey={'MPS12'} />
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {data?.bettypeName.map((betType: any, index: number) => {
+          return (
+            <tr key={`${betType}-${index}`}>
+              {index === 0 && (
+                <td rowSpan={data?.bettypeName.length} className="text-left bgGrey">
+                  <Trans i18nKey={`${data?.sportName}`} />
+                </td>
+              )}
+              <td className="text-left">{betType}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
