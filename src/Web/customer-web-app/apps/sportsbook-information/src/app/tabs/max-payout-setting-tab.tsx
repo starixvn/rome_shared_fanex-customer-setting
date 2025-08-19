@@ -18,12 +18,12 @@ export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async (url: string) => {
+    const fetchData = async () => {
       const response = await axios.get<MaxPayoutSettingData>(url);
       return response.data;
     };
-    fetchData(url).then((data) => {
-      setData(data);
+    fetchData().then((result) => {
+      setData(result);
       setLoading(false);
     });
   }, [url]);
@@ -144,7 +144,7 @@ const SecondTable = ({ data }: { data: MaxPayoutSport }) => {
         </tr>
       </thead>
       <tbody>
-        {data?.bettypeName.map((betType: any, index: number) => {
+        {data?.bettypeName.map((betType: string, index: number) => {
           return (
             <tr key={`${betType}-${index}`}>
               {index === 0 && (
