@@ -46,7 +46,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
         result = await CreateMember(request, newCustId);
         if (!result.IsSuccessful)
         {
-            Rollback(newCustId);
+            await Rollback(newCustId);
         }
 
         return result;
@@ -125,7 +125,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
         return new CreateCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
-    private async void Rollback(int newCustId)
+    private async Task Rollback(int newCustId)
     {
         var parameters = new Hashtable
         {

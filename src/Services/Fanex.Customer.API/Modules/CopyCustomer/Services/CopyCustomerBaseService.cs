@@ -1,34 +1,35 @@
-using Fanex.Customer.API;
-using Fanex.Customer.API.Modules.CopyCustomer;
 using Fanex.Customer.API.Modules.CopyCustomer.Command;
 using Fanex.Customer.API.Modules.CopyCustomer.Models;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Data.Repository;
 
-public abstract class CopyCustomerBaseService
+namespace Fanex.Customer.API.Modules.CopyCustomer.Services
 {
-    protected readonly IMessageService messageService;
-
-    protected readonly AppSettings appSettings;
-
-    protected readonly IDynamicRepository dynamicRepository;
-
-    public CopyCustomerBaseService(IMessageService messageService,
-        AppSettings appSettings,
-        IDynamicRepository dynamicRepository)
+    public abstract class CopyCustomerBaseService
     {
-        this.messageService = messageService;
-        this.appSettings = appSettings;
-        this.dynamicRepository = dynamicRepository;
-    }
+        protected readonly IMessageService messageService;
 
-    public abstract Task<CopyCustomerResult> Copy(CopyCustomerRequest request);
-        
-    public async Task<decimal> GetCashAccumCredit(int agentId)
-    {
-        var command = new GetCashAccumCreditCommand(agentId);
-        await dynamicRepository.ExecuteAsync(command);
+        protected readonly AppSettings appSettings;
 
-        return command.AccumCreditReturn;
+        protected readonly IDynamicRepository dynamicRepository;
+
+        protected CopyCustomerBaseService(IMessageService messageService,
+            AppSettings appSettings,
+            IDynamicRepository dynamicRepository)
+        {
+            this.messageService = messageService;
+            this.appSettings = appSettings;
+            this.dynamicRepository = dynamicRepository;
+        }
+
+        public abstract Task<CopyCustomerResult> Copy(CopyCustomerRequest request);
+            
+        public async Task<decimal> GetCashAccumCredit(int agentId)
+        {
+            var command = new GetCashAccumCreditCommand(agentId);
+            await dynamicRepository.ExecuteAsync(command);
+
+            return command.AccumCreditReturn;
+        }
     }
 }

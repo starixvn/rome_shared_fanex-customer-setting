@@ -103,7 +103,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         {
             foreach (var newCustId in result.NewCustIds)
             {
-                AfterCreateCustomerProcess(
+                await AfterCreateCustomerProcess(
                 newCustId,
                 request.Context.SubAccId,
                 (byte)(uplineRoleId - 1),
@@ -164,17 +164,17 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         }
     }
 
-    private void AfterCreateCustomerProcess(int newCustId, int subAccId, byte roleId, string siteLabel, int currencyId, string userName, int userId, string ip)
+    private async Task AfterCreateCustomerProcess(int newCustId, int subAccId, byte roleId, string siteLabel, int currencyId, string userName, int userId, string ip)
     {
-        AddMsgAfterCreateNewSMA(new AddMsgAfterCreateNewSMACommand(newCustId, subAccId, roleId));
+        await AddMsgAfterCreateNewSMA(new AddMsgAfterCreateNewSMACommand(newCustId, subAccId, roleId));
         if (roleId == CustomerLevel.Super && appSettings.IsSpecialSites(siteLabel) && currencyId != 20)
         {
-            AddSuperToAutoTransferList(new InsertSuperToAutoTransferCommand(userName, 2, userId, ip));
-            AddDefaultDateLimitSuper(new UpdateCustomerDateLimitCommand(newCustId.ToString(), userName, null, 33, 2, userId));
+            await AddSuperToAutoTransferList(new InsertSuperToAutoTransferCommand(userName, 2, userId, ip));
+            await AddDefaultDateLimitSuper(new UpdateCustomerDateLimitCommand(newCustId.ToString(), userName, null, 33, 2, userId));
         }
     }
 
-    private async void AddDefaultDateLimitSuper(UpdateCustomerDateLimitCommand command)
+    private async Task AddDefaultDateLimitSuper(UpdateCustomerDateLimitCommand command)
     {
         try
         {
@@ -186,7 +186,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         }
     }
 
-    private async void AddSuperToAutoTransferList(InsertSuperToAutoTransferCommand command)
+    private async Task AddSuperToAutoTransferList(InsertSuperToAutoTransferCommand command)
     {
         try
         {
@@ -198,7 +198,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         }
     }
 
-    private async void AddMsgAfterCreateNewSMA(AddMsgAfterCreateNewSMACommand command)
+    private async Task AddMsgAfterCreateNewSMA(AddMsgAfterCreateNewSMACommand command)
     {
         try
         {

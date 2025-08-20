@@ -43,7 +43,7 @@ public class CopyMemberService : CopyCustomerBaseService
         result = await CopyMember(request, newCustId);
         if (!result.IsSuccessful)
         {
-            Rollback(newCustId);
+            await Rollback(newCustId);
         }
 
         return result;
@@ -124,7 +124,7 @@ public class CopyMemberService : CopyCustomerBaseService
         return new CopyCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), 0, msg.MainMessage);
     }
 
-    private async void Rollback(int newCustId)
+    private async Task Rollback(int newCustId)
     {
         var parameters = new Hashtable
         {

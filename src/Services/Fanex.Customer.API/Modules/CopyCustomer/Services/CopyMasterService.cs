@@ -43,7 +43,7 @@ public class CopyMasterService : CopyCustomerBaseService
         result = await CopyMaster(request, newCustId);
         if (!result.IsSuccessful)
         {
-            Rollback(newCustId);
+            await Rollback(newCustId);
         }
 
         return result;
@@ -116,7 +116,7 @@ public class CopyMasterService : CopyCustomerBaseService
         return new CopyCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), 0, msg.MainMessage);
     }
 
-    private async void Rollback(int newCustId)
+    private async Task Rollback(int newCustId)
     {
         var parameters = new Hashtable
         {

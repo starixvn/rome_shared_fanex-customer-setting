@@ -67,6 +67,9 @@ public class GroupItemDefault
     [Newtonsoft.Json.JsonIgnore]
     public string SubGroupName { get; set; }
 
+    [Newtonsoft.Json.JsonIgnore]
+    public string TooltipMessage { get; set; }
+
     public bool IsLive { get; set; }
 
     public virtual bool ShouldSerializeIsLive() => true;
@@ -78,6 +81,4 @@ public class GroupItemDefault
 
     public virtual bool Is3DecimalPTValue()
         => false;
-
-    public string TooltipMessage { get; set; }
 }
