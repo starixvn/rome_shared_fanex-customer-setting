@@ -72,7 +72,7 @@ const RenderTab = ({ tab }: { tab: TabOptions }) => {
     case 'CommissionHintTab':
       return <CommissionHintTab url={tab.url} />;
     case 'MaxPayoutSettingTab':
-      return <MaxPayoutSettingTab/>;
+      return <MaxPayoutSettingTab url={tab.url} />;
     case 'WinLossLimitTab':
       return <WinLossLimitTab url={tab.url} />;
     case 'PotentialWinLimitSettingTab':
