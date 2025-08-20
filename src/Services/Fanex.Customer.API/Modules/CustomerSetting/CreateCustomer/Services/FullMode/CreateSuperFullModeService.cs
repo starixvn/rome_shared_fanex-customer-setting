@@ -14,11 +14,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
 {
     private const string ValidateSPName = "Acc_CustomerInsMember_Com_Validate";
 
-    private const string RegisterSPName = "Acc_CustomerIns_Register";
-
     private const string CreateNewSPName = "Acc_CustomerInsMember_Com";
-
-    private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
     public CreateSuperFullModeService(IMessageService messageService, 
         AppSettings appSettings, 
@@ -36,7 +32,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             return result;
         }
         
-        result = await Register(request);
+        result = await RegisterSuperCustomer(request);
         if (!result.IsSuccessful)
         {
             return result;
@@ -46,7 +42,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
         result = await CreateSuper(request, newCustId);
         if (!result.IsSuccessful)
         {
-            await Rollback(newCustId);
+            await RollbackCustomer(newCustId);
         }
 
         return result;
@@ -73,7 +69,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
         return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
-    private async Task<CreateCustomerResult> Register(CreateRequest request)
+    private async Task<CreateCustomerResult> RegisterSuperCustomer(CreateRequest request)
     {
         var parameters = new Hashtable
         {
@@ -85,7 +81,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
         };
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
+        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustomerIns_Register");
         await db.ExecuteNonQueryAsync(parameters);
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
@@ -121,17 +117,6 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
         return new CreateCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
-    }
-
-    private async Task Rollback(int newCustId)
-    {
-        var parameters = new Hashtable
-        {
-            { "custid", newCustId }
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RollbackSPName);
-        await db.ExecuteNonQueryAsync(parameters);
     }
 
 }

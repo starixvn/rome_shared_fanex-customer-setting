@@ -4,6 +4,9 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Data.Repository;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria.Cash;
+using System.Collections;
+using Fanex.Data;
+using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -42,5 +45,37 @@ public class CreateCustomerBaseService : ICreateCustomerBaseService
         await dynamicRepository.ExecuteAsync(command);
 
         return command.AccumCreditReturn;
+    }
+    
+    protected async Task RollbackCustomer(int newCustId)
+    {
+        const string RollbackSPName = "Acc_CustomerIns_Rollback";
+        var parameters = new Hashtable
+        {
+            { "custid", newCustId }
+        };
+
+        using IObjectDb db = ObjectDbFactory.CreateInstance(RollbackSPName);
+        await db.ExecuteNonQueryAsync(parameters);
+    }
+
+    protected async Task<CreateCustomerResult> RegisterCustomer(CreateRequest request, int roleId)
+    {
+        const string RegisterSPName = "Acc_CustomerIns_Register";
+        var parameters = new Hashtable
+        {
+            { "username", request.Settings.GeneralInfo.UserName },
+            { "sitedbgroupid", request.Context.CustDBGroupID },
+            { "site", request.Settings.GeneralInfo.Site },
+            { "roleid", roleId },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
+            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
+        };
+
+        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
+        return new CreateCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 }

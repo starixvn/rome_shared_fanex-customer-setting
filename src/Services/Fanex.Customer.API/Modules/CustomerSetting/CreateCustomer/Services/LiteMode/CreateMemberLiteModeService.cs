@@ -16,11 +16,7 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
 
     private const string ValidateSPName = "Acc_LiteMode_CustomerInsMember_Ag_Validate";
 
-    private const string RegisterSPName = "Acc_CustomerIns_Register";
-
     private const string CreateNewSPName = "Acc_LiteMode_CustomerInsMember_Ag";
-
-    private const string RollbackSPName = "Acc_CustomerIns_Rollback";
 
     public CreateMemberLiteModeService(IMessageService messageService, 
         AppSettings appSettings, 
@@ -38,7 +34,7 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
             return result;
         }
         
-        result = await Register(request);
+        result = await RegisterCustomer(request, CustomerLevel.Member);
         if (!result.IsSuccessful)
         {
             return result;
@@ -48,7 +44,7 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
         result = await CreateMember(request, newCustId);
         if (!result.IsSuccessful)
         {
-            await Rollback(newCustId);
+            await RollbackCustomer(newCustId);
         }
 
         return result;
@@ -76,25 +72,6 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
         return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
-    }
-
-    private async Task<CreateCustomerResult> Register(CreateRequest request)
-    {
-        var parameters = new Hashtable
-        {
-            { "username", request.Settings.GeneralInfo.UserName },
-            { "sitedbgroupid", request.Context.CustDBGroupID },
-            { "site", request.Settings.GeneralInfo.Site },
-            { "roleid", CustomerLevel.Member },
-            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<CreateCustomerResult> CreateMember(CreateRequest request, int newCustId)
@@ -128,17 +105,6 @@ public class CreateMemberLiteModeService : CreateCustomerBaseService, ICreateCus
         var outputParams = db.GetOutputParams();
         var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
         return new CreateCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
-    }
-
-    private async Task Rollback(int newCustId)
-    {
-        var parameters = new Hashtable
-        {
-            { "custid", newCustId }
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RollbackSPName);
-        await db.ExecuteNonQueryAsync(parameters);
     }
 
 }
