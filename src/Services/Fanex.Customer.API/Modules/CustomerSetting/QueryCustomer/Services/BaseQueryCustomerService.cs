@@ -118,4 +118,71 @@ public class BaseQueryCustomerService : BaseCustomerService
             customerSetting.ProductGroups = productGroupsList;
         }
     }
+
+    protected IEnumerable<GroupItemDefault> GetGroupItems(
+        int groupId,
+        int groupTypeId,
+        int displayType,
+        int roleId,
+        bool isGetUpline,
+        bool? isDirectMember,
+        string language,
+        IEnumerable<GroupItemDefault> groupItems,
+        IGrouping<object, SettingProfile> t,
+        bool isSiteLabel777,
+        decimal ptStep)
+    {
+        return groupItems.Join(
+            t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType, sb.ProductId }),
+            groupItems => new { SportType = groupItems.SportTypeId, BetType = groupItems.BetTypeId },
+            groupItemsProfile => new { groupItemsProfile.Key.SportType, groupItemsProfile.Key.BetType },
+            (groupItem, groupItemsProfile) =>
+            {
+                if (isGetUpline)
+                {
+                    groupItem.MapUpline();
+                }
+
+                groupItem.ProductId = groupItemsProfile.Key.ProductId;
+                groupItem.ProductName = cacheRefService.GetProductName(groupItemsProfile.Key.ProductId, language);
+                groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
+                groupItem.SubGroupName = cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
+                groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
+                groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, language);
+                groupItem.DisplayName = cacheRefService.GetDisplayNameByDisplayType(
+                    groupItem.SportTypeId,
+                    groupItem.BetTypeId,
+                    groupId,
+                    groupTypeId,
+                    displayType,
+                    roleId,
+                    isDirectMember,
+                    language,
+                    isSiteLabel777);
+
+                if (helperService.IsPTGroupType(groupTypeId))
+                {
+                    ((PTItem)groupItem).Step = ptStep;
+                }
+
+                return groupItem;
+            });
+    }
+
+    protected GroupType CreateGroupType(
+        int groupTypeId,
+        int displayType,
+        bool isAllowUncheckAll,
+        string language,
+        bool isReadOnly = false)
+    {
+        return new GroupType
+        {
+            Id = groupTypeId,
+            IsAllowUncheckAll = isAllowUncheckAll,
+            Name = Resources.Resources.ResourceManager.GetString($"GroupType{groupTypeId}", new System.Globalization.CultureInfo(language)),
+            DisplayType = (short)displayType,
+            IsReadOnly = isReadOnly
+        };
+    }
 }

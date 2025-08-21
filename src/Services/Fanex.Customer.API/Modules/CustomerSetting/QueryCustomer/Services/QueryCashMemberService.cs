@@ -149,26 +149,24 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
                         t.Key.GroupType,
                         isDirectMember);
 
-                    var groupType = new GroupType
-                    {
-                        Id = t.Key.GroupType,
-                        IsAllowUncheckAll = isAllowUncheckAll,
-                        Name = Resources.Resources.ResourceManager.GetString(
-                            $"GroupType{t.Key.GroupType}",
-                            new System.Globalization.CultureInfo(request.Language)),
-                        DisplayType = t.Key.DisplayType,
-                        GroupItems = GetGroupItems(
-                            g.Key,
-                            t.Key.GroupType,
-                            t.Key.DisplayType,
-                            request.RoleId - 1,
-                            request.IsGetUpline,
-                            isDirectMember,
-                            request.Language,
-                            groupItems,
-                            t,
-                            isSiteLabel777)
-                    };
+                    var groupType = CreateGroupType(
+                        t.Key.GroupType,
+                        t.Key.DisplayType,
+                        isAllowUncheckAll,
+                        request.Language);
+                    
+                    groupType.GroupItems = GetGroupItems(
+                        g.Key,
+                        t.Key.GroupType,
+                        t.Key.DisplayType,
+                        request.RoleId - 1,
+                        request.IsGetUpline,
+                        isDirectMember,
+                        request.Language,
+                        groupItems,
+                        t,
+                        isSiteLabel777,
+                        ptStep);
 
                     return groupType;
                 }
@@ -206,25 +204,25 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
                     false,
                     0);
 
-                var groupType = new GroupType
-                {
-                    Id = t.Key.GroupType,
-                    IsAllowUncheckAll = isAllowUncheckAll,
-                    Name = Resources.Resources.ResourceManager.GetString($"GroupType{t.Key.GroupType}", new System.Globalization.CultureInfo(request.Language)),
-                    DisplayType = t.Key.DisplayType,
-                    IsReadOnly = IsReadOnlyGroupType(request, t.Key.GroupType),
-                    GroupItems = GetGroupItems(
-                        g.Key,
-                        t.Key.GroupType,
-                        t.Key.DisplayType,
-                        request.RoleId,
-                        request.IsGetUpline,
-                        isDirectMember,
-                        request.Language,
-                        groupItems,
-                        t,
-                        isSiteLabel777)
-                };
+                var groupType = CreateGroupType(
+                    t.Key.GroupType,
+                    t.Key.DisplayType,
+                    isAllowUncheckAll,
+                    request.Language,
+                    IsReadOnlyGroupType(request, t.Key.GroupType));
+                
+                groupType.GroupItems = GetGroupItems(
+                    g.Key,
+                    t.Key.GroupType,
+                    t.Key.DisplayType,
+                    request.RoleId,
+                    request.IsGetUpline,
+                    isDirectMember,
+                    request.Language,
+                    groupItems,
+                    t,
+                    isSiteLabel777,
+                    ptStep);
 
                 return groupType;
             }
@@ -246,55 +244,5 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
     private bool IsCrossline(QueryCashCustomerRequest request)
     {
         return request.UplineRoleId - request.RoleId > 1;
-    }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
-    private IEnumerable<GroupItemDefault> GetGroupItems(
-        int groupId,
-        int groupTypeId,
-        int displayType,
-        int roleId,
-        bool isGetUpline,
-        bool? isDirectMember,
-        string language,
-        IEnumerable<GroupItemDefault> groupItems,
-        IGrouping<object, SettingProfile> t,
-        bool isSiteLabel777)
-    {
-        return groupItems.Join(
-        t.GroupBy(sb => new { sb.SubGroupId, sb.SportType, sb.BetType, sb.ProductId }),
-        groupItems => new { SportType = groupItems.SportTypeId, BetType = groupItems.BetTypeId },
-        groupItemsProfile => new { groupItemsProfile.Key.SportType, groupItemsProfile.Key.BetType },
-        (groupItem, groupItemsProfile) =>
-        {
-            if (isGetUpline)
-            {
-                groupItem.MapUpline();
-            }
-
-            groupItem.ProductId = groupItemsProfile.Key.ProductId;
-            groupItem.ProductName = cacheRefService.GetProductName(groupItem.ProductId, language);
-            groupItem.SubGroupId = groupItemsProfile.Key.SubGroupId;
-            groupItem.SubGroupName = cacheRefService.GetSubGroupName(groupItemsProfile.Key.SubGroupId, language);
-            groupItem.SportTypeName = cacheRefService.GetSportTypeName(groupItem.SportTypeId, language);
-            groupItem.BetTypeName = cacheRefService.GetBetTypeName(groupItem.BetTypeId, language);
-            groupItem.DisplayName = cacheRefService.GetDisplayNameByDisplayType(
-                groupItem.SportTypeId,
-                groupItem.BetTypeId,
-                groupId,
-                groupTypeId,
-                displayType,
-                roleId,
-                isDirectMember,
-                language,
-                isSiteLabel777);
-
-            if (helperService.IsPTGroupType(groupTypeId))
-            {
-                ((PTItem)groupItem).Step = ptStep;
-            }
-
-            return groupItem;
-        });
     }
 }
