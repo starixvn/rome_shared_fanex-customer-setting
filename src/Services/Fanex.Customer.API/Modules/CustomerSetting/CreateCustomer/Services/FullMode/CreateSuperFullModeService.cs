@@ -1,21 +1,16 @@
-using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Utils;
-using Fanex.Data;
-using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
+using Fanex.Customer.API.Shared.Constants;
+using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
 public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
-    private const string ValidateSPName = "Acc_CustomerInsMember_Com_Validate";
-
-    private const string CreateNewSPName = "Acc_CustomerInsMember_Com";
-
     public CreateSuperFullModeService(IMessageService messageService, 
         AppSettings appSettings, 
         ICustomerSettingHelper helperService,
@@ -50,73 +45,64 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
 
     private async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)
     {
-        var parameters = new Hashtable
-        {
-            { "currency", request.Settings.GeneralInfo.Currency },
-            { "site", request.Settings.GeneralInfo.Site },
-            { "creator", request.Context.CreatorId },
-            { "username", request.Settings.GeneralInfo.UserName },
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-            { "credit", request.Settings.GeneralInfo.MaxCredit },
-            { "settingstatus", appSettings.SettingStatus },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
-        };
+        var criteria = new ValidateSuperSettingCommand(
+            request.Settings.GeneralInfo.Currency,
+            request.Settings.GeneralInfo.Site,
+            request.Context.CreatorId,
+            request.Settings.GeneralInfo.UserName,
+            LanguageUtils.ToLanguageKey(request.Context.Language),
+            request.Settings.GeneralInfo.MaxCredit,
+            appSettings.SettingStatus,
+            helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode())
+        );
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        await dynamicRepository.ExecuteAsync(criteria);
+        var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
+        return new CreateCustomerResult(0, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<CreateCustomerResult> RegisterSuperCustomer(CreateRequest request)
     {
-        var parameters = new Hashtable
-        {
-            { "username", request.Settings.GeneralInfo.UserName },
-            { "sitedbgroupid", request.Context.CustDBGroupID },
-            { "site", request.Context.Site },
-            { "currency", request.Settings.GeneralInfo.Currency },
-            { "roleid", CustomerLevel.Super },
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
-        };
+        var criteria = new RegisterSuperCustomerCommand(
+            request.Settings.GeneralInfo.UserName,
+            request.Context.CustDBGroupID,
+            request.Context.Site,
+            request.Settings.GeneralInfo.Currency,
+            CustomerLevel.Super,
+            LanguageUtils.ToLanguageKey(request.Context.Language)
+        );
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance("Acc_CustomerIns_Register");
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        await dynamicRepository.ExecuteAsync(criteria);
+        var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
+        return new CreateCustomerResult(criteria.CustId, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<CreateCustomerResult> CreateSuper(CreateRequest request, int newCustId)
     {
-        var parameters = new Hashtable
-        {
-            { "custid", newCustId },
-            { "firstname", request.Settings.GeneralInfo.FirstName ?? string.Empty },
-            { "lastname", request.Settings.GeneralInfo.LastName ?? string.Empty},
-            { "creator", request.Context.CreatorId },
-            { "username", request.Settings.GeneralInfo.UserName },
-            { "userpwd", request.Settings.GeneralInfo.Password },
-            { "phone", request.Settings.GeneralInfo.Phone ?? string.Empty},
-            { "mobilephone", request.Settings.GeneralInfo.MobilePhone ?? string.Empty},
-            { "fax", request.Settings.GeneralInfo.Fax ?? string.Empty},
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-            { "credit", request.Settings.GeneralInfo.MaxCredit },
-            { "systemid", request.Context.SystemId },
-            { "ip", request.Context.IP },
-            { "settingstatus", appSettings.SettingStatus },
-            { "site", request.Settings.GeneralInfo.Site },
-            { "currency", request.Settings.GeneralInfo.Currency },
-            { "isinternal", request.Settings.GeneralInfo.IsInternal },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
-        };
+        var criteria = new CreateSuperCommand(
+            newCustId,
+            request.Settings.GeneralInfo.FirstName ?? string.Empty,
+            request.Settings.GeneralInfo.LastName ?? string.Empty,
+            request.Context.CreatorId,
+            request.Settings.GeneralInfo.UserName,
+            request.Settings.GeneralInfo.Password,
+            request.Settings.GeneralInfo.Phone ?? string.Empty,
+            request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
+            request.Settings.GeneralInfo.Fax ?? string.Empty,
+            LanguageUtils.ToLanguageKey(request.Context.Language),
+            request.Settings.GeneralInfo.MaxCredit,
+            request.Context.SystemId,
+            request.Context.IP,
+            appSettings.SettingStatus,
+            request.Settings.GeneralInfo.Site,
+            request.Settings.GeneralInfo.Currency,
+            request.Settings.GeneralInfo.IsInternal,
+            helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode())
+        );
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        await dynamicRepository.ExecuteAsync(criteria);
+        var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
+        return new CreateCustomerResult(newCustId, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 
 }

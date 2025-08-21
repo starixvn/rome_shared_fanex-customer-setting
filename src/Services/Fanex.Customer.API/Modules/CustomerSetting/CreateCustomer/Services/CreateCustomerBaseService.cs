@@ -4,8 +4,7 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Data.Repository;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria.Cash;
-using System.Collections;
-using Fanex.Data;
+using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
@@ -49,33 +48,23 @@ public class CreateCustomerBaseService : ICreateCustomerBaseService
     
     protected async Task RollbackCustomer(int newCustId)
     {
-        const string RollbackSPName = "Acc_CustomerIns_Rollback";
-        var parameters = new Hashtable
-        {
-            { "custid", newCustId }
-        };
-
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RollbackSPName);
-        await db.ExecuteNonQueryAsync(parameters);
+        var criteria = new RollbackRegisterCustomer(newCustId);
+        await dynamicRepository.ExecuteAsync(criteria);
     }
 
     protected async Task<CreateCustomerResult> RegisterCustomer(CreateRequest request, int roleId)
     {
-        const string RegisterSPName = "Acc_CustomerIns_Register";
-        var parameters = new Hashtable
-        {
-            { "username", request.Settings.GeneralInfo.UserName },
-            { "sitedbgroupid", request.Context.CustDBGroupID },
-            { "site", request.Settings.GeneralInfo.Site },
-            { "roleid", roleId },
-            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
-        };
+        var criteria = new RegisterCustomerBeforeAddNew(
+            request.Settings.GeneralInfo.UserName,
+            request.Context.CustDBGroupID,
+            request.Settings.GeneralInfo.Site,
+            (byte)roleId,
+            request.Settings.GeneralInfo.UplineCustId,
+            LanguageUtils.ToLanguageKey(request.Context.Language)
+        );
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        await dynamicRepository.ExecuteAsync(criteria);
+        var msg = messageService.TranslateMessage(0, criteria.ErrMsg, request.Context.Language);
+        return new CreateCustomerResult(criteria.CustId, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 }
