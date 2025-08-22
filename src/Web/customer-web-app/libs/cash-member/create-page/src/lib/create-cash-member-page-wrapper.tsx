@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { CreateCashMemberPage } from './create-cash-member-page';
 import { CashServiceAds } from '@customer-web-app/advertisement-pages';
 import { CashServiceStatus } from '@customer-web-app/share-models';
+declare const nickName: string;
 export interface CreateDirectMemberPageWrapperProps { }
 
 export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapperProps) {
@@ -10,7 +11,7 @@ export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapper
   const [isEnabled, setIsEnabled] = useState(false);
   const [isError, setIsError] = useState(false);
   const [cashServiceStatus, setCashServiceStatus] = useState<CashServiceStatus>({ isCashServiceEnabled: false, isCanUpdateCashServiceStatus: false, isOfferedCashService: false });
-
+  
   useEffect(() => {
     const checkCashServiceStatus = async () => {
       try {
@@ -37,7 +38,7 @@ export function CreateCashMemberPageWrapper(props: CreateDirectMemberPageWrapper
 
   return (
     <>
-      {isModalOpen && <CashServiceAds isOpen={isModalOpen} onConfirm={handleEnableCashService} cashServiceStatus={cashServiceStatus} />}
+      {isModalOpen && <CashServiceAds isOpen={isModalOpen} onConfirm={handleEnableCashService} cashServiceStatus={cashServiceStatus} nickName={nickName} />}
       {isEnabled && !isError ?  <CreateCashMemberPage isEnabled={isEnabled} /> : null}
     </>
   );

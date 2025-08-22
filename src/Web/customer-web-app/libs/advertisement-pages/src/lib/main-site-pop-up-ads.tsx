@@ -19,7 +19,6 @@ declare global {
 export function MainSitePopUpAds() {
     const [isOpen, setIsOpen] = useState(true);
     const [shouldShowPopup, setShouldShowPopup] = useState(false);
-
     useEffect(() => {
         const hideAds = localStorage.getItem(`${appConfig.nickName}-hideCashServiceAds`);
         if (hideAds !== 'true') {
@@ -72,6 +71,7 @@ export function MainSitePopUpAds() {
             isAllowCloseAds: true
         }}
         onDontShowAgain={checkDontShowAgain}
+        nickName={appConfig.nickName}
     />;
 }
 
