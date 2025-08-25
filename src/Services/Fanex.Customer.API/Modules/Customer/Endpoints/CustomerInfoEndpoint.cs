@@ -53,7 +53,8 @@ public class GetCustomerInfoEndpoint :
                 request.UserId,
                 request.SubAccId,
                 request.IP,
-                request.Language);
+                request.Language,
+                request.Remark);
             await dynamicRepository.ExecuteAsync(command);
             return Results.Ok(new Result(command.ErrorCode, command.ErrorMsg));
         }

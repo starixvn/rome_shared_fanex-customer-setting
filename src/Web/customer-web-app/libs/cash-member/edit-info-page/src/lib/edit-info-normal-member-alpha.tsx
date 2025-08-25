@@ -9,6 +9,7 @@ import {
   LAST_NAME_MAX_LENGTH,
   NUMBER_REGEX,
   PHONE_NUMBER_MAX_LENGTH,
+  REMARK_MAX_LENGTH,
 } from '@customer-web-app/shared-constants';
 import {
   ButtonFull,
@@ -33,6 +34,7 @@ export const EditInfoNormalMemberAlpha = () => {
     phone: '',
     email: '',
     fax: '',
+    remark: '',
   });
   const [loading, setLoading] = useState(false);
   const { showResult, renderResultMessage } = useResultMessage();
@@ -252,6 +254,28 @@ export const EditInfoNormalMemberAlpha = () => {
                         type="text"
                         maxLength={PHONE_NUMBER_MAX_LENGTH}
                         className={styles.input}
+                        onBlur={(e) => {
+                          const trimmedValue = e.target.value.trim();
+                          field.onChange(trimmedValue);
+                        }}
+                      />
+                    )}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td className={styles.labelCell}>
+                  <Label>{t('Remark')}</Label>
+                </td>
+                <td colSpan={3}>
+                  <Controller
+                    name="remark"
+                    control={control}
+                    render={({ field }) => (
+                      <textarea
+                        {...field}
+                        rows={3}
+                        className={styles.textarea}
                         onBlur={(e) => {
                           const trimmedValue = e.target.value.trim();
                           field.onChange(trimmedValue);

@@ -43,6 +43,7 @@ export interface BaseCustomerInfo {
     phone: string;
     email: string;
     fax: string;
+    remark?: string;
 }
 
 export interface InfoNormalMember extends BaseCustomerInfo {}
@@ -50,7 +51,6 @@ export interface InfoNormalMember extends BaseCustomerInfo {}
 export interface InfoCashMember extends BaseCustomerInfo {
     mobileCode: string;
     mobileNumber: string;
-    remark?: string;
 };
 
 export enum BankAccountErrorCode {

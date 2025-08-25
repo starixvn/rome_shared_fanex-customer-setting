@@ -21,6 +21,8 @@ namespace Fanex.Customer.Client.Models
 
         public string Fax { get; set; }
 
+        public string Remark { get; set; }
+
         public int CurrencyId { get; set; }
 
         public string CurrencyName { get; set; }

@@ -13,5 +13,6 @@ namespace Fanex.Customer.Client.Params
         public int SubAccId { get; set; }
         public string IP { get; set; }
         public string Language { get; set; }
+        public string Remark { get; set; }
     }
 }
