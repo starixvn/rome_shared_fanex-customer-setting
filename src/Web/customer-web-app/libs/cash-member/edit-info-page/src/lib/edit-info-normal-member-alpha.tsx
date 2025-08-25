@@ -82,6 +82,7 @@ export const EditInfoNormalMemberAlpha = () => {
         MobilePhone: formData.mobilePhone,
         Email: formData.email,
         Fax: formData.fax,
+        Remark: formData.remark,
       });
 
       if (response.isSuccessful) {
