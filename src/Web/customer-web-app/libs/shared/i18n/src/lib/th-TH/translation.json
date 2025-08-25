@@ -14,6 +14,8 @@
   "agentMaxCredit": "จำนวนเงินสูงสุดในบัญชีของตัวแทน",
   "memberMaxCredit": "เครดิตสูงสุดของสมาชิก",
   "fax": "แฟกซ์",
+  "remark": "หมายเหตุ",
+  "enterRemark": "กรอกหมายเหตุ",
   "allowAutoPt": "อนุญาตให้ใช้ค่าความเสี่ยงอัตโนมัติ",
   "superMaxCreditInvalid": "Master Max Credit must be between {{min}} and {{max}}",
   "masterMaxCreditInvalid": "เครดิตสูงสุดของมาสเตอร์ต้องอยู่ระหว่าง {{min}} และ {{max}}",

@@ -14,6 +14,8 @@
   "agentMaxCredit": "代理信用额",
   "memberMaxCredit": "会员最高信用额",
   "fax": "传真",
+  "remark": "备注",
+  "enterRemark": "输入备注",
   "allowAutoPt": "允许自动占成",
   "superMaxCreditInvalid": "Master Max Credit must be between {{min}} and {{max}}",
   "masterMaxCreditInvalid": "总代理最高信用额应在{{min}}和{{max}}之间",

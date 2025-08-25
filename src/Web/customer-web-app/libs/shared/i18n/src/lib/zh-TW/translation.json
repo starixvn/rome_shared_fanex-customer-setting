@@ -14,6 +14,8 @@
   "agentMaxCredit": "代理信用額",
   "memberMaxCredit": "會員最高信用額",
   "fax": "傳真",
+  "remark": "備註",
+  "enterRemark": "輸入備註",
   "allowAutoPt": "允許自動佔成",
   "superMaxCreditInvalid": "Master Max Credit must be between {{min}} and {{max}}",
   "masterMaxCreditInvalid": "總代理最高信用額應在{{min}}和{{max}}之間",

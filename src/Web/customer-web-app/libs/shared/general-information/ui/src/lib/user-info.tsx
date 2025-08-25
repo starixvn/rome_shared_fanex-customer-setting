@@ -39,21 +39,66 @@ function UserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collapse, 
       </div>
       <WrapperTooltip className="global-tooltip" id="userInfo" />
       <div className={classNames(styles['row'], { toggle: collapse })}>
-        {!collapse && UserInformationFields.map((field) => (
-          <BlockItem key={field} label={t(field)}>
-            {isReadOnly ?
-              <span className={styles['readOny-user-info']}>{generalInfo[field] || ''}</span>
-              : <input
+        {!collapse && UserInformationFields.map((field) => {
+          const renderInputField = () => {
+            if (isReadOnly) {
+              return (
+                <span className={styles['readOny-user-info']}>
+                  {generalInfo[field] || ''}
+                </span>
+              );
+            }
+
+            return (
+              <input
                 key={field}
                 type="text"
                 maxLength={50}
                 value={generalInfo[field] || ''}
                 onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
               />
-            }
-          </BlockItem>
-        ))}
+            );
+          };
+
+          return (
+            <BlockItem key={field} label={t(field)}>
+              {renderInputField()}
+            </BlockItem>
+          );
+        })}
       </div>
+      
+      <div className={classNames(styles['row'], { toggle: collapse })}>
+        {(() => {
+          console.log('REMARK DEBUG: collapse =', collapse, 'isReadOnly =', isReadOnly, 'generalInfo.remark =', generalInfo.remark);
+          return null;
+        })()}
+        {!collapse && (
+          <div className={styles['remark-item']}>
+            <BlockItem label={t('remark')}>
+              {isReadOnly ? (
+                <span className={styles['readOny-user-info']}>
+                  {generalInfo.remark ? (
+                    <div className={styles['remark-readonly']}>{generalInfo.remark}</div>
+                  ) : (
+                    ''
+                  )}
+                </span>
+              ) : (
+                <textarea
+                  className={styles['remark-textarea']}
+                  maxLength={300}
+                  rows={2}
+                  value={generalInfo.remark || ''}
+                  onChange={(e) => handleGeneralInfoChange('remark', e.target.value)}
+                  placeholder={t('enterRemark')}
+                />
+              )}
+            </BlockItem>
+          </div>
+        )}
+      </div>
+      
     </div>
   );
 }

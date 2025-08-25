@@ -142,3 +142,39 @@ label.checkbox {
 .description {
   color: var(--color-label);
 }
+
+.remark-textarea {
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-height: 40px;
+  
+  &:focus {
+    border-color: var(--color-primary, #007bff);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+  
+  &::placeholder {
+    color: var(--color-placeholder, #999);
+    opacity: 1;
+  }
+}
+
+.remark-item {
+  flex: 0 0 50%; /* 3 items out of 6 = 50% (First Name + Last Name + Phone) */
+  max-width: 50%;
+}
+
+.remark-row {
+  grid-column: 1 / -1; /* Take full width across all columns */
+}
+
+.remark-readonly {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

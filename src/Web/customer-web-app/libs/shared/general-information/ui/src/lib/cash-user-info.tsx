@@ -37,7 +37,33 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
     const { field, component, isError, onFocus, onBlur, maxInputLength, description, label } = config;
 
     if (isReadOnly) {
+      if (field === 'remark') {
+        return (
+          <span className={styles['readOny-user-info']}>
+            {generalInfo[field] ? (
+              <div className={styles['remark-readonly']}>{generalInfo[field]}</div>
+            ) : (
+              ''
+            )}
+          </span>
+        );
+      }
       return <span className={styles['readOny-user-info']}>{generalInfo[field] ?? ''}</span>;
+    }
+
+    if (field === 'remark') {
+      return (
+        <textarea
+          className={styles['remark-textarea']}
+          maxLength={500}
+          rows={3}
+          value={generalInfo[field] || ''}
+          onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
+          placeholder={t('enterRemark')}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+      );
     }
 
     switch (component) {
@@ -112,6 +138,33 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
             {renderField(config)}
           </BlockItem>
         ))}
+      </div>
+      
+      <div className={classNames(styles['row'], { toggle: collapse })}>
+        {!collapse && (
+          <div className={styles['remark-item']}>
+            <BlockItem label={t('remark')}>
+              {isReadOnly ? (
+                <span className={styles['readOny-user-info']}>
+                  {generalInfo.remark ? (
+                    <div className={styles['remark-readonly']}>{generalInfo.remark}</div>
+                  ) : (
+                    ''
+                  )}
+                </span>
+              ) : (
+                <textarea
+                  className={styles['remark-textarea']}
+                  maxLength={500}
+                  rows={3}
+                  value={generalInfo.remark || ''}
+                  onChange={(e) => handleGeneralInfoChange('remark', e.target.value)}
+                  placeholder={t('enterRemark')}
+                />
+              )}
+            </BlockItem>
+          </div>
+        )}
       </div>
     </div>
   );
