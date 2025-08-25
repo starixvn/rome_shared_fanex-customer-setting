@@ -69,10 +69,6 @@ function UserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collapse, 
       </div>
       
       <div className={classNames(styles['row'], { toggle: collapse })}>
-        {(() => {
-          console.log('REMARK DEBUG: collapse =', collapse, 'isReadOnly =', isReadOnly, 'generalInfo.remark =', generalInfo.remark);
-          return null;
-        })()}
         {!collapse && (
           <div className={styles['remark-item']}>
             <BlockItem label={t('remark')}>
