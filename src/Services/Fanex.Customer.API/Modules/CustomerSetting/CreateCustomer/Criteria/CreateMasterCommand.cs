@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 public class CreateMasterCommand : INonQueryCommand
 {
     public CreateMasterCommand(int custid, string firstname, string lastname, int creator, string username,
-        string userpwd, string phone, string mobilephone, string fax, string transferoption,
+        string userpwd, string phone, string mobilephone, string fax, string remark, string transferoption,
         bool disableautompt, string language, int subaccid, decimal credit, int srecommend,
         byte systemid, string ip, string site, int settingstatus, string settingxml)
     {
@@ -18,6 +18,7 @@ public class CreateMasterCommand : INonQueryCommand
         Phone = phone;
         Mobilephone = mobilephone;
         Fax = fax;
+        Remark = remark;
         Transferoption = transferoption;
         Disableautompt = disableautompt;
         Language = language;
@@ -40,6 +41,7 @@ public class CreateMasterCommand : INonQueryCommand
     public string Phone { get; set; }
     public string Mobilephone { get; set; }
     public string Fax { get; set; }
+    public string Remark { get; set; }
     public string Transferoption { get; set; }
     public bool Disableautompt { get; set; }
     public string Language { get; set; }

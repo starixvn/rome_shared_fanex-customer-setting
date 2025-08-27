@@ -13,6 +13,7 @@ public class CreateCashMemberCommand : INonQueryCommand
         string userPwd,
         string phone,
         string mobilePhone,
+        string remark,
         int bankId,
         string accountNumber,
         string settingXml,
@@ -31,6 +32,7 @@ public class CreateCashMemberCommand : INonQueryCommand
         UserPwd = userPwd;
         Phone = phone;
         MobilePhone = mobilePhone;
+        Remark = remark;
         BankId = bankId;
         AccountNumber = accountNumber;
         SettingXml = settingXml;
@@ -50,6 +52,7 @@ public class CreateCashMemberCommand : INonQueryCommand
     public string UserPwd { get; }
     public string Phone { get; }
     public string MobilePhone { get; }
+    public string Remark { get; }
     public int BankId { get; }
     public string AccountNumber { get; }
     public string SettingXml { get; }

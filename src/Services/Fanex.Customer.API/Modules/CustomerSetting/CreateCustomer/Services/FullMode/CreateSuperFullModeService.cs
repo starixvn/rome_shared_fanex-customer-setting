@@ -89,6 +89,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             request.Settings.GeneralInfo.Phone ?? string.Empty,
             request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
             request.Settings.GeneralInfo.Fax ?? string.Empty,
+            request.Settings.GeneralInfo.Remark ?? string.Empty,
             LanguageUtils.ToLanguageKey(request.Context.Language),
             request.Settings.GeneralInfo.MaxCredit,
             request.Context.SystemId,

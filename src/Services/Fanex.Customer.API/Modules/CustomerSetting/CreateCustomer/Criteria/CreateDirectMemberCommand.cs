@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 public class CreateDirectMemberCommand : INonQueryCommand
 {
     public CreateDirectMemberCommand(int custid, string firstname, string lastname, int creator, string username,
-        string userpwd, string phone, string mobilephone, string fax, decimal credit, string settingxml,
+        string userpwd, string phone, string mobilephone, string fax, string remark, decimal credit, string settingxml,
         string language, int subaccid, int uplineid, string ugroup, byte systemid, string ip, int settingstatus)
     {
         Custid = custid;
@@ -17,6 +17,7 @@ public class CreateDirectMemberCommand : INonQueryCommand
         Phone = phone;
         Mobilephone = mobilephone;
         Fax = fax;
+        Remark = remark;
         Credit = credit;
         Settingxml = settingxml;
         Language = language;
@@ -37,6 +38,7 @@ public class CreateDirectMemberCommand : INonQueryCommand
     public string Phone { get; set; }
     public string Mobilephone { get; set; }
     public string Fax { get; set; }
+    public string Remark { get; set; }
     public decimal Credit { get; set; }
     public string Settingxml { get; set; }
     public string Language { get; set; }

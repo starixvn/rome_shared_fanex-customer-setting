@@ -75,6 +75,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             request.Settings.GeneralInfo.Phone ?? string.Empty,
             request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
             request.Settings.GeneralInfo.Fax ?? string.Empty,
+            request.Settings.GeneralInfo.Remark ?? string.Empty,
             request.Settings.GeneralInfo.MaxCredit,
             helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()),
             LanguageUtils.ToLanguageKey(request.Context.Language),

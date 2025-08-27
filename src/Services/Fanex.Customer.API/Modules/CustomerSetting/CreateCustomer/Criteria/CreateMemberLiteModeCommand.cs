@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 public class CreateMemberLiteModeCommand : INonQueryCommand
 {
     public CreateMemberLiteModeCommand(int custId, string firstName, string lastName, int creator,
-        string username, string userPwd, string phone, string mobilePhone, string fax,
+        string username, string userPwd, string phone, string mobilePhone, string fax, string remark,
         string settingXml, string templateName, string settingTypeAll, string language,
         int subAccId, decimal credit, int recommend, string uGroup, byte systemId, string ip,
         int settingStatus)
@@ -19,6 +19,7 @@ public class CreateMemberLiteModeCommand : INonQueryCommand
         Phone = phone;
         Mobilephone = mobilePhone;
         Fax = fax;
+        Remark = remark;
         Settingxml = settingXml;
         Templatename = templateName;
         Settingtypeall = settingTypeAll;
@@ -41,6 +42,7 @@ public class CreateMemberLiteModeCommand : INonQueryCommand
     public string Phone { get; set; }
     public string Mobilephone { get; set; }
     public string Fax { get; set; }
+    public string Remark { get; set; }
     public string Settingxml { get; set; }
     public string Templatename { get; set; }
     public string Settingtypeall { get; set; }

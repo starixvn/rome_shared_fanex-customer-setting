@@ -76,6 +76,7 @@ public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCust
             request.Settings.GeneralInfo.Phone ?? string.Empty,
             request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
             request.Settings.GeneralInfo.Fax ?? string.Empty,
+            request.Settings.GeneralInfo.Remark ?? string.Empty,
             request.Settings.GeneralInfo.TransferOption,
             LanguageUtils.ToLanguageKey(request.Context.Language),
             request.Context.SubAccId,

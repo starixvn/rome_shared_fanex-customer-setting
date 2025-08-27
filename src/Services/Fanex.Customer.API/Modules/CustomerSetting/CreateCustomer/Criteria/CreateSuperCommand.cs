@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 public class CreateSuperCommand : INonQueryCommand
 {
     public CreateSuperCommand(int custId, string firstName, string lastName, int creator, string username,
-        string userPwd, string phone, string mobilePhone, string fax, string language, decimal credit,
+        string userPwd, string phone, string mobilePhone, string fax, string remark, string language, decimal credit,
         byte systemId, string ip, int settingStatus, string site, int currency, bool isInternal, string settingXml)
     {
         Custid = custId;
@@ -17,6 +17,7 @@ public class CreateSuperCommand : INonQueryCommand
         Phone = phone;
         Mobilephone = mobilePhone;
         Fax = fax;
+        Remark = remark;
         Language = language;
         Credit = credit;
         Systemid = systemId;
@@ -37,6 +38,7 @@ public class CreateSuperCommand : INonQueryCommand
     public string Phone { get; set; }
     public string Mobilephone { get; set; }
     public string Fax { get; set; }
+    public string Remark { get; set; }
     public string Language { get; set; }
     public decimal Credit { get; set; }
     public byte Systemid { get; set; }
