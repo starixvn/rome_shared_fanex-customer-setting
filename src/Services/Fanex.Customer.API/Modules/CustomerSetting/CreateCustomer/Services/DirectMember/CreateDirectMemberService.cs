@@ -116,6 +116,7 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
             { "ugroup", request.Settings.Group },
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
+            { "remark", request.Settings.GeneralInfo.Remark }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));

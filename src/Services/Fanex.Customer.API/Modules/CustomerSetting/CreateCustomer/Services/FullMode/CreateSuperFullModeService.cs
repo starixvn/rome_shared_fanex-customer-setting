@@ -114,6 +114,7 @@ public class CreateSuperFullModeService : CreateCustomerBaseService, ICreateCust
             { "currency", request.Settings.GeneralInfo.Currency },
             { "isinternal", request.Settings.GeneralInfo.IsInternal },
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
+            { "remark", request.Settings.GeneralInfo.Remark }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));

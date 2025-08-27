@@ -121,6 +121,7 @@ public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCus
             { "ip", request.Context.IP },
             { "site", request.Settings.GeneralInfo.Site },
             { "settingstatus", appSettings.SettingStatus },
+            { "remark", request.Settings.GeneralInfo.Remark }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));

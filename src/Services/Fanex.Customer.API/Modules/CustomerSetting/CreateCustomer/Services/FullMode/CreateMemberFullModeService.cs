@@ -116,6 +116,7 @@ public class CreateMemberFullModeService : CreateCustomerBaseService, ICreateCus
             { "systemid", request.Context.SystemId },
             { "ip", request.Context.IP },
             { "settingstatus", appSettings.SettingStatus },
+            { "remark", request.Settings.GeneralInfo.Remark }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));

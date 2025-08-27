@@ -118,6 +118,7 @@ public class CreateMasterFullModeService : CreateCustomerBaseService, ICreateCus
             { "site", request.Settings.GeneralInfo.Site },
             { "settingstatus", appSettings.SettingStatus },
             { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
+            { "remark", request.Settings.GeneralInfo.Remark }
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));
