@@ -241,10 +241,10 @@ export const CashServiceAds = (props: CashServiceAdsProps) => {
     }
     if (!isOpen) return null;
 
-    const callAnalyze = () => {
+    const callAnalyze = (step: number) => {
         AnalyzeCashServiceAds({
             name: nickName || '',
-            step: currentStep + 1,
+            step: step,
             act: 'close'
         });
     }
@@ -254,7 +254,7 @@ export const CashServiceAds = (props: CashServiceAdsProps) => {
             <div className={styles.popup}>
                 {onClose && <button
                     onClick={() => {
-                        callAnalyze();
+                        callAnalyze(0);
                         onClose();
                     }}
                     className={styles['close-button']}
@@ -279,7 +279,7 @@ export const CashServiceAds = (props: CashServiceAdsProps) => {
                         onStepChange={setCurrentStep}
                         onClose={() => {
                             setContentFrame(ContentFrame.Main);
-                            callAnalyze();
+                            callAnalyze(currentStep + 1);
                             onClose?.();
                         }}
                         onFinish={cashServiceStatus.isCanUpdateCashServiceStatus ? onConfirm : undefined}
