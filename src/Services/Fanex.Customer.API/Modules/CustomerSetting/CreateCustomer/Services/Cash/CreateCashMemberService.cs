@@ -18,9 +18,9 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
 {
     private readonly ICustomerService _customerService;
 
-    private List<int> newCustIds = new List<int>();
+    private readonly List<int> newCustIds = new List<int>();
 
-    private List<string> newUserNames = new List<string>();
+    private readonly List<string> newUserNames = new List<string>();
 
     public CreateCashMemberService(IMessageService messageService,
         AppSettings appSettings,
@@ -49,7 +49,7 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
             if (i > 0 || retryCount > 0)
             {
                 var suggestNewUserNameResult = await _customerService.GetSuggestUsername(
-                    new Customer.Requests.GetSuggestUsernameRequest()
+                    new Customer.Requests.GetSuggestUsernameRequest
                     { 
                         ActorName = request.Settings.GeneralInfo.UplineUserName, 
                         RoleId = request.Settings.GeneralInfo.UplineRoleId
