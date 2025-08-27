@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
@@ -14,9 +15,9 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
 {
     private readonly ICustomerService _customerService;
 
-    private List<int> newCustIds = new List<int>();
+    private readonly List<int> newCustIds = new List<int>();
 
-    private List<string> newUserNames = new List<string>();
+    private readonly List<string> newUserNames = new List<string>();
 
     public CreateDirectMemberService(IMessageService messageService,
         AppSettings appSettings,
@@ -28,6 +29,8 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
         this._customerService = customerService;
     }
 
+    [SuppressMessage("SonarQube", "S3776:Cognitive Complexity of methods should not be too high", Justification = "Business logic complexity required for customer creation workflow")]
+    [SuppressMessage("SonarQube", "S127:for loop stop conditions should be invariant", Justification = "Retry logic requires loop counter modification")]
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         int retryCount = 0;

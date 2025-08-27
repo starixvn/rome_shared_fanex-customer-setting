@@ -10,6 +10,7 @@ using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria.Cash;
 using Fanex.Data.Repository;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.Cash;
 
@@ -31,6 +32,8 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
         this._customerService = customerService;
     }
 
+    [SuppressMessage("SonarQube", "S3776:Cognitive Complexity of methods should not be too high", Justification = "Business logic complexity required for customer creation workflow")]
+    [SuppressMessage("SonarQube", "S127:for loop stop conditions should be invariant", Justification = "Retry logic requires loop counter modification")]
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         int retryCount = 0;
