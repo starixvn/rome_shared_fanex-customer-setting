@@ -120,6 +120,14 @@ label.checkbox {
   border-radius: 3px;
   padding: 0 5px;
   min-width: 165px;
+  &.text-area {
+    height: 52px;
+    width: 750px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
 }
 
 .max-credit {
@@ -143,38 +151,55 @@ label.checkbox {
   color: var(--color-label);
 }
 
-.remark-textarea {
-  width: 100%;
-  resize: vertical;
-  font-family: inherit;
-  font-size: inherit;
-  padding: 4px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  min-height: 40px;
-  
-  &:focus {
-    border-color: var(--color-primary, #007bff);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-  }
-  
-  &::placeholder {
-    color: var(--color-placeholder, #999);
-    opacity: 1;
-  }
-}
-
-.remark-item {
-  flex: 0 0 50%; /* 3 items out of 6 = 50% (First Name + Last Name + Phone) */
-  max-width: 50%;
-}
-
-.remark-row {
-  grid-column: 1 / -1; /* Take full width across all columns */
-}
-
-.remark-readonly {
+.remark-user-info {
+  width: 750px;
+  padding: 0x 8px;
+  line-height: 1.5;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: 3px;
+  resize: none;
+  text-overflow: ellipsis;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  word-break: break-word;
+  &.cash-user{
+    width: 795px;
+  }
+  color: var(--color-label);
 }
+
+// .remark-textarea {
+//   width: 100%;
+//   resize: vertical;
+//   font-family: inherit;
+//   font-size: inherit;
+//   padding: 4px 8px;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+//   min-height: 40px;
+  
+//   &:focus {
+//     border-color: var(--color-primary, #007bff);
+//     outline: none;
+//     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+//   }
+  
+//   &::placeholder {
+//     color: var(--color-placeholder, #999);
+//     opacity: 1;
+//   }
+// }
+
+// .remark-item {
+//   flex: 0 0 50%; /* 3 items out of 6 = 50% (First Name + Last Name + Phone) */
+//   max-width: 50%;
+// }
+
+// .remark-row {
+//   grid-column: 1 / -1; /* Take full width across all columns */
+// }
+
+// .remark-readonly {
+//   white-space: pre-wrap;
+//   word-wrap: break-word;
+// }

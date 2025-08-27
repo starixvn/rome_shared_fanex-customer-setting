@@ -89,6 +89,7 @@ export const EditCashMemberGeneralInformation = forwardRef<ValidationRefType, Ed
             userInformationFields={[
               {
                 field: 'firstName',
+                row: 0,
                 description: t('FirstNameDescription'),
                 required: true,
                 onFocus: () => setLocationTooltip('firstName'),
@@ -98,6 +99,7 @@ export const EditCashMemberGeneralInformation = forwardRef<ValidationRefType, Ed
               },
               {
                 field: 'lastName',
+                row: 0,
                 description: t('LastNameDescription'),
                 required: true,
                 onFocus: () => setLocationTooltip('lastName'),
@@ -107,6 +109,7 @@ export const EditCashMemberGeneralInformation = forwardRef<ValidationRefType, Ed
               },
               {
                 field: 'mobilePhone',
+                row: 0,
                 label: t('mobile'),
                 description: t('MobilePhoneDescription'),
                 required: true,
@@ -118,10 +121,19 @@ export const EditCashMemberGeneralInformation = forwardRef<ValidationRefType, Ed
               },
               {
                 field: 'phone',
+                row: 0,
                 onFocus: () => setLocationTooltip('phone'),
                 onBlur: () => { setLocationTooltip('') },
                 maxInputLength: 50
               },
+              {
+                field: 'remark',
+                row: 1,
+                component: 'textArea',
+                onFocus: () => setLocationTooltip('remark'),
+                onBlur: () => { setLocationTooltip('') },
+                maxInputLength: 500
+              }
             ]}
             generalInfo={generalInfo}
             handleGeneralInfoChange={async (field, value) => {

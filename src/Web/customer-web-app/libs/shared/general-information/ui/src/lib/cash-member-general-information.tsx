@@ -303,6 +303,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
             userInformationFields={[
               {
                 field: 'firstName',
+                row: 0,
                 description: t('FirstNameDescription'),
                 required: true,
                 onFocus: () => setLocationTooltip('firstName'),
@@ -315,6 +316,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
               },
               {
                 field: 'lastName',
+                row: 0,
                 description: t('LastNameDescription'),
                 required: true,
                 onFocus: () => setLocationTooltip('lastName'),
@@ -327,6 +329,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
               },
               {
                 field: 'mobilePhone',
+                row: 0,
                 label: t('mobile'),
                 description: t('MobilePhoneDescription'),
                 required: true,
@@ -341,6 +344,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
               },
               {
                 field: 'phone',
+                row: 0,
                 onFocus: () => setLocationTooltip('phone'),
                 onBlur: () => { 
                   setLocationTooltip('');
@@ -348,6 +352,17 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
                 },
                 maxInputLength: 50
               },
+              {
+                field: 'remark',
+                row: 1,
+                component: 'textArea',
+                onFocus: () => setLocationTooltip('remark'),
+                onBlur: () => { 
+                  setLocationTooltip('');
+                  onBlurTrimValue('remark', generalInfo.remark);
+                },
+                maxInputLength: 500
+              }
             ]}
             generalInfo={generalInfo}
             handleGeneralInfoChange={async (field, value) => {

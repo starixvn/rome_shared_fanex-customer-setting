@@ -82,12 +82,11 @@ function UserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collapse, 
                 </span>
               ) : (
                 <textarea
-                  className={styles['remark-textarea']}
-                  maxLength={300}
+                  className={styles['remark-user-info']}
+                  maxLength={50}
                   rows={2}
                   value={generalInfo.remark || ''}
                   onChange={(e) => handleGeneralInfoChange('remark', e.target.value)}
-                  placeholder={t('enterRemark')}
                 />
               )}
             </BlockItem>
