@@ -1,22 +1,16 @@
-using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Utils;
-using Fanex.Data;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
+using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
 public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
-
-    private const string ValidateSPName = "Acc_CustomerInsMember_MAg_Validate";
-
-    private const string CreateNewSPName = "Acc_CustomerInsMember_MAg";
-
     public CreateAgentFullModeService(IMessageService messageService, 
         AppSettings appSettings, 
         ICustomerSettingHelper helperService,
@@ -51,60 +45,53 @@ public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCust
 
     private async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)
     {
-        var parameters = new Hashtable
-        {
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-            { "mrecommend", request.Settings.GeneralInfo.UplineCustId },
-            { "credit", request.Settings.GeneralInfo.MaxCredit },
-            { "maxcredit", request.Settings.GeneralInfo.MemberMaxCredit },
-            { "creator", request.Context.CreatorId },
-            { "username", request.Settings.GeneralInfo.UserName },
-            { "ip", request.Context.IP },
-            { "settingstatus", appSettings.SettingStatus },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
-            { "systemid", request.Context.SystemId },
-            { "site", request.Context.Site },
-        };
+        var criteria = new ValidateAgentSettingCommand(
+            LanguageUtils.ToLanguageKey(request.Context.Language),
+            request.Settings.GeneralInfo.UplineCustId,
+            request.Settings.GeneralInfo.MaxCredit,
+            request.Settings.GeneralInfo.MemberMaxCredit,
+            request.Context.CreatorId,
+            request.Settings.GeneralInfo.UserName,
+            request.Context.IP,
+            appSettings.SettingStatus,
+            helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()),
+            request.Context.SystemId,
+            request.Context.Site
+        );
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        await dynamicRepository.ExecuteAsync(criteria);
+        var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
+        return new CreateCustomerResult(0, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<CreateCustomerResult> CreateAgent(CreateRequest request, int newCustId)
     {
-        var parameters = new Hashtable
-        {
-            { "custid", newCustId },
-            { "firstname", request.Settings.GeneralInfo.FirstName ?? string.Empty },
-            { "lastname", request.Settings.GeneralInfo.LastName ?? string.Empty},
-            { "creator", request.Context.CreatorId },
-            { "username", request.Settings.GeneralInfo.UserName },
-            { "userpwd", request.Settings.GeneralInfo.Password },
-            { "phone", request.Settings.GeneralInfo.Phone ?? string.Empty},
-            { "mobilephone", request.Settings.GeneralInfo.MobilePhone ?? string.Empty},
-            { "fax", request.Settings.GeneralInfo.Fax ?? string.Empty},
-            { "transferoption", request.Settings.GeneralInfo.TransferOption},
-            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-            { "subaccid", request.Context.SubAccId },
-            { "credit", request.Settings.GeneralInfo.MaxCredit },
-            { "maxcredit", request.Settings.GeneralInfo.MemberMaxCredit },
-            { "mrecommend", request.Settings.GeneralInfo.UplineCustId },
-            { "systemid", request.Context.SystemId },
-            { "ip", request.Context.IP },
-            { "site", request.Context.Site },
-            { "settingstatus", appSettings.SettingStatus },
-            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()) },
-            { "remark", request.Settings.GeneralInfo.Remark }
-        };
+        var criteria = new CreateAgentCommand(
+            newCustId,
+            request.Settings.GeneralInfo.FirstName ?? string.Empty,
+            request.Settings.GeneralInfo.LastName ?? string.Empty,
+            request.Context.CreatorId,
+            request.Settings.GeneralInfo.UserName,
+            request.Settings.GeneralInfo.Password,
+            request.Settings.GeneralInfo.Phone ?? string.Empty,
+            request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
+            request.Settings.GeneralInfo.Fax ?? string.Empty,
+            request.Settings.GeneralInfo.TransferOption,
+            LanguageUtils.ToLanguageKey(request.Context.Language),
+            request.Context.SubAccId,
+            request.Settings.GeneralInfo.MaxCredit,
+            request.Settings.GeneralInfo.MemberMaxCredit,
+            request.Settings.GeneralInfo.UplineCustId,
+            request.Context.SystemId,
+            request.Context.IP,
+            request.Context.Site,
+            appSettings.SettingStatus,
+            helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode())
+        );
 
-        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));
-        await db.ExecuteNonQueryAsync(parameters);
-        var outputParams = db.GetOutputParams();
-        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
-        return new CreateCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+        await dynamicRepository.ExecuteAsync(criteria);
+        var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
+        return new CreateCustomerResult(newCustId, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 
 }
