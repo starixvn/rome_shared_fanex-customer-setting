@@ -76,6 +76,7 @@ public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCus
             request.Settings.GeneralInfo.Phone ?? string.Empty,
             request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
             request.Settings.GeneralInfo.Fax ?? string.Empty,
+            request.Settings.GeneralInfo.Remark ?? string.Empty,
             request.Settings.GeneralInfo.TransferOption,
             request.Settings.GeneralInfo.DisableAutoMPT,
             helperService.CreateSettingTypesJson(request.Settings.ProductGroups, request.Context.IsFullMode()),
@@ -90,7 +91,7 @@ public class CreateMasterLiteModeService : CreateCustomerBaseService, ICreateCus
             request.Settings.GeneralInfo.Site,
             appSettings.SettingStatus
         );
-        
+
         await dynamicRepository.ExecuteAsync(criteria);
         var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
         return new CreateCustomerResult(newCustId, criteria.ErrCode, msg.MainMessage, msg.SubMessages);

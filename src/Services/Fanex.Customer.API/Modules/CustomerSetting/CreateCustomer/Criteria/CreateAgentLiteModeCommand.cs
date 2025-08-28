@@ -5,7 +5,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 public class CreateAgentLiteModeCommand : INonQueryCommand
 {
     public CreateAgentLiteModeCommand(int custId, string firstName, string lastName, int creator,
-        string username, string userPwd, string phone, string mobilePhone, string fax,
+        string username, string userPwd, string phone, string mobilePhone, string fax, string remark,
         string transferOption, string settingXml, string templateName, string settingTypeAll,
         string language, int subAccId, decimal credit, decimal maxCredit, int mRecommend,
         byte systemId, string ip, int settingStatus)
@@ -19,6 +19,7 @@ public class CreateAgentLiteModeCommand : INonQueryCommand
         Phone = phone;
         Mobilephone = mobilePhone;
         Fax = fax;
+        Remark = remark;
         Transferoption = transferOption;
         Settingxml = settingXml;
         Templatename = templateName;
@@ -42,6 +43,7 @@ public class CreateAgentLiteModeCommand : INonQueryCommand
     public string Phone { get; set; }
     public string Mobilephone { get; set; }
     public string Fax { get; set; }
+    public string Remark { get; set; }
     public string Transferoption { get; set; }
     public string Settingxml { get; set; }
     public string Templatename { get; set; }
