@@ -32,6 +32,7 @@ export const EditInfoCashMemberForm = () => {
         phone: '',
         email: '',
         fax: '',
+        remark: '',
     });
     const [isLoading, setIsLoading] = useState(false);
     const methods = useForm<InfoCashMember>({

@@ -43,7 +43,7 @@ export interface BaseCustomerInfo {
     phone: string;
     email: string;
     fax: string;
-    remark?: string;
+    remark: string;
 }
 
 export interface InfoNormalMember extends BaseCustomerInfo {}
