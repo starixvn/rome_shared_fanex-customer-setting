@@ -276,6 +276,7 @@ export const EditInfoNormalMemberAlpha = () => {
                       <textarea
                         {...field}
                         rows={3}
+                        maxLength={REMARK_MAX_LENGTH}
                         className={styles.textarea}
                         onBlur={(e) => {
                           const trimmedValue = e.target.value.trim();
