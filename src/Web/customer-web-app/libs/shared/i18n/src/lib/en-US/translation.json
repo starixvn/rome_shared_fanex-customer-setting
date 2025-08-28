@@ -16,7 +16,7 @@
   "memberMaxCredit": "Member Max Credit",
   "fax": "Fax",
   "remark": "Remark",
-  "enterRemark": "Enter Remark",
+  "enterRemark": "Enter remark (max 50 characters)",
   "allowAutoPt": "Allow Auto PT",
   "superMaxCreditInvalid": "Super Max Credit must be equal or greater than {{min}}",
   "masterMaxCreditInvalid": "Master Max Credit must be between {{min}} and {{max}}",

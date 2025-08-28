@@ -73,13 +73,11 @@ function UserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collapse, 
           <div className={styles['remark-item']}>
             <BlockItem label={t('remark')}>
               {isReadOnly ? (
-                <span className={styles['readOny-user-info']}>
-                  {generalInfo.remark ? (
-                    <div className={styles['remark-readonly']}>{generalInfo.remark}</div>
-                  ) : (
-                    ''
-                  )}
-                </span>
+                <div className={classNames(styles['readOny-user-info'], styles['text-area'])}>
+                  <span className={styles['remark-readonly']}>
+                    {generalInfo.remark || ''}
+                  </span>
+                </div>
               ) : (
                 <textarea
                   className={styles['remark-user-info']}
@@ -87,6 +85,7 @@ function UserInfo({generalInfo, handleGeneralInfoChange, setCollapse, collapse, 
                   rows={2}
                   value={generalInfo.remark || ''}
                   onChange={(e) => handleGeneralInfoChange('remark', e.target.value)}
+                  placeholder={t('enterRemark')}
                 />
               )}
             </BlockItem>

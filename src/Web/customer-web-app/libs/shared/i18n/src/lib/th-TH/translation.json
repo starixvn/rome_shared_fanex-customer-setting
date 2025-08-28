@@ -15,7 +15,7 @@
   "memberMaxCredit": "เครดิตสูงสุดของสมาชิก",
   "fax": "แฟกซ์",
   "remark": "หมายเหตุ",
-  "enterRemark": "กรอกหมายเหตุ",
+  "enterRemark": "กรอกหมายเหตุ (สูงสุด 50 ตัวอักษร)",
   "allowAutoPt": "อนุญาตให้ใช้ค่าความเสี่ยงอัตโนมัติ",
   "superMaxCreditInvalid": "Master Max Credit must be between {{min}} and {{max}}",
   "masterMaxCreditInvalid": "เครดิตสูงสุดของมาสเตอร์ต้องอยู่ระหว่าง {{min}} และ {{max}}",

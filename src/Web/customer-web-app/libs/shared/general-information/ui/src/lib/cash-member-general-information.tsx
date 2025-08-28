@@ -361,7 +361,7 @@ export const CashMemberGeneralInformation = forwardRef<ValidationRefType, CashMe
                   setLocationTooltip('');
                   onBlurTrimValue('remark', generalInfo.remark);
                 },
-                maxInputLength: 500
+                maxInputLength: 50
               }
             ]}
             generalInfo={generalInfo}
