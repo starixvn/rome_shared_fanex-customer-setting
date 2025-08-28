@@ -204,17 +204,21 @@ export const CashServiceAds = (props: CashServiceAdsProps) => {
 
 
     const steps = useMemo(() => stepConfigs.map((config) => (
-        <div key={config.id} className={styles['step-container']}>
+        <div key={config.id}>
             <div className={styles['step-title']}>{t(config.title)}</div>
             {!config.isSpecial && config.image && (
-                <img
-                    className={classNames(styles['step-image'], config.className)}
-                    src={`${imagePath}${config.image}`}
-                    alt={t(config.title)}
-                />
+                <div className={styles['step-media']}>
+                    <img
+                        className={classNames(styles['step-image'], config.className)}
+                        src={`${imagePath}${config.image}`}
+                        alt={t(config.title)}
+                    />
+                </div>
             )}
             {!config.isSpecial && config.video && (
+                <div className={styles['step-media']}>
                 <video
+                    style={{ zIndex: 1, position: 'relative' }}
                     className={classNames(styles['step-image'], config.className)}
                     src={`${imagePath}${config.video}`}
                     muted
@@ -222,6 +226,7 @@ export const CashServiceAds = (props: CashServiceAdsProps) => {
                     playsInline
                     controls
                 />
+                </div>
             )}
             {!config.isSpecial && (
                 <div className={styles['step-description']}>{t(config.description as string)}</div>

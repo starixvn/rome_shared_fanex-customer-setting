@@ -155,11 +155,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   background: white;
   box-sizing: border-box;
   padding: 15px 0;
   border-radius: 20px;
+  gap: 10px;
 }
 
 .step-content {
@@ -171,17 +172,18 @@
   justify-content: center;
 }
 
-.step-container {
-  z-index: 1;
-}
-
 .step-navigation {
   display: flex;
   justify-content: center;
   gap: 8px;
   width: 100%;
 }
-
+.step-media{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+}
 .step-counter {
   color: #9a9a9a;
   font-weight: 500;
@@ -189,15 +191,15 @@
 }
 
 .step-image {
-  width: 100%;
-  max-height: 160px;
-  height: auto;
-  object-fit: contain;
+  display: block;
+  max-width: 500px;   
+  max-height: 250px;
 }
 
 .support-scale {
   transition: transform 0.6s ease-in-out;
-  width: auto;
+  width: 100%;
+  height: 100%;
   border: 1px solid #9ea6ae;
   border-radius: 8px;
   &:hover {
@@ -525,10 +527,6 @@
     font-size: 14px;
   }
 
-  .step-image {
-    max-height: 180px;
-  }
-
   .step-content {
     height: 320px;
   }
@@ -546,10 +544,6 @@
     max-width: 250px;
     padding: 0 30px;
     letter-spacing: 0.1px;
-  }
-
-  .step-image {
-    max-height: 260px;
   }
 
   .step-title {
@@ -605,5 +599,26 @@
   .free-badge {
     font-size: 16px;
     padding: 4px 12px;
+  }
+}
+@media (max-width: 768px) {
+  .step-media{
+    height: 190px;
+    .step-image{
+      max-height: 170px;
+    }
+  }
+  .step-content {
+    height: auto;
+    > *{
+      width: 85%;
+      .support-scale{
+        height: 250px;
+        max-height: 250px;
+        &:hover{
+          transform: scale(1);
+        }
+      }
+    }
   }
 }
