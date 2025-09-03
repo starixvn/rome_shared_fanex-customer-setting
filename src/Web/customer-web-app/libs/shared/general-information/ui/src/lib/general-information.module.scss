@@ -166,4 +166,10 @@ label.checkbox {
     width: 795px;
   }
   color: var(--color-label);
+  
+  &:focus {
+    outline: none;
+    border: 1px solid var(--border-input);
+    box-shadow: none;
+  }
 }
