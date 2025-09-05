@@ -14,7 +14,7 @@ import { IconInfo } from '@customer-web-app/shared/base/common-icon';
 import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 import NiceModal from '@ebay/nice-modal-react';
 
-import { CustomerSettingInformationPageUrl } from '../customer-setting-information-page-url';
+import { CustomerSettingInformationPageUrl, TabNames } from '../customer-setting-information-page-url';
 import { scrollToBLock } from '../scroll-helper';
 import { GroupSettingBlockProps } from '../types';
 import WinAmount from './win-amount';
@@ -315,7 +315,7 @@ const WinLimit = forwardRef<ValidationRefType, GroupSettingBlockProps>(function 
 
 function Note() {
   const { t } = useTranslation();
-  const { url } = CustomerSettingInformationPageUrl({ tab: 5 });
+  const { url } = CustomerSettingInformationPageUrl({ tabName: TabNames.WinLossLimitTab });
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();

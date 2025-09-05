@@ -96,5 +96,6 @@
   "MaxWinCashMember": "최대 승리 = 허용 범위 내 입력 값",
   "MaxWinCashMemberAllowedRange": "허용 범위 = [0.1; 에이전트 배수 × 에이전트 지급 크레딧]",
   "MaxWinCashMemberExample": " (예: 에이전트 크레딧 = 1,000이고 배수 = 3 → 범위 = [0.1; 3,000])",
-  "MaxLoss": "최대 손실: 허용 범위 내 입력 값."
+  "MaxLoss": "최대 손실: 허용 범위 내 입력 값.",
+  "MaxWinSettingTabTitle": "최대 승리 설정"
 } 

@@ -96,5 +96,6 @@
   "MaxWinCashMember": "Thắng Tối Đa = Nhập giá trị trong phạm vi cho phép",
   "MaxWinCashMemberAllowedRange": "Phạm vi = [0.1; Hệ số đã chọn * Tín dụng được cấp]",
   "MaxWinCashMemberExample": " (ví dụ: nếu tín dụng của đại lý = 1.000 và hệ số = 3 → phạm vi = [0,1; 3.000])",
-  "MaxLoss": "Maximum Loss: Upline's Maximum Loss value"
+  "MaxLoss": "Maximum Loss: Upline's Maximum Loss value",
+  "MaxWinSettingTabTitle": "Thiết lập Thắng Tối Đa"
 }

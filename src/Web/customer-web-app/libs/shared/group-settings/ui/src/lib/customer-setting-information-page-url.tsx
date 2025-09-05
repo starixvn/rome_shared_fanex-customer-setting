@@ -1,10 +1,21 @@
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 
 interface CustomerSettingInformationPageUrlProps {
-  tab?: number;
+  tabName?: string;
 }
 
-export const CustomerSettingInformationPageUrl = ({ tab }: CustomerSettingInformationPageUrlProps) => {
+export const TabNames = {
+  BetSettingTab: 'BetSettingTab', //0
+  MaxPayoutSettingTab: 'MaxPayoutSettingTab', //1
+  PTSettingTab: 'PTSettingTab',//2
+  CommissionHintTab: 'CommissionHintTab',//3
+  ProductCategorySettingTab: 'ProductCategorySettingTab', //4
+  WinLossLimitTab: 'WinLossLimitTab',//5
+  PotentialWinLimitSettingTab: 'PotentialWinLimitSettingTab',//6
+  MaxWinSettingTab: 'MaxWinSettingTab',//7
+} as const;
+
+export const CustomerSettingInformationPageUrl = ({ tabName }: CustomerSettingInformationPageUrlProps) => {
   const { mode, generalInfo } = useGroupSettingContext();
   const siteCurrency = `&site=${generalInfo?.site}&siteLabel=${generalInfo?.siteLabel}&currency=${generalInfo?.currency}`;
 
@@ -26,7 +37,7 @@ export const CustomerSettingInformationPageUrl = ({ tab }: CustomerSettingInform
   const queryParams = `${getCustomerIdAndRoleId()}${siteCurrency}`;
   const url = `${
     appConfig.applicationPath === '/' ? window.location.origin + '/' : appConfig.applicationPath
-  }Customer/SportBookInformation?tabindex=${tab}${queryParams}`;
+  }Customer/SportBookInformation?tabName=${tabName}${queryParams}`;
 
   return { url };
 };
