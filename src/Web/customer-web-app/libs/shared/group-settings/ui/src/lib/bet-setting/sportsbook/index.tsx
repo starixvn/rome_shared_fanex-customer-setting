@@ -296,7 +296,7 @@ const SportsBookBetSetting = forwardRef<ValidationRefType, GroupSettingBlockProp
                     checked={betSettings.every((item) => item.maxPayoutPerMatchMultipleMode === true)}
                   />
               )}
-              {t('maxPayoutPerMatch')}
+              {t('maxWinPerMatch')}
               <SportsBookBetSettingMaxPayoutNote />
             </>
           }

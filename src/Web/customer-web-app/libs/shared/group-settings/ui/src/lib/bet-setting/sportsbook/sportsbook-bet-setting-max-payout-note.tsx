@@ -5,9 +5,9 @@ import { IconInfo } from '@customer-web-app/shared/base/common-icon';
 import { CustomerSettingInformationPageUrl, TabNames } from '../../customer-setting-information-page-url';
 
 export default function SportsBookBetSettingMaxPayoutNote() {
-  const { url } = CustomerSettingInformationPageUrl({ tabName: TabNames.MaxPayoutSettingTab });
+  const { url } = CustomerSettingInformationPageUrl({ tabName: TabNames.MaxWinSettingTab });
   const { t } = useTranslation();
-  const tooltipContent = t('MaxPayoutInfoTitle');
+  const tooltipContent = t('MaxWinSettingTab');
 
   return (
     <a
