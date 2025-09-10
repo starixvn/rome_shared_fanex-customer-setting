@@ -32,6 +32,7 @@ export const EditInfoCashMemberForm = () => {
         phone: '',
         email: '',
         fax: '',
+        remark: '',
     });
     const [isLoading, setIsLoading] = useState(false);
     const methods = useForm<InfoCashMember>({
@@ -237,7 +238,7 @@ export const EditInfoCashMemberForm = () => {
                                 />
                             </div>
                         </div>
-                        {!isAlphaSystem && <div className={styles['form-group-item']}>
+                        <div className={styles['form-group-item']}>
                             <Label>{t('Remark')}</Label>
                             <Controller
                                 name="remark"
@@ -245,14 +246,14 @@ export const EditInfoCashMemberForm = () => {
                                     <textarea
                                         {...field}
                                         maxLength={REMARK_MAX_LENGTH}
-                                        style={{ height: '150px' }}
+                                        rows={3}
                                         onBlur={(e) => {
                                             const trimmedValue = e.target.value.trim();
                                             field.onChange(trimmedValue);
                                         }}
                                     />}
                             />
-                        </div>}
+                        </div>
                         <div className={classNames(styles['form-group-row'], isAlphaSystem && styles['justify-start'])}>
                             <ButtonFull text={t('Update')} onClick={methods.handleSubmit(onSubmit)} disabled={isLoading} />
                             <ButtonOutline text={t('Reset')} onClick={() => {

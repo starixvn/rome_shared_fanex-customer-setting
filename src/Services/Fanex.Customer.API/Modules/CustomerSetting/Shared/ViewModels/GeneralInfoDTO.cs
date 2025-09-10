@@ -38,6 +38,8 @@ public class GeneralInformationDTO
 
     public string Fax { get; set; }
 
+    public string Remark { get; set; }
+
     public bool DisableAutoMPT { get; set; }
 
     public string Group { get; set; }

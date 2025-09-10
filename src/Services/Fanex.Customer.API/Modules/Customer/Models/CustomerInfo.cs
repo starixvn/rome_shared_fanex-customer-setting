@@ -18,6 +18,8 @@ public class CustomerInfo
 
     public string Fax { get; init; }
 
+    public string Remark { get; init; }
+
     public int CurrencyId { get; init; }
 
     public string CurrencyName { get; init; }

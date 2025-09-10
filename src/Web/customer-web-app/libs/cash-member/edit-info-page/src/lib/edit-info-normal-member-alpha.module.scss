@@ -42,6 +42,20 @@
         white-space: nowrap;
         color: var(--text-color);
     }
+
+    .textarea {
+        min-width: 540px;
+        resize: none;
+        border-radius: 3px;
+        border: 1px solid var(--border-input);
+        padding: 5px 8px !important;
+        overflow: auto;
+        background: var(--bg-input);
+        color: var(--text-color);
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
 
