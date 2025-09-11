@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,407 +59,407 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
             <xsd:complexType>
-                <xsd:choice maxOccurs="unbounded">
-                    <xsd:element name="metadata">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" use="required" type="xsd:string"/>
-                            <xsd:attribute name="type" type="xsd:string"/>
-                            <xsd:attribute name="mimetype" type="xsd:string"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="assembly">
-                        <xsd:complexType>
-                            <xsd:attribute name="alias" type="xsd:string"/>
-                            <xsd:attribute name="name" type="xsd:string"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="data">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="resheader">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                </xsd:choice>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <data name="AgentMinPTCannotBeGreaterThanAgentMaxPT" xml:space="preserve">
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AgentMinPTCannotBeGreaterThanAgentMaxPT" xml:space="preserve">
         <value>Agent Min PT must be less than or equal to Agent Max PT.</value>
     </data>
-    <data name="AllProducts" xml:space="preserve">
+  <data name="AllProducts" xml:space="preserve">
         <value>All Products</value>
     </data>
-    <data name="Comm1" xml:space="preserve">
+  <data name="Comm1" xml:space="preserve">
         <value>Commission 1 (Comm 1)</value>
     </data>
-    <data name="Comm2" xml:space="preserve">
+  <data name="Comm2" xml:space="preserve">
         <value>Commission 2 (Comm 2)</value>
     </data>
-    <data name="Comm3" xml:space="preserve">
+  <data name="Comm3" xml:space="preserve">
         <value>Commission 3 (Comm 3): Applies to other bettypes.</value>
     </data>
-    <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
+  <data name="ConfiguredNicknameSuccessfully" xml:space="preserve">
         <value>Your nickname was configured successfully</value>
     </data>
-    <data name="CustomerSettings" xml:space="preserve">
+  <data name="CustomerSettings" xml:space="preserve">
         <value>Customer Settings</value>
     </data>
-    <data name="GeneralInfo" xml:space="preserve">
+  <data name="GeneralInfo" xml:space="preserve">
         <value>General Information</value>
     </data>
-    <data name="GroupType150" xml:space="preserve">
+  <data name="GroupType150" xml:space="preserve">
         <value>Commission</value>
     </data>
-    <data name="GroupType151" xml:space="preserve">
+  <data name="GroupType151" xml:space="preserve">
         <value>Bet Setting</value>
     </data>
-    <data name="GroupType152" xml:space="preserve">
+  <data name="GroupType152" xml:space="preserve">
         <value>Parlay Max Payout per Bet</value>
     </data>
-    <data name="GroupType153" xml:space="preserve">
+  <data name="GroupType153" xml:space="preserve">
         <value>Position Taking</value>
     </data>
-    <data name="GroupType154" xml:space="preserve">
+  <data name="GroupType154" xml:space="preserve">
         <value>Bet Setting</value>
     </data>
-    <data name="GroupType156" xml:space="preserve">
+  <data name="GroupType156" xml:space="preserve">
         <value>Commission</value>
     </data>
-    <data name="GroupType158" xml:space="preserve">
+  <data name="GroupType158" xml:space="preserve">
         <value>Bet Limit</value>
     </data>
-    <data name="GroupType159" xml:space="preserve">
+  <data name="GroupType159" xml:space="preserve">
         <value>Bet Setting</value>
     </data>
-    <data name="GroupType160" xml:space="preserve">
+  <data name="GroupType160" xml:space="preserve">
         <value>Product Status</value>
     </data>
-    <data name="InvalidParameterValue" xml:space="preserve">
+  <data name="InvalidParameterValue" xml:space="preserve">
         <value>Invalid parameter value.</value>
     </data>
-    <data name="LimitAgentNewDownlineError" xml:space="preserve">
+  <data name="LimitAgentNewDownlineError" xml:space="preserve">
         <value>Sorry, you can only create 5 members per day, please try again tomorrow.</value>
     </data>
-    <data name="LimitMasterNewDownlineError" xml:space="preserve">
+  <data name="LimitMasterNewDownlineError" xml:space="preserve">
         <value>Sorry, you can only create 3 agents per day, please try again tomorrow.</value>
     </data>
-    <data name="LimitSuperNewDownlineError" xml:space="preserve">
+  <data name="LimitSuperNewDownlineError" xml:space="preserve">
         <value>Sorry, you can only create 3 masters per day, please try again tomorrow.</value>
     </data>
-    <data name="Live" xml:space="preserve">
+  <data name="Live" xml:space="preserve">
         <value>Live</value>
     </data>
-    <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
+  <data name="MasterMinPTCannotBeGreaterThanMasterMaxPT" xml:space="preserve">
         <value>Master Min PT must be less than or equal to Master Max PT.</value>
     </data>
-    <data name="Max" xml:space="preserve">
+  <data name="Max" xml:space="preserve">
         <value>Max</value>
     </data>
-    <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
+  <data name="MaxPayoutSettingInfoSportsName" xml:space="preserve">
         <value>All Sports except &lt;br&gt; {0} and {1}</value>
     </data>
-    <data name="Min" xml:space="preserve">
+  <data name="Min" xml:space="preserve">
         <value>Min</value>
     </data>
-    <data name="Msg_1" xml:space="preserve">
+  <data name="Msg_1" xml:space="preserve">
         <value>Invalid commission rate.</value>
     </data>
-    <data name="Msg_12" xml:space="preserve">
+  <data name="Msg_12" xml:space="preserve">
         <value>Unable to assign this commission group to the member.</value>
     </data>
-    <data name="Msg_10002" xml:space="preserve">
+  <data name="Msg_10002" xml:space="preserve">
         <value>Wrong Max Per Ball</value>
     </data>
-    <data name="Msg_10003" xml:space="preserve">
+  <data name="Msg_10003" xml:space="preserve">
         <value>Wrong Min bet/ Max bet/ Max per match</value>
     </data>
-    <data name="Msg_10006" xml:space="preserve">
+  <data name="Msg_10006" xml:space="preserve">
         <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
     </data>
-    <data name="Msg_10007" xml:space="preserve">
+  <data name="Msg_10007" xml:space="preserve">
         <value>Max bet must be less than or equal to Upline's max bet.</value>
     </data>
-    <data name="Msg_10008" xml:space="preserve">
+  <data name="Msg_10008" xml:space="preserve">
         <value>Max Per Match must be less than or equal to Upline'sMax Per Match.</value>
     </data>
-    <data name="Msg_10009" xml:space="preserve">
+  <data name="Msg_10009" xml:space="preserve">
         <value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
     </data>
-    <data name="Msg_10010" xml:space="preserve">
+  <data name="Msg_10010" xml:space="preserve">
         <value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
     </data>
-    <data name="Msg_10011" xml:space="preserve">
+  <data name="Msg_10011" xml:space="preserve">
         <value>Max Per Ball must be less than or equal to Upline's Max Per Ball</value>
     </data>
-    <data name="Msg_10016" xml:space="preserve">
+  <data name="Msg_10016" xml:space="preserve">
         <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
     </data>
-    <data name="Msg_10017" xml:space="preserve">
+  <data name="Msg_10017" xml:space="preserve">
         <value>Max bet must be less than or equal to Upline's max bet.</value>
     </data>
-    <data name="Msg_10018" xml:space="preserve">
+  <data name="Msg_10018" xml:space="preserve">
         <value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
-    </data>
-    <data name="Msg_10019" xml:space="preserve">
+  </data>
+  <data name="Msg_10019" xml:space="preserve">
         <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
     </data>
-    <data name="Msg_10020" xml:space="preserve">
+  <data name="Msg_10020" xml:space="preserve">
         <value>Max bet must be less than or equal to Upline's max bet.</value>
     </data>
-    <data name="Msg_10021" xml:space="preserve">
+  <data name="Msg_10021" xml:space="preserve">
         <value>Max Per Match must be less than or equal to Upline's Max Per Match.</value>
     </data>
-    <data name="Msg_10022" xml:space="preserve">
+  <data name="Msg_10022" xml:space="preserve">
         <value>You are not allowed to change Daily auto reset limit.</value>
     </data>
-    <data name="Msg_10024" xml:space="preserve">
+  <data name="Msg_10024" xml:space="preserve">
         <value>Maximum Win should be less than or equal to Maximum Win of the direct upline.</value>
     </data>
-    <data name="Msg_10033" xml:space="preserve">
+  <data name="Msg_10033" xml:space="preserve">
         <value>Maximum Loss should be less than or equal to Maximum Loss of the direct upline.</value>
     </data>
-    <data name="Msg_10034" xml:space="preserve">
+  <data name="Msg_10034" xml:space="preserve">
         <value>This user's upline does not have Stake Level.</value>
     </data>
-    <data name="Msg_10035" xml:space="preserve">
+  <data name="Msg_10035" xml:space="preserve">
         <value>Each bet type must have at least one Bet Limit value to be selected</value>
     </data>
-    <data name="Msg_10036" xml:space="preserve">
+  <data name="Msg_10036" xml:space="preserve">
         <value>You can only assign maximum {0} bet limits to member level for {1}.</value>
     </data>
-    <data name="Msg_10059" xml:space="preserve">
-        <value>Wrong Max Payout Per Match.</value>
+  <data name="Msg_10059" xml:space="preserve">
+        <value>Wrong Max Win Per Match.</value>
     </data>
-    <data name="Msg_10060" xml:space="preserve">
-        <value>Max Per Match must be less than or equal to Max Payout Per Match</value>
-    </data>
-    <data name="Msg_10061" xml:space="preserve">
+  <data name="Msg_10060" xml:space="preserve">
+        <value>Max Per Match must be less than or equal to Max Win Per Match </value>
+  </data>
+  <data name="Msg_10061" xml:space="preserve">
         <value>Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match</value>
     </data>
-    <data name="Msg_10062" xml:space="preserve">
+  <data name="Msg_10062" xml:space="preserve">
         <value>Min Bet must be greater than or equal to Upline's Min Bet</value>
     </data>
-    <data name="Msg_10063" xml:space="preserve">
+  <data name="Msg_10063" xml:space="preserve">
         <value>Max Bet must be less than or equal to Upline's Max Bet</value>
     </data>
-    <data name="Msg_10064" xml:space="preserve">
+  <data name="Msg_10064" xml:space="preserve">
         <value>Max Per Match must be less than or equal to Upline's Max Per Match</value>
     </data>
-    <data name="Msg_10065" xml:space="preserve">
-        <value>Max Payout Per Match must be less than or equal to Upline's Max Payout Per Match</value>
+  <data name="Msg_10065" xml:space="preserve">
+        <value>Max Win Per Match must be less than or equal to Upline's Max Win Per Match</value>
     </data>
-    <data name="Msg_10066" xml:space="preserve">
+  <data name="Msg_10066" xml:space="preserve">
         <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>
     </data>
-    <data name="Msg_10067" xml:space="preserve">
+  <data name="Msg_10067" xml:space="preserve">
         <value>Min Bet must be less than or equal to Max Bet and Max Bet must be less than or equal to Max Per Match</value>
     </data>
-    <data name="Msg_10070" xml:space="preserve">
+  <data name="Msg_10070" xml:space="preserve">
         <value>The Parlay Max Payout value must be a positive amount.</value>
     </data>
-    <data name="Msg_10071" xml:space="preserve">
+  <data name="Msg_10071" xml:space="preserve">
         <value>Parlay Max Payout per Bet: The setting of Single Match Parlay is higher than the upline's.</value>
     </data>
-    <data name="Msg_10072" xml:space="preserve">
+  <data name="Msg_10072" xml:space="preserve">
         <value>Parlay Max Payout per Bet: The setting of Combo 2 is higher than the upline's.</value>
     </data>
-    <data name="Msg_10073" xml:space="preserve">
+  <data name="Msg_10073" xml:space="preserve">
         <value>Parlay Max Payout per Bet: The setting of Combo 3 - 5 is higher than the upline's.</value>
     </data>
-    <data name="Msg_10074" xml:space="preserve">
+  <data name="Msg_10074" xml:space="preserve">
         <value>Parlay Max Payout per Bet: The setting of Combo Over 6 is higher than the upline's.</value>
     </data>
-    <data name="Msg_10078" xml:space="preserve">
+  <data name="Msg_10078" xml:space="preserve">
         <value>RNG Casino:  You have reached the maximum of monthly allowance (1 time) to update Position Taking. Please try again after {0} 12:00 PM GMT+8.</value>
     </data>
-    <data name="Msg_20001" xml:space="preserve">
+  <data name="Msg_20001" xml:space="preserve">
         <value>Wrong position taking.</value>
     </data>
-    <data name="Msg_20002" xml:space="preserve">
+  <data name="Msg_20002" xml:space="preserve">
         <value>Wrong position taking (min/max set by company).</value>
     </data>
-    <data name="Msg_20005" xml:space="preserve">
+  <data name="Msg_20005" xml:space="preserve">
         <value>Wrong position taking (max set by company).</value>
     </data>
-    <data name="Msg_20008" xml:space="preserve">
+  <data name="Msg_20008" xml:space="preserve">
         <value>Wrong agent position taking.</value>
     </data>
-    <data name="Msg_20019" xml:space="preserve">
+  <data name="Msg_20019" xml:space="preserve">
         <value>Existing masters exceed new Super Max PT.</value>
     </data>
-    <data name="Msg_20020" xml:space="preserve">
+  <data name="Msg_20020" xml:space="preserve">
         <value>Existing members exceed new Super Max PT.</value>
     </data>
-    <data name="Msg_20021" xml:space="preserve">
+  <data name="Msg_20021" xml:space="preserve">
         <value>Existing masters exceed new Master Max PT.</value>
     </data>
-    <data name="Msg_20022" xml:space="preserve">
+  <data name="Msg_20022" xml:space="preserve">
         <value>Existing members exceed new Master Max PT.</value>
     </data>
-    <data name="Msg_20023" xml:space="preserve">
+  <data name="Msg_20023" xml:space="preserve">
         <value>Existing agents exceed new Agent Max PT.</value>
     </data>
-    <data name="Msg_20024" xml:space="preserve">
+  <data name="Msg_20024" xml:space="preserve">
         <value>Existing members exceed new Agent Max PT.</value>
     </data>
-    <data name="Msg_20025" xml:space="preserve">
+  <data name="Msg_20025" xml:space="preserve">
         <value>The position taking violates Upline Min/Max PT.</value>
     </data>
-    <data name="Msg_20026" xml:space="preserve">
+  <data name="Msg_20026" xml:space="preserve">
         <value>Existing agents exceed new Master Max PT.</value>
     </data>
-    <data name="Msg_20027" xml:space="preserve">
+  <data name="Msg_20027" xml:space="preserve">
         <value>The position taking violates Master Max PT set by company</value>
     </data>
-    <data name="Msg_20028" xml:space="preserve">
+  <data name="Msg_20028" xml:space="preserve">
         <value>The position taking violates Super Max PT.</value>
     </data>
-    <data name="Msg_20029" xml:space="preserve">
+  <data name="Msg_20029" xml:space="preserve">
         <value>The position taking violates Super Min PT.</value>
     </data>
-    <data name="Msg_20030" xml:space="preserve">
+  <data name="Msg_20030" xml:space="preserve">
         <value>The Agent Min PT violates Master Max PT.</value>
     </data>
-    <data name="Msg_20031" xml:space="preserve">
+  <data name="Msg_20031" xml:space="preserve">
         <value>The position taking violates Master Max PT.</value>
     </data>
-    <data name="Msg_20032" xml:space="preserve">
+  <data name="Msg_20032" xml:space="preserve">
         <value>The position taking violates Master Min PT.</value>
     </data>
-    <data name="Msg_20033" xml:space="preserve">
+  <data name="Msg_20033" xml:space="preserve">
         <value>The position taking violates Agent Min/Max PT.</value>
     </data>
-    <data name="Msg_20034" xml:space="preserve">
+  <data name="Msg_20034" xml:space="preserve">
         <value>The position taking violates Agent Max PT.</value>
     </data>
-    <data name="Msg_20044" xml:space="preserve">
+  <data name="Msg_20044" xml:space="preserve">
         <value>You are not allowed to have Auto PT, please contact your upline.</value>
     </data>
-    <data name="Msg_20045" xml:space="preserve">
+  <data name="Msg_20045" xml:space="preserve">
         <value>This Template Name already exists.</value>
     </data>
-    <data name="Msg_20046" xml:space="preserve">
+  <data name="Msg_20046" xml:space="preserve">
         <value>Invalid Position Taking(max set by upline).</value>
     </data>
-    <data name="Msg_20047" xml:space="preserve">
+  <data name="Msg_20047" xml:space="preserve">
         <value>This Template does not exist.</value>
     </data>
-    <data name="Msg_20048" xml:space="preserve">
+  <data name="Msg_20048" xml:space="preserve">
         <value>Invalid Position Taking(min/max set by upline).</value>
     </data>
-    <data name="Msg_60033" xml:space="preserve">
+  <data name="Msg_60033" xml:space="preserve">
         <value>Unable to edit downline's Product Status because the account disabled for this product.</value>
     </data>
-    <data name="Msg_60035" xml:space="preserve">
+  <data name="Msg_60035" xml:space="preserve">
         <value>You are not allowed to disable downline's product.</value>
     </data>
-    <data name="Msg_60037" xml:space="preserve">
+  <data name="Msg_60037" xml:space="preserve">
         <value>You cannot Enable {0} when {1} is Disabled.</value>
     </data>
-    <data name="Msg_90012" xml:space="preserve">
+  <data name="Msg_90012" xml:space="preserve">
         <value>You are not allowed to perform this action.</value>
     </data>
-    <data name="MyanmarOddsComm" xml:space="preserve">
+  <data name="MyanmarOddsComm" xml:space="preserve">
         <value>Myanmar Odds: Applies to {0} bettypes with Myanmar Odds Type.</value>
     </data>
-    <data name="NicknameRule" xml:space="preserve">
+  <data name="NicknameRule" xml:space="preserve">
         <value>Nickname must be unique, only alphabet or numeric and should have at least a minimum of 5 characters and maximum of 20 characters.</value>
     </data>
-    <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
+  <data name="SuperMinPTCannotBeGreaterThanSuperMaxPT" xml:space="preserve">
         <value>Super Min PT must be less than or equal to Super Max PT.</value>
     </data>
-    <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
+  <data name="ThisSourceAccountWasDisabled" xml:space="preserve">
         <value>This Source Account was disabled.</value>
     </data>
-    <data name="UM" xml:space="preserve">
+  <data name="UM" xml:space="preserve">
         <value>Under maintenance ({0} - {1}). [5003]</value>
     </data>
-    <data name="UMMainMsg" xml:space="preserve">
+  <data name="UMMainMsg" xml:space="preserve">
         <value>Unable to Update because of the maintenance of the settings below (GMT+8):</value>
     </data>
-    <data name="UMSubMsg" xml:space="preserve">
+  <data name="UMSubMsg" xml:space="preserve">
         <value>{0}: {1} ({2} to {3})</value>
     </data>
-    <data name="UpdateSuccess_150" xml:space="preserve">
+  <data name="UpdateSuccess_150" xml:space="preserve">
         <value>Updated commission setting successfully.</value>
     </data>
-    <data name="UpdateSuccess_151" xml:space="preserve">
+  <data name="UpdateSuccess_151" xml:space="preserve">
         <value>Bet Setting is updated successfully.</value>
     </data>
-    <data name="UpdateSuccess_152" xml:space="preserve">
+  <data name="UpdateSuccess_152" xml:space="preserve">
         <value>Parlay Max Payout Per Bet is updated successfully.</value>
     </data>
-    <data name="UpdateSuccess_153" xml:space="preserve">
+  <data name="UpdateSuccess_153" xml:space="preserve">
         <value>Position taking is updated successfully.</value>
     </data>
-    <data name="UpdateSuccess_154" xml:space="preserve">
+  <data name="UpdateSuccess_154" xml:space="preserve">
         <value>Bet Setting is updated successfully.</value>
     </data>
-    <data name="UpdateSuccess_155" xml:space="preserve">
+  <data name="UpdateSuccess_155" xml:space="preserve">
         <value>Updated Win Loss Limit successfully.</value>
     </data>
-    <data name="UpdateSuccess_156" xml:space="preserve">
+  <data name="UpdateSuccess_156" xml:space="preserve">
         <value>Updated commission setting successfully.</value>
     </data>
-    <data name="UpdateSuccess_158" xml:space="preserve">
+  <data name="UpdateSuccess_158" xml:space="preserve">
         <value>Updated Bet Limit successfully.</value>
     </data>
-    <data name="UpdateSuccess_160" xml:space="preserve">
+  <data name="UpdateSuccess_160" xml:space="preserve">
         <value>Product Status is updated successfully.</value>
     </data>
-    <data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
+  <data name="UpdateSuccess_GeneralInfo" xml:space="preserve">
         <value>General Info is updated successfully.</value>
     </data>
-    <data name="lbl1X2" xml:space="preserve">
+  <data name="lbl1X2" xml:space="preserve">
         <value>1 X 2</value>
     </data>
-    <data name="GroupType161" xml:space="preserve">
+  <data name="GroupType161" xml:space="preserve">
         <value>Win Limit</value>
     </data>
-    <data name="UpdateSuccess_161" xml:space="preserve">
+  <data name="UpdateSuccess_161" xml:space="preserve">
         <value>Win Limit is updated successfully.</value>
     </data>
-    <data name="GroupType162" xml:space="preserve">
+  <data name="GroupType162" xml:space="preserve">
         <value>Potential Win Limit</value>
     </data>
-    <data name="UpdateSuccess_162" xml:space="preserve">
+  <data name="UpdateSuccess_162" xml:space="preserve">
         <value>Potential Win Limit is updated successfully.</value>
     </data>
-    <data name="JackpotStatusTooltip" xml:space="preserve">
+  <data name="JackpotStatusTooltip" xml:space="preserve">
         <value>This jackpot status applies only to {0} jackpot. When the Jackpot is disabled, members can still play all games as usual, but jackpot participation will not be available.</value>
         <comment>Tooltip for jackpot status, {0} = product names (comma separated)</comment>
     </data>

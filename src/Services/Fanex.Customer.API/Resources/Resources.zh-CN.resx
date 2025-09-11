@@ -262,10 +262,10 @@
     <value>对于{1} 您只能将最大{0} 投注限额分配给会员。</value>
   </data>
   <data name="Msg_10059" xml:space="preserve">
-    <value>单场最高派彩错误</value>
+    <value>单场最高赢额错误</value>
   </data>
   <data name="Msg_10060" xml:space="preserve">
-    <value>单场限额必须少于或等于单场最高派彩限额</value>
+    <value>单场限额必须小于或等于单场最高赢额</value>
   </data>
   <data name="Msg_10061" xml:space="preserve">
     <value>单粒球最高投注必须大于或等于最高投注且少于或等于单场限额</value>
@@ -280,7 +280,7 @@
     <value>单场限额必须少于或等于上线的单场限额</value>
   </data>
   <data name="Msg_10065" xml:space="preserve">
-    <value>单场最高派彩必须少于或等于上线的单场最高派彩</value>
+    <value>单场最高赢额必须小于或等于上线的单场最高赢额</value>
   </data>
   <data name="Msg_10066" xml:space="preserve">
     <value>单粒球最高投注必须少于或等于上线的单粒球最高投注</value>

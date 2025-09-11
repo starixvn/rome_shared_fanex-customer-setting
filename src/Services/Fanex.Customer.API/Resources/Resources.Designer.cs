@@ -520,7 +520,7 @@ namespace Fanex.Customer.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wrong Max Payout Per Match..
+        ///   Looks up a localized string similar to Wrong Max Win Per Match..
         /// </summary>
         public static string Msg_10059 {
             get {
@@ -529,7 +529,7 @@ namespace Fanex.Customer.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max Per Match must be less than or equal to Max Payout Per Match.
+        ///   Looks up a localized string similar to Max Per Match must be less than or equal to Max Win Per Match .
         /// </summary>
         public static string Msg_10060 {
             get {
@@ -574,7 +574,7 @@ namespace Fanex.Customer.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max Payout Per Match must be less than or equal to Upline&apos;s Max Payout Per Match.
+        ///   Looks up a localized string similar to Max Win Per Match must be less than or equal to Upline&apos;s Max Win Per Match.
         /// </summary>
         public static string Msg_10065 {
             get {
