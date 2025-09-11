@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-    <Version>1.0.3.8</Version>
+    <Version>1.0.3.7</Version>
     <Authors>@Rome</Authors>
     <Company>Nexcel</Company>
     <Product>Fanex</Product>
-    <PackageReleaseNotes>Add Remark</PackageReleaseNotes>
+    <PackageReleaseNotes>Revert - Remove GetMaxPayoutSettingInformation</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

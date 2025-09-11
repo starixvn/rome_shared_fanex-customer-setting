@@ -15,8 +15,7 @@ public class UpdateCustomerInfoCommand : NonQueryCommand
         int userId,
         int subAccId,
         string ip,
-        string language,
-        string remark)
+        string language)
     {
         CustId = custId;
         FirstName = firstName;
@@ -29,7 +28,6 @@ public class UpdateCustomerInfoCommand : NonQueryCommand
         SubAccId = subAccId;
         IP = ip;
         Language = language;
-        Remark = remark;
     }
 
     public int CustId { get; }
@@ -53,8 +51,6 @@ public class UpdateCustomerInfoCommand : NonQueryCommand
     public string IP { get; }
 
     public string Language { get; }
-
-    public string Remark { get; }
 
     public int ErrorCode { get; set; }
 

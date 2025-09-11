@@ -13,8 +13,7 @@ public record UpdateCustomerInfoRequest(
     int UserId,
     int SubAccId,
     string IP,
-    string Language,
-    string Remark)
+    string Language)
 {
     public bool IsValid() => CustId > 0 && UserId > 0 && SubAccId >= 0 && ValidateUpdateCustomerInfoRequest();
 

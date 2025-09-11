@@ -4,8 +4,6 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Data.Repository;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria.Cash;
-using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
-using Fanex.Customer.API.Shared.Utils;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -44,27 +42,5 @@ public class CreateCustomerBaseService : ICreateCustomerBaseService
         await dynamicRepository.ExecuteAsync(command);
 
         return command.AccumCreditReturn;
-    }
-    
-    protected async Task RollbackCustomer(int newCustId)
-    {
-        var criteria = new RollbackRegisterCustomer(newCustId);
-        await dynamicRepository.ExecuteAsync(criteria);
-    }
-
-    protected async Task<CreateCustomerResult> RegisterCustomer(CreateRequest request, int roleId)
-    {
-        var criteria = new RegisterCustomerBeforeAddNew(
-            request.Settings.GeneralInfo.UserName,
-            request.Context.CustDBGroupID,
-            request.Settings.GeneralInfo.Site,
-            (byte)roleId,
-            request.Settings.GeneralInfo.UplineCustId,
-            LanguageUtils.ToLanguageKey(request.Context.Language)
-        );
-
-        await dynamicRepository.ExecuteAsync(criteria);
-        var msg = messageService.TranslateMessage(0, criteria.ErrMsg, request.Context.Language);
-        return new CreateCustomerResult(criteria.CustId, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 }

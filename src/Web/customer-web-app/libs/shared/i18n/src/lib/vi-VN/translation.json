@@ -14,8 +14,6 @@
   "agentMaxCredit": "Hạn mức tín dụng tối đa của Agent",
   "memberMaxCredit": "Hạn mức tín dụng tối đa của Member",
   "fax": "Fax",
-  "remark": "Ghi chú",
-  "enterRemark": "Nhập ghi chú (tối đa 50 ký tự)",
   "allowAutoPt": "Cho Auto PT",
   "superMaxCreditInvalid": "Master Max Credit must be between {{min}} and {{max}}",
   "masterMaxCreditInvalid": "Hạn mức tín dụng lớn nhất của Master phải từ {{min}} đến {{max}}",

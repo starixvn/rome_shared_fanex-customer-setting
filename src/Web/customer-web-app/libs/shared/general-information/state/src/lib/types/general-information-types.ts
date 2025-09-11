@@ -11,7 +11,6 @@ export interface GeneralInfo {
   phone?: string;
   mobilePhone?: string;
   fax?: string;
-  remark?: string;
   maxCredit: number;
   maxCreditMin?: number;
   maxCreditMax?: number;
@@ -38,4 +37,4 @@ export interface GeneralInfo {
     accountNumber?: string;
   }
 }
-export type UserInformation = Pick<GeneralInfo, 'firstName' | 'lastName' | 'phone' | 'mobilePhone' | 'fax' | 'remark'>;
+export type UserInformation = Pick<GeneralInfo, 'firstName' | 'lastName' | 'phone' | 'mobilePhone' | 'fax'>;

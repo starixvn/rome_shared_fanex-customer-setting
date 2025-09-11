@@ -26,7 +26,6 @@ interface FieldConfig {
   readonly onFocus: () => void;
   readonly onBlur: () => void;
   readonly isError?: boolean;
-  readonly row?: number;
 }
 
 
@@ -34,18 +33,12 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
   const { t } = useTranslation();
   const tooltipContent = collapse ? t('ClickToExpand') : t('ClickToCollapse');
 
-  const renderReadOnlyField = (config: FieldConfig) => {
-    const { field, component } = config;
-    if (component === 'textArea') {
-      return <span className={classNames(styles['readOny-user-info'], styles['text-area'])}>{generalInfo[field] ?? ''}</span>;
-    }
-    else {
+  const renderField = (config: FieldConfig) => {
+    const { field, component, isError, onFocus, onBlur, maxInputLength, description, label } = config;
+
+    if (isReadOnly) {
       return <span className={styles['readOny-user-info']}>{generalInfo[field] ?? ''}</span>;
     }
-  }
-
-  const renderField = (config: FieldConfig) => {
-    const { field, component, isError, onFocus, onBlur, maxInputLength, description } = config;
 
     switch (component) {
       case 'phoneWithCountryCode':
@@ -78,34 +71,20 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
             {description && <span className={styles['description']}>{description}</span>}
           </div>
         );
-      case 'textArea':
-        return (
-          <textarea
-            rows={2}
-            className={classNames(styles[`${field}-user-info`], styles['cash-user'], { error: isError })}
-            id={field}
-            maxLength={maxInputLength}
-            value={generalInfo[field] || ''}
-            onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
-            placeholder={description}
-            onFocus={onFocus}
-            onBlur={onBlur}
-          />
-        );
       default:
         return (
           <>
-            <input
-              onFocus={onFocus}
-              onBlur={onBlur}
-              className={classNames({ error: isError })}
-              id={field}
-              type="text"
-              maxLength={maxInputLength}
-              value={generalInfo[field] ?? ''}
-              onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
-            />
-            {description && <span className={styles['description']}>{description}</span>}
+           <input
+            onFocus={onFocus}
+            onBlur={onBlur}
+            className={classNames({ error: isError })}
+            id={field}
+            type="text"
+            maxLength={maxInputLength}
+            value={generalInfo[field] ?? ''}
+            onChange={(e) => handleGeneralInfoChange(field, e.target.value)}
+          />
+          {description && <span className={styles['description']}>{description}</span>}
           </>
         );
     }
@@ -122,31 +101,15 @@ function CashUserInfo({ generalInfo, handleGeneralInfoChange, setCollapse, colla
         {t('userInformation')}
       </div>
       <WrapperTooltip className="global-tooltip" id="userInfo" />
-
-
-      <div className={classNames(styles['row'])}>
-        {!collapse && userInformationFields.filter((config) => config.row === 0).map((config) => (
+      <div className={classNames(styles['row'], { toggle: collapse })}>
+        {!collapse && userInformationFields.map((config) => (
           <BlockItem key={config.field} label={
             <div>
               {config.label ?? t(config.field)}
               {config.required && <span className="require">*</span>}
             </div>
           }>
-            {isReadOnly ? renderReadOnlyField(config) : renderField(config)}
-          </BlockItem>
-        ))}
-      </div>
-
-
-      <div className={classNames(styles['row'])}>
-        {!collapse && userInformationFields.filter((config) => config.row === 1).map((config) => (
-          <BlockItem key={config.field} label={
-            <div>
-              {config.label ?? t(config.field)}
-              {config.required && <span className="require">*</span>}
-            </div>
-          }>
-            {isReadOnly ? renderReadOnlyField(config) : renderField(config)}
+            {renderField(config)}
           </BlockItem>
         ))}
       </div>

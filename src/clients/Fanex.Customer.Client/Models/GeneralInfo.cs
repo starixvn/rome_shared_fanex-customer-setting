@@ -51,7 +51,5 @@ namespace Fanex.Customer.Client.Models
         public bool IsInternal { get; set; }
 
         public Bank Bank { get; set; }
-
-        public string Remark { get; set; }
     }
 }

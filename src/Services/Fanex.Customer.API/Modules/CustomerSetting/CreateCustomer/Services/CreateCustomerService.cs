@@ -62,8 +62,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.LastName) && request.Settings.GeneralInfo.LastName.ContainsHTML())
         || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Phone) && request.Settings.GeneralInfo.Phone.ContainsHTML())
         || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.MobilePhone) && request.Settings.GeneralInfo.MobilePhone.ContainsHTML())
-        || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Fax) && request.Settings.GeneralInfo.Fax.ContainsHTML())
-        || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Remark) && request.Settings.GeneralInfo.Remark.ContainsHTML()))
+        || (!string.IsNullOrWhiteSpace(request.Settings.GeneralInfo.Fax) && request.Settings.GeneralInfo.Fax.ContainsHTML()))
         {
             return false;
         }

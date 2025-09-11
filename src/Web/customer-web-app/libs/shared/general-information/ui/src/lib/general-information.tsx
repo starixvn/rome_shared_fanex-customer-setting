@@ -132,7 +132,7 @@ export const GeneralInformation = forwardRef<ValidationRefType, GeneralInformati
                       setLocationTooltip('userName');
                     }}
                     onBlur={() => setLocationTooltip('')}
-                    autoComplete="username"
+                    autoComplete="new-username"
                   />
                   {validationResults['userName'] !== undefined && (
                     <span>{getErrorByField('userName') ? <IconWrong /> : <IconCorrect />}</span>

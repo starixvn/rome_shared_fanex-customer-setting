@@ -32,7 +32,6 @@ public class GeneralInformation
         MemberMaxCredit = dto.MemberMaxCredit;
         MemberMaxCreditMin = dto.MemberMaxCreditMin;
         Fax = dto.Fax;
-        Remark = dto.Remark;
         DisableAutoMPT = dto.DisableAutoMPT;
         TransferOption = dto.TransferOption;
         IsAutomateTransfer = dto.IsAutomateTransfer;
@@ -83,8 +82,6 @@ public class GeneralInformation
     public decimal MemberMaxCreditMin { get; set; }
 
     public string Fax { get; set; }
-
-    public string Remark { get; set; }
 
     public bool DisableAutoMPT { get; set; }
 

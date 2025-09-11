@@ -10,7 +10,6 @@ using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria.Cash;
 using Fanex.Data.Repository;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.Cash;
 
@@ -18,9 +17,9 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
 {
     private readonly ICustomerService _customerService;
 
-    private readonly List<int> newCustIds = new List<int>();
+    private List<int> newCustIds = new List<int>();
 
-    private readonly List<string> newUserNames = new List<string>();
+    private List<string> newUserNames = new List<string>();
 
     public CreateCashMemberService(IMessageService messageService,
         AppSettings appSettings,
@@ -32,8 +31,6 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
         this._customerService = customerService;
     }
 
-    [SuppressMessage("SonarQube", "S3776:Cognitive Complexity of methods should not be too high", Justification = "Business logic complexity required for customer creation workflow")]
-    [SuppressMessage("SonarQube", "S127:for loop stop conditions should be invariant", Justification = "Retry logic requires loop counter modification")]
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         int retryCount = 0;
@@ -49,7 +46,7 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
             if (i > 0 || retryCount > 0)
             {
                 var suggestNewUserNameResult = await _customerService.GetSuggestUsername(
-                    new Customer.Requests.GetSuggestUsernameRequest
+                    new Customer.Requests.GetSuggestUsernameRequest()
                     { 
                         ActorName = request.Settings.GeneralInfo.UplineUserName, 
                         RoleId = request.Settings.GeneralInfo.UplineRoleId
@@ -151,7 +148,6 @@ public class CreateCashMemberService : CreateCustomerBaseService, ICreateCustome
             request.Settings.GeneralInfo.Password,
             request.Settings.GeneralInfo.Phone ?? string.Empty,
             request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
-            request.Settings.GeneralInfo.Remark ?? string.Empty,
             request.Settings.GeneralInfo.Bank?.BankId ?? 0,
             request.Settings.GeneralInfo.Bank?.AccountNumber ?? string.Empty,
             helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false),

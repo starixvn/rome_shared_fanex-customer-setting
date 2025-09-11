@@ -87,8 +87,7 @@ public class EditCustomerService : BaseCustomerService, IEditCustomerService
             || (!string.IsNullOrWhiteSpace(generalInformation.LastName) && generalInformation.LastName.ContainsHTML())
             || (!string.IsNullOrWhiteSpace(generalInformation.Phone) && generalInformation.Phone.ContainsHTML())
             || (!string.IsNullOrWhiteSpace(generalInformation.MobilePhone) && generalInformation.MobilePhone.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(generalInformation.Fax) && generalInformation.Fax.ContainsHTML())
-            || (!string.IsNullOrWhiteSpace(generalInformation.Remark) && generalInformation.Remark.ContainsHTML()))
+            || (!string.IsNullOrWhiteSpace(generalInformation.Fax) && generalInformation.Fax.ContainsHTML()))
             {
                 return false;
             }

@@ -157,8 +157,7 @@ export const isGeneralInfoChanged = (generalInfo: GeneralInfo, originalGeneralIn
   generalInfo.lastName !== originalGeneralInfo.lastName ||
   generalInfo.phone !== originalGeneralInfo.phone ||
   generalInfo.mobilePhone !== originalGeneralInfo.mobilePhone ||
-  generalInfo.fax !== originalGeneralInfo.fax ||
-  generalInfo.remark !== originalGeneralInfo.remark;
+  generalInfo.fax !== originalGeneralInfo.fax;
 
 export const getUnCheckAutoPtItems = (
   productGroups: ProductGroup[],

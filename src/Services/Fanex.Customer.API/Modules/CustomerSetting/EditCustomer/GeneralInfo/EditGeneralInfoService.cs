@@ -34,7 +34,6 @@ public class GeneralInfoService
             { "ip", request.Context.IP },
             { "userid", request.Context.ActorId },
             { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
-            { "remark", request.Settings.GeneralInfo.Remark }
         };
 
         if (request.Context.RoleId == (int)CustomerLevel.Agent)

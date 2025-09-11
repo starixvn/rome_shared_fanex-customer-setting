@@ -1,13 +1,13 @@
-using System.Diagnostics.CodeAnalysis;
+using System.Collections;
 using Fanex.Customer.API.Modules.CreateCustomer.Requests;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.ViewModels;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 using Fanex.Customer.API.Modules.Message;
 using Fanex.Customer.API.Shared.Utils;
+using Fanex.Data;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Data.Repository;
-using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
@@ -15,9 +15,17 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
 {
     private readonly ICustomerService _customerService;
 
-    private readonly List<int> newCustIds = new List<int>();
+    private const string ValidateSPName = "Acc_CustomerInsMember_DirectMember_Validate";
 
-    private readonly List<string> newUserNames = new List<string>();
+    private const string RegisterSPName = "Acc_CustomerIns_Register";
+
+    private const string CreateNewSPName = "Acc_CustomerInsMember_DirectMember";
+
+    private const string RollbackSPName = "Acc_CustomerIns_Rollback";
+
+    private List<int> newCustIds = new List<int>();
+
+    private List<string> newUserNames = new List<string>();
 
     public CreateDirectMemberService(IMessageService messageService,
         AppSettings appSettings,
@@ -29,8 +37,6 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
         this._customerService = customerService;
     }
 
-    [SuppressMessage("SonarQube", "S3776:Cognitive Complexity of methods should not be too high", Justification = "Business logic complexity required for customer creation workflow")]
-    [SuppressMessage("SonarQube", "S127:for loop stop conditions should be invariant", Justification = "Retry logic requires loop counter modification")]
     public override async Task<CreateCustomerResult> Create(CreateRequest request)
     {
         int retryCount = 0;
@@ -59,7 +65,7 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
                 }
             }
 
-            result = await RegisterCustomer(request, CustomerLevel.Member);
+            result = await Register(request);
             if (!result.IsSuccessful)
             {
                 if (result.Code == 201 && retryCount <= 5)
@@ -82,7 +88,7 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
             result = await CreateMember(request, newCustId);
             if (!result.IsSuccessful)
             {
-                await RollbackCustomer(newCustId);
+                Rollback(newCustId);
                 return result;
             }
             else
@@ -99,49 +105,84 @@ public class CreateDirectMemberService : CreateCustomerBaseService, ICreateCusto
 
     private async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)
     {
-        var criteria = new ValidateDirectMemberSettingCommand(
-            request.Context.CreatorId,
-            request.Settings.GeneralInfo.UserName,
-            request.Settings.GeneralInfo.MaxCredit,
-            helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false),
-            LanguageUtils.ToLanguageKey(request.Context.Language),
-            request.Settings.GeneralInfo.UplineCustId,
-            request.Settings.Group,
-            request.Context.SystemId,
-            request.Context.IP
-        );
+        var parameters = new Hashtable
+        {
+            { "creator", request.Context.CreatorId },
+            { "username", request.Settings.GeneralInfo.UserName },
+            { "credit", request.Settings.GeneralInfo.MaxCredit },
+            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false) },
+            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
+            { "ugroup", request.Settings.Group },
+            { "systemid", request.Context.SystemId },
+            { "ip", request.Context.IP },
+        };
 
-        await dynamicRepository.ExecuteAsync(criteria);
-        var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
-        return new CreateCustomerResult(0, criteria.ErrCode, msg.MainMessage, msg.SubMessages, newUserNames);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(ValidateSPName, request.Context.CustDBGroupID));
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
+        return new CreateCustomerResult(0, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages, newUserNames);
+    }
+
+    private async Task<CreateCustomerResult> Register(CreateRequest request)
+    {
+        var parameters = new Hashtable
+        {
+            { "username", request.Settings.GeneralInfo.UserName },
+            { "sitedbgroupid", request.Context.CustDBGroupID },
+            { "site", request.Settings.GeneralInfo.Site },
+            { "roleid", CustomerLevel.Member },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
+            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) }
+        };
+
+        using IObjectDb db = ObjectDbFactory.CreateInstance(RegisterSPName);
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
+        return new CreateCustomerResult(Convert.ToInt32(outputParams["custid"]), Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
     }
 
     private async Task<CreateCustomerResult> CreateMember(CreateRequest request, int newCustId)
     {
-        var criteria = new CreateDirectMemberCommand(
-            newCustId,
-            request.Settings.GeneralInfo.FirstName ?? string.Empty,
-            request.Settings.GeneralInfo.LastName ?? string.Empty,
-            request.Context.CreatorId,
-            request.Settings.GeneralInfo.UserName,
-            request.Settings.GeneralInfo.Password,
-            request.Settings.GeneralInfo.Phone ?? string.Empty,
-            request.Settings.GeneralInfo.MobilePhone ?? string.Empty,
-            request.Settings.GeneralInfo.Fax ?? string.Empty,
-            request.Settings.GeneralInfo.Remark ?? string.Empty,
-            request.Settings.GeneralInfo.MaxCredit,
-            helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false),
-            LanguageUtils.ToLanguageKey(request.Context.Language),
-            request.Context.SubAccId,
-            request.Settings.GeneralInfo.UplineCustId,
-            request.Settings.Group,
-            request.Context.SystemId,
-            request.Context.IP,
-            appSettings.SettingStatus
-        );
+        var parameters = new Hashtable
+        {
+            { "custid", newCustId },
+            { "firstname", request.Settings.GeneralInfo.FirstName ?? string.Empty },
+            { "lastname", request.Settings.GeneralInfo.LastName ?? string.Empty},
+            { "creator", request.Context.CreatorId },
+            { "username", request.Settings.GeneralInfo.UserName },
+            { "userpwd", request.Settings.GeneralInfo.Password },
+            { "phone", request.Settings.GeneralInfo.Phone ?? string.Empty},
+            { "mobilephone", request.Settings.GeneralInfo.MobilePhone ?? string.Empty},
+            { "fax", request.Settings.GeneralInfo.Fax ?? string.Empty},
+            { "credit", request.Settings.GeneralInfo.MaxCredit },
+            { "settingxml", helperService.CreateSettingTypesJson(request.Settings.ProductGroups, false) },
+            { "language", LanguageUtils.ToLanguageKey(request.Context.Language) },
+            { "subaccid", request.Context.SubAccId },
+            { "uplineid", request.Settings.GeneralInfo.UplineCustId },
+            { "ugroup", request.Settings.Group},
+            { "systemid", request.Context.SystemId },
+            { "ip", request.Context.IP },
+            { "settingstatus", appSettings.SettingStatus },
+        };
 
-        await dynamicRepository.ExecuteAsync(criteria);
-        var msg = messageService.TranslateMessage(criteria.Msgtype, criteria.ErrMsg, request.Context.Language);
-        return new CreateCustomerResult(newCustId, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
+        using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CreateNewSPName, request.Context.CustDBGroupID));
+        await db.ExecuteNonQueryAsync(parameters);
+        var outputParams = db.GetOutputParams();
+        var msg = messageService.TranslateMessage(Convert.ToInt32(outputParams["msgtype"]), Convert.ToString(outputParams["errmsg"]), request.Context.Language);
+        return new CreateCustomerResult(newCustId, Convert.ToInt32(outputParams["errcode"]), msg.MainMessage, msg.SubMessages);
+    }
+
+    private async void Rollback(int newCustId)
+    {
+        var parameters = new Hashtable
+        {
+            { "custid", newCustId }
+        };
+
+        using IObjectDb db = ObjectDbFactory.CreateInstance(RollbackSPName);
+        await db.ExecuteNonQueryAsync(parameters);
     }
 }

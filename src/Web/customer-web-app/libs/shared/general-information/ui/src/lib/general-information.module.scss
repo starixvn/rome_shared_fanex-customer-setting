@@ -120,14 +120,6 @@ label.checkbox {
   border-radius: 3px;
   padding: 0 5px;
   min-width: 165px;
-  &.text-area {
-    height: 52px;
-    width: 750px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
 }
 
 .max-credit {
@@ -149,27 +141,4 @@ label.checkbox {
 
 .description {
   color: var(--color-label);
-}
-
-.remark-user-info {
-  width: 750px;
-  padding: 0x 8px;
-  line-height: 1.5;
-  background: var(--bg-input);
-  border: 1px solid var(--border-input);
-  border-radius: 3px;
-  resize: none;
-  text-overflow: ellipsis;
-  white-space: pre-wrap;
-  word-break: break-word;
-  &.cash-user{
-    width: 795px;
-  }
-  color: var(--color-label);
-  
-  &:focus {
-    outline: none;
-    border: 1px solid var(--border-input);
-    box-shadow: none;
-  }
 }
