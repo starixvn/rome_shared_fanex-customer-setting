@@ -117,7 +117,7 @@
   "maxPayoutPerMatchMustBeGreaterThanOrEqualToMaxPerMatch": "单场最高派彩必须大于或等于单场限额",
   "maxWinPerMatchMustBeGreaterThanOrEqualToMaxPerMatch": "单场最高赢额必须大于或等于单场限额",
   "maxPayoutPerMatchMustBeLessThanOrEqualTo": "单场最高派彩必须少于或等于 {{value}}",
-  "maxWinPerMatchMustBeLessThanOrEqualTo": "单场最高赢额必须少于或等于 {{value}}",
+  "maxWinPerMatchMustBeLessThanOrEqualTo": "单场最高赢额必须小于或等于 {{value}}",
   "userInformation": "用户信息",
   "alertSite": "Please Select Site",
   "alertCurrency": "Please Select Currency",
