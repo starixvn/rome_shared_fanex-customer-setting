@@ -15,6 +15,7 @@ import { GroupSettingBlockProps } from '../types';
 import ParlayMaxPayoutRow from './parlay-max-payout-row';
 import ParlayMaxPayoutValidator from './parlay-max-payout-validator';
 import { AppConfigHelper } from '@customer-web-app/shared-helpers';
+import ParlayMaxPayoutNote from './parlay-max-payout-note';
 
 const ParlayMaxPayoutBlockId = 'parlay-max-payout';
 
@@ -102,7 +103,12 @@ const ParlayMaxPayout = forwardRef<ValidationRefType, GroupSettingBlockProps>(fu
   return (
     <Block
       id={ParlayMaxPayoutBlockId}
-      title={t('ParlayMaxPayout')}
+      title={
+        <>
+          {t('ParlayMaxPayout')}
+          <ParlayMaxPayoutNote />
+        </>
+      }
       ref={blockRef}
       isPartialUpdate={isEditMode === true && !props.isReadOnly}
       onSaveClick={() => updateGroupSetting?.(GroupTypeIds.ParlayMaxPayout)}

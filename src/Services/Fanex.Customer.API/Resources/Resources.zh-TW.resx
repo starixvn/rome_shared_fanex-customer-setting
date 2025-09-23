@@ -262,10 +262,10 @@
     <value>對於{1} 您只能將最大{0} 投註限額分配給會員。</value>
   </data>
   <data name="Msg_10059" xml:space="preserve">
-    <value>單場最高派彩錯誤</value>
+    <value>單場最高贏額錯誤</value>
   </data>
   <data name="Msg_10060" xml:space="preserve">
-    <value>單場限額必须少於或等於單場最高派彩限額</value>
+    <value>單場限額必須小於或等於單場最高贏額</value>
   </data>
   <data name="Msg_10061" xml:space="preserve">
     <value>單粒球最高投注必須大於或等於最高投注且少於或等於單場限額</value>
@@ -280,7 +280,7 @@
     <value>單場限額必须少於或等於上線的單場限額</value>
   </data>
   <data name="Msg_10065" xml:space="preserve">
-    <value>單場最高派彩 必须少於或等於上線的單場最高派彩</value>
+    <value>單場最高贏額必須小於或等於上線的單場最高贏額</value>
   </data>
   <data name="Msg_10066" xml:space="preserve">
     <value>單粒球最高投注必须少於或等於上線的單粒球最高投注</value>

@@ -262,10 +262,10 @@
     <value>You can only assign maximum {0} bet limits to member level for {1}.</value>
   </data>
   <data name="Msg_10059" xml:space="preserve">
-    <value>Wrong Max Payout Per Match.</value>
+    <value>Wrong Max Win Per Match.</value>
   </data>
   <data name="Msg_10060" xml:space="preserve">
-    <value>Max Per Match must be less than or equal to Max Payout Per Match</value>
+    <value>Max Per Match must be less than or equal to Max Win Per Match </value>
   </data>
   <data name="Msg_10061" xml:space="preserve">
     <value>Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match</value>
@@ -280,7 +280,7 @@
     <value>Max Per Match must be less than or equal to Upline's Max Per Match</value>
   </data>
   <data name="Msg_10065" xml:space="preserve">
-    <value>Max Payout Per Match must be less than or equal to Upline's Max Payout Per Match</value>
+    <value>Max Win Per Match must be less than or equal to Upline's Max Win Per Match</value>
   </data>
   <data name="Msg_10066" xml:space="preserve">
     <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>

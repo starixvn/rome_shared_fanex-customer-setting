@@ -13,29 +13,29 @@ type MaxPayoutSettingData = {
   maxPayoutSport: MaxPayoutSport;
 };
 
-export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
-  const [data, setData] = useState<MaxPayoutSettingData>({} as MaxPayoutSettingData);
-  const [loading, setLoading] = useState(true);
+export const MaxPayoutSettingTab = ({ url }: { url: string }) => {
+  // const [data, setData] = useState<MaxPayoutSettingData>({} as MaxPayoutSettingData);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get<MaxPayoutSettingData>(url);
-      return response.data;
-    };
-    fetchData().then((result) => {
-      setData(result);
-      setLoading(false);
-    });
-  }, [url]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await axios.get<MaxPayoutSettingData>(url);
+  //     return response.data;
+  //   };
+  //   fetchData().then((result) => {
+  //     setData(result);
+  //     setLoading(false);
+  //   });
+  // }, [url]);
 
-  if (loading) {
-    return <div />;
-  }
+  // if (loading) {
+  //   return <div />;
+  // }
 
   return (
     <div>
       <div>
-        <div>
+        {/* <div>
           <strong>
             <Trans i18nKey={'MPSInformation'} />{' '}
           </strong>
@@ -66,21 +66,22 @@ export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
             </div>
           </div>
         </div>
-        <br />
+        <br /> 
         <div>
           <Trans i18nKey={'MPS9'} />
-        </div>
+        </div> 
         <br />
-        <div>
+         <div>
           <Trans i18nKey={'MPS10'} />
           <SecondTable data={data.maxPayoutSport} />
-        </div>
+        </div> 
         <br />
         <div>
           <strong>
             <Trans i18nKey={'MPS18'} />
           </strong>
         </div>
+        */}
         <div>
           <Trans i18nKey={'MPS19'} />
         </div>
@@ -105,15 +106,15 @@ export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
         </div>
         <br />
 
-        <div>
+        {/* <div>
           <Trans i18nKey={'MPS25'} />
         </div>
-        <br />
+         <br />
         <div>
           <Trans i18nKey={'MPS26'} />
         </div>
         <br />
-        <div>
+       <div>
           <Trans i18nKey={'MPS27'} />
         </div>
         <br />
@@ -124,7 +125,7 @@ export const MaxPayoutSettingTab = ({ url}: { url: string}) => {
           <strong>
             <Trans i18nKey={'MPS28'} />
           </strong>
-        </div>
+        </div> */}
       </div>
     </div>
   );

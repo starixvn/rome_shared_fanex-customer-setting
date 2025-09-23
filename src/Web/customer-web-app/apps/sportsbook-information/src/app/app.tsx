@@ -9,6 +9,7 @@ import { Layout } from './layout';
 import { BetSettingTab } from './tabs/bet-setting-tab';
 import { CommissionHintTab } from './tabs/commission-hint-tab';
 import { MaxPayoutSettingTab } from './tabs/max-payout-setting-tab';
+import { MaxWinSettingTab } from './tabs/max-win-setting-tab';
 import { PotentialWinLimitSettingTab } from './tabs/potential-win-limit';
 import { ProductCategorySettingTab } from './tabs/product-category-setting-tab';
 import { PtSettingTab } from './tabs/pt-setting-tab';
@@ -61,25 +62,25 @@ export function App() {
   );
 }
 
+const TabComponents: Record<string, React.ComponentType<{ url: string }>> = {
+  PTSettingTab: PtSettingTab,
+  BetSettingTab: BetSettingTab,
+  ProductCategorySettingTab: ProductCategorySettingTab,
+  CommissionHintTab: CommissionHintTab,
+  MaxPayoutSettingTab: MaxPayoutSettingTab,
+  MaxWinSettingTab: MaxWinSettingTab,
+  WinLossLimitTab: WinLossLimitTab,
+  PotentialWinLimitSettingTab: PotentialWinLimitSettingTab,
+};
+
 const RenderTab = ({ tab }: { tab: TabOptions }) => {
-  switch (tab.id) {
-    case 'PTSettingTab':
-      return <PtSettingTab url={tab.url} />;
-    case 'BetSettingTab':
-      return <BetSettingTab url={tab.url} />;
-    case 'ProductCategorySettingTab':
-      return <ProductCategorySettingTab url={tab.url} />;
-    case 'CommissionHintTab':
-      return <CommissionHintTab url={tab.url} />;
-    case 'MaxPayoutSettingTab':
-      return <MaxPayoutSettingTab url={tab.url} />;
-    case 'WinLossLimitTab':
-      return <WinLossLimitTab url={tab.url} />;
-    case 'PotentialWinLimitSettingTab':
-      return <PotentialWinLimitSettingTab />;
-    default:
-      return <div />;
+  const TabComponent = TabComponents[tab.id];
+  
+  if (!TabComponent) {
+    return <div>Unknown tab: {tab.id}</div>;
   }
+  
+  return <TabComponent url={tab.url} />;
 };
 
 export default App;

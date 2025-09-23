@@ -95,7 +95,7 @@ export default class SportsBookBetSettingValidator extends BetSettingBaseValidat
       this.maxPayoutPerMatch !== null &&
       this.maxPerMatch > this.maxPayoutPerMatch
     )
-      return new ValidateBetSetting(false, fieldName, 'maxPerMatchMustBeLessThanOrEqualToMaxPayoutPerMatch');
+      return new ValidateBetSetting(false, fieldName, 'maxPerMatchMustBeLessThanOrEqualToMaxWinPerMatch');
 
     if (this.maxBet !== undefined && this.maxBet > this.maxPerMatch)
       return new ValidateBetSetting(false, fieldName, 'maxPerMatchMustBeGreaterThanOrEqualToMaxBet');
@@ -112,12 +112,12 @@ export default class SportsBookBetSettingValidator extends BetSettingBaseValidat
       this.upline.maxPayoutPerMatch !== 0 &&
       this.maxPayoutPerMatch > this.upline.maxPayoutPerMatch
     )
-      return new ValidateBetSetting(false, fieldName, 'maxPayoutPerMatchMustBeLessThanOrEqualTo', {
+      return new ValidateBetSetting(false, fieldName, 'maxWinPerMatchMustBeLessThanOrEqualTo', {
         value: NumberHelper.formatWithCommas(this.upline.maxPayoutPerMatch),
       });
 
     if (this.maxPerMatch !== undefined && this.maxPayoutPerMatch < this.maxPerMatch && this.maxPayoutPerMatch !== null)
-      return new ValidateBetSetting(false, fieldName, 'maxPayoutPerMatchMustBeGreaterThanOrEqualToMaxPerMatch');
+      return new ValidateBetSetting(false, fieldName, 'maxWinPerMatchMustBeGreaterThanOrEqualToMaxPerMatch');
 
     return new ValidateBetSetting(true);
   }

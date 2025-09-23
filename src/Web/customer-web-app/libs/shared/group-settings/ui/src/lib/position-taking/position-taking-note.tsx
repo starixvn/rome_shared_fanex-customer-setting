@@ -3,10 +3,10 @@ import { MouseEvent } from 'react';
 
 import { IconInfo } from '@customer-web-app/shared/base/common-icon';
 
-import { CustomerSettingInformationPageUrl } from '../customer-setting-information-page-url';
+import { CustomerSettingInformationPageUrl, TabNames } from '../customer-setting-information-page-url';
 
 export default function PositionTakingNote() {
-  const { url } = CustomerSettingInformationPageUrl({ tab: 2 });
+  const { url } = CustomerSettingInformationPageUrl({ tabName: TabNames.PTSettingTab });
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
