@@ -262,10 +262,10 @@
     <value>Bạn chỉ có thể gán tối đa {0} giới hạn cược cho cấp Member của {1}.</value>
   </data>
   <data name="Msg_10059" xml:space="preserve">
-    <value>Wrong Max Win Per Match.</value>
+    <value>Sai Thắng Tối Đa Mỗi Trận.</value>
   </data>
   <data name="Msg_10060" xml:space="preserve">
-    <value>Max Per Match must be less than or equal to Max Win Per Match </value>
+    <value>Cược Tối Đa Cho 1 Trận phải nhỏ hơn hoặc bằng Thắng Tối Đa Mỗi Trận</value>
   </data>
   <data name="Msg_10061" xml:space="preserve">
     <value>Max Per Ball must be greater than or equal to Max Bet and less than or equal to Max Per Match</value>
@@ -280,7 +280,7 @@
     <value>Max Per Match must be less than or equal to Upline's Max Per Match</value>
   </data>
   <data name="Msg_10065" xml:space="preserve">
-    <value>Max Win Per Match must be less than or equal to Upline's Max Win Per Match</value>
+    <value>Cược Tối Đa Cho 1 Trận phải nhỏ hơn hoặc bằng Thắng Tối Đa Mỗi Trận của Cấp Trên</value>
   </data>
   <data name="Msg_10066" xml:space="preserve">
     <value>Max Per Ball must be less than or equal to Upline''s Max Per Ball</value>
