@@ -26,6 +26,12 @@ using Fanex.Customer.API.Modules.CustomerSetting.Shared.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration);
+builder.Services.AddSingleton<IAppSettings>(provider => 
+{
+    var appSettings = new AppSettings();
+    builder.Configuration.Bind(appSettings);
+    return appSettings;
+});
 builder.Services.AddFanexLogging(builder.Configuration);
 builder.Services.AddFanexRemotingRef(builder.Configuration);
 builder.Services.AddSingleton<ICacheService, CacheService>();

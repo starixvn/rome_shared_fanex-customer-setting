@@ -6,13 +6,14 @@ using Fanex.Customer.API.Shared.Utils;
 using Fanex.Customer.API.Shared.Constants;
 using Fanex.Data.Repository;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
+using Fanex.Customer.API;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services.FullMode;
 
 public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCustomerBaseService
 {
     public CreateAgentFullModeService(IMessageService messageService, 
-        AppSettings appSettings, 
+        IAppSettings appSettings, 
         ICustomerSettingHelper helperService,
         IDynamicRepository dynamicRepository)
         : base( messageService, appSettings, helperService, dynamicRepository)
@@ -43,7 +44,7 @@ public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCust
         return result;
     }
 
-    private async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)
+    protected virtual async Task<CreateCustomerResult> ValidateSetting(CreateRequest request)
     {
         var criteria = new ValidateAgentSettingCommand(
             LanguageUtils.ToLanguageKey(request.Context.Language),
@@ -64,7 +65,7 @@ public class CreateAgentFullModeService : CreateCustomerBaseService, ICreateCust
         return new CreateCustomerResult(0, criteria.ErrCode, msg.MainMessage, msg.SubMessages);
     }
 
-    private async Task<CreateCustomerResult> CreateAgent(CreateRequest request, int newCustId)
+    protected virtual async Task<CreateCustomerResult> CreateAgent(CreateRequest request, int newCustId)
     {
         var criteria = new CreateAgentCommand(
             newCustId,

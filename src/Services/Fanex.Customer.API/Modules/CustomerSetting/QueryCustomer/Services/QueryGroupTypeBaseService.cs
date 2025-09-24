@@ -144,58 +144,53 @@ public class QueryGroupTypeBaseService<T> : IQueryGroupTypeBaseService<T>
 
     private static CommissionGroup MappingData(IDataReader reader, int roleId, int? uplineRoleId, int? agentId)
     {
-        decimal discount = 0, uplineDiscount = 0;
-        decimal? uplineOfUplineDiscount = null;
-        if (agentId.HasValue && agentId == -3)
-        {
-            discount = Converter.ToDecimal(reader["PlayerDiscount"]);
-            uplineDiscount = Converter.ToDecimal(reader["MasterDiscount"]);
-            uplineOfUplineDiscount = null;
-        }
-        else if (agentId.HasValue && agentId == -4)
-        {
-            discount = Converter.ToDecimal(reader["PlayerDiscount"]);
-            uplineDiscount = Converter.ToDecimal(reader["SuperDiscount"]);
-            uplineOfUplineDiscount = null;
-        }
-        else
-        {
-            if (roleId == CustomerLevel.Member)
-            {
-                discount = Converter.ToDecimal(reader["PlayerDiscount"]);
-                uplineDiscount = Converter.ToDecimal(reader["AgentDiscount"]);
-                uplineOfUplineDiscount = uplineRoleId == CustomerLevel.Super ? Converter.ToDecimal(reader["MasterDiscount"]) : null;
-            }
-            else if (roleId == CustomerLevel.Agent)
-            {
-                discount = Converter.ToDecimal(reader["AgentDiscount"]);
-                uplineDiscount = Converter.ToDecimal(reader["MasterDiscount"]);
-                uplineOfUplineDiscount = null;
-            }
-            else if (roleId == CustomerLevel.Master)
-            {
-                discount = Converter.ToDecimal(reader["MasterDiscount"]);
-                uplineDiscount = Converter.ToDecimal(reader["SuperDiscount"]);
-                uplineOfUplineDiscount = null;
-            }
-            else if (roleId == CustomerLevel.Super)
-            {
-                discount = Converter.ToDecimal(reader["SuperDiscount"]);
-                uplineDiscount = Converter.ToDecimal(reader["DefaultMaxDiscount"]);
-                uplineOfUplineDiscount = null;
-            }
-        }
-
+        var discountConfig = GetDiscountConfiguration(roleId, uplineRoleId, agentId);
+        
         return new CommissionGroup
         {
             SportTypeId = Converter.ToInt(reader["SportType"]),
             BetTypeId = Converter.ToInt(reader["BetType"]),
-            Discount = discount,
-            UplineDiscount = uplineDiscount,
-            UplineOfUplineDiscount = uplineOfUplineDiscount,
+            Discount = Converter.ToDecimal(reader[discountConfig.DiscountField]),
+            UplineDiscount = Converter.ToDecimal(reader[discountConfig.UplineDiscountField]),
+            UplineOfUplineDiscount = discountConfig.UplineOfUplineDiscountField != null 
+                ? Converter.ToDecimal(reader[discountConfig.UplineOfUplineDiscountField]) 
+                : null,
             Step = Converter.ToDecimal(reader["IntervalComm"]),
         };
     }
+
+    private static DiscountConfiguration GetDiscountConfiguration(int roleId, int? uplineRoleId, int? agentId)
+    {
+        // Handle special agent cases first
+        if (agentId.HasValue)
+        {
+            return agentId.Value switch
+            {
+                -3 => new DiscountConfiguration("PlayerDiscount", "MasterDiscount", null),
+                -4 => new DiscountConfiguration("PlayerDiscount", "SuperDiscount", null),
+                _ => GetRoleBasedConfiguration(roleId, uplineRoleId)
+            };
+        }
+
+        return GetRoleBasedConfiguration(roleId, uplineRoleId);
+    }
+
+    private static DiscountConfiguration GetRoleBasedConfiguration(int roleId, int? uplineRoleId)
+    {
+        return roleId switch
+        {
+            CustomerLevel.Member => new DiscountConfiguration(
+                "PlayerDiscount", 
+                "AgentDiscount", 
+                uplineRoleId == CustomerLevel.Super ? "MasterDiscount" : null),
+            CustomerLevel.Agent => new DiscountConfiguration("AgentDiscount", "MasterDiscount", null),
+            CustomerLevel.Master => new DiscountConfiguration("MasterDiscount", "SuperDiscount", null),
+            CustomerLevel.Super => new DiscountConfiguration("SuperDiscount", "DefaultMaxDiscount", null),
+            _ => throw new ArgumentException($"Unknown role ID: {roleId}", nameof(roleId))
+        };
+    }
+
+    private record DiscountConfiguration(string DiscountField, string UplineDiscountField, string UplineOfUplineDiscountField);
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
     private ICriteria GetQueryForEditCriteria(

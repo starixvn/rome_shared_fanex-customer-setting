@@ -19,6 +19,7 @@ using Fanex.Customer.API.Modules.Password.Service;
 using Fanex.Common.Extensions;
 using Fanex.Customer.API.Modules.CreateCustomer.Services.Cash;
 using Fanex.Customer.API.Modules.Customer.Criteria;
+using System.Net.Http;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -124,7 +125,7 @@ public class CreateCustomerService : CreateCustomerServiceBase, ICreateCustomerS
         return result;
     }
 
-    private CreateCustomerBaseService GetCreateCustomerService(bool isFullMode, int uplineRoleId, bool isCashService, bool? isDirectMember)
+    protected CreateCustomerBaseService GetCreateCustomerService(bool isFullMode, int uplineRoleId, bool isCashService, bool? isDirectMember)
     {
         if(isCashService)
         {

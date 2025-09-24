@@ -6,6 +6,7 @@ using Fanex.Data.Repository;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria.Cash;
 using Fanex.Customer.API.Modules.CustomerSetting.CreateCustomer.Criteria;
 using Fanex.Customer.API.Shared.Utils;
+using Fanex.Customer.API;
 
 namespace Fanex.Customer.API.Modules.CreateCustomer.Services;
 
@@ -18,14 +19,14 @@ public class CreateCustomerBaseService : ICreateCustomerBaseService
 {
     protected readonly IMessageService messageService;
 
-    protected readonly AppSettings appSettings;
+    protected readonly IAppSettings appSettings;
 
     protected readonly ICustomerSettingHelper helperService;
 
     protected readonly IDynamicRepository dynamicRepository;
 
     public CreateCustomerBaseService(IMessageService messageService,
-        AppSettings appSettings,
+        IAppSettings appSettings,
         ICustomerSettingHelper helperService,
         IDynamicRepository dynamicRepository)
     {

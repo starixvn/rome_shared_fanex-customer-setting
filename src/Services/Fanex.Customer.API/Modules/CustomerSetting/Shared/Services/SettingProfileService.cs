@@ -8,7 +8,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 
 public class SettingProfileService : ISettingProfileService
 {
-    private const int CacheDurationInHour = 0;
+    private const int CacheDurationInHour = 1;
 
     private readonly IDynamicRepository dynamicRepository;
 
