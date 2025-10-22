@@ -31,7 +31,6 @@ namespace Fanex.Customer.API.Modules.Otp
         private const int TimePeriod = 30;
         private const int OtpSize = 6;
         private const int SecretKeyLength = 20;
-        private const int DisabledAccountErrorCode = 200;
         private const string Issuer = "MyAppName";
         private const string NotDetectedDevice = "N/A";
         private const int InvalidDataErrorCode = 1;
@@ -39,8 +38,6 @@ namespace Fanex.Customer.API.Modules.Otp
         private const int DownlineIsDisabledErrorCode = 600;
         private const int DownlineDoesNotHaveRegisteredDeviceErrorCode = 100;
         private const int FailedToRemoveDownlineOtpErrorCode = 101;
-        private const string CustIdCannotBeNegOrZero = "Cust Id cannot be negative or zero";
-
         private readonly IDynamicRepository dynamicRepository;
         private readonly OtpService otpService;
         private readonly IJsonHelper jsonHelper;
@@ -125,6 +122,7 @@ namespace Fanex.Customer.API.Modules.Otp
             }
 
             var deviceInfoSerialized = jsonHelper.Serialize(param.Device.Info);
+            await Logging.Logger.Log.InfoAsync("Setup OTP: {0}", jsonHelper.Serialize(param));
             var command = new InsertCustomerOtpCommand
             {
                 CustId = param.CustId,
@@ -215,6 +213,7 @@ namespace Fanex.Customer.API.Modules.Otp
 
         public async Task<bool> IsDifferenceDevice(int custId, string deviceId, int subAccId = 0)
         {
+            await Logging.Logger.Log.InfoAsync("IsDifferenceDevice, deviceId: {0}", deviceId);
             if (deviceId == NotDetectedDevice)
             {
                 await logger.InfoAsync("User device was not detected");
