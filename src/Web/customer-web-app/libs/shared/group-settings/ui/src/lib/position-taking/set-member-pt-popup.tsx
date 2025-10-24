@@ -193,7 +193,16 @@ const MasterNotTakeAutoPT = ({
     );
 
     return (
-      <BlockRow key={betTypeName} label={renderPTLabel(sportTypeName, false, true, copyIcon, () => true)}>
+      <BlockRow key={betTypeName} label={renderPTLabel({
+        labelName: sportTypeName,
+        isMultipleMode: false,
+        isMultipleModeChecked: true,
+        copyIcon,
+        handleCheckMultiple: () => true,
+        tooltipMessage: undefined,
+        sportTypeId,
+        betTypeId
+      })}>
         {renderNoneBlockColumn(`${sportTypeId}${betTypeId}`, 1)}
       </BlockRow>
     );
@@ -218,7 +227,16 @@ const MasterNotTakeAutoPT = ({
       />
     );
 
-    return hasCopyIcon ? renderPTLabel(labelName, false, true, copyIcon, () => true) : labelName;
+    return hasCopyIcon ? renderPTLabel({
+      labelName,
+      isMultipleMode: false,
+      isMultipleModeChecked: true,
+      copyIcon,
+      handleCheckMultiple: () => true,
+      tooltipMessage: undefined,
+      sportTypeId: item.sportTypeId,
+      betTypeId: item.betTypeId
+    }) : labelName;
   };
 
   return (ptGroups as MasterPositionTakingGroupItem[][]).map((group, index) => {
@@ -333,7 +351,16 @@ const AgentNotTakeAutoPT = ({
     );
 
     return (
-      <BlockRow key={betTypeName} label={renderPTLabel(sportTypeName, false, true, copyIcon, () => true)}>
+      <BlockRow key={betTypeName} label={renderPTLabel({
+        labelName: sportTypeName,
+        isMultipleMode: false,
+        isMultipleModeChecked: true,
+        copyIcon,
+        handleCheckMultiple: () => true,
+        tooltipMessage: undefined,
+        sportTypeId,
+        betTypeId
+      })}>
         {renderNoneBlockColumn(`${sportTypeId}${betTypeId}`, 1)}
       </BlockRow>
     );
@@ -357,7 +384,16 @@ const AgentNotTakeAutoPT = ({
         }}
       />
     );
-    return hasCopyIcon ? renderPTLabel(labelName, false, true, copyIcon, () => true) : labelName;
+    return hasCopyIcon ? renderPTLabel({
+      labelName,
+      isMultipleMode: false,
+      isMultipleModeChecked: true,
+      copyIcon,
+      handleCheckMultiple: () => true,
+      tooltipMessage: undefined,
+      sportTypeId: item.sportTypeId,
+      betTypeId: item.betTypeId
+    }) : labelName;
   };
 
   return (ptGroups as AgentPositionTakingGroupItem[][]).map((group, index) => {

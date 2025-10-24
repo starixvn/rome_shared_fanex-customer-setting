@@ -38,12 +38,12 @@ export function GroupLabel({
     />
   );
 
-  return renderPTLabel(
-    firstGroupItem.sportTypeName,
-    isMultipleMode ?? false,
-    group.every((item) => item.isMultipleModeChecked === true),
+  return renderPTLabel({
+    labelName: firstGroupItem.sportTypeName,
+    isMultipleMode: isMultipleMode ?? false,
+    isMultipleModeChecked: group.every((item) => item.isMultipleModeChecked === true),
     copyIcon,
-    (isChecked) => {
+    handleCheckMultiple: (isChecked) => {
       const groupItems = ptItems.map((item) => {
         if (item.sportTypeId === firstGroupItem.sportTypeId) {
           return { ...item, isMultipleModeChecked: isChecked };
@@ -52,6 +52,9 @@ export function GroupLabel({
         return item;
       });
       handleUpdateSettingItems?.(ProductGroupIds.SportsBook, GroupTypeIds.PositionTaking, groupItems as []);
-    }
-  );
+    },
+    tooltipMessage: undefined, // no tooltip for group label
+    sportTypeId: firstGroupItem.sportTypeId,
+    betTypeId: firstGroupItem.betTypeId
+  });
 }

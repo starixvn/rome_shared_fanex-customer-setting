@@ -103,7 +103,7 @@ export default function DirectMemberCommission({
         </BlockColumn>
         <BlockColumn>{t('lblCommissionForMember')}</BlockColumn>
       </BlockRow>
-      {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked }) => {
+      {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked, tooltipMessage }) => {
         const isAsianHDP = sportTypeId === SportTypeIds.Soccer && betTypeId === BetTypeIds.Handicap;
         const asianHDPCommValue = generalInfo?.commissions?.find((c) => group?.includes(c.name))?.discount ?? 0;
         return (
@@ -114,6 +114,9 @@ export default function DirectMemberCommission({
                 displayName={displayName as string}
                 isSelected={isMultipleModeChecked}
                 isReadOnly={isReadOnly}
+                tooltipMessage={tooltipMessage}
+                sportTypeId={sportTypeId}
+                betTypeId={betTypeId}
                 handleSelectCommission={(isChecked) =>
                   handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked })
                 }

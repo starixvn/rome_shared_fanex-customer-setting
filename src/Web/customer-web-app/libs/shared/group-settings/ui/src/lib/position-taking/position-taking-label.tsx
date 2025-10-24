@@ -1,6 +1,7 @@
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { GroupItem } from '@customer-web-app/shared-group-settings-types';
+import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import { CopyPTICon, CopyStatusPT, isCopySuccess, renderPTLabel } from './utils';
 
@@ -41,10 +42,18 @@ export default function PTLabel({
     />
   );
 
-  return renderPTLabel(displayName, isMultipleMode ?? false, item.isMultipleModeChecked, copyIcon, (isChecked) =>
-    handleSettingItemChange?.(Number(productGroupId), GroupTypeIds.PositionTaking, item.sportTypeId, item.betTypeId, {
-      isMultipleModeChecked: isChecked,
-      isUpdateMinPtOnly: false,
-    } as Partial<GroupItem>)
-  );
+  return renderPTLabel({
+    labelName: displayName,
+    isMultipleMode: isMultipleMode ?? false,
+    isMultipleModeChecked: item.isMultipleModeChecked,
+    copyIcon,
+    handleCheckMultiple: (isChecked) =>
+      handleSettingItemChange?.(Number(productGroupId), GroupTypeIds.PositionTaking, item.sportTypeId, item.betTypeId, {
+        isMultipleModeChecked: isChecked,
+        isUpdateMinPtOnly: false,
+      } as Partial<GroupItem>),
+    tooltipMessage: item.tooltipMessage,
+    sportTypeId: item.sportTypeId,
+    betTypeId: item.betTypeId
+  });
 }

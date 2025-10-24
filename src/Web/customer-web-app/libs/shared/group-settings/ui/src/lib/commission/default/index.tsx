@@ -25,7 +25,7 @@ export default function DefaultCommission({
           />
         </div>
       )}
-      {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked }) => {
+      {commissions?.map(({ sportTypeId, betTypeId, displayName, discount, upline, isMultipleModeChecked, tooltipMessage }) => {
         return (
           <BlockItem
             key={`${sportTypeId}${betTypeId}`}
@@ -34,6 +34,9 @@ export default function DefaultCommission({
                 displayName={displayName as string}
                 isSelected={isMultipleModeChecked}
                 isReadOnly={isReadOnly}
+                tooltipMessage={tooltipMessage}
+                sportTypeId={sportTypeId}
+                betTypeId={betTypeId}
                 handleSelectCommission={(isChecked) =>
                   handleCommissionChange(sportTypeId, betTypeId, { isMultipleModeChecked: isChecked })
                 }

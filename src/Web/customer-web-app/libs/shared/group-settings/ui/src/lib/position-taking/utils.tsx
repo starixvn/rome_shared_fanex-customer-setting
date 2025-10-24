@@ -45,16 +45,30 @@ export function CopyPTICon({ id, isCopy, isCopySuccess, handleCopyClick }: Reado
   );
 }
 
-export const renderPTLabel = (
-  labelName: string | undefined,
-  isMultipleMode: boolean,
-  isMultipleModeChecked: boolean,
-  copyIcon: React.ReactNode,
-  handleCheckMultiple: (isChecked: boolean) => void
-) => {
+type RenderPTLabelProps = {
+  labelName: string | undefined;
+  isMultipleMode: boolean;
+  isMultipleModeChecked: boolean;
+  copyIcon: React.ReactNode;
+  handleCheckMultiple: (isChecked: boolean) => void;
+  tooltipMessage?: string;
+  sportTypeId?: number;
+  betTypeId?: number;
+};
+
+export const renderPTLabel = ({
+  labelName,
+  isMultipleMode,
+  isMultipleModeChecked,
+  copyIcon,
+  handleCheckMultiple,
+  tooltipMessage,
+  sportTypeId,
+  betTypeId
+}: RenderPTLabelProps) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'normal' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         {isMultipleMode && (
           <input
             type="checkbox"
@@ -64,7 +78,21 @@ export const renderPTLabel = (
         )}
         <span>{labelName}</span>
       </div>
-      {copyIcon}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        {tooltipMessage && (
+          <>
+            <span
+              className="ic-info"
+              id={`pt-tooltip-${sportTypeId}-${betTypeId}`}
+              data-tooltip-id={`pt-tooltip-${sportTypeId}-${betTypeId}`}
+              data-tooltip-place="top"
+              data-tooltip-content={tooltipMessage}
+            ></span>
+            <WrapperTooltip type="default" id={`pt-tooltip-${sportTypeId}-${betTypeId}`} place="top" />
+          </>
+        )}
+        {copyIcon}
+      </div>
     </div>
   );
 };
