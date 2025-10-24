@@ -118,6 +118,8 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, isDirectMember, role)
         };
         await SetProductStatusTooltip(customerSetting, request.Language, request.CustId, appSettings.SettingStatus);
+        await SetCommAndPTTooltip(customerSetting, request.Language, request.CustId, appSettings.SettingStatus);
+        
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
         return customerSetting;
     }
@@ -388,6 +390,7 @@ public class QueryCustomerService : BaseQueryCustomerService, IQueryCustomerServ
                 isDirectMember,
                 language,
                 isSiteLabel777);
+            /// groupItem.TooltipMessage = // To do: set tooltip message, lúc này sẽ cần thêm 1 file config cho biêt;
 
             if (helperService.IsPTGroupType(groupTypeId))
             {
