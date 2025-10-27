@@ -474,5 +474,6 @@
 	</Function>
 	<Function Name="Customer Setting Note and Tooltip">
 		<Setting Key="Acc_CustSetting_JackpotStatusTooltip" SpName="Acc_CustSetting_JackpotStatusTooltip" DbName="DBAGE.bodb02.wsv_nap" />
+		<Setting Key="Acc_CustSetting_GetTooltipProduct" SpName="Acc_CustSetting_GetTooltipProduct_UAT1" DbName="DBAGE.bodb02.wsv_nap" />
 	</Function>
 </Functions>

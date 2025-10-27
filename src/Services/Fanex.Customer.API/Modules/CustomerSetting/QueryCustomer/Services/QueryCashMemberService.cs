@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Fanex.Customer.API.Modules.CustomerSetting.Shared.Services;
 using static Fanex.Customer.API.Modules.CustomerSetting.Shared.Services.SettingProfileService;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
+using Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.AfterQuery;
 
 namespace Fanex.Customer.API.Modules.QueryCustomer.Services;
 
@@ -26,6 +27,8 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
 
     private readonly ISiteDBGroupService siteDBGroupService;
 
+    private readonly IAfterQueryService afterQueryService;
+
     public QueryCashCustomerService(
         ICustomerService customerService,
         ISiteDBGroupService siteDBGroupService,
@@ -34,11 +37,13 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
         ISettingProfileService settingProfileService,
         ICacheRefService cacheRefService,
         IMessageService messageService,
-        ICustomerSettingHelper helperService)
+        ICustomerSettingHelper helperService,
+        IAfterQueryService afterQueryService)
         : base(dynamicRepository, appSettings, settingProfileService, cacheRefService, messageService, null, helperService)
     {
         this.customerService = customerService;
         this.siteDBGroupService = siteDBGroupService;
+        this.afterQueryService = afterQueryService;
     }
 
     private decimal ptStep = 1;
@@ -83,7 +88,17 @@ public class QueryCashCustomerService : BaseQueryCustomerService, IQueryCashCust
             ProductGroups = GetProductGroups(settingProfile, request, appSettings.Belonging777Group(generalInfo.SiteLabel), generalInfo, role)
         };
 
-        await SetProductStatusTooltip(customerSetting, request.Language, request.CustId, appSettings.SettingStatus);
+        // Execute after query tasks for tooltip setting
+        var afterQueryContext = new AfterQueryContext
+        {
+            Language = request.Language,
+            CustId = request.CustId,
+            SettingStatus = appSettings.SettingStatus,
+            Site = generalInfo.Site,
+            Currency = generalInfo.Currency
+        };
+        await afterQueryService.ExecuteAllTasksAsync(customerSetting, afterQueryContext);
+        
         customerSetting.GeneralInfo.UplineRoleId = request.RoleId;
         return customerSetting;
     }

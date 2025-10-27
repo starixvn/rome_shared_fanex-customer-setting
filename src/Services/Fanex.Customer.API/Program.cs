@@ -56,6 +56,7 @@ builder.Services.AddHttpClient<IOTPService, OTPService>(httpClient =>
     httpClient.DefaultRequestHeaders.Add("Accept-Language", Thread.CurrentThread.CurrentCulture.Name);
 });
 builder.Services.AddScoped<SophosOtp, OtpServiceImpl>();
+builder.Services.AddMemoryCache();
 builder.Services.RegisterSecurityCodeModule();
 builder.Services.RegisterCustomerModule();
 builder.Services.RegisterCopyCustomerModule(builder.Configuration);

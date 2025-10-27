@@ -463,4 +463,8 @@
         <value>This jackpot status applies only to {0} jackpot. When the Jackpot is disabled, members can still play all games as usual, but jackpot participation will not be available.</value>
         <comment>Tooltip for jackpot status, {0} = product names (comma separated)</comment>
     </data>
+  <data name="MessageTooltip_LiveCasinoGroup" xml:space="preserve">
+        <value>Product: {0}</value>
+        <comment>Tooltip for live casino group products, {0} = product names (comma separated)</comment>
+    </data>
 </root>

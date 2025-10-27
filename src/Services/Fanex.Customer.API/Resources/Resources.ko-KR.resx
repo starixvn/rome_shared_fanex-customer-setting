@@ -467,4 +467,7 @@
   <data name="Msg_10024" xml:space="preserve">
         <value>최대 승리는 직속 상위의 최대 승리보다 작거나 같아야 합니다.</value>
     </data>
+  <data name="MessageTooltip_LiveCasinoGroup" xml:space="preserve">
+    <value>제품: {0}</value>
+  </data>
 </root>

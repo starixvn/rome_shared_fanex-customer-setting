@@ -6,5 +6,9 @@
   "cSpell.words": [
     "sportsbook",
     "upline"
-  ]
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "Nexcel SonarQube",
+    "projectKey": "Pioneers-Customer-Setting"
+  }
 }
