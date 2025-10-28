@@ -15,6 +15,7 @@ using Xunit;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.AfterQuery;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria.EditSettings;
 using Fanex.Customer.API.Modules.QueryCustomer.Criteria;
 using static Fanex.Customer.API.Modules.CustomerSetting.Shared.Services.SettingProfileService;
@@ -35,6 +36,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.Test
         private readonly Mock<ICacheRefService> _cacheRefServiceMock = new();
         private readonly Mock<IMessageService> _messageServiceMock = new();
         private readonly Mock<ICustomerSettingHelper> _helperServiceMock = new();
+        private readonly Mock<IAfterQueryService> _afterQueryServiceMock = new();
 
         private readonly AppSettings _appSettings = new AppSettings();
 
@@ -50,7 +52,8 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.Test
                 _settingProfileServiceMock.Object,
                 _cacheRefServiceMock.Object,
                 _messageServiceMock.Object,
-                _helperServiceMock.Object
+                _helperServiceMock.Object,
+                _afterQueryServiceMock.Object
             );
         }
 

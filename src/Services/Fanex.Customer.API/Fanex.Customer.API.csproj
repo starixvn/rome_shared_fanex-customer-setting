@@ -6,6 +6,11 @@
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Fanex.Customer.API.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.2" />
     <PackageReference Include="Fanex.Common" Version="1.1.1" />
     <PackageReference Include="Fanex.Data.Repository" Version="4.2.2" />

@@ -13,6 +13,7 @@ using Xunit;
 using Fanex.Customer.API.Modules.Customer;
 using Fanex.Customer.API.Shared.Services;
 using Fanex.Customer.API.Modules.Message;
+using Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.AfterQuery;
 
 namespace Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.Tests
 {
@@ -26,6 +27,7 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.Test
         private readonly Mock<ICacheRefService> _cacheRefService = new();
         private readonly Mock<IMessageService> _messageService = new();
         private readonly Mock<ICustomerSettingHelper> _helperService = new();
+        private readonly Mock<IAfterQueryService> _afterQueryService = new();
 
         private readonly AppSettings _settings = new AppSettings();
 
@@ -40,7 +42,8 @@ namespace Fanex.Customer.API.Modules.CustomerSetting.QueryCustomer.Services.Test
                 _settingProfileService.Object,
                 _cacheRefService.Object,
                 _messageService.Object,
-                _helperService.Object);
+                _helperService.Object,
+                _afterQueryService.Object);
         }
 
         [Fact]
