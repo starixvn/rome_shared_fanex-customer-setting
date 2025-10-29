@@ -79,6 +79,7 @@ export const renderPTLabel = ({
         <span>{labelName}</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        {copyIcon}
         {tooltipMessage && (
           <>
             <span
@@ -91,7 +92,6 @@ export const renderPTLabel = ({
             <WrapperTooltip type="default" id={`pt-tooltip-${sportTypeId}-${betTypeId}`} place="top" />
           </>
         )}
-        {copyIcon}
       </div>
     </div>
   );
