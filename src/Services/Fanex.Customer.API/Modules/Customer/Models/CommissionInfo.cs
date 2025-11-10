@@ -3,6 +3,8 @@ namespace Fanex.Customer.API.Modules.Customer.Models;
 public class CommissionInfo
 {
     public IEnumerable<CommissionHint> CommissionTypeList { get; set; }
+    
+    public bool IsShowOtherProducts { get; set; }
 }
 
 public class CommissionHint

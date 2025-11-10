@@ -7,4 +7,6 @@ public class GetCommissionHintRequest
     public string Site { get; set; }
     
     public string Language { get; set; }
+    
+    public string SiteLabel { get; set; }
 }

@@ -77,7 +77,7 @@ namespace Fanex.Customer.Client.Services
 
         Task<string> GetProductCategories(int? custId, string site, string siteLabel, int currency, string language = "en-US");
 
-        Task<string> GetCommissionHint(int custId, string site, string language = "en-US");
+        Task<string> GetCommissionHint(int custId, string site, string siteLabel, string language = "en-US");
 
         Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US");
 
@@ -311,8 +311,8 @@ namespace Fanex.Customer.Client.Services
         public Task<string> GetMaxPayoutSettingInformation(string siteName, string siteLabel, string language = "en-US")
             => httpClient.GetStringAsync($"customer/max-payout-setting-information?siteName={siteName}&siteLabel={siteLabel}&language={language}");
 
-        public Task<string> GetCommissionHint(int custId, string site, string language = "en-US")
-            => httpClient.GetStringAsync($"customer/commission-hint?custId={custId}&site={site}&language={language}");
+        public Task<string> GetCommissionHint(int custId, string site, string siteLabel, string language = "en-US")
+            => httpClient.GetStringAsync($"customer/commission-hint?custId={custId}&site={site}&siteLabel={siteLabel}&language={language}");
 
         public Task<string> GetSuggestUsername(string actorName, byte roleId)
             => httpClient.PostAsJsonAsync<string>("customer/suggest-username", new { actorName, roleId });

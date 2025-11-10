@@ -32,5 +32,11 @@ public class AppSettings
         false :
         SitesAllowUncheckStakeLevelOnMember.Split(',').Select(site => site.Trim()).Any(site => site.Equals(siteName, System.StringComparison.CurrentCultureIgnoreCase));
 
+    public string MBCSiteLabels { get; set; }
+
+    public bool IsMBC(string siteLabel)
+        => !string.IsNullOrWhiteSpace(MBCSiteLabels) &&
+        MBCSiteLabels.Split(',').Select(site => site.Trim()).Any(site => site.Equals(siteLabel, System.StringComparison.CurrentCultureIgnoreCase));
+
     public PasswordService PasswordService { get; set; }
 }

@@ -9,6 +9,7 @@ import styles from '../app.module.scss';
 // naming by api response
 type CommissionHintData = {
   commissionTypeList: { commissionName: string; commissionId: number; bettypes: { name: string; id: number }[] }[];
+  isShowOtherProducts: boolean;
 };
 
 export const CommissionHintTab = ({ url }: { url: string }) => {
@@ -34,13 +35,17 @@ export const CommissionHintTab = ({ url }: { url: string }) => {
   return (
     <div>
       <div className={styles.info}>
-        <div>
-          <b>{t('OtherProductsCommissionInformation')}</b>
-        </div>
-        <div>{t('BBINBetSetting2')}</div>
-        <div>{t('FGGNote')}</div>
-        <div>{t('GPILiveCasinoNote')}</div>
-        <div>{t('MicrogamingLiveNote')}</div>
+        {data.isShowOtherProducts && (
+          <>
+            <div>
+              <b>{t('OtherProductsCommissionInformation')}</b>
+            </div>
+            <div>{t('BBINBetSetting2')}</div>
+            <div>{t('FGGNote')}</div>
+            <div>{t('GPILiveCasinoNote')}</div>
+            <div>{t('MicrogamingLiveNote')}</div>
+          </>
+        )}
         <div>
           <b>{t('SportsBookCommissionInformation')}</b>
         </div>

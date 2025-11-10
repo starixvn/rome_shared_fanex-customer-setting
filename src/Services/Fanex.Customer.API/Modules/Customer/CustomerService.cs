@@ -336,6 +336,7 @@ public class CustomerService : ICustomerService
         }
 
         commissionInfo.CommissionTypeList = commissionTypeList;
+        commissionInfo.IsShowOtherProducts = !appSettings.IsMBC(request.SiteLabel);
         return commissionInfo;
     }
 

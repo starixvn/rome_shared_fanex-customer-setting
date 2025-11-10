@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
-    <Version>1.0.3.7</Version>
+    <Version>1.0.3.9-adjustptcommlc001</Version>
     <Authors>@Rome</Authors>
     <Company>Nexcel</Company>
     <Product>Fanex</Product>
-    <PackageReleaseNotes>Revert - Remove GetMaxPayoutSettingInformation</PackageReleaseNotes>
+    <PackageReleaseNotes>242260 - Change Terms and Conditions - Adjust Max PT 90% and Comm 0.8% for Live Casino Product</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
