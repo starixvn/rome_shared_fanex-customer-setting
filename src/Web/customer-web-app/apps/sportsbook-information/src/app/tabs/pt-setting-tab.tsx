@@ -61,7 +61,7 @@ export const PtSettingTab = ({ url}: { url: string}) => {
                         {item.bettypeName}
                       </td>
                     )}
-                    <td className="text-left">{betType.displayTypeName}</td>
+                    <td className="text-left" dangerouslySetInnerHTML={{ __html: betType.displayTypeName.replace('+', '<sup>+</sup>') }} />
                   </tr>
                 ))}
               </tbody>
