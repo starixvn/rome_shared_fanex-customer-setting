@@ -1,7 +1,6 @@
 import { GroupTypeIds, ProductGroupIds } from '@customer-web-app/shared-constants';
 import { useGroupSettingContext } from '@customer-web-app/shared-group-settings-context';
 import { GroupItem } from '@customer-web-app/shared-group-settings-types';
-import { WrapperTooltip } from '@customer-web-app/wrapper-tooltip';
 
 import { CopyPTICon, CopyStatusPT, isCopySuccess, renderPTLabel } from './utils';
 

@@ -52,8 +52,8 @@ type RenderPTLabelProps = {
   copyIcon: React.ReactNode;
   handleCheckMultiple: (isChecked: boolean) => void;
   tooltipMessage?: string;
-  sportTypeId?: number;
-  betTypeId?: number;
+  sportTypeId: number;
+  betTypeId: number;
 };
 
 export const renderPTLabel = ({

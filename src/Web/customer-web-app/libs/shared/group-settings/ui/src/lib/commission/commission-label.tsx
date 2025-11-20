@@ -6,8 +6,8 @@ type Props = {
   isReadOnly: boolean;
   isSelected: boolean;
   tooltipMessage?: string;
-  sportTypeId?: number;
-  betTypeId?: number;
+  sportTypeId: number;
+  betTypeId: number;
   handleSelectCommission: (isSelected: boolean) => void;
 };
 
@@ -32,10 +32,20 @@ export default function CommissionLabel({
           <span>{displayName}</span>
           <span
             className="ic-info"
+            role="button"
+            tabIndex={0}
+            aria-label="Commission information"
+            aria-describedby={`commission-tooltip-${sportTypeId}-${betTypeId}`}
             id={`commission-tooltip-${sportTypeId}-${betTypeId}`}
             data-tooltip-id={`commission-tooltip-${sportTypeId}-${betTypeId}`}
             data-tooltip-place="top"
             data-tooltip-content={tooltipMessage}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.currentTarget.focus();
+              }
+            }}
           ></span>
           <WrapperTooltip type="default" id={`commission-tooltip-${sportTypeId}-${betTypeId}`} place="top" />
         </div>
