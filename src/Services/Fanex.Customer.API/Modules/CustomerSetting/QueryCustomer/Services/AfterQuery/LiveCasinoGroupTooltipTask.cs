@@ -15,6 +15,8 @@ public abstract class LiveCasinoGroupTooltipTask : BaseTooltipTask
     private readonly ICacheRefService cacheRefService;
     private readonly IMemoryCache memoryCache;
 
+    protected abstract string TooltipResourceKey { get; }
+
     protected LiveCasinoGroupTooltipTask(
         IDynamicRepository dynamicRepository, 
         ICacheRefService cacheRefService,
@@ -70,7 +72,7 @@ public abstract class LiveCasinoGroupTooltipTask : BaseTooltipTask
             if (productNames.Any())
             {
                 string tooltipTemplate = Resources.Resources.ResourceManager.GetString(
-                    "MessageTooltip_LiveCasinoGroup", 
+                    TooltipResourceKey, 
                     new System.Globalization.CultureInfo(context.Language));
                 var tooltipMessage = string.Format(tooltipTemplate, string.Join(", ", productNames));
                 tooltipMappings[key] = tooltipMessage;

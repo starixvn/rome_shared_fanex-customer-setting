@@ -9,6 +9,8 @@ public class PTTooltipTask : LiveCasinoGroupTooltipTask
 {
     public override int GroupTypeId => GroupTypes.PositionTaking;
 
+    protected override string TooltipResourceKey => "MessageTooltip_LiveCasinoGroup_PositionTaking";
+
     public PTTooltipTask(
         IDynamicRepository dynamicRepository, 
         ICacheRefService cacheRefService,

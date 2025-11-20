@@ -9,6 +9,8 @@ public class CommissionTooltipTask : LiveCasinoGroupTooltipTask
 {
     public override int GroupTypeId => GroupTypes.Commission;
 
+    protected override string TooltipResourceKey => "MessageTooltip_LiveCasinoGroup_Commission";
+
     public CommissionTooltipTask(
         IDynamicRepository dynamicRepository, 
         ICacheRefService cacheRefService,
