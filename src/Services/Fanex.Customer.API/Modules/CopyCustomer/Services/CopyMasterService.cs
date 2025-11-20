@@ -107,6 +107,7 @@ public class CopyMasterService : CopyCustomerBaseService
             { "language", request.LanguageKey },
             { "ip", request.IP },
             { "systemid", request.SystemId },
+            { "settingstatus", appSettings.SettingStatus },
         };
 
         using IObjectDb db = ObjectDbFactory.CreateInstance(SPNameUtils.GetSPNameWithPrefix(CopySPName, request.CustDBGroupID));
