@@ -460,6 +460,6 @@
     <value>此积宝状态仅适用于{0}积宝。当积宝被禁用时，会员仍可照常进行所有游戏，但无法参与积宝活动</value>
   </data>
   <data name="MessageTooltip_LiveCasinoGroup" xml:space="preserve">
-    <value>产品：{0}</value>
+    <value />
   </data>
 </root>

@@ -454,6 +454,6 @@
     <value>Product Status is updated successfully.</value>
   </data>
   <data name="MessageTooltip_LiveCasinoGroup" xml:space="preserve">
-    <value>製品: {0}</value>
+    <value />
   </data>
 </root>
