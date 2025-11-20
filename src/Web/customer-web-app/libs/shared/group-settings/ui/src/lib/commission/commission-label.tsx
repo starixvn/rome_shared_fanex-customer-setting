@@ -32,20 +32,13 @@ export default function CommissionLabel({
           <span>{displayName}</span>
           <span
             className="ic-info"
-            role="button"
+            role="img"
             tabIndex={0}
             aria-label="Commission information"
             aria-describedby={`commission-tooltip-${sportTypeId}-${betTypeId}`}
-            id={`commission-tooltip-${sportTypeId}-${betTypeId}`}
             data-tooltip-id={`commission-tooltip-${sportTypeId}-${betTypeId}`}
             data-tooltip-place="top"
             data-tooltip-content={tooltipMessage}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                e.currentTarget.focus();
-              }
-            }}
           ></span>
           <WrapperTooltip type="default" id={`commission-tooltip-${sportTypeId}-${betTypeId}`} place="top" />
         </div>
