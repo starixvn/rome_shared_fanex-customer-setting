@@ -459,4 +459,10 @@
   <data name="JackpotStatusTooltip" xml:space="preserve">
     <value>此積寶狀態僅適用於{0} 積寶。當積寶被禁用時，會員仍可照常進行所有遊戲，但無法參與積寶活動</value>
   </data>
+  <data name="MessageTooltip_LiveCasinoGroup_Commission" xml:space="preserve">
+    <value>產品: {0}. 其他產品: 沒有佣金</value>
+  </data>
+  <data name="MessageTooltip_LiveCasinoGroup_PositionTaking" xml:space="preserve">
+    <value>產品: {0}.</value>
+  </data>
 </root>
