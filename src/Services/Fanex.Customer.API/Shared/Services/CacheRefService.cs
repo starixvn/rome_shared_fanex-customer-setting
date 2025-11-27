@@ -12,7 +12,7 @@ public interface ICacheRefService
 
     string GetSubGroupName(int? subGroupId, string language = "en-US");
 
-    string GetSportTypeName(int sporttypeId, string language = "en-US");
+    string GetSportTypeName(int sportTypeId, string language = "en-US");
 
     string GetBetTypeName(int bettypeId, string language = "en-US");
 
@@ -36,6 +36,9 @@ public interface ICacheRefService
         bool isSiteLabel777 = false);
 
     string GetParlayMaxPayoutBetSettingInfoSportName(string settingId, bool isSpecialPlatform, string language);
+    
+
+    string GetBetBuilderPlusBetTypeName(string resourceId, string language = "en-US");
 }
 
 public class CacheRefService : ICacheRefService
@@ -62,7 +65,10 @@ public class CacheRefService : ICacheRefService
 
     private const string G_GT_Sport_Bettype_RefId_Saba = "G_GT_Sport_BT_Saba";
 
-    private Dictionary<string, string> cacheData = new Dictionary<string, string>();
+    private const string BetBuilderPlusRefId = "BetBuilderPlus";
+
+
+    private readonly Dictionary<string, string> cacheData = [];
 
     private readonly AppSettings _appSettings;
 
@@ -173,24 +179,9 @@ public class CacheRefService : ICacheRefService
     {
         if (displayType == DisplayType.CommSB)
         {
-            if (roleId == CustomerLevel.Member || isDirectMember.GetValueOrDefault())
-            {
-                return GetSportsbookCommMemberName(
-                    productGroupId,
-                    groupTypeId,
-                    sportTypeId,
-                    betTypeId,
-                    language);
-            }
-            else
-            {
-                return GetSportsbookCommSMAName(
-                    productGroupId,
-                    groupTypeId,
-                    sportTypeId,
-                    betTypeId,
-                    language);
-            }
+            return (roleId == CustomerLevel.Member || isDirectMember.GetValueOrDefault()) ?
+                GetSportsbookCommMemberName(productGroupId, groupTypeId, sportTypeId, betTypeId, language) :
+                GetSportsbookCommSMAName(productGroupId, groupTypeId, sportTypeId, betTypeId, language);
         }
         else
         {
@@ -218,6 +209,9 @@ public class CacheRefService : ICacheRefService
                     language,
                     settingId);
     }
+
+    public string GetBetBuilderPlusBetTypeName(string resourceId, string language = "en-US")
+        => remotingRef.GetResourceDataByRefIdAndResourceId(BetBuilderPlusRefId, resourceId, language, resourceId);
 
     private string CombineRefKey(int productGroupId, int groupTypeId, int sporttypeId, int bettypeId)
         => $"{productGroupId}_{groupTypeId}_{sporttypeId}_{bettypeId}";

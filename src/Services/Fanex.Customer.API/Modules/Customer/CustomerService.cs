@@ -82,6 +82,10 @@ public class CustomerService : ICustomerService
 
     private readonly ISiteDBService siteDBService;
 
+    private const int SystemParlayTypeId = 29;
+
+    private const string BetBuilderPlusResourceValue = "3";
+
     public CustomerService(IDynamicRepository dynamicRepository, ICacheRefService cacheRefService, ISiteDBService siteDBService, IOptions<AppSettings> appSettings)
     {
         this.dynamicRepository = dynamicRepository;
@@ -183,11 +187,21 @@ public class CustomerService : ICustomerService
     public async Task<List<PTSettingInfo>> GetPTSettingInfo(GetPTSettingInformationRequest request)
     {
         List<PTSettingInfo> ptSettingInfo = new List<PTSettingInfo>();
-        var ptSettingInfoDtos = await dynamicRepository.FetchAsync<PTSettingInfoDto>(new GetPTSettingInfoCriteria(request.CustId, request.IsTest, request.Site));
+        var ptSettingInfoDtos = (await dynamicRepository.FetchAsync<PTSettingInfoDto>(new GetPTSettingInfoCriteria(request.CustId, request.IsTest, request.Site))).ToList();
         foreach (var ptSettingInfoDto in ptSettingInfoDtos)
         {
             ptSettingInfoDto.BettypeName = cacheRefService.GetDisplayedBetTypeName(Convert.ToInt32(ptSettingInfoDto.TypeDesc), request.Language);
             ptSettingInfoDto.DisplayTypeName = cacheRefService.GetBetTypeName(ptSettingInfoDto.TypeId, request.Language);
+        }
+
+        if(ptSettingInfoDtos.Exists(p => p.TypeId == SystemParlayTypeId))
+        {
+            var systemParlayPT = ptSettingInfoDtos.First(p => p.TypeId == SystemParlayTypeId);
+            ptSettingInfoDtos.Add(new PTSettingInfoDto(systemParlayPT.TypeDesc, SystemParlayTypeId)
+                { 
+                    BettypeName = systemParlayPT.BettypeName,
+                    DisplayTypeName = cacheRefService.GetBetBuilderPlusBetTypeName(BetBuilderPlusResourceValue, request.Language)
+                });
         }
 
         foreach (var group in ptSettingInfoDtos.GroupBy(p => new { p.TypeDesc, p.BettypeName }))
