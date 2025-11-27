@@ -43,17 +43,16 @@
   "MPS17": "Accumulated max payout counts all running tickets. It will be released if any running tickets are settled/rejected/refunded/voided.",
   "MPS19": "- <strong>Parlay Max Payout Per Bet:</strong> This setting is used to calculate the max bet of each combo parlay in a single ticket.",
   "MPS20": "1. Given that the Parlay Max Payout Setting is:Single Match Parlay = 400, Combo 2 = 500; Combo 3-5 = 1,000; Combo 6+ & System Parlay  = 2,000",
-  "MPS21": "      2. If member makes 3 selections: A (odds = 2), B (odds = 3), C (odds = 4), the system will offer the following combos: Double (3 Bets), Treble (1 Bet), Trixie (4 Bets) and Lucky 7 (7 Bets)    ",
+  "MPS21": "2. If member makes 3 selections: A (odds = 2), B (odds = 3), C (odds = 4), the system will offer the following combos: Double (3 Bets), Treble (1 Bet), Trixie (4 Bets) and Lucky 7 (7 Bets)    ",
   "MPS22": "3. Max Bet of 3 Double bets = Parlay Max Payout of Combo 2 / (odds AB + odds BC + odds AC) = 500 / (2*3 + 3*4 + 2*4) = 500 / 26 = 19",
   "MPS23": "4. Max Bet of a Treble bet = Parlay Max Payout of Combo 3-5 / odds ABC = 1,000 / (2*3*4) = 1000 / 24 = 41",
   "MPS24": "5. Max Bet of Trixie and Lucky 7 bets =  Parlay Max Payout of Combo 6+ & System Parlay / (odds Double + odds Treble) = 2,000 / (26 + 24) = 2000 / 50 = 40",
-  "MPS24_1": "6. If member selects 5 selections across 3 matches with final odds = 20, Max Bet of Bet Builder<sup>+</sup> = Parlay Max Payout of Combo 3-5 / final odds = 1000 / 20 = 50",
-  "MPS24_2": "7. If member selects 5 selections within one match and the final odds = 4, Max Bet of Bet Builder<sup>+</sup> = Parlay Max Payout of Single Match Parlay / final odds = 400 / 4 = 100",
+  "MPS24_1": "6. If member selects 6 selections across 3 matches with final odds = 20, Max Bet of Bet Builder<sup>+</sup> = Parlay Max Payout of Combo 3-5 / final odds = 1000 / 20 = 50",
+  "MPS24_2": "7. If member selects 3 selections within one match and the final odds = 4, Max Bet of Bet Builder<sup>+</sup> = Parlay Max Payout of Single Match Parlay / final odds = 400 / 4 = 100",
   "MPS_SabaCaption": "Saba Virtual Sports Bet Setting Information",
   "MPS_SabaDetails": "In the table below, Saba Virtual Sports follows the bet settings of the listed sports.",
   "MPS_VSCaption": "Virtual Sports Bet Setting Information",
   "MPS_VSDetails": "In the table below, Virtual Sports follows the bet settings of the listed sports.",
-
   "MaxWinSettingInformation": "Max Win Setting Information",
   "MaxWinSettingInformationContent_0": "- Max Win Per Match is a setting that controls the maximum total winnings across all tickets of the same match.",
   "MaxWinSettingInformationContent_1": "For example: <br/> 1. Given that max win per match = 1,000 <br/> 2. If member places the first ticket with Odds = 11, Stake = 70, the ticket will have: <br/> - Max Bet = Max Win Per Match / (Odds-1) = 1,000 / (11-1) = 100. <br/> - Max Win = Stake * (Odds-1) = 70 * (11-1) = 700 = Accumulated Max Win* <br/> 3. If member places the second ticket with Odds = 6, the ticket will have: <br/> - Max Bet = (Max Win Per Match - Accumulated Max Win) / (Odds-1)= (1,000 - 700) / (6-1) = 60. ",
@@ -84,7 +83,6 @@
   "MicrogamingLiveNote": "[Microgaming Live] : Commission is not applied to Casino Hold'em game.",
   "WinLossLimitNote1": "Live Casino: Compare Win/Loss Limit with Win/Loss of EACH product.",
   "WinLossLimitNote2": "RNG Casino: Compare Win/Loss Limit with the total Win/Loss of ALL products.",
-
   "MaxWinLoss": "Maximum Win/Loss refers to the highest amount a Member can win or lose. Bets will be denied if a Member’s total win/loss exceeds the limit.",
   "MaxWin": "Maximum Win = Selected multiplier * Given Credit",
   "MaxWinExample": " (ex. if multiplier = 5 and credit = 1,000 → max win = 5,000)",
@@ -94,4 +92,3 @@
   "MaxLoss": "Maximum Loss: Input value within the allowed range.",
   "MaxWinSettingTabTitle": "Max Win"
 }
- 
